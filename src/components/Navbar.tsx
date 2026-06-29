@@ -18,9 +18,8 @@ const translations = {
   ca: {
     home: "Inici",
     club: "El Club",
-    routes: "Rutes",
+    sponsors: "Patrocinadors",
     gallery: "Galeria",
-    calendar: "Calendari",
     contact: "Contacte",
     memberArea: "Àrea de Socis",
     joinUs: "Fes-te Soci",
@@ -28,9 +27,8 @@ const translations = {
   es: {
     home: "Inicio",
     club: "El Club",
-    routes: "Rutas",
+    sponsors: "Patrocinadores",
     gallery: "Galería",
-    calendar: "Calendario",
     contact: "Contacto",
     memberArea: "Área de Socios",
     joinUs: "Hazte Socio",
@@ -38,9 +36,8 @@ const translations = {
   fr: {
     home: "Accueil",
     club: "Le Club",
-    routes: "Routes",
+    sponsors: "Sponsors",
     gallery: "Galerie",
-    calendar: "Calendrier",
     contact: "Contact",
     memberArea: "Espace Membres",
     joinUs: "Devenir Membre",
@@ -48,9 +45,8 @@ const translations = {
   en: {
     home: "Home",
     club: "The Club",
-    routes: "Routes",
+    sponsors: "Sponsors",
     gallery: "Gallery",
-    calendar: "Calendar",
     contact: "Contact",
     memberArea: "Member Area",
     joinUs: "Join Us",
@@ -72,9 +68,8 @@ export const Navbar = ({ language, setLanguage }: NavbarProps) => {
   const navLinks = [
     { path: "/", label: t.home },
     { path: "/el-club", label: t.club },
-    { path: "/rutes", label: t.routes },
+    { path: "/patrocinadors", label: t.sponsors },
     { path: "/galeria", label: t.gallery },
-    { path: "/calendari", label: t.calendar },
     { path: "/contacte", label: t.contact },
   ];
 
@@ -86,9 +81,7 @@ export const Navbar = ({ language, setLanguage }: NavbarProps) => {
         <div className="flex items-center justify-between h-20">
           {/* Logo */}
           <Link to="/" className="flex items-center space-x-3">
-            <div className="w-12 h-12 gradient-hero rounded-sm flex items-center justify-center">
-              <span className="text-primary-foreground font-bold text-xl">BMW</span>
-            </div>
+            <img src="/club/logo-small.png" alt="BMW Club Andorra" className="w-12 h-12 object-contain" />
             <div className="hidden md:flex flex-col">
               <span className="font-bold text-lg leading-tight">BMW CLUB</span>
               <span className="text-sm text-muted-foreground leading-tight">ANDORRA</span>
@@ -135,17 +128,15 @@ export const Navbar = ({ language, setLanguage }: NavbarProps) => {
               </DropdownMenuContent>
             </DropdownMenu>
 
-            {/* Member Area Button - Desktop */}
-            <Link to="/area-soci" className="hidden md:block">
-              <Button variant="outline" size="sm">
-                {t.memberArea}
-              </Button>
-            </Link>
-
-            {/* Join Button */}
-            <Link to="/alta-soci" className="hidden md:block">
+            <Link to="/galeria/sortides/2026" className="hidden md:block">
               <Button variant="hero" size="sm">
-                {t.joinUs}
+                {language === "ca"
+                  ? "Últimes Sortides"
+                  : language === "es"
+                    ? "Últimas Salidas"
+                    : language === "fr"
+                      ? "Dernières Sorties"
+                      : "Latest Outings"}
               </Button>
             </Link>
 
@@ -180,14 +171,15 @@ export const Navbar = ({ language, setLanguage }: NavbarProps) => {
                 </Link>
               ))}
               <div className="pt-2 space-y-2">
-                <Link to="/area-soci" className="block" onClick={() => setIsMobileMenuOpen(false)}>
-                  <Button variant="outline" size="sm" className="w-full">
-                    {t.memberArea}
-                  </Button>
-                </Link>
-                <Link to="/alta-soci" className="block" onClick={() => setIsMobileMenuOpen(false)}>
+                <Link to="/galeria/sortides/2026" className="block" onClick={() => setIsMobileMenuOpen(false)}>
                   <Button variant="hero" size="sm" className="w-full">
-                    {t.joinUs}
+                    {language === "ca"
+                      ? "Últimes Sortides"
+                      : language === "es"
+                        ? "Últimas Salidas"
+                        : language === "fr"
+                          ? "Dernières Sorties"
+                          : "Latest Outings"}
                   </Button>
                 </Link>
               </div>

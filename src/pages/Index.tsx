@@ -13,12 +13,12 @@ const Index = () => {
 
   const translations = {
     ca: {
-      whatWeDo: "Què Fem?",
-      whatWeDoDesc: "Descobreix les nostres activitats i experiències",
-      routes: "Rutes Espectaculars",
-      routesDesc: "Explora els millors ports de muntanya i carreteres dels Pirineus amb el teu BMW",
-      events: "Esdeveniments del Club",
-      eventsDesc: "Reunions, sortides en grup i trobades amb altres membres del club",
+      whatWeDo: "Benvingut/da al BMW Club Andorra",
+      whatWeDoDesc: "Comunitat, trobades, galeria i experiències per a propietaris i aficionats de la marca.",
+      sponsors: "Patrocinadors del Club",
+      sponsorsDesc: "Descobreix les empreses i marques que donen suport a l’activitat del BMW Club Andorra",
+      outings: "Últimes Sortides",
+      outingsDesc: "Reviu les trobades, esmorzars i activitats més recents de la comunitat",
       community: "Comunitat Activa",
       communityDesc: "Comparteix la teva passió amb altres entusiastes de BMW a Andorra",
       gallery: "Galeria de Moments",
@@ -26,20 +26,18 @@ const Index = () => {
       forCars: "Per Cotxes",
       forMotos: "Per Motos",
       forSUVs: "Per SUVs",
-      exploreRoutes: "Explorar Rutes",
-      viewEvents: "Veure Esdeveniments",
-      joinCommunity: "Uneix-te a la Comunitat",
+      viewSponsors: "Veure Patrocinadors",
+      viewOutings: "Veure Sortides",
+      joinCommunity: "Descobrir el Club",
       viewGallery: "Veure Galeria",
-      whyJoin: "Per què Unir-te?",
-      whyJoinDesc: "Avantatges de ser membre del BMW Club Andorra",
     },
     es: {
-      whatWeDo: "¿Qué Hacemos?",
-      whatWeDoDesc: "Descubre nuestras actividades y experiencias",
-      routes: "Rutas Espectaculares",
-      routesDesc: "Explora los mejores puertos de montaña y carreteras de los Pirineos con tu BMW",
-      events: "Eventos del Club",
-      eventsDesc: "Reuniones, salidas en grupo y encuentros con otros miembros del club",
+      whatWeDo: "Bienvenido/a al BMW Club Andorra",
+      whatWeDoDesc: "Comunidad, encuentros, galería y experiencias para propietarios y aficionados de la marca.",
+      sponsors: "Patrocinadores del Club",
+      sponsorsDesc: "Descubre las empresas y marcas que apoyan la actividad del BMW Club Andorra",
+      outings: "Últimas Salidas",
+      outingsDesc: "Revive los encuentros, desayunos y actividades más recientes de la comunidad",
       community: "Comunidad Activa",
       communityDesc: "Comparte tu pasión con otros entusiastas de BMW en Andorra",
       gallery: "Galería de Momentos",
@@ -47,20 +45,18 @@ const Index = () => {
       forCars: "Para Coches",
       forMotos: "Para Motos",
       forSUVs: "Para SUVs",
-      exploreRoutes: "Explorar Rutas",
-      viewEvents: "Ver Eventos",
-      joinCommunity: "Únete a la Comunidad",
+      viewSponsors: "Ver Patrocinadores",
+      viewOutings: "Ver Salidas",
+      joinCommunity: "Descubrir el Club",
       viewGallery: "Ver Galería",
-      whyJoin: "¿Por qué Unirte?",
-      whyJoinDesc: "Ventajas de ser miembro del BMW Club Andorra",
     },
     fr: {
-      whatWeDo: "Ce Que Nous Faisons?",
-      whatWeDoDesc: "Découvrez nos activités et expériences",
-      routes: "Itinéraires Spectaculaires",
-      routesDesc: "Explorez les meilleurs cols de montagne et routes des Pyrénées avec votre BMW",
-      events: "Événements du Club",
-      eventsDesc: "Réunions, sorties en groupe et rencontres avec d'autres membres du club",
+      whatWeDo: "Bienvenue au BMW Club Andorra",
+      whatWeDoDesc: "Communauté, rencontres, galerie et expériences pour les propriétaires et passionnés de la marque.",
+      sponsors: "Sponsors du Club",
+      sponsorsDesc: "Découvrez les entreprises et marques qui soutiennent l’activité du BMW Club Andorra",
+      outings: "Dernières Sorties",
+      outingsDesc: "Revivez les rencontres, petits-déjeuners et activités récentes de la communauté",
       community: "Communauté Active",
       communityDesc: "Partagez votre passion avec d'autres passionnés de BMW en Andorre",
       gallery: "Galerie de Moments",
@@ -68,20 +64,18 @@ const Index = () => {
       forCars: "Pour Voitures",
       forMotos: "Pour Motos",
       forSUVs: "Pour SUVs",
-      exploreRoutes: "Explorer les Itinéraires",
-      viewEvents: "Voir les Événements",
-      joinCommunity: "Rejoindre la Communauté",
+      viewSponsors: "Voir les Sponsors",
+      viewOutings: "Voir les Sorties",
+      joinCommunity: "Découvrir le Club",
       viewGallery: "Voir la Galerie",
-      whyJoin: "Pourquoi Nous Rejoindre?",
-      whyJoinDesc: "Avantages d'être membre du BMW Club Andorra",
     },
     en: {
-      whatWeDo: "What We Do?",
-      whatWeDoDesc: "Discover our activities and experiences",
-      routes: "Spectacular Routes",
-      routesDesc: "Explore the best mountain passes and roads of the Pyrenees with your BMW",
-      events: "Club Events",
-      eventsDesc: "Meetings, group outings and gatherings with other club members",
+      whatWeDo: "Welcome to BMW Club Andorra",
+      whatWeDoDesc: "Community, meetups, gallery and experiences for BMW owners and enthusiasts.",
+      sponsors: "Club Sponsors",
+      sponsorsDesc: "Discover the companies and brands that support BMW Club Andorra activities",
+      outings: "Latest Outings",
+      outingsDesc: "Relive the most recent meetups, breakfasts and club activities",
       community: "Active Community",
       communityDesc: "Share your passion with other BMW enthusiasts in Andorra",
       gallery: "Gallery of Moments",
@@ -89,12 +83,10 @@ const Index = () => {
       forCars: "For Cars",
       forMotos: "For Motorcycles",
       forSUVs: "For SUVs",
-      exploreRoutes: "Explore Routes",
-      viewEvents: "View Events",
-      joinCommunity: "Join the Community",
+      viewSponsors: "View Sponsors",
+      viewOutings: "View Outings",
+      joinCommunity: "Discover the Club",
       viewGallery: "View Gallery",
-      whyJoin: "Why Join?",
-      whyJoinDesc: "Benefits of being a member of BMW Club Andorra",
     },
   };
 
@@ -103,48 +95,46 @@ const Index = () => {
   return (
     <div className="min-h-screen flex flex-col">
       <Navbar language={language} setLanguage={setLanguage} />
-      
-      {/* Hero Section */}
+
       <Hero language={language} />
 
-      {/* What We Do Section */}
       <section className="py-20 bg-background">
         <div className="container mx-auto px-4">
           <div className="text-center max-w-3xl mx-auto mb-16">
             <h2 className="text-4xl md:text-5xl font-bold mb-4">{t.whatWeDo}</h2>
             <p className="text-xl text-muted-foreground">{t.whatWeDoDesc}</p>
+            <p className="text-base md:text-lg text-muted-foreground mt-6 leading-relaxed">
+              Som una comunitat de propietaris i aficionats de BMW que comparteix passió per la marca, la conducció i les experiències a la carretera. Aquí trobaràs trobades, galeria i vida de club.
+            </p>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-            {/* Routes Card */}
             <Card className="p-6 hover:shadow-elegant transition-all group cursor-pointer">
               <div className="gradient-hero w-16 h-16 rounded-sm flex items-center justify-center mb-4 group-hover:scale-110 transition-base">
                 <Mountain className="h-8 w-8 text-primary-foreground" />
               </div>
-              <h3 className="text-xl font-semibold mb-3">{t.routes}</h3>
-              <p className="text-muted-foreground mb-4">{t.routesDesc}</p>
-              <Link to="/rutes">
+              <h3 className="text-xl font-semibold mb-3">{t.sponsors}</h3>
+              <p className="text-muted-foreground mb-4">{t.sponsorsDesc}</p>
+              <Link to="/patrocinadors">
                 <Button variant="link" className="p-0">
-                  {t.exploreRoutes} →
+                  {t.viewSponsors} →
                 </Button>
               </Link>
             </Card>
 
-            {/* Events Card */}
             <Card className="p-6 hover:shadow-elegant transition-all group cursor-pointer">
               <div className="gradient-hero w-16 h-16 rounded-sm flex items-center justify-center mb-4 group-hover:scale-110 transition-base">
                 <Calendar className="h-8 w-8 text-primary-foreground" />
               </div>
-              <h3 className="text-xl font-semibold mb-3">{t.events}</h3>
-              <p className="text-muted-foreground mb-4">{t.eventsDesc}</p>
-              <Link to="/calendari">
+              <h3 className="text-xl font-semibold mb-3">{t.outings}</h3>
+              <p className="text-muted-foreground mb-4">{t.outingsDesc}</p>
+              <Link to="/galeria/sortides/2026">
                 <Button variant="link" className="p-0">
-                  {t.viewEvents} →
+                  {t.viewOutings} →
                 </Button>
               </Link>
             </Card>
 
-            {/* Community Card */}
             <Card className="p-6 hover:shadow-elegant transition-all group cursor-pointer">
               <div className="gradient-hero w-16 h-16 rounded-sm flex items-center justify-center mb-4 group-hover:scale-110 transition-base">
                 <Users className="h-8 w-8 text-primary-foreground" />
@@ -158,7 +148,6 @@ const Index = () => {
               </Link>
             </Card>
 
-            {/* Gallery Card */}
             <Card className="p-6 hover:shadow-elegant transition-all group cursor-pointer">
               <div className="gradient-hero w-16 h-16 rounded-sm flex items-center justify-center mb-4 group-hover:scale-110 transition-base">
                 <ImageIcon className="h-8 w-8 text-primary-foreground" />
@@ -175,15 +164,12 @@ const Index = () => {
         </div>
       </section>
 
-      {/* Featured Image Section */}
       <section className="py-20 bg-secondary">
         <div className="container mx-auto px-4">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
             <div className="space-y-6">
-              <h2 className="text-4xl md:text-5xl font-bold">{t.routes}</h2>
-              <p className="text-xl text-muted-foreground leading-relaxed">
-                {t.routesDesc}
-              </p>
+              <h2 className="text-4xl md:text-5xl font-bold">{t.outings}</h2>
+              <p className="text-xl text-muted-foreground leading-relaxed">{t.outingsDesc}</p>
               <div className="flex flex-wrap gap-4 pt-4">
                 <div className="flex items-center gap-2 bg-background px-4 py-2 rounded-sm">
                   <Car className="h-5 w-5 text-primary" />
@@ -198,9 +184,9 @@ const Index = () => {
                   <span className="font-medium">{t.forSUVs}</span>
                 </div>
               </div>
-              <Link to="/rutes">
+              <Link to="/galeria/sortides/2026">
                 <Button variant="hero" size="lg">
-                  {t.exploreRoutes}
+                  {t.viewOutings}
                 </Button>
               </Link>
             </div>

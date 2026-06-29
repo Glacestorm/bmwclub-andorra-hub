@@ -9,7 +9,7 @@ const translations = {
   ca: {
     about: "Sobre Nosaltres",
     club: "El Club",
-    routes: "Rutes",
+    sponsors: "Patrocinadors",
     gallery: "Galeria",
     contact: "Contacte",
     legal: "Legal",
@@ -24,7 +24,7 @@ const translations = {
   es: {
     about: "Sobre Nosotros",
     club: "El Club",
-    routes: "Rutas",
+    sponsors: "Patrocinadores",
     gallery: "Galería",
     contact: "Contacto",
     legal: "Legal",
@@ -39,7 +39,7 @@ const translations = {
   fr: {
     about: "À Propos",
     club: "Le Club",
-    routes: "Routes",
+    sponsors: "Sponsors",
     gallery: "Galerie",
     contact: "Contact",
     legal: "Légal",
@@ -54,7 +54,7 @@ const translations = {
   en: {
     about: "About Us",
     club: "The Club",
-    routes: "Routes",
+    sponsors: "Sponsors",
     gallery: "Gallery",
     contact: "Contact",
     legal: "Legal",
@@ -78,9 +78,7 @@ export const Footer = ({ language }: FooterProps) => {
           {/* Brand */}
           <div className="space-y-4">
             <div className="flex items-center space-x-3">
-              <div className="w-12 h-12 gradient-hero rounded-sm flex items-center justify-center">
-                <span className="text-primary-foreground font-bold text-xl">BMW</span>
-              </div>
+              <img src="/club/logo-small.png" alt="BMW Club Andorra" className="w-12 h-12 object-contain" />
               <div className="flex flex-col">
                 <span className="font-bold text-lg leading-tight">{t.bmwClub}</span>
               </div>
@@ -98,8 +96,8 @@ export const Footer = ({ language }: FooterProps) => {
                 </Link>
               </li>
               <li>
-                <Link to="/rutes" className="text-sm text-accent-foreground/80 hover:text-primary transition-base">
-                  {t.routes}
+                <Link to="/patrocinadors" className="text-sm text-accent-foreground/80 hover:text-primary transition-base">
+                  {t.sponsors}
                 </Link>
               </li>
               <li>
@@ -150,7 +148,7 @@ export const Footer = ({ language }: FooterProps) => {
                 <Facebook className="h-6 w-6" />
               </a>
               <a
-                href="https://instagram.com"
+                href="https://instagram.com/bmwclubandorra"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-accent-foreground/80 hover:text-primary transition-base"
@@ -158,7 +156,7 @@ export const Footer = ({ language }: FooterProps) => {
                 <Instagram className="h-6 w-6" />
               </a>
               <a
-                href="mailto:info@bmwclubandorra.com"
+                href="mailto:bmwclubandorra@gmail.com"
                 className="text-accent-foreground/80 hover:text-primary transition-base"
               >
                 <Mail className="h-6 w-6" />

@@ -14,7 +14,7 @@ const translations = {
     description: "Uneix-te al club de propietaris i entusiastes de BMW a Andorra. Descobreix les millors rutes, comparteix experiències i viu la passió per la marca.",
     joinNow: "Fes-te Soci Ara",
     discover: "Descobreix Més",
-    nextEvent: "Proper Esdeveniment",
+    latestOutings: "Últimes Sortides",
     viewGallery: "Veure Galeria",
   },
   es: {
@@ -23,7 +23,7 @@ const translations = {
     description: "Únete al club de propietarios y entusiastas de BMW en Andorra. Descubre las mejores rutas, comparte experiencias y vive la pasión por la marca.",
     joinNow: "Hazte Socio Ahora",
     discover: "Descubrir Más",
-    nextEvent: "Próximo Evento",
+    latestOutings: "Últimas Salidas",
     viewGallery: "Ver Galería",
   },
   fr: {
@@ -32,7 +32,7 @@ const translations = {
     description: "Rejoignez le club de propriétaires et passionnés de BMW en Andorre. Découvrez les meilleurs itinéraires, partagez des expériences et vivez la passion pour la marque.",
     joinNow: "Devenir Membre",
     discover: "Découvrir Plus",
-    nextEvent: "Prochain Événement",
+    latestOutings: "Dernières Sorties",
     viewGallery: "Voir Galerie",
   },
   en: {
@@ -41,7 +41,7 @@ const translations = {
     description: "Join the BMW owners and enthusiasts club in Andorra. Discover the best routes, share experiences and live the passion for the brand.",
     joinNow: "Join Now",
     discover: "Discover More",
-    nextEvent: "Next Event",
+    latestOutings: "Latest Outings",
     viewGallery: "View Gallery",
   },
 };
@@ -82,7 +82,7 @@ export const Hero = ({ language }: HeroProps) => {
 
           {/* CTA Buttons */}
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4 pt-4 animate-in fade-in slide-in-from-bottom-4 duration-700 delay-300">
-            <Link to="/alta-soci">
+            <Link to="/contacte">
               <Button variant="hero" size="lg" className="w-full sm:w-auto gap-2">
                 {t.joinNow}
                 <ArrowRight className="h-5 w-5" />
@@ -97,11 +97,11 @@ export const Hero = ({ language }: HeroProps) => {
 
           {/* Quick Links */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4 pt-12 max-w-2xl mx-auto animate-in fade-in slide-in-from-bottom-4 duration-700 delay-500">
-            <Link to="/calendari">
+            <Link to="/galeria/sortides/2026">
               <div className="group bg-white/10 backdrop-blur-sm border border-white/20 rounded-sm p-6 transition-all hover:bg-white/20 hover:scale-105">
                 <Calendar className="h-8 w-8 text-white mb-3 mx-auto" />
-                <h3 className="text-white font-semibold text-lg">{t.nextEvent}</h3>
-                <p className="text-white/70 text-sm mt-2">Descobreix els nostres propers esdeveniments</p>
+                <h3 className="text-white font-semibold text-lg">{t.latestOutings}</h3>
+                <p className="text-white/70 text-sm mt-2">Descobreix les últimes sortides i trobades del club</p>
               </div>
             </Link>
             <Link to="/galeria">

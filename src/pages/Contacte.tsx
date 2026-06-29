@@ -25,9 +25,9 @@ const Contacte = () => {
       email: "Email",
       message: "Missatge",
       send: "Enviar Missatge",
-      emailAddress: "info@bmwclubandorra.com",
-      phone: "+376 XXX XXX",
-      location: "Andorra la Vella, Andorra",
+      emailAddress: "bmwclubandorra@gmail.com",
+      phone: "+376 338 117",
+      location: "C/ del Picó, 1-3, AD700 Escaldes-Engordany",
       getInTouch: "Com Contactar-nos",
       successMessage: "Missatge enviat correctament!",
       errorMessage: "Si us plau, omple tots els camps",
@@ -39,9 +39,9 @@ const Contacte = () => {
       email: "Email",
       message: "Mensaje",
       send: "Enviar Mensaje",
-      emailAddress: "info@bmwclubandorra.com",
-      phone: "+376 XXX XXX",
-      location: "Andorra la Vella, Andorra",
+      emailAddress: "bmwclubandorra@gmail.com",
+      phone: "+376 338 117",
+      location: "C/ del Picó, 1-3, AD700 Escaldes-Engordany",
       getInTouch: "Cómo Contactarnos",
       successMessage: "¡Mensaje enviado correctamente!",
       errorMessage: "Por favor, completa todos los campos",
@@ -53,9 +53,9 @@ const Contacte = () => {
       email: "Email",
       message: "Message",
       send: "Envoyer le Message",
-      emailAddress: "info@bmwclubandorra.com",
-      phone: "+376 XXX XXX",
-      location: "Andorre-la-Vieille, Andorre",
+      emailAddress: "bmwclubandorra@gmail.com",
+      phone: "+376 338 117",
+      location: "C/ del Picó, 1-3, AD700 Escaldes-Engordany",
       getInTouch: "Comment Nous Contacter",
       successMessage: "Message envoyé avec succès!",
       errorMessage: "Veuillez remplir tous les champs",
@@ -67,9 +67,9 @@ const Contacte = () => {
       email: "Email",
       message: "Message",
       send: "Send Message",
-      emailAddress: "info@bmwclubandorra.com",
-      phone: "+376 XXX XXX",
-      location: "Andorra la Vella, Andorra",
+      emailAddress: "bmwclubandorra@gmail.com",
+      phone: "+376 338 117",
+      location: "C/ del Picó, 1-3, AD700 Escaldes-Engordany",
       getInTouch: "How to Contact Us",
       successMessage: "Message sent successfully!",
       errorMessage: "Please fill in all fields",
@@ -80,25 +80,21 @@ const Contacte = () => {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    
+
     if (!formData.name || !formData.email || !formData.message) {
       toast.error(t.errorMessage);
       return;
     }
 
-    // Here you would typically send the form data to a backend
     console.log("Form submitted:", formData);
     toast.success(t.successMessage);
-    
-    // Reset form
     setFormData({ name: "", email: "", message: "" });
   };
 
   return (
     <div className="min-h-screen flex flex-col">
       <Navbar language={language} setLanguage={setLanguage} />
-      
-      {/* Hero Section */}
+
       <section className="pt-32 pb-20 bg-gradient-to-b from-secondary to-background">
         <div className="container mx-auto px-4">
           <div className="max-w-4xl mx-auto text-center">
@@ -108,11 +104,9 @@ const Contacte = () => {
         </div>
       </section>
 
-      {/* Contact Section */}
       <section className="py-20">
         <div className="container mx-auto px-4">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 max-w-6xl mx-auto">
-            {/* Contact Form */}
             <Card className="p-8">
               <form onSubmit={handleSubmit} className="space-y-6">
                 <div className="space-y-2">
@@ -153,7 +147,6 @@ const Contacte = () => {
               </form>
             </Card>
 
-            {/* Contact Info */}
             <div className="space-y-8">
               <div>
                 <h2 className="text-3xl font-bold mb-6">{t.getInTouch}</h2>
@@ -173,7 +166,7 @@ const Contacte = () => {
                     </div>
                     <div>
                       <h3 className="font-semibold text-lg mb-1">{t.email}</h3>
-                      <a href="mailto:info@bmwclubandorra.com" className="text-primary hover:underline">
+                      <a href="mailto:bmwclubandorra@gmail.com" className="text-primary hover:underline">
                         {t.emailAddress}
                       </a>
                     </div>
