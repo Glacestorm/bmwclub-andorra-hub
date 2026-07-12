@@ -10,6 +10,7 @@ import Patrocinadors from "./pages/Patrocinadors";
 import Galeria from "./pages/Galeria";
 import GaleriaCollection from "./pages/GaleriaCollection";
 import Meteo from "./pages/Meteo";
+import LegalPage from "./pages/LegalPage";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -24,6 +25,7 @@ const App = () => (
           <Route path="/" element={<Index />} />
           <Route path="/el-club" element={<ElClub />} />
           <Route path="/contacte" element={<Contacte />} />
+          <Route path="/alta-soci" element={<Contacte />} />
           <Route path="/patrocinadors" element={<Patrocinadors />} />
           <Route path="/galeria" element={<Galeria />} />
           <Route path="/galeria/historiques" element={<GaleriaCollection />} />
@@ -35,6 +37,9 @@ const App = () => (
           <Route path="/galeria/sortides/2025" element={<GaleriaCollection />} />
           <Route path="/galeria/sortides/2026" element={<GaleriaCollection />} />
           <Route path="/meteo" element={<Meteo />} />
+          <Route path="/privacitat" element={<LegalPage pageKey="privacitat" />} />
+          <Route path="/cookies" element={<LegalPage pageKey="cookies" />} />
+          <Route path="/condicions" element={<LegalPage pageKey="condicions" />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>

@@ -24,12 +24,13 @@ const Contacte = () => {
       name: "Nom",
       email: "Email",
       message: "Missatge",
-      send: "Enviar Missatge",
+      send: "Obrir email",
       emailAddress: "bmwclubandorra@gmail.com",
       phone: "+376 338 117",
       location: "C/ del Picó, 1-3, AD700 Escaldes-Engordany",
       getInTouch: "Com Contactar-nos",
-      successMessage: "Missatge enviat correctament!",
+      formHelp: "Aquest formulari obre el teu client de correu amb el missatge preparat.",
+      successMessage: "S'obre el teu client de correu amb el missatge preparat.",
       errorMessage: "Si us plau, omple tots els camps",
     },
     es: {
@@ -38,12 +39,13 @@ const Contacte = () => {
       name: "Nombre",
       email: "Email",
       message: "Mensaje",
-      send: "Enviar Mensaje",
+      send: "Abrir email",
       emailAddress: "bmwclubandorra@gmail.com",
       phone: "+376 338 117",
       location: "C/ del Picó, 1-3, AD700 Escaldes-Engordany",
-      getInTouch: "Cómo Contactarnos",
-      successMessage: "¡Mensaje enviado correctamente!",
+      getInTouch: "Cómo contactarnos",
+      formHelp: "Este formulario abre tu cliente de correo con el mensaje preparado.",
+      successMessage: "Se abre tu cliente de correo con el mensaje preparado.",
       errorMessage: "Por favor, completa todos los campos",
     },
     fr: {
@@ -52,12 +54,13 @@ const Contacte = () => {
       name: "Nom",
       email: "Email",
       message: "Message",
-      send: "Envoyer le Message",
+      send: "Ouvrir l'email",
       emailAddress: "bmwclubandorra@gmail.com",
       phone: "+376 338 117",
       location: "C/ del Picó, 1-3, AD700 Escaldes-Engordany",
-      getInTouch: "Comment Nous Contacter",
-      successMessage: "Message envoyé avec succès!",
+      getInTouch: "Comment nous contacter",
+      formHelp: "Ce formulaire ouvre votre client mail avec le message préparé.",
+      successMessage: "Votre client mail va s'ouvrir avec le message préparé.",
       errorMessage: "Veuillez remplir tous les champs",
     },
     en: {
@@ -66,12 +69,13 @@ const Contacte = () => {
       name: "Name",
       email: "Email",
       message: "Message",
-      send: "Send Message",
+      send: "Open email",
       emailAddress: "bmwclubandorra@gmail.com",
       phone: "+376 338 117",
       location: "C/ del Picó, 1-3, AD700 Escaldes-Engordany",
-      getInTouch: "How to Contact Us",
-      successMessage: "Message sent successfully!",
+      getInTouch: "How to contact us",
+      formHelp: "This form opens your email client with the message prepared.",
+      successMessage: "Your email client will open with the prepared message.",
       errorMessage: "Please fill in all fields",
     },
   };
@@ -86,7 +90,17 @@ const Contacte = () => {
       return;
     }
 
-    console.log("Form submitted:", formData);
+    const subject = encodeURIComponent(`Consulta web BMW Club Andorra - ${formData.name}`);
+    const body = encodeURIComponent(
+      [
+        `Nom: ${formData.name}`,
+        `Email: ${formData.email}`,
+        "",
+        formData.message,
+      ].join("\n"),
+    );
+
+    window.location.href = `mailto:${t.emailAddress}?subject=${subject}&body=${body}`;
     toast.success(t.successMessage);
     setFormData({ name: "", email: "", message: "" });
   };
@@ -109,6 +123,7 @@ const Contacte = () => {
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 max-w-6xl mx-auto">
             <Card className="p-8">
               <form onSubmit={handleSubmit} className="space-y-6">
+                <p className="text-sm text-muted-foreground">{t.formHelp}</p>
                 <div className="space-y-2">
                   <Label htmlFor="name">{t.name}</Label>
                   <Input
