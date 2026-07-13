@@ -19,6 +19,7 @@ const Destacats = lazy(() => import("./pages/Destacats"));
 const Arxiu = lazy(() => import("./pages/Arxiu"));
 const BmwOficial = lazy(() => import("./pages/BmwOficial"));
 const ClubAssistant = lazy(() => import("./pages/ClubAssistant"));
+const Itineraris = lazy(() => import("./pages/Itineraris"));
 const EventDetail = lazy(() => import("./pages/EventDetail"));
 const LegalPage = lazy(() => import("./pages/LegalPage"));
 const NotFound = lazy(() => import("./pages/NotFound"));
@@ -68,6 +69,7 @@ const App = () => (
               <Route path="/arxiu" element={<Arxiu />} />
               <Route path="/bmw-oficial" element={<BmwOficial />} />
               <Route path="/assistent-ia" element={<ClubAssistant />} />
+              <Route path="/itineraris" element={<Itineraris />} />
               <Route path="/esdeveniments/:eventId" element={<EventDetail />} />
               <Route path="/galeria" element={<Galeria />} />
               <Route path="/galeria/historiques" element={<GaleriaCollection />} />

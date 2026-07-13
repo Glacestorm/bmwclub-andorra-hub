@@ -45,6 +45,7 @@ const translations: Record<LanguageCode, Record<string, string>> = {
     prompt3: "Quins patrocinadors hi ha",
     prompt4: "Què és el club",
     prompt5: "Com contactar",
+    prompt6: "Millors itineraris per Andorra",
     ready: "Preparat per ajudar-te",
     nextTrips: "Properes sortides",
     join: "Fer-se soci",
@@ -54,6 +55,7 @@ const translations: Record<LanguageCode, Record<string, string>> = {
     nextTripsCta: "Obrir calendari",
     joinCta: "Anar a contacte",
     sponsorsCta: "Veure patrocinadors",
+    routesCta: "Veure itineraris",
     clubCta: "Descobrir el club",
     contactCta: "Contactar",
     fallbackTitle: "Puc orientar-te millor",
@@ -83,6 +85,7 @@ const translations: Record<LanguageCode, Record<string, string>> = {
     prompt3: "Qué patrocinadores hay",
     prompt4: "Qué es el club",
     prompt5: "Cómo contactar",
+    prompt6: "Mejores itinerarios por Andorra",
     ready: "Listo para ayudarte",
     nextTrips: "Próximas salidas",
     join: "Hacerse socio",
@@ -92,6 +95,7 @@ const translations: Record<LanguageCode, Record<string, string>> = {
     nextTripsCta: "Abrir calendario",
     joinCta: "Ir a contacto",
     sponsorsCta: "Ver patrocinadores",
+    routesCta: "Ver itinerarios",
     clubCta: "Descubrir el club",
     contactCta: "Contactar",
     fallbackTitle: "Puedo orientarte mejor",
@@ -121,6 +125,7 @@ const translations: Record<LanguageCode, Record<string, string>> = {
     prompt3: "Quels sponsors",
     prompt4: "Qu'est-ce que le club",
     prompt5: "Comment contacter",
+    prompt6: "Meilleurs itinéraires en Andorre",
     ready: "Prêt à vous aider",
     nextTrips: "Prochaines sorties",
     join: "Adhésion",
@@ -130,6 +135,7 @@ const translations: Record<LanguageCode, Record<string, string>> = {
     nextTripsCta: "Ouvrir le calendrier",
     joinCta: "Aller au contact",
     sponsorsCta: "Voir les sponsors",
+    routesCta: "Voir les itinéraires",
     clubCta: "Découvrir le club",
     contactCta: "Contacter",
     fallbackTitle: "Je peux mieux vous orienter",
@@ -159,6 +165,7 @@ const translations: Record<LanguageCode, Record<string, string>> = {
     prompt3: "Which sponsors are there",
     prompt4: "What is the club",
     prompt5: "How to contact",
+    prompt6: "Best Andorra driving routes",
     ready: "Ready to help",
     nextTrips: "Upcoming outings",
     join: "Become a member",
@@ -168,6 +175,7 @@ const translations: Record<LanguageCode, Record<string, string>> = {
     nextTripsCta: "Open calendar",
     joinCta: "Go to contact",
     sponsorsCta: "View sponsors",
+    routesCta: "View routes",
     clubCta: "Discover the club",
     contactCta: "Contact",
     fallbackTitle: "I can guide you better",
@@ -197,6 +205,7 @@ const translations: Record<LanguageCode, Record<string, string>> = {
     prompt3: "Quais patrocinadores existem",
     prompt4: "O que é o clube",
     prompt5: "Como contactar",
+    prompt6: "Melhores itinerários por Andorra",
     ready: "Pronto para ajudar",
     nextTrips: "Próximos passeios",
     join: "Tornar-se sócio",
@@ -206,6 +215,7 @@ const translations: Record<LanguageCode, Record<string, string>> = {
     nextTripsCta: "Abrir calendário",
     joinCta: "Ir a contacto",
     sponsorsCta: "Ver patrocinadores",
+    routesCta: "Ver itinerários",
     clubCta: "Descobrir o clube",
     contactCta: "Contactar",
     fallbackTitle: "Posso orientar melhor",
@@ -235,6 +245,7 @@ const translations: Record<LanguageCode, Record<string, string>> = {
     prompt3: "Welche Sponsoren gibt es",
     prompt4: "Was ist der Club",
     prompt5: "Wie kontaktieren",
+    prompt6: "Beste Routen in Andorra",
     ready: "Bereit zu helfen",
     nextTrips: "Nächste Ausfahrten",
     join: "Mitglied werden",
@@ -244,6 +255,7 @@ const translations: Record<LanguageCode, Record<string, string>> = {
     nextTripsCta: "Kalender öffnen",
     joinCta: "Zum Kontakt",
     sponsorsCta: "Sponsoren ansehen",
+    routesCta: "Routen ansehen",
     clubCta: "Club entdecken",
     contactCta: "Kontakt",
     fallbackTitle: "Ich kann besser helfen",
@@ -273,6 +285,7 @@ const translations: Record<LanguageCode, Record<string, string>> = {
     prompt3: "Какие есть спонсоры",
     prompt4: "Что такое клуб",
     prompt5: "Как связаться",
+    prompt6: "Лучшие маршруты по Андорре",
     ready: "Готов помочь",
     nextTrips: "Ближайшие выезды",
     join: "Вступление",
@@ -282,6 +295,7 @@ const translations: Record<LanguageCode, Record<string, string>> = {
     nextTripsCta: "Открыть календарь",
     joinCta: "Перейти к контактам",
     sponsorsCta: "Смотреть спонсоров",
+    routesCta: "Смотреть маршруты",
     clubCta: "Узнать о клубе",
     contactCta: "Связаться",
     fallbackTitle: "Я могу направить точнее",
@@ -355,6 +369,17 @@ const ClubAssistant = () => {
             ? `${language === "es" ? "La próxima salida cargada es" : `${t.nextTrips}:`} ${nextEvent.title} · ${formatEventDateRange(nextEvent, language)}.${upcomingEvents.length ? ` ${upcomingEvents.join(" · ")}` : ""}`
             : t.fallbackBody,
         cta: { label: t.nextTripsCta, href: "/calendari/2026" },
+      };
+    }
+
+    if (/(itiner|ruta|route|road|andorra.*moto|andorra.*coche|driv)/.test(q)) {
+      return {
+        title: language === "es" ? "Itinerarios BMW en Andorra" : t.nextTrips,
+        body:
+          language === "es"
+            ? "Ya tienes una guía específica con rutas pensadas para BMW en Andorra: itinerarios de coche, moto y mixtos, con duración, distancia, trazado recomendado y enfoque de conducción."
+            : t.fallbackBody,
+        cta: { label: t.routesCta, href: "/itineraris" },
       };
     }
 
@@ -448,7 +473,7 @@ const ClubAssistant = () => {
     recognition.start();
   };
 
-  const prompts = [t.prompt1, t.prompt2, t.prompt3, t.prompt4, t.prompt5];
+  const prompts = [t.prompt1, t.prompt2, t.prompt3, t.prompt4, t.prompt5, t.prompt6];
 
   return (
     <PageShell>

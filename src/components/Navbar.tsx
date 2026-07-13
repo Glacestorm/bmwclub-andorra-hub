@@ -11,13 +11,13 @@ interface NavbarProps {
 }
 
 const translations: Record<LanguageCode, Record<string, string>> = {
-  ca: { home: "Inici", club: "El Club", calendar: "Calendari", sponsors: "Patrocinadors", featured: "Destacats", archive: "Arxiu", official: "BMW Oficial", assistant: "Assistent IA", gallery: "Galeria", contact: "Contacte", calendarCta: "Calendari 2026" },
-  es: { home: "Inicio", club: "El Club", calendar: "Calendario", sponsors: "Patrocinadores", featured: "Destacados", archive: "Archivo", official: "BMW Oficial", assistant: "Asistente IA", gallery: "Galería", contact: "Contacto", calendarCta: "Calendario 2026" },
-  fr: { home: "Accueil", club: "Le Club", calendar: "Calendrier", sponsors: "Sponsors", featured: "Temps forts", archive: "Archive", official: "BMW Officiel", assistant: "Assistant IA", gallery: "Galerie", contact: "Contact", calendarCta: "Calendrier 2026" },
-  en: { home: "Home", club: "The Club", calendar: "Calendar", sponsors: "Sponsors", featured: "Highlights", archive: "Archive", official: "BMW Official", assistant: "AI Concierge", gallery: "Gallery", contact: "Contact", calendarCta: "Calendar 2026" },
-  pt: { home: "Início", club: "O Clube", calendar: "Calendário", sponsors: "Patrocinadores", featured: "Destaques", archive: "Arquivo", official: "BMW Oficial", assistant: "Assistente IA", gallery: "Galeria", contact: "Contacto", calendarCta: "Calendário 2026" },
-  de: { home: "Startseite", club: "Der Club", calendar: "Kalender", sponsors: "Sponsoren", featured: "Highlights", archive: "Archiv", official: "BMW Offiziell", assistant: "KI-Assistent", gallery: "Galerie", contact: "Kontakt", calendarCta: "Kalender 2026" },
-  ru: { home: "Главная", club: "Клуб", calendar: "Календарь", sponsors: "Спонсоры", featured: "Главное", archive: "Архив", official: "BMW Official", assistant: "ИИ помощник", gallery: "Галерея", contact: "Контакты", calendarCta: "Календарь 2026" },
+  ca: { home: "Inici", club: "El Club", calendar: "Calendari", sponsors: "Patrocinadors", featured: "Destacats", archive: "Arxiu", official: "BMW Oficial", routes: "Itineraris", assistant: "Assistent IA", gallery: "Galeria", contact: "Contacte", calendarCta: "Calendari 2026" },
+  es: { home: "Inicio", club: "El Club", calendar: "Calendario", sponsors: "Patrocinadores", featured: "Destacados", archive: "Archivo", official: "BMW Oficial", routes: "Itinerarios", assistant: "Asistente IA", gallery: "Galería", contact: "Contacto", calendarCta: "Calendario 2026" },
+  fr: { home: "Accueil", club: "Le Club", calendar: "Calendrier", sponsors: "Sponsors", featured: "Temps forts", archive: "Archive", official: "BMW Officiel", routes: "Itinéraires", assistant: "Assistant IA", gallery: "Galerie", contact: "Contact", calendarCta: "Calendrier 2026" },
+  en: { home: "Home", club: "The Club", calendar: "Calendar", sponsors: "Sponsors", featured: "Highlights", archive: "Archive", official: "BMW Official", routes: "Routes", assistant: "AI Concierge", gallery: "Gallery", contact: "Contact", calendarCta: "Calendar 2026" },
+  pt: { home: "Início", club: "O Clube", calendar: "Calendário", sponsors: "Patrocinadores", featured: "Destaques", archive: "Arquivo", official: "BMW Oficial", routes: "Itinerários", assistant: "Assistente IA", gallery: "Galeria", contact: "Contacto", calendarCta: "Calendário 2026" },
+  de: { home: "Startseite", club: "Der Club", calendar: "Kalender", sponsors: "Sponsoren", featured: "Highlights", archive: "Archiv", official: "BMW Offiziell", routes: "Routen", assistant: "KI-Assistent", gallery: "Galerie", contact: "Kontakt", calendarCta: "Kalender 2026" },
+  ru: { home: "Главная", club: "Клуб", calendar: "Календарь", sponsors: "Спонсоры", featured: "Главное", archive: "Архив", official: "BMW Official", routes: "Маршруты", assistant: "ИИ помощник", gallery: "Галерея", contact: "Контакты", calendarCta: "Календарь 2026" },
 };
 
 export const Navbar = ({ language, setLanguage }: NavbarProps) => {
@@ -33,6 +33,7 @@ export const Navbar = ({ language, setLanguage }: NavbarProps) => {
     { path: "/destacats", label: t.featured },
     { path: "/arxiu", label: t.archive },
     { path: "/bmw-oficial", label: t.official },
+    { path: "/itineraris", label: t.routes },
     { path: "/assistent-ia", label: t.assistant },
     { path: "/galeria", label: t.gallery },
     { path: "/contacte", label: t.contact },

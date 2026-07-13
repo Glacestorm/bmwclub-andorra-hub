@@ -1,0 +1,304 @@
+import { Link } from "react-router-dom";
+import { ArrowRight, CalendarRange, CarFront, Compass, Mountain, Route, ShieldCheck, Bike } from "lucide-react";
+import { PageShell } from "@/components/PageShell";
+import { Card } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
+import { useLanguage } from "@/components/LanguageProvider";
+import { LanguageCode } from "@/lib/i18n";
+import { itineraryGuide, type ClubItinerary } from "@/content/itineraryGuide";
+
+const translations: Record<LanguageCode, Record<string, string>> = {
+  ca: {
+    eyebrow: "Itineraris BMW a Andorra",
+    title: "Les millors rutes per gaudir Andorra en cotxe o en moto, amb lectura premium i molt ADN BMW.",
+    intro: "No és un llistat genèric. És una guia pensada per a gent que gaudeix conduint: carreteres amb ritme, miradors útils, bones parades i recorreguts que encaixen de debò amb l’esperit del club.",
+    cta: "Parlar amb l’assistent IA",
+    kindCar: "Cotxe",
+    kindMoto: "Moto",
+    kindBoth: "Cotxe + moto",
+    duration: "Durada ideal",
+    distance: "Distància aproximada",
+    season: "Millor finestra",
+    rhythm: "Ritme",
+    start: "Sortida",
+    finish: "Final",
+    route: "Traçat recomanat",
+    highlights: "Per què val la pena",
+    bmw: "Per què és molt BMW",
+    notes: "Notes pràctiques",
+    guide1: "Rutes pensades per gaudir, no per córrer.",
+    guide2: "Separació clara entre itineraris de cotxe, moto i mixtos.",
+    guide3: "Lectura útil per a salides del club o escapada individual.",
+    contactCta: "Vull una sortida del club",
+  },
+  es: {
+    eyebrow: "Itinerarios BMW en Andorra",
+    title: "Las mejores rutas para disfrutar Andorra en coche o en moto, con lectura premium y mucho ADN BMW.",
+    intro: "No es un listado genérico. Es una guía pensada para gente que disfruta conduciendo: carreteras con ritmo, miradores útiles, buenas paradas y recorridos que encajan de verdad con el espíritu del club.",
+    cta: "Hablar con el asistente IA",
+    kindCar: "Coche",
+    kindMoto: "Moto",
+    kindBoth: "Coche + moto",
+    duration: "Duración ideal",
+    distance: "Distancia aproximada",
+    season: "Mejor ventana",
+    rhythm: "Ritmo",
+    start: "Salida",
+    finish: "Final",
+    route: "Trazado recomendado",
+    highlights: "Por qué merece la pena",
+    bmw: "Por qué es muy BMW",
+    notes: "Notas prácticas",
+    guide1: "Rutas pensadas para disfrutar, no para correr.",
+    guide2: "Separación clara entre itinerarios de coche, moto y mixtos.",
+    guide3: "Lectura útil para salidas del club o escapada individual.",
+    contactCta: "Quiero una salida del club",
+  },
+  fr: {
+    eyebrow: "Itinéraires BMW en Andorre",
+    title: "Les meilleures routes pour profiter de l’Andorre en voiture ou à moto, avec une lecture premium et un vrai ADN BMW.",
+    intro: "Ce n’est pas une liste générique. C’est un guide pour les gens qui aiment vraiment conduire : routes au bon rythme, belvédères utiles, bons arrêts et parcours cohérents avec l’esprit du club.",
+    cta: "Parler à l’assistant IA",
+    kindCar: "Voiture",
+    kindMoto: "Moto",
+    kindBoth: "Voiture + moto",
+    duration: "Durée idéale",
+    distance: "Distance approximative",
+    season: "Meilleure fenêtre",
+    rhythm: "Rythme",
+    start: "Départ",
+    finish: "Arrivée",
+    route: "Tracé recommandé",
+    highlights: "Pourquoi ça vaut le coup",
+    bmw: "Pourquoi c’est très BMW",
+    notes: "Notes pratiques",
+    guide1: "Des routes faites pour profiter, pas pour courir.",
+    guide2: "Séparation claire entre voiture, moto et itinéraires mixtes.",
+    guide3: "Lecture utile pour une sortie du club ou une escapade individuelle.",
+    contactCta: "Je veux une sortie du club",
+  },
+  en: {
+    eyebrow: "BMW itineraries in Andorra",
+    title: "The best routes to enjoy Andorra by car or motorcycle, with premium thinking and strong BMW DNA.",
+    intro: "This is not a generic list. It is a guide for people who truly enjoy driving: roads with rhythm, useful viewpoints, proper stops and routes that genuinely fit the spirit of the club.",
+    cta: "Talk to the AI concierge",
+    kindCar: "Car",
+    kindMoto: "Motorcycle",
+    kindBoth: "Car + motorcycle",
+    duration: "Ideal duration",
+    distance: "Approx. distance",
+    season: "Best window",
+    rhythm: "Rhythm",
+    start: "Start",
+    finish: "Finish",
+    route: "Recommended route",
+    highlights: "Why it is worth it",
+    bmw: "Why it feels BMW",
+    notes: "Practical notes",
+    guide1: "Routes built for enjoyment, not speed.",
+    guide2: "Clear split between car, motorcycle and mixed itineraries.",
+    guide3: "Useful reading for official club outings or solo escapes.",
+    contactCta: "I want a club outing",
+  },
+  pt: {
+    eyebrow: "Itinerários BMW em Andorra",
+    title: "As melhores rotas para desfrutar de Andorra de carro ou moto, com leitura premium e muito ADN BMW.",
+    intro: "Não é uma lista genérica. É um guia para quem gosta mesmo de conduzir: estradas com ritmo, miradouros úteis, boas paragens e percursos alinhados com o espírito do clube.",
+    cta: "Falar com o assistente IA",
+    kindCar: "Carro",
+    kindMoto: "Moto",
+    kindBoth: "Carro + moto",
+    duration: "Duração ideal",
+    distance: "Distância aproximada",
+    season: "Melhor janela",
+    rhythm: "Ritmo",
+    start: "Partida",
+    finish: "Fim",
+    route: "Traçado recomendado",
+    highlights: "Porque vale a pena",
+    bmw: "Porque é muito BMW",
+    notes: "Notas práticas",
+    guide1: "Rotas pensadas para desfrutar, não para correr.",
+    guide2: "Separação clara entre carro, moto e itinerários mistos.",
+    guide3: "Leitura útil para saídas do clube ou escapada individual.",
+    contactCta: "Quero uma saída do clube",
+  },
+  de: {
+    eyebrow: "BMW-Routen in Andorra",
+    title: "Die besten Strecken, um Andorra mit Auto oder Motorrad zu genießen – mit Premium-Blick und viel BMW-DNA.",
+    intro: "Keine generische Liste. Sondern ein Guide für Menschen, die wirklich gern fahren: Straßen mit Rhythmus, sinnvolle Aussichtspunkte, gute Stopps und Routen, die zum Geist des Clubs passen.",
+    cta: "Mit dem KI-Assistenten sprechen",
+    kindCar: "Auto",
+    kindMoto: "Motorrad",
+    kindBoth: "Auto + Motorrad",
+    duration: "Ideale Dauer",
+    distance: "Ungefähre Distanz",
+    season: "Beste Saison",
+    rhythm: "Rhythmus",
+    start: "Start",
+    finish: "Ziel",
+    route: "Empfohlene Linie",
+    highlights: "Warum es sich lohnt",
+    bmw: "Warum es sehr BMW ist",
+    notes: "Praktische Hinweise",
+    guide1: "Routen zum Genießen, nicht zum Rasen.",
+    guide2: "Klare Trennung zwischen Auto-, Motorrad- und Mix-Routen.",
+    guide3: "Nützlich für Club-Ausfahrten oder Solo-Trips.",
+    contactCta: "Ich will eine Club-Ausfahrt",
+  },
+  ru: {
+    eyebrow: "BMW-маршруты по Андорре",
+    title: "Лучшие дороги Андорры для автомобиля или мотоцикла — с премиальной логикой и яркой BMW-ДНК.",
+    intro: "Это не общий список. Это гид для тех, кто любит вождение: дороги с ритмом, полезные смотровые, хорошие остановки и маршруты, которые действительно подходят духу клуба.",
+    cta: "Поговорить с ИИ помощником",
+    kindCar: "Авто",
+    kindMoto: "Мото",
+    kindBoth: "Авто + мото",
+    duration: "Идеальная длительность",
+    distance: "Примерная дистанция",
+    season: "Лучшее время",
+    rhythm: "Ритм",
+    start: "Старт",
+    finish: "Финиш",
+    route: "Рекомендуемый маршрут",
+    highlights: "Почему стоит ехать",
+    bmw: "Почему это очень BMW",
+    notes: "Практические заметки",
+    guide1: "Маршруты для удовольствия, а не для гонки.",
+    guide2: "Чёткое разделение на авто, мото и смешанные маршруты.",
+    guide3: "Полезно и для клубных выездов, и для личной поездки.",
+    contactCta: "Хочу выезд клуба",
+  },
+};
+
+const getProfileMeta = (route: ClubItinerary, t: Record<string, string>) => {
+  if (route.profile === "car") return { label: t.kindCar, icon: CarFront };
+  if (route.profile === "motorcycle") return { label: t.kindMoto, icon: Bike };
+  return { label: t.kindBoth, icon: Route };
+};
+
+const Itineraris = () => {
+  const { language } = useLanguage();
+  const t = translations[language];
+
+  return (
+    <PageShell>
+      <section className="pt-10 pb-8">
+        <div className="container mx-auto px-4 max-w-6xl">
+          <Card className="glass-dark border-0 rounded-[2rem] md:rounded-[2.5rem] overflow-hidden relative p-6 md:p-10 text-white shadow-elegant">
+            <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(0,102,177,.35),transparent_32%)]" />
+            <div className="relative z-10 grid lg:grid-cols-[1.08fr_0.92fr] gap-8 items-end">
+              <div>
+                <div className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/10 px-4 py-2 text-xs font-semibold uppercase tracking-[0.24em] text-white/80">
+                  <Mountain className="h-4 w-4" />
+                  {t.eyebrow}
+                </div>
+                <h1 className="mt-5 text-3xl sm:text-4xl md:text-6xl font-bold text-balance max-w-4xl">{t.title}</h1>
+                <p className="mt-5 max-w-3xl text-lg text-white/72">{t.intro}</p>
+                <div className="mt-8 flex flex-wrap gap-3">
+                  <Link to="/assistent-ia"><Button variant="hero" size="lg" className="rounded-full">{t.cta}</Button></Link>
+                  <Link to="/contacte"><Button variant="outline" size="lg" className="rounded-full border-white/15 bg-white/5 text-white hover:bg-white/10">{t.contactCta}</Button></Link>
+                </div>
+              </div>
+
+              <div className="grid gap-4 sm:grid-cols-3 lg:grid-cols-1 xl:grid-cols-3">
+                {[
+                  { icon: Compass, text: t.guide1 },
+                  { icon: Route, text: t.guide2 },
+                  { icon: ShieldCheck, text: t.guide3 },
+                ].map((item) => {
+                  const Icon = item.icon;
+                  return (
+                    <div key={item.text} className="rounded-[1.75rem] border border-white/10 bg-white/8 p-5 backdrop-blur-xl">
+                      <Icon className="h-5 w-5 text-primary" />
+                      <div className="mt-3 text-sm text-white/72">{item.text}</div>
+                    </div>
+                  );
+                })}
+              </div>
+            </div>
+          </Card>
+        </div>
+      </section>
+
+      <section className="pb-16">
+        <div className="container mx-auto px-4 max-w-6xl grid gap-6">
+          {itineraryGuide.map((route) => {
+            const profile = getProfileMeta(route, t);
+            const ProfileIcon = profile.icon;
+            return (
+              <Card key={route.id} className="premium-card border-0 rounded-[2rem] p-6 md:p-8 shadow-elegant overflow-hidden">
+                <div className="grid lg:grid-cols-[0.92fr_1.08fr] gap-8 items-start">
+                  <div>
+                    <div className="inline-flex items-center gap-2 rounded-full bg-primary/10 px-4 py-2 text-xs font-semibold uppercase tracking-[0.2em] text-primary">
+                      <ProfileIcon className="h-4 w-4" />
+                      {profile.label}
+                    </div>
+                    <h2 className="mt-5 text-3xl md:text-4xl font-bold text-balance">{route.title[language]}</h2>
+                    <p className="mt-4 text-lg text-muted-foreground">{route.strapline[language]}</p>
+
+                    <div className="mt-6 grid sm:grid-cols-2 gap-4">
+                      <div className="rounded-[1.5rem] bg-white/70 p-4">
+                        <div className="text-xs uppercase tracking-[0.18em] text-primary font-semibold">{t.duration}</div>
+                        <div className="mt-2 font-semibold">{route.duration}</div>
+                      </div>
+                      <div className="rounded-[1.5rem] bg-white/70 p-4">
+                        <div className="text-xs uppercase tracking-[0.18em] text-primary font-semibold">{t.distance}</div>
+                        <div className="mt-2 font-semibold">{route.distance}</div>
+                      </div>
+                      <div className="rounded-[1.5rem] bg-white/70 p-4">
+                        <div className="text-xs uppercase tracking-[0.18em] text-primary font-semibold">{t.season}</div>
+                        <div className="mt-2 font-semibold">{route.bestSeason[language]}</div>
+                      </div>
+                      <div className="rounded-[1.5rem] bg-white/70 p-4">
+                        <div className="text-xs uppercase tracking-[0.18em] text-primary font-semibold">{t.rhythm}</div>
+                        <div className="mt-2 font-semibold">{route.rhythm[language]}</div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div className="grid gap-5">
+                    <div className="rounded-[1.6rem] border border-border/70 bg-white/70 p-5">
+                      <div className="flex items-center gap-2 text-primary font-semibold text-sm uppercase tracking-[0.18em]"><CalendarRange className="h-4 w-4" /> {t.route}</div>
+                      <div className="mt-4 text-sm text-muted-foreground"><span className="font-semibold text-foreground">{t.start}:</span> {route.start} · <span className="font-semibold text-foreground">{t.finish}:</span> {route.finish}</div>
+                      <div className="mt-4 flex flex-wrap gap-2">
+                        {route.waypoints.map((point) => (
+                          <span key={point} className="rounded-full border border-border/80 bg-background/85 px-3 py-1 text-xs font-medium text-foreground/82">{point}</span>
+                        ))}
+                      </div>
+                    </div>
+
+                    <div className="rounded-[1.6rem] border border-border/70 bg-white/70 p-5">
+                      <div className="text-sm uppercase tracking-[0.18em] text-primary font-semibold">{t.highlights}</div>
+                      <ul className="mt-4 space-y-3 text-sm text-foreground/86">
+                        {route.highlights.map((item, index) => (
+                          <li key={`${route.id}-highlight-${index}`} className="flex gap-3"><ArrowRight className="h-4 w-4 text-primary shrink-0 mt-0.5" /> <span>{item[language]}</span></li>
+                        ))}
+                      </ul>
+                    </div>
+
+                    <div className="rounded-[1.6rem] border border-border/70 bg-white/70 p-5">
+                      <div className="text-sm uppercase tracking-[0.18em] text-primary font-semibold">{t.bmw}</div>
+                      <p className="mt-4 text-sm text-foreground/86">{route.bmwAngle[language]}</p>
+                    </div>
+
+                    <div className="rounded-[1.6rem] border border-border/70 bg-white/70 p-5">
+                      <div className="text-sm uppercase tracking-[0.18em] text-primary font-semibold">{t.notes}</div>
+                      <ul className="mt-4 space-y-3 text-sm text-foreground/82">
+                        {route.notes.map((item, index) => (
+                          <li key={`${route.id}-note-${index}`} className="flex gap-3"><ShieldCheck className="h-4 w-4 text-primary shrink-0 mt-0.5" /> <span>{item[language]}</span></li>
+                        ))}
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+              </Card>
+            );
+          })}
+        </div>
+      </section>
+    </PageShell>
+  );
+};
+
+export default Itineraris;

@@ -37,6 +37,16 @@ const translations: Record<LanguageCode, Record<string, string>> = {
     assistantPill2d: "Pot escoltar la pregunta i llegir la resposta en veu alta si el navegador ho suporta.",
     assistantPill3: "Context real",
     assistantPill3d: "Es basa en el calendari, contingut i estructura actual de la web.",
+    routesEyebrow: "Guia de carreteres BMW",
+    routesTitle: "Andorra també pot llegir-se com a destinació de conducció: ja té guia pròpia per a cotxe i moto.",
+    routesBody: "He incorporat una selecció d’itineraris amb traçat recomanat, ritme, durada, distància i lectura BMW perquè la web també expliqui el territori.",
+    routesCta: "Obrir itineraris",
+    routesCard1t: "Cotxe",
+    routesCard1d: "Grand Tour, touring i ports amb trams fluids.",
+    routesCard2t: "Moto",
+    routesCard2d: "Alta muntanya, ritme i carreteres amb molta lectura.",
+    routesCard3t: "Club",
+    routesCard3d: "Rutes útils per a sortides oficials o escapades BMW.",
     highlightsEyebrow: "Destacats del club",
     highlightsTitle: "La part emocional també ha de respirar premium",
     highlightsCta: "Veure tots els destacats",
@@ -84,6 +94,16 @@ const translations: Record<LanguageCode, Record<string, string>> = {
     assistantPill2d: "Puede escuchar la pregunta y leer la respuesta en voz alta si el navegador lo soporta.",
     assistantPill3: "Contexto real",
     assistantPill3d: "Se apoya en el calendario, contenidos y estructura actual de la web.",
+    routesEyebrow: "Guía de carreteras BMW",
+    routesTitle: "Andorra también puede leerse como destino de conducción: ya tiene guía propia para coche y moto.",
+    routesBody: "He incorporado una selección de itinerarios con trazado recomendado, estilo de conducción, duración, distancia y lectura BMW para que la web no solo enseñe el club, sino también el territorio.",
+    routesCta: "Abrir itinerarios",
+    routesCard1t: "Coche",
+    routesCard1d: "Grand Tour, touring y puertos con tramos fluidos.",
+    routesCard2t: "Moto",
+    routesCard2d: "Alta montaña, ritmo y carreteras con mucha lectura.",
+    routesCard3t: "Club",
+    routesCard3d: "Rutas útiles para salidas oficiales o escapadas BMW.",
     highlightsEyebrow: "Destacados del club",
     highlightsTitle: "La parte emocional también debe respirar premium",
     highlightsCta: "Ver todos los destacados",
@@ -131,6 +151,16 @@ const translations: Record<LanguageCode, Record<string, string>> = {
     assistantPill2d: "Il peut écouter la question et lire la réponse à voix haute si le navigateur le permet.",
     assistantPill3: "Contexte réel",
     assistantPill3d: "Il s'appuie sur le calendrier, le contenu et la structure actuelle du site.",
+    routesEyebrow: "Guide des routes BMW",
+    routesTitle: "L’Andorre peut aussi se lire comme destination de conduite : elle a déjà son propre guide auto et moto.",
+    routesBody: "J’ai intégré une sélection d’itinéraires avec tracé recommandé, style de conduite, durée, distance et lecture BMW pour que le site montre aussi le territoire.",
+    routesCta: "Ouvrir les itinéraires",
+    routesCard1t: "Voiture",
+    routesCard1d: "Grand Tour, touring et cols fluides.",
+    routesCard2t: "Moto",
+    routesCard2d: "Haute montagne, rythme et routes très lisibles.",
+    routesCard3t: "Club",
+    routesCard3d: "Routes utiles pour sorties officielles ou escapades BMW.",
     highlightsEyebrow: "Temps forts du club",
     highlightsTitle: "La partie émotionnelle doit elle aussi respirer le premium",
     highlightsCta: "Voir tous les temps forts",
@@ -178,6 +208,16 @@ const translations: Record<LanguageCode, Record<string, string>> = {
     assistantPill2d: "It can listen to the question and read the reply aloud if the browser supports it.",
     assistantPill3: "Real context",
     assistantPill3d: "It relies on the website's current calendar, content and structure.",
+    routesEyebrow: "BMW road guide",
+    routesTitle: "Andorra can also be read as a driving destination: it now has its own car and motorcycle guide.",
+    routesBody: "I added a curated set of itineraries with recommended layout, driving character, duration, distance and BMW fit so the website showcases the territory too.",
+    routesCta: "Open routes",
+    routesCard1t: "Car",
+    routesCard1d: "Grand touring, passes and smooth rhythm sections.",
+    routesCard2t: "Motorcycle",
+    routesCard2d: "High mountain, pace and roads with strong reading.",
+    routesCard3t: "Club",
+    routesCard3d: "Useful runs for official outings or private BMW escapes.",
     highlightsEyebrow: "Club highlights",
     highlightsTitle: "The emotional side should also feel premium",
     highlightsCta: "View all highlights",
@@ -225,6 +265,16 @@ const translations: Record<LanguageCode, Record<string, string>> = {
     assistantPill2d: "Pode ouvir a pergunta e ler a resposta em voz alta se o navegador suportar.",
     assistantPill3: "Contexto real",
     assistantPill3d: "Baseia-se no calendário, conteúdos e estrutura atual do site.",
+    routesEyebrow: "Guia de estradas BMW",
+    routesTitle: "Andorra também pode ser lida como destino de condução: já tem guia própria para carro e moto.",
+    routesBody: "Integrei uma seleção de itinerários com traçado recomendado, estilo de condução, duração, distância e leitura BMW.",
+    routesCta: "Abrir itinerários",
+    routesCard1t: "Carro",
+    routesCard1d: "Grand Tour, touring e portos com troços fluidos.",
+    routesCard2t: "Moto",
+    routesCard2d: "Alta montanha, ritmo e estradas com muita leitura.",
+    routesCard3t: "Clube",
+    routesCard3d: "Rotas úteis para saídas oficiais ou escapadas BMW.",
     highlightsEyebrow: "Destaques do clube",
     highlightsTitle: "A parte emocional também deve respirar premium",
     highlightsCta: "Ver todos os destaques",
@@ -272,6 +322,16 @@ const translations: Record<LanguageCode, Record<string, string>> = {
     assistantPill2d: "Kann die Frage hören und die Antwort vorlesen, wenn der Browser es unterstützt.",
     assistantPill3: "Echter Kontext",
     assistantPill3d: "Greift auf den aktuellen Kalender, Inhalte und die Struktur der Website zurück.",
+    routesEyebrow: "BMW-Routenguide",
+    routesTitle: "Andorra lässt sich auch als Fahrziel lesen: dafür gibt es jetzt einen eigenen Auto- und Motorrad-Guide.",
+    routesBody: "Ich habe kuratierte Strecken mit empfohlener Linie, Fahrcharakter, Dauer, Distanz und BMW-Fit ergänzt.",
+    routesCta: "Routen öffnen",
+    routesCard1t: "Auto",
+    routesCard1d: "Grand Touring, Pässe und flüssige Etappen.",
+    routesCard2t: "Motorrad",
+    routesCard2d: "Hochgebirge, Rhythmus und sehr lesbare Straßen.",
+    routesCard3t: "Club",
+    routesCard3d: "Nützliche Routen für offizielle Ausfahrten oder BMW-Auszeiten.",
     highlightsEyebrow: "Club-Highlights",
     highlightsTitle: "Auch die emotionale Seite sollte hochwertig wirken",
     highlightsCta: "Alle Highlights ansehen",
@@ -319,6 +379,16 @@ const translations: Record<LanguageCode, Record<string, string>> = {
     assistantPill2d: "Может слушать вопрос и озвучивать ответ, если браузер поддерживает функцию.",
     assistantPill3: "Реальный контекст",
     assistantPill3d: "Опирается на текущий календарь, контент и структуру сайта.",
+    routesEyebrow: "BMW road guide",
+    routesTitle: "Андорру можно читать и как направление для вождения: теперь у сайта есть гид по маршрутам для авто и мото.",
+    routesBody: "Я добавил отобранные маршруты с рекомендованной линией, характером езды, длительностью, дистанцией и BMW-подачей.",
+    routesCta: "Открыть маршруты",
+    routesCard1t: "Авто",
+    routesCard1d: "Grand touring, перевалы и плавные участки.",
+    routesCard2t: "Мото",
+    routesCard2d: "Высокогорье, ритм и дороги с хорошей читаемостью.",
+    routesCard3t: "Клуб",
+    routesCard3d: "Полезно для официальных выездов или личных BMW-эскейпов.",
     highlightsEyebrow: "Главные моменты клуба",
     highlightsTitle: "Эмоциональная часть тоже должна ощущаться премиально",
     highlightsCta: "Все главные моменты",
@@ -437,6 +507,33 @@ const Index = () => {
                     </div>
                   );
                 })}
+              </div>
+            </div>
+          </Card>
+        </div>
+      </section>
+
+      <section className="pb-16">
+        <div className="container mx-auto px-4 max-w-6xl">
+          <Card className="premium-card border-0 rounded-[2rem] p-6 md:p-8 shadow-elegant">
+            <div className="grid lg:grid-cols-[0.95fr_1.05fr] gap-8 items-start">
+              <div>
+                <p className="text-sm uppercase tracking-[0.25em] text-primary">{t.routesEyebrow}</p>
+                <h2 className="mt-3 text-3xl md:text-4xl font-bold text-balance">{t.routesTitle}</h2>
+                <p className="mt-4 text-muted-foreground max-w-2xl">{t.routesBody}</p>
+                <Link to="/itineraris" className="inline-block mt-6"><Button variant="hero">{t.routesCta}</Button></Link>
+              </div>
+              <div className="grid sm:grid-cols-3 gap-4">
+                {[
+                  { title: t.routesCard1t, text: t.routesCard1d },
+                  { title: t.routesCard2t, text: t.routesCard2d },
+                  { title: t.routesCard3t, text: t.routesCard3d },
+                ].map((item) => (
+                  <div key={item.title} className="rounded-[1.5rem] bg-white/70 p-4">
+                    <div className="text-xs uppercase tracking-[0.18em] text-primary font-semibold">{item.title}</div>
+                    <div className="mt-3 text-sm text-foreground/82">{item.text}</div>
+                  </div>
+                ))}
               </div>
             </div>
           </Card>

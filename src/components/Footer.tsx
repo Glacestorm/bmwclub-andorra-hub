@@ -14,6 +14,7 @@ const translations: Record<LanguageCode, Record<string, string>> = {
     partners: "Patrocinadors",
     sponsors: "Destacats",
     assistant: "Assistent IA",
+    routes: "Itineraris",
     gallery: "Galeria",
     contact: "BMW Oficial",
     legal: "Legal",
@@ -37,6 +38,7 @@ const translations: Record<LanguageCode, Record<string, string>> = {
     partners: "Patrocinadores",
     sponsors: "Destacados",
     assistant: "Asistente IA",
+    routes: "Itinerarios",
     gallery: "Galería",
     contact: "BMW Oficial",
     legal: "Legal",
@@ -60,6 +62,7 @@ const translations: Record<LanguageCode, Record<string, string>> = {
     partners: "Sponsors",
     sponsors: "Temps forts",
     assistant: "Assistant IA",
+    routes: "Itinéraires",
     gallery: "Galerie",
     contact: "BMW Officiel",
     legal: "Légal",
@@ -83,6 +86,7 @@ const translations: Record<LanguageCode, Record<string, string>> = {
     partners: "Sponsors",
     sponsors: "Highlights",
     assistant: "AI Concierge",
+    routes: "Routes",
     gallery: "Gallery",
     contact: "BMW Official",
     legal: "Legal",
@@ -106,6 +110,7 @@ const translations: Record<LanguageCode, Record<string, string>> = {
     partners: "Patrocinadores",
     sponsors: "Destaques",
     assistant: "Assistente IA",
+    routes: "Itinerários",
     gallery: "Galeria",
     contact: "BMW Oficial",
     legal: "Legal",
@@ -129,6 +134,7 @@ const translations: Record<LanguageCode, Record<string, string>> = {
     partners: "Sponsoren",
     sponsors: "Highlights",
     assistant: "KI-Assistent",
+    routes: "Routen",
     gallery: "Galerie",
     contact: "BMW Offiziell",
     legal: "Rechtliches",
@@ -152,6 +158,7 @@ const translations: Record<LanguageCode, Record<string, string>> = {
     partners: "Спонсоры",
     sponsors: "Главное",
     assistant: "ИИ помощник",
+    routes: "Маршруты",
     gallery: "Галерея",
     contact: "BMW Official",
     legal: "Правовая информация",
@@ -202,6 +209,7 @@ export const Footer = ({ language }: FooterProps) => {
               <li><Link to="/patrocinadors" className="text-sm text-white/72 hover:text-white transition-base">{t.partners}</Link></li>
               <li><Link to="/destacats" className="text-sm text-white/72 hover:text-white transition-base">{t.sponsors}</Link></li>
               <li><Link to="/assistent-ia" className="text-sm text-white/72 hover:text-white transition-base">{t.assistant}</Link></li>
+              <li><Link to="/itineraris" className="text-sm text-white/72 hover:text-white transition-base">{t.routes}</Link></li>
               <li><Link to="/galeria" className="text-sm text-white/72 hover:text-white transition-base">{t.gallery}</Link></li>
               <li><Link to="/bmw-oficial" className="text-sm text-white/72 hover:text-white transition-base">{t.contact}</Link></li>
             </ul>
