@@ -1,4 +1,5 @@
 import { ClubEvent, clubEvents } from "@/content/calendarData";
+import { defaultLanguage, localeByLanguage, LanguageCode } from "@/lib/i18n";
 
 const ANDORRA_TZ = "Europe/Andorra";
 
@@ -46,7 +47,7 @@ export const getLastCompletedEvent = (reference = nowInAndorra()) => {
   return pastEvents.at(-1) ?? null;
 };
 
-export const formatEventDateRange = (event: ClubEvent) => {
+export const formatEventDateRange = (event: ClubEvent, language: LanguageCode = defaultLanguage) => {
   if (!event.start) return event.displayDate;
 
   const start = new Date(event.start);
@@ -57,14 +58,14 @@ export const formatEventDateRange = (event: ClubEvent) => {
       start.getDate() === end.getDate()
     : true;
 
-  const dateFormatter = new Intl.DateTimeFormat("ca-AD", {
+  const dateFormatter = new Intl.DateTimeFormat(localeByLanguage[language], {
     day: "2-digit",
     month: "2-digit",
     year: "numeric",
     timeZone: ANDORRA_TZ,
   });
 
-  const timeFormatter = new Intl.DateTimeFormat("ca-AD", {
+  const timeFormatter = new Intl.DateTimeFormat(localeByLanguage[language], {
     hour: "2-digit",
     minute: "2-digit",
     hour12: false,
@@ -82,15 +83,15 @@ export const formatEventDateRange = (event: ClubEvent) => {
   return `${dateFormatter.format(start)} ${timeFormatter.format(start)} → ${dateFormatter.format(end)} ${timeFormatter.format(end)}`;
 };
 
-export const formatMonthGroup = (event: ClubEvent) => {
+export const formatMonthGroup = (event: ClubEvent, language: LanguageCode = defaultLanguage) => {
   if (!event.start) return "Sense data exacta";
-  return new Intl.DateTimeFormat("ca-AD", { month: "long", year: "numeric", timeZone: ANDORRA_TZ }).format(new Date(event.start));
+  return new Intl.DateTimeFormat(localeByLanguage[language], { month: "long", year: "numeric", timeZone: ANDORRA_TZ }).format(new Date(event.start));
 };
 
-export const groupEventsByMonth = (events: ClubEvent[]) => {
+export const groupEventsByMonth = (events: ClubEvent[], language: LanguageCode = defaultLanguage) => {
   const groups = new Map<string, ClubEvent[]>();
   for (const event of events) {
-    const key = formatMonthGroup(event);
+    const key = formatMonthGroup(event, language);
     groups.set(key, [...(groups.get(key) ?? []), event]);
   }
   return Array.from(groups.entries());

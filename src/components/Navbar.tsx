@@ -8,13 +8,14 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
+import { LanguageCode, supportedLanguages } from "@/lib/i18n";
 
 interface NavbarProps {
-  language: string;
-  setLanguage: (lang: string) => void;
+  language: LanguageCode;
+  setLanguage: (lang: LanguageCode) => void;
 }
 
-const translations = {
+const translations: Record<LanguageCode, Record<string, string>> = {
   ca: {
     home: "Inici",
     club: "El Club",
@@ -23,8 +24,7 @@ const translations = {
     calendar: "Calendari",
     weather: "Meteo",
     contact: "Contacte",
-    memberArea: "Àrea de Socis",
-    joinUs: "Fes-te Soci",
+    calendarCta: "Calendari 2026",
   },
   es: {
     home: "Inicio",
@@ -34,8 +34,7 @@ const translations = {
     calendar: "Calendario",
     weather: "Meteo",
     contact: "Contacto",
-    memberArea: "Área de Socios",
-    joinUs: "Hazte Socio",
+    calendarCta: "Calendario 2026",
   },
   fr: {
     home: "Accueil",
@@ -45,8 +44,7 @@ const translations = {
     calendar: "Calendrier",
     weather: "Météo",
     contact: "Contact",
-    memberArea: "Espace Membres",
-    joinUs: "Devenir Membre",
+    calendarCta: "Calendrier 2026",
   },
   en: {
     home: "Home",
@@ -56,22 +54,44 @@ const translations = {
     calendar: "Calendar",
     weather: "Weather",
     contact: "Contact",
-    memberArea: "Member Area",
-    joinUs: "Join Us",
+    calendarCta: "Calendar 2026",
+  },
+  pt: {
+    home: "Início",
+    club: "O Clube",
+    sponsors: "Patrocinadores",
+    gallery: "Galeria",
+    calendar: "Calendário",
+    weather: "Meteorologia",
+    contact: "Contacto",
+    calendarCta: "Calendário 2026",
+  },
+  de: {
+    home: "Startseite",
+    club: "Der Club",
+    sponsors: "Sponsoren",
+    gallery: "Galerie",
+    calendar: "Kalender",
+    weather: "Wetter",
+    contact: "Kontakt",
+    calendarCta: "Kalender 2026",
+  },
+  ru: {
+    home: "Главная",
+    club: "Клуб",
+    sponsors: "Спонсоры",
+    gallery: "Галерея",
+    calendar: "Календарь",
+    weather: "Погода",
+    contact: "Контакты",
+    calendarCta: "Календарь 2026",
   },
 };
-
-const languages = [
-  { code: "ca", name: "Català" },
-  { code: "es", name: "Castellano" },
-  { code: "fr", name: "Français" },
-  { code: "en", name: "English" },
-];
 
 export const Navbar = ({ language, setLanguage }: NavbarProps) => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const location = useLocation();
-  const t = translations[language as keyof typeof translations];
+  const t = translations[language];
 
   const navLinks = [
     { path: "/", label: t.home },
@@ -89,7 +109,6 @@ export const Navbar = ({ language, setLanguage }: NavbarProps) => {
     <nav className="fixed top-0 left-0 right-0 z-50 bg-background/95 backdrop-blur-sm border-b border-border">
       <div className="container mx-auto px-4">
         <div className="flex items-center justify-between h-20">
-          {/* Logo */}
           <Link to="/" className="flex items-center space-x-3">
             <img src="/club/logo-small.png" alt="BMW Club Andorra" className="w-12 h-12 object-contain" />
             <div className="hidden md:flex flex-col">
@@ -98,7 +117,6 @@ export const Navbar = ({ language, setLanguage }: NavbarProps) => {
             </div>
           </Link>
 
-          {/* Desktop Navigation */}
           <div className="hidden lg:flex items-center space-x-1">
             {navLinks.map((link) => (
               <Link
@@ -115,9 +133,7 @@ export const Navbar = ({ language, setLanguage }: NavbarProps) => {
             ))}
           </div>
 
-          {/* Right Side Actions */}
           <div className="flex items-center space-x-3">
-            {/* Language Selector */}
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
                 <Button variant="ghost" size="sm" className="gap-1">
@@ -126,7 +142,7 @@ export const Navbar = ({ language, setLanguage }: NavbarProps) => {
                 </Button>
               </DropdownMenuTrigger>
               <DropdownMenuContent align="end">
-                {languages.map((lang) => (
+                {supportedLanguages.map((lang) => (
                   <DropdownMenuItem
                     key={lang.code}
                     onClick={() => setLanguage(lang.code)}
@@ -139,18 +155,9 @@ export const Navbar = ({ language, setLanguage }: NavbarProps) => {
             </DropdownMenu>
 
             <Link to="/calendari/2026" className="hidden md:block">
-              <Button variant="hero" size="sm">
-                {language === "ca"
-                  ? "Calendari 2026"
-                  : language === "es"
-                    ? "Calendario 2026"
-                    : language === "fr"
-                      ? "Calendrier 2026"
-                      : "Calendar 2026"}
-              </Button>
+              <Button variant="hero" size="sm">{t.calendarCta}</Button>
             </Link>
 
-            {/* Mobile Menu Button */}
             <Button
               variant="ghost"
               size="icon"
@@ -162,7 +169,6 @@ export const Navbar = ({ language, setLanguage }: NavbarProps) => {
           </div>
         </div>
 
-        {/* Mobile Menu */}
         {isMobileMenuOpen && (
           <div className="lg:hidden py-4 border-t border-border">
             <div className="flex flex-col space-y-2">
@@ -183,13 +189,7 @@ export const Navbar = ({ language, setLanguage }: NavbarProps) => {
               <div className="pt-2 space-y-2">
                 <Link to="/calendari/2026" className="block" onClick={() => setIsMobileMenuOpen(false)}>
                   <Button variant="hero" size="sm" className="w-full">
-                    {language === "ca"
-                      ? "Calendari 2026"
-                      : language === "es"
-                        ? "Calendario 2026"
-                        : language === "fr"
-                          ? "Calendrier 2026"
-                          : "Calendar 2026"}
+                    {t.calendarCta}
                   </Button>
                 </Link>
               </div>
