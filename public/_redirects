@@ -1,0 +1,17 @@
+# Legacy Joomla/Gantry routes -> new BMW Club Andorra SPA routes
+/index.php/ca/ / 301
+/index.php/ca/home-ca / 301
+/index.php/ca/patrocinadors /patrocinadors 301
+/index.php/ca/calendari/calendari-2026 /calendari/2026 301
+/index.php/ca/meteo /meteo 301
+/index.php/ca/recull-fotos /galeria 301
+/index.php/ca/recull-fotos/fotos-historiques /galeria/historiques 301
+/index.php/ca/recull-fotos/fotos-historiques/anys-2011-2012 /galeria/historiques/2011-2012 301
+/index.php/ca/recull-fotos/fotos-historiques/anys-2013-2014-2015 /galeria/historiques/2013-2015 301
+/index.php/ca/recull-fotos/fotos-historiques/anys-2016-2020-2021 /galeria/historiques/2016-2021 301
+/index.php/ca/recull-fotos/fotos-historiques/any-2022 /galeria/historiques/2022 301
+/index.php/ca/recull-fotos/fotos-sortides /galeria 301
+/index.php/ca/recull-fotos/fotos-sortides/any-2024 /galeria/sortides/2024 301
+/index.php/ca/recull-fotos/fotos-sortides/any-2025 /galeria/sortides/2025 301
+/index.php/ca/recull-fotos/fotos-sortides/any-2026 /galeria/sortides/2026 301
+/index.php/ca/component/dpcalendar/event/4o-cars-coffee /esdeveniments/cars-coffee-2026-07-12 301
