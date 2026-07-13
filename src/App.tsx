@@ -3,7 +3,7 @@ import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
 import { LanguageProvider } from "@/components/LanguageProvider";
 
 const Index = lazy(() => import("./pages/Index"));
@@ -53,6 +53,22 @@ const App = () => (
               <Route path="/el-club" element={<ElClub />} />
               <Route path="/contacte" element={<Contacte />} />
               <Route path="/alta-soci" element={<Contacte />} />
+              <Route path="/galeria/sortides" element={<Navigate to="/galeria" replace />} />
+              <Route path="/index.php/ca" element={<Navigate to="/" replace />} />
+              <Route path="/index.php/ca/home-ca" element={<Navigate to="/" replace />} />
+              <Route path="/index.php/ca/patrocinadors" element={<Navigate to="/patrocinadors" replace />} />
+              <Route path="/index.php/ca/meteo" element={<Navigate to="/meteo" replace />} />
+              <Route path="/index.php/ca/recull-fotos" element={<Navigate to="/galeria" replace />} />
+              <Route path="/index.php/ca/recull-fotos/fotos-historiques" element={<Navigate to="/galeria/historiques" replace />} />
+              <Route path="/index.php/ca/recull-fotos/fotos-historiques/anys-2011-2012" element={<Navigate to="/galeria/historiques/2011-2012" replace />} />
+              <Route path="/index.php/ca/recull-fotos/fotos-historiques/anys-2013-2014-2015" element={<Navigate to="/galeria/historiques/2013-2015" replace />} />
+              <Route path="/index.php/ca/recull-fotos/fotos-historiques/anys-2016-2020-2021" element={<Navigate to="/galeria/historiques/2016-2021" replace />} />
+              <Route path="/index.php/ca/recull-fotos/fotos-historiques/any-2022" element={<Navigate to="/galeria/historiques/2022" replace />} />
+              <Route path="/index.php/ca/recull-fotos/fotos-sortides" element={<Navigate to="/galeria" replace />} />
+              <Route path="/index.php/ca/recull-fotos/fotos-sortides/any-2024" element={<Navigate to="/galeria/sortides/2024" replace />} />
+              <Route path="/index.php/ca/recull-fotos/fotos-sortides/any-2025" element={<Navigate to="/galeria/sortides/2025" replace />} />
+              <Route path="/index.php/ca/recull-fotos/fotos-sortides/any-2026" element={<Navigate to="/galeria/sortides/2026" replace />} />
+              <Route path="/index.php/ca/component/dpcalendar/event/4o-cars-coffee" element={<Navigate to="/esdeveniments/cars-coffee-2026-07-12" replace />} />
               <Route path="/patrocinadors" element={<Patrocinadors />} />
               <Route path="/calendari" element={<Calendari />} />
               <Route path="/calendari/:year" element={<CalendariYear />} />
