@@ -1,5 +1,5 @@
 import { Link, Navigate, useLocation } from "react-router-dom";
-import { ArrowRight, Images, Sparkles } from "lucide-react";
+import { ArrowRight, Gauge, Images, Sparkles } from "lucide-react";
 import { PageShell } from "@/components/PageShell";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
@@ -31,6 +31,9 @@ const translations: Record<LanguageCode, Record<string, string>> = {
     collectionsTitle: "Lectura més clara del material recuperat",
     collectionsBody: "Cada any o bloc històric ara s'obre com una peça pròpia, amb àlbums, arxiu fotogràfic i millor jerarquia visual.",
     openMedia: "Obrir arxiu visual",
+    performance: "Media optimitzada",
+    performanceBody: "Hem passat a càrrega progressiva: primer es presenta la peça i després es van obrint fotos sota demanda, evitant baixar centenars d'imatges de cop.",
+    progressive: "càrrega progressiva",
   },
   es: {
     gallery: "Galería",
@@ -42,6 +45,9 @@ const translations: Record<LanguageCode, Record<string, string>> = {
     collectionsTitle: "Lectura más clara del material recuperado",
     collectionsBody: "Cada año o bloque histórico se abre ahora como una pieza propia, con álbumes, archivo fotográfico y mejor jerarquía visual.",
     openMedia: "Abrir archivo visual",
+    performance: "Media optimizada",
+    performanceBody: "Hemos pasado a carga progresiva: primero se presenta la pieza y luego se van abriendo fotos bajo demanda, evitando bajar cientos de imágenes de golpe.",
+    progressive: "carga progresiva",
   },
   fr: {
     gallery: "Galerie",
@@ -53,6 +59,9 @@ const translations: Record<LanguageCode, Record<string, string>> = {
     collectionsTitle: "Lecture plus claire du matériel récupéré",
     collectionsBody: "Chaque année ou bloc historique s'ouvre désormais comme une pièce propre, avec albums, archive photographique et meilleure hiérarchie visuelle.",
     openMedia: "Ouvrir l'archive visuelle",
+    performance: "Média optimisé",
+    performanceBody: "Nous sommes passés à un chargement progressif : la pièce est d'abord présentée puis les photos s'ouvrent à la demande, évitant de télécharger des centaines d'images d'un coup.",
+    progressive: "chargement progressif",
   },
   en: {
     gallery: "Gallery",
@@ -64,6 +73,9 @@ const translations: Record<LanguageCode, Record<string, string>> = {
     collectionsTitle: "Clearer reading of the recovered material",
     collectionsBody: "Each year or historical block now opens as its own piece, with albums, photographic archive and better visual hierarchy.",
     openMedia: "Open visual archive",
+    performance: "Optimised media",
+    performanceBody: "The gallery now uses progressive loading: the piece is introduced first and photos open on demand, avoiding hundreds of images downloading at once.",
+    progressive: "progressive loading",
   },
   pt: {
     gallery: "Galeria",
@@ -75,6 +87,9 @@ const translations: Record<LanguageCode, Record<string, string>> = {
     collectionsTitle: "Leitura mais clara do material recuperado",
     collectionsBody: "Cada ano ou bloco histórico abre agora como uma peça própria, com álbuns, arquivo fotográfico e melhor hierarquia visual.",
     openMedia: "Abrir arquivo visual",
+    performance: "Media otimizada",
+    performanceBody: "Passámos para carregamento progressivo: primeiro apresenta-se a peça e depois as fotos abrem sob pedido, evitando descarregar centenas de imagens de uma vez.",
+    progressive: "carregamento progressivo",
   },
   de: {
     gallery: "Galerie",
@@ -86,6 +101,9 @@ const translations: Record<LanguageCode, Record<string, string>> = {
     collectionsTitle: "Klarere Lesbarkeit des wiederhergestellten Materials",
     collectionsBody: "Jedes Jahr oder jeder historische Block öffnet sich jetzt als eigener Bereich mit Alben, Bildarchiv und besserer visueller Hierarchie.",
     openMedia: "Visuelles Archiv öffnen",
+    performance: "Optimierte Medien",
+    performanceBody: "Die Galerie lädt jetzt progressiv: erst wird der Bereich vorgestellt, danach werden Fotos bei Bedarf geöffnet, statt sofort Hunderte Bilder zu laden.",
+    progressive: "progressives Laden",
   },
   ru: {
     gallery: "Галерея",
@@ -97,6 +115,9 @@ const translations: Record<LanguageCode, Record<string, string>> = {
     collectionsTitle: "Более ясное чтение восстановленного материала",
     collectionsBody: "Каждый год или исторический блок теперь открывается как отдельный материал с альбомами, фотоархивом и лучшей визуальной иерархией.",
     openMedia: "Открыть визуальный архив",
+    performance: "Оптимизированные медиа",
+    performanceBody: "Галерея теперь загружается постепенно: сначала показывается раздел, затем фотографии открываются по запросу, без скачивания сотен изображений сразу.",
+    progressive: "постепенная загрузка",
   },
 };
 
@@ -118,7 +139,7 @@ const GaleriaCollection = () => {
     <PageShell>
       <section className="pt-10 pb-10">
         <div className="container mx-auto px-4 max-w-6xl">
-          <Card className="glass-dark border-0 rounded-[2.5rem] overflow-hidden relative p-8 md:p-10 text-white">
+          <Card className="glass-dark border-0 rounded-[2.5rem] overflow-hidden relative p-8 md:p-10 text-white shadow-elegant">
             <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(0,102,177,.35),transparent_30%)]" />
             <div className="relative z-10 grid lg:grid-cols-[1.05fr_0.95fr] gap-8 items-end">
               <div>
@@ -128,8 +149,9 @@ const GaleriaCollection = () => {
                 </div>
                 <h1 className="mt-5 text-4xl md:text-6xl font-bold text-balance">{page.hero.title}</h1>
                 {page.hero.subtitle ? <p className="mt-5 max-w-3xl text-lg text-white/76">{page.hero.subtitle}</p> : null}
-                <div className="mt-8">
+                <div className="mt-8 flex flex-wrap gap-3">
                   <NavigateButton href="/galeria" label={t.back} />
+                  <span className="inline-flex items-center rounded-full border border-white/12 bg-white/8 px-4 py-3 text-xs font-semibold uppercase tracking-[0.22em] text-white/75">{t.progressive}</span>
                 </div>
               </div>
 
@@ -151,6 +173,10 @@ const GaleriaCollection = () => {
                     <div className="mt-1 text-xs uppercase tracking-[0.18em] text-muted-foreground">{t.photos}</div>
                   </div>
                 </div>
+                <div className="mt-6 rounded-[1.5rem] border border-border/70 bg-white/70 p-4">
+                  <div className="flex items-center gap-2 text-sm font-semibold text-primary"><Gauge className="h-4 w-4" /> {t.performance}</div>
+                  <p className="mt-2 text-sm text-muted-foreground">{t.performanceBody}</p>
+                </div>
               </Card>
             </div>
           </Card>
@@ -162,7 +188,7 @@ const GaleriaCollection = () => {
           <div className="container mx-auto px-4 max-w-6xl">
             <div className="grid md:grid-cols-2 xl:grid-cols-3 gap-4">
               {page.albums.map((album) => (
-                <Card key={`${album.year ?? "album"}-${album.title}`} className="premium-card border-0 rounded-[1.7rem] p-5 hover-tilt">
+                <Card key={`${album.year ?? "album"}-${album.title}`} className="premium-card border-0 rounded-[1.7rem] p-5 hover-tilt shadow-sm">
                   {album.year ? <p className="text-xs uppercase tracking-[0.2em] text-primary font-semibold mb-3">{album.year}</p> : null}
                   <h2 className="text-lg font-semibold text-balance">{album.title}</h2>
                 </Card>
@@ -179,7 +205,7 @@ const GaleriaCollection = () => {
           <div className="container mx-auto px-4 max-w-6xl">
             <div className="grid md:grid-cols-2 gap-6">
               {page.groups.map((group) => (
-                <Card key={group.href} className="premium-card border-0 rounded-[2rem] p-6">
+                <Card key={group.href} className="premium-card border-0 rounded-[2rem] p-6 shadow-sm">
                   <h2 className="text-2xl font-bold text-balance">{group.title}</h2>
                   <div className="mt-5"><NavigateButton href={group.href} label={t.openMedia} /></div>
                 </Card>

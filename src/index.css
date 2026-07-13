@@ -236,6 +236,11 @@
     opacity: 0.9;
   }
 
+  .content-auto-block {
+    content-visibility: auto;
+    contain-intrinsic-size: 1200px;
+  }
+
   .text-balance {
     text-wrap: balance;
   }
