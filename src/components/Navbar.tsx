@@ -55,16 +55,18 @@ export const Navbar = ({ language, setLanguage }: NavbarProps) => {
             </div>
           </Link>
 
-          <div className="hidden xl:flex items-center gap-1 glass-panel rounded-full px-2 py-2">
-            {navLinks.map((link) => (
-              <Link
-                key={link.path}
-                to={link.path}
-                className={`px-4 py-2 text-sm font-medium transition-base rounded-full ${isActive(link.path) ? "text-primary bg-white shadow-sm" : "text-foreground hover:text-primary hover:bg-white/60"}`}
-              >
-                {link.label}
-              </Link>
-            ))}
+          <div className="hidden xl:flex min-w-0 flex-1 justify-center px-2">
+            <div className="glass-panel flex max-w-full flex-nowrap items-center gap-1 overflow-x-auto rounded-full px-2 py-2 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
+              {navLinks.map((link) => (
+                <Link
+                  key={link.path}
+                  to={link.path}
+                  className={`shrink-0 whitespace-nowrap rounded-full px-3 py-2 text-[13px] font-medium transition-base 2xl:px-4 2xl:text-sm ${isActive(link.path) ? "text-primary bg-white shadow-sm" : "text-foreground hover:text-primary hover:bg-white/60"}`}
+                >
+                  {link.label}
+                </Link>
+              ))}
+            </div>
           </div>
 
           <div className="flex items-center space-x-3 shrink-0">
