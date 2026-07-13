@@ -16,6 +16,8 @@ export type ClubItinerary = {
   start: string;
   finish: string;
   waypoints: string[];
+  clubRecommended?: boolean;
+  clubRecommendation?: LocalizedText;
   highlights: LocalizedText[];
   bmwAngle: LocalizedText;
   notes: LocalizedText[];
@@ -66,6 +68,16 @@ export const itineraryGuide: ClubItinerary[] = [
     start: "Andorra la Vella",
     finish: "Ordino / Andorra la Vella",
     waypoints: ["Andorra la Vella", "Escaldes-Engordany", "Engolasters", "Canillo", "Meritxell", "Ordino", "Coll d’Ordino"],
+    clubRecommended: true,
+    clubRecommendation: {
+      ca: "Molt bona opció com a sortida oficial si busques una ruta elegant, assequible per a molts perfils BMW i amb parades netes per a foto i grup.",
+      es: "Muy buena opción como salida oficial si buscas una ruta elegante, asumible para muchos perfiles BMW y con paradas limpias para foto y grupo.",
+      fr: "Très bonne option comme sortie officielle si vous cherchez une route élégante, accessible à de nombreux profils BMW et avec de bons arrêts photo.",
+      en: "A very strong official club-outing option if you want an elegant route, accessible to many BMW profiles and with clean photo stops.",
+      pt: "Muito boa opção como saída oficial se procuras uma rota elegante, acessível a muitos perfis BMW e com boas paragens para foto e grupo.",
+      de: "Sehr gute Option als offizielle Club-Ausfahrt, wenn ihr eine elegante, für viele BMW-Profile passende Route mit guten Fotostopps wollt.",
+      ru: "Очень сильный вариант для официального выезда клуба: элегантный маршрут, подходящий многим BMW, с хорошими остановками для фото и группы.",
+    },
     highlights: [
       {
         ca: "Comença suaument pujant cap a Engolasters per obrir la ruta amb vistes sobre la vall central.",
@@ -330,6 +342,16 @@ export const itineraryGuide: ClubItinerary[] = [
     start: "Ordino",
     finish: "Arcalís / Ordino",
     waypoints: ["Ordino", "La Cortinada", "Arans", "El Serrat", "Arcalís"],
+    clubRecommended: true,
+    clubRecommendation: {
+      ca: "És probablement la millor ruta oficial del club si vols combinar paisatge potent, bon ritme, esmorzar o parada llarga i una presentació molt premium dels cotxes.",
+      es: "Probablemente es la mejor ruta oficial del club si quieres combinar paisaje potente, buen ritmo, desayuno o parada larga y una presentación muy premium de los coches.",
+      fr: "C’est probablement la meilleure route officielle du club si vous voulez combiner grand paysage, bon rythme, pause longue ou petit-déjeuner et présentation premium des voitures.",
+      en: "This is probably the best official club route if you want strong scenery, good rhythm, a breakfast or long stop and a very premium car presentation.",
+      pt: "Provavelmente é a melhor rota oficial do clube se queres combinar grande paisagem, bom ritmo, pequeno-almoço ou paragem longa e uma apresentação muito premium dos carros.",
+      de: "Wahrscheinlich die beste offizielle Club-Route, wenn ihr starke Landschaft, guten Rhythmus, Frühstücksstopp und eine sehr hochwertige Fahrzeug-Präsentation kombinieren wollt.",
+      ru: "Вероятно, это лучший официальный маршрут клуба: сильные виды, хороший ритм, завтрак или длинная остановка и очень премиальная подача машин.",
+    },
     highlights: [
       {
         ca: "És la ruta que millor encaixa si vols vendre Andorra com a destinació premium de carretera i paisatge.",

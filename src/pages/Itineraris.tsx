@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { ArrowRight, CalendarRange, CarFront, Compass, Mountain, Route, ShieldCheck, Bike } from "lucide-react";
+import { ArrowRight, CalendarRange, CarFront, Compass, Mountain, Route, ShieldCheck, Bike, Crown, Map } from "lucide-react";
 import { PageShell } from "@/components/PageShell";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
@@ -23,6 +23,8 @@ const translations: Record<LanguageCode, Record<string, string>> = {
     start: "Sortida",
     finish: "Final",
     route: "Traçat recomanat",
+    scheme: "Esquema visual",
+    schemeNote: "Mapa estilitzat del recorregut, pensat per entendre el flux de la ruta d’un cop d’ull.",
     highlights: "Per què val la pena",
     bmw: "Per què és molt BMW",
     notes: "Notes pràctiques",
@@ -30,6 +32,10 @@ const translations: Record<LanguageCode, Record<string, string>> = {
     guide2: "Separació clara entre itineraris de cotxe, moto i mixtos.",
     guide3: "Lectura útil per a salides del club o escapada individual.",
     contactCta: "Vull una sortida del club",
+    clubPick: "Ruta ideal per a sortida oficial del club",
+    clubPickBody: "La recomanació editorial per a una jornada de club ben resolta.",
+    mapStart: "Start",
+    mapFinish: "Finish",
   },
   es: {
     eyebrow: "Itinerarios BMW en Andorra",
@@ -46,6 +52,8 @@ const translations: Record<LanguageCode, Record<string, string>> = {
     start: "Salida",
     finish: "Final",
     route: "Trazado recomendado",
+    scheme: "Esquema visual",
+    schemeNote: "Mapa estilizado del recorrido, pensado para entender el flujo de la ruta de un vistazo.",
     highlights: "Por qué merece la pena",
     bmw: "Por qué es muy BMW",
     notes: "Notas prácticas",
@@ -53,6 +61,10 @@ const translations: Record<LanguageCode, Record<string, string>> = {
     guide2: "Separación clara entre itinerarios de coche, moto y mixtos.",
     guide3: "Lectura útil para salidas del club o escapada individual.",
     contactCta: "Quiero una salida del club",
+    clubPick: "Ruta ideal para salida oficial del club",
+    clubPickBody: "La recomendación editorial para una jornada de club bien planteada.",
+    mapStart: "Start",
+    mapFinish: "Finish",
   },
   fr: {
     eyebrow: "Itinéraires BMW en Andorre",
@@ -69,6 +81,8 @@ const translations: Record<LanguageCode, Record<string, string>> = {
     start: "Départ",
     finish: "Arrivée",
     route: "Tracé recommandé",
+    scheme: "Schéma visuel",
+    schemeNote: "Carte stylisée du parcours pour comprendre immédiatement le flux de la route.",
     highlights: "Pourquoi ça vaut le coup",
     bmw: "Pourquoi c’est très BMW",
     notes: "Notes pratiques",
@@ -76,6 +90,10 @@ const translations: Record<LanguageCode, Record<string, string>> = {
     guide2: "Séparation claire entre voiture, moto et itinéraires mixtes.",
     guide3: "Lecture utile pour une sortie du club ou une escapade individuelle.",
     contactCta: "Je veux une sortie du club",
+    clubPick: "Route idéale pour une sortie officielle du club",
+    clubPickBody: "La recommandation éditoriale pour une vraie journée club bien pensée.",
+    mapStart: "Start",
+    mapFinish: "Finish",
   },
   en: {
     eyebrow: "BMW itineraries in Andorra",
@@ -92,6 +110,8 @@ const translations: Record<LanguageCode, Record<string, string>> = {
     start: "Start",
     finish: "Finish",
     route: "Recommended route",
+    scheme: "Visual schematic",
+    schemeNote: "A stylised route map designed to show the route flow at a glance.",
     highlights: "Why it is worth it",
     bmw: "Why it feels BMW",
     notes: "Practical notes",
@@ -99,6 +119,10 @@ const translations: Record<LanguageCode, Record<string, string>> = {
     guide2: "Clear split between car, motorcycle and mixed itineraries.",
     guide3: "Useful reading for official club outings or solo escapes.",
     contactCta: "I want a club outing",
+    clubPick: "Ideal route for an official club outing",
+    clubPickBody: "The editorial recommendation for a properly designed club day.",
+    mapStart: "Start",
+    mapFinish: "Finish",
   },
   pt: {
     eyebrow: "Itinerários BMW em Andorra",
@@ -115,6 +139,8 @@ const translations: Record<LanguageCode, Record<string, string>> = {
     start: "Partida",
     finish: "Fim",
     route: "Traçado recomendado",
+    scheme: "Esquema visual",
+    schemeNote: "Mapa estilizado do percurso para perceber o fluxo da rota num relance.",
     highlights: "Porque vale a pena",
     bmw: "Porque é muito BMW",
     notes: "Notas práticas",
@@ -122,6 +148,10 @@ const translations: Record<LanguageCode, Record<string, string>> = {
     guide2: "Separação clara entre carro, moto e itinerários mistos.",
     guide3: "Leitura útil para saídas do clube ou escapada individual.",
     contactCta: "Quero uma saída do clube",
+    clubPick: "Rota ideal para saída oficial do clube",
+    clubPickBody: "A recomendação editorial para um dia de clube bem montado.",
+    mapStart: "Start",
+    mapFinish: "Finish",
   },
   de: {
     eyebrow: "BMW-Routen in Andorra",
@@ -138,6 +168,8 @@ const translations: Record<LanguageCode, Record<string, string>> = {
     start: "Start",
     finish: "Ziel",
     route: "Empfohlene Linie",
+    scheme: "Visuelles Schema",
+    schemeNote: "Stilisierte Kartenlogik, damit der Routenfluss auf einen Blick verständlich wird.",
     highlights: "Warum es sich lohnt",
     bmw: "Warum es sehr BMW ist",
     notes: "Praktische Hinweise",
@@ -145,6 +177,10 @@ const translations: Record<LanguageCode, Record<string, string>> = {
     guide2: "Klare Trennung zwischen Auto-, Motorrad- und Mix-Routen.",
     guide3: "Nützlich für Club-Ausfahrten oder Solo-Trips.",
     contactCta: "Ich will eine Club-Ausfahrt",
+    clubPick: "Ideale Route für eine offizielle Club-Ausfahrt",
+    clubPickBody: "Die redaktionelle Empfehlung für einen sauber gedachten Club-Tag.",
+    mapStart: "Start",
+    mapFinish: "Finish",
   },
   ru: {
     eyebrow: "BMW-маршруты по Андорре",
@@ -161,6 +197,8 @@ const translations: Record<LanguageCode, Record<string, string>> = {
     start: "Старт",
     finish: "Финиш",
     route: "Рекомендуемый маршрут",
+    scheme: "Визуальная схема",
+    schemeNote: "Стилизованная карта маршрута, чтобы сразу понимать его логику и поток.",
     highlights: "Почему стоит ехать",
     bmw: "Почему это очень BMW",
     notes: "Практические заметки",
@@ -168,6 +206,10 @@ const translations: Record<LanguageCode, Record<string, string>> = {
     guide2: "Чёткое разделение на авто, мото и смешанные маршруты.",
     guide3: "Полезно и для клубных выездов, и для личной поездки.",
     contactCta: "Хочу выезд клуба",
+    clubPick: "Идеальный маршрут для официального выезда клуба",
+    clubPickBody: "Редакционная рекомендация для хорошо собранного клубного дня.",
+    mapStart: "Start",
+    mapFinish: "Finish",
   },
 };
 
@@ -175,6 +217,62 @@ const getProfileMeta = (route: ClubItinerary, t: Record<string, string>) => {
   if (route.profile === "car") return { label: t.kindCar, icon: CarFront };
   if (route.profile === "motorcycle") return { label: t.kindMoto, icon: Bike };
   return { label: t.kindBoth, icon: Route };
+};
+
+const RouteSchematic = ({ route, t }: { route: ClubItinerary; t: Record<string, string> }) => {
+  const count = route.waypoints.length;
+  const points = route.waypoints.map((point, index) => {
+    const x = 34 + (index * (252 / Math.max(count - 1, 1)));
+    const y = index % 2 === 0 ? 46 : 112;
+    return { point, x, y };
+  });
+  const polyline = points.map((point) => `${point.x},${point.y}`).join(" ");
+
+  return (
+    <div className="rounded-[1.6rem] border border-border/70 bg-white/72 p-5 overflow-hidden">
+      <div className="flex items-center gap-2 text-primary font-semibold text-sm uppercase tracking-[0.18em]">
+        <Map className="h-4 w-4" />
+        {t.scheme}
+      </div>
+      <p className="mt-2 text-sm text-muted-foreground">{t.schemeNote}</p>
+
+      <div className="mt-5 overflow-x-auto">
+        <div className="min-w-[320px]">
+          <svg viewBox="0 0 320 160" className="w-full h-auto">
+            <defs>
+              <linearGradient id={`route-gradient-${route.id}`} x1="0%" x2="100%" y1="0%" y2="0%">
+                <stop offset="0%" stopColor="rgba(0,102,177,0.45)" />
+                <stop offset="100%" stopColor="rgba(15,23,42,0.72)" />
+              </linearGradient>
+            </defs>
+            <polyline
+              points={polyline}
+              fill="none"
+              stroke={`url(#route-gradient-${route.id})`}
+              strokeWidth="6"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeDasharray="0"
+            />
+            {points.map((point, index) => (
+              <g key={`${route.id}-${point.point}-${index}`}>
+                <circle cx={point.x} cy={point.y} r={index === 0 || index === points.length - 1 ? 10 : 7} fill={index === 0 ? "#0066B1" : index === points.length - 1 ? "#111827" : "#ffffff"} stroke="#0f172a" strokeWidth="2" />
+                <text x={point.x} y={point.y + 28} textAnchor="middle" fontSize="10" fontWeight="700" fill="#334155">
+                  {point.point.length > 18 ? `${point.point.slice(0, 16)}…` : point.point}
+                </text>
+              </g>
+            ))}
+          </svg>
+        </div>
+      </div>
+
+      <div className="mt-4 flex flex-wrap gap-3 text-xs uppercase tracking-[0.18em] text-muted-foreground font-semibold">
+        <span>{t.mapStart}: {route.start}</span>
+        <span>•</span>
+        <span>{t.mapFinish}: {route.finish}</span>
+      </div>
+    </div>
+  );
 };
 
 const Itineraris = () => {
@@ -230,12 +328,31 @@ const Itineraris = () => {
               <Card key={route.id} className="premium-card border-0 rounded-[2rem] p-6 md:p-8 shadow-elegant overflow-hidden">
                 <div className="grid lg:grid-cols-[0.92fr_1.08fr] gap-8 items-start">
                   <div>
-                    <div className="inline-flex items-center gap-2 rounded-full bg-primary/10 px-4 py-2 text-xs font-semibold uppercase tracking-[0.2em] text-primary">
-                      <ProfileIcon className="h-4 w-4" />
-                      {profile.label}
+                    <div className="flex flex-wrap items-center gap-3">
+                      <div className="inline-flex items-center gap-2 rounded-full bg-primary/10 px-4 py-2 text-xs font-semibold uppercase tracking-[0.2em] text-primary">
+                        <ProfileIcon className="h-4 w-4" />
+                        {profile.label}
+                      </div>
+                      {route.clubRecommended ? (
+                        <div className="inline-flex items-center gap-2 rounded-full bg-accent px-4 py-2 text-xs font-semibold uppercase tracking-[0.2em] text-white shadow-sm">
+                          <Crown className="h-4 w-4 text-primary" />
+                          {t.clubPick}
+                        </div>
+                      ) : null}
                     </div>
+
                     <h2 className="mt-5 text-3xl md:text-4xl font-bold text-balance">{route.title[language]}</h2>
                     <p className="mt-4 text-lg text-muted-foreground">{route.strapline[language]}</p>
+
+                    {route.clubRecommended && route.clubRecommendation ? (
+                      <div className="mt-5 rounded-[1.5rem] border border-accent/10 bg-accent text-white p-5 shadow-[0_20px_50px_-35px_rgba(15,23,42,.65)]">
+                        <div className="inline-flex items-center gap-2 rounded-full bg-white/10 px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.18em] text-white/84">
+                          <Crown className="h-3.5 w-3.5 text-primary" />
+                          {t.clubPickBody}
+                        </div>
+                        <p className="mt-3 text-sm text-white/78">{route.clubRecommendation[language]}</p>
+                      </div>
+                    ) : null}
 
                     <div className="mt-6 grid sm:grid-cols-2 gap-4">
                       <div className="rounded-[1.5rem] bg-white/70 p-4">
@@ -258,6 +375,8 @@ const Itineraris = () => {
                   </div>
 
                   <div className="grid gap-5">
+                    <RouteSchematic route={route} t={t} />
+
                     <div className="rounded-[1.6rem] border border-border/70 bg-white/70 p-5">
                       <div className="flex items-center gap-2 text-primary font-semibold text-sm uppercase tracking-[0.18em]"><CalendarRange className="h-4 w-4" /> {t.route}</div>
                       <div className="mt-4 text-sm text-muted-foreground"><span className="font-semibold text-foreground">{t.start}:</span> {route.start} · <span className="font-semibold text-foreground">{t.finish}:</span> {route.finish}</div>
