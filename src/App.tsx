@@ -13,6 +13,10 @@ import GaleriaCollection from "./pages/GaleriaCollection";
 import Meteo from "./pages/Meteo";
 import Calendari from "./pages/Calendari";
 import CalendariYear from "./pages/CalendariYear";
+import Destacats from "./pages/Destacats";
+import Arxiu from "./pages/Arxiu";
+import BmwOficial from "./pages/BmwOficial";
+import EventDetail from "./pages/EventDetail";
 import LegalPage from "./pages/LegalPage";
 import NotFound from "./pages/NotFound";
 
@@ -43,6 +47,10 @@ const App = () => (
           <Route path="/calendari/2014" element={<CalendariYear />} />
           <Route path="/calendari/2013" element={<CalendariYear />} />
           <Route path="/calendari/2011" element={<CalendariYear />} />
+          <Route path="/destacats" element={<Destacats />} />
+          <Route path="/arxiu" element={<Arxiu />} />
+          <Route path="/bmw-oficial" element={<BmwOficial />} />
+          <Route path="/esdeveniments/:eventId" element={<EventDetail />} />
           <Route path="/galeria" element={<Galeria />} />
           <Route path="/galeria/historiques" element={<GaleriaCollection />} />
           <Route path="/galeria/historiques/2011-2012" element={<GaleriaCollection />} />

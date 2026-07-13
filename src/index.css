@@ -13,11 +13,11 @@
     --bmw-blue-light: 207 90% 45%;
     --bmw-blue-dark: 207 100% 25%;
     
-    --background: 0 0% 100%; /* Pure white */
-    --foreground: 0 0% 10%; /* Almost black */
+    --background: 220 20% 98%; /* Soft premium white */
+    --foreground: 220 22% 10%; /* Almost black */
 
     --card: 0 0% 100%;
-    --card-foreground: 0 0% 10%;
+    --card-foreground: 220 22% 10%;
 
     --popover: 0 0% 100%;
     --popover-foreground: 0 0% 10%;
@@ -25,33 +25,34 @@
     --primary: 207 100% 35%; /* BMW Blue */
     --primary-foreground: 0 0% 100%;
 
-    --secondary: 0 0% 96%; /* Light grey */
-    --secondary-foreground: 0 0% 10%;
+    --secondary: 220 18% 95%; /* Light grey */
+    --secondary-foreground: 220 22% 10%;
 
-    --muted: 0 0% 96%;
-    --muted-foreground: 0 0% 45%;
+    --muted: 220 18% 95%;
+    --muted-foreground: 220 10% 38%;
 
-    --accent: 0 0% 15%; /* Dark grey/black */
+    --accent: 220 26% 9%; /* Dark graphite */
     --accent-foreground: 0 0% 100%;
 
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 0 0% 100%;
 
-    --border: 0 0% 90%;
-    --input: 0 0% 90%;
+    --border: 220 18% 88%;
+    --input: 220 18% 88%;
     --ring: 207 100% 35%;
 
-    --radius: 0.25rem; /* Smaller radius for sharper BMW look */
+    --radius: 1rem;
 
-    /* BMW gradients */
-    --gradient-hero: linear-gradient(135deg, hsl(207 100% 35%) 0%, hsl(207 100% 25%) 100%);
-    --gradient-overlay: linear-gradient(180deg, transparent 0%, hsl(0 0% 0% / 0.6) 100%);
+    /* BMW-inspired gradients */
+    --gradient-hero: linear-gradient(135deg, hsl(220 26% 8%) 0%, hsl(220 22% 12%) 30%, hsl(207 100% 35%) 100%);
+    --gradient-overlay: linear-gradient(180deg, hsl(220 20% 5% / 0.15) 0%, hsl(220 26% 6% / 0.78) 100%);
+    --gradient-panel: linear-gradient(145deg, hsl(0 0% 100% / 0.82) 0%, hsl(220 30% 98% / 0.7) 100%);
     
     /* Shadows */
-    --shadow-sm: 0 1px 2px 0 hsl(0 0% 0% / 0.05);
-    --shadow-md: 0 4px 6px -1px hsl(0 0% 0% / 0.1);
-    --shadow-lg: 0 10px 15px -3px hsl(0 0% 0% / 0.1);
-    --shadow-xl: 0 20px 25px -5px hsl(0 0% 0% / 0.1);
+    --shadow-sm: 0 1px 2px 0 hsl(220 30% 10% / 0.06);
+    --shadow-md: 0 8px 20px -10px hsl(220 30% 10% / 0.18);
+    --shadow-lg: 0 24px 60px -24px hsl(220 34% 8% / 0.32);
+    --shadow-xl: 0 40px 90px -35px hsl(220 36% 6% / 0.38);
     
     /* Transitions */
     --transition-base: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
@@ -96,6 +97,15 @@
   body {
     @apply bg-background text-foreground font-sans antialiased;
     font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    background-image:
+      radial-gradient(circle at 15% 20%, hsl(207 100% 35% / 0.08), transparent 28%),
+      radial-gradient(circle at 85% 10%, hsl(220 26% 10% / 0.08), transparent 24%),
+      linear-gradient(180deg, hsl(220 25% 98%) 0%, hsl(220 20% 97%) 100%);
+    min-height: 100vh;
+  }
+
+  ::selection {
+    background: hsl(var(--primary) / 0.18);
   }
 
   h1, h2, h3, h4, h5, h6 {
@@ -124,6 +134,10 @@
     background: var(--gradient-overlay);
   }
 
+  .gradient-panel {
+    background: var(--gradient-panel);
+  }
+
   .transition-base {
     transition: var(--transition-base);
   }
@@ -134,6 +148,55 @@
 
   .shadow-elegant {
     box-shadow: var(--shadow-lg);
+  }
+
+  .glass-panel {
+    background: linear-gradient(145deg, hsl(0 0% 100% / 0.58), hsl(220 20% 100% / 0.18));
+    backdrop-filter: blur(22px);
+    -webkit-backdrop-filter: blur(22px);
+    border: 1px solid hsl(0 0% 100% / 0.38);
+    box-shadow: 0 24px 70px -36px hsl(220 40% 8% / 0.42);
+  }
+
+  .glass-dark {
+    background: linear-gradient(145deg, hsl(220 26% 10% / 0.72), hsl(220 22% 14% / 0.45));
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid hsl(0 0% 100% / 0.08);
+    box-shadow: 0 30px 70px -30px hsl(220 36% 3% / 0.55);
+  }
+
+  .premium-card {
+    background: linear-gradient(160deg, hsl(0 0% 100% / 0.95), hsl(220 25% 98% / 0.82));
+    border: 1px solid hsl(var(--border) / 0.8);
+    box-shadow: 0 22px 50px -32px hsl(220 30% 10% / 0.26);
+  }
+
+  .hover-tilt {
+    transform-style: preserve-3d;
+    transition: transform 0.45s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.45s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  .hover-tilt:hover {
+    transform: perspective(1200px) rotateX(4deg) rotateY(-6deg) translateY(-4px);
+    box-shadow: 0 34px 70px -30px hsl(220 34% 10% / 0.35);
+  }
+
+  .section-shell {
+    position: relative;
+    overflow: hidden;
+  }
+
+  .section-shell::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background: radial-gradient(circle at top right, hsl(207 100% 35% / 0.08), transparent 28%);
+  }
+
+  .metal-line {
+    background: linear-gradient(90deg, transparent 0%, hsl(var(--border)) 18%, hsl(var(--foreground) / 0.12) 50%, hsl(var(--border)) 82%, transparent 100%);
   }
 
   .text-balance {

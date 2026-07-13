@@ -32,6 +32,8 @@ export const getEventStatus = (event: ClubEvent, reference = nowInAndorra()) => 
 export const getEventsByYear = (year: number) =>
   clubEvents.filter((event) => event.year === year).sort((a, b) => (a.start ?? "9999").localeCompare(b.start ?? "9999"));
 
+export const getEventById = (id: string) => clubEvents.find((event) => event.id === id) ?? null;
+
 export const getNextEvent = (reference = nowInAndorra()) =>
   clubEvents.find((event) => {
     const start = getEventStart(event);

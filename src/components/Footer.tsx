@@ -10,9 +10,9 @@ const translations: Record<LanguageCode, Record<string, string>> = {
   ca: {
     about: "Sobre Nosaltres",
     club: "El Club",
-    sponsors: "Patrocinadors",
-    gallery: "Galeria",
-    contact: "Contacte",
+    sponsors: "Destacats",
+    gallery: "Arxiu",
+    contact: "BMW Oficial",
     legal: "Legal",
     privacy: "Privacitat",
     cookies: "Cookies",
@@ -25,9 +25,9 @@ const translations: Record<LanguageCode, Record<string, string>> = {
   es: {
     about: "Sobre nosotros",
     club: "El Club",
-    sponsors: "Patrocinadores",
-    gallery: "Galería",
-    contact: "Contacto",
+    sponsors: "Destacados",
+    gallery: "Archivo",
+    contact: "BMW Oficial",
     legal: "Legal",
     privacy: "Privacidad",
     cookies: "Cookies",
@@ -40,9 +40,9 @@ const translations: Record<LanguageCode, Record<string, string>> = {
   fr: {
     about: "À propos",
     club: "Le Club",
-    sponsors: "Sponsors",
-    gallery: "Galerie",
-    contact: "Contact",
+    sponsors: "Temps forts",
+    gallery: "Archive",
+    contact: "BMW Officiel",
     legal: "Légal",
     privacy: "Confidentialité",
     cookies: "Cookies",
@@ -55,9 +55,9 @@ const translations: Record<LanguageCode, Record<string, string>> = {
   en: {
     about: "About us",
     club: "The Club",
-    sponsors: "Sponsors",
-    gallery: "Gallery",
-    contact: "Contact",
+    sponsors: "Highlights",
+    gallery: "Archive",
+    contact: "BMW Official",
     legal: "Legal",
     privacy: "Privacy",
     cookies: "Cookies",
@@ -70,9 +70,9 @@ const translations: Record<LanguageCode, Record<string, string>> = {
   pt: {
     about: "Sobre nós",
     club: "O Clube",
-    sponsors: "Patrocinadores",
-    gallery: "Galeria",
-    contact: "Contacto",
+    sponsors: "Destaques",
+    gallery: "Arquivo",
+    contact: "BMW Oficial",
     legal: "Legal",
     privacy: "Privacidade",
     cookies: "Cookies",
@@ -85,9 +85,9 @@ const translations: Record<LanguageCode, Record<string, string>> = {
   de: {
     about: "Über uns",
     club: "Der Club",
-    sponsors: "Sponsoren",
-    gallery: "Galerie",
-    contact: "Kontakt",
+    sponsors: "Highlights",
+    gallery: "Archiv",
+    contact: "BMW Offiziell",
     legal: "Rechtliches",
     privacy: "Datenschutz",
     cookies: "Cookies",
@@ -100,9 +100,9 @@ const translations: Record<LanguageCode, Record<string, string>> = {
   ru: {
     about: "О нас",
     club: "Клуб",
-    sponsors: "Спонсоры",
-    gallery: "Галерея",
-    contact: "Контакты",
+    sponsors: "Главное",
+    gallery: "Архив",
+    contact: "BMW Official",
     legal: "Правовая информация",
     privacy: "Конфиденциальность",
     cookies: "Cookies",
@@ -135,9 +135,9 @@ export const Footer = ({ language }: FooterProps) => {
             <h3 className="font-semibold text-lg mb-4">{t.about}</h3>
             <ul className="space-y-2">
               <li><Link to="/el-club" className="text-sm text-accent-foreground/80 hover:text-primary transition-base">{t.club}</Link></li>
-              <li><Link to="/patrocinadors" className="text-sm text-accent-foreground/80 hover:text-primary transition-base">{t.sponsors}</Link></li>
-              <li><Link to="/galeria" className="text-sm text-accent-foreground/80 hover:text-primary transition-base">{t.gallery}</Link></li>
-              <li><Link to="/contacte" className="text-sm text-accent-foreground/80 hover:text-primary transition-base">{t.contact}</Link></li>
+              <li><Link to="/destacats" className="text-sm text-accent-foreground/80 hover:text-primary transition-base">{t.sponsors}</Link></li>
+              <li><Link to="/arxiu" className="text-sm text-accent-foreground/80 hover:text-primary transition-base">{t.gallery}</Link></li>
+              <li><Link to="/bmw-oficial" className="text-sm text-accent-foreground/80 hover:text-primary transition-base">{t.contact}</Link></li>
             </ul>
           </div>
 
