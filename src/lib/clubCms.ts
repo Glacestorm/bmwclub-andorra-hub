@@ -25,7 +25,7 @@ export type ClubAdminEntryRow = {
 };
 
 const SUPABASE_URL = import.meta.env.VITE_SUPABASE_URL?.trim() ?? "";
-const SUPABASE_ANON_KEY = import.meta.env.VITE_SUPABASE_ANON_KEY?.trim() ?? "";
+const SUPABASE_ANON_KEY = (import.meta.env.VITE_SUPABASE_ANON_KEY?.trim() || import.meta.env.VITE_SUPABASE_PUBLISHABLE_KEY?.trim() || "");
 const SUPABASE_BUCKET = import.meta.env.VITE_SUPABASE_STORAGE_BUCKET?.trim() || "club-media";
 const CLUB_ENTRIES_TABLE = "club_admin_entries";
 
