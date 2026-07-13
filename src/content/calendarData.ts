@@ -411,7 +411,6 @@ export const clubEvents: ClubEvent[] = [
     source: andorraLaVella,
     destination: laSeu,
     galleryHref: "/galeria/sortides/2024",
-    legacyHref: "https://bmwclubandorra.com/index.php/ca/component/dpcalendar/event/sortida-a-espanya?calid=30&Itemid=102",
     evidence: "original-site",
   },
   {
@@ -503,7 +502,6 @@ export const clubEvents: ClubEvent[] = [
     source: andorraLaVella,
     destination: andorraLaVella,
     galleryHref: "/galeria/sortides/2025",
-    legacyHref: "https://bmwclubandorra.com/index.php/ca/component/dpcalendar/event/cars-coffee?calid=30&Itemid=102",
     evidence: "original-site",
   },
   {
@@ -543,7 +541,6 @@ export const clubEvents: ClubEvent[] = [
     source: andorraLaVella,
     destination: axLesThermes,
     galleryHref: "/galeria/sortides/2025",
-    legacyHref: "https://bmwclubandorra.com/index.php/ca/component/dpcalendar/event/sortida-a-franca?calid=30&Itemid=102",
     evidence: "original-site",
   },
   {
@@ -570,7 +567,6 @@ export const clubEvents: ClubEvent[] = [
     source: andorraLaVella,
     destination: munich,
     galleryHref: "/galeria/sortides/2025",
-    legacyHref: "https://bmwclubandorra.com/index.php/ca/component/dpcalendar/event/viatge-al-museu-bmw-munich?calid=30&Itemid=102",
     evidence: "original-site",
   },
   {
@@ -693,7 +689,6 @@ export const clubEvents: ClubEvent[] = [
     category: "cars-coffee",
     source: andorraLaVella,
     destination: andorraLaVella,
-    legacyHref: "https://bmwclubandorra.com/index.php/ca/component/dpcalendar/event/4o-cars-coffee?calid=30&Itemid=102",
     evidence: "original-site",
     featured: true,
   },
@@ -707,7 +702,6 @@ export const clubEvents: ClubEvent[] = [
     category: "cars-coffee",
     source: andorraLaVella,
     destination: andorraLaVella,
-    legacyHref: "https://bmwclubandorra.com/index.php/ca/component/dpcalendar/event/5o-cars-coffee?calid=30&Itemid=102",
     notes: ["Recuperat del calendari original publicat a la web antiga."],
     evidence: "original-site",
     featured: true,

@@ -5,6 +5,15 @@ export type SponsorLink = {
   href: string;
 };
 
+export type SponsorBrand = {
+  logoPath: string;
+  accent: string;
+  surface: string;
+  border: string;
+  text: string;
+  badge: string;
+};
+
 export type SponsorItem = {
   id: string;
   name: string;
@@ -14,6 +23,7 @@ export type SponsorItem = {
   benefit?: LocalizedText;
   accent?: string;
   link?: SponsorLink;
+  brand: SponsorBrand;
 };
 
 export const sponsorItems: SponsorItem[] = [
@@ -23,6 +33,14 @@ export const sponsorItems: SponsorItem[] = [
     tier: "featured",
     category: "Automoció / retail",
     accent: "Sponsor principal",
+    brand: {
+      logoPath: "/sponsors/pyrenees-andorra.svg",
+      accent: "#d4af37",
+      surface: "linear-gradient(135deg, rgba(17,24,39,0.98) 0%, rgba(38,38,38,0.96) 100%)",
+      border: "rgba(212,175,55,0.34)",
+      text: "#ffffff",
+      badge: "rgba(212,175,55,0.16)",
+    },
     summary: {
       ca: "Peça clau per projectar una relació premium amb la marca i amb el món BMW a Andorra.",
       es: "Pieza clave para proyectar una relación premium con la marca y con el mundo BMW en Andorra.",
@@ -49,6 +67,14 @@ export const sponsorItems: SponsorItem[] = [
     tier: "premium",
     category: "Hospitality",
     accent: "Partner premium",
+    brand: {
+      logoPath: "/sponsors/coma-hotel.svg",
+      accent: "#a16207",
+      surface: "linear-gradient(135deg, rgba(250,245,235,0.96) 0%, rgba(255,255,255,0.96) 100%)",
+      border: "rgba(161,98,7,0.24)",
+      text: "#1f2937",
+      badge: "rgba(161,98,7,0.10)",
+    },
     summary: {
       ca: "Un partner ideal per associar el club amb experiència, territori i trobades amb nivell.",
       es: "Un partner ideal para asociar el club con experiencia, territorio y encuentros con nivel.",
@@ -66,6 +92,14 @@ export const sponsorItems: SponsorItem[] = [
     tier: "premium",
     category: "Lifestyle / col·leccionisme",
     accent: "Benefici per a socis",
+    brand: {
+      logoPath: "/sponsors/basar-valira.svg",
+      accent: "#2563eb",
+      surface: "linear-gradient(135deg, rgba(239,246,255,0.96) 0%, rgba(255,255,255,0.98) 100%)",
+      border: "rgba(37,99,235,0.22)",
+      text: "#0f172a",
+      badge: "rgba(37,99,235,0.10)",
+    },
     summary: {
       ca: "Encaixa molt bé per a una presentació de lifestyle BMW: miniatures, afició i compra especialitzada.",
       es: "Encaja muy bien para una presentación de lifestyle BMW: miniaturas, afición y compra especializada.",
@@ -92,6 +126,14 @@ export const sponsorItems: SponsorItem[] = [
     tier: "premium",
     category: "Serveis / mobilitat",
     accent: "Partner local",
+    brand: {
+      logoPath: "/sponsors/santeloi.svg",
+      accent: "#16a34a",
+      surface: "linear-gradient(135deg, rgba(240,253,244,0.96) 0%, rgba(255,255,255,0.98) 100%)",
+      border: "rgba(22,163,74,0.22)",
+      text: "#111827",
+      badge: "rgba(22,163,74,0.10)",
+    },
     summary: {
       ca: "Un nom fort del teixit local andorrà. Dona credibilitat, arrelament i presència comercial.",
       es: "Un nombre fuerte del tejido local andorrano. Aporta credibilidad, arraigo y presencia comercial.",
@@ -109,6 +151,14 @@ export const sponsorItems: SponsorItem[] = [
     tier: "premium",
     category: "Gastronomia",
     accent: "Partner gourmet",
+    brand: {
+      logoPath: "/sponsors/obrador-toni.svg",
+      accent: "#d97706",
+      surface: "linear-gradient(135deg, rgba(255,247,237,0.96) 0%, rgba(255,255,255,0.98) 100%)",
+      border: "rgba(217,119,6,0.22)",
+      text: "#3f2d20",
+      badge: "rgba(217,119,6,0.10)",
+    },
     summary: {
       ca: "Perfecte per reforçar l'ambient de trobades, esmorzars i experiència local de qualitat.",
       es: "Perfecto para reforzar el ambiente de encuentros, desayunos y experiencia local de calidad.",
@@ -126,6 +176,14 @@ export const sponsorItems: SponsorItem[] = [
     tier: "premium",
     category: "Energia / mobilitat",
     accent: "Marca global",
+    brand: {
+      logoPath: "/sponsors/totalenergies.svg",
+      accent: "#ef4444",
+      surface: "linear-gradient(135deg, rgba(255,255,255,0.98) 0%, rgba(255,245,245,0.96) 100%)",
+      border: "rgba(239,68,68,0.20)",
+      text: "#111827",
+      badge: "rgba(239,68,68,0.10)",
+    },
     summary: {
       ca: "Aporta una capa més internacional i automobilística al relat del panell de patrocinadors.",
       es: "Aporta una capa más internacional y automovilística al relato del panel de patrocinadores.",
@@ -142,6 +200,14 @@ export const sponsorItems: SponsorItem[] = [
     name: "ADA SL",
     tier: "support",
     category: "Partner de suport",
+    brand: {
+      logoPath: "/sponsors/ada-sl.svg",
+      accent: "#38bdf8",
+      surface: "linear-gradient(135deg, rgba(248,250,252,0.98) 0%, rgba(239,246,255,0.96) 100%)",
+      border: "rgba(56,189,248,0.20)",
+      text: "#111827",
+      badge: "rgba(56,189,248,0.10)",
+    },
     summary: {
       ca: "Col·laborador històric dins l'ecosistema del club.",
       es: "Colaborador histórico dentro del ecosistema del club.",
@@ -157,6 +223,14 @@ export const sponsorItems: SponsorItem[] = [
     name: "Financera d’Assegurances",
     tier: "support",
     category: "Finances / assegurances",
+    brand: {
+      logoPath: "/sponsors/financera-assegurances.svg",
+      accent: "#14b8a6",
+      surface: "linear-gradient(135deg, rgba(240,253,250,0.98) 0%, rgba(255,255,255,0.96) 100%)",
+      border: "rgba(20,184,166,0.20)",
+      text: "#1f2937",
+      badge: "rgba(20,184,166,0.10)",
+    },
     summary: {
       ca: "Suport vinculat a condicions i avantatges per als membres.",
       es: "Apoyo vinculado a condiciones y ventajas para los miembros.",
@@ -173,6 +247,14 @@ export const sponsorItems: SponsorItem[] = [
     name: "Eric",
     tier: "support",
     category: "Col·laborador",
+    brand: {
+      logoPath: "/sponsors/eric.svg",
+      accent: "#8b5cf6",
+      surface: "linear-gradient(135deg, rgba(250,245,255,0.98) 0%, rgba(255,255,255,0.96) 100%)",
+      border: "rgba(139,92,246,0.20)",
+      text: "#111827",
+      badge: "rgba(139,92,246,0.10)",
+    },
     summary: {
       ca: "Presència de suport dins la xarxa de col·laboradors del club.",
       es: "Presencia de apoyo dentro de la red de colaboradores del club.",
@@ -188,6 +270,14 @@ export const sponsorItems: SponsorItem[] = [
     name: "Planxisteria Auto Parc",
     tier: "support",
     category: "Taller / carrosseria",
+    brand: {
+      logoPath: "/sponsors/planxisteria-auto-parc.svg",
+      accent: "#f97316",
+      surface: "linear-gradient(135deg, rgba(255,247,237,0.98) 0%, rgba(255,255,255,0.96) 100%)",
+      border: "rgba(249,115,22,0.20)",
+      text: "#111827",
+      badge: "rgba(249,115,22,0.10)",
+    },
     summary: {
       ca: "Col·laborador amb encaix natural dins el relat de cura del vehicle i postvenda local.",
       es: "Colaborador con encaje natural dentro del relato de cuidado del vehículo y posventa local.",

@@ -52,7 +52,7 @@ export const featuredEventMeta: FeaturedEventMeta[] = [
       de: "Eines der historischen Ereignisse, das den Charakter des Clubs am besten erklärt: Straße, Territorium und BMW-Community in Andorra.",
       ru: "Одно из исторических событий, лучше всего отражающих характер клуба: дорога, территория и сообщество BMW в Андорре.",
     },
-    heroImage: "https://bmwclubandorra.com/images/Tour_Cevennes_Roussillon.jpg",
+    heroImage: "/legacy-mirror/images/Tour_Cevennes_Roussillon.jpg",
   },
   {
     eventId: "rally-turistic-2024",
@@ -148,7 +148,7 @@ export const archiveItems: ArchiveItem[] = [
     type: "pdf",
     year: "2015",
     title: "2n Campionat Slot 2015 - Classificació",
-    href: "https://bmwclubandorra.com/images/2n_Campionat_Slot_2015_Classif_07.pdf",
+    href: "/legacy-mirror/images/2n_Campionat_Slot_2015_Classif_07.pdf",
     summary: {
       ca: "Document recuperat del lloc antic. Ideal per obrir una hemeroteca real del club amb resultats, cartells i PDFs històrics.",
       es: "Documento recuperado del sitio antiguo. Ideal para abrir una hemeroteca real del club con resultados, carteles y PDFs históricos.",
@@ -166,7 +166,7 @@ export const archiveItems: ArchiveItem[] = [
     type: "pdf",
     year: "Classic",
     title: "BMW Classic Live 05/1",
-    href: "https://bmwclubandorra.com/images/revistes/BMW_Classic_live/Mobile_Tradition_live_05_1_D.pdf",
+    href: "/legacy-mirror/images/revistes/BMW_Classic_live/Mobile_Tradition_live_05_1_D.pdf",
     summary: {
       ca: "Revista recuperada del repositori antic. Aporta profunditat editorial i encaixa molt bé en un 'Arxiu del Club'.",
       es: "Revista recuperada del repositorio antiguo. Aporta profundidad editorial y encaja muy bien en un 'Archivo del Club'.",
@@ -184,7 +184,7 @@ export const archiveItems: ArchiveItem[] = [
     type: "pdf",
     year: "Classic",
     title: "BMW Classic Live 03/3",
-    href: "https://bmwclubandorra.com/images/revistes/BMW_Classic_live/Mobile_Tradition_live_03_3_D.pdf",
+    href: "/legacy-mirror/images/revistes/BMW_Classic_live/Mobile_Tradition_live_03_3_D.pdf",
     summary: {
       ca: "Segona peça editorial recuperada. Reforça la idea de marca, col·leccionisme i passió BMW més enllà de les sortides.",
       es: "Segunda pieza editorial recuperada. Refuerza la idea de marca, coleccionismo y pasión BMW más allá de las salidas.",
@@ -202,7 +202,7 @@ export const archiveItems: ArchiveItem[] = [
     type: "image",
     year: "2022",
     title: "Tour Cevennes Roussillon",
-    href: "https://bmwclubandorra.com/images/Tour_Cevennes_Roussillon.jpg",
+    href: "/legacy-mirror/images/Tour_Cevennes_Roussillon.jpg",
     summary: {
       ca: "Imatge històrica gran i usable per a seccions editorials, portades de viatges o una cronologia visual del club.",
       es: "Imagen histórica grande y usable para secciones editoriales, portadas de viajes o una cronología visual del club.",
@@ -214,24 +214,6 @@ export const archiveItems: ArchiveItem[] = [
     },
     accent: "IMG",
     sizeHint: "301 KB",
-  },
-  {
-    id: "gopro-2015-video",
-    type: "video",
-    year: "2015",
-    title: "GOPR0232.MP4",
-    href: "https://bmwclubandorra.com/images/GOPR0232.MP4",
-    summary: {
-      ca: "Vídeo històric molt pesat. Jo no el serviria directament a portada, però sí com a peça d'arxiu o vídeo destacat amb previsualització pròpia.",
-      es: "Vídeo histórico muy pesado. Yo no lo serviría directamente en portada, pero sí como pieza de archivo o vídeo destacado con previsualización propia.",
-      fr: "Vidéo historique très lourde. Je ne la servirais pas directement en page d'accueil, mais oui comme pièce d'archive ou vidéo mise en avant avec prévisualisation propre.",
-      en: "Very large historical video. I would not serve it directly on the homepage, but it fits as an archive piece or featured video with its own preview.",
-      pt: "Vídeo histórico muito pesado. Não o colocaria diretamente na homepage, mas sim como peça de arquivo ou vídeo em destaque com pré-visualização própria.",
-      de: "Sehr großes historisches Video. Ich würde es nicht direkt auf der Startseite ausspielen, aber als Archivstück oder Featured-Video mit eigener Vorschau nutzen.",
-      ru: "Очень тяжёлое историческое видео. Я бы не размещал его напрямую на главной, но использовал бы как архивный материал или отдельный выделенный ролик с собственной превью.",
-    },
-    accent: "VIDEO",
-    sizeHint: "742 MB",
   },
 ];
 

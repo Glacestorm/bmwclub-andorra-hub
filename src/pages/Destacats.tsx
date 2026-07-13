@@ -54,7 +54,7 @@ const Destacats = () => {
                     </div>
                     <Link to={`/esdeveniments/${event.id}`}><Button variant="hero">{t.button} <ArrowRight className="h-4 w-4" /></Button></Link>
                   </div>
-                  <div className="min-h-[280px] lg:min-h-full relative" style={{ backgroundImage: `linear-gradient(145deg, rgba(10,15,24,.25), rgba(0,102,177,.28)), url(${meta.heroImage ?? 'https://bmwclubandorra.com/images/Tour_Cevennes_Roussillon.jpg'})`, backgroundSize: 'cover', backgroundPosition: 'center' }} />
+                  <div className="min-h-[280px] lg:min-h-full relative" style={{ backgroundImage: `linear-gradient(145deg, rgba(10,15,24,.25), rgba(0,102,177,.28)), url(${meta.heroImage ?? '/legacy-mirror/images/Tour_Cevennes_Roussillon.jpg'})`, backgroundSize: 'cover', backgroundPosition: 'center' }} />
                 </div>
               </Card>
             );

@@ -16,6 +16,7 @@ const translations: Record<LanguageCode, Record<string, string | string[]>> = {
     body: "Hem integrat l'esperit de la benvinguda original dins la portada perquè expliqui el club des del primer scroll: comunitat BMW, sortides, trobades i passió compartida.",
     primary: "Descobrir el club",
     secondary: "Obrir galeria",
+    assistant: "Parlar amb l’assistent IA",
     carousel: "Moments del club",
     points: [
       "Comunitat de propietaris i aficionats BMW a Andorra.",
@@ -33,6 +34,7 @@ const translations: Record<LanguageCode, Record<string, string | string[]>> = {
     body: "He integrado el espíritu de la bienvenida original dentro de la portada para que explique el club desde el primer scroll: comunidad BMW, salidas, encuentros y pasión compartida.",
     primary: "Descubrir el club",
     secondary: "Abrir galería",
+    assistant: "Hablar con el asistente IA",
     carousel: "Momentos del club",
     points: [
       "Comunidad de propietarios y aficionados BMW en Andorra.",
@@ -50,6 +52,7 @@ const translations: Record<LanguageCode, Record<string, string | string[]>> = {
     body: "J'ai intégré l'esprit de la bienvenue originale dans la page d'accueil afin qu'elle explique le club dès le premier scroll : communauté BMW, sorties, rencontres et passion partagée.",
     primary: "Découvrir le club",
     secondary: "Ouvrir la galerie",
+    assistant: "Parler à l'assistant IA",
     carousel: "Moments du club",
     points: [
       "Communauté de propriétaires et passionnés BMW en Andorre.",
@@ -67,6 +70,7 @@ const translations: Record<LanguageCode, Record<string, string | string[]>> = {
     body: "I folded the spirit of the original welcome page into the homepage so it explains the club from the very first scroll: BMW community, outings, gatherings and shared passion.",
     primary: "Discover the club",
     secondary: "Open gallery",
+    assistant: "Talk to the AI concierge",
     carousel: "Club moments",
     points: [
       "BMW owners and enthusiasts community in Andorra.",
@@ -84,6 +88,7 @@ const translations: Record<LanguageCode, Record<string, string | string[]>> = {
     body: "Integrei o espírito da página de boas-vindas original na homepage para que explique o clube desde o primeiro scroll: comunidade BMW, passeios, encontros e paixão partilhada.",
     primary: "Descobrir o clube",
     secondary: "Abrir galeria",
+    assistant: "Falar com o assistente IA",
     carousel: "Momentos do clube",
     points: [
       "Comunidade de proprietários e entusiastas BMW em Andorra.",
@@ -101,6 +106,7 @@ const translations: Record<LanguageCode, Record<string, string | string[]>> = {
     body: "Ich habe den Geist der ursprünglichen Willkommensseite in die Startseite integriert, damit sie den Club schon beim ersten Scroll erklärt: BMW-Community, Ausfahrten, Treffen und gemeinsame Leidenschaft.",
     primary: "Club entdecken",
     secondary: "Galerie öffnen",
+    assistant: "Mit dem KI-Assistenten sprechen",
     carousel: "Club-Momente",
     points: [
       "Community von BMW-Besitzern und Enthusiasten in Andorra.",
@@ -118,6 +124,7 @@ const translations: Record<LanguageCode, Record<string, string | string[]>> = {
     body: "Я встроил дух оригинальной приветственной страницы в главную, чтобы сайт сразу объяснял клуб: сообщество BMW, выезды, встречи и общую страсть.",
     primary: "Узнать о клубе",
     secondary: "Открыть галерею",
+    assistant: "Поговорить с ИИ помощником",
     carousel: "Моменты клуба",
     points: [
       "Сообщество владельцев и поклонников BMW в Андорре.",
@@ -145,7 +152,7 @@ export const HomeWelcomeShowcase = () => {
   const [selectedIndex, setSelectedIndex] = useState(0);
 
   const slides = useMemo(() => {
-    const fallback = archiveItems.find((item) => item.id === "tour-cevennes-image")?.href ?? "https://bmwclubandorra.com/images/Tour_Cevennes_Roussillon.jpg";
+    const fallback = archiveItems.find((item) => item.id === "tour-cevennes-image")?.href ?? "/legacy-mirror/images/Tour_Cevennes_Roussillon.jpg";
 
     return slideSources.map((source, index) => ({
       title: String(t[source.labelKey]),
@@ -194,6 +201,7 @@ export const HomeWelcomeShowcase = () => {
               <div className="flex flex-wrap gap-3">
                 <Link to="/el-club"><Button variant="hero">{t.primary}</Button></Link>
                 <Link to="/galeria"><Button variant="outline">{t.secondary}</Button></Link>
+                <Link to="/assistent-ia"><Button variant="outline">{t.assistant}</Button></Link>
               </div>
             </div>
 

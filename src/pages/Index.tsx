@@ -347,7 +347,7 @@ const Index = () => {
           <div className="grid lg:grid-cols-3 gap-6">
             {highlightCards.map(({ meta, event }) => (
               <Card key={meta.eventId} className="premium-card border-0 rounded-[2rem] overflow-hidden hover-tilt">
-                <div className="h-56 bg-cover bg-center" style={{ backgroundImage: `linear-gradient(180deg, rgba(10,15,24,.05), rgba(10,15,24,.42)), url(${meta.heroImage ?? 'https://bmwclubandorra.com/images/Tour_Cevennes_Roussillon.jpg'})` }} />
+                <div className="h-56 bg-cover bg-center" style={{ backgroundImage: `linear-gradient(180deg, rgba(10,15,24,.05), rgba(10,15,24,.42)), url(${meta.heroImage ?? '/legacy-mirror/images/Tour_Cevennes_Roussillon.jpg'})` }} />
                 <div className="p-6">
                   <div className="text-xs uppercase tracking-[0.2em] text-primary font-semibold">{getLocalizedText(meta.tag, language)}</div>
                   <h3 className="mt-3 text-2xl font-bold text-balance">{event?.title}</h3>

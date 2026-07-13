@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="640" height="240" viewBox="0 0 640 240" fill="none">
+  <rect width="640" height="240" rx="40" fill="#3f2d20"/>
+  <rect x="22" y="22" width="596" height="196" rx="28" fill="none" stroke="#d97706" stroke-opacity="0.55" stroke-width="2"/>
+  <circle cx="108" cy="120" r="52" fill="#d97706" fill-opacity="0.16" stroke="#d97706" stroke-width="2"/>
+  <text x="108" y="132" text-anchor="middle" font-family="Inter, Arial, sans-serif" font-size="34" font-weight="700" fill="#d97706">LOD</text>
+  <text x="188" y="108" font-family="Inter, Arial, sans-serif" font-size="30" font-weight="700" fill="#fff7ed">L’Obrador d’en Toni</text>
+  <text x="188" y="146" font-family="Inter, Arial, sans-serif" font-size="16" font-weight="500" fill="#d97706">BMW Club Andorra · Sponsor</text>
+</svg>

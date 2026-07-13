@@ -4,7 +4,7 @@ import { PageShell } from "@/components/PageShell";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { useLanguage } from "@/components/LanguageProvider";
-import { sponsorItems } from "@/content/sponsorData";
+import { sponsorItems, type SponsorItem } from "@/content/sponsorData";
 import { getLocalizedText } from "@/lib/localized";
 import { LanguageCode } from "@/lib/i18n";
 
@@ -12,8 +12,7 @@ const translations: Record<LanguageCode, Record<string, string>> = {
   ca: {
     eyebrow: "Patrocinadors i partners",
     title: "Un panell amb més valor, més visibilitat i millor presència per a les marques",
-    intro:
-      "Els patrocinadors han de veure clarament que formen part d'un club cuidat, premium i amb una presentació a l'altura. Per això ara tenen més presència, millor jerarquia visual i enllaç directe a la seva web.",
+    intro: "Els patrocinadors han de veure clarament que formen part d'un club cuidat, premium i amb una presentació a l'altura. Per això ara tenen més presència, millor jerarquia visual, color de marca com a accent i identitat pròpia dins cada targeta.",
     ctaPrimary: "Fer-me patrocinador",
     ctaSecondary: "Veure BMW Oficial",
     featuredLabel: "Sponsor principal",
@@ -35,12 +34,12 @@ const translations: Record<LanguageCode, Record<string, string>> = {
     memberValueDesc: "Condicions especials, recanvis, accessoris i context comercial clar.",
     trustLabel: "Confiança de marca",
     trustDesc: "Una presentació més sòlida per a un sponsor que ha de sentir-se central.",
+    visualIdentity: "Identitat visual",
   },
   es: {
     eyebrow: "Patrocinadores y partners",
     title: "Un panel con más valor, más visibilidad y mejor presencia para las marcas",
-    intro:
-      "Los patrocinadores tienen que percibir claramente que forman parte de un club cuidado, premium y con una presentación a la altura. Por eso ahora tienen más presencia, mejor jerarquía visual y enlace directo a su web.",
+    intro: "Los patrocinadores tienen que percibir claramente que forman parte de un club cuidado, premium y con una presentación a la altura. Por eso ahora tienen más presencia, mejor jerarquía visual, color de marca como acento e identidad propia dentro de cada tarjeta.",
     ctaPrimary: "Quiero ser patrocinador",
     ctaSecondary: "Ver BMW Oficial",
     featuredLabel: "Patrocinador principal",
@@ -62,12 +61,12 @@ const translations: Record<LanguageCode, Record<string, string>> = {
     memberValueDesc: "Condiciones especiales, recambios, accesorios y contexto comercial claro.",
     trustLabel: "Confianza de marca",
     trustDesc: "Una presentación más sólida para un patrocinador que debe sentirse central.",
+    visualIdentity: "Identidad visual",
   },
   fr: {
     eyebrow: "Sponsors et partenaires",
     title: "Un panneau avec plus de valeur, plus de visibilité et une meilleure présence pour les marques",
-    intro:
-      "Les sponsors doivent percevoir clairement qu'ils font partie d'un club soigné, premium et présenté avec niveau. Ils disposent désormais de plus de présence, d'une meilleure hiérarchie visuelle et d'un lien direct vers leur site.",
+    intro: "Les sponsors doivent percevoir clairement qu'ils font partie d'un club soigné, premium et présenté avec niveau. Ils disposent désormais de plus de présence, d'une meilleure hiérarchie visuelle, d'une couleur de marque en accent et d'une identité propre dans chaque carte.",
     ctaPrimary: "Devenir sponsor",
     ctaSecondary: "Voir BMW Officiel",
     featuredLabel: "Sponsor principal",
@@ -89,12 +88,12 @@ const translations: Record<LanguageCode, Record<string, string>> = {
     memberValueDesc: "Conditions spéciales, pièces, accessoires et contexte commercial clair.",
     trustLabel: "Confiance de marque",
     trustDesc: "Une présentation plus solide pour un sponsor qui doit se sentir central.",
+    visualIdentity: "Identité visuelle",
   },
   en: {
     eyebrow: "Sponsors and partners",
     title: "A panel with more value, more visibility and better presence for partner brands",
-    intro:
-      "Sponsors should immediately feel they are part of a carefully presented, premium club. That is why they now get more presence, a clearer visual hierarchy and direct links to their official sites.",
+    intro: "Sponsors should immediately feel they are part of a carefully presented, premium club. That is why they now get more presence, clearer hierarchy, brand colour accents and a stronger identity on every card.",
     ctaPrimary: "Become a sponsor",
     ctaSecondary: "View BMW Official",
     featuredLabel: "Main sponsor",
@@ -116,12 +115,12 @@ const translations: Record<LanguageCode, Record<string, string>> = {
     memberValueDesc: "Special conditions, parts, accessories and clear commercial context.",
     trustLabel: "Brand trust",
     trustDesc: "A stronger presentation for a sponsor that should feel central.",
+    visualIdentity: "Visual identity",
   },
   pt: {
     eyebrow: "Patrocinadores e parceiros",
     title: "Um painel com mais valor, mais visibilidade e melhor presença para as marcas",
-    intro:
-      "Os patrocinadores devem perceber logo que fazem parte de um clube cuidado, premium e bem apresentado. Por isso passam agora a ter mais presença, melhor hierarquia visual e ligação direta ao site oficial.",
+    intro: "Os patrocinadores devem perceber logo que fazem parte de um clube cuidado, premium e bem apresentado. Por isso passam agora a ter mais presença, melhor hierarquia visual, cor de marca como acento e identidade própria em cada cartão.",
     ctaPrimary: "Quero ser patrocinador",
     ctaSecondary: "Ver BMW Oficial",
     featuredLabel: "Patrocinador principal",
@@ -143,12 +142,12 @@ const translations: Record<LanguageCode, Record<string, string>> = {
     memberValueDesc: "Condições especiais, peças, acessórios e contexto comercial claro.",
     trustLabel: "Confiança de marca",
     trustDesc: "Uma apresentação mais sólida para um patrocinador que deve sentir-se central.",
+    visualIdentity: "Identidade visual",
   },
   de: {
     eyebrow: "Sponsoren und Partner",
     title: "Ein Bereich mit mehr Wert, mehr Sichtbarkeit und besserer Präsenz für Partnermarken",
-    intro:
-      "Sponsoren sollen sofort erkennen, dass sie Teil eines gepflegten, hochwertigen Clubs sind. Deshalb erhalten sie jetzt mehr Präsenz, eine klarere visuelle Hierarchie und direkte Links zu ihren offiziellen Websites.",
+    intro: "Sponsoren sollen sofort erkennen, dass sie Teil eines gepflegten, hochwertigen Clubs sind. Deshalb erhalten sie jetzt mehr Präsenz, klarere Hierarchie, Markenfarben als Akzent und eine stärkere Identität auf jeder Karte.",
     ctaPrimary: "Sponsor werden",
     ctaSecondary: "BMW Offiziell ansehen",
     featuredLabel: "Hauptsponsor",
@@ -170,12 +169,12 @@ const translations: Record<LanguageCode, Record<string, string>> = {
     memberValueDesc: "Sonderkonditionen, Teile, Zubehör und klarer kommerzieller Kontext.",
     trustLabel: "Markenvertrauen",
     trustDesc: "Eine stärkere Präsentation für einen Sponsor, der zentral wirken soll.",
+    visualIdentity: "Visuelle Identität",
   },
   ru: {
     eyebrow: "Спонсоры и партнёры",
     title: "Панель с большей ценностью, заметностью и лучшим присутствием для партнёрских брендов",
-    intro:
-      "Спонсоры должны сразу видеть, что они являются частью аккуратно оформленного премиального клуба. Поэтому теперь у них больше присутствия, более чёткая визуальная иерархия и прямые ссылки на официальные сайты.",
+    intro: "Спонсоры должны сразу видеть, что они являются частью аккуратно оформленного премиального клуба. Поэтому теперь у них больше присутствия, более чёткая иерархия, фирменные цветовые акценты и своя идентичность на каждой карточке.",
     ctaPrimary: "Стать спонсором",
     ctaSecondary: "Открыть BMW Official",
     featuredLabel: "Главный спонсор",
@@ -197,8 +196,28 @@ const translations: Record<LanguageCode, Record<string, string>> = {
     memberValueDesc: "Специальные условия, запчасти, аксессуары и понятный коммерческий контекст.",
     trustLabel: "Доверие к бренду",
     trustDesc: "Более сильная подача для спонсора, который должен ощущаться центральным.",
+    visualIdentity: "Визуальная идентичность",
   },
 };
+
+const SponsorLogoPlate = ({ sponsor, dark = false }: { sponsor: SponsorItem; dark?: boolean }) => (
+  <div
+    className="rounded-[1.6rem] p-4 border"
+    style={{
+      background: sponsor.brand.surface,
+      borderColor: sponsor.brand.border,
+      color: sponsor.brand.text,
+      boxShadow: dark ? `0 30px 70px -40px ${sponsor.brand.accent}55` : `0 18px 45px -35px ${sponsor.brand.accent}40`,
+    }}
+  >
+    <div className="flex items-center justify-between gap-3">
+      <img src={sponsor.brand.logoPath} alt={`${sponsor.name} logo`} className="h-16 w-auto max-w-full object-contain" loading="lazy" />
+      <div className="rounded-full px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.18em]" style={{ background: sponsor.brand.badge, color: sponsor.brand.text }}>
+        {sponsor.category}
+      </div>
+    </div>
+  </div>
+);
 
 const Patrocinadors = () => {
   const { language } = useLanguage();
@@ -290,7 +309,8 @@ const Patrocinadors = () => {
                 </div>
 
                 <div className="glass-panel rounded-[2rem] p-6 md:p-7 border border-white/10">
-                  <div className="rounded-[1.75rem] bg-white text-slate-950 p-6 shadow-elegant">
+                  <SponsorLogoPlate sponsor={featuredSponsor} dark />
+                  <div className="rounded-[1.75rem] bg-white text-slate-950 p-6 shadow-elegant mt-5">
                     <div className="inline-flex items-center gap-2 rounded-full bg-primary/10 px-3 py-1 text-xs font-semibold uppercase tracking-[0.2em] text-primary">
                       <BadgeCheck className="h-4 w-4" />
                       {t.presentingPartner}
@@ -298,7 +318,7 @@ const Patrocinadors = () => {
                     <div className="mt-4 text-2xl font-bold text-balance">{featuredSponsor.name}</div>
                     <div className="mt-2 text-sm text-slate-500 uppercase tracking-[0.2em]">{featuredSponsor.category}</div>
                     {featuredSponsor.benefit && (
-                      <div className="mt-6 rounded-[1.5rem] bg-secondary/80 p-5">
+                      <div className="mt-6 rounded-[1.5rem] p-5" style={{ background: featuredSponsor.brand.badge }}>
                         <div className="text-xs uppercase tracking-[0.22em] text-primary font-semibold">{t.memberBenefits}</div>
                         <p className="mt-3 font-medium text-slate-800">{getLocalizedText(featuredSponsor.benefit, language)}</p>
                       </div>
@@ -327,25 +347,26 @@ const Patrocinadors = () => {
 
           <div className="grid lg:grid-cols-2 xl:grid-cols-3 gap-6">
             {premiumSponsors.map((sponsor) => (
-              <Card key={sponsor.id} className="premium-card border-0 rounded-[2rem] p-6 hover-tilt h-full flex flex-col">
-                <div className="flex items-start justify-between gap-3">
+              <Card key={sponsor.id} className="border rounded-[2rem] p-6 hover-tilt h-full flex flex-col shadow-sm" style={{ background: sponsor.brand.surface, borderColor: sponsor.brand.border }}>
+                <SponsorLogoPlate sponsor={sponsor} />
+                <div className="flex items-start justify-between gap-3 mt-5">
                   <div>
-                    <div className="text-xs uppercase tracking-[0.22em] text-primary font-semibold">{t.premiumLabel}</div>
+                    <div className="text-xs uppercase tracking-[0.22em] font-semibold" style={{ color: sponsor.brand.accent }}>{t.visualIdentity}</div>
                     <h3 className="mt-3 text-2xl font-bold text-balance">{sponsor.name}</h3>
                   </div>
-                  <div className="rounded-full border border-primary/15 bg-primary/8 px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.18em] text-primary">
+                  <div className="rounded-full px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.18em]" style={{ background: sponsor.brand.badge, color: sponsor.brand.accent }}>
                     {sponsor.category}
                   </div>
                 </div>
                 <p className="mt-4 text-muted-foreground flex-1">{getLocalizedText(sponsor.summary, language)}</p>
                 {sponsor.benefit && (
-                  <div className="mt-5 rounded-[1.35rem] bg-secondary/70 p-4 text-sm text-foreground/85">
-                    <div className="text-xs uppercase tracking-[0.2em] text-primary font-semibold mb-2">{t.memberBenefits}</div>
+                  <div className="mt-5 rounded-[1.35rem] p-4 text-sm text-foreground/85" style={{ background: sponsor.brand.badge }}>
+                    <div className="text-xs uppercase tracking-[0.2em] font-semibold mb-2" style={{ color: sponsor.brand.accent }}>{t.memberBenefits}</div>
                     {getLocalizedText(sponsor.benefit, language)}
                   </div>
                 )}
                 {sponsor.link && (
-                  <a href={sponsor.link.href} target="_blank" rel="noreferrer" className="inline-flex items-center gap-2 mt-6 text-primary font-semibold">
+                  <a href={sponsor.link.href} target="_blank" rel="noreferrer" className="inline-flex items-center gap-2 mt-6 font-semibold" style={{ color: sponsor.brand.accent }}>
                     {t.openSite}
                     <ArrowUpRight className="h-4 w-4" />
                   </a>
@@ -366,12 +387,13 @@ const Patrocinadors = () => {
               </div>
               <div className="grid sm:grid-cols-2 gap-4">
                 {supportSponsors.map((sponsor) => (
-                  <div key={sponsor.id} className="rounded-[1.5rem] bg-white/70 border border-white/70 p-5 shadow-[0_20px_45px_-35px_rgba(15,23,42,.35)]">
-                    <div className="text-xs uppercase tracking-[0.2em] text-primary font-semibold">{sponsor.category}</div>
+                  <div key={sponsor.id} className="rounded-[1.5rem] border p-5 shadow-[0_20px_45px_-35px_rgba(15,23,42,.35)]" style={{ background: sponsor.brand.surface, borderColor: sponsor.brand.border }}>
+                    <img src={sponsor.brand.logoPath} alt={`${sponsor.name} logo`} className="h-12 w-auto max-w-full object-contain" loading="lazy" />
+                    <div className="mt-4 text-xs uppercase tracking-[0.2em] font-semibold" style={{ color: sponsor.brand.accent }}>{sponsor.category}</div>
                     <div className="mt-3 text-xl font-bold text-balance">{sponsor.name}</div>
                     <p className="mt-3 text-sm text-muted-foreground">{getLocalizedText(sponsor.summary, language)}</p>
                     {sponsor.link && (
-                      <a href={sponsor.link.href} target="_blank" rel="noreferrer" className="inline-flex items-center gap-2 mt-4 text-sm font-semibold text-primary">
+                      <a href={sponsor.link.href} target="_blank" rel="noreferrer" className="inline-flex items-center gap-2 mt-4 text-sm font-semibold" style={{ color: sponsor.brand.accent }}>
                         {t.openSite}
                         <ArrowUpRight className="h-4 w-4" />
                       </a>
