@@ -187,11 +187,13 @@ export const Footer = ({ language }: FooterProps) => {
       <div className="container mx-auto px-4 py-12">
         <div className="grid gap-6 xl:grid-cols-[1.2fr_0.9fr_1fr_0.8fr]">
           <div className="glass-dark rounded-[2rem] p-6 md:p-7 border border-white/8">
-            <div className="flex items-center space-x-3">
-              <img src="/club/logo-small.png" alt="BMW Club Andorra" className="w-12 h-12 object-contain" />
+            <div className="flex items-center space-x-4">
+              <div className="flex h-16 w-16 items-center justify-center rounded-[1.35rem] border border-white/12 bg-white/10 shadow-[0_16px_40px_-28px_rgba(0,0,0,.55)]">
+                <img src="/club/logo-small.png" alt="BMW Club Andorra" className="h-12 w-12 object-contain" />
+              </div>
               <div className="flex flex-col">
-                <span className="font-bold text-lg leading-tight">{t.bmwClub}</span>
-                <span className="text-sm text-white/60 leading-tight">Andorra</span>
+                <span className="font-bold text-xl leading-tight tracking-[0.04em]">{t.bmwClub}</span>
+                <span className="text-sm font-medium uppercase tracking-[0.2em] text-white/60 leading-tight">Andorra</span>
               </div>
             </div>
             <p className="mt-4 text-sm text-white/72">{t.description}</p>

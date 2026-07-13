@@ -44,12 +44,14 @@ export const Navbar = ({ language, setLanguage }: NavbarProps) => {
   return (
     <nav className="fixed top-0 left-0 right-0 z-50 bg-background/72 backdrop-blur-xl border-b border-white/40 shadow-[0_14px_48px_-28px_rgba(15,23,42,.28)]">
       <div className="container mx-auto px-4">
-        <div className="flex items-center justify-between h-20 gap-4">
-          <Link to="/" className="flex items-center space-x-3 shrink-0">
-            <img src="/club/logo-small.png" alt="BMW Club Andorra" className="w-12 h-12 object-contain" />
+        <div className="flex items-center justify-between h-20 md:h-[5.7rem] gap-4">
+          <Link to="/" className="flex items-center space-x-3 shrink-0 rounded-full pr-2 transition-base hover:bg-white/35">
+            <div className="flex h-14 w-14 items-center justify-center rounded-2xl border border-white/55 bg-white/88 shadow-[0_16px_40px_-24px_rgba(15,23,42,.55)] md:h-16 md:w-16">
+              <img src="/club/logo-small.png" alt="BMW Club Andorra" className="h-11 w-11 object-contain md:h-12 md:w-12" />
+            </div>
             <div className="hidden md:flex flex-col">
-              <span className="font-bold text-lg leading-tight">BMW CLUB</span>
-              <span className="text-sm text-muted-foreground leading-tight">ANDORRA</span>
+              <span className="font-bold text-[1.05rem] leading-tight tracking-[0.08em]">BMW CLUB</span>
+              <span className="text-sm font-medium text-muted-foreground leading-tight tracking-[0.22em]">ANDORRA</span>
             </div>
           </Link>
 

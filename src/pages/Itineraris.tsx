@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { ArrowRight, CalendarRange, CarFront, Compass, Mountain, Route, ShieldCheck, Bike, Crown, Map } from "lucide-react";
+import { ArrowRight, CalendarRange, CarFront, Compass, Mountain, Route, ShieldCheck, Bike, Crown, Map, ImageIcon, ExternalLink } from "lucide-react";
 import { PageShell } from "@/components/PageShell";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
@@ -36,6 +36,11 @@ const translations: Record<LanguageCode, Record<string, string>> = {
     clubPickBody: "La recomanació editorial per a una jornada de club ben resolta.",
     mapStart: "Start",
     mapFinish: "Finish",
+    routePhoto: "Foto del recorregut",
+    routePhotoNote: "Fotografia real del paisatge vinculat a aquesta ruta.",
+    credits: "Crèdits",
+    source: "Font",
+    license: "Llicència",
   },
   es: {
     eyebrow: "Itinerarios BMW en Andorra",
@@ -65,6 +70,11 @@ const translations: Record<LanguageCode, Record<string, string>> = {
     clubPickBody: "La recomendación editorial para una jornada de club bien planteada.",
     mapStart: "Start",
     mapFinish: "Finish",
+    routePhoto: "Foto del itinerario",
+    routePhotoNote: "Fotografía real del paisaje vinculado a esta ruta.",
+    credits: "Créditos",
+    source: "Fuente",
+    license: "Licencia",
   },
   fr: {
     eyebrow: "Itinéraires BMW en Andorre",
@@ -94,6 +104,11 @@ const translations: Record<LanguageCode, Record<string, string>> = {
     clubPickBody: "La recommandation éditoriale pour une vraie journée club bien pensée.",
     mapStart: "Start",
     mapFinish: "Finish",
+    routePhoto: "Photo de l'itinéraire",
+    routePhotoNote: "Photographie réelle du paysage lié à cette route.",
+    credits: "Crédits",
+    source: "Source",
+    license: "Licence",
   },
   en: {
     eyebrow: "BMW itineraries in Andorra",
@@ -123,6 +138,11 @@ const translations: Record<LanguageCode, Record<string, string>> = {
     clubPickBody: "The editorial recommendation for a properly designed club day.",
     mapStart: "Start",
     mapFinish: "Finish",
+    routePhoto: "Route photography",
+    routePhotoNote: "Real landscape photography linked to this route.",
+    credits: "Credits",
+    source: "Source",
+    license: "License",
   },
   pt: {
     eyebrow: "Itinerários BMW em Andorra",
@@ -152,6 +172,11 @@ const translations: Record<LanguageCode, Record<string, string>> = {
     clubPickBody: "A recomendação editorial para um dia de clube bem montado.",
     mapStart: "Start",
     mapFinish: "Finish",
+    routePhoto: "Foto do itinerário",
+    routePhotoNote: "Fotografia real da paisagem ligada a esta rota.",
+    credits: "Créditos",
+    source: "Fonte",
+    license: "Licença",
   },
   de: {
     eyebrow: "BMW-Routen in Andorra",
@@ -181,6 +206,11 @@ const translations: Record<LanguageCode, Record<string, string>> = {
     clubPickBody: "Die redaktionelle Empfehlung für einen sauber gedachten Club-Tag.",
     mapStart: "Start",
     mapFinish: "Finish",
+    routePhoto: "Routenfoto",
+    routePhotoNote: "Echte Landschaftsfotografie aus dem Umfeld dieser Route.",
+    credits: "Credits",
+    source: "Quelle",
+    license: "Lizenz",
   },
   ru: {
     eyebrow: "BMW-маршруты по Андорре",
@@ -210,6 +240,11 @@ const translations: Record<LanguageCode, Record<string, string>> = {
     clubPickBody: "Редакционная рекомендация для хорошо собранного клубного дня.",
     mapStart: "Start",
     mapFinish: "Finish",
+    routePhoto: "Фото маршрута",
+    routePhotoNote: "Реальная фотография пейзажа, связанного с этим маршрутом.",
+    credits: "Авторство",
+    source: "Источник",
+    license: "Лицензия",
   },
 };
 
@@ -270,6 +305,44 @@ const RouteSchematic = ({ route, t }: { route: ClubItinerary; t: Record<string, 
         <span>{t.mapStart}: {route.start}</span>
         <span>•</span>
         <span>{t.mapFinish}: {route.finish}</span>
+      </div>
+    </div>
+  );
+};
+
+const RoutePhoto = ({ route, t, language }: { route: ClubItinerary; t: Record<string, string>; language: LanguageCode }) => {
+  return (
+    <div className="overflow-hidden rounded-[1.6rem] border border-border/70 bg-white/72">
+      <div className="relative aspect-[16/10] overflow-hidden">
+        <img
+          src={route.image.src}
+          alt={route.image.alt[language]}
+          className="h-full w-full object-cover transition-transform duration-700 hover:scale-[1.03]"
+          loading="lazy"
+          decoding="async"
+        />
+        <div className="absolute inset-0 bg-gradient-to-t from-slate-950/88 via-slate-950/18 to-transparent" />
+        <div className="absolute inset-x-0 bottom-0 p-5 md:p-6 text-white">
+          <div className="inline-flex items-center gap-2 rounded-full border border-white/12 bg-white/10 px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.18em] text-white/86 backdrop-blur-md">
+            <ImageIcon className="h-3.5 w-3.5" />
+            {t.routePhoto}
+          </div>
+          <p className="mt-3 max-w-xl text-sm text-white/82">{t.routePhotoNote}</p>
+        </div>
+      </div>
+
+      <div className="flex flex-wrap items-center gap-x-2 gap-y-1 border-t border-border/60 bg-white/88 px-4 py-3 text-xs text-muted-foreground">
+        <span className="font-semibold text-foreground/84">{t.credits}:</span>
+        <a href={route.image.creditHref} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1 font-medium text-foreground/86 transition-base hover:text-primary">
+          {route.image.creditName}
+          <ExternalLink className="h-3 w-3" />
+        </a>
+        <span>·</span>
+        <span>{t.source}: Wikimedia Commons</span>
+        <span>·</span>
+        <a href={route.image.licenseHref} target="_blank" rel="noopener noreferrer" className="font-medium text-foreground/86 transition-base hover:text-primary">
+          {t.license}: {route.image.licenseLabel}
+        </a>
       </div>
     </div>
   );
@@ -375,6 +448,7 @@ const Itineraris = () => {
                   </div>
 
                   <div className="grid gap-5">
+                    <RoutePhoto route={route} t={t} language={language} />
                     <RouteSchematic route={route} t={t} />
 
                     <div className="rounded-[1.6rem] border border-border/70 bg-white/70 p-5">

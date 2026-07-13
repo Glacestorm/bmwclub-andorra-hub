@@ -18,6 +18,14 @@ export type ClubItinerary = {
   waypoints: string[];
   clubRecommended?: boolean;
   clubRecommendation?: LocalizedText;
+  image: {
+    src: string;
+    alt: LocalizedText;
+    creditName: string;
+    creditHref: string;
+    licenseLabel: string;
+    licenseHref: string;
+  };
   highlights: LocalizedText[];
   bmwAngle: LocalizedText;
   notes: LocalizedText[];
@@ -77,6 +85,22 @@ export const itineraryGuide: ClubItinerary[] = [
       pt: "Muito boa opção como saída oficial se procuras uma rota elegante, acessível a muitos perfis BMW e com boas paragens para foto e grupo.",
       de: "Sehr gute Option als offizielle Club-Ausfahrt, wenn ihr eine elegante, für viele BMW-Profile passende Route mit guten Fotostopps wollt.",
       ru: "Очень сильный вариант для официального выезда клуба: элегантный маршрут, подходящий многим BMW, с хорошими остановками для фото и группы.",
+    },
+    image: {
+      src: "/itineraries/engolasters.jpg",
+      alt: {
+        ca: "Vista panoràmica d'Engolasters, amb muntanya i vall oberta.",
+        es: "Vista panorámica de Engolasters, con montaña y valle abierto.",
+        fr: "Vue panoramique d'Engolasters, entre montagne et vallée ouverte.",
+        en: "Panoramic view of Engolasters with mountain lines and an open valley.",
+        pt: "Vista panorâmica de Engolasters, com montanha e vale aberto.",
+        de: "Panoramablick auf Engolasters mit Bergkulisse und offenem Tal.",
+        ru: "Панорамный вид на Engolasters с горами и открытой долиной.",
+      },
+      creditName: "Diego Delso",
+      creditHref: "https://commons.wikimedia.org/wiki/File:Vista_de_Engolasters,_Andorra,_2013-12-30,_DD_05.JPG",
+      licenseLabel: "CC BY-SA 3.0",
+      licenseHref: "https://creativecommons.org/licenses/by-sa/3.0/",
     },
     highlights: [
       {
@@ -172,6 +196,22 @@ export const itineraryGuide: ClubItinerary[] = [
     start: "La Massana",
     finish: "La Massana / Ordino",
     waypoints: ["La Massana", "Pal", "Coll de la Botella", "Arinsal", "Erts", "Ordino"],
+    image: {
+      src: "/itineraries/coll-botella.jpg",
+      alt: {
+        ca: "Vista aèria del Coll de la Botella i l'entorn de Pal.",
+        es: "Vista aérea del Coll de la Botella y el entorno de Pal.",
+        fr: "Vue aérienne du Coll de la Botella et de l'environnement de Pal.",
+        en: "Aerial view of Coll de la Botella and the Pal mountain surroundings.",
+        pt: "Vista aérea do Coll de la Botella e do entorno de Pal.",
+        de: "Luftblick auf Coll de la Botella und die Berglandschaft rund um Pal.",
+        ru: "Аэровид на Coll de la Botella и горный район Pal.",
+      },
+      creditName: "Cristina Rodrigues",
+      creditHref: "https://commons.wikimedia.org/wiki/File:Vallnord_Andorra_Coll_de_la_Botella_Drone_8476E327FF980504CF5160AB9279E858.jpg",
+      licenseLabel: "CC BY 4.0",
+      licenseHref: "https://creativecommons.org/licenses/by/4.0/",
+    },
     highlights: [
       {
         ca: "Puja cap a Pal i regala’t la parada forta del mirador del Coll de la Botella.",
@@ -257,6 +297,22 @@ export const itineraryGuide: ClubItinerary[] = [
     start: "Encamp",
     finish: "Pas de la Casa / Encamp",
     waypoints: ["Encamp", "Grau Roig", "Pas de la Casa", "Port d’Envalira", "Andorra Circuit"],
+    image: {
+      src: "/itineraries/pas-de-la-casa.jpg",
+      alt: {
+        ca: "Vista de Pas de la Casa des del Port d'Envalira.",
+        es: "Vista de Pas de la Casa desde el Port d'Envalira.",
+        fr: "Vue de Pas de la Casa depuis le Port d'Envalira.",
+        en: "View of Pas de la Casa from Port d'Envalira.",
+        pt: "Vista de Pas de la Casa desde o Port d'Envalira.",
+        de: "Blick auf Pas de la Casa vom Port d'Envalira aus.",
+        ru: "Вид на Pas de la Casa с Port d'Envalira.",
+      },
+      creditName: "Krzysztof Golik",
+      creditHref: "https://commons.wikimedia.org/wiki/File:View_of_Pas_de_la_Casa_(1).jpg",
+      licenseLabel: "CC BY-SA 4.0",
+      licenseHref: "https://creativecommons.org/licenses/by-sa/4.0/",
+    },
     highlights: [
       {
         ca: "Des de Encamp cap a Pas de la Casa la carretera canvia de to i entra en lectura d’alta muntanya.",
@@ -351,6 +407,22 @@ export const itineraryGuide: ClubItinerary[] = [
       pt: "Provavelmente é a melhor rota oficial do clube se queres combinar grande paisagem, bom ritmo, pequeno-almoço ou paragem longa e uma apresentação muito premium dos carros.",
       de: "Wahrscheinlich die beste offizielle Club-Route, wenn ihr starke Landschaft, guten Rhythmus, Frühstücksstopp und eine sehr hochwertige Fahrzeug-Präsentation kombinieren wollt.",
       ru: "Вероятно, это лучший официальный маршрут клуба: сильные виды, хороший ритм, завтрак или длинная остановка и очень премиальная подача машин.",
+    },
+    image: {
+      src: "/itineraries/ordino-arcalis.jpg",
+      alt: {
+        ca: "Paisatge d'Ordino Arcalís, amb cims i llum neta d'alta vall.",
+        es: "Paisaje de Ordino Arcalís, con cumbres y luz limpia de alta montaña.",
+        fr: "Paysage d'Ordino Arcalís, entre sommets et lumière nette de haute vallée.",
+        en: "Ordino Arcalís landscape with high peaks and clear alpine light.",
+        pt: "Paisagem de Ordino Arcalís, com picos e luz limpa de alta montanha.",
+        de: "Landschaft von Ordino Arcalís mit Gipfeln und klarem Hochgebirgslicht.",
+        ru: "Пейзаж Ordino Arcalís с вершинами и чистым светом высокогорья.",
+      },
+      creditName: "Alberto-g-rovi",
+      creditHref: "https://commons.wikimedia.org/wiki/File:Ordino_Arcal%C3%ADs_(1).jpg",
+      licenseLabel: "CC BY 3.0",
+      licenseHref: "https://creativecommons.org/licenses/by/3.0/",
     },
     highlights: [
       {
