@@ -81,7 +81,7 @@ export const bmwContent: Record<string, PageContent> = {
       title: "La passió per BMW, compartida a Andorra",
       subtitle:
         "Comunitat, trobades, rutes i experiències per a propietaris i aficionats de la marca.",
-      primaryCta: { label: "Veure sortides", href: "/galeria/sortides/2026" },
+      primaryCta: { label: "Veure calendari 2026", href: "/calendari/2026" },
       secondaryCta: { label: "Descobrir el club", href: "/el-club" },
     },
     sections: [
@@ -100,8 +100,8 @@ export const bmwContent: Record<string, PageContent> = {
         items: [
           {
             title: "Sortides i trobades",
-            text: "Esmorzars, rutes i activitats per gaudir de la conducció i compartir afició.",
-            href: "/galeria/sortides/2026",
+            text: "Esmorzars, rutes, activitats i el calendari públic complet del club.",
+            href: "/calendari/2026",
           },
           {
             title: "Comunitat BMW",
@@ -253,7 +253,7 @@ export const bmwContent: Record<string, PageContent> = {
       { title: "Sortida França 15/05/2022" },
       { title: "Sortida Andorra 19/06/2022" },
       { title: "Rally Turístic 01/10/2022" },
-      { title: "Cloenda 13/10/2022" },
+      { title: "Cloenda 13/11/2022" },
     ],
   },
   sortides_2024: {
@@ -294,9 +294,11 @@ export const bmwContent: Record<string, PageContent> = {
     seoTitle: "Any 2026 | BMW Club Andorra",
     hero: { title: "Any 2026", subtitle: "Recull de les primeres activitats i trobades del club durant el 2026." },
     albums: [
-      { title: "1r Cars & Coffee" },
-      { title: "Sortida a Cerdanya" },
-      { title: "2n Cars & Coffee" },
+      { title: "1r Cars & Coffee 01/03/2026" },
+      { title: "Sortida a Cerdanya 29/03/2026" },
+      { title: "2n Cars & Coffee 19/04/2026" },
+      { title: "4º Cars & Coffee 12/07/2026" },
+      { title: "5º Cars & Coffee 18/10/2026" },
     ],
   },
   meteo: {

@@ -10,6 +10,8 @@ import Patrocinadors from "./pages/Patrocinadors";
 import Galeria from "./pages/Galeria";
 import GaleriaCollection from "./pages/GaleriaCollection";
 import Meteo from "./pages/Meteo";
+import Calendari from "./pages/Calendari";
+import CalendariYear from "./pages/CalendariYear";
 import LegalPage from "./pages/LegalPage";
 import NotFound from "./pages/NotFound";
 
@@ -27,6 +29,18 @@ const App = () => (
           <Route path="/contacte" element={<Contacte />} />
           <Route path="/alta-soci" element={<Contacte />} />
           <Route path="/patrocinadors" element={<Patrocinadors />} />
+          <Route path="/calendari" element={<Calendari />} />
+          <Route path="/calendari/2026" element={<CalendariYear />} />
+          <Route path="/calendari/2025" element={<CalendariYear />} />
+          <Route path="/calendari/2024" element={<CalendariYear />} />
+          <Route path="/calendari/2022" element={<CalendariYear />} />
+          <Route path="/calendari/2021" element={<CalendariYear />} />
+          <Route path="/calendari/2020" element={<CalendariYear />} />
+          <Route path="/calendari/2016" element={<CalendariYear />} />
+          <Route path="/calendari/2015" element={<CalendariYear />} />
+          <Route path="/calendari/2014" element={<CalendariYear />} />
+          <Route path="/calendari/2013" element={<CalendariYear />} />
+          <Route path="/calendari/2011" element={<CalendariYear />} />
           <Route path="/galeria" element={<Galeria />} />
           <Route path="/galeria/historiques" element={<GaleriaCollection />} />
           <Route path="/galeria/historiques/2011-2012" element={<GaleriaCollection />} />

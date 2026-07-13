@@ -20,6 +20,8 @@ const translations = {
     club: "El Club",
     sponsors: "Patrocinadors",
     gallery: "Galeria",
+    calendar: "Calendari",
+    weather: "Meteo",
     contact: "Contacte",
     memberArea: "Àrea de Socis",
     joinUs: "Fes-te Soci",
@@ -29,6 +31,8 @@ const translations = {
     club: "El Club",
     sponsors: "Patrocinadores",
     gallery: "Galería",
+    calendar: "Calendario",
+    weather: "Meteo",
     contact: "Contacto",
     memberArea: "Área de Socios",
     joinUs: "Hazte Socio",
@@ -38,6 +42,8 @@ const translations = {
     club: "Le Club",
     sponsors: "Sponsors",
     gallery: "Galerie",
+    calendar: "Calendrier",
+    weather: "Météo",
     contact: "Contact",
     memberArea: "Espace Membres",
     joinUs: "Devenir Membre",
@@ -47,6 +53,8 @@ const translations = {
     club: "The Club",
     sponsors: "Sponsors",
     gallery: "Gallery",
+    calendar: "Calendar",
+    weather: "Weather",
     contact: "Contact",
     memberArea: "Member Area",
     joinUs: "Join Us",
@@ -68,6 +76,8 @@ export const Navbar = ({ language, setLanguage }: NavbarProps) => {
   const navLinks = [
     { path: "/", label: t.home },
     { path: "/el-club", label: t.club },
+    { path: "/calendari", label: t.calendar },
+    { path: "/meteo", label: t.weather },
     { path: "/patrocinadors", label: t.sponsors },
     { path: "/galeria", label: t.gallery },
     { path: "/contacte", label: t.contact },
@@ -128,15 +138,15 @@ export const Navbar = ({ language, setLanguage }: NavbarProps) => {
               </DropdownMenuContent>
             </DropdownMenu>
 
-            <Link to="/galeria/sortides/2026" className="hidden md:block">
+            <Link to="/calendari/2026" className="hidden md:block">
               <Button variant="hero" size="sm">
                 {language === "ca"
-                  ? "Últimes Sortides"
+                  ? "Calendari 2026"
                   : language === "es"
-                    ? "Últimas Salidas"
+                    ? "Calendario 2026"
                     : language === "fr"
-                      ? "Dernières Sorties"
-                      : "Latest Outings"}
+                      ? "Calendrier 2026"
+                      : "Calendar 2026"}
               </Button>
             </Link>
 
@@ -171,15 +181,15 @@ export const Navbar = ({ language, setLanguage }: NavbarProps) => {
                 </Link>
               ))}
               <div className="pt-2 space-y-2">
-                <Link to="/galeria/sortides/2026" className="block" onClick={() => setIsMobileMenuOpen(false)}>
+                <Link to="/calendari/2026" className="block" onClick={() => setIsMobileMenuOpen(false)}>
                   <Button variant="hero" size="sm" className="w-full">
                     {language === "ca"
-                      ? "Últimes Sortides"
+                      ? "Calendari 2026"
                       : language === "es"
-                        ? "Últimas Salidas"
+                        ? "Calendario 2026"
                         : language === "fr"
-                          ? "Dernières Sorties"
-                          : "Latest Outings"}
+                          ? "Calendrier 2026"
+                          : "Calendar 2026"}
                   </Button>
                 </Link>
               </div>
