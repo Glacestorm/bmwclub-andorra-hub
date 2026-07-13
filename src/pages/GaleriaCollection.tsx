@@ -1,8 +1,13 @@
-import { Navigate, useLocation } from "react-router-dom";
+import { Link, Navigate, useLocation } from "react-router-dom";
+import { ArrowRight, Images, Sparkles } from "lucide-react";
 import { PageShell } from "@/components/PageShell";
-import { BmwContentRenderer } from "@/components/BmwContentRenderer";
+import { Card } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
 import { GalleryMediaSections } from "@/components/GalleryMediaSections";
 import { bmwContent } from "@/content/bmwContent";
+import { galleryMediaByPage } from "@/content/galleryMedia";
+import { useLanguage } from "@/components/LanguageProvider";
+import { LanguageCode } from "@/lib/i18n";
 
 const pageByPath: Record<string, keyof typeof bmwContent> = {
   "/galeria/historiques": "historiques",
@@ -15,20 +20,182 @@ const pageByPath: Record<string, keyof typeof bmwContent> = {
   "/galeria/sortides/2026": "sortides_2026",
 };
 
+const translations: Record<LanguageCode, Record<string, string>> = {
+  ca: {
+    gallery: "Galeria",
+    albums: "Àlbums",
+    photos: "fotos",
+    sections: "seccions visuals",
+    back: "Tornar a galeria",
+    collections: "Col·leccions",
+    collectionsTitle: "Lectura més clara del material recuperat",
+    collectionsBody: "Cada any o bloc històric ara s'obre com una peça pròpia, amb àlbums, arxiu fotogràfic i millor jerarquia visual.",
+    openMedia: "Obrir arxiu visual",
+  },
+  es: {
+    gallery: "Galería",
+    albums: "Álbumes",
+    photos: "fotos",
+    sections: "secciones visuales",
+    back: "Volver a galería",
+    collections: "Colecciones",
+    collectionsTitle: "Lectura más clara del material recuperado",
+    collectionsBody: "Cada año o bloque histórico se abre ahora como una pieza propia, con álbumes, archivo fotográfico y mejor jerarquía visual.",
+    openMedia: "Abrir archivo visual",
+  },
+  fr: {
+    gallery: "Galerie",
+    albums: "Albums",
+    photos: "photos",
+    sections: "sections visuelles",
+    back: "Retour à la galerie",
+    collections: "Collections",
+    collectionsTitle: "Lecture plus claire du matériel récupéré",
+    collectionsBody: "Chaque année ou bloc historique s'ouvre désormais comme une pièce propre, avec albums, archive photographique et meilleure hiérarchie visuelle.",
+    openMedia: "Ouvrir l'archive visuelle",
+  },
+  en: {
+    gallery: "Gallery",
+    albums: "Albums",
+    photos: "photos",
+    sections: "visual sections",
+    back: "Back to gallery",
+    collections: "Collections",
+    collectionsTitle: "Clearer reading of the recovered material",
+    collectionsBody: "Each year or historical block now opens as its own piece, with albums, photographic archive and better visual hierarchy.",
+    openMedia: "Open visual archive",
+  },
+  pt: {
+    gallery: "Galeria",
+    albums: "Álbuns",
+    photos: "fotos",
+    sections: "secções visuais",
+    back: "Voltar à galeria",
+    collections: "Coleções",
+    collectionsTitle: "Leitura mais clara do material recuperado",
+    collectionsBody: "Cada ano ou bloco histórico abre agora como uma peça própria, com álbuns, arquivo fotográfico e melhor hierarquia visual.",
+    openMedia: "Abrir arquivo visual",
+  },
+  de: {
+    gallery: "Galerie",
+    albums: "Alben",
+    photos: "Fotos",
+    sections: "visuelle Bereiche",
+    back: "Zurück zur Galerie",
+    collections: "Sammlungen",
+    collectionsTitle: "Klarere Lesbarkeit des wiederhergestellten Materials",
+    collectionsBody: "Jedes Jahr oder jeder historische Block öffnet sich jetzt als eigener Bereich mit Alben, Bildarchiv und besserer visueller Hierarchie.",
+    openMedia: "Visuelles Archiv öffnen",
+  },
+  ru: {
+    gallery: "Галерея",
+    albums: "Альбомы",
+    photos: "фото",
+    sections: "визуальных разделов",
+    back: "Назад в галерею",
+    collections: "Коллекции",
+    collectionsTitle: "Более ясное чтение восстановленного материала",
+    collectionsBody: "Каждый год или исторический блок теперь открывается как отдельный материал с альбомами, фотоархивом и лучшей визуальной иерархией.",
+    openMedia: "Открыть визуальный архив",
+  },
+};
+
 const GaleriaCollection = () => {
   const location = useLocation();
+  const { language } = useLanguage();
+  const t = translations[language];
   const key = pageByPath[location.pathname];
 
   if (!key) {
     return <Navigate to="/galeria" replace />;
   }
 
+  const page = bmwContent[key];
+  const sections = galleryMediaByPage[key] ?? [];
+  const photoCount = sections.reduce((acc, section) => acc + section.images.length, 0);
+
   return (
     <PageShell>
-      <BmwContentRenderer page={bmwContent[key]} />
-      <GalleryMediaSections pageKey={key} />
+      <section className="pt-10 pb-10">
+        <div className="container mx-auto px-4 max-w-6xl">
+          <Card className="glass-dark border-0 rounded-[2.5rem] overflow-hidden relative p-8 md:p-10 text-white">
+            <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(0,102,177,.35),transparent_30%)]" />
+            <div className="relative z-10 grid lg:grid-cols-[1.05fr_0.95fr] gap-8 items-end">
+              <div>
+                <div className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/10 px-4 py-2 text-xs font-semibold uppercase tracking-[0.24em] text-white/75">
+                  <Images className="h-4 w-4" />
+                  {t.gallery}
+                </div>
+                <h1 className="mt-5 text-4xl md:text-6xl font-bold text-balance">{page.hero.title}</h1>
+                {page.hero.subtitle ? <p className="mt-5 max-w-3xl text-lg text-white/76">{page.hero.subtitle}</p> : null}
+                <div className="mt-8">
+                  <NavigateButton href="/galeria" label={t.back} />
+                </div>
+              </div>
+
+              <Card className="glass-panel border-0 rounded-[2rem] p-6 md:p-7 text-slate-950">
+                <p className="text-sm uppercase tracking-[0.24em] text-primary">{t.collections}</p>
+                <h2 className="mt-3 text-3xl font-bold text-balance">{t.collectionsTitle}</h2>
+                <p className="mt-4 text-muted-foreground">{t.collectionsBody}</p>
+                <div className="mt-6 grid grid-cols-3 gap-3">
+                  <div className="rounded-[1.25rem] bg-secondary/80 p-4">
+                    <div className="text-2xl font-bold">{page.albums?.length ?? 0}</div>
+                    <div className="mt-1 text-xs uppercase tracking-[0.18em] text-muted-foreground">{t.albums}</div>
+                  </div>
+                  <div className="rounded-[1.25rem] bg-secondary/80 p-4">
+                    <div className="text-2xl font-bold">{sections.length}</div>
+                    <div className="mt-1 text-xs uppercase tracking-[0.18em] text-muted-foreground">{t.sections}</div>
+                  </div>
+                  <div className="rounded-[1.25rem] bg-secondary/80 p-4">
+                    <div className="text-2xl font-bold">{photoCount}</div>
+                    <div className="mt-1 text-xs uppercase tracking-[0.18em] text-muted-foreground">{t.photos}</div>
+                  </div>
+                </div>
+              </Card>
+            </div>
+          </Card>
+        </div>
+      </section>
+
+      {page.albums?.length ? (
+        <section className="pb-10">
+          <div className="container mx-auto px-4 max-w-6xl">
+            <div className="grid md:grid-cols-2 xl:grid-cols-3 gap-4">
+              {page.albums.map((album) => (
+                <Card key={`${album.year ?? "album"}-${album.title}`} className="premium-card border-0 rounded-[1.7rem] p-5 hover-tilt">
+                  {album.year ? <p className="text-xs uppercase tracking-[0.2em] text-primary font-semibold mb-3">{album.year}</p> : null}
+                  <h2 className="text-lg font-semibold text-balance">{album.title}</h2>
+                </Card>
+              ))}
+            </div>
+          </div>
+        </section>
+      ) : null}
+
+      {sections.length ? <GalleryMediaSections pageKey={key} /> : null}
+
+      {!sections.length && page.groups?.length ? (
+        <section className="pb-16">
+          <div className="container mx-auto px-4 max-w-6xl">
+            <div className="grid md:grid-cols-2 gap-6">
+              {page.groups.map((group) => (
+                <Card key={group.href} className="premium-card border-0 rounded-[2rem] p-6">
+                  <h2 className="text-2xl font-bold text-balance">{group.title}</h2>
+                  <div className="mt-5"><NavigateButton href={group.href} label={t.openMedia} /></div>
+                </Card>
+              ))}
+            </div>
+          </div>
+        </section>
+      ) : null}
     </PageShell>
   );
 };
+
+const NavigateButton = ({ href, label }: { href: string; label: string }) => (
+  <Link to={href}>
+    <Button variant="hero" className="rounded-full gap-2">{label}<ArrowRight className="h-4 w-4" /></Button>
+  </Link>
+);
 
 export default GaleriaCollection;

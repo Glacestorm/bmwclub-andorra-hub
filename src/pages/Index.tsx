@@ -41,6 +41,12 @@ const translations: Record<LanguageCode, Record<string, string>> = {
     sponsorsOpen: "Obrir web",
     featuredSponsorLabel: "Sponsor principal",
     featuredSponsorText: "Pyrénées Andorra ha de sentir-se visible de debò: més presència, millor composició i context premium dins la home.",
+    journalEyebrow: "Lectura del club",
+    journalTitle: "Tres entrades clares per entendre el club, reviure'l i connectar-lo amb la marca",
+    journalClub: "El Club",
+    journalGallery: "Galeria",
+    journalBrand: "BMW Oficial",
+    journalOpen: "Entrar",
     visitEvent: "Obrir fitxa",
     openOfficial: "Obrir",
   },
@@ -72,6 +78,12 @@ const translations: Record<LanguageCode, Record<string, string>> = {
     sponsorsOpen: "Abrir web",
     featuredSponsorLabel: "Patrocinador principal",
     featuredSponsorText: "Pyrénées Andorra debe sentirse realmente visible: más presencia, mejor composición y contexto premium dentro de la home.",
+    journalEyebrow: "Lectura del club",
+    journalTitle: "Tres entradas claras para entender el club, revivirlo y conectarlo con la marca",
+    journalClub: "El Club",
+    journalGallery: "Galería",
+    journalBrand: "BMW Oficial",
+    journalOpen: "Entrar",
     visitEvent: "Abrir ficha",
     openOfficial: "Abrir",
   },
@@ -103,6 +115,12 @@ const translations: Record<LanguageCode, Record<string, string>> = {
     sponsorsOpen: "Ouvrir le site",
     featuredSponsorLabel: "Sponsor principal",
     featuredSponsorText: "Pyrénées Andorra doit réellement se sentir visible : plus de présence, une meilleure composition et un contexte premium sur l'accueil.",
+    journalEyebrow: "Lecture du club",
+    journalTitle: "Trois entrées claires pour comprendre le club, le revivre et le relier à la marque",
+    journalClub: "Le Club",
+    journalGallery: "Galerie",
+    journalBrand: "BMW Officiel",
+    journalOpen: "Entrer",
     visitEvent: "Ouvrir la fiche",
     openOfficial: "Ouvrir",
   },
@@ -134,6 +152,12 @@ const translations: Record<LanguageCode, Record<string, string>> = {
     sponsorsOpen: "Open site",
     featuredSponsorLabel: "Main sponsor",
     featuredSponsorText: "Pyrénées Andorra should feel genuinely visible: more presence, better composition and premium context across the homepage.",
+    journalEyebrow: "Club reading",
+    journalTitle: "Three clear entry points to understand the club, relive it and connect it with the brand",
+    journalClub: "The Club",
+    journalGallery: "Gallery",
+    journalBrand: "BMW Official",
+    journalOpen: "Open",
     visitEvent: "Open detail",
     openOfficial: "Open",
   },
@@ -165,6 +189,12 @@ const translations: Record<LanguageCode, Record<string, string>> = {
     sponsorsOpen: "Abrir site",
     featuredSponsorLabel: "Patrocinador principal",
     featuredSponsorText: "Pyrénées Andorra deve sentir-se realmente visível: mais presença, melhor composição e contexto premium na home.",
+    journalEyebrow: "Leitura do clube",
+    journalTitle: "Três entradas claras para entender o clube, revivê-lo e ligá-lo à marca",
+    journalClub: "O Clube",
+    journalGallery: "Galeria",
+    journalBrand: "BMW Oficial",
+    journalOpen: "Entrar",
     visitEvent: "Abrir ficha",
     openOfficial: "Abrir",
   },
@@ -196,6 +226,12 @@ const translations: Record<LanguageCode, Record<string, string>> = {
     sponsorsOpen: "Website öffnen",
     featuredSponsorLabel: "Hauptsponsor",
     featuredSponsorText: "Pyrénées Andorra soll wirklich sichtbar sein: mehr Präsenz, bessere Komposition und Premium-Kontext auf der Startseite.",
+    journalEyebrow: "Club-Lektüre",
+    journalTitle: "Drei klare Einstiege, um den Club zu verstehen, neu zu erleben und mit der Marke zu verbinden",
+    journalClub: "Der Club",
+    journalGallery: "Galerie",
+    journalBrand: "BMW Offiziell",
+    journalOpen: "Öffnen",
     visitEvent: "Detail öffnen",
     openOfficial: "Öffnen",
   },
@@ -227,6 +263,12 @@ const translations: Record<LanguageCode, Record<string, string>> = {
     sponsorsOpen: "Открыть сайт",
     featuredSponsorLabel: "Главный спонсор",
     featuredSponsorText: "Pyrénées Andorra должен быть действительно заметным: больше присутствия, лучше композиция и премиальный контекст на главной.",
+    journalEyebrow: "Навигация по клубу",
+    journalTitle: "Три ясные точки входа, чтобы понять клуб, пережить его заново и связать с брендом",
+    journalClub: "Клуб",
+    journalGallery: "Галерея",
+    journalBrand: "BMW Official",
+    journalOpen: "Открыть",
     visitEvent: "Открыть карточку",
     openOfficial: "Открыть",
   },
@@ -356,6 +398,31 @@ const Index = () => {
               </div>
             </div>
           </Card>
+        </div>
+      </section>
+
+      <section className="pb-16">
+        <div className="container mx-auto px-4 max-w-6xl">
+          <div className="mb-8">
+            <p className="text-sm uppercase tracking-[0.25em] text-primary">{t.journalEyebrow}</p>
+            <h2 className="mt-2 text-3xl md:text-5xl font-bold text-balance">{t.journalTitle}</h2>
+          </div>
+          <div className="grid md:grid-cols-3 gap-6">
+            {[
+              { title: t.journalClub, href: "/el-club", text: t.pillar2d },
+              { title: t.journalGallery, href: "/galeria", text: t.pillar3d },
+              { title: t.journalBrand, href: "/bmw-oficial", text: t.pillar4d },
+            ].map((item) => (
+              <Link key={item.href} to={item.href}>
+                <Card className="premium-card border-0 rounded-[2rem] p-6 hover-tilt h-full">
+                  <div className="text-xs uppercase tracking-[0.2em] text-primary font-semibold">BMW Club Andorra</div>
+                  <h3 className="mt-4 text-2xl font-bold text-balance">{item.title}</h3>
+                  <p className="mt-3 text-muted-foreground">{item.text}</p>
+                  <div className="mt-5 inline-flex items-center gap-2 text-primary font-semibold">{t.journalOpen} <ArrowRight className="h-4 w-4" /></div>
+                </Card>
+              </Link>
+            ))}
+          </div>
         </div>
       </section>
 
