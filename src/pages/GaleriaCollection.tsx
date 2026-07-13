@@ -8,6 +8,7 @@ import { bmwContent } from "@/content/bmwContent";
 import { galleryMediaByPage } from "@/content/galleryMedia";
 import { useLanguage } from "@/components/LanguageProvider";
 import { LanguageCode } from "@/lib/i18n";
+import { mergeGallerySections, usePublishedGallerySections } from "@/lib/clubCms";
 
 const pageByPath: Record<string, keyof typeof bmwContent> = {
   "/galeria/historiques": "historiques",
@@ -132,7 +133,8 @@ const GaleriaCollection = () => {
   }
 
   const page = bmwContent[key];
-  const sections = galleryMediaByPage[key] ?? [];
+  const { data: dynamicSections } = usePublishedGallerySections(key);
+  const sections = mergeGallerySections(galleryMediaByPage[key] ?? [], dynamicSections);
   const photoCount = sections.reduce((acc, section) => acc + section.images.length, 0);
 
   return (
@@ -198,7 +200,7 @@ const GaleriaCollection = () => {
         </section>
       ) : null}
 
-      {sections.length ? <GalleryMediaSections pageKey={key} /> : null}
+      {sections.length ? <GalleryMediaSections pageKey={key} sections={sections} /> : null}
 
       {!sections.length && page.groups?.length ? (
         <section className="pb-16">

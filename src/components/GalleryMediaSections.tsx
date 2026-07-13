@@ -8,7 +8,8 @@ import { LanguageCode } from "@/lib/i18n";
 import { ArrowLeft, Camera, ChevronDown, ChevronUp, FolderOpen, Images, ExternalLink } from "lucide-react";
 
 interface GalleryMediaSectionsProps {
-  pageKey: string;
+  pageKey?: string;
+  sections?: GalleryMediaSection[];
 }
 
 const INITIAL_VISIBLE = 7;
@@ -188,8 +189,8 @@ const GallerySectionCard = ({ section, isInitiallyOpen, language }: { section: G
   );
 };
 
-export const GalleryMediaSections = ({ pageKey }: GalleryMediaSectionsProps) => {
-  const sections = galleryMediaByPage[pageKey] ?? [];
+export const GalleryMediaSections = ({ pageKey = "gallery", sections: sectionsProp }: GalleryMediaSectionsProps) => {
+  const sections = sectionsProp ?? galleryMediaByPage[pageKey] ?? [];
   const { language } = useLanguage();
 
   if (!sections.length) return null;
@@ -199,7 +200,7 @@ export const GalleryMediaSections = ({ pageKey }: GalleryMediaSectionsProps) => 
       <div className="container mx-auto px-4 space-y-10">
         {sections.map((section, index) => (
           <GallerySectionCard
-            key={`${pageKey}-${section.title}`}
+            key={`${pageKey}-${section.title}-${index}`}
             section={section}
             isInitiallyOpen={sections.length === 1 ? true : index === 0}
             language={language}

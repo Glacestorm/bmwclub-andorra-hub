@@ -1,582 +1,810 @@
-import { useEffect, useMemo, useState } from "react";
-import { Download, CalendarRange, Images, MapPinned, ShieldCheck, Save, RotateCcw, Copy, FolderOpen, Sparkles, LockKeyhole } from "lucide-react";
+import { useEffect, useMemo, useState, type ReactNode } from "react";
+import { useQueryClient } from "@tanstack/react-query";
+import { CalendarRange, FolderOpen, Images, LockKeyhole, LogOut, MapPinned, Plus, Save, ShieldCheck, Trash2, UploadCloud, WandSparkles } from "lucide-react";
 import { PageShell } from "@/components/PageShell";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { useLanguage } from "@/components/LanguageProvider";
-import { LanguageCode } from "@/lib/i18n";
-import { itineraryGuide } from "@/content/itineraryGuide";
-import { clubEvents, calendarYears } from "@/content/calendarData";
+import { clubEvents } from "@/content/calendarData";
 import { galleryMediaByPage } from "@/content/galleryMedia";
+import { itineraryGuide } from "@/content/itineraryGuide";
+import {
+  clubCmsConfig,
+  collectionKeyByGalleryHref,
+  deleteClubEntry,
+  galleryCollectionOptions,
+  galleryHrefByCollectionKey,
+  saveClubEntry,
+  signInClubAdmin,
+  signOutClubAdmin,
+  slugify,
+  uploadClubMedia,
+  useClubAdminEntries,
+  useCmsSession,
+} from "@/lib/clubCms";
 
-const STORAGE_PREFIX = "bmwclub-admin";
-
-const translations: Record<LanguageCode, Record<string, string>> = {
-  ca: {
-    eyebrow: "Gestió del club",
-    title: "Backoffice editorial base per gestionar fotos, itineraris i calendari d'una manera més neta.",
-    intro: "No és encara un backend amb publicació automàtica segura. Sí que és una base de gestió usable: prepara contingut, guarda esborranys al navegador, exporta JSON i treballa sense perdre estructura.",
-    admin: "Accés administrador",
-    status: "Base de gestió activa",
-    photos: "Fotos",
-    itineraries: "Itineraris",
-    calendar: "Calendari",
-    dashboard: "Panell ràpid",
-    currentPhotos: "fotos indexades",
-    currentRoutes: "rutes actives",
-    currentEvents: "esdeveniments",
-    save: "Guardar esborrany",
-    reset: "Netejar",
-    export: "Descarregar JSON",
-    copy: "Copiar JSON",
-    saved: "Esborrany guardat al navegador.",
-    copied: "JSON copiat al porta-retalls.",
-    photoCollection: "Clau de col·lecció",
-    photoTitle: "Títol de l'àlbum o bloc",
-    sourceFolder: "Carpeta origen",
-    note: "Nota editorial",
-    imageLines: "Imatges",
-    imageHelp: "Una línia per foto: URL | ALT | FILENAME",
-    previewCount: "Fotos preparades",
-    itineraryId: "ID intern",
-    itineraryProfile: "Perfil",
-    itineraryTitle: "Títol visible",
-    itineraryStrapline: "Subtítol / pitch",
-    itineraryDistance: "Distància",
-    itineraryDuration: "Durada",
-    itinerarySeason: "Millor temporada",
-    itineraryStart: "Sortida",
-    itineraryFinish: "Final",
-    itineraryWaypoints: "Waypoints",
-    itineraryWaypointsHelp: "Separats per coma",
-    itineraryHighlights: "Highlights",
-    itineraryHighlightsHelp: "Una línia per idea",
-    itineraryBmwAngle: "Per què és molt BMW",
-    itineraryNotes: "Notes pràctiques",
-    itineraryNotesHelp: "Una línia per nota",
-    category: "Categoria",
-    eventId: "ID de l'esdeveniment",
-    eventTitle: "Títol",
-    year: "Any",
-    start: "Inici ISO",
-    end: "Final ISO",
-    displayDate: "Data visible",
-    source: "Origen",
-    destination: "Destí",
-    galleryHref: "Enllaç galeria",
-    summary: "Resum",
-    workflow: "Flux recomanat",
-    workflowBody: "Omple el formulari, guarda l'esborrany, exporta el JSON i ja tens una peça estructurada per connectar-la a publicació real després.",
-    security: "Seguretat",
-    securityBody: "Aquesta primera versió no publica sola ni puja fitxers al servidor. Per fer-ho bé cal el següent pas: auth + storage + persistència real.",
-    draftReady: "Punt de gestió llest per créixer a backend real.",
-    car: "Cotxe",
-    motorcycle: "Moto",
-    both: "Mixt",
-  },
-  es: {
-    eyebrow: "Gestión del club",
-    title: "Backoffice editorial base para gestionar fotos, itinerarios y calendario de una forma mucho más limpia.",
-    intro: "Todavía no es un backend con publicación automática segura. Sí es una base de gestión usable: prepara contenido, guarda borradores en el navegador, exporta JSON y trabaja sin perder estructura.",
-    admin: "Acceso administrador",
-    status: "Base de gestión activa",
-    photos: "Fotos",
-    itineraries: "Itinerarios",
-    calendar: "Calendario",
-    dashboard: "Panel rápido",
-    currentPhotos: "fotos indexadas",
-    currentRoutes: "rutas activas",
-    currentEvents: "eventos",
-    save: "Guardar borrador",
-    reset: "Limpiar",
-    export: "Descargar JSON",
-    copy: "Copiar JSON",
-    saved: "Borrador guardado en el navegador.",
-    copied: "JSON copiado al portapapeles.",
-    photoCollection: "Clave de colección",
-    photoTitle: "Título del álbum o bloque",
-    sourceFolder: "Carpeta origen",
-    note: "Nota editorial",
-    imageLines: "Imágenes",
-    imageHelp: "Una línea por foto: URL | ALT | FILENAME",
-    previewCount: "Fotos preparadas",
-    itineraryId: "ID interno",
-    itineraryProfile: "Perfil",
-    itineraryTitle: "Título visible",
-    itineraryStrapline: "Subtítulo / pitch",
-    itineraryDistance: "Distancia",
-    itineraryDuration: "Duración",
-    itinerarySeason: "Mejor temporada",
-    itineraryStart: "Salida",
-    itineraryFinish: "Final",
-    itineraryWaypoints: "Waypoints",
-    itineraryWaypointsHelp: "Separados por coma",
-    itineraryHighlights: "Highlights",
-    itineraryHighlightsHelp: "Una línea por idea",
-    itineraryBmwAngle: "Por qué es muy BMW",
-    itineraryNotes: "Notas prácticas",
-    itineraryNotesHelp: "Una línea por nota",
-    category: "Categoría",
-    eventId: "ID del evento",
-    eventTitle: "Título",
-    year: "Año",
-    start: "Inicio ISO",
-    end: "Fin ISO",
-    displayDate: "Fecha visible",
-    source: "Origen",
-    destination: "Destino",
-    galleryHref: "Enlace galería",
-    summary: "Resumen",
-    workflow: "Flujo recomendado",
-    workflowBody: "Rellena el formulario, guarda el borrador, exporta el JSON y ya tienes una pieza estructurada para conectarla más adelante a una publicación real.",
-    security: "Seguridad",
-    securityBody: "Esta primera versión no publica sola ni sube ficheros al servidor. Para hacerlo bien, el siguiente paso es auth + storage + persistencia real.",
-    draftReady: "Punto de gestión listo para crecer a backend real.",
-    car: "Coche",
-    motorcycle: "Moto",
-    both: "Mixto",
-  },
-  fr: {
-    eyebrow: "Gestion du club",
-    title: "Base de backoffice éditorial pour gérer photos, itinéraires et calendrier avec plus de clarté.",
-    intro: "Ce n'est pas encore un backend sécurisé avec publication automatique. C'est déjà une base exploitable : préparez le contenu, gardez des brouillons dans le navigateur et exportez du JSON propre.",
-    admin: "Accès administrateur",
-    status: "Base de gestion active",
-    photos: "Photos",
-    itineraries: "Itinéraires",
-    calendar: "Calendrier",
-    dashboard: "Panneau rapide",
-    currentPhotos: "photos indexées",
-    currentRoutes: "itinéraires actifs",
-    currentEvents: "événements",
-    save: "Enregistrer le brouillon",
-    reset: "Nettoyer",
-    export: "Télécharger le JSON",
-    copy: "Copier le JSON",
-    saved: "Brouillon enregistré dans le navigateur.",
-    copied: "JSON copié dans le presse-papiers.",
-    photoCollection: "Clé de collection",
-    photoTitle: "Titre de l'album ou du bloc",
-    sourceFolder: "Dossier source",
-    note: "Note éditoriale",
-    imageLines: "Images",
-    imageHelp: "Une ligne par photo : URL | ALT | FILENAME",
-    previewCount: "Photos préparées",
-    itineraryId: "ID interne",
-    itineraryProfile: "Profil",
-    itineraryTitle: "Titre visible",
-    itineraryStrapline: "Sous-titre / pitch",
-    itineraryDistance: "Distance",
-    itineraryDuration: "Durée",
-    itinerarySeason: "Meilleure saison",
-    itineraryStart: "Départ",
-    itineraryFinish: "Arrivée",
-    itineraryWaypoints: "Waypoints",
-    itineraryWaypointsHelp: "Séparés par des virgules",
-    itineraryHighlights: "Highlights",
-    itineraryHighlightsHelp: "Une ligne par idée",
-    itineraryBmwAngle: "Pourquoi c'est très BMW",
-    itineraryNotes: "Notes pratiques",
-    itineraryNotesHelp: "Une ligne par note",
-    category: "Catégorie",
-    eventId: "ID de l'événement",
-    eventTitle: "Titre",
-    year: "Année",
-    start: "Début ISO",
-    end: "Fin ISO",
-    displayDate: "Date visible",
-    source: "Origine",
-    destination: "Destination",
-    galleryHref: "Lien galerie",
-    summary: "Résumé",
-    workflow: "Flux recommandé",
-    workflowBody: "Remplissez le formulaire, gardez le brouillon, exportez le JSON et vous aurez une pièce déjà structurée pour un vrai backend ensuite.",
-    security: "Sécurité",
-    securityBody: "Cette première version ne publie pas seule et n'envoie pas de fichiers au serveur. Pour bien faire, l'étape suivante est auth + storage + persistance réelle.",
-    draftReady: "Base prête à évoluer vers un vrai backend.",
-    car: "Voiture",
-    motorcycle: "Moto",
-    both: "Mixte",
-  },
-  en: {
-    eyebrow: "Club management",
-    title: "A base editorial backoffice to manage photos, itineraries and the calendar in a much cleaner way.",
-    intro: "This is not yet a secure auto-publishing backend. It is already a usable management base: prepare content, keep browser drafts, export clean JSON and work without losing structure.",
-    admin: "Admin access",
-    status: "Management base active",
-    photos: "Photos",
-    itineraries: "Itineraries",
-    calendar: "Calendar",
-    dashboard: "Quick dashboard",
-    currentPhotos: "indexed photos",
-    currentRoutes: "active routes",
-    currentEvents: "events",
-    save: "Save draft",
-    reset: "Reset",
-    export: "Download JSON",
-    copy: "Copy JSON",
-    saved: "Draft saved in the browser.",
-    copied: "JSON copied to clipboard.",
-    photoCollection: "Collection key",
-    photoTitle: "Album or block title",
-    sourceFolder: "Source folder",
-    note: "Editorial note",
-    imageLines: "Images",
-    imageHelp: "One line per photo: URL | ALT | FILENAME",
-    previewCount: "Prepared photos",
-    itineraryId: "Internal ID",
-    itineraryProfile: "Profile",
-    itineraryTitle: "Visible title",
-    itineraryStrapline: "Strapline / pitch",
-    itineraryDistance: "Distance",
-    itineraryDuration: "Duration",
-    itinerarySeason: "Best season",
-    itineraryStart: "Start",
-    itineraryFinish: "Finish",
-    itineraryWaypoints: "Waypoints",
-    itineraryWaypointsHelp: "Comma-separated",
-    itineraryHighlights: "Highlights",
-    itineraryHighlightsHelp: "One line per idea",
-    itineraryBmwAngle: "Why it feels BMW",
-    itineraryNotes: "Practical notes",
-    itineraryNotesHelp: "One line per note",
-    category: "Category",
-    eventId: "Event ID",
-    eventTitle: "Title",
-    year: "Year",
-    start: "ISO start",
-    end: "ISO end",
-    displayDate: "Visible date",
-    source: "Source",
-    destination: "Destination",
-    galleryHref: "Gallery link",
-    summary: "Summary",
-    workflow: "Recommended flow",
-    workflowBody: "Fill the form, save the draft, export the JSON and you already have a structured piece ready to connect to real publishing later.",
-    security: "Security",
-    securityBody: "This first version does not self-publish or upload files to the server. The proper next step is auth + storage + real persistence.",
-    draftReady: "Management point ready to grow into a real backend.",
-    car: "Car",
-    motorcycle: "Motorcycle",
-    both: "Mixed",
-  },
-  pt: {
-    eyebrow: "Gestão do clube",
-    title: "Backoffice editorial base para gerir fotos, itinerários e calendário de forma muito mais limpa.",
-    intro: "Ainda não é um backend seguro com publicação automática. Já é uma base útil: prepara conteúdo, guarda rascunhos no navegador e exporta JSON limpo.",
-    admin: "Acesso administrador",
-    status: "Base de gestão ativa",
-    photos: "Fotos",
-    itineraries: "Itinerários",
-    calendar: "Calendário",
-    dashboard: "Painel rápido",
-    currentPhotos: "fotos indexadas",
-    currentRoutes: "rotas ativas",
-    currentEvents: "eventos",
-    save: "Guardar rascunho",
-    reset: "Limpar",
-    export: "Descarregar JSON",
-    copy: "Copiar JSON",
-    saved: "Rascunho guardado no navegador.",
-    copied: "JSON copiado para a área de transferência.",
-    photoCollection: "Chave da coleção",
-    photoTitle: "Título do álbum ou bloco",
-    sourceFolder: "Pasta de origem",
-    note: "Nota editorial",
-    imageLines: "Imagens",
-    imageHelp: "Uma linha por foto: URL | ALT | FILENAME",
-    previewCount: "Fotos preparadas",
-    itineraryId: "ID interno",
-    itineraryProfile: "Perfil",
-    itineraryTitle: "Título visível",
-    itineraryStrapline: "Subtítulo / pitch",
-    itineraryDistance: "Distância",
-    itineraryDuration: "Duração",
-    itinerarySeason: "Melhor época",
-    itineraryStart: "Partida",
-    itineraryFinish: "Fim",
-    itineraryWaypoints: "Waypoints",
-    itineraryWaypointsHelp: "Separados por vírgulas",
-    itineraryHighlights: "Highlights",
-    itineraryHighlightsHelp: "Uma linha por ideia",
-    itineraryBmwAngle: "Porque é muito BMW",
-    itineraryNotes: "Notas práticas",
-    itineraryNotesHelp: "Uma linha por nota",
-    category: "Categoria",
-    eventId: "ID do evento",
-    eventTitle: "Título",
-    year: "Ano",
-    start: "Início ISO",
-    end: "Fim ISO",
-    displayDate: "Data visível",
-    source: "Origem",
-    destination: "Destino",
-    galleryHref: "Link da galeria",
-    summary: "Resumo",
-    workflow: "Fluxo recomendado",
-    workflowBody: "Preenche o formulário, guarda o rascunho, exporta o JSON e já tens uma peça estruturada para ligar a publicação real depois.",
-    security: "Segurança",
-    securityBody: "Esta primeira versão não publica sozinha nem envia ficheiros ao servidor. O passo certo a seguir é auth + storage + persistência real.",
-    draftReady: "Base pronta para crescer para backend real.",
-    car: "Carro",
-    motorcycle: "Moto",
-    both: "Misto",
-  },
-  de: {
-    eyebrow: "Club-Verwaltung",
-    title: "Ein redaktionelles Backoffice-Grundgerüst, um Fotos, Routen und Kalender sauberer zu verwalten.",
-    intro: "Noch kein sicheres Auto-Publishing-Backend. Aber bereits eine nutzbare Verwaltungsbasis: Inhalte vorbereiten, Browser-Entwürfe speichern und sauberes JSON exportieren.",
-    admin: "Admin-Zugang",
-    status: "Verwaltungsbasis aktiv",
-    photos: "Fotos",
-    itineraries: "Routen",
-    calendar: "Kalender",
-    dashboard: "Schnellübersicht",
-    currentPhotos: "indizierte Fotos",
-    currentRoutes: "aktive Routen",
-    currentEvents: "Events",
-    save: "Entwurf speichern",
-    reset: "Zurücksetzen",
-    export: "JSON herunterladen",
-    copy: "JSON kopieren",
-    saved: "Entwurf im Browser gespeichert.",
-    copied: "JSON in die Zwischenablage kopiert.",
-    photoCollection: "Sammlungsschlüssel",
-    photoTitle: "Album- oder Blocktitel",
-    sourceFolder: "Quellordner",
-    note: "Redaktionelle Notiz",
-    imageLines: "Bilder",
-    imageHelp: "Eine Zeile pro Foto: URL | ALT | FILENAME",
-    previewCount: "Vorbereitete Fotos",
-    itineraryId: "Interne ID",
-    itineraryProfile: "Profil",
-    itineraryTitle: "Sichtbarer Titel",
-    itineraryStrapline: "Untertitel / Pitch",
-    itineraryDistance: "Distanz",
-    itineraryDuration: "Dauer",
-    itinerarySeason: "Beste Saison",
-    itineraryStart: "Start",
-    itineraryFinish: "Ziel",
-    itineraryWaypoints: "Waypoints",
-    itineraryWaypointsHelp: "Durch Kommas getrennt",
-    itineraryHighlights: "Highlights",
-    itineraryHighlightsHelp: "Eine Zeile pro Idee",
-    itineraryBmwAngle: "Warum es sehr BMW ist",
-    itineraryNotes: "Praktische Hinweise",
-    itineraryNotesHelp: "Eine Zeile pro Hinweis",
-    category: "Kategorie",
-    eventId: "Event-ID",
-    eventTitle: "Titel",
-    year: "Jahr",
-    start: "ISO-Start",
-    end: "ISO-Ende",
-    displayDate: "Sichtbares Datum",
-    source: "Startpunkt",
-    destination: "Zielpunkt",
-    galleryHref: "Galerie-Link",
-    summary: "Zusammenfassung",
-    workflow: "Empfohlener Ablauf",
-    workflowBody: "Formular ausfüllen, Entwurf speichern, JSON exportieren – und schon steht eine strukturierte Grundlage für spätere echte Veröffentlichung.",
-    security: "Sicherheit",
-    securityBody: "Diese erste Version veröffentlicht nicht selbst und lädt keine Dateien auf den Server. Der saubere nächste Schritt ist Auth + Storage + echte Persistenz.",
-    draftReady: "Verwaltungspunkt bereit für echtes Backend-Wachstum.",
-    car: "Auto",
-    motorcycle: "Motorrad",
-    both: "Gemischt",
-  },
-  ru: {
-    eyebrow: "Управление клубом",
-    title: "Базовый редакционный backoffice для более удобного управления фото, маршрутами и календарём.",
-    intro: "Это ещё не безопасный backend с автопубликацией. Но уже рабочая база: готовьте контент, храните черновики в браузере и выгружайте чистый JSON.",
-    admin: "Доступ администратора",
-    status: "База управления активна",
-    photos: "Фото",
-    itineraries: "Маршруты",
-    calendar: "Календарь",
-    dashboard: "Быстрая панель",
-    currentPhotos: "проиндексированных фото",
-    currentRoutes: "активных маршрутов",
-    currentEvents: "событий",
-    save: "Сохранить черновик",
-    reset: "Очистить",
-    export: "Скачать JSON",
-    copy: "Скопировать JSON",
-    saved: "Черновик сохранён в браузере.",
-    copied: "JSON скопирован в буфер обмена.",
-    photoCollection: "Ключ коллекции",
-    photoTitle: "Название альбома или блока",
-    sourceFolder: "Исходная папка",
-    note: "Редакционная заметка",
-    imageLines: "Изображения",
-    imageHelp: "Одна строка на фото: URL | ALT | FILENAME",
-    previewCount: "Подготовлено фото",
-    itineraryId: "Внутренний ID",
-    itineraryProfile: "Профиль",
-    itineraryTitle: "Видимый заголовок",
-    itineraryStrapline: "Подзаголовок / pitch",
-    itineraryDistance: "Дистанция",
-    itineraryDuration: "Длительность",
-    itinerarySeason: "Лучший сезон",
-    itineraryStart: "Старт",
-    itineraryFinish: "Финиш",
-    itineraryWaypoints: "Waypoints",
-    itineraryWaypointsHelp: "Через запятую",
-    itineraryHighlights: "Highlights",
-    itineraryHighlightsHelp: "Одна строка на идею",
-    itineraryBmwAngle: "Почему это очень BMW",
-    itineraryNotes: "Практические заметки",
-    itineraryNotesHelp: "Одна строка на заметку",
-    category: "Категория",
-    eventId: "ID события",
-    eventTitle: "Заголовок",
-    year: "Год",
-    start: "ISO начало",
-    end: "ISO конец",
-    displayDate: "Видимая дата",
-    source: "Источник",
-    destination: "Назначение",
-    galleryHref: "Ссылка на галерею",
-    summary: "Сводка",
-    workflow: "Рекомендуемый поток",
-    workflowBody: "Заполни форму, сохрани черновик, выгрузи JSON — и у тебя уже есть структурированный блок для подключения к реальной публикации позже.",
-    security: "Безопасность",
-    securityBody: "Эта первая версия не публикует сама и не загружает файлы на сервер. Правильный следующий шаг: auth + storage + реальная персистентность.",
-    draftReady: "Точка управления готова к росту в реальный backend.",
-    car: "Авто",
-    motorcycle: "Мото",
-    both: "Смешанный",
-  },
-};
-
-type PhotoDraft = {
-  collectionKey: string;
-  title: string;
-  sourceFolder: string;
-  note: string;
-  imageLines: string;
-};
-
-type ItineraryDraft = {
-  id: string;
-  profile: "car" | "motorcycle" | "both";
-  title: string;
-  strapline: string;
-  distance: string;
-  duration: string;
-  season: string;
-  start: string;
-  finish: string;
-  waypoints: string;
-  highlights: string;
-  bmwAngle: string;
-  notes: string;
-};
-
-type CalendarDraft = {
-  id: string;
-  year: string;
-  title: string;
-  category: string;
-  start: string;
-  end: string;
-  displayDate: string;
-  source: string;
-  destination: string;
-  galleryHref: string;
-  summary: string;
-};
-
-const defaultPhotoDraft: PhotoDraft = {
+const defaultGalleryDraft = () => ({
+  recordId: "",
+  slug: "",
+  status: "published" as const,
+  sortOrder: 0,
   collectionKey: "sortides_2026",
-  title: "Nova sortida / nou bloc",
+  title: "Nova col·lecció",
   sourceFolder: "sortides/2026",
   note: "",
-  imageLines: "https://example.com/foto-01.jpg | BMW Club Andorra - portada de la sortida | foto-01.jpg",
-};
+  images: [] as { src: string; alt: string; filename: string }[],
+});
 
-const defaultItineraryDraft: ItineraryDraft = {
-  id: "nova-ruta-club",
-  profile: "both",
+const defaultItineraryDraft = () => ({
+  recordId: "",
+  slug: "nova-ruta-club",
+  status: "published" as const,
+  sortOrder: 0,
   title: "Nova ruta premium del club",
+  profile: "both" as const,
   strapline: "Ruta pensada per conduir, parar bé i fotografiar els cotxes.",
-  distance: "65 km",
+  rhythm: "Touring",
   duration: "3 h",
-  season: "Primavera i tardor",
+  distance: "65 km",
+  bestSeason: "Primavera i tardor",
   start: "Andorra la Vella",
   finish: "Ordino",
-  waypoints: "Andorra la Vella, Escaldes, Canillo, Ordino",
-  highlights: "Miradors nets\nRitme molt fluid\nParades premium per al club",
+  waypointsText: "Andorra la Vella, Escaldes, Canillo, Ordino",
+  highlightsText: "Miradors nets\nRitme molt fluid\nParades premium per al club",
   bmwAngle: "Perfecta per a una sortida oficial amb molt bon ADN BMW.",
-  notes: "Comprovar meteo\nEvitar neu acumulada\nBon punt per esmorzar",
-};
+  notesText: "Comprovar meteo\nEvitar neu acumulada\nBon punt per esmorzar",
+  clubRecommended: true,
+  clubRecommendation: "Molt bona candidata per a una sortida oficial del club.",
+  imageSrc: "",
+  imageAlt: "",
+  creditName: "BMW Club Andorra",
+  creditHref: "",
+  licenseLabel: "Fitxer del club",
+  licenseHref: "",
+});
 
-const defaultCalendarDraft: CalendarDraft = {
-  id: "nova-sortida-2026",
-  year: "2026",
+const defaultEventDraft = () => ({
+  recordId: "",
+  slug: "nova-sortida-2026",
+  status: "published" as const,
+  sortOrder: 0,
+  year: 2026,
   title: "Nova sortida BMW Club Andorra",
   category: "sortida",
   start: "2026-09-20T09:00:00+02:00",
   end: "2026-09-20T15:00:00+02:00",
   displayDate: "20/09/2026",
-  source: "Andorra la Vella",
-  destination: "Ordino",
+  sourceName: "Andorra la Vella",
+  sourceLabel: "",
+  sourceLat: "42.5063",
+  sourceLon: "1.5218",
+  sourceTimezone: "Europe/Andorra",
+  destinationName: "Ordino",
+  destinationLabel: "",
+  destinationLat: "42.5562",
+  destinationLon: "1.5332",
+  destinationTimezone: "Europe/Andorra",
   galleryHref: "/galeria/sortides/2026",
   summary: "Sortida oficial del club amb parada per esmorzar i fotografia.",
+  notesText: "",
+  evidence: "mixed",
+  featured: true,
+});
+
+const splitLines = (value: string) =>
+  value
+    .split("\n")
+    .map((item) => item.trim())
+    .filter(Boolean);
+
+const galleryEntryToDraft = (entry: any) => ({
+  recordId: entry.id,
+  slug: entry.slug,
+  status: entry.status,
+  sortOrder: entry.sort_order ?? 0,
+  collectionKey: entry.collection_key || "sortides_2026",
+  title: entry.title,
+  sourceFolder: String(entry.payload?.sourceFolder ?? ""),
+  note: String(entry.payload?.note ?? ""),
+  images: Array.isArray(entry.payload?.images)
+    ? entry.payload.images.map((image: any) => ({ src: String(image?.src ?? ""), alt: String(image?.alt ?? ""), filename: String(image?.filename ?? "") }))
+    : [],
+});
+
+const itineraryEntryToDraft = (entry: any) => ({
+  recordId: entry.id,
+  slug: entry.slug,
+  status: entry.status,
+  sortOrder: entry.sort_order ?? 0,
+  title: entry.title,
+  profile: entry.payload?.profile ?? "both",
+  strapline: String(entry.payload?.strapline ?? ""),
+  rhythm: String(entry.payload?.rhythm ?? "Touring"),
+  duration: String(entry.payload?.duration ?? ""),
+  distance: String(entry.payload?.distance ?? ""),
+  bestSeason: String(entry.payload?.bestSeason ?? ""),
+  start: String(entry.payload?.start ?? ""),
+  finish: String(entry.payload?.finish ?? ""),
+  waypointsText: Array.isArray(entry.payload?.waypoints) ? entry.payload.waypoints.join(", ") : "",
+  highlightsText: Array.isArray(entry.payload?.highlights) ? entry.payload.highlights.join("\n") : "",
+  bmwAngle: String(entry.payload?.bmwAngle ?? ""),
+  notesText: Array.isArray(entry.payload?.notes) ? entry.payload.notes.join("\n") : "",
+  clubRecommended: Boolean(entry.payload?.clubRecommended),
+  clubRecommendation: String(entry.payload?.clubRecommendation ?? ""),
+  imageSrc: String(entry.payload?.image?.src ?? entry.cover_image_url ?? ""),
+  imageAlt: String(entry.payload?.image?.alt ?? ""),
+  creditName: String(entry.payload?.image?.creditName ?? "BMW Club Andorra"),
+  creditHref: String(entry.payload?.image?.creditHref ?? ""),
+  licenseLabel: String(entry.payload?.image?.licenseLabel ?? "Fitxer del club"),
+  licenseHref: String(entry.payload?.image?.licenseHref ?? ""),
+});
+
+const eventEntryToDraft = (entry: any) => ({
+  recordId: entry.id,
+  slug: entry.slug,
+  status: entry.status,
+  sortOrder: entry.sort_order ?? 0,
+  year: Number(entry.year ?? 2026),
+  title: entry.title,
+  category: String(entry.payload?.category ?? "sortida"),
+  start: String(entry.payload?.start ?? ""),
+  end: String(entry.payload?.end ?? ""),
+  displayDate: String(entry.payload?.displayDate ?? ""),
+  sourceName: String(entry.payload?.source?.name ?? "Andorra la Vella"),
+  sourceLabel: String(entry.payload?.source?.label ?? ""),
+  sourceLat: String(entry.payload?.source?.lat ?? "42.5063"),
+  sourceLon: String(entry.payload?.source?.lon ?? "1.5218"),
+  sourceTimezone: String(entry.payload?.source?.timezone ?? "Europe/Andorra"),
+  destinationName: String(entry.payload?.destination?.name ?? "Ordino"),
+  destinationLabel: String(entry.payload?.destination?.label ?? ""),
+  destinationLat: String(entry.payload?.destination?.lat ?? "42.5562"),
+  destinationLon: String(entry.payload?.destination?.lon ?? "1.5332"),
+  destinationTimezone: String(entry.payload?.destination?.timezone ?? "Europe/Andorra"),
+  galleryHref: String(entry.payload?.galleryHref ?? (entry.collection_key ? galleryHrefByCollectionKey[entry.collection_key] ?? "" : "")),
+  summary: String(entry.payload?.summary ?? ""),
+  notesText: Array.isArray(entry.payload?.notes) ? entry.payload.notes.join("\n") : "",
+  evidence: String(entry.payload?.evidence ?? "mixed"),
+  featured: Boolean(entry.payload?.featured),
+});
+
+const parseFloatSafe = (value: string, fallback: number) => {
+  const parsed = Number(value);
+  return Number.isFinite(parsed) ? parsed : fallback;
 };
 
-const splitLines = (text: string) => text.split("\n").map((item) => item.trim()).filter(Boolean);
-const storageKey = (name: string) => `${STORAGE_PREFIX}:${name}`;
+const GestioClub = () => {
+  const queryClient = useQueryClient();
+  const { client, ready, session } = useCmsSession();
+  const galleryEntries = useClubAdminEntries("gallery", Boolean(session));
+  const itineraryEntries = useClubAdminEntries("itinerary", Boolean(session));
+  const eventEntries = useClubAdminEntries("event", Boolean(session));
 
-const saveDownload = (filename: string, content: string) => {
-  const blob = new Blob([content], { type: "application/json;charset=utf-8" });
-  const url = URL.createObjectURL(blob);
-  const anchor = document.createElement("a");
-  anchor.href = url;
-  anchor.download = filename;
-  anchor.click();
-  URL.revokeObjectURL(url);
-};
+  const [banner, setBanner] = useState<{ tone: "success" | "danger" | "info"; text: string } | null>(null);
+  const [authForm, setAuthForm] = useState({ email: "", password: "" });
+  const [busy, setBusy] = useState(false);
+  const [galleryDraft, setGalleryDraft] = useState(defaultGalleryDraft());
+  const [itineraryDraft, setItineraryDraft] = useState(defaultItineraryDraft());
+  const [eventDraft, setEventDraft] = useState(defaultEventDraft());
 
-const parseImages = (raw: string) => splitLines(raw).map((line, index) => {
-  const [src = "", alt = "", filename = ""] = line.split("|").map((item) => item.trim());
-  return {
-    src,
-    alt: alt || `Imatge ${index + 1}`,
-    filename: filename || src.split("/").pop() || `image-${index + 1}.jpg`,
-  };
-}).filter((item) => item.src);
-
-const useLocalDraft = <T,>(key: string, initialValue: T) => {
-  const [value, setValue] = useState<T>(initialValue);
+  const staticPhotoCount = useMemo(() => Object.values(galleryMediaByPage).flat().reduce((acc, section) => acc + section.images.length, 0), []);
+  const staticRouteCount = itineraryGuide.length;
+  const staticEventCount = clubEvents.length;
 
   useEffect(() => {
-    if (typeof window === "undefined") return;
-    const saved = window.localStorage.getItem(storageKey(key));
-    if (saved) {
-      try {
-        setValue(JSON.parse(saved) as T);
-      } catch {
-        window.localStorage.removeItem(storageKey(key));
+    if (!galleryDraft.slug && galleryDraft.title) {
+      setGalleryDraft((current) => ({ ...current, slug: slugify(`${current.collectionKey}-${current.title}`) }));
+    }
+  }, [galleryDraft.slug, galleryDraft.title, galleryDraft.collectionKey]);
+
+  useEffect(() => {
+    if (!itineraryDraft.slug && itineraryDraft.title) {
+      setItineraryDraft((current) => ({ ...current, slug: slugify(current.title) }));
+    }
+  }, [itineraryDraft.slug, itineraryDraft.title]);
+
+  useEffect(() => {
+    if (!eventDraft.slug && eventDraft.title) {
+      setEventDraft((current) => ({ ...current, slug: slugify(current.title) }));
+    }
+  }, [eventDraft.slug, eventDraft.title]);
+
+  const invalidateCms = async () => {
+    await Promise.all([
+      queryClient.invalidateQueries({ queryKey: ["club-cms-admin"] }),
+      queryClient.invalidateQueries({ queryKey: ["club-cms-gallery"] }),
+      queryClient.invalidateQueries({ queryKey: ["club-cms-itineraries"] }),
+      queryClient.invalidateQueries({ queryKey: ["club-cms-events"] }),
+    ]);
+  };
+
+  const setSuccess = (text: string) => setBanner({ tone: "success", text });
+  const setError = (error: unknown, fallback: string) => {
+    const message = error instanceof Error ? error.message : fallback;
+    setBanner({ tone: "danger", text: message || fallback });
+  };
+
+  const handleSignIn = async () => {
+    if (!authForm.email || !authForm.password) {
+      setBanner({ tone: "info", text: "Falta email o contrasenya." });
+      return;
+    }
+
+    try {
+      setBusy(true);
+      await signInClubAdmin(authForm.email, authForm.password);
+      setSuccess("Sessió d'administrador oberta.");
+    } catch (error) {
+      setError(error, "No s'ha pogut iniciar sessió.");
+    } finally {
+      setBusy(false);
+    }
+  };
+
+  const handleSignOut = async () => {
+    try {
+      setBusy(true);
+      await signOutClubAdmin();
+      setSuccess("Sessió tancada.");
+    } catch (error) {
+      setError(error, "No s'ha pogut tancar sessió.");
+    } finally {
+      setBusy(false);
+    }
+  };
+
+  const handleGalleryUpload = async (files: FileList | null) => {
+    if (!files?.length) return;
+    if (!client || !session) {
+      setBanner({ tone: "info", text: "Has d'entrar com a admin abans de pujar fotos." });
+      return;
+    }
+
+    try {
+      setBusy(true);
+      const uploaded = [] as { src: string; alt: string; filename: string }[];
+      for (const file of Array.from(files)) {
+        const extension = file.name.includes(".") ? file.name.split(".").pop() : "jpg";
+        const base = file.name.replace(/\.[^.]+$/, "");
+        const path = `gallery/${slugify(galleryDraft.collectionKey)}/${Date.now()}-${slugify(base)}.${extension}`;
+        const url = await uploadClubMedia(file, path);
+        uploaded.push({ src: url, alt: `${galleryDraft.title} - ${base}`, filename: file.name });
       }
+      setGalleryDraft((current) => ({ ...current, images: [...current.images, ...uploaded] }));
+      setSuccess(`${uploaded.length} fitxer(s) pujats al bucket ${clubCmsConfig.bucket}.`);
+    } catch (error) {
+      setError(error, "No s'han pogut pujar les fotos.");
+    } finally {
+      setBusy(false);
     }
-  }, [key]);
-
-  const persist = () => {
-    if (typeof window === "undefined") return;
-    window.localStorage.setItem(storageKey(key), JSON.stringify(value));
   };
 
-  const reset = () => {
-    if (typeof window !== "undefined") {
-      window.localStorage.removeItem(storageKey(key));
+  const handleItineraryImageUpload = async (files: FileList | null) => {
+    const file = files?.[0];
+    if (!file) return;
+    if (!client || !session) {
+      setBanner({ tone: "info", text: "Has d'entrar com a admin abans de pujar la imatge." });
+      return;
     }
-    setValue(initialValue);
+
+    try {
+      setBusy(true);
+      const extension = file.name.includes(".") ? file.name.split(".").pop() : "jpg";
+      const path = `itineraries/${slugify(itineraryDraft.slug || itineraryDraft.title)}/${Date.now()}.${extension}`;
+      const url = await uploadClubMedia(file, path);
+      setItineraryDraft((current) => ({ ...current, imageSrc: url, imageAlt: current.imageAlt || current.title }));
+      setSuccess("Imatge d'itinerari pujada correctament.");
+    } catch (error) {
+      setError(error, "No s'ha pogut pujar la imatge de l'itinerari.");
+    } finally {
+      setBusy(false);
+    }
   };
 
-  return { value, setValue, persist, reset };
+  const saveGallery = async () => {
+    try {
+      setBusy(true);
+      const saved = await saveClubEntry({
+        id: galleryDraft.recordId || undefined,
+        slug: galleryDraft.slug || slugify(`${galleryDraft.collectionKey}-${galleryDraft.title}`),
+        contentType: "gallery",
+        status: galleryDraft.status,
+        title: galleryDraft.title,
+        collectionKey: galleryDraft.collectionKey,
+        sortOrder: galleryDraft.sortOrder,
+        payload: {
+          sourceFolder: galleryDraft.sourceFolder,
+          note: galleryDraft.note || undefined,
+          images: galleryDraft.images,
+        },
+      });
+      setGalleryDraft(galleryEntryToDraft(saved));
+      await invalidateCms();
+      setSuccess("Col·lecció guardada a Supabase.");
+    } catch (error) {
+      setError(error, "No s'ha pogut guardar la col·lecció.");
+    } finally {
+      setBusy(false);
+    }
+  };
+
+  const saveItinerary = async () => {
+    try {
+      setBusy(true);
+      const saved = await saveClubEntry({
+        id: itineraryDraft.recordId || undefined,
+        slug: itineraryDraft.slug || slugify(itineraryDraft.title),
+        contentType: "itinerary",
+        status: itineraryDraft.status,
+        title: itineraryDraft.title,
+        sortOrder: itineraryDraft.sortOrder,
+        coverImageUrl: itineraryDraft.imageSrc || null,
+        payload: {
+          profile: itineraryDraft.profile,
+          strapline: itineraryDraft.strapline,
+          rhythm: itineraryDraft.rhythm,
+          duration: itineraryDraft.duration,
+          distance: itineraryDraft.distance,
+          bestSeason: itineraryDraft.bestSeason,
+          start: itineraryDraft.start,
+          finish: itineraryDraft.finish,
+          waypoints: itineraryDraft.waypointsText.split(",").map((item) => item.trim()).filter(Boolean),
+          highlights: splitLines(itineraryDraft.highlightsText),
+          bmwAngle: itineraryDraft.bmwAngle,
+          notes: splitLines(itineraryDraft.notesText),
+          clubRecommended: itineraryDraft.clubRecommended,
+          clubRecommendation: itineraryDraft.clubRecommendation || undefined,
+          image: {
+            src: itineraryDraft.imageSrc,
+            alt: itineraryDraft.imageAlt || itineraryDraft.title,
+            creditName: itineraryDraft.creditName,
+            creditHref: itineraryDraft.creditHref || undefined,
+            licenseLabel: itineraryDraft.licenseLabel,
+            licenseHref: itineraryDraft.licenseHref || undefined,
+          },
+        },
+      });
+      setItineraryDraft(itineraryEntryToDraft(saved));
+      await invalidateCms();
+      setSuccess("Itinerari guardat a Supabase.");
+    } catch (error) {
+      setError(error, "No s'ha pogut guardar l'itinerari.");
+    } finally {
+      setBusy(false);
+    }
+  };
+
+  const saveEvent = async () => {
+    try {
+      setBusy(true);
+      const collectionKey = collectionKeyByGalleryHref[eventDraft.galleryHref] ?? null;
+      const saved = await saveClubEntry({
+        id: eventDraft.recordId || undefined,
+        slug: eventDraft.slug || slugify(eventDraft.title),
+        contentType: "event",
+        status: eventDraft.status,
+        title: eventDraft.title,
+        collectionKey,
+        year: Number(eventDraft.year),
+        sortOrder: eventDraft.sortOrder,
+        payload: {
+          category: eventDraft.category,
+          start: eventDraft.start,
+          end: eventDraft.end || undefined,
+          displayDate: eventDraft.displayDate,
+          source: {
+            name: eventDraft.sourceName,
+            label: eventDraft.sourceLabel || undefined,
+            lat: parseFloatSafe(eventDraft.sourceLat, 42.5063),
+            lon: parseFloatSafe(eventDraft.sourceLon, 1.5218),
+            timezone: eventDraft.sourceTimezone || "Europe/Andorra",
+          },
+          destination: eventDraft.destinationName
+            ? {
+                name: eventDraft.destinationName,
+                label: eventDraft.destinationLabel || undefined,
+                lat: parseFloatSafe(eventDraft.destinationLat, 42.5562),
+                lon: parseFloatSafe(eventDraft.destinationLon, 1.5332),
+                timezone: eventDraft.destinationTimezone || "Europe/Andorra",
+              }
+            : undefined,
+          galleryHref: eventDraft.galleryHref || undefined,
+          summary: eventDraft.summary || undefined,
+          notes: splitLines(eventDraft.notesText),
+          evidence: eventDraft.evidence,
+          featured: eventDraft.featured,
+        },
+      });
+      setEventDraft(eventEntryToDraft(saved));
+      await invalidateCms();
+      setSuccess("Esdeveniment guardat a Supabase.");
+    } catch (error) {
+      setError(error, "No s'ha pogut guardar l'esdeveniment.");
+    } finally {
+      setBusy(false);
+    }
+  };
+
+  const deleteCurrent = async (type: "gallery" | "itinerary" | "event") => {
+    const recordId = type === "gallery" ? galleryDraft.recordId : type === "itinerary" ? itineraryDraft.recordId : eventDraft.recordId;
+    if (!recordId) {
+      setBanner({ tone: "info", text: "Aquest element encara no existeix a base de dades." });
+      return;
+    }
+
+    try {
+      setBusy(true);
+      await deleteClubEntry(recordId);
+      await invalidateCms();
+      if (type === "gallery") setGalleryDraft(defaultGalleryDraft());
+      if (type === "itinerary") setItineraryDraft(defaultItineraryDraft());
+      if (type === "event") setEventDraft(defaultEventDraft());
+      setSuccess("Element eliminat.");
+    } catch (error) {
+      setError(error, "No s'ha pogut eliminar l'element.");
+    } finally {
+      setBusy(false);
+    }
+  };
+
+  const galleryItems = galleryEntries.data ?? [];
+  const itineraryItems = itineraryEntries.data ?? [];
+  const eventItems = eventEntries.data ?? [];
+
+  return (
+    <PageShell>
+      <section className="pt-10 pb-8">
+        <div className="container mx-auto max-w-6xl px-4">
+          <Card className="glass-dark relative overflow-hidden rounded-[2.5rem] border-0 p-8 text-white shadow-elegant md:p-10">
+            <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(0,102,177,.32),transparent_34%)]" />
+            <div className="relative z-10 grid gap-8 lg:grid-cols-[1.05fr_0.95fr]">
+              <div>
+                <div className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/10 px-4 py-2 text-xs font-semibold uppercase tracking-[0.24em] text-white/78">
+                  <LockKeyhole className="h-4 w-4" />
+                  Accés club
+                </div>
+                <h1 className="mt-5 max-w-4xl text-3xl font-bold text-balance sm:text-4xl md:text-6xl">
+                  Backoffice real amb auth, storage i persistència.
+                </h1>
+                <p className="mt-5 max-w-3xl text-lg text-white/72">
+                  Aquesta zona ja està pensada per treballar contra Supabase: login, CRUD de fotos, itineraris i calendari, i pujada de fitxers al bucket públic del club.
+                </p>
+                <div className="mt-6 inline-flex items-center gap-2 rounded-full border border-emerald-400/20 bg-emerald-400/10 px-4 py-2 text-sm font-medium text-emerald-100">
+                  <ShieldCheck className="h-4 w-4" />
+                  {clubCmsConfig.enabled ? "Capa backend preparada" : "Falta connectar variables d'entorn"}
+                </div>
+              </div>
+
+              <div className="grid gap-4 sm:grid-cols-3 lg:grid-cols-1 xl:grid-cols-3">
+                <StatCard value={staticPhotoCount} label="fotos actuals" />
+                <StatCard value={staticRouteCount} label="rutes actuals" />
+                <StatCard value={staticEventCount} label="esdeveniments actuals" />
+              </div>
+            </div>
+          </Card>
+        </div>
+      </section>
+
+      {!clubCmsConfig.enabled ? (
+        <section className="pb-20">
+          <div className="container mx-auto max-w-6xl px-4 grid gap-6 lg:grid-cols-[1.1fr_0.9fr]">
+            <Card className="rounded-[2rem] border-0 bg-white/80 p-6 shadow-sm">
+              <div className="inline-flex items-center gap-2 rounded-full bg-primary/10 px-3 py-1 text-xs font-semibold uppercase tracking-[0.2em] text-primary">
+                <WandSparkles className="h-4 w-4" />
+                Setup pendent
+              </div>
+              <h2 className="mt-4 text-2xl font-bold">Per activar-lo de veritat</h2>
+              <p className="mt-3 text-sm text-muted-foreground">
+                El codi ja està cablejat. Ara només falta posar les variables del frontend i aplicar l'SQL a Supabase.
+              </p>
+              <div className="mt-5 rounded-[1.4rem] border border-border/70 bg-slate-950 p-4 text-sm text-white">
+                <div>1. Copia <strong>.env.example</strong> a <strong>.env.local</strong>.</div>
+                <div>2. Omple <strong>VITE_SUPABASE_URL</strong> i <strong>VITE_SUPABASE_ANON_KEY</strong>.</div>
+                <div>3. Aplica <strong>supabase/club-cms.sql</strong>.</div>
+                <div>4. Torna a desplegar la web.</div>
+              </div>
+            </Card>
+            <Card className="rounded-[2rem] border-0 bg-white/80 p-6 shadow-sm">
+              <h3 className="text-lg font-bold">Variables esperades</h3>
+              <pre className="mt-4 overflow-x-auto rounded-[1.2rem] bg-slate-950 p-4 text-xs text-white">VITE_SUPABASE_URL=...{"\n"}VITE_SUPABASE_ANON_KEY=...{"\n"}VITE_SUPABASE_STORAGE_BUCKET=club-media</pre>
+              <p className="mt-4 text-sm text-muted-foreground">Bucket per defecte: <strong>{clubCmsConfig.bucket}</strong>.</p>
+            </Card>
+          </div>
+        </section>
+      ) : !ready ? (
+        <section className="pb-20"><div className="container mx-auto max-w-6xl px-4"><Card className="rounded-[2rem] border-0 bg-white/80 p-8 shadow-sm">Carregant sessió d'administrador…</Card></div></section>
+      ) : !session ? (
+        <section className="pb-20">
+          <div className="container mx-auto max-w-6xl px-4 grid gap-6 lg:grid-cols-[0.9fr_1.1fr]">
+            <Card className="rounded-[2rem] border-0 bg-white/80 p-6 shadow-sm">
+              <h2 className="text-2xl font-bold">Login admin</h2>
+              <p className="mt-3 text-sm text-muted-foreground">Entra amb un usuari autenticat de Supabase. Amb la política actual, qualsevol usuari autenticat pot gestionar el contingut. Si vols rols fins, ho fem al següent pas.</p>
+              <div className="mt-5 grid gap-4">
+                <Field label="Email"><Input value={authForm.email} onChange={(event) => setAuthForm((current) => ({ ...current, email: event.target.value }))} /></Field>
+                <Field label="Contrasenya"><Input type="password" value={authForm.password} onChange={(event) => setAuthForm((current) => ({ ...current, password: event.target.value }))} /></Field>
+                <Button variant="hero" className="rounded-full" disabled={busy} onClick={handleSignIn}>Entrar</Button>
+              </div>
+            </Card>
+            <Card className="rounded-[2rem] border-0 bg-white/80 p-6 shadow-sm">
+              <h3 className="text-xl font-bold">Què queda connectat</h3>
+              <ul className="mt-4 space-y-3 text-sm text-muted-foreground list-disc pl-5">
+                <li>CRUD de galeries a la taula <strong>club_admin_entries</strong>.</li>
+                <li>Uploads al bucket públic <strong>{clubCmsConfig.bucket}</strong>.</li>
+                <li>Itineraris i calendari visibles al frontend quan l'entrada està en estat <strong>published</strong>.</li>
+                <li>Fallback: el contingut estàtic actual continua viu encara que Supabase falli.</li>
+              </ul>
+            </Card>
+          </div>
+        </section>
+      ) : (
+        <section className="pb-16">
+          <div className="container mx-auto grid max-w-6xl gap-6 px-4 lg:grid-cols-[1.15fr_0.85fr]">
+            <div>
+              <Tabs defaultValue="photos" className="space-y-5">
+                <TabsList className="h-auto flex-wrap rounded-[1.25rem] bg-white/70 p-2">
+                  <TabsTrigger value="photos" className="rounded-xl px-4 py-2">Fotos</TabsTrigger>
+                  <TabsTrigger value="itineraries" className="rounded-xl px-4 py-2">Itineraris</TabsTrigger>
+                  <TabsTrigger value="calendar" className="rounded-xl px-4 py-2">Calendari</TabsTrigger>
+                </TabsList>
+
+                <TabsContent value="photos">
+                  <Card className="premium-card rounded-[2rem] border-0 p-6 md:p-8">
+                    <SectionHeader icon={Images} title="Galeria real" body="Puja fitxers al bucket i guarda la col·lecció com a draft o published." />
+                    <EditorToolbar
+                      items={galleryItems}
+                      onNew={() => setGalleryDraft(defaultGalleryDraft())}
+                      onPick={(id) => {
+                        const entry = galleryItems.find((item) => item.id === id);
+                        if (entry) setGalleryDraft(galleryEntryToDraft(entry));
+                      }}
+                    />
+                    <div className="grid gap-4 md:grid-cols-2 mt-5">
+                      <Field label="Slug"><Input value={galleryDraft.slug} onChange={(event) => setGalleryDraft((current) => ({ ...current, slug: slugify(event.target.value) }))} /></Field>
+                      <Field label="Status">
+                        <select className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm" value={galleryDraft.status} onChange={(event) => setGalleryDraft((current) => ({ ...current, status: event.target.value as "draft" | "published" }))}>
+                          <option value="draft">draft</option>
+                          <option value="published">published</option>
+                        </select>
+                      </Field>
+                    </div>
+                    <div className="grid gap-4 md:grid-cols-2 mt-4">
+                      <Field label="Col·lecció pública">
+                        <select className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm" value={galleryDraft.collectionKey} onChange={(event) => setGalleryDraft((current) => ({ ...current, collectionKey: event.target.value }))}>
+                          {galleryCollectionOptions.map((option) => <option key={option.key} value={option.key}>{option.label}</option>)}
+                        </select>
+                      </Field>
+                      <Field label="Ordre"><Input type="number" value={galleryDraft.sortOrder} onChange={(event) => setGalleryDraft((current) => ({ ...current, sortOrder: Number(event.target.value) || 0 }))} /></Field>
+                    </div>
+                    <div className="grid gap-4 md:grid-cols-2 mt-4">
+                      <Field label="Títol visible"><Input value={galleryDraft.title} onChange={(event) => setGalleryDraft((current) => ({ ...current, title: event.target.value }))} /></Field>
+                      <Field label="Carpeta origen"><Input value={galleryDraft.sourceFolder} onChange={(event) => setGalleryDraft((current) => ({ ...current, sourceFolder: event.target.value }))} /></Field>
+                    </div>
+                    <Field label="Nota editorial" className="mt-4"><Input value={galleryDraft.note} onChange={(event) => setGalleryDraft((current) => ({ ...current, note: event.target.value }))} /></Field>
+                    <div className="mt-5 rounded-[1.5rem] border border-dashed border-border/80 bg-background/60 p-4">
+                      <div className="flex flex-wrap items-center justify-between gap-3">
+                        <div>
+                          <div className="font-semibold">Pujar fotos al bucket</div>
+                          <div className="text-sm text-muted-foreground">Les imatges pujades s'afegeixen directament a aquesta col·lecció.</div>
+                        </div>
+                        <label className="inline-flex cursor-pointer items-center gap-2 rounded-full bg-primary px-4 py-2 text-sm font-medium text-white">
+                          <UploadCloud className="h-4 w-4" />
+                          Seleccionar fitxers
+                          <input type="file" accept="image/*" multiple className="hidden" onChange={(event) => handleGalleryUpload(event.target.files)} />
+                        </label>
+                      </div>
+                    </div>
+                    <div className="mt-5 space-y-3">
+                      {galleryDraft.images.map((image, index) => (
+                        <div key={`${image.src}-${index}`} className="grid gap-3 rounded-[1.2rem] border border-border/70 bg-white/70 p-4 md:grid-cols-[1fr_1fr_auto]">
+                          <Input value={image.src} onChange={(event) => setGalleryDraft((current) => ({ ...current, images: current.images.map((item, itemIndex) => itemIndex === index ? { ...item, src: event.target.value } : item) }))} placeholder="URL pública" />
+                          <Input value={image.alt} onChange={(event) => setGalleryDraft((current) => ({ ...current, images: current.images.map((item, itemIndex) => itemIndex === index ? { ...item, alt: event.target.value } : item) }))} placeholder="ALT" />
+                          <div className="flex items-center gap-2">
+                            <Input value={image.filename} onChange={(event) => setGalleryDraft((current) => ({ ...current, images: current.images.map((item, itemIndex) => itemIndex === index ? { ...item, filename: event.target.value } : item) }))} placeholder="filename.jpg" />
+                            <Button variant="ghost" size="icon" onClick={() => setGalleryDraft((current) => ({ ...current, images: current.images.filter((_, itemIndex) => itemIndex !== index) }))}><Trash2 className="h-4 w-4" /></Button>
+                          </div>
+                        </div>
+                      ))}
+                      {!galleryDraft.images.length ? <p className="text-sm text-muted-foreground">Encara no hi ha imatges en aquesta col·lecció.</p> : null}
+                    </div>
+                    <ActionsRow onSave={saveGallery} onDelete={() => deleteCurrent("gallery")} busy={busy} />
+                  </Card>
+                </TabsContent>
+
+                <TabsContent value="itineraries">
+                  <Card className="premium-card rounded-[2rem] border-0 p-6 md:p-8">
+                    <SectionHeader icon={MapPinned} title="Itineraris reals" body="Quan guardes en published, la ruta apareix a /itineraris sense tocar el codi estàtic." />
+                    <EditorToolbar
+                      items={itineraryItems}
+                      onNew={() => setItineraryDraft(defaultItineraryDraft())}
+                      onPick={(id) => {
+                        const entry = itineraryItems.find((item) => item.id === id);
+                        if (entry) setItineraryDraft(itineraryEntryToDraft(entry));
+                      }}
+                    />
+                    <div className="grid gap-4 md:grid-cols-2 mt-5">
+                      <Field label="Slug"><Input value={itineraryDraft.slug} onChange={(event) => setItineraryDraft((current) => ({ ...current, slug: slugify(event.target.value) }))} /></Field>
+                      <Field label="Status">
+                        <select className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm" value={itineraryDraft.status} onChange={(event) => setItineraryDraft((current) => ({ ...current, status: event.target.value as "draft" | "published" }))}>
+                          <option value="draft">draft</option>
+                          <option value="published">published</option>
+                        </select>
+                      </Field>
+                    </div>
+                    <div className="grid gap-4 md:grid-cols-2 mt-4">
+                      <Field label="Títol"><Input value={itineraryDraft.title} onChange={(event) => setItineraryDraft((current) => ({ ...current, title: event.target.value }))} /></Field>
+                      <Field label="Perfil">
+                        <select className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm" value={itineraryDraft.profile} onChange={(event) => setItineraryDraft((current) => ({ ...current, profile: event.target.value as "car" | "motorcycle" | "both" }))}>
+                          <option value="car">car</option>
+                          <option value="motorcycle">motorcycle</option>
+                          <option value="both">both</option>
+                        </select>
+                      </Field>
+                    </div>
+                    <div className="grid gap-4 md:grid-cols-2 mt-4">
+                      <Field label="Pitch"><Input value={itineraryDraft.strapline} onChange={(event) => setItineraryDraft((current) => ({ ...current, strapline: event.target.value }))} /></Field>
+                      <Field label="Ritme"><Input value={itineraryDraft.rhythm} onChange={(event) => setItineraryDraft((current) => ({ ...current, rhythm: event.target.value }))} /></Field>
+                    </div>
+                    <div className="grid gap-4 md:grid-cols-4 mt-4">
+                      <Field label="Durada"><Input value={itineraryDraft.duration} onChange={(event) => setItineraryDraft((current) => ({ ...current, duration: event.target.value }))} /></Field>
+                      <Field label="Distància"><Input value={itineraryDraft.distance} onChange={(event) => setItineraryDraft((current) => ({ ...current, distance: event.target.value }))} /></Field>
+                      <Field label="Temporada"><Input value={itineraryDraft.bestSeason} onChange={(event) => setItineraryDraft((current) => ({ ...current, bestSeason: event.target.value }))} /></Field>
+                      <Field label="Ordre"><Input type="number" value={itineraryDraft.sortOrder} onChange={(event) => setItineraryDraft((current) => ({ ...current, sortOrder: Number(event.target.value) || 0 }))} /></Field>
+                    </div>
+                    <div className="grid gap-4 md:grid-cols-2 mt-4">
+                      <Field label="Sortida"><Input value={itineraryDraft.start} onChange={(event) => setItineraryDraft((current) => ({ ...current, start: event.target.value }))} /></Field>
+                      <Field label="Final"><Input value={itineraryDraft.finish} onChange={(event) => setItineraryDraft((current) => ({ ...current, finish: event.target.value }))} /></Field>
+                    </div>
+                    <Field label="Waypoints" className="mt-4"><Input value={itineraryDraft.waypointsText} onChange={(event) => setItineraryDraft((current) => ({ ...current, waypointsText: event.target.value }))} /></Field>
+                    <Field label="Highlights" className="mt-4"><Textarea value={itineraryDraft.highlightsText} onChange={(event) => setItineraryDraft((current) => ({ ...current, highlightsText: event.target.value }))} /></Field>
+                    <Field label="Per què és molt BMW" className="mt-4"><Textarea value={itineraryDraft.bmwAngle} onChange={(event) => setItineraryDraft((current) => ({ ...current, bmwAngle: event.target.value }))} /></Field>
+                    <Field label="Notes" className="mt-4"><Textarea value={itineraryDraft.notesText} onChange={(event) => setItineraryDraft((current) => ({ ...current, notesText: event.target.value }))} /></Field>
+                    <div className="grid gap-4 md:grid-cols-2 mt-4">
+                      <Field label="Ruta oficial recomanada">
+                        <select className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm" value={itineraryDraft.clubRecommended ? "yes" : "no"} onChange={(event) => setItineraryDraft((current) => ({ ...current, clubRecommended: event.target.value === "yes" }))}>
+                          <option value="yes">yes</option>
+                          <option value="no">no</option>
+                        </select>
+                      </Field>
+                      <Field label="Text recomanació"><Input value={itineraryDraft.clubRecommendation} onChange={(event) => setItineraryDraft((current) => ({ ...current, clubRecommendation: event.target.value }))} /></Field>
+                    </div>
+                    <div className="mt-5 rounded-[1.5rem] border border-dashed border-border/80 bg-background/60 p-4">
+                      <div className="flex flex-wrap items-center justify-between gap-3">
+                        <div>
+                          <div className="font-semibold">Imatge de l'itinerari</div>
+                          <div className="text-sm text-muted-foreground">Pots pujar una imatge al bucket o enganxar una URL manualment.</div>
+                        </div>
+                        <label className="inline-flex cursor-pointer items-center gap-2 rounded-full bg-primary px-4 py-2 text-sm font-medium text-white">
+                          <UploadCloud className="h-4 w-4" />
+                          Pujar imatge
+                          <input type="file" accept="image/*" className="hidden" onChange={(event) => handleItineraryImageUpload(event.target.files)} />
+                        </label>
+                      </div>
+                    </div>
+                    <div className="grid gap-4 md:grid-cols-2 mt-4">
+                      <Field label="Image src"><Input value={itineraryDraft.imageSrc} onChange={(event) => setItineraryDraft((current) => ({ ...current, imageSrc: event.target.value }))} /></Field>
+                      <Field label="Image alt"><Input value={itineraryDraft.imageAlt} onChange={(event) => setItineraryDraft((current) => ({ ...current, imageAlt: event.target.value }))} /></Field>
+                    </div>
+                    <div className="grid gap-4 md:grid-cols-2 mt-4">
+                      <Field label="Crèdit"><Input value={itineraryDraft.creditName} onChange={(event) => setItineraryDraft((current) => ({ ...current, creditName: event.target.value }))} /></Field>
+                      <Field label="Enllaç crèdit"><Input value={itineraryDraft.creditHref} onChange={(event) => setItineraryDraft((current) => ({ ...current, creditHref: event.target.value }))} /></Field>
+                    </div>
+                    <div className="grid gap-4 md:grid-cols-2 mt-4">
+                      <Field label="Llicència"><Input value={itineraryDraft.licenseLabel} onChange={(event) => setItineraryDraft((current) => ({ ...current, licenseLabel: event.target.value }))} /></Field>
+                      <Field label="Enllaç llicència"><Input value={itineraryDraft.licenseHref} onChange={(event) => setItineraryDraft((current) => ({ ...current, licenseHref: event.target.value }))} /></Field>
+                    </div>
+                    <ActionsRow onSave={saveItinerary} onDelete={() => deleteCurrent("itinerary")} busy={busy} />
+                  </Card>
+                </TabsContent>
+
+                <TabsContent value="calendar">
+                  <Card className="premium-card rounded-[2rem] border-0 p-6 md:p-8">
+                    <SectionHeader icon={CalendarRange} title="Calendari real" body="Quan guardes en published, l'esdeveniment apareix a /calendari i a la fitxa /esdeveniments/:slug." />
+                    <EditorToolbar
+                      items={eventItems}
+                      onNew={() => setEventDraft(defaultEventDraft())}
+                      onPick={(id) => {
+                        const entry = eventItems.find((item) => item.id === id);
+                        if (entry) setEventDraft(eventEntryToDraft(entry));
+                      }}
+                    />
+                    <div className="grid gap-4 md:grid-cols-2 mt-5">
+                      <Field label="Slug"><Input value={eventDraft.slug} onChange={(event) => setEventDraft((current) => ({ ...current, slug: slugify(event.target.value) }))} /></Field>
+                      <Field label="Status">
+                        <select className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm" value={eventDraft.status} onChange={(event) => setEventDraft((current) => ({ ...current, status: event.target.value as "draft" | "published" }))}>
+                          <option value="draft">draft</option>
+                          <option value="published">published</option>
+                        </select>
+                      </Field>
+                    </div>
+                    <div className="grid gap-4 md:grid-cols-4 mt-4">
+                      <Field label="Any"><Input type="number" value={eventDraft.year} onChange={(event) => setEventDraft((current) => ({ ...current, year: Number(event.target.value) || 2026 }))} /></Field>
+                      <Field label="Categoria"><Input value={eventDraft.category} onChange={(event) => setEventDraft((current) => ({ ...current, category: event.target.value }))} /></Field>
+                      <Field label="Ordre"><Input type="number" value={eventDraft.sortOrder} onChange={(event) => setEventDraft((current) => ({ ...current, sortOrder: Number(event.target.value) || 0 }))} /></Field>
+                      <Field label="Featured">
+                        <select className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm" value={eventDraft.featured ? "yes" : "no"} onChange={(event) => setEventDraft((current) => ({ ...current, featured: event.target.value === "yes" }))}>
+                          <option value="yes">yes</option>
+                          <option value="no">no</option>
+                        </select>
+                      </Field>
+                    </div>
+                    <div className="grid gap-4 md:grid-cols-2 mt-4">
+                      <Field label="Títol"><Input value={eventDraft.title} onChange={(event) => setEventDraft((current) => ({ ...current, title: event.target.value }))} /></Field>
+                      <Field label="Data visible"><Input value={eventDraft.displayDate} onChange={(event) => setEventDraft((current) => ({ ...current, displayDate: event.target.value }))} /></Field>
+                    </div>
+                    <div className="grid gap-4 md:grid-cols-2 mt-4">
+                      <Field label="Start ISO"><Input value={eventDraft.start} onChange={(event) => setEventDraft((current) => ({ ...current, start: event.target.value }))} /></Field>
+                      <Field label="End ISO"><Input value={eventDraft.end} onChange={(event) => setEventDraft((current) => ({ ...current, end: event.target.value }))} /></Field>
+                    </div>
+                    <div className="grid gap-4 md:grid-cols-2 mt-4">
+                      <Field label="Origen"><Input value={eventDraft.sourceName} onChange={(event) => setEventDraft((current) => ({ ...current, sourceName: event.target.value }))} /></Field>
+                      <Field label="Destí"><Input value={eventDraft.destinationName} onChange={(event) => setEventDraft((current) => ({ ...current, destinationName: event.target.value }))} /></Field>
+                    </div>
+                    <div className="grid gap-4 md:grid-cols-3 mt-4">
+                      <Field label="Source lat"><Input value={eventDraft.sourceLat} onChange={(event) => setEventDraft((current) => ({ ...current, sourceLat: event.target.value }))} /></Field>
+                      <Field label="Source lon"><Input value={eventDraft.sourceLon} onChange={(event) => setEventDraft((current) => ({ ...current, sourceLon: event.target.value }))} /></Field>
+                      <Field label="Source timezone"><Input value={eventDraft.sourceTimezone} onChange={(event) => setEventDraft((current) => ({ ...current, sourceTimezone: event.target.value }))} /></Field>
+                    </div>
+                    <div className="grid gap-4 md:grid-cols-3 mt-4">
+                      <Field label="Destination lat"><Input value={eventDraft.destinationLat} onChange={(event) => setEventDraft((current) => ({ ...current, destinationLat: event.target.value }))} /></Field>
+                      <Field label="Destination lon"><Input value={eventDraft.destinationLon} onChange={(event) => setEventDraft((current) => ({ ...current, destinationLon: event.target.value }))} /></Field>
+                      <Field label="Destination timezone"><Input value={eventDraft.destinationTimezone} onChange={(event) => setEventDraft((current) => ({ ...current, destinationTimezone: event.target.value }))} /></Field>
+                    </div>
+                    <div className="grid gap-4 md:grid-cols-2 mt-4">
+                      <Field label="Galeria associada">
+                        <select className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm" value={eventDraft.galleryHref} onChange={(event) => setEventDraft((current) => ({ ...current, galleryHref: event.target.value }))}>
+                          {galleryCollectionOptions.map((option) => <option key={option.href} value={option.href}>{option.label}</option>)}
+                        </select>
+                      </Field>
+                      <Field label="Evidència">
+                        <select className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm" value={eventDraft.evidence} onChange={(event) => setEventDraft((current) => ({ ...current, evidence: event.target.value }))}>
+                          <option value="original-site">original-site</option>
+                          <option value="gallery-title">gallery-title</option>
+                          <option value="media-inferred">media-inferred</option>
+                          <option value="mixed">mixed</option>
+                        </select>
+                      </Field>
+                    </div>
+                    <Field label="Resum" className="mt-4"><Textarea value={eventDraft.summary} onChange={(event) => setEventDraft((current) => ({ ...current, summary: event.target.value }))} /></Field>
+                    <Field label="Notes" className="mt-4"><Textarea value={eventDraft.notesText} onChange={(event) => setEventDraft((current) => ({ ...current, notesText: event.target.value }))} /></Field>
+                    <ActionsRow onSave={saveEvent} onDelete={() => deleteCurrent("event")} busy={busy} />
+                  </Card>
+                </TabsContent>
+              </Tabs>
+            </div>
+
+            <div className="grid gap-6">
+              <Card className="rounded-[2rem] border-0 bg-white/72 p-6 shadow-sm">
+                <div className="inline-flex items-center gap-2 rounded-full bg-primary/10 px-3 py-1 text-xs font-semibold uppercase tracking-[0.2em] text-primary">
+                  <ShieldCheck className="h-4 w-4" />
+                  Sessió admin activa
+                </div>
+                <p className="mt-4 text-sm text-muted-foreground break-all">{session.user.email}</p>
+                <div className="mt-5 grid gap-3">
+                  <StatusLine icon={FolderOpen} text={`${galleryItems.length} registres dinàmics de galeria`} />
+                  <StatusLine icon={MapPinned} text={`${itineraryItems.length} registres dinàmics d'itinerari`} />
+                  <StatusLine icon={CalendarRange} text={`${eventItems.length} registres dinàmics de calendari`} />
+                </div>
+                <Button variant="outline" className="mt-5 rounded-full" disabled={busy} onClick={handleSignOut}><LogOut className="h-4 w-4" />Tancar sessió</Button>
+              </Card>
+
+              <Card className="rounded-[2rem] border-0 bg-white/72 p-6 shadow-sm">
+                <h2 className="text-xl font-bold">Com funciona ara</h2>
+                <ul className="mt-4 space-y-3 text-sm text-muted-foreground list-disc pl-5">
+                  <li>Les entrades en <strong>published</strong> apareixen al frontend públic.</li>
+                  <li>Les entrades en <strong>draft</strong> queden només al backoffice.</li>
+                  <li>Les rutes i esdeveniments dinàmics se sobreposen al contingut estàtic sense trencar-lo.</li>
+                  <li>Les galeries dinàmiques s'afegeixen a les col·leccions existents.</li>
+                </ul>
+              </Card>
+
+              {banner ? <Banner tone={banner.tone} text={banner.text} /> : null}
+            </div>
+          </div>
+        </section>
+      )}
+    </PageShell>
+  );
 };
 
 const StatCard = ({ value, label }: { value: number; label: string }) => (
@@ -596,284 +824,27 @@ const SectionHeader = ({ icon: Icon, title, body }: { icon: typeof Images; title
   </div>
 );
 
-const GestioClub = () => {
-  const { language } = useLanguage();
-  const t = translations[language];
-  const photoDraft = useLocalDraft<PhotoDraft>("photos", defaultPhotoDraft);
-  const itineraryDraft = useLocalDraft<ItineraryDraft>("itinerary", defaultItineraryDraft);
-  const calendarDraft = useLocalDraft<CalendarDraft>("calendar", defaultCalendarDraft);
-  const [status, setStatus] = useState("");
-
-  const photoCount = useMemo(() => Object.values(galleryMediaByPage).flat().reduce((acc, section) => acc + section.images.length, 0), []);
-  const preparedImages = useMemo(() => parseImages(photoDraft.value.imageLines), [photoDraft.value.imageLines]);
-
-  const photoPayload = useMemo(() => JSON.stringify({
-    title: photoDraft.value.title,
-    sourceFolder: photoDraft.value.sourceFolder,
-    note: photoDraft.value.note || undefined,
-    images: preparedImages,
-  }, null, 2), [photoDraft.value, preparedImages]);
-
-  const itineraryPayload = useMemo(() => JSON.stringify({
-    id: itineraryDraft.value.id,
-    profile: itineraryDraft.value.profile,
-    title: itineraryDraft.value.title,
-    strapline: itineraryDraft.value.strapline,
-    distance: itineraryDraft.value.distance,
-    duration: itineraryDraft.value.duration,
-    bestSeason: itineraryDraft.value.season,
-    start: itineraryDraft.value.start,
-    finish: itineraryDraft.value.finish,
-    waypoints: itineraryDraft.value.waypoints.split(",").map((item) => item.trim()).filter(Boolean),
-    highlights: splitLines(itineraryDraft.value.highlights),
-    bmwAngle: itineraryDraft.value.bmwAngle,
-    notes: splitLines(itineraryDraft.value.notes),
-  }, null, 2), [itineraryDraft.value]);
-
-  const calendarPayload = useMemo(() => JSON.stringify({
-    id: calendarDraft.value.id,
-    year: Number(calendarDraft.value.year),
-    title: calendarDraft.value.title,
-    category: calendarDraft.value.category,
-    start: calendarDraft.value.start,
-    end: calendarDraft.value.end,
-    displayDate: calendarDraft.value.displayDate,
-    source: calendarDraft.value.source,
-    destination: calendarDraft.value.destination || undefined,
-    galleryHref: calendarDraft.value.galleryHref || undefined,
-    summary: calendarDraft.value.summary || undefined,
-  }, null, 2), [calendarDraft.value]);
-
-  const copyPayload = async (payload: string) => {
-    try {
-      await navigator.clipboard.writeText(payload);
-      setStatus(t.copied);
-    } catch {
-      setStatus("Clipboard blocked");
-    }
-  };
-
-  return (
-    <PageShell>
-      <section className="pt-10 pb-8">
-        <div className="container mx-auto max-w-6xl px-4">
-          <Card className="glass-dark relative overflow-hidden rounded-[2.5rem] border-0 p-8 text-white shadow-elegant md:p-10">
-            <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(0,102,177,.32),transparent_34%)]" />
-            <div className="relative z-10 grid gap-8 lg:grid-cols-[1.05fr_0.95fr]">
-              <div>
-                <div className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/10 px-4 py-2 text-xs font-semibold uppercase tracking-[0.24em] text-white/78">
-                  <LockKeyhole className="h-4 w-4" />
-                  {t.admin}
-                </div>
-                <h1 className="mt-5 max-w-4xl text-3xl font-bold text-balance sm:text-4xl md:text-6xl">{t.title}</h1>
-                <p className="mt-5 max-w-3xl text-lg text-white/72">{t.intro}</p>
-                <div className="mt-6 inline-flex items-center gap-2 rounded-full border border-emerald-400/20 bg-emerald-400/10 px-4 py-2 text-sm font-medium text-emerald-100">
-                  <ShieldCheck className="h-4 w-4" />
-                  {t.draftReady}
-                </div>
-              </div>
-
-              <div className="grid gap-4 sm:grid-cols-3 lg:grid-cols-1 xl:grid-cols-3">
-                <StatCard value={photoCount} label={t.currentPhotos} />
-                <StatCard value={itineraryGuide.length} label={t.currentRoutes} />
-                <StatCard value={clubEvents.length} label={t.currentEvents} />
-              </div>
-            </div>
-          </Card>
-        </div>
-      </section>
-
-      <section className="pb-16">
-        <div className="container mx-auto grid max-w-6xl gap-6 px-4 lg:grid-cols-[1.12fr_0.88fr]">
-          <div>
-            <Tabs defaultValue="photos" className="space-y-5">
-              <TabsList className="h-auto flex-wrap rounded-[1.25rem] bg-white/70 p-2">
-                <TabsTrigger value="photos" className="rounded-xl px-4 py-2">{t.photos}</TabsTrigger>
-                <TabsTrigger value="itineraries" className="rounded-xl px-4 py-2">{t.itineraries}</TabsTrigger>
-                <TabsTrigger value="calendar" className="rounded-xl px-4 py-2">{t.calendar}</TabsTrigger>
-              </TabsList>
-
-              <TabsContent value="photos">
-                <Card className="premium-card rounded-[2rem] border-0 p-6 md:p-8">
-                  <SectionHeader icon={Images} title={t.photos} body={t.workflowBody} />
-                  <div className="grid gap-4 md:grid-cols-2">
-                    <div>
-                      <label className="mb-2 block text-sm font-medium">{t.photoCollection}</label>
-                      <Input value={photoDraft.value.collectionKey} onChange={(e) => photoDraft.setValue({ ...photoDraft.value, collectionKey: e.target.value })} />
-                    </div>
-                    <div>
-                      <label className="mb-2 block text-sm font-medium">{t.photoTitle}</label>
-                      <Input value={photoDraft.value.title} onChange={(e) => photoDraft.setValue({ ...photoDraft.value, title: e.target.value })} />
-                    </div>
-                  </div>
-                  <div className="mt-4 grid gap-4 md:grid-cols-2">
-                    <div>
-                      <label className="mb-2 block text-sm font-medium">{t.sourceFolder}</label>
-                      <Input value={photoDraft.value.sourceFolder} onChange={(e) => photoDraft.setValue({ ...photoDraft.value, sourceFolder: e.target.value })} />
-                    </div>
-                    <div>
-                      <label className="mb-2 block text-sm font-medium">{t.note}</label>
-                      <Input value={photoDraft.value.note} onChange={(e) => photoDraft.setValue({ ...photoDraft.value, note: e.target.value })} />
-                    </div>
-                  </div>
-                  <div className="mt-4">
-                    <label className="mb-2 block text-sm font-medium">{t.imageLines}</label>
-                    <Textarea className="min-h-[220px]" value={photoDraft.value.imageLines} onChange={(e) => photoDraft.setValue({ ...photoDraft.value, imageLines: e.target.value })} />
-                    <p className="mt-2 text-xs text-muted-foreground">{t.imageHelp}</p>
-                  </div>
-                  <div className="mt-4 rounded-[1.25rem] border border-border/70 bg-white/70 p-4 text-sm">
-                    <span className="font-semibold">{t.previewCount}:</span> {preparedImages.length}
-                  </div>
-                  <ActionsRow
-                    t={t}
-                    onSave={() => { photoDraft.persist(); setStatus(t.saved); }}
-                    onReset={() => { photoDraft.reset(); setStatus(""); }}
-                    onExport={() => saveDownload(`${photoDraft.value.collectionKey || "gallery"}.json`, photoPayload)}
-                    onCopy={() => copyPayload(photoPayload)}
-                  />
-                </Card>
-              </TabsContent>
-
-              <TabsContent value="itineraries">
-                <Card className="premium-card rounded-[2rem] border-0 p-6 md:p-8">
-                  <SectionHeader icon={MapPinned} title={t.itineraries} body={t.workflowBody} />
-                  <div className="grid gap-4 md:grid-cols-2">
-                    <Field label={t.itineraryId}><Input value={itineraryDraft.value.id} onChange={(e) => itineraryDraft.setValue({ ...itineraryDraft.value, id: e.target.value })} /></Field>
-                    <Field label={t.itineraryProfile}>
-                      <select className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm" value={itineraryDraft.value.profile} onChange={(e) => itineraryDraft.setValue({ ...itineraryDraft.value, profile: e.target.value as ItineraryDraft['profile'] })}>
-                        <option value="car">{t.car}</option>
-                        <option value="motorcycle">{t.motorcycle}</option>
-                        <option value="both">{t.both}</option>
-                      </select>
-                    </Field>
-                  </div>
-                  <div className="mt-4 grid gap-4 md:grid-cols-2">
-                    <Field label={t.itineraryTitle}><Input value={itineraryDraft.value.title} onChange={(e) => itineraryDraft.setValue({ ...itineraryDraft.value, title: e.target.value })} /></Field>
-                    <Field label={t.itineraryStrapline}><Input value={itineraryDraft.value.strapline} onChange={(e) => itineraryDraft.setValue({ ...itineraryDraft.value, strapline: e.target.value })} /></Field>
-                  </div>
-                  <div className="mt-4 grid gap-4 md:grid-cols-4">
-                    <Field label={t.itineraryDistance}><Input value={itineraryDraft.value.distance} onChange={(e) => itineraryDraft.setValue({ ...itineraryDraft.value, distance: e.target.value })} /></Field>
-                    <Field label={t.itineraryDuration}><Input value={itineraryDraft.value.duration} onChange={(e) => itineraryDraft.setValue({ ...itineraryDraft.value, duration: e.target.value })} /></Field>
-                    <Field label={t.itinerarySeason}><Input value={itineraryDraft.value.season} onChange={(e) => itineraryDraft.setValue({ ...itineraryDraft.value, season: e.target.value })} /></Field>
-                    <Field label={t.itineraryStart}><Input value={itineraryDraft.value.start} onChange={(e) => itineraryDraft.setValue({ ...itineraryDraft.value, start: e.target.value })} /></Field>
-                  </div>
-                  <div className="mt-4 grid gap-4 md:grid-cols-2">
-                    <Field label={t.itineraryFinish}><Input value={itineraryDraft.value.finish} onChange={(e) => itineraryDraft.setValue({ ...itineraryDraft.value, finish: e.target.value })} /></Field>
-                    <Field label={t.itineraryWaypoints}><Input value={itineraryDraft.value.waypoints} onChange={(e) => itineraryDraft.setValue({ ...itineraryDraft.value, waypoints: e.target.value })} /></Field>
-                  </div>
-                  <p className="mt-2 text-xs text-muted-foreground">{t.itineraryWaypointsHelp}</p>
-                  <div className="mt-4 grid gap-4">
-                    <Field label={t.itineraryHighlights}><Textarea value={itineraryDraft.value.highlights} onChange={(e) => itineraryDraft.setValue({ ...itineraryDraft.value, highlights: e.target.value })} /></Field>
-                    <p className="-mt-2 text-xs text-muted-foreground">{t.itineraryHighlightsHelp}</p>
-                    <Field label={t.itineraryBmwAngle}><Textarea value={itineraryDraft.value.bmwAngle} onChange={(e) => itineraryDraft.setValue({ ...itineraryDraft.value, bmwAngle: e.target.value })} /></Field>
-                    <Field label={t.itineraryNotes}><Textarea value={itineraryDraft.value.notes} onChange={(e) => itineraryDraft.setValue({ ...itineraryDraft.value, notes: e.target.value })} /></Field>
-                    <p className="-mt-2 text-xs text-muted-foreground">{t.itineraryNotesHelp}</p>
-                  </div>
-                  <ActionsRow
-                    t={t}
-                    onSave={() => { itineraryDraft.persist(); setStatus(t.saved); }}
-                    onReset={() => { itineraryDraft.reset(); setStatus(""); }}
-                    onExport={() => saveDownload(`${itineraryDraft.value.id || "itinerary"}.json`, itineraryPayload)}
-                    onCopy={() => copyPayload(itineraryPayload)}
-                  />
-                </Card>
-              </TabsContent>
-
-              <TabsContent value="calendar">
-                <Card className="premium-card rounded-[2rem] border-0 p-6 md:p-8">
-                  <SectionHeader icon={CalendarRange} title={t.calendar} body={t.workflowBody} />
-                  <div className="grid gap-4 md:grid-cols-2">
-                    <Field label={t.eventId}><Input value={calendarDraft.value.id} onChange={(e) => calendarDraft.setValue({ ...calendarDraft.value, id: e.target.value })} /></Field>
-                    <Field label={t.eventTitle}><Input value={calendarDraft.value.title} onChange={(e) => calendarDraft.setValue({ ...calendarDraft.value, title: e.target.value })} /></Field>
-                  </div>
-                  <div className="mt-4 grid gap-4 md:grid-cols-4">
-                    <Field label={t.year}><Input value={calendarDraft.value.year} onChange={(e) => calendarDraft.setValue({ ...calendarDraft.value, year: e.target.value })} list="calendar-years" /></Field>
-                    <Field label={t.category}><Input value={calendarDraft.value.category} onChange={(e) => calendarDraft.setValue({ ...calendarDraft.value, category: e.target.value })} /></Field>
-                    <Field label={t.displayDate}><Input value={calendarDraft.value.displayDate} onChange={(e) => calendarDraft.setValue({ ...calendarDraft.value, displayDate: e.target.value })} /></Field>
-                    <Field label={t.galleryHref}><Input value={calendarDraft.value.galleryHref} onChange={(e) => calendarDraft.setValue({ ...calendarDraft.value, galleryHref: e.target.value })} /></Field>
-                  </div>
-                  <datalist id="calendar-years">
-                    {calendarYears.map((year) => <option key={year} value={year} />)}
-                  </datalist>
-                  <div className="mt-4 grid gap-4 md:grid-cols-2">
-                    <Field label={t.start}><Input value={calendarDraft.value.start} onChange={(e) => calendarDraft.setValue({ ...calendarDraft.value, start: e.target.value })} /></Field>
-                    <Field label={t.end}><Input value={calendarDraft.value.end} onChange={(e) => calendarDraft.setValue({ ...calendarDraft.value, end: e.target.value })} /></Field>
-                  </div>
-                  <div className="mt-4 grid gap-4 md:grid-cols-2">
-                    <Field label={t.source}><Input value={calendarDraft.value.source} onChange={(e) => calendarDraft.setValue({ ...calendarDraft.value, source: e.target.value })} /></Field>
-                    <Field label={t.destination}><Input value={calendarDraft.value.destination} onChange={(e) => calendarDraft.setValue({ ...calendarDraft.value, destination: e.target.value })} /></Field>
-                  </div>
-                  <div className="mt-4">
-                    <Field label={t.summary}><Textarea value={calendarDraft.value.summary} onChange={(e) => calendarDraft.setValue({ ...calendarDraft.value, summary: e.target.value })} /></Field>
-                  </div>
-                  <ActionsRow
-                    t={t}
-                    onSave={() => { calendarDraft.persist(); setStatus(t.saved); }}
-                    onReset={() => { calendarDraft.reset(); setStatus(""); }}
-                    onExport={() => saveDownload(`${calendarDraft.value.id || "event"}.json`, calendarPayload)}
-                    onCopy={() => copyPayload(calendarPayload)}
-                  />
-                </Card>
-              </TabsContent>
-            </Tabs>
-          </div>
-
-          <div className="grid gap-6">
-            <Card className="rounded-[2rem] border-0 bg-white/72 p-6 shadow-sm">
-              <div className="inline-flex items-center gap-2 rounded-full bg-primary/10 px-3 py-1 text-xs font-semibold uppercase tracking-[0.2em] text-primary">
-                <Sparkles className="h-3.5 w-3.5" />
-                {t.dashboard}
-              </div>
-              <p className="mt-4 text-sm text-muted-foreground">{t.workflowBody}</p>
-              <div className="mt-5 grid gap-3">
-                <StatusLine icon={FolderOpen} text={`${Object.keys(galleryMediaByPage).length} col·leccions de galeria`} />
-                <StatusLine icon={MapPinned} text={`${itineraryGuide.length} rutes actives`} />
-                <StatusLine icon={CalendarRange} text={`${clubEvents.length} entrades de calendari`} />
-              </div>
-              {status ? <div className="mt-5 rounded-[1.2rem] border border-emerald-200 bg-emerald-50 px-4 py-3 text-sm text-emerald-700">{status}</div> : null}
-            </Card>
-
-            <Card className="rounded-[2rem] border-0 bg-white/72 p-6 shadow-sm">
-              <h2 className="text-xl font-bold">{t.workflow}</h2>
-              <p className="mt-3 text-sm text-muted-foreground">{t.workflowBody}</p>
-            </Card>
-
-            <Card className="rounded-[2rem] border-0 bg-white/72 p-6 shadow-sm">
-              <h2 className="text-xl font-bold">{t.security}</h2>
-              <p className="mt-3 text-sm text-muted-foreground">{t.securityBody}</p>
-            </Card>
-          </div>
-        </div>
-      </section>
-    </PageShell>
-  );
-};
-
-const Field = ({ label, children }: { label: string; children: React.ReactNode }) => (
-  <div>
+const Field = ({ label, children, className = "" }: { label: string; children: ReactNode; className?: string }) => (
+  <div className={className}>
     <label className="mb-2 block text-sm font-medium">{label}</label>
     {children}
   </div>
 );
 
-const ActionsRow = ({
-  t,
-  onSave,
-  onReset,
-  onExport,
-  onCopy,
-}: {
-  t: Record<string, string>;
-  onSave: () => void;
-  onReset: () => void;
-  onExport: () => void;
-  onCopy: () => void;
-}) => (
+const EditorToolbar = ({ items, onNew, onPick }: { items: any[]; onNew: () => void; onPick: (id: string) => void }) => (
+  <div className="grid gap-3 rounded-[1.4rem] border border-border/70 bg-white/70 p-4 md:grid-cols-[1fr_auto]">
+    <select className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm" defaultValue="" onChange={(event) => event.target.value && onPick(event.target.value)}>
+      <option value="">Carregar registre existent…</option>
+      {items.map((item) => <option key={item.id} value={item.id}>{item.title} · {item.status}</option>)}
+    </select>
+    <Button variant="outline" className="rounded-full" onClick={onNew}><Plus className="h-4 w-4" />Nou</Button>
+  </div>
+);
+
+const ActionsRow = ({ onSave, onDelete, busy }: { onSave: () => void; onDelete: () => void; busy: boolean }) => (
   <div className="mt-6 flex flex-wrap gap-3">
-    <Button variant="hero" className="rounded-full" onClick={onSave}><Save className="h-4 w-4" />{t.save}</Button>
-    <Button variant="outline" className="rounded-full" onClick={onExport}><Download className="h-4 w-4" />{t.export}</Button>
-    <Button variant="outline" className="rounded-full" onClick={onCopy}><Copy className="h-4 w-4" />{t.copy}</Button>
-    <Button variant="ghost" className="rounded-full" onClick={onReset}><RotateCcw className="h-4 w-4" />{t.reset}</Button>
+    <Button variant="hero" className="rounded-full" disabled={busy} onClick={onSave}><Save className="h-4 w-4" />Guardar</Button>
+    <Button variant="outline" className="rounded-full" disabled={busy} onClick={onDelete}><Trash2 className="h-4 w-4" />Eliminar</Button>
   </div>
 );
 
@@ -883,5 +854,10 @@ const StatusLine = ({ icon: Icon, text }: { icon: typeof Images; text: string })
     <span>{text}</span>
   </div>
 );
+
+const Banner = ({ tone, text }: { tone: "success" | "danger" | "info"; text: string }) => {
+  const toneClass = tone === "success" ? "border-emerald-200 bg-emerald-50 text-emerald-700" : tone === "danger" ? "border-red-200 bg-red-50 text-red-700" : "border-sky-200 bg-sky-50 text-sky-700";
+  return <div className={`rounded-[1.2rem] border px-4 py-3 text-sm ${toneClass}`}>{text}</div>;
+};
 
 export default GestioClub;

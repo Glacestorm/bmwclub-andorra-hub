@@ -5,7 +5,8 @@ import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { useLanguage } from "@/components/LanguageProvider";
 import { LanguageCode } from "@/lib/i18n";
-import { itineraryGuide, type ClubItinerary } from "@/content/itineraryGuide";
+import { type ClubItinerary } from "@/content/itineraryGuide";
+import { useMergedItineraries } from "@/lib/clubCms";
 
 const translations: Record<LanguageCode, Record<string, string>> = {
   ca: {
@@ -351,6 +352,7 @@ const RoutePhoto = ({ route, t, language }: { route: ClubItinerary; t: Record<st
 const Itineraris = () => {
   const { language } = useLanguage();
   const t = translations[language];
+  const { data: routes } = useMergedItineraries();
 
   return (
     <PageShell>
@@ -394,7 +396,7 @@ const Itineraris = () => {
 
       <section className="pb-16">
         <div className="container mx-auto px-4 max-w-6xl grid gap-6">
-          {itineraryGuide.map((route) => {
+          {routes.map((route) => {
             const profile = getProfileMeta(route, t);
             const ProfileIcon = profile.icon;
             return (

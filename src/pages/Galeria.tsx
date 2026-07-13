@@ -7,6 +7,7 @@ import { useLanguage } from "@/components/LanguageProvider";
 import { LanguageCode } from "@/lib/i18n";
 import { bmwContent } from "@/content/bmwContent";
 import { galleryMediaByPage } from "@/content/galleryMedia";
+import { mergeGallerySections, usePublishedGallerySections } from "@/lib/clubCms";
 
 const translations: Record<LanguageCode, Record<string, string>> = {
   ca: {
@@ -132,10 +133,13 @@ const Galeria = () => {
   const { language } = useLanguage();
   const t = translations[language];
   const page = bmwContent.galeria;
+  const { data: historicDynamic } = usePublishedGallerySections("historiques");
+  const { data: outingsDynamic } = usePublishedGallerySections("sortides_2024");
 
   const groups = (page.groups ?? []).map((group, index) => {
     const pageKey = groupToPageKey[group.href];
-    const sections = pageKey ? galleryMediaByPage[pageKey] ?? [] : [];
+    const dynamicSections = pageKey === "historiques" ? historicDynamic : pageKey === "sortides_2024" ? outingsDynamic : [];
+    const sections = pageKey ? mergeGallerySections(galleryMediaByPage[pageKey] ?? [], dynamicSections) : [];
     const photoCount = sections.reduce((acc, section) => acc + section.images.length, 0);
     return {
       ...group,

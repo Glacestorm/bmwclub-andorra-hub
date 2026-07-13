@@ -111,7 +111,7 @@ export const CalendarYearAgenda = ({ year, events }: { year: number; events: Clu
             <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,_hsl(207_100%_55%_/_0.25),_transparent_34%)]" />
             <div className="relative z-10 space-y-5">
               <p className="text-xs uppercase tracking-[0.25em] text-white/65">{ui.agenda}</p>
-              <h1 className="text-4xl md:text-6xl font-bold text-balance">{yearLabels[year]}</h1>
+              <h1 className="text-4xl md:text-6xl font-bold text-balance">{yearLabels[year] ?? `Calendari ${year}`}</h1>
               <p className="text-white/78 max-w-3xl">{ui.intro}</p>
               <div className="grid gap-3 sm:grid-cols-3">
                 <div className="rounded-2xl border border-white/10 bg-white/8 p-4">
@@ -132,7 +132,7 @@ export const CalendarYearAgenda = ({ year, events }: { year: number; events: Clu
 
           <Card className="premium-card rounded-[2rem] border-0 p-7 md:p-8 shadow-elegant">
             <div className="flex items-center gap-3 text-primary"><CalendarDays className="h-5 w-5" /><p className="text-xs uppercase tracking-[0.25em] font-semibold">{year}</p></div>
-            <h2 className="mt-4 text-3xl font-bold text-balance">{nextUpcoming?.title ?? yearLabels[year]}</h2>
+            <h2 className="mt-4 text-3xl font-bold text-balance">{nextUpcoming?.title ?? yearLabels[year] ?? `Calendari ${year}`}</h2>
             <p className="mt-3 text-muted-foreground">{nextUpcoming ? formatEventDateRange(nextUpcoming, language) : ui.intro}</p>
             <div className="mt-6 space-y-3">
               <div className="rounded-2xl border border-border/70 bg-background/80 p-4">

@@ -55,17 +55,7 @@ const App = () => (
               <Route path="/alta-soci" element={<Contacte />} />
               <Route path="/patrocinadors" element={<Patrocinadors />} />
               <Route path="/calendari" element={<Calendari />} />
-              <Route path="/calendari/2026" element={<CalendariYear />} />
-              <Route path="/calendari/2025" element={<CalendariYear />} />
-              <Route path="/calendari/2024" element={<CalendariYear />} />
-              <Route path="/calendari/2022" element={<CalendariYear />} />
-              <Route path="/calendari/2021" element={<CalendariYear />} />
-              <Route path="/calendari/2020" element={<CalendariYear />} />
-              <Route path="/calendari/2016" element={<CalendariYear />} />
-              <Route path="/calendari/2015" element={<CalendariYear />} />
-              <Route path="/calendari/2014" element={<CalendariYear />} />
-              <Route path="/calendari/2013" element={<CalendariYear />} />
-              <Route path="/calendari/2011" element={<CalendariYear />} />
+              <Route path="/calendari/:year" element={<CalendariYear />} />
               <Route path="/destacats" element={<Destacats />} />
               <Route path="/arxiu" element={<Arxiu />} />
               <Route path="/bmw-oficial" element={<BmwOficial />} />

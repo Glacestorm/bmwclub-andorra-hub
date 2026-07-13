@@ -29,25 +29,33 @@ export const getEventStatus = (event: ClubEvent, reference = nowInAndorra()) => 
   return "live" as const;
 };
 
-export const getEventsByYear = (year: number) =>
-  clubEvents.filter((event) => event.year === year).sort((a, b) => (a.start ?? "9999").localeCompare(b.start ?? "9999"));
+export const getEventsByYearFromList = (events: ClubEvent[], year: number) =>
+  events.filter((event) => event.year === year).sort((a, b) => (a.start ?? "9999").localeCompare(b.start ?? "9999"));
 
-export const getEventById = (id: string) => clubEvents.find((event) => event.id === id) ?? null;
+export const getEventsByYear = (year: number) => getEventsByYearFromList(clubEvents, year);
 
-export const getNextEvent = (reference = nowInAndorra()) =>
-  clubEvents.find((event) => {
+export const getEventByIdFromList = (events: ClubEvent[], id: string) => events.find((event) => event.id === id) ?? null;
+
+export const getEventById = (id: string) => getEventByIdFromList(clubEvents, id);
+
+export const getNextEventFromList = (events: ClubEvent[], reference = nowInAndorra()) =>
+  events.find((event) => {
     const start = getEventStart(event);
     return start ? start > reference : false;
   }) ?? null;
 
-export const getLastCompletedEvent = (reference = nowInAndorra()) => {
-  const pastEvents = clubEvents.filter((event) => {
+export const getNextEvent = (reference = nowInAndorra()) => getNextEventFromList(clubEvents, reference);
+
+export const getLastCompletedEventFromList = (events: ClubEvent[], reference = nowInAndorra()) => {
+  const pastEvents = events.filter((event) => {
     const end = getEventEnd(event);
     return end ? end <= reference : false;
   });
 
   return pastEvents.at(-1) ?? null;
 };
+
+export const getLastCompletedEvent = (reference = nowInAndorra()) => getLastCompletedEventFromList(clubEvents, reference);
 
 export const formatEventDateRange = (event: ClubEvent, language: LanguageCode = defaultLanguage) => {
   if (!event.start) return event.displayDate;

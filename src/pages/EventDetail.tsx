@@ -9,7 +9,8 @@ import { LanguageCode } from "@/lib/i18n";
 import { getLocalizedText } from "@/lib/localized";
 import { archiveItems, featuredEventMeta } from "@/content/siteExperience";
 import { galleryMediaByPage } from "@/content/galleryMedia";
-import { formatEventDateRange, getEventById, getEventStatus } from "@/lib/calendar";
+import { formatEventDateRange, getEventByIdFromList, getEventStatus } from "@/lib/calendar";
+import { collectionKeyByGalleryHref, mergeGallerySections, useMergedEvents, usePublishedGallerySections } from "@/lib/clubCms";
 
 const galleryPageByHref: Record<string, string> = {
   "/galeria/historiques/2011-2012": "historiques_2011_2012",
@@ -36,13 +37,16 @@ const EventDetail = () => {
   const { language } = useLanguage();
   const t = translations[language];
 
+  const { data: events } = useMergedEvents();
+
   if (!eventId) return <Navigate to="/destacats" replace />;
-  const event = getEventById(eventId);
+  const event = getEventByIdFromList(events, eventId);
   if (!event) return <Navigate to="/destacats" replace />;
 
   const meta = featuredEventMeta.find((item) => item.eventId === event.id);
-  const galleryKey = event.galleryHref ? galleryPageByHref[event.galleryHref] : undefined;
-  const gallerySections = galleryKey ? galleryMediaByPage[galleryKey] ?? [] : [];
+  const galleryKey = event.galleryHref ? (galleryPageByHref[event.galleryHref] ?? collectionKeyByGalleryHref[event.galleryHref]) : undefined;
+  const { data: dynamicSections } = usePublishedGallerySections(galleryKey ?? "");
+  const gallerySections = galleryKey ? mergeGallerySections(galleryMediaByPage[galleryKey] ?? [], dynamicSections) : [];
   const previewImages = gallerySections.flatMap((section) => section.images).slice(0, 6);
   const relatedArchive = archiveItems.filter((item) => meta?.archiveIds?.includes(item.id));
   const status = getEventStatus(event);
