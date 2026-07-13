@@ -407,7 +407,7 @@ const Index = () => {
 
       <section className="pb-16">
         <div className="container mx-auto px-4 max-w-6xl">
-          <Card className="glass-dark border-0 rounded-[2.25rem] p-8 md:p-10 text-white overflow-hidden relative shadow-[0_35px_100px_-45px_rgba(15,23,42,.7)]">
+          <Card className="glass-dark border-0 rounded-[2rem] md:rounded-[2.25rem] p-6 md:p-10 text-white overflow-hidden relative shadow-[0_35px_100px_-45px_rgba(15,23,42,.7)]">
             <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(0,102,177,.36),transparent_34%)]" />
             <div className="relative z-10 grid lg:grid-cols-[1fr_0.95fr] gap-8 items-start">
               <div>
@@ -422,7 +422,7 @@ const Index = () => {
                 </div>
               </div>
 
-              <div className="grid gap-4 sm:grid-cols-3 lg:grid-cols-1 xl:grid-cols-3">
+              <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-3">
                 {[
                   { title: t.assistantPill1, desc: t.assistantPill1d, icon: BadgeCheck },
                   { title: t.assistantPill2, desc: t.assistantPill2d, icon: Volume2 },
@@ -483,12 +483,12 @@ const Index = () => {
 
               <div className="grid lg:grid-cols-[1.2fr_0.8fr] gap-6 items-stretch">
                 {featuredSponsor && (
-                  <a href={featuredSponsor.link?.href} target="_blank" rel="noreferrer" className="rounded-[2rem] border border-white/12 bg-white/8 p-6 md:p-8 block hover:bg-white/10 transition-base shadow-[0_25px_70px_-38px_rgba(15,23,42,.5)]">
+                  <a href={featuredSponsor.link?.href} target="_blank" rel="noreferrer" className="rounded-[1.75rem] md:rounded-[2rem] border border-white/12 bg-white/8 p-5 md:p-8 block hover:bg-white/10 transition-base shadow-[0_25px_70px_-38px_rgba(15,23,42,.5)]">
                     <div className="inline-flex items-center gap-2 rounded-full bg-white/10 px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.2em] text-white/75">{t.featuredSponsorLabel}</div>
                     <div className="mt-5 rounded-[1.6rem] p-5" style={{ background: featuredSponsor.brand.surface, border: `1px solid ${featuredSponsor.brand.border}` }}>
                       <img src={featuredSponsor.brand.logoPath} alt={`${featuredSponsor.name} logo`} className="h-16 w-auto max-w-full object-contain" loading="lazy" />
                     </div>
-                    <div className="mt-4 text-3xl md:text-4xl font-bold text-balance">{featuredSponsor.name}</div>
+                    <div className="mt-4 text-2xl sm:text-3xl md:text-4xl font-bold text-balance">{featuredSponsor.name}</div>
                     <div className="mt-3 text-sm uppercase tracking-[0.2em] text-white/55">{featuredSponsor.category}</div>
                     <p className="mt-5 max-w-2xl text-white/76">{t.featuredSponsorText}</p>
                     <div className="mt-6 rounded-[1.5rem] border border-white/10 bg-black/10 p-5">

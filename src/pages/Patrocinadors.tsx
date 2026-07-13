@@ -210,9 +210,9 @@ const SponsorLogoPlate = ({ sponsor, dark = false }: { sponsor: SponsorItem; dar
       boxShadow: dark ? `0 30px 70px -40px ${sponsor.brand.accent}55` : `0 18px 45px -35px ${sponsor.brand.accent}40`,
     }}
   >
-    <div className="flex items-center justify-between gap-3">
-      <img src={sponsor.brand.logoPath} alt={`${sponsor.name} logo`} className="h-16 w-auto max-w-full object-contain" loading="lazy" />
-      <div className="rounded-full px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.18em]" style={{ background: sponsor.brand.badge, color: sponsor.brand.text }}>
+    <div className="flex flex-col items-start gap-3 sm:flex-row sm:items-center sm:justify-between">
+      <img src={sponsor.brand.logoPath} alt={`${sponsor.name} logo`} className="h-14 sm:h-16 w-auto max-w-full object-contain" loading="lazy" />
+      <div className="rounded-full px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.18em] max-w-full break-words" style={{ background: sponsor.brand.badge, color: sponsor.brand.text }}>
         {sponsor.category}
       </div>
     </div>
@@ -231,7 +231,7 @@ const Patrocinadors = () => {
     <PageShell>
       <section className="pt-10 pb-8">
         <div className="container mx-auto px-4 max-w-6xl">
-          <Card className="glass-dark border-0 rounded-[2.5rem] overflow-hidden relative p-8 md:p-10 text-white">
+          <Card className="glass-dark border-0 rounded-[2rem] md:rounded-[2.5rem] overflow-hidden relative p-6 md:p-10 text-white">
             <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(0,102,177,.35),transparent_32%)]" />
             <div className="relative z-10 grid lg:grid-cols-[1.1fr_0.9fr] gap-8 items-end">
               <div>
@@ -239,7 +239,7 @@ const Patrocinadors = () => {
                   <Handshake className="h-4 w-4" />
                   {t.eyebrow}
                 </div>
-                <h1 className="mt-5 text-4xl md:text-6xl font-bold text-balance max-w-4xl">{t.title}</h1>
+                <h1 className="mt-5 text-3xl sm:text-4xl md:text-6xl font-bold text-balance max-w-4xl">{t.title}</h1>
                 <p className="mt-5 max-w-3xl text-lg text-white/72">{t.intro}</p>
                 <div className="mt-8 flex flex-wrap gap-3">
                   <Link to="/contacte">
@@ -253,7 +253,7 @@ const Patrocinadors = () => {
                 </div>
               </div>
 
-              <div className="grid gap-4 md:grid-cols-3 lg:grid-cols-1 xl:grid-cols-3">
+              <div className="grid gap-4 sm:grid-cols-3 lg:grid-cols-1 xl:grid-cols-3">
                 <div className="rounded-[1.75rem] border border-white/10 bg-white/8 p-5 backdrop-blur-xl">
                   <div className="text-3xl font-bold">{sponsorItems.length}</div>
                   <div className="mt-2 text-sm text-white/68">{t.activeBrands}</div>
@@ -275,7 +275,7 @@ const Patrocinadors = () => {
       {featuredSponsor && (
         <section className="pb-10">
           <div className="container mx-auto px-4 max-w-6xl">
-            <Card className="glass-dark border border-white/10 rounded-[2.75rem] overflow-hidden p-8 md:p-10 text-white relative shadow-[0_40px_110px_-48px_rgba(15,23,42,.75)]">
+            <Card className="glass-dark border border-white/10 rounded-[2rem] md:rounded-[2.75rem] overflow-hidden p-6 md:p-10 text-white relative shadow-[0_40px_110px_-48px_rgba(15,23,42,.75)]">
               <div className="absolute inset-0 bg-[radial-gradient(circle_at_12%_18%,rgba(255,255,255,.08),transparent_18%),radial-gradient(circle_at_82%_12%,rgba(0,102,177,.42),transparent_30%)]" />
               <div className="relative z-10 grid lg:grid-cols-[1.15fr_0.85fr] gap-8 items-start">
                 <div>
@@ -284,13 +284,13 @@ const Patrocinadors = () => {
                     {t.featuredLabel}
                   </div>
                   <div className="mt-5 flex flex-wrap items-center gap-3">
-                    <h2 className="text-4xl md:text-6xl font-bold text-balance leading-[0.95]">{featuredSponsor.name}</h2>
+                    <h2 className="text-3xl sm:text-4xl md:text-6xl font-bold text-balance leading-[0.95]">{featuredSponsor.name}</h2>
                     {featuredSponsor.accent && <span className="rounded-full border border-white/10 bg-white/8 px-4 py-2 text-xs font-semibold uppercase tracking-[0.2em] text-white/70">{featuredSponsor.accent}</span>}
                   </div>
-                  <p className="mt-5 max-w-3xl text-xl text-white/80">{t.featuredStatement}</p>
+                  <p className="mt-5 max-w-3xl text-lg md:text-xl text-white/80">{t.featuredStatement}</p>
                   <p className="mt-5 text-base md:text-lg text-white/68 max-w-3xl">{getLocalizedText(featuredSponsor.summary, language)}</p>
 
-                  <div className="mt-8 grid md:grid-cols-3 gap-4">
+                  <div className="mt-8 grid sm:grid-cols-2 xl:grid-cols-3 gap-4">
                     {[
                       { icon: Sparkles, title: t.officialPresence, desc: t.officialPresenceDesc },
                       { icon: ShieldCheck, title: t.memberValue, desc: t.memberValueDesc },
@@ -325,7 +325,7 @@ const Patrocinadors = () => {
                     )}
                     <p className="mt-5 text-sm text-slate-600">{t.benefitsSummary}</p>
                     {featuredSponsor.link && (
-                      <a href={featuredSponsor.link.href} target="_blank" rel="noreferrer" className="inline-flex items-center gap-2 mt-6 rounded-full bg-accent px-5 py-3 text-sm font-semibold text-white transition-base hover:bg-accent/90">
+                      <a href={featuredSponsor.link.href} target="_blank" rel="noreferrer" className="inline-flex w-full sm:w-auto justify-center items-center gap-2 mt-6 rounded-full bg-accent px-5 py-3 text-sm font-semibold text-white transition-base hover:bg-accent/90">
                         {t.openSite}
                         <ArrowUpRight className="h-4 w-4" />
                       </a>
@@ -347,9 +347,9 @@ const Patrocinadors = () => {
 
           <div className="grid lg:grid-cols-2 xl:grid-cols-3 gap-6">
             {premiumSponsors.map((sponsor) => (
-              <Card key={sponsor.id} className="border rounded-[2rem] p-6 hover-tilt h-full flex flex-col shadow-sm" style={{ background: sponsor.brand.surface, borderColor: sponsor.brand.border }}>
+              <Card key={sponsor.id} className="border rounded-[1.75rem] md:rounded-[2rem] p-5 md:p-6 hover-tilt h-full flex flex-col shadow-sm" style={{ background: sponsor.brand.surface, borderColor: sponsor.brand.border }}>
                 <SponsorLogoPlate sponsor={sponsor} />
-                <div className="flex items-start justify-between gap-3 mt-5">
+                <div className="flex flex-col items-start gap-3 mt-5 sm:flex-row sm:justify-between">
                   <div>
                     <div className="text-xs uppercase tracking-[0.22em] font-semibold" style={{ color: sponsor.brand.accent }}>{t.visualIdentity}</div>
                     <h3 className="mt-3 text-2xl font-bold text-balance">{sponsor.name}</h3>
@@ -379,7 +379,7 @@ const Patrocinadors = () => {
 
       <section className="pb-16">
         <div className="container mx-auto px-4 max-w-6xl">
-          <Card className="glass-panel border-0 rounded-[2.25rem] p-8 md:p-10">
+          <Card className="glass-panel border-0 rounded-[2rem] md:rounded-[2.25rem] p-6 md:p-10">
             <div className="grid lg:grid-cols-[0.9fr_1.1fr] gap-8 items-start">
               <div>
                 <p className="text-sm uppercase tracking-[0.24em] text-primary">{t.networkLabel}</p>

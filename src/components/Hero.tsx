@@ -134,7 +134,7 @@ export const Hero = ({ language }: HeroProps) => {
   const t = translations[language];
 
   return (
-    <section className="relative min-h-[92vh] flex items-center justify-center overflow-hidden pt-20">
+    <section className="relative min-h-[86vh] md:min-h-[92vh] flex items-center justify-center overflow-hidden pt-20">
       <div className="absolute inset-0 z-0">
         <img src={heroImage} alt="BMW in Andorra mountains" className="w-full h-full object-cover scale-[1.03]" loading="eager" />
         <div className="absolute inset-0 gradient-overlay" />
@@ -148,13 +148,13 @@ export const Hero = ({ language }: HeroProps) => {
               <Sparkles className="h-4 w-4" /> {t.eyebrow}
             </div>
             <div className="space-y-4">
-              <h1 className="text-5xl md:text-7xl font-bold text-balance leading-[0.95]">{t.title}</h1>
-              <p className="text-xl md:text-2xl font-light text-white/85 max-w-3xl">{t.subtitle}</p>
+              <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-balance leading-[0.95]">{t.title}</h1>
+              <p className="text-lg sm:text-xl md:text-2xl font-light text-white/85 max-w-3xl">{t.subtitle}</p>
             </div>
             <p className="text-base md:text-lg text-white/74 max-w-2xl leading-relaxed">{t.description}</p>
-            <div className="flex flex-col sm:flex-row items-start gap-4 pt-2">
-              <Link to="/calendari/2026"><Button variant="hero" size="xl" className="gap-2">{t.primary}<ArrowRight className="h-5 w-5" /></Button></Link>
-              <Link to="/destacats"><Button variant="outline" size="xl" className="bg-white/8 text-white border-white/20 hover:bg-white/14">{t.secondary}</Button></Link>
+            <div className="flex flex-col sm:flex-row items-stretch sm:items-start gap-4 pt-2">
+              <Link to="/calendari/2026" className="w-full sm:w-auto"><Button variant="hero" size="xl" className="gap-2 w-full sm:w-auto">{t.primary}<ArrowRight className="h-5 w-5" /></Button></Link>
+              <Link to="/destacats" className="w-full sm:w-auto"><Button variant="outline" size="xl" className="w-full sm:w-auto bg-white/8 text-white border-white/20 hover:bg-white/14">{t.secondary}</Button></Link>
             </div>
 
             <div className="glass-dark rounded-[1.65rem] border border-white/10 p-5 max-w-2xl">
@@ -167,8 +167,8 @@ export const Hero = ({ language }: HeroProps) => {
                   <div className="mt-3 text-xl font-semibold">Pyrénées Andorra</div>
                   <p className="mt-2 text-sm text-white/68">{t.sponsorText}</p>
                 </div>
-                <Link to="/patrocinadors" className="shrink-0">
-                  <Button variant="outline" className="rounded-full border-white/15 bg-white/6 text-white hover:bg-white/10">{t.sponsorCta}</Button>
+                <Link to="/patrocinadors" className="shrink-0 w-full sm:w-auto">
+                  <Button variant="outline" className="w-full sm:w-auto rounded-full border-white/15 bg-white/6 text-white hover:bg-white/10">{t.sponsorCta}</Button>
                 </Link>
               </div>
             </div>

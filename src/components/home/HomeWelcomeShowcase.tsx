@@ -198,10 +198,10 @@ export const HomeWelcomeShowcase = () => {
                 ))}
               </div>
 
-              <div className="flex flex-wrap gap-3">
-                <Link to="/el-club"><Button variant="hero">{t.primary}</Button></Link>
-                <Link to="/galeria"><Button variant="outline">{t.secondary}</Button></Link>
-                <Link to="/assistent-ia"><Button variant="outline">{t.assistant}</Button></Link>
+              <div className="flex flex-col sm:flex-row sm:flex-wrap gap-3">
+                <Link to="/el-club" className="w-full sm:w-auto"><Button variant="hero" className="w-full sm:w-auto">{t.primary}</Button></Link>
+                <Link to="/galeria" className="w-full sm:w-auto"><Button variant="outline" className="w-full sm:w-auto">{t.secondary}</Button></Link>
+                <Link to="/assistent-ia" className="w-full sm:w-auto"><Button variant="outline" className="w-full sm:w-auto">{t.assistant}</Button></Link>
               </div>
             </div>
 
@@ -226,7 +226,7 @@ export const HomeWelcomeShowcase = () => {
                   {slides.map((slide, index) => (
                     <div key={`${slide.title}-${index}`} className="min-w-0 flex-[0_0_100%] pl-0">
                       <div className="overflow-hidden rounded-[1.5rem] border border-white/10 bg-black/10">
-                        <div className="relative h-[24rem] md:h-[28rem] overflow-hidden">
+                        <div className="relative h-[18rem] sm:h-[22rem] md:h-[28rem] overflow-hidden">
                           <img
                             src={slide.src}
                             alt={slide.alt}

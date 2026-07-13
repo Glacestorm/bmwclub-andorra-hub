@@ -177,9 +177,11 @@
     transition: transform 0.45s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.45s cubic-bezier(0.22, 1, 0.36, 1);
   }
 
-  .hover-tilt:hover {
-    transform: perspective(1200px) rotateX(4deg) rotateY(-6deg) translateY(-4px);
-    box-shadow: 0 34px 70px -30px hsl(220 34% 10% / 0.35);
+  @media (hover: hover) and (pointer: fine) {
+    .hover-tilt:hover {
+      transform: perspective(1200px) rotateX(4deg) rotateY(-6deg) translateY(-4px);
+      box-shadow: 0 34px 70px -30px hsl(220 34% 10% / 0.35);
+    }
   }
 
   .section-shell {
