@@ -1,6 +1,7 @@
 import { Navigate, useLocation } from "react-router-dom";
 import { PageShell } from "@/components/PageShell";
 import { BmwContentRenderer } from "@/components/BmwContentRenderer";
+import { GalleryMediaSections } from "@/components/GalleryMediaSections";
 import { bmwContent } from "@/content/bmwContent";
 
 const pageByPath: Record<string, keyof typeof bmwContent> = {
@@ -25,6 +26,7 @@ const GaleriaCollection = () => {
   return (
     <PageShell>
       <BmwContentRenderer page={bmwContent[key]} />
+      <GalleryMediaSections pageKey={key} />
     </PageShell>
   );
 };
