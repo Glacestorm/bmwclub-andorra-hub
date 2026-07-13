@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { ArrowRight, Archive, Calendar, Globe2, ShieldCheck, Sparkles, Stars } from "lucide-react";
+import { ArrowRight, Archive, Calendar, Globe2, Sparkles, Stars } from "lucide-react";
 import { PageShell } from "@/components/PageShell";
 import { Hero } from "@/components/Hero";
 import { Button } from "@/components/ui/button";
@@ -39,6 +39,8 @@ const translations: Record<LanguageCode, Record<string, string>> = {
     sponsorsTitle: "Marques amb visibilitat real, no una llista discreta al peu de pàgina",
     sponsorsCta: "Veure patrocinadors",
     sponsorsOpen: "Obrir web",
+    featuredSponsorLabel: "Sponsor principal",
+    featuredSponsorText: "Pyrénées Andorra ha de sentir-se visible de debò: més presència, millor composició i context premium dins la home.",
     visitEvent: "Obrir fitxa",
     openOfficial: "Obrir",
   },
@@ -68,6 +70,8 @@ const translations: Record<LanguageCode, Record<string, string>> = {
     sponsorsTitle: "Marcas con visibilidad real, no una lista discreta en el pie de página",
     sponsorsCta: "Ver patrocinadores",
     sponsorsOpen: "Abrir web",
+    featuredSponsorLabel: "Patrocinador principal",
+    featuredSponsorText: "Pyrénées Andorra debe sentirse realmente visible: más presencia, mejor composición y contexto premium dentro de la home.",
     visitEvent: "Abrir ficha",
     openOfficial: "Abrir",
   },
@@ -97,6 +101,8 @@ const translations: Record<LanguageCode, Record<string, string>> = {
     sponsorsTitle: "Des marques avec une vraie visibilité, pas une simple liste discrète en pied de page",
     sponsorsCta: "Voir les sponsors",
     sponsorsOpen: "Ouvrir le site",
+    featuredSponsorLabel: "Sponsor principal",
+    featuredSponsorText: "Pyrénées Andorra doit réellement se sentir visible : plus de présence, une meilleure composition et un contexte premium sur l'accueil.",
     visitEvent: "Ouvrir la fiche",
     openOfficial: "Ouvrir",
   },
@@ -126,6 +132,8 @@ const translations: Record<LanguageCode, Record<string, string>> = {
     sponsorsTitle: "Brands with real visibility, not a discreet list hidden in the footer",
     sponsorsCta: "View sponsors",
     sponsorsOpen: "Open site",
+    featuredSponsorLabel: "Main sponsor",
+    featuredSponsorText: "Pyrénées Andorra should feel genuinely visible: more presence, better composition and premium context across the homepage.",
     visitEvent: "Open detail",
     openOfficial: "Open",
   },
@@ -155,6 +163,8 @@ const translations: Record<LanguageCode, Record<string, string>> = {
     sponsorsTitle: "Marcas com visibilidade real, não uma lista discreta no rodapé",
     sponsorsCta: "Ver patrocinadores",
     sponsorsOpen: "Abrir site",
+    featuredSponsorLabel: "Patrocinador principal",
+    featuredSponsorText: "Pyrénées Andorra deve sentir-se realmente visível: mais presença, melhor composição e contexto premium na home.",
     visitEvent: "Abrir ficha",
     openOfficial: "Abrir",
   },
@@ -184,6 +194,8 @@ const translations: Record<LanguageCode, Record<string, string>> = {
     sponsorsTitle: "Marken mit echter Sichtbarkeit, nicht nur eine unauffällige Liste im Footer",
     sponsorsCta: "Sponsoren ansehen",
     sponsorsOpen: "Website öffnen",
+    featuredSponsorLabel: "Hauptsponsor",
+    featuredSponsorText: "Pyrénées Andorra soll wirklich sichtbar sein: mehr Präsenz, bessere Komposition und Premium-Kontext auf der Startseite.",
     visitEvent: "Detail öffnen",
     openOfficial: "Öffnen",
   },
@@ -213,6 +225,8 @@ const translations: Record<LanguageCode, Record<string, string>> = {
     sponsorsTitle: "Бренды с реальной заметностью, а не просто скромным списком в подвале сайта",
     sponsorsCta: "Открыть спонсоров",
     sponsorsOpen: "Открыть сайт",
+    featuredSponsorLabel: "Главный спонсор",
+    featuredSponsorText: "Pyrénées Andorra должен быть действительно заметным: больше присутствия, лучше композиция и премиальный контекст на главной.",
     visitEvent: "Открыть карточку",
     openOfficial: "Открыть",
   },
@@ -222,7 +236,8 @@ const Index = () => {
   const { language } = useLanguage();
   const t = translations[language];
   const highlightCards = featuredEventMeta.slice(0, 3).map((item) => ({ meta: item, event: getEventById(item.eventId) })).filter((item) => item.event);
-  const homeSponsors = sponsorItems.filter((item) => item.link).slice(0, 4);
+  const featuredSponsor = sponsorItems.find((item) => item.tier === "featured");
+  const homeSponsors = sponsorItems.filter((item) => item.link && item.tier !== "featured").slice(0, 3);
 
   return (
     <PageShell>
@@ -305,21 +320,39 @@ const Index = () => {
         <div className="container mx-auto px-4 max-w-6xl">
           <Card className="glass-dark border-0 rounded-[2rem] p-8 text-white overflow-hidden relative">
             <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(0,102,177,.25),transparent_35%)]" />
-            <div className="relative z-10 grid lg:grid-cols-[0.85fr_1.15fr] gap-6 items-start">
-              <div>
-                <p className="text-sm uppercase tracking-[0.25em] text-white/70">{t.sponsorsEyebrow}</p>
-                <h2 className="mt-3 text-3xl md:text-4xl font-bold text-balance">{t.sponsorsTitle}</h2>
-                <Link to="/patrocinadors" className="inline-block mt-6"><Button variant="hero">{t.sponsorsCta}</Button></Link>
+            <div className="relative z-10">
+              <div className="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-5 mb-6">
+                <div>
+                  <p className="text-sm uppercase tracking-[0.25em] text-white/70">{t.sponsorsEyebrow}</p>
+                  <h2 className="mt-3 text-3xl md:text-4xl font-bold text-balance">{t.sponsorsTitle}</h2>
+                </div>
+                <Link to="/patrocinadors" className="inline-block"><Button variant="hero">{t.sponsorsCta}</Button></Link>
               </div>
-              <div className="grid sm:grid-cols-2 gap-4">
-                {homeSponsors.map((sponsor) => (
-                  <a key={sponsor.id} href={sponsor.link?.href} target="_blank" rel="noreferrer" className="rounded-2xl border border-white/10 bg-white/5 p-4 block hover:bg-white/10 transition-base">
-                    <div className="text-xs uppercase tracking-[0.2em] text-white/60 font-semibold">{sponsor.category}</div>
-                    <div className="mt-2 font-semibold text-balance">{sponsor.name}</div>
-                    <div className="mt-2 text-sm text-white/68">{getLocalizedText(sponsor.summary, language)}</div>
-                    <div className="mt-4 inline-flex items-center gap-2 text-sm text-white">{t.sponsorsOpen} <ArrowRight className="h-4 w-4" /></div>
+
+              <div className="grid lg:grid-cols-[1.2fr_0.8fr] gap-6 items-stretch">
+                {featuredSponsor && (
+                  <a href={featuredSponsor.link?.href} target="_blank" rel="noreferrer" className="rounded-[2rem] border border-white/12 bg-white/8 p-6 md:p-8 block hover:bg-white/10 transition-base shadow-[0_25px_70px_-38px_rgba(15,23,42,.5)]">
+                    <div className="inline-flex items-center gap-2 rounded-full bg-white/10 px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.2em] text-white/75">{t.featuredSponsorLabel}</div>
+                    <div className="mt-4 text-3xl md:text-4xl font-bold text-balance">{featuredSponsor.name}</div>
+                    <div className="mt-3 text-sm uppercase tracking-[0.2em] text-white/55">{featuredSponsor.category}</div>
+                    <p className="mt-5 max-w-2xl text-white/76">{t.featuredSponsorText}</p>
+                    <div className="mt-6 rounded-[1.5rem] border border-white/10 bg-black/10 p-5">
+                      <p className="text-sm text-white/72">{getLocalizedText(featuredSponsor.summary, language)}</p>
+                    </div>
+                    <div className="mt-6 inline-flex items-center gap-2 text-sm text-white font-semibold">{t.sponsorsOpen} <ArrowRight className="h-4 w-4" /></div>
                   </a>
-                ))}
+                )}
+
+                <div className="grid gap-4">
+                  {homeSponsors.map((sponsor) => (
+                    <a key={sponsor.id} href={sponsor.link?.href} target="_blank" rel="noreferrer" className="rounded-2xl border border-white/10 bg-white/5 p-4 block hover:bg-white/10 transition-base">
+                      <div className="text-xs uppercase tracking-[0.2em] text-white/60 font-semibold">{sponsor.category}</div>
+                      <div className="mt-2 font-semibold text-balance">{sponsor.name}</div>
+                      <div className="mt-2 text-sm text-white/68">{getLocalizedText(sponsor.summary, language)}</div>
+                      <div className="mt-4 inline-flex items-center gap-2 text-sm text-white">{t.sponsorsOpen} <ArrowRight className="h-4 w-4" /></div>
+                    </a>
+                  ))}
+                </div>
               </div>
             </div>
           </Card>

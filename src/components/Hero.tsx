@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { ArrowRight, Calendar, Compass, Sparkles } from "lucide-react";
+import { ArrowRight, Calendar, Compass, Sparkles, Star } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import heroImage from "@/assets/hero-bmw.jpg";
 import { LanguageCode } from "@/lib/i18n";
@@ -22,6 +22,9 @@ const translations: Record<LanguageCode, Record<string, string>> = {
     card2d: "Documents, revistes i vídeos amb criteri.",
     card3t: "BMW Oficial",
     card3d: "Enllaç directe a novetats i univers BMW.",
+    sponsorLabel: "Partner destacat",
+    sponsorText: "Pyrénées Andorra reforça el pol premium del club amb més visibilitat i millor presència digital.",
+    sponsorCta: "Veure patrocinadors",
   },
   es: {
     eyebrow: "BMW Club Andorra",
@@ -36,6 +39,9 @@ const translations: Record<LanguageCode, Record<string, string>> = {
     card2d: "Documentos, revistas y vídeos con criterio.",
     card3t: "BMW Oficial",
     card3d: "Enlace directo a novedades y universo BMW.",
+    sponsorLabel: "Partner destacado",
+    sponsorText: "Pyrénées Andorra refuerza el polo premium del club con más visibilidad y mejor presencia digital.",
+    sponsorCta: "Ver patrocinadores",
   },
   fr: {
     eyebrow: "BMW Club Andorra",
@@ -50,6 +56,9 @@ const translations: Record<LanguageCode, Record<string, string>> = {
     card2d: "Documents, magazines et vidéos avec méthode.",
     card3t: "BMW Officiel",
     card3d: "Lien direct vers les nouveautés et l'univers BMW.",
+    sponsorLabel: "Partenaire mis en avant",
+    sponsorText: "Pyrénées Andorra renforce le pôle premium du club avec plus de visibilité et une meilleure présence digitale.",
+    sponsorCta: "Voir les sponsors",
   },
   en: {
     eyebrow: "BMW Club Andorra",
@@ -64,6 +73,9 @@ const translations: Record<LanguageCode, Record<string, string>> = {
     card2d: "Documents, magazines and videos with intent.",
     card3t: "BMW Official",
     card3d: "Direct link to BMW updates and official universe.",
+    sponsorLabel: "Featured partner",
+    sponsorText: "Pyrénées Andorra strengthens the club's premium side with more visibility and a stronger digital presence.",
+    sponsorCta: "View sponsors",
   },
   pt: {
     eyebrow: "BMW Club Andorra",
@@ -78,6 +90,9 @@ const translations: Record<LanguageCode, Record<string, string>> = {
     card2d: "Documentos, revistas e vídeos com critério.",
     card3t: "BMW Oficial",
     card3d: "Ligação direta a novidades e universo BMW.",
+    sponsorLabel: "Parceiro em destaque",
+    sponsorText: "Pyrénées Andorra reforça o lado premium do clube com mais visibilidade e melhor presença digital.",
+    sponsorCta: "Ver patrocinadores",
   },
   de: {
     eyebrow: "BMW Club Andorra",
@@ -92,6 +107,9 @@ const translations: Record<LanguageCode, Record<string, string>> = {
     card2d: "Dokumente, Magazine und Videos mit Sinn.",
     card3t: "BMW Offiziell",
     card3d: "Direkter Link zu Neuheiten und BMW-Welt.",
+    sponsorLabel: "Hervorgehobener Partner",
+    sponsorText: "Pyrénées Andorra stärkt die Premium-Seite des Clubs mit mehr Sichtbarkeit und stärkerer digitaler Präsenz.",
+    sponsorCta: "Sponsoren ansehen",
   },
   ru: {
     eyebrow: "BMW Club Andorra",
@@ -106,6 +124,9 @@ const translations: Record<LanguageCode, Record<string, string>> = {
     card2d: "Документы, журналы и видео с идеей.",
     card3t: "BMW Official",
     card3d: "Прямая ссылка на новинки и мир BMW.",
+    sponsorLabel: "Выделенный партнёр",
+    sponsorText: "Pyrénées Andorra усиливает премиальный полюс клуба за счёт большей заметности и более сильного цифрового присутствия.",
+    sponsorCta: "Открыть спонсоров",
   },
 };
 
@@ -134,6 +155,22 @@ export const Hero = ({ language }: HeroProps) => {
             <div className="flex flex-col sm:flex-row items-start gap-4 pt-2">
               <Link to="/calendari/2026"><Button variant="hero" size="xl" className="gap-2">{t.primary}<ArrowRight className="h-5 w-5" /></Button></Link>
               <Link to="/destacats"><Button variant="outline" size="xl" className="bg-white/8 text-white border-white/20 hover:bg-white/14">{t.secondary}</Button></Link>
+            </div>
+
+            <div className="glass-dark rounded-[1.65rem] border border-white/10 p-5 max-w-2xl">
+              <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
+                <div>
+                  <div className="inline-flex items-center gap-2 rounded-full bg-white/10 px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.2em] text-white/70">
+                    <Star className="h-3.5 w-3.5 text-primary" />
+                    {t.sponsorLabel}
+                  </div>
+                  <div className="mt-3 text-xl font-semibold">Pyrénées Andorra</div>
+                  <p className="mt-2 text-sm text-white/68">{t.sponsorText}</p>
+                </div>
+                <Link to="/patrocinadors" className="shrink-0">
+                  <Button variant="outline" className="rounded-full border-white/15 bg-white/6 text-white hover:bg-white/10">{t.sponsorCta}</Button>
+                </Link>
+              </div>
             </div>
           </div>
 

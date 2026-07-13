@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { Users, Target, Heart, Award } from "lucide-react";
+import { Users, Target, Heart, Award, ArrowRight, Compass, CalendarDays, ShieldCheck } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { PageShell } from "@/components/PageShell";
@@ -28,6 +28,10 @@ const translations: Record<LanguageCode, Record<string, string>> = {
     benefit4: "Coneixement compartit",
     benefit4Desc: "Aprèn dels millors sobre manteniment i conducció",
     joinNow: "Fes-te soci ara",
+    stats1: "Rutes amb identitat",
+    stats2: "Experiència club",
+    stats3: "Passió compartida",
+    ctaSecondary: "Veure calendari",
   },
   es: {
     title: "El Club",
@@ -50,6 +54,10 @@ const translations: Record<LanguageCode, Record<string, string>> = {
     benefit4: "Conocimiento compartido",
     benefit4Desc: "Aprende de los mejores sobre mantenimiento y conducción",
     joinNow: "Hazte socio ahora",
+    stats1: "Rutas con identidad",
+    stats2: "Experiencia club",
+    stats3: "Pasión compartida",
+    ctaSecondary: "Ver calendario",
   },
   fr: {
     title: "Le Club",
@@ -72,6 +80,10 @@ const translations: Record<LanguageCode, Record<string, string>> = {
     benefit4: "Connaissances partagées",
     benefit4Desc: "Apprenez des meilleurs en matière d’entretien et de conduite",
     joinNow: "Devenir membre",
+    stats1: "Routes avec identité",
+    stats2: "Expérience club",
+    stats3: "Passion partagée",
+    ctaSecondary: "Voir le calendrier",
   },
   en: {
     title: "The Club",
@@ -94,6 +106,10 @@ const translations: Record<LanguageCode, Record<string, string>> = {
     benefit4: "Shared knowledge",
     benefit4Desc: "Learn from the best about maintenance and driving",
     joinNow: "Join now",
+    stats1: "Routes with identity",
+    stats2: "Club experience",
+    stats3: "Shared passion",
+    ctaSecondary: "View calendar",
   },
   pt: {
     title: "O Clube",
@@ -116,6 +132,10 @@ const translations: Record<LanguageCode, Record<string, string>> = {
     benefit4: "Conhecimento partilhado",
     benefit4Desc: "Aprenda com os melhores sobre manutenção e condução",
     joinNow: "Torne-se sócio",
+    stats1: "Rotas com identidade",
+    stats2: "Experiência de clube",
+    stats3: "Paixão partilhada",
+    ctaSecondary: "Ver calendário",
   },
   de: {
     title: "Der Club",
@@ -138,6 +158,10 @@ const translations: Record<LanguageCode, Record<string, string>> = {
     benefit4: "Geteiltes Wissen",
     benefit4Desc: "Lernen Sie von den Besten über Wartung und Fahrtechnik",
     joinNow: "Jetzt Mitglied werden",
+    stats1: "Routen mit Profil",
+    stats2: "Club-Erlebnis",
+    stats3: "Gemeinsame Leidenschaft",
+    ctaSecondary: "Kalender ansehen",
   },
   ru: {
     title: "Клуб",
@@ -160,6 +184,10 @@ const translations: Record<LanguageCode, Record<string, string>> = {
     benefit4: "Общие знания",
     benefit4Desc: "Учитесь у лучших обслуживанию и вождению",
     joinNow: "Стать участником",
+    stats1: "Маршруты с характером",
+    stats2: "Опыт клуба",
+    stats3: "Общая страсть",
+    ctaSecondary: "Открыть календарь",
   },
 };
 
@@ -169,47 +197,111 @@ const ElClub = () => {
 
   return (
     <PageShell>
-      <section className="pt-32 pb-20 bg-gradient-to-b from-secondary to-background">
-        <div className="container mx-auto px-4"><div className="max-w-4xl mx-auto text-center"><h1 className="text-5xl md:text-6xl font-bold mb-6">{t.title}</h1><p className="text-xl text-muted-foreground">{t.subtitle}</p></div></div>
+      <section className="pt-10 pb-10">
+        <div className="container mx-auto px-4 max-w-6xl">
+          <Card className="glass-dark border-0 rounded-[2.5rem] overflow-hidden relative p-8 md:p-10 text-white">
+            <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(0,102,177,.35),transparent_30%)]" />
+            <div className="relative z-10 grid lg:grid-cols-[1.05fr_0.95fr] gap-8 items-end">
+              <div>
+                <div className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/10 px-4 py-2 text-xs font-semibold uppercase tracking-[0.24em] text-white/75">
+                  <Users className="h-4 w-4" />
+                  {t.subtitle}
+                </div>
+                <h1 className="mt-5 text-4xl md:text-6xl font-bold text-balance">{t.title}</h1>
+                <p className="mt-5 max-w-3xl text-lg text-white/76">{t.intro}</p>
+                <div className="mt-8 flex flex-wrap gap-3">
+                  <Link to="/alta-soci"><Button variant="hero" size="lg" className="rounded-full">{t.joinNow}</Button></Link>
+                  <Link to="/calendari/2026"><Button variant="outline" size="lg" className="rounded-full border-white/15 bg-white/5 text-white hover:bg-white/10">{t.ctaSecondary}</Button></Link>
+                </div>
+              </div>
+
+              <div className="grid md:grid-cols-3 lg:grid-cols-1 xl:grid-cols-3 gap-4">
+                {[t.stats1, t.stats2, t.stats3].map((item) => (
+                  <div key={item} className="rounded-[1.6rem] border border-white/10 bg-white/8 p-5 backdrop-blur-xl">
+                    <div className="text-lg font-semibold">{item}</div>
+                    <div className="mt-2 text-sm text-white/65">BMW Club Andorra</div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </Card>
+        </div>
       </section>
 
-      <section className="py-20">
-        <div className="container mx-auto px-4">
-          <div className="max-w-4xl mx-auto">
-            <p className="text-lg md:text-xl leading-relaxed text-center mb-16">{t.intro}</p>
-            <Card className="p-8 md:p-12 bg-gradient-to-br from-primary/5 to-primary/10 border-primary/20">
-              <div className="flex items-center gap-4 mb-6"><div className="gradient-hero w-16 h-16 rounded-sm flex items-center justify-center"><Target className="h-8 w-8 text-primary-foreground" /></div><h2 className="text-3xl font-bold">{t.ourMission}</h2></div>
-              <p className="text-lg leading-relaxed text-muted-foreground">{t.missionDesc}</p>
+      <section className="pb-10">
+        <div className="container mx-auto px-4 max-w-6xl">
+          <div className="grid lg:grid-cols-[1fr_0.95fr] gap-6 items-stretch">
+            <Card className="premium-card border-0 rounded-[2.2rem] p-8 md:p-10">
+              <div className="rounded-2xl bg-primary/10 p-3 w-fit"><Target className="h-6 w-6 text-primary" /></div>
+              <h2 className="mt-5 text-3xl md:text-4xl font-bold text-balance">{t.ourMission}</h2>
+              <p className="mt-4 text-lg text-muted-foreground leading-relaxed">{t.missionDesc}</p>
+              <div className="mt-8 grid sm:grid-cols-2 gap-4">
+                {[
+                  { icon: Compass, text: t.activity4 },
+                  { icon: CalendarDays, text: t.activity2 },
+                  { icon: Users, text: t.benefit2 },
+                  { icon: ShieldCheck, text: t.benefit4 },
+                ].map((item) => {
+                  const Icon = item.icon;
+                  return (
+                    <div key={item.text} className="rounded-[1.5rem] bg-white/80 border border-white/80 p-5">
+                      <div className="rounded-2xl bg-primary/10 p-3 w-fit"><Icon className="h-5 w-5 text-primary" /></div>
+                      <p className="mt-4 font-semibold text-balance">{item.text}</p>
+                    </div>
+                  );
+                })}
+              </div>
+            </Card>
+
+            <Card className="glass-panel border-0 rounded-[2.2rem] p-8 md:p-10">
+              <p className="text-sm uppercase tracking-[0.24em] text-primary">{t.whatWeDo}</p>
+              <div className="mt-6 space-y-4">
+                {[t.activity1, t.activity2, t.activity3, t.activity4].map((activity, index) => (
+                  <div key={activity} className="rounded-[1.5rem] bg-white/75 border border-white/70 p-5 shadow-[0_16px_40px_-34px_rgba(15,23,42,.35)]">
+                    <div className="flex items-start gap-4">
+                      <div className="gradient-hero w-12 h-12 rounded-2xl flex items-center justify-center flex-shrink-0">
+                        <span className="text-primary-foreground font-bold text-lg">{index + 1}</span>
+                      </div>
+                      <p className="text-lg text-foreground/90 pt-2">{activity}</p>
+                    </div>
+                  </div>
+                ))}
+              </div>
             </Card>
           </div>
         </div>
       </section>
 
-      <section className="py-20 bg-secondary">
-        <div className="container mx-auto px-4">
-          <div className="max-w-4xl mx-auto">
-            <h2 className="text-4xl font-bold text-center mb-12">{t.whatWeDo}</h2>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              {[t.activity1, t.activity2, t.activity3, t.activity4].map((activity, index) => (
-                <Card key={index} className="p-6 hover:shadow-elegant transition-all">
-                  <div className="flex items-start gap-4"><div className="gradient-hero w-12 h-12 rounded-sm flex items-center justify-center flex-shrink-0"><span className="text-primary-foreground font-bold text-lg">{index + 1}</span></div><p className="text-lg pt-2">{activity}</p></div>
-                </Card>
-              ))}
-            </div>
+      <section className="pb-16">
+        <div className="container mx-auto px-4 max-w-6xl">
+          <div className="mb-8 text-center max-w-3xl mx-auto">
+            <p className="text-sm uppercase tracking-[0.24em] text-primary">BMW Club Andorra</p>
+            <h2 className="mt-3 text-3xl md:text-5xl font-bold text-balance">{t.whyJoin}</h2>
           </div>
-        </div>
-      </section>
 
-      <section className="py-20">
-        <div className="container mx-auto px-4">
-          <div className="text-center max-w-3xl mx-auto mb-16"><h2 className="text-4xl md:text-5xl font-bold mb-4">{t.whyJoin}</h2></div>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 max-w-6xl mx-auto">
-            {[{ icon: Award, title: t.benefit1, desc: t.benefit1Desc }, { icon: Users, title: t.benefit2, desc: t.benefit2Desc }, { icon: Heart, title: t.benefit3, desc: t.benefit3Desc }, { icon: Target, title: t.benefit4, desc: t.benefit4Desc }].map((item) => {
+          <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-6">
+            {[
+              { icon: Award, title: t.benefit1, desc: t.benefit1Desc },
+              { icon: Users, title: t.benefit2, desc: t.benefit2Desc },
+              { icon: Heart, title: t.benefit3, desc: t.benefit3Desc },
+              { icon: Target, title: t.benefit4, desc: t.benefit4Desc },
+            ].map((item) => {
               const Icon = item.icon;
-              return <Card key={item.title} className="p-6 text-center hover:shadow-elegant transition-all group"><div className="gradient-hero w-16 h-16 rounded-sm flex items-center justify-center mb-4 mx-auto group-hover:scale-110 transition-base"><Icon className="h-8 w-8 text-primary-foreground" /></div><h3 className="text-xl font-semibold mb-3">{item.title}</h3><p className="text-muted-foreground">{item.desc}</p></Card>;
+              return (
+                <Card key={item.title} className="premium-card border-0 rounded-[1.9rem] p-6 text-center hover-tilt group h-full">
+                  <div className="gradient-hero w-16 h-16 rounded-[1.25rem] flex items-center justify-center mb-5 mx-auto group-hover:scale-110 transition-base">
+                    <Icon className="h-8 w-8 text-primary-foreground" />
+                  </div>
+                  <h3 className="text-xl font-semibold mb-3 text-balance">{item.title}</h3>
+                  <p className="text-muted-foreground">{item.desc}</p>
+                </Card>
+              );
             })}
           </div>
-          <div className="text-center mt-12"><Link to="/alta-soci"><Button variant="hero" size="xl">{t.joinNow}</Button></Link></div>
+
+          <div className="text-center mt-12">
+            <Link to="/alta-soci"><Button variant="hero" size="xl" className="gap-2">{t.joinNow}<ArrowRight className="h-5 w-5" /></Button></Link>
+          </div>
         </div>
       </section>
     </PageShell>

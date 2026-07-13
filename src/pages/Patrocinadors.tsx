@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { ArrowUpRight, BadgeCheck, Crown, Handshake } from "lucide-react";
+import { ArrowUpRight, BadgeCheck, Crown, Handshake, ShieldCheck, Sparkles, Star } from "lucide-react";
 import { PageShell } from "@/components/PageShell";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
@@ -27,6 +27,14 @@ const translations: Record<LanguageCode, Record<string, string>> = {
     activeBrands: "marques visibles",
     linkedPartners: "partners amb enllaç",
     supportPartners: "col·laboradors de suport",
+    presentingPartner: "Partner presentador del club",
+    featuredStatement: "La marca que més ha de brillar dins aquest panell perquè connecta club, territori i experiència BMW.",
+    officialPresence: "Presència premium",
+    officialPresenceDesc: "Visibilitat principal dins el panell, home i peu de pàgina.",
+    memberValue: "Valor per als socis",
+    memberValueDesc: "Condicions especials, recanvis, accessoris i context comercial clar.",
+    trustLabel: "Confiança de marca",
+    trustDesc: "Una presentació més sòlida per a un sponsor que ha de sentir-se central.",
   },
   es: {
     eyebrow: "Patrocinadores y partners",
@@ -46,6 +54,14 @@ const translations: Record<LanguageCode, Record<string, string>> = {
     activeBrands: "marcas visibles",
     linkedPartners: "partners con enlace",
     supportPartners: "colaboradores de soporte",
+    presentingPartner: "Partner presentador del club",
+    featuredStatement: "La marca que más debe brillar dentro de este panel porque conecta club, territorio y experiencia BMW.",
+    officialPresence: "Presencia premium",
+    officialPresenceDesc: "Visibilidad principal dentro del panel, home y pie de página.",
+    memberValue: "Valor para socios",
+    memberValueDesc: "Condiciones especiales, recambios, accesorios y contexto comercial claro.",
+    trustLabel: "Confianza de marca",
+    trustDesc: "Una presentación más sólida para un patrocinador que debe sentirse central.",
   },
   fr: {
     eyebrow: "Sponsors et partenaires",
@@ -65,6 +81,14 @@ const translations: Record<LanguageCode, Record<string, string>> = {
     activeBrands: "marques visibles",
     linkedPartners: "partenaires avec lien",
     supportPartners: "collaborateurs de soutien",
+    presentingPartner: "Partenaire référent du club",
+    featuredStatement: "La marque qui doit le plus rayonner dans ce panneau car elle relie club, territoire et expérience BMW.",
+    officialPresence: "Présence premium",
+    officialPresenceDesc: "Visibilité principale dans le panneau, l'accueil et le pied de page.",
+    memberValue: "Valeur membre",
+    memberValueDesc: "Conditions spéciales, pièces, accessoires et contexte commercial clair.",
+    trustLabel: "Confiance de marque",
+    trustDesc: "Une présentation plus solide pour un sponsor qui doit se sentir central.",
   },
   en: {
     eyebrow: "Sponsors and partners",
@@ -84,6 +108,14 @@ const translations: Record<LanguageCode, Record<string, string>> = {
     activeBrands: "visible brands",
     linkedPartners: "linked partners",
     supportPartners: "support collaborators",
+    presentingPartner: "Presenting partner of the club",
+    featuredStatement: "The brand that should shine the most in this panel because it connects the club, the territory and the BMW experience.",
+    officialPresence: "Premium presence",
+    officialPresenceDesc: "Primary visibility across this panel, the homepage and the footer.",
+    memberValue: "Member value",
+    memberValueDesc: "Special conditions, parts, accessories and clear commercial context.",
+    trustLabel: "Brand trust",
+    trustDesc: "A stronger presentation for a sponsor that should feel central.",
   },
   pt: {
     eyebrow: "Patrocinadores e parceiros",
@@ -103,6 +135,14 @@ const translations: Record<LanguageCode, Record<string, string>> = {
     activeBrands: "marcas visíveis",
     linkedPartners: "parceiros com link",
     supportPartners: "colaboradores de apoio",
+    presentingPartner: "Parceiro apresentador do clube",
+    featuredStatement: "A marca que mais deve brilhar neste painel porque liga clube, território e experiência BMW.",
+    officialPresence: "Presença premium",
+    officialPresenceDesc: "Visibilidade principal dentro do painel, home e rodapé.",
+    memberValue: "Valor para sócios",
+    memberValueDesc: "Condições especiais, peças, acessórios e contexto comercial claro.",
+    trustLabel: "Confiança de marca",
+    trustDesc: "Uma apresentação mais sólida para um patrocinador que deve sentir-se central.",
   },
   de: {
     eyebrow: "Sponsoren und Partner",
@@ -122,6 +162,14 @@ const translations: Record<LanguageCode, Record<string, string>> = {
     activeBrands: "sichtbare Marken",
     linkedPartners: "Partner mit Link",
     supportPartners: "Support-Partner",
+    presentingPartner: "Präsentierender Partner des Clubs",
+    featuredStatement: "Die Marke, die in diesem Bereich am stärksten strahlen sollte, weil sie Club, Region und BMW-Erlebnis verbindet.",
+    officialPresence: "Premium-Präsenz",
+    officialPresenceDesc: "Hauptsichtbarkeit in diesem Bereich, auf der Startseite und im Footer.",
+    memberValue: "Mitgliedernutzen",
+    memberValueDesc: "Sonderkonditionen, Teile, Zubehör und klarer kommerzieller Kontext.",
+    trustLabel: "Markenvertrauen",
+    trustDesc: "Eine stärkere Präsentation für einen Sponsor, der zentral wirken soll.",
   },
   ru: {
     eyebrow: "Спонсоры и партнёры",
@@ -141,6 +189,14 @@ const translations: Record<LanguageCode, Record<string, string>> = {
     activeBrands: "видимых брендов",
     linkedPartners: "партнёров со ссылкой",
     supportPartners: "поддерживающих партнёров",
+    presentingPartner: "Ключевой партнёр клуба",
+    featuredStatement: "Бренд, который должен сиять сильнее всех в этой панели, потому что связывает клуб, территорию и опыт BMW.",
+    officialPresence: "Премиальное присутствие",
+    officialPresenceDesc: "Главная видимость в этой панели, на главной странице и в футере.",
+    memberValue: "Ценность для участников",
+    memberValueDesc: "Специальные условия, запчасти, аксессуары и понятный коммерческий контекст.",
+    trustLabel: "Доверие к бренду",
+    trustDesc: "Более сильная подача для спонсора, который должен ощущаться центральным.",
   },
 };
 
@@ -200,32 +256,56 @@ const Patrocinadors = () => {
       {featuredSponsor && (
         <section className="pb-10">
           <div className="container mx-auto px-4 max-w-6xl">
-            <Card className="premium-card border-0 rounded-[2.5rem] overflow-hidden p-8 md:p-10">
-              <div className="grid lg:grid-cols-[1fr_0.9fr] gap-8 items-center">
+            <Card className="glass-dark border border-white/10 rounded-[2.75rem] overflow-hidden p-8 md:p-10 text-white relative shadow-[0_40px_110px_-48px_rgba(15,23,42,.75)]">
+              <div className="absolute inset-0 bg-[radial-gradient(circle_at_12%_18%,rgba(255,255,255,.08),transparent_18%),radial-gradient(circle_at_82%_12%,rgba(0,102,177,.42),transparent_30%)]" />
+              <div className="relative z-10 grid lg:grid-cols-[1.15fr_0.85fr] gap-8 items-start">
                 <div>
-                  <div className="inline-flex items-center gap-2 rounded-full bg-primary/10 px-4 py-2 text-xs font-semibold uppercase tracking-[0.22em] text-primary">
-                    <Crown className="h-4 w-4" />
+                  <div className="inline-flex items-center gap-2 rounded-full bg-white/10 px-4 py-2 text-xs font-semibold uppercase tracking-[0.22em] text-white/80">
+                    <Crown className="h-4 w-4 text-primary" />
                     {t.featuredLabel}
                   </div>
-                  <h2 className="mt-5 text-3xl md:text-5xl font-bold text-balance">{featuredSponsor.name}</h2>
-                  <p className="mt-4 text-lg text-muted-foreground">{getLocalizedText(featuredSponsor.summary, language)}</p>
-                  {featuredSponsor.benefit && (
-                    <div className="mt-6 rounded-[1.5rem] bg-secondary/70 p-5">
-                      <div className="text-xs uppercase tracking-[0.22em] text-primary font-semibold">{t.memberBenefits}</div>
-                      <p className="mt-3 font-medium text-foreground/90">{getLocalizedText(featuredSponsor.benefit, language)}</p>
-                    </div>
-                  )}
+                  <div className="mt-5 flex flex-wrap items-center gap-3">
+                    <h2 className="text-4xl md:text-6xl font-bold text-balance leading-[0.95]">{featuredSponsor.name}</h2>
+                    {featuredSponsor.accent && <span className="rounded-full border border-white/10 bg-white/8 px-4 py-2 text-xs font-semibold uppercase tracking-[0.2em] text-white/70">{featuredSponsor.accent}</span>}
+                  </div>
+                  <p className="mt-5 max-w-3xl text-xl text-white/80">{t.featuredStatement}</p>
+                  <p className="mt-5 text-base md:text-lg text-white/68 max-w-3xl">{getLocalizedText(featuredSponsor.summary, language)}</p>
+
+                  <div className="mt-8 grid md:grid-cols-3 gap-4">
+                    {[
+                      { icon: Sparkles, title: t.officialPresence, desc: t.officialPresenceDesc },
+                      { icon: ShieldCheck, title: t.memberValue, desc: t.memberValueDesc },
+                      { icon: Star, title: t.trustLabel, desc: t.trustDesc },
+                    ].map((item) => {
+                      const Icon = item.icon;
+                      return (
+                        <div key={item.title} className="rounded-[1.5rem] border border-white/10 bg-white/6 p-5 backdrop-blur-xl">
+                          <div className="rounded-2xl bg-white/10 p-3 w-fit"><Icon className="h-5 w-5 text-primary" /></div>
+                          <div className="mt-4 text-lg font-semibold">{item.title}</div>
+                          <p className="mt-2 text-sm text-white/66">{item.desc}</p>
+                        </div>
+                      );
+                    })}
+                  </div>
                 </div>
 
-                <div className="glass-panel rounded-[2rem] p-6 md:p-7">
-                  <div className="rounded-[1.5rem] bg-accent text-white p-6 shadow-elegant">
-                    <div className="inline-flex items-center gap-2 rounded-full bg-white/10 px-3 py-1 text-xs font-semibold uppercase tracking-[0.2em]">
+                <div className="glass-panel rounded-[2rem] p-6 md:p-7 border border-white/10">
+                  <div className="rounded-[1.75rem] bg-white text-slate-950 p-6 shadow-elegant">
+                    <div className="inline-flex items-center gap-2 rounded-full bg-primary/10 px-3 py-1 text-xs font-semibold uppercase tracking-[0.2em] text-primary">
                       <BadgeCheck className="h-4 w-4" />
-                      BMW Club Andorra
+                      {t.presentingPartner}
                     </div>
-                    <p className="mt-4 text-xl font-semibold text-balance">{t.benefitsSummary}</p>
+                    <div className="mt-4 text-2xl font-bold text-balance">{featuredSponsor.name}</div>
+                    <div className="mt-2 text-sm text-slate-500 uppercase tracking-[0.2em]">{featuredSponsor.category}</div>
+                    {featuredSponsor.benefit && (
+                      <div className="mt-6 rounded-[1.5rem] bg-secondary/80 p-5">
+                        <div className="text-xs uppercase tracking-[0.22em] text-primary font-semibold">{t.memberBenefits}</div>
+                        <p className="mt-3 font-medium text-slate-800">{getLocalizedText(featuredSponsor.benefit, language)}</p>
+                      </div>
+                    )}
+                    <p className="mt-5 text-sm text-slate-600">{t.benefitsSummary}</p>
                     {featuredSponsor.link && (
-                      <a href={featuredSponsor.link.href} target="_blank" rel="noreferrer" className="inline-flex items-center gap-2 mt-6 text-sm font-semibold text-white">
+                      <a href={featuredSponsor.link.href} target="_blank" rel="noreferrer" className="inline-flex items-center gap-2 mt-6 rounded-full bg-accent px-5 py-3 text-sm font-semibold text-white transition-base hover:bg-accent/90">
                         {t.openSite}
                         <ArrowUpRight className="h-4 w-4" />
                       </a>
