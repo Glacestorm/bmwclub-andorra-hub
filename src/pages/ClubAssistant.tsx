@@ -1,6 +1,6 @@
-import { useMemo, useRef, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { Link } from "react-router-dom";
-import { Mic, MicOff, Sparkles, Volume2, CalendarDays, Users, BadgeCheck, Mail, ArrowRight } from "lucide-react";
+import { Mic, MicOff, Sparkles, Volume2, CalendarDays, Users, BadgeCheck, Mail, ArrowRight, MessageSquareText } from "lucide-react";
 import { PageShell } from "@/components/PageShell";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
@@ -22,6 +22,11 @@ type AssistantResponse = {
   title: string;
   body: string;
   cta?: { label: string; href: string };
+};
+
+type HistoryItem = {
+  question: string;
+  answer: AssistantResponse;
 };
 
 const translations: Record<LanguageCode, Record<string, string>> = {
@@ -53,6 +58,15 @@ const translations: Record<LanguageCode, Record<string, string>> = {
     contactCta: "Contactar",
     fallbackTitle: "Puc orientar-te millor",
     fallbackBody: "Prova amb una d'aquestes preguntes: properes sortides, com fer-me soci, patrocinadors, contacte o què és el club.",
+    guideTitle: "Què resol ara mateix",
+    guide1: "Sortides i calendari",
+    guide1d: "Llegeix el calendari carregat i et guia cap a la següent activitat.",
+    guide2: "Socis i contacte",
+    guide2d: "Explica com contactar amb el club i per on començar l'alta.",
+    guide3: "Patrocinadors i club",
+    guide3d: "Resumeix patrocinadors visibles i explica ràpidament què és el club.",
+    history: "Converses recents",
+    sourceNote: "Resposta basada en la informació actual carregada al web.",
   },
   es: {
     eyebrow: "Conserje IA del club",
@@ -82,6 +96,15 @@ const translations: Record<LanguageCode, Record<string, string>> = {
     contactCta: "Contactar",
     fallbackTitle: "Puedo orientarte mejor",
     fallbackBody: "Prueba con una de estas preguntas: próximas salidas, cómo hacerme socio, patrocinadores, contacto o qué es el club.",
+    guideTitle: "Qué resuelve ahora mismo",
+    guide1: "Salidas y calendario",
+    guide1d: "Lee el calendario cargado y te lleva a la siguiente actividad del club.",
+    guide2: "Socios y contacto",
+    guide2d: "Explica cómo contactar con el club y por dónde empezar el alta.",
+    guide3: "Patrocinadores y club",
+    guide3d: "Resume los patrocinadores visibles y explica rápido qué es el club.",
+    history: "Conversaciones recientes",
+    sourceNote: "Respuesta basada en la información actual cargada en la web.",
   },
   fr: {
     eyebrow: "Concierge IA du club",
@@ -111,6 +134,15 @@ const translations: Record<LanguageCode, Record<string, string>> = {
     contactCta: "Contacter",
     fallbackTitle: "Je peux mieux vous orienter",
     fallbackBody: "Essayez l'une de ces questions : prochaines sorties, comment adhérer, sponsors, contact ou qu'est-ce que le club.",
+    guideTitle: "Ce qu'il résout maintenant",
+    guide1: "Sorties et calendrier",
+    guide1d: "Lit le calendrier chargé et vous emmène vers la prochaine activité.",
+    guide2: "Adhésion et contact",
+    guide2d: "Explique comment contacter le club et par où commencer l'adhésion.",
+    guide3: "Sponsors et club",
+    guide3d: "Résume les sponsors visibles et explique rapidement le club.",
+    history: "Conversations récentes",
+    sourceNote: "Réponse fondée sur les informations actuellement chargées sur le site.",
   },
   en: {
     eyebrow: "Club AI concierge",
@@ -140,6 +172,15 @@ const translations: Record<LanguageCode, Record<string, string>> = {
     contactCta: "Contact",
     fallbackTitle: "I can guide you better",
     fallbackBody: "Try one of these questions: upcoming outings, how to become a member, sponsors, contact or what the club is.",
+    guideTitle: "What it solves right now",
+    guide1: "Outings and calendar",
+    guide1d: "Reads the loaded calendar and guides visitors to the next activity.",
+    guide2: "Membership and contact",
+    guide2d: "Explains how to contact the club and where to start membership.",
+    guide3: "Sponsors and club",
+    guide3d: "Summarises visible sponsors and quickly explains the club.",
+    history: "Recent conversations",
+    sourceNote: "Reply based on the current information loaded on the website.",
   },
   pt: {
     eyebrow: "Concierge IA do clube",
@@ -169,6 +210,15 @@ const translations: Record<LanguageCode, Record<string, string>> = {
     contactCta: "Contactar",
     fallbackTitle: "Posso orientar melhor",
     fallbackBody: "Experimente uma destas perguntas: próximos passeios, como ser sócio, patrocinadores, contacto ou o que é o clube.",
+    guideTitle: "O que resolve agora",
+    guide1: "Passeios e calendário",
+    guide1d: "Lê o calendário carregado e leva o visitante à próxima atividade.",
+    guide2: "Sócios e contacto",
+    guide2d: "Explica como contactar o clube e por onde começar a adesão.",
+    guide3: "Patrocinadores e clube",
+    guide3d: "Resume os patrocinadores visíveis e explica rapidamente o clube.",
+    history: "Conversas recentes",
+    sourceNote: "Resposta baseada na informação atual carregada no site.",
   },
   de: {
     eyebrow: "Club KI-Concierge",
@@ -198,6 +248,15 @@ const translations: Record<LanguageCode, Record<string, string>> = {
     contactCta: "Kontakt",
     fallbackTitle: "Ich kann besser helfen",
     fallbackBody: "Probieren Sie eine dieser Fragen: nächste Ausfahrten, Mitglied werden, Sponsoren, Kontakt oder was der Club ist.",
+    guideTitle: "Was es jetzt löst",
+    guide1: "Ausfahrten und Kalender",
+    guide1d: "Liest den geladenen Kalender und führt zum nächsten Event.",
+    guide2: "Mitgliedschaft und Kontakt",
+    guide2d: "Erklärt, wie man den Club kontaktiert und mit der Mitgliedschaft beginnt.",
+    guide3: "Sponsoren und Club",
+    guide3d: "Fasst sichtbare Sponsoren zusammen und erklärt den Club kurz.",
+    history: "Letzte Gespräche",
+    sourceNote: "Antwort auf Basis der aktuell geladenen Website-Informationen.",
   },
   ru: {
     eyebrow: "ИИ-консьерж клуба",
@@ -227,6 +286,15 @@ const translations: Record<LanguageCode, Record<string, string>> = {
     contactCta: "Связаться",
     fallbackTitle: "Я могу направить точнее",
     fallbackBody: "Попробуйте один из вопросов: ближайшие выезды, как вступить, спонсоры, контакты или что такое клуб.",
+    guideTitle: "Что решает сейчас",
+    guide1: "Выезды и календарь",
+    guide1d: "Читает загруженный календарь и ведёт к следующей активности.",
+    guide2: "Участие и контакты",
+    guide2d: "Объясняет, как связаться с клубом и с чего начать вступление.",
+    guide3: "Спонсоры и клуб",
+    guide3d: "Кратко описывает видимых спонсоров и сам клуб.",
+    history: "Недавние разговоры",
+    sourceNote: "Ответ основан на текущей информации, загруженной на сайт.",
   },
 };
 
@@ -252,12 +320,18 @@ const ClubAssistant = () => {
   const t = translations[language];
   const [query, setQuery] = useState("");
   const [answer, setAnswer] = useState<AssistantResponse>({ title: t.ready, body: t.fallbackBody });
+  const [history, setHistory] = useState<HistoryItem[]>([]);
   const [isListening, setIsListening] = useState(false);
   const recognitionRef = useRef<any>(null);
 
   const featuredSponsor = sponsorItems.find((item) => item.tier === "featured");
   const nextEvent = getNextEvent();
   const upcomingEvents = useMemo(() => getUpcomingEvents(language), [language]);
+
+  useEffect(() => {
+    setAnswer({ title: t.ready, body: t.fallbackBody });
+    setHistory([]);
+  }, [language, t.ready, t.fallbackBody]);
 
   const resolveAnswer = (rawQuestion: string): AssistantResponse => {
     const q = rawQuestion.toLowerCase();
@@ -278,7 +352,7 @@ const ClubAssistant = () => {
         title: t.nextTrips,
         body:
           nextEvent
-            ? `${language === "es" ? "La próxima salida cargada es" : t.nextTrips + ':'} ${nextEvent.title} · ${formatEventDateRange(nextEvent, language)}.${upcomingEvents.length ? ` ${upcomingEvents.join(" · ")}` : ""}`
+            ? `${language === "es" ? "La próxima salida cargada es" : `${t.nextTrips}:`} ${nextEvent.title} · ${formatEventDateRange(nextEvent, language)}.${upcomingEvents.length ? ` ${upcomingEvents.join(" · ")}` : ""}`
             : t.fallbackBody,
         cta: { label: t.nextTripsCta, href: "/calendari/2026" },
       };
@@ -327,7 +401,9 @@ const ClubAssistant = () => {
       setAnswer({ title: t.fallbackTitle, body: t.fallbackBody });
       return;
     }
-    setAnswer(resolveAnswer(question));
+    const resolved = resolveAnswer(question);
+    setAnswer(resolved);
+    setHistory((prev) => [{ question, answer: resolved }, ...prev].slice(0, 3));
   };
 
   const handleVoiceReply = () => {
@@ -390,7 +466,15 @@ const ClubAssistant = () => {
                 <p className="mt-5 max-w-3xl text-lg text-white/72">{t.intro}</p>
                 <div className="mt-8 flex flex-wrap gap-3">
                   {prompts.map((prompt) => (
-                    <Button key={prompt} variant="outline" className="rounded-full border-white/15 bg-white/5 text-white hover:bg-white/10" onClick={() => { setQuery(prompt); submitQuestion(prompt); }}>
+                    <Button
+                      key={prompt}
+                      variant="outline"
+                      className="rounded-full border-white/15 bg-white/5 text-white hover:bg-white/10"
+                      onClick={() => {
+                        setQuery(prompt);
+                        submitQuestion(prompt);
+                      }}
+                    >
                       {prompt}
                     </Button>
                   ))}
@@ -429,6 +513,7 @@ const ClubAssistant = () => {
               <div className="mt-6 rounded-[1.75rem] border border-border/70 bg-white/70 p-6">
                 <div className="text-xs uppercase tracking-[0.22em] text-primary font-semibold">{answer.title}</div>
                 <p className="mt-3 text-lg text-foreground/88 leading-relaxed">{answer.body}</p>
+                <p className="mt-4 text-xs uppercase tracking-[0.18em] text-muted-foreground">{t.sourceNote}</p>
                 {answer.cta ? (
                   <Link to={answer.cta.href} className="inline-flex items-center gap-2 mt-5 text-primary font-semibold">
                     {answer.cta.label}
@@ -438,24 +523,55 @@ const ClubAssistant = () => {
               </div>
             </Card>
 
-            <Card className="glass-panel border-0 rounded-[2rem] p-6 md:p-7 shadow-elegant">
-              <div className="inline-flex items-center gap-2 rounded-full bg-primary/10 px-4 py-2 text-xs font-semibold uppercase tracking-[0.22em] text-primary">
-                <Mail className="h-4 w-4" />
-                {t.ready}
-              </div>
-              <div className="mt-5 space-y-4 text-sm text-muted-foreground">
-                <div className="rounded-[1.4rem] bg-white/75 p-4">
-                  <div className="font-semibold text-foreground">bmwclubandorra@gmail.com</div>
-                  <div className="mt-1">+376 338 117</div>
+            <div className="grid gap-6">
+              <Card className="glass-panel border-0 rounded-[2rem] p-6 md:p-7 shadow-elegant">
+                <div className="inline-flex items-center gap-2 rounded-full bg-primary/10 px-4 py-2 text-xs font-semibold uppercase tracking-[0.22em] text-primary">
+                  <Mail className="h-4 w-4" />
+                  {t.guideTitle}
                 </div>
-                {upcomingEvents.map((line) => (
-                  <div key={line} className="rounded-[1.4rem] bg-white/75 p-4">{line}</div>
-                ))}
-                <div className="rounded-[1.4rem] bg-white/75 p-4">
-                  {featuredSponsor ? `${featuredSponsor.name} · sponsor principal` : "BMW Club Andorra"}
+                <div className="mt-5 grid gap-4 text-sm text-muted-foreground">
+                  {[
+                    { title: t.guide1, body: t.guide1d },
+                    { title: t.guide2, body: t.guide2d },
+                    { title: t.guide3, body: t.guide3d },
+                  ].map((item) => (
+                    <div key={item.title} className="rounded-[1.4rem] bg-white/75 p-4">
+                      <div className="font-semibold text-foreground">{item.title}</div>
+                      <div className="mt-2">{item.body}</div>
+                    </div>
+                  ))}
+                  <div className="rounded-[1.4rem] bg-white/75 p-4">
+                    <div className="font-semibold text-foreground">bmwclubandorra@gmail.com</div>
+                    <div className="mt-1">+376 338 117</div>
+                  </div>
+                  {upcomingEvents.map((line) => (
+                    <div key={line} className="rounded-[1.4rem] bg-white/75 p-4">{line}</div>
+                  ))}
+                  <div className="rounded-[1.4rem] bg-white/75 p-4">
+                    {featuredSponsor ? `${featuredSponsor.name} · sponsor principal` : "BMW Club Andorra"}
+                  </div>
                 </div>
-              </div>
-            </Card>
+              </Card>
+
+              <Card className="premium-card border-0 rounded-[2rem] p-6 shadow-elegant">
+                <div className="inline-flex items-center gap-2 rounded-full bg-primary/10 px-4 py-2 text-xs font-semibold uppercase tracking-[0.22em] text-primary">
+                  <MessageSquareText className="h-4 w-4" />
+                  {t.history}
+                </div>
+                <div className="mt-5 grid gap-4">
+                  {history.length === 0 ? (
+                    <div className="rounded-[1.4rem] border border-border/70 bg-white/75 p-4 text-sm text-muted-foreground">{t.fallbackBody}</div>
+                  ) : (
+                    history.map((item, index) => (
+                      <div key={`${item.question}-${index}`} className="rounded-[1.4rem] border border-border/70 bg-white/75 p-4">
+                        <div className="text-xs uppercase tracking-[0.18em] text-primary font-semibold">{item.question}</div>
+                        <div className="mt-2 text-sm text-foreground/86">{item.answer.body}</div>
+                      </div>
+                    ))
+                  )}
+                </div>
+              </Card>
+            </div>
           </div>
         </div>
       </section>

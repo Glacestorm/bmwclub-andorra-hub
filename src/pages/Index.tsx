@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { ArrowRight, Archive, Calendar, Globe2, Sparkles, Stars } from "lucide-react";
+import { ArrowRight, Archive, BadgeCheck, Calendar, Globe2, Mic, Sparkles, Stars, Volume2 } from "lucide-react";
 import { PageShell } from "@/components/PageShell";
 import { Hero } from "@/components/Hero";
 import { Button } from "@/components/ui/button";
@@ -27,6 +27,16 @@ const translations: Record<LanguageCode, Record<string, string>> = {
     pillar3d: "Documents, vídeos i revistes que abans estaven dispersos ara passen a ser una hemeroteca útil.",
     pillar4: "BMW Oficial",
     pillar4d: "Hub especial per connectar el club amb novetats, configurador i univers oficial BMW.",
+    assistantEyebrow: "Conserge IA",
+    assistantTitle: "Una entrada guiada perquè qualsevol visitant entengui el club en menys d'un minut",
+    assistantBody: "No és només un chatbot decoratiu: orienta sobre properes sortides, socis, patrocinadors, contacte i lectura general del club amb veu opcional des del navegador.",
+    assistantCta: "Obrir assistent IA",
+    assistantPill1: "Preguntes guiades",
+    assistantPill1d: "Respostes ràpides sobre salides, alta de soci, patrocinadors i contacte.",
+    assistantPill2: "Veu",
+    assistantPill2d: "Pot escoltar la pregunta i llegir la resposta en veu alta si el navegador ho suporta.",
+    assistantPill3: "Context real",
+    assistantPill3d: "Es basa en el calendari, contingut i estructura actual de la web.",
     highlightsEyebrow: "Destacats del club",
     highlightsTitle: "La part emocional també ha de respirar premium",
     highlightsCta: "Veure tots els destacats",
@@ -64,6 +74,16 @@ const translations: Record<LanguageCode, Record<string, string>> = {
     pillar3d: "Documentos, vídeos y revistas que antes estaban dispersos pasan a ser una hemeroteca útil.",
     pillar4: "BMW Oficial",
     pillar4d: "Hub especial para conectar el club con novedades, configurador y universo oficial BMW.",
+    assistantEyebrow: "Conserje IA",
+    assistantTitle: "Una entrada guiada para que cualquier visitante entienda el club en menos de un minuto",
+    assistantBody: "No es un chatbot decorativo: orienta sobre próximas salidas, alta de socio, patrocinadores, contacto y lectura general del club, con voz opcional desde el navegador.",
+    assistantCta: "Abrir asistente IA",
+    assistantPill1: "Preguntas guiadas",
+    assistantPill1d: "Respuestas rápidas sobre salidas, hacerse socio, patrocinadores y contacto.",
+    assistantPill2: "Voz",
+    assistantPill2d: "Puede escuchar la pregunta y leer la respuesta en voz alta si el navegador lo soporta.",
+    assistantPill3: "Contexto real",
+    assistantPill3d: "Se apoya en el calendario, contenidos y estructura actual de la web.",
     highlightsEyebrow: "Destacados del club",
     highlightsTitle: "La parte emocional también debe respirar premium",
     highlightsCta: "Ver todos los destacados",
@@ -101,6 +121,16 @@ const translations: Record<LanguageCode, Record<string, string>> = {
     pillar3d: "Documents, vidéos et magazines auparavant dispersés deviennent une archive utile.",
     pillar4: "BMW Officiel",
     pillar4d: "Hub spécial pour relier le club aux nouveautés, au configurateur et à l'univers officiel BMW.",
+    assistantEyebrow: "Concierge IA",
+    assistantTitle: "Une entrée guidée pour qu'un visiteur comprenne le club en moins d'une minute",
+    assistantBody: "Ce n'est pas un chatbot décoratif : il guide sur les prochaines sorties, l'adhésion, les sponsors, le contact et la lecture générale du club, avec une voix optionnelle depuis le navigateur.",
+    assistantCta: "Ouvrir l'assistant IA",
+    assistantPill1: "Questions guidées",
+    assistantPill1d: "Réponses rapides sur les sorties, l'adhésion, les sponsors et le contact.",
+    assistantPill2: "Voix",
+    assistantPill2d: "Il peut écouter la question et lire la réponse à voix haute si le navigateur le permet.",
+    assistantPill3: "Contexte réel",
+    assistantPill3d: "Il s'appuie sur le calendrier, le contenu et la structure actuelle du site.",
     highlightsEyebrow: "Temps forts du club",
     highlightsTitle: "La partie émotionnelle doit elle aussi respirer le premium",
     highlightsCta: "Voir tous les temps forts",
@@ -138,6 +168,16 @@ const translations: Record<LanguageCode, Record<string, string>> = {
     pillar3d: "Documents, videos and magazines that were scattered now become a useful archive.",
     pillar4: "BMW Official",
     pillar4d: "Special hub connecting the club with official BMW updates, configurator and brand universe.",
+    assistantEyebrow: "AI concierge",
+    assistantTitle: "A guided entry point so any visitor understands the club in under a minute",
+    assistantBody: "It is not a decorative chatbot: it guides visitors through upcoming outings, membership, sponsors, contact and the club story, with optional browser voice.",
+    assistantCta: "Open AI concierge",
+    assistantPill1: "Guided questions",
+    assistantPill1d: "Quick answers about outings, membership, sponsors and contact.",
+    assistantPill2: "Voice",
+    assistantPill2d: "It can listen to the question and read the reply aloud if the browser supports it.",
+    assistantPill3: "Real context",
+    assistantPill3d: "It relies on the website's current calendar, content and structure.",
     highlightsEyebrow: "Club highlights",
     highlightsTitle: "The emotional side should also feel premium",
     highlightsCta: "View all highlights",
@@ -166,7 +206,7 @@ const translations: Record<LanguageCode, Record<string, string>> = {
     ethos: "Experiência BMW com mais peso, mais contexto e melhor design.",
     pillars: "Nova direção",
     pillarsTitle: "Um site mais forte, mais moderno e com narrativa própria",
-    pillarsSubtitle: "Levámos o site para uma linguagem mais premium: calendário vivo, meteorologia útil, arquivo real e ponte direta com a BMW oficial. Sem ruído, sem efeitos gratuitos.",
+    pillarsSubtitle: "Levámos o site para uma linguagem mais premium: calendário vivo, meteorologia útil, arquivo real e ponte direta para a BMW oficial. Sem ruído, sem efeitos gratuitos.",
     pillar1: "Calendário vivo",
     pillar1d: "Passeios futuros, histórico e contagem decrescente ligados entre si.",
     pillar2: "Destaques editoriais",
@@ -175,6 +215,16 @@ const translations: Record<LanguageCode, Record<string, string>> = {
     pillar3d: "Documentos, vídeos e revistas que antes estavam dispersos passam a formar uma hemeroteca útil.",
     pillar4: "BMW Oficial",
     pillar4d: "Hub especial para ligar o clube às novidades, configurador e universo oficial BMW.",
+    assistantEyebrow: "Concierge IA",
+    assistantTitle: "Uma entrada guiada para que qualquer visitante perceba o clube em menos de um minuto",
+    assistantBody: "Não é um chatbot decorativo: orienta sobre próximos passeios, adesão, patrocinadores, contacto e leitura geral do clube, com voz opcional no navegador.",
+    assistantCta: "Abrir assistente IA",
+    assistantPill1: "Perguntas guiadas",
+    assistantPill1d: "Respostas rápidas sobre passeios, sócios, patrocinadores e contacto.",
+    assistantPill2: "Voz",
+    assistantPill2d: "Pode ouvir a pergunta e ler a resposta em voz alta se o navegador suportar.",
+    assistantPill3: "Contexto real",
+    assistantPill3d: "Baseia-se no calendário, conteúdos e estrutura atual do site.",
     highlightsEyebrow: "Destaques do clube",
     highlightsTitle: "A parte emocional também deve respirar premium",
     highlightsCta: "Ver todos os destaques",
@@ -212,6 +262,16 @@ const translations: Record<LanguageCode, Record<string, string>> = {
     pillar3d: "Dokumente, Videos und Magazine werden aus verstreuten Dateien zu einem nützlichen Archiv.",
     pillar4: "BMW Offiziell",
     pillar4d: "Spezieller Hub, der den Club mit offiziellen BMW-Neuheiten, Konfigurator und Markenwelt verbindet.",
+    assistantEyebrow: "KI-Concierge",
+    assistantTitle: "Ein geführter Einstieg, damit jeder Besucher den Club in unter einer Minute versteht",
+    assistantBody: "Kein dekorativer Chatbot: Er hilft bei Ausfahrten, Mitgliedschaft, Sponsoren, Kontakt und Club-Verständnis, inklusive optionaler Browser-Stimme.",
+    assistantCta: "KI-Assistent öffnen",
+    assistantPill1: "Geführte Fragen",
+    assistantPill1d: "Schnelle Antworten zu Ausfahrten, Mitgliedschaft, Sponsoren und Kontakt.",
+    assistantPill2: "Stimme",
+    assistantPill2d: "Kann die Frage hören und die Antwort vorlesen, wenn der Browser es unterstützt.",
+    assistantPill3: "Echter Kontext",
+    assistantPill3d: "Greift auf den aktuellen Kalender, Inhalte und die Struktur der Website zurück.",
     highlightsEyebrow: "Club-Highlights",
     highlightsTitle: "Auch die emotionale Seite sollte hochwertig wirken",
     highlightsCta: "Alle Highlights ansehen",
@@ -249,6 +309,16 @@ const translations: Record<LanguageCode, Record<string, string>> = {
     pillar3d: "Документы, видео и журналы, которые раньше были разбросаны, становятся полезным архивом.",
     pillar4: "BMW Official",
     pillar4d: "Специальный хаб, связывающий клуб с официальными новинками BMW, конфигуратором и миром бренда.",
+    assistantEyebrow: "ИИ-консьерж",
+    assistantTitle: "Понятная guided-входная точка, чтобы посетитель понял клуб меньше чем за минуту",
+    assistantBody: "Это не декоративный чатбот: он помогает с ближайшими выездами, вступлением, спонсорами, контактами и общим пониманием клуба, включая голос в браузере.",
+    assistantCta: "Открыть ИИ помощника",
+    assistantPill1: "Готовые вопросы",
+    assistantPill1d: "Быстрые ответы о выездах, вступлении, спонсорах и контактах.",
+    assistantPill2: "Голос",
+    assistantPill2d: "Может слушать вопрос и озвучивать ответ, если браузер поддерживает функцию.",
+    assistantPill3: "Реальный контекст",
+    assistantPill3d: "Опирается на текущий календарь, контент и структуру сайта.",
     highlightsEyebrow: "Главные моменты клуба",
     highlightsTitle: "Эмоциональная часть тоже должна ощущаться премиально",
     highlightsCta: "Все главные моменты",
@@ -259,7 +329,7 @@ const translations: Record<LanguageCode, Record<string, string>> = {
     officialTitle: "Прямая связь с брендом и его официальными новинками",
     officialCta: "Открыть официальный хаб",
     sponsorsEyebrow: "Спонсоры",
-    sponsorsTitle: "Бренды с реальной заметностью, а не просто скромным списком в подвале сайта",
+    sponsorsTitle: "Бренды с реальной заметностью, а не скромный список в футере",
     sponsorsCta: "Открыть спонсоров",
     sponsorsOpen: "Открыть сайт",
     featuredSponsorLabel: "Главный спонсор",
@@ -337,6 +407,44 @@ const Index = () => {
 
       <section className="pb-16">
         <div className="container mx-auto px-4 max-w-6xl">
+          <Card className="glass-dark border-0 rounded-[2.25rem] p-8 md:p-10 text-white overflow-hidden relative shadow-[0_35px_100px_-45px_rgba(15,23,42,.7)]">
+            <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(0,102,177,.36),transparent_34%)]" />
+            <div className="relative z-10 grid lg:grid-cols-[1fr_0.95fr] gap-8 items-start">
+              <div>
+                <p className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/8 px-4 py-2 text-xs font-semibold uppercase tracking-[0.24em] text-white/76">
+                  <BadgeCheck className="h-4 w-4 text-primary" />
+                  {t.assistantEyebrow}
+                </p>
+                <h2 className="mt-5 text-3xl md:text-5xl font-bold text-balance">{t.assistantTitle}</h2>
+                <p className="mt-4 text-lg text-white/72 max-w-3xl">{t.assistantBody}</p>
+                <div className="mt-6 flex flex-wrap gap-3">
+                  <Link to="/assistent-ia"><Button variant="hero">{t.assistantCta}</Button></Link>
+                </div>
+              </div>
+
+              <div className="grid gap-4 sm:grid-cols-3 lg:grid-cols-1 xl:grid-cols-3">
+                {[
+                  { title: t.assistantPill1, desc: t.assistantPill1d, icon: BadgeCheck },
+                  { title: t.assistantPill2, desc: t.assistantPill2d, icon: Volume2 },
+                  { title: t.assistantPill3, desc: t.assistantPill3d, icon: Mic },
+                ].map((item) => {
+                  const Icon = item.icon;
+                  return (
+                    <div key={item.title} className="rounded-[1.6rem] border border-white/10 bg-white/8 p-5 backdrop-blur-xl">
+                      <div className="rounded-2xl bg-white/10 p-3 w-fit"><Icon className="h-5 w-5 text-primary" /></div>
+                      <div className="mt-4 text-lg font-semibold">{item.title}</div>
+                      <p className="mt-2 text-sm text-white/66">{item.desc}</p>
+                    </div>
+                  );
+                })}
+              </div>
+            </div>
+          </Card>
+        </div>
+      </section>
+
+      <section className="pb-16">
+        <div className="container mx-auto px-4 max-w-6xl">
           <div className="flex items-end justify-between gap-4 mb-8">
             <div>
               <p className="text-sm uppercase tracking-[0.25em] text-primary">{t.highlightsEyebrow}</p>
@@ -377,6 +485,9 @@ const Index = () => {
                 {featuredSponsor && (
                   <a href={featuredSponsor.link?.href} target="_blank" rel="noreferrer" className="rounded-[2rem] border border-white/12 bg-white/8 p-6 md:p-8 block hover:bg-white/10 transition-base shadow-[0_25px_70px_-38px_rgba(15,23,42,.5)]">
                     <div className="inline-flex items-center gap-2 rounded-full bg-white/10 px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.2em] text-white/75">{t.featuredSponsorLabel}</div>
+                    <div className="mt-5 rounded-[1.6rem] p-5" style={{ background: featuredSponsor.brand.surface, border: `1px solid ${featuredSponsor.brand.border}` }}>
+                      <img src={featuredSponsor.brand.logoPath} alt={`${featuredSponsor.name} logo`} className="h-16 w-auto max-w-full object-contain" loading="lazy" />
+                    </div>
                     <div className="mt-4 text-3xl md:text-4xl font-bold text-balance">{featuredSponsor.name}</div>
                     <div className="mt-3 text-sm uppercase tracking-[0.2em] text-white/55">{featuredSponsor.category}</div>
                     <p className="mt-5 max-w-2xl text-white/76">{t.featuredSponsorText}</p>
@@ -390,7 +501,10 @@ const Index = () => {
                 <div className="grid gap-4">
                   {homeSponsors.map((sponsor) => (
                     <a key={sponsor.id} href={sponsor.link?.href} target="_blank" rel="noreferrer" className="rounded-2xl border border-white/10 bg-white/5 p-4 block hover:bg-white/10 transition-base">
-                      <div className="text-xs uppercase tracking-[0.2em] text-white/60 font-semibold">{sponsor.category}</div>
+                      <div className="rounded-[1.15rem] px-4 py-4" style={{ background: sponsor.brand.surface, border: `1px solid ${sponsor.brand.border}` }}>
+                        <img src={sponsor.brand.logoPath} alt={`${sponsor.name} logo`} className="h-10 w-auto max-w-full object-contain" loading="lazy" />
+                      </div>
+                      <div className="mt-4 text-xs uppercase tracking-[0.2em] text-white/60 font-semibold">{sponsor.category}</div>
                       <div className="mt-2 font-semibold text-balance">{sponsor.name}</div>
                       <div className="mt-2 text-sm text-white/68">{getLocalizedText(sponsor.summary, language)}</div>
                       <div className="mt-4 inline-flex items-center gap-2 text-sm text-white">{t.sponsorsOpen} <ArrowRight className="h-4 w-4" /></div>
