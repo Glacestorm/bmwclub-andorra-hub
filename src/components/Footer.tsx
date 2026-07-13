@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import { Facebook, Instagram, Mail } from "lucide-react";
 import { LanguageCode } from "@/lib/i18n";
+import { sponsorItems } from "@/content/sponsorData";
 
 interface FooterProps {
   language: LanguageCode;
@@ -10,6 +11,7 @@ const translations: Record<LanguageCode, Record<string, string>> = {
   ca: {
     about: "Sobre Nosaltres",
     club: "El Club",
+    partners: "Patrocinadors",
     sponsors: "Destacats",
     gallery: "Arxiu",
     contact: "BMW Oficial",
@@ -18,6 +20,7 @@ const translations: Record<LanguageCode, Record<string, string>> = {
     cookies: "Cookies",
     terms: "Condicions",
     follow: "Segueix-nos",
+    premiumPartners: "Partners premium",
     rights: "Tots els drets reservats",
     bmwClub: "BMW Club Andorra",
     description: "Club de propietaris i entusiastes de BMW a Andorra",
@@ -25,6 +28,7 @@ const translations: Record<LanguageCode, Record<string, string>> = {
   es: {
     about: "Sobre nosotros",
     club: "El Club",
+    partners: "Patrocinadores",
     sponsors: "Destacados",
     gallery: "Archivo",
     contact: "BMW Oficial",
@@ -33,6 +37,7 @@ const translations: Record<LanguageCode, Record<string, string>> = {
     cookies: "Cookies",
     terms: "Condiciones",
     follow: "Síguenos",
+    premiumPartners: "Partners premium",
     rights: "Todos los derechos reservados",
     bmwClub: "BMW Club Andorra",
     description: "Club de propietarios y entusiastas de BMW en Andorra",
@@ -40,6 +45,7 @@ const translations: Record<LanguageCode, Record<string, string>> = {
   fr: {
     about: "À propos",
     club: "Le Club",
+    partners: "Sponsors",
     sponsors: "Temps forts",
     gallery: "Archive",
     contact: "BMW Officiel",
@@ -48,6 +54,7 @@ const translations: Record<LanguageCode, Record<string, string>> = {
     cookies: "Cookies",
     terms: "Conditions",
     follow: "Suivez-nous",
+    premiumPartners: "Partenaires premium",
     rights: "Tous droits réservés",
     bmwClub: "BMW Club Andorra",
     description: "Club de propriétaires et passionnés de BMW en Andorre",
@@ -55,6 +62,7 @@ const translations: Record<LanguageCode, Record<string, string>> = {
   en: {
     about: "About us",
     club: "The Club",
+    partners: "Sponsors",
     sponsors: "Highlights",
     gallery: "Archive",
     contact: "BMW Official",
@@ -63,6 +71,7 @@ const translations: Record<LanguageCode, Record<string, string>> = {
     cookies: "Cookies",
     terms: "Terms",
     follow: "Follow us",
+    premiumPartners: "Premium partners",
     rights: "All rights reserved",
     bmwClub: "BMW Club Andorra",
     description: "BMW owners and enthusiasts club in Andorra",
@@ -70,6 +79,7 @@ const translations: Record<LanguageCode, Record<string, string>> = {
   pt: {
     about: "Sobre nós",
     club: "O Clube",
+    partners: "Patrocinadores",
     sponsors: "Destaques",
     gallery: "Arquivo",
     contact: "BMW Oficial",
@@ -78,6 +88,7 @@ const translations: Record<LanguageCode, Record<string, string>> = {
     cookies: "Cookies",
     terms: "Condições",
     follow: "Siga-nos",
+    premiumPartners: "Parceiros premium",
     rights: "Todos os direitos reservados",
     bmwClub: "BMW Club Andorra",
     description: "Clube de proprietários e entusiastas BMW em Andorra",
@@ -85,6 +96,7 @@ const translations: Record<LanguageCode, Record<string, string>> = {
   de: {
     about: "Über uns",
     club: "Der Club",
+    partners: "Sponsoren",
     sponsors: "Highlights",
     gallery: "Archiv",
     contact: "BMW Offiziell",
@@ -93,6 +105,7 @@ const translations: Record<LanguageCode, Record<string, string>> = {
     cookies: "Cookies",
     terms: "Bedingungen",
     follow: "Folgen Sie uns",
+    premiumPartners: "Premium-Partner",
     rights: "Alle Rechte vorbehalten",
     bmwClub: "BMW Club Andorra",
     description: "Club für BMW-Besitzer und Enthusiasten in Andorra",
@@ -100,6 +113,7 @@ const translations: Record<LanguageCode, Record<string, string>> = {
   ru: {
     about: "О нас",
     club: "Клуб",
+    partners: "Спонсоры",
     sponsors: "Главное",
     gallery: "Архив",
     contact: "BMW Official",
@@ -108,6 +122,7 @@ const translations: Record<LanguageCode, Record<string, string>> = {
     cookies: "Cookies",
     terms: "Условия",
     follow: "Подписывайтесь",
+    premiumPartners: "Премиум-партнёры",
     rights: "Все права защищены",
     bmwClub: "BMW Club Andorra",
     description: "Клуб владельцев и поклонников BMW в Андорре",
@@ -116,11 +131,12 @@ const translations: Record<LanguageCode, Record<string, string>> = {
 
 export const Footer = ({ language }: FooterProps) => {
   const t = translations[language];
+  const footerSponsors = sponsorItems.filter((item) => item.link).slice(0, 3);
 
   return (
     <footer className="bg-accent text-accent-foreground mt-auto">
       <div className="container mx-auto px-4 py-12">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-5 gap-8 mb-8">
           <div className="space-y-4">
             <div className="flex items-center space-x-3">
               <img src="/club/logo-small.png" alt="BMW Club Andorra" className="w-12 h-12 object-contain" />
@@ -135,9 +151,23 @@ export const Footer = ({ language }: FooterProps) => {
             <h3 className="font-semibold text-lg mb-4">{t.about}</h3>
             <ul className="space-y-2">
               <li><Link to="/el-club" className="text-sm text-accent-foreground/80 hover:text-primary transition-base">{t.club}</Link></li>
+              <li><Link to="/patrocinadors" className="text-sm text-accent-foreground/80 hover:text-primary transition-base">{t.partners}</Link></li>
               <li><Link to="/destacats" className="text-sm text-accent-foreground/80 hover:text-primary transition-base">{t.sponsors}</Link></li>
               <li><Link to="/arxiu" className="text-sm text-accent-foreground/80 hover:text-primary transition-base">{t.gallery}</Link></li>
               <li><Link to="/bmw-oficial" className="text-sm text-accent-foreground/80 hover:text-primary transition-base">{t.contact}</Link></li>
+            </ul>
+          </div>
+
+          <div>
+            <h3 className="font-semibold text-lg mb-4">{t.premiumPartners}</h3>
+            <ul className="space-y-2">
+              {footerSponsors.map((sponsor) => (
+                <li key={sponsor.id}>
+                  <a href={sponsor.link?.href} target="_blank" rel="noopener noreferrer" className="text-sm text-accent-foreground/80 hover:text-primary transition-base">
+                    {sponsor.name}
+                  </a>
+                </li>
+              ))}
             </ul>
           </div>
 

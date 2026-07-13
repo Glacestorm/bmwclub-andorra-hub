@@ -11,13 +11,13 @@ interface NavbarProps {
 }
 
 const translations: Record<LanguageCode, Record<string, string>> = {
-  ca: { home: "Inici", club: "El Club", calendar: "Calendari", featured: "Destacats", archive: "Arxiu", official: "BMW Oficial", gallery: "Galeria", contact: "Contacte", calendarCta: "Calendari 2026" },
-  es: { home: "Inicio", club: "El Club", calendar: "Calendario", featured: "Destacados", archive: "Archivo", official: "BMW Oficial", gallery: "Galería", contact: "Contacto", calendarCta: "Calendario 2026" },
-  fr: { home: "Accueil", club: "Le Club", calendar: "Calendrier", featured: "Temps forts", archive: "Archive", official: "BMW Officiel", gallery: "Galerie", contact: "Contact", calendarCta: "Calendrier 2026" },
-  en: { home: "Home", club: "The Club", calendar: "Calendar", featured: "Highlights", archive: "Archive", official: "BMW Official", gallery: "Gallery", contact: "Contact", calendarCta: "Calendar 2026" },
-  pt: { home: "Início", club: "O Clube", calendar: "Calendário", featured: "Destaques", archive: "Arquivo", official: "BMW Oficial", gallery: "Galeria", contact: "Contacto", calendarCta: "Calendário 2026" },
-  de: { home: "Startseite", club: "Der Club", calendar: "Kalender", featured: "Highlights", archive: "Archiv", official: "BMW Offiziell", gallery: "Galerie", contact: "Kontakt", calendarCta: "Kalender 2026" },
-  ru: { home: "Главная", club: "Клуб", calendar: "Календарь", featured: "Главное", archive: "Архив", official: "BMW Official", gallery: "Галерея", contact: "Контакты", calendarCta: "Календарь 2026" },
+  ca: { home: "Inici", club: "El Club", calendar: "Calendari", sponsors: "Patrocinadors", featured: "Destacats", archive: "Arxiu", official: "BMW Oficial", gallery: "Galeria", contact: "Contacte", calendarCta: "Calendari 2026" },
+  es: { home: "Inicio", club: "El Club", calendar: "Calendario", sponsors: "Patrocinadores", featured: "Destacados", archive: "Archivo", official: "BMW Oficial", gallery: "Galería", contact: "Contacto", calendarCta: "Calendario 2026" },
+  fr: { home: "Accueil", club: "Le Club", calendar: "Calendrier", sponsors: "Sponsors", featured: "Temps forts", archive: "Archive", official: "BMW Officiel", gallery: "Galerie", contact: "Contact", calendarCta: "Calendrier 2026" },
+  en: { home: "Home", club: "The Club", calendar: "Calendar", sponsors: "Sponsors", featured: "Highlights", archive: "Archive", official: "BMW Official", gallery: "Gallery", contact: "Contact", calendarCta: "Calendar 2026" },
+  pt: { home: "Início", club: "O Clube", calendar: "Calendário", sponsors: "Patrocinadores", featured: "Destaques", archive: "Arquivo", official: "BMW Oficial", gallery: "Galeria", contact: "Contacto", calendarCta: "Calendário 2026" },
+  de: { home: "Startseite", club: "Der Club", calendar: "Kalender", sponsors: "Sponsoren", featured: "Highlights", archive: "Archiv", official: "BMW Offiziell", gallery: "Galerie", contact: "Kontakt", calendarCta: "Kalender 2026" },
+  ru: { home: "Главная", club: "Клуб", calendar: "Календарь", sponsors: "Спонсоры", featured: "Главное", archive: "Архив", official: "BMW Official", gallery: "Галерея", contact: "Контакты", calendarCta: "Календарь 2026" },
 };
 
 export const Navbar = ({ language, setLanguage }: NavbarProps) => {
@@ -29,6 +29,7 @@ export const Navbar = ({ language, setLanguage }: NavbarProps) => {
     { path: "/", label: t.home },
     { path: "/el-club", label: t.club },
     { path: "/calendari", label: t.calendar },
+    { path: "/patrocinadors", label: t.sponsors },
     { path: "/destacats", label: t.featured },
     { path: "/arxiu", label: t.archive },
     { path: "/bmw-oficial", label: t.official },

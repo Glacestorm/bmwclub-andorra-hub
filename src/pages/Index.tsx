@@ -9,6 +9,7 @@ import { useLanguage } from "@/components/LanguageProvider";
 import { LanguageCode } from "@/lib/i18n";
 import { getLocalizedText } from "@/lib/localized";
 import { archiveItems, featuredEventMeta, officialBmwLinks } from "@/content/siteExperience";
+import { sponsorItems } from "@/content/sponsorData";
 import { getEventById } from "@/lib/calendar";
 
 const translations: Record<LanguageCode, Record<string, string>> = {
@@ -34,6 +35,10 @@ const translations: Record<LanguageCode, Record<string, string>> = {
     officialEyebrow: "BMW Oficial",
     officialTitle: "Enllaç directe a la marca i a les novetats oficials",
     officialCta: "Veure hub oficial",
+    sponsorsEyebrow: "Patrocinadors",
+    sponsorsTitle: "Marques amb visibilitat real, no una llista discreta al peu de pàgina",
+    sponsorsCta: "Veure patrocinadors",
+    sponsorsOpen: "Obrir web",
     visitEvent: "Obrir fitxa",
     openOfficial: "Obrir",
   },
@@ -59,6 +64,10 @@ const translations: Record<LanguageCode, Record<string, string>> = {
     officialEyebrow: "BMW Oficial",
     officialTitle: "Enlace directo a la marca y a sus novedades oficiales",
     officialCta: "Ver hub oficial",
+    sponsorsEyebrow: "Patrocinadores",
+    sponsorsTitle: "Marcas con visibilidad real, no una lista discreta en el pie de página",
+    sponsorsCta: "Ver patrocinadores",
+    sponsorsOpen: "Abrir web",
     visitEvent: "Abrir ficha",
     openOfficial: "Abrir",
   },
@@ -84,6 +93,10 @@ const translations: Record<LanguageCode, Record<string, string>> = {
     officialEyebrow: "BMW Officiel",
     officialTitle: "Lien direct vers la marque et ses nouveautés officielles",
     officialCta: "Voir le hub officiel",
+    sponsorsEyebrow: "Sponsors",
+    sponsorsTitle: "Des marques avec une vraie visibilité, pas une simple liste discrète en pied de page",
+    sponsorsCta: "Voir les sponsors",
+    sponsorsOpen: "Ouvrir le site",
     visitEvent: "Ouvrir la fiche",
     openOfficial: "Ouvrir",
   },
@@ -109,6 +122,10 @@ const translations: Record<LanguageCode, Record<string, string>> = {
     officialEyebrow: "BMW Official",
     officialTitle: "Direct link to the brand and its official updates",
     officialCta: "View official hub",
+    sponsorsEyebrow: "Sponsors",
+    sponsorsTitle: "Brands with real visibility, not a discreet list hidden in the footer",
+    sponsorsCta: "View sponsors",
+    sponsorsOpen: "Open site",
     visitEvent: "Open detail",
     openOfficial: "Open",
   },
@@ -134,6 +151,10 @@ const translations: Record<LanguageCode, Record<string, string>> = {
     officialEyebrow: "BMW Oficial",
     officialTitle: "Ligação direta à marca e às novidades oficiais",
     officialCta: "Ver hub oficial",
+    sponsorsEyebrow: "Patrocinadores",
+    sponsorsTitle: "Marcas com visibilidade real, não uma lista discreta no rodapé",
+    sponsorsCta: "Ver patrocinadores",
+    sponsorsOpen: "Abrir site",
     visitEvent: "Abrir ficha",
     openOfficial: "Abrir",
   },
@@ -159,6 +180,10 @@ const translations: Record<LanguageCode, Record<string, string>> = {
     officialEyebrow: "BMW Offiziell",
     officialTitle: "Direkter Link zur Marke und ihren offiziellen Neuheiten",
     officialCta: "Offiziellen Hub ansehen",
+    sponsorsEyebrow: "Sponsoren",
+    sponsorsTitle: "Marken mit echter Sichtbarkeit, nicht nur eine unauffällige Liste im Footer",
+    sponsorsCta: "Sponsoren ansehen",
+    sponsorsOpen: "Website öffnen",
     visitEvent: "Detail öffnen",
     openOfficial: "Öffnen",
   },
@@ -184,6 +209,10 @@ const translations: Record<LanguageCode, Record<string, string>> = {
     officialEyebrow: "BMW Official",
     officialTitle: "Прямая связь с брендом и его официальными новинками",
     officialCta: "Открыть официальный хаб",
+    sponsorsEyebrow: "Спонсоры",
+    sponsorsTitle: "Бренды с реальной заметностью, а не просто скромным списком в подвале сайта",
+    sponsorsCta: "Открыть спонсоров",
+    sponsorsOpen: "Открыть сайт",
     visitEvent: "Открыть карточку",
     openOfficial: "Открыть",
   },
@@ -193,6 +222,7 @@ const Index = () => {
   const { language } = useLanguage();
   const t = translations[language];
   const highlightCards = featuredEventMeta.slice(0, 3).map((item) => ({ meta: item, event: getEventById(item.eventId) })).filter((item) => item.event);
+  const homeSponsors = sponsorItems.filter((item) => item.link).slice(0, 4);
 
   return (
     <PageShell>
@@ -268,6 +298,31 @@ const Index = () => {
               </Card>
             ))}
           </div>
+        </div>
+      </section>
+
+      <section className="pb-16">
+        <div className="container mx-auto px-4 max-w-6xl">
+          <Card className="glass-dark border-0 rounded-[2rem] p-8 text-white overflow-hidden relative">
+            <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(0,102,177,.25),transparent_35%)]" />
+            <div className="relative z-10 grid lg:grid-cols-[0.85fr_1.15fr] gap-6 items-start">
+              <div>
+                <p className="text-sm uppercase tracking-[0.25em] text-white/70">{t.sponsorsEyebrow}</p>
+                <h2 className="mt-3 text-3xl md:text-4xl font-bold text-balance">{t.sponsorsTitle}</h2>
+                <Link to="/patrocinadors" className="inline-block mt-6"><Button variant="hero">{t.sponsorsCta}</Button></Link>
+              </div>
+              <div className="grid sm:grid-cols-2 gap-4">
+                {homeSponsors.map((sponsor) => (
+                  <a key={sponsor.id} href={sponsor.link?.href} target="_blank" rel="noreferrer" className="rounded-2xl border border-white/10 bg-white/5 p-4 block hover:bg-white/10 transition-base">
+                    <div className="text-xs uppercase tracking-[0.2em] text-white/60 font-semibold">{sponsor.category}</div>
+                    <div className="mt-2 font-semibold text-balance">{sponsor.name}</div>
+                    <div className="mt-2 text-sm text-white/68">{getLocalizedText(sponsor.summary, language)}</div>
+                    <div className="mt-4 inline-flex items-center gap-2 text-sm text-white">{t.sponsorsOpen} <ArrowRight className="h-4 w-4" /></div>
+                  </a>
+                ))}
+              </div>
+            </div>
+          </Card>
         </div>
       </section>
 
