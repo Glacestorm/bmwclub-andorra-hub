@@ -5,6 +5,7 @@ import { Hero } from "@/components/Hero";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { CountdownToNextEvent } from "@/components/calendar/CountdownToNextEvent";
+import { HomeWelcomeShowcase } from "@/components/home/HomeWelcomeShowcase";
 import { useLanguage } from "@/components/LanguageProvider";
 import { LanguageCode } from "@/lib/i18n";
 import { getLocalizedText } from "@/lib/localized";
@@ -284,8 +285,9 @@ const Index = () => {
   return (
     <PageShell>
       <Hero language={language} />
+      <HomeWelcomeShowcase />
 
-      <section className="-mt-16 relative z-20 pb-10">
+      <section className="pb-10">
         <div className="container mx-auto px-4">
           <Card className="glass-panel rounded-[2rem] border-0 max-w-6xl mx-auto p-6 md:p-8">
             <div className="grid md:grid-cols-[1.2fr_0.8fr] gap-8 items-center">
