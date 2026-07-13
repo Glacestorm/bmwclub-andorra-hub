@@ -199,6 +199,43 @@
     background: linear-gradient(90deg, transparent 0%, hsl(var(--border)) 18%, hsl(var(--foreground) / 0.12) 50%, hsl(var(--border)) 82%, transparent 100%);
   }
 
+  .stat-pill {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.35rem;
+    border-radius: 999px;
+    border: 1px solid hsl(var(--border) / 0.8);
+    background: hsl(0 0% 100% / 0.76);
+    padding: 0.45rem 0.85rem;
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: hsl(var(--foreground) / 0.82);
+    box-shadow: 0 14px 32px -24px hsl(220 34% 8% / 0.24);
+  }
+
+  .stat-pill-dark {
+    background: hsl(220 24% 12% / 0.88);
+    border-color: hsl(220 22% 18% / 0.8);
+    color: hsl(0 0% 100% / 0.88);
+  }
+
+  .event-card-premium {
+    position: relative;
+    overflow: hidden;
+  }
+
+  .event-card-premium::before {
+    content: "";
+    position: absolute;
+    inset: 0 auto 0 0;
+    width: 4px;
+    background: linear-gradient(180deg, hsl(var(--primary)) 0%, hsl(var(--primary) / 0.15) 100%);
+    opacity: 0.9;
+  }
+
   .text-balance {
     text-wrap: balance;
   }
