@@ -31,6 +31,7 @@ const translations: Record<LanguageCode, Record<string, string>> = {
     assistantEyebrow: "Conserge IA",
     assistantBody: "Guia el visitant sobre sortides, socis, contacte i vida del club.",
     assistantCta: "Obrir assistent",
+    admin: "Accés club",
   },
   es: {
     about: "Club y contenido",
@@ -55,6 +56,7 @@ const translations: Record<LanguageCode, Record<string, string>> = {
     assistantEyebrow: "Conserje IA",
     assistantBody: "Guía al visitante sobre salidas, socios, contacto y vida del club.",
     assistantCta: "Abrir asistente",
+    admin: "Acceso club",
   },
   fr: {
     about: "Club et contenus",
@@ -79,6 +81,7 @@ const translations: Record<LanguageCode, Record<string, string>> = {
     assistantEyebrow: "Concierge IA",
     assistantBody: "Guide le visiteur sur les sorties, l'adhésion, le contact et la vie du club.",
     assistantCta: "Ouvrir l'assistant",
+    admin: "Accès club",
   },
   en: {
     about: "Club and content",
@@ -103,6 +106,7 @@ const translations: Record<LanguageCode, Record<string, string>> = {
     assistantEyebrow: "AI concierge",
     assistantBody: "Guides visitors through outings, membership, contact and the club story.",
     assistantCta: "Open assistant",
+    admin: "Club access",
   },
   pt: {
     about: "Clube e conteúdo",
@@ -127,6 +131,7 @@ const translations: Record<LanguageCode, Record<string, string>> = {
     assistantEyebrow: "Concierge IA",
     assistantBody: "Orienta o visitante sobre passeios, sócios, contacto e vida do clube.",
     assistantCta: "Abrir assistente",
+    admin: "Acesso clube",
   },
   de: {
     about: "Club und Inhalte",
@@ -151,6 +156,7 @@ const translations: Record<LanguageCode, Record<string, string>> = {
     assistantEyebrow: "KI-Concierge",
     assistantBody: "Hilft Besuchern bei Ausfahrten, Mitgliedschaft, Kontakt und Clubverständnis.",
     assistantCta: "Assistent öffnen",
+    admin: "Club-Zugang",
   },
   ru: {
     about: "Клуб и контент",
@@ -175,6 +181,7 @@ const translations: Record<LanguageCode, Record<string, string>> = {
     assistantEyebrow: "ИИ-консьерж",
     assistantBody: "Помогает посетителю с выездами, участием, контактами и жизнью клуба.",
     assistantCta: "Открыть помощника",
+    admin: "Доступ клуба",
   },
 };
 
@@ -257,6 +264,7 @@ export const Footer = ({ language }: FooterProps) => {
                 <li><Link to="/privacitat" className="text-sm text-white/72 hover:text-white transition-base">{t.privacy}</Link></li>
                 <li><Link to="/cookies" className="text-sm text-white/72 hover:text-white transition-base">{t.cookies}</Link></li>
                 <li><Link to="/condicions" className="text-sm text-white/72 hover:text-white transition-base">{t.terms}</Link></li>
+                <li><Link to="/gestio-club" className="text-sm text-white/72 hover:text-white transition-base">{t.admin}</Link></li>
               </ul>
             </div>
 
