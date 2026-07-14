@@ -5,27 +5,36 @@ import { Dialog, DialogContent, DialogDescription, DialogTitle } from "@/compone
 import { galleryMediaByPage, type GalleryMediaSection } from "@/content/galleryMedia";
 import { useLanguage } from "@/components/LanguageProvider";
 import { LanguageCode } from "@/lib/i18n";
-import { ArrowLeft, Camera, ChevronDown, ChevronUp, FolderOpen, Images, ExternalLink } from "lucide-react";
+import { ArrowLeft, Camera, ChevronDown, ChevronUp, Images, ExternalLink } from "lucide-react";
 
 interface GalleryMediaSectionsProps {
   pageKey?: string;
   sections?: GalleryMediaSection[];
 }
 
-const translations: Record<LanguageCode, { sourceFolder: string; photos: string; recovered: string; openImage: string; openArchive: string; closeArchive: string; showing: string; readyLoad: string; backToGallery: string; openNewTab: string; }> = {
-  ca: { sourceFolder: "Carpeta origen", photos: "fotos", recovered: "Arxiu recuperat", openImage: "Obrir imatge", openArchive: "Obrir arxiu visual", closeArchive: "Plegar arxiu", showing: "Mostrant", readyLoad: "La col·lecció carrega totes les fotos del bloc per obrir-les sense espera.", backToGallery: "Tornar a la galeria", openNewTab: "Obrir en pestanya nova" },
-  es: { sourceFolder: "Carpeta origen", photos: "fotos", recovered: "Archivo recuperado", openImage: "Abrir imagen", openArchive: "Abrir archivo visual", closeArchive: "Plegar archivo", showing: "Mostrando", readyLoad: "La colección carga todas las fotos del bloque para abrirlas sin espera.", backToGallery: "Volver a la galería", openNewTab: "Abrir en pestaña nueva" },
-  fr: { sourceFolder: "Dossier source", photos: "photos", recovered: "Archive récupérée", openImage: "Ouvrir l'image", openArchive: "Ouvrir l'archive visuelle", closeArchive: "Réduire l'archive", showing: "Affichage", readyLoad: "La collection charge toutes les photos du bloc pour les ouvrir sans attente.", backToGallery: "Retour à la galerie", openNewTab: "Ouvrir dans un nouvel onglet" },
-  en: { sourceFolder: "Source folder", photos: "photos", recovered: "Recovered archive", openImage: "Open image", openArchive: "Open visual archive", closeArchive: "Collapse archive", showing: "Showing", readyLoad: "The collection loads every photo in the section so it opens without waiting.", backToGallery: "Back to gallery", openNewTab: "Open in new tab" },
-  pt: { sourceFolder: "Pasta de origem", photos: "fotos", recovered: "Arquivo recuperado", openImage: "Abrir imagem", openArchive: "Abrir arquivo visual", closeArchive: "Recolher arquivo", showing: "A mostrar", readyLoad: "A coleção carrega todas as fotos do bloco para abrir sem espera.", backToGallery: "Voltar à galeria", openNewTab: "Abrir em novo separador" },
-  de: { sourceFolder: "Quellordner", photos: "Fotos", recovered: "Wiederhergestelltes Archiv", openImage: "Bild öffnen", openArchive: "Visuelles Archiv öffnen", closeArchive: "Archiv einklappen", showing: "Angezeigt", readyLoad: "Die Sammlung lädt alle Fotos des Bereichs, damit sie ohne Wartezeit geöffnet werden.", backToGallery: "Zurück zur Galerie", openNewTab: "In neuem Tab öffnen" },
-  ru: { sourceFolder: "Исходная папка", photos: "фото", recovered: "Восстановленный архив", openImage: "Открыть изображение", openArchive: "Открыть визуальный архив", closeArchive: "Свернуть архив", showing: "Показано", readyLoad: "Коллекция загружает все фото блока заранее, чтобы открывать их без ожидания.", backToGallery: "Назад в галерею", openNewTab: "Открыть в новой вкладке" },
+const translations: Record<LanguageCode, { photos: string; outingLabel: string; historicLabel: string; outingSummary: string; historicSummary: string; openImage: string; openArchive: string; closeArchive: string; showing: string; backToGallery: string; openNewTab: string; }> = {
+  ca: { photos: "fotos", outingLabel: "Sortida del club", historicLabel: "Memòria del club", outingSummary: "Selecció fotogràfica de la jornada, amb ruta, ambient i moments destacats compartits pels socis.", historicSummary: "Recull visual de l'arxiu històric del club i de la trajectòria BMW vinculada a Andorra.", openImage: "Obrir imatge", openArchive: "Obrir arxiu visual", closeArchive: "Plegar arxiu", showing: "Mostrant", backToGallery: "Tornar a la galeria", openNewTab: "Obrir en pestanya nova" },
+  es: { photos: "fotos", outingLabel: "Salida del club", historicLabel: "Memoria del club", outingSummary: "Selección fotográfica de la jornada, con ruta, ambiente y momentos destacados compartidos por los socios.", historicSummary: "Recorrido visual por el archivo histórico del club y la trayectoria BMW vinculada a Andorra.", openImage: "Abrir imagen", openArchive: "Abrir archivo visual", closeArchive: "Plegar archivo", showing: "Mostrando", backToGallery: "Volver a la galería", openNewTab: "Abrir en pestaña nueva" },
+  fr: { photos: "photos", outingLabel: "Sortie du club", historicLabel: "Mémoire du club", outingSummary: "Sélection photographique de la journée, avec itinéraire, ambiance et moments forts partagés par les membres.", historicSummary: "Parcours visuel dans les archives historiques du club et dans l'histoire BMW liée à l'Andorre.", openImage: "Ouvrir l'image", openArchive: "Ouvrir l'archive visuelle", closeArchive: "Réduire l'archive", showing: "Affichage", backToGallery: "Retour à la galerie", openNewTab: "Ouvrir dans un nouvel onglet" },
+  en: { photos: "photos", outingLabel: "Club outing", historicLabel: "Club memory", outingSummary: "Photo selection from the day, with route, atmosphere and standout moments shared by members.", historicSummary: "Visual journey through the club's historical archive and the BMW story connected to Andorra.", openImage: "Open image", openArchive: "Open visual archive", closeArchive: "Collapse archive", showing: "Showing", backToGallery: "Back to gallery", openNewTab: "Open in new tab" },
+  pt: { photos: "fotos", outingLabel: "Saída do clube", historicLabel: "Memória do clube", outingSummary: "Seleção fotográfica da jornada, com rota, ambiente e momentos marcantes partilhados pelos sócios.", historicSummary: "Percurso visual pelo arquivo histórico do clube e pela história BMW ligada a Andorra.", openImage: "Abrir imagem", openArchive: "Abrir arquivo visual", closeArchive: "Recolher arquivo", showing: "A mostrar", backToGallery: "Voltar à galeria", openNewTab: "Abrir em novo separador" },
+  de: { photos: "Fotos", outingLabel: "Clubausfahrt", historicLabel: "Clubgeschichte", outingSummary: "Fotografische Auswahl des Tages mit Route, Atmosphäre und besonderen Momenten der Mitglieder.", historicSummary: "Visueller Rückblick auf das historische Archiv des Clubs und die mit Andorra verbundene BMW-Geschichte.", openImage: "Bild öffnen", openArchive: "Visuelles Archiv öffnen", closeArchive: "Archiv einklappen", showing: "Angezeigt", backToGallery: "Zurück zur Galerie", openNewTab: "In neuem Tab öffnen" },
+  ru: { photos: "фото", outingLabel: "Выезд клуба", historicLabel: "Память клуба", outingSummary: "Фотоподборка дня: маршрут, атмосфера и яркие моменты, которыми поделились участники клуба.", historicSummary: "Визуальный обзор исторического архива клуба и истории BMW, связанной с Андоррой.", openImage: "Открыть изображение", openArchive: "Открыть визуальный архив", closeArchive: "Свернуть архив", showing: "Показано", backToGallery: "Назад в галерею", openNewTab: "Открыть в новой вкладке" },
+};
+
+const getSectionContext = (section: GalleryMediaSection, t: (typeof translations)[LanguageCode]) => {
+  const isHistoric = section.sourceFolder.includes("historiques");
+  return {
+    label: isHistoric ? t.historicLabel : t.outingLabel,
+    summary: isHistoric ? t.historicSummary : t.outingSummary,
+  };
 };
 
 const GallerySectionCard = ({ section, isInitiallyOpen, language }: { section: GalleryMediaSection; isInitiallyOpen: boolean; language: LanguageCode }) => {
   const t = translations[language];
   const [isOpen, setIsOpen] = useState(isInitiallyOpen);
   const [selectedIndex, setSelectedIndex] = useState<number | null>(null);
+  const context = getSectionContext(section, t);
 
   const heroImage = section.images[0];
   const selectedImage = selectedIndex !== null ? section.images[selectedIndex] : null;
@@ -45,15 +54,10 @@ const GallerySectionCard = ({ section, isInitiallyOpen, language }: { section: G
           <div>
             <div className="inline-flex items-center gap-2 rounded-full bg-primary/10 px-3 py-1 text-xs font-semibold uppercase tracking-[0.2em] text-primary">
               <Camera className="h-3.5 w-3.5" />
-              {t.recovered}
+              {context.label}
             </div>
             <h2 className="mt-4 text-2xl md:text-3xl font-bold text-balance">{section.title}</h2>
-            <div className="mt-3 inline-flex items-center gap-2 text-sm text-muted-foreground">
-              <FolderOpen className="h-4 w-4" />
-              {t.sourceFolder}: {section.sourceFolder}
-            </div>
-            {section.note ? <p className="mt-4 text-sm text-amber-700">{section.note}</p> : null}
-            <p className="mt-3 text-sm text-muted-foreground">{t.readyLoad}</p>
+            <p className="mt-4 text-sm text-muted-foreground">{context.summary}</p>
           </div>
 
           <div className="flex flex-col items-start gap-3 lg:items-end">
