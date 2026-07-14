@@ -15,6 +15,15 @@ create table if not exists public.club_admin_entries (
   updated_at timestamptz not null default now()
 );
 
+create table if not exists public.gallery_photo_feedback (
+  id uuid primary key default gen_random_uuid(),
+  photo_src text not null,
+  author_name text not null default 'Anònim',
+  rating integer not null check (rating between 1 and 5),
+  comment text,
+  created_at timestamptz not null default now()
+);
+
 create or replace function public.set_club_admin_entries_updated_at()
 returns trigger
 language plpgsql
@@ -32,6 +41,7 @@ for each row
 execute function public.set_club_admin_entries_updated_at();
 
 alter table public.club_admin_entries enable row level security;
+alter table public.gallery_photo_feedback enable row level security;
 
 drop policy if exists "club cms published rows are public" on public.club_admin_entries;
 create policy "club cms published rows are public"
@@ -67,6 +77,23 @@ on public.club_admin_entries
 for delete
 to authenticated
 using (true);
+
+drop policy if exists "gallery feedback public read" on public.gallery_photo_feedback;
+create policy "gallery feedback public read"
+on public.gallery_photo_feedback
+for select
+using (true);
+
+drop policy if exists "gallery feedback public insert" on public.gallery_photo_feedback;
+create policy "gallery feedback public insert"
+on public.gallery_photo_feedback
+for insert
+to anon, authenticated
+with check (
+  length(trim(photo_src)) > 0
+  and length(trim(author_name)) > 0
+  and rating between 1 and 5
+);
 
 insert into storage.buckets (id, name, public)
 values ('club-media', 'club-media', true)

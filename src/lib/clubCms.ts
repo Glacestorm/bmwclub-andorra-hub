@@ -24,10 +24,20 @@ export type ClubAdminEntryRow = {
   updated_at: string;
 };
 
+export type ClubPhotoFeedbackRow = {
+  id: string;
+  photo_src: string;
+  author_name: string;
+  rating: number;
+  comment: string | null;
+  created_at: string;
+};
+
 const SUPABASE_URL = import.meta.env.VITE_SUPABASE_URL?.trim() ?? "";
 const SUPABASE_ANON_KEY = (import.meta.env.VITE_SUPABASE_ANON_KEY?.trim() || import.meta.env.VITE_SUPABASE_PUBLISHABLE_KEY?.trim() || "");
 const SUPABASE_BUCKET = import.meta.env.VITE_SUPABASE_STORAGE_BUCKET?.trim() || "club-media";
 const CLUB_ENTRIES_TABLE = "club_admin_entries";
+const CLUB_PHOTO_FEEDBACK_TABLE = "gallery_photo_feedback";
 
 export const galleryCollectionOptions = [
   { key: "historiques", href: "/galeria/historiques", label: "Històriques" },
@@ -290,6 +300,37 @@ export const usePublishedGallerySections = (collectionKey: string) => {
   return { ...query, data: query.data ?? [] };
 };
 
+export const usePhotoFeedback = (photoSrc: string, enabled = true) => {
+  const query = useQuery({
+    queryKey: ["club-photo-feedback", photoSrc],
+    queryFn: async () => {
+      const client = getSupabaseClient();
+      if (!client) return [] as ClubPhotoFeedbackRow[];
+
+      const { data, error } = await client
+        .from(CLUB_PHOTO_FEEDBACK_TABLE)
+        .select("id, photo_src, author_name, rating, comment, created_at")
+        .eq("photo_src", photoSrc)
+        .order("created_at", { ascending: false });
+
+      if (error) throw error;
+      return (data ?? []) as ClubPhotoFeedbackRow[];
+    },
+    enabled: clubCmsConfig.enabled && enabled && Boolean(photoSrc),
+    staleTime: 15_000,
+  });
+
+  const entries = query.data ?? [];
+  const averageRating = entries.length ? entries.reduce((acc, item) => acc + item.rating, 0) / entries.length : 0;
+
+  return {
+    ...query,
+    data: entries,
+    totalRatings: entries.length,
+    averageRating,
+  };
+};
+
 export const usePublishedItineraries = () => {
   const query = useQuery({
     queryKey: ["club-cms-itineraries"],
@@ -345,6 +386,34 @@ export const uploadClubMedia = async (file: File, path: string) => {
 
   const { data } = client.storage.from(clubCmsConfig.bucket).getPublicUrl(path);
   return data.publicUrl;
+};
+
+export const savePhotoFeedback = async (input: {
+  photoSrc: string;
+  authorName?: string;
+  rating: number;
+  comment?: string;
+}) => {
+  const client = getSupabaseClient();
+  if (!client) throw new Error("Supabase is not configured");
+
+  const rating = Math.max(1, Math.min(5, Math.round(input.rating)));
+  const authorName = input.authorName?.trim() || "Anònim";
+  const comment = input.comment?.trim() || null;
+
+  const { data, error } = await client
+    .from(CLUB_PHOTO_FEEDBACK_TABLE)
+    .insert({
+      photo_src: input.photoSrc,
+      author_name: authorName,
+      rating,
+      comment,
+    })
+    .select("id, photo_src, author_name, rating, comment, created_at")
+    .single();
+
+  if (error) throw error;
+  return data as ClubPhotoFeedbackRow;
 };
 
 export const saveClubEntry = async (input: {
