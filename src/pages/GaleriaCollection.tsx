@@ -33,7 +33,7 @@ const translations: Record<LanguageCode, Record<string, string>> = {
     collectionsBody: "Cada any o bloc històric ara s'obre com una peça pròpia, amb àlbums, arxiu fotogràfic i millor jerarquia visual.",
     openMedia: "Obrir arxiu visual",
     performance: "Media optimitzada",
-    performanceBody: "Hem passat a càrrega progressiva: primer es presenta la peça i després es van obrint fotos sota demanda, evitant baixar centenars d'imatges de cop.",
+    performanceBody: "La càrrega progressiva presenta primer cada bloc i obre les fotos sota demanda, evitant descarregar centenars d'imatges de cop.",
     progressive: "càrrega progressiva",
   },
   es: {
@@ -47,7 +47,7 @@ const translations: Record<LanguageCode, Record<string, string>> = {
     collectionsBody: "Cada año o bloque histórico se abre ahora como una pieza propia, con álbumes, archivo fotográfico y mejor jerarquía visual.",
     openMedia: "Abrir archivo visual",
     performance: "Media optimizada",
-    performanceBody: "Hemos pasado a carga progresiva: primero se presenta la pieza y luego se van abriendo fotos bajo demanda, evitando bajar cientos de imágenes de golpe.",
+    performanceBody: "La carga progresiva presenta primero cada bloque y abre las fotos bajo demanda, evitando descargar cientos de imágenes de golpe.",
     progressive: "carga progresiva",
   },
   fr: {
@@ -61,7 +61,7 @@ const translations: Record<LanguageCode, Record<string, string>> = {
     collectionsBody: "Chaque année ou bloc historique s'ouvre désormais comme une pièce propre, avec albums, archive photographique et meilleure hiérarchie visuelle.",
     openMedia: "Ouvrir l'archive visuelle",
     performance: "Média optimisé",
-    performanceBody: "Nous sommes passés à un chargement progressif : la pièce est d'abord présentée puis les photos s'ouvrent à la demande, évitant de télécharger des centaines d'images d'un coup.",
+    performanceBody: "Le chargement progressif présente d'abord chaque bloc puis ouvre les photos à la demande, évitant le téléchargement de centaines d'images d'un coup.",
     progressive: "chargement progressif",
   },
   en: {
@@ -75,7 +75,7 @@ const translations: Record<LanguageCode, Record<string, string>> = {
     collectionsBody: "Each year or historical block now opens as its own piece, with albums, photographic archive and better visual hierarchy.",
     openMedia: "Open visual archive",
     performance: "Optimised media",
-    performanceBody: "The gallery now uses progressive loading: the piece is introduced first and photos open on demand, avoiding hundreds of images downloading at once.",
+    performanceBody: "Progressive loading presents each section first and opens photos on demand, avoiding hundreds of images downloading at once.",
     progressive: "progressive loading",
   },
   pt: {
@@ -89,7 +89,7 @@ const translations: Record<LanguageCode, Record<string, string>> = {
     collectionsBody: "Cada ano ou bloco histórico abre agora como uma peça própria, com álbuns, arquivo fotográfico e melhor hierarquia visual.",
     openMedia: "Abrir arquivo visual",
     performance: "Media otimizada",
-    performanceBody: "Passámos para carregamento progressivo: primeiro apresenta-se a peça e depois as fotos abrem sob pedido, evitando descarregar centenas de imagens de uma vez.",
+    performanceBody: "O carregamento progressivo apresenta primeiro cada bloco e abre as fotos sob pedido, evitando descarregar centenas de imagens de uma só vez.",
     progressive: "carregamento progressivo",
   },
   de: {
@@ -103,7 +103,7 @@ const translations: Record<LanguageCode, Record<string, string>> = {
     collectionsBody: "Jedes Jahr oder jeder historische Block öffnet sich jetzt als eigener Bereich mit Alben, Bildarchiv und besserer visueller Hierarchie.",
     openMedia: "Visuelles Archiv öffnen",
     performance: "Optimierte Medien",
-    performanceBody: "Die Galerie lädt jetzt progressiv: erst wird der Bereich vorgestellt, danach werden Fotos bei Bedarf geöffnet, statt sofort Hunderte Bilder zu laden.",
+    performanceBody: "Das progressive Laden zeigt zuerst jeden Bereich und öffnet Fotos bei Bedarf, statt sofort Hunderte Bilder zu laden.",
     progressive: "progressives Laden",
   },
   ru: {
@@ -117,7 +117,7 @@ const translations: Record<LanguageCode, Record<string, string>> = {
     collectionsBody: "Каждый год или исторический блок теперь открывается как отдельный материал с альбомами, фотоархивом и лучшей визуальной иерархией.",
     openMedia: "Открыть визуальный архив",
     performance: "Оптимизированные медиа",
-    performanceBody: "Галерея теперь загружается постепенно: сначала показывается раздел, затем фотографии открываются по запросу, без скачивания сотен изображений сразу.",
+    performanceBody: "Постепенная загрузка сначала показывает каждый раздел, а затем открывает фотографии по запросу, без скачивания сотен изображений сразу.",
     progressive: "постепенная загрузка",
   },
 };

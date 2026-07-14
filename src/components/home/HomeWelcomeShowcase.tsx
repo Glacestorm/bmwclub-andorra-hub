@@ -12,8 +12,8 @@ import { archiveItems } from "@/content/siteExperience";
 const translations: Record<LanguageCode, Record<string, string | string[]>> = {
   ca: {
     eyebrow: "Benvinguda del club",
-    title: "La pàgina clàssica de benvinguda ara té millor lloc: a la home i amb més pes.",
-    body: "Hem integrat l'esperit de la benvinguda original dins la portada perquè expliqui el club des del primer scroll: comunitat BMW, sortides, trobades i passió compartida.",
+    title: "Benvinguda, comunitat i memòria BMW a la portada del club.",
+    body: "La portada presenta des del primer scroll la comunitat BMW del club, les sortides, les trobades i la passió compartida.",
     primary: "Descobrir el club",
     secondary: "Obrir galeria",
     assistant: "Parlar amb l’assistent IA",
@@ -30,8 +30,8 @@ const translations: Record<LanguageCode, Record<string, string | string[]>> = {
   },
   es: {
     eyebrow: "Bienvenida del club",
-    title: "La antigua página de bienvenida ahora tiene mejor sitio: en la home y con más peso.",
-    body: "He integrado el espíritu de la bienvenida original dentro de la portada para que explique el club desde el primer scroll: comunidad BMW, salidas, encuentros y pasión compartida.",
+    title: "Bienvenida, comunidad y memoria BMW en la portada del club.",
+    body: "La portada presenta desde el primer scroll la comunidad BMW del club, las salidas, los encuentros y la pasión compartida.",
     primary: "Descubrir el club",
     secondary: "Abrir galería",
     assistant: "Hablar con el asistente IA",
@@ -48,8 +48,8 @@ const translations: Record<LanguageCode, Record<string, string | string[]>> = {
   },
   fr: {
     eyebrow: "Bienvenue du club",
-    title: "L'ancienne page de bienvenue a désormais une meilleure place : sur l'accueil et avec plus de poids.",
-    body: "J'ai intégré l'esprit de la bienvenue originale dans la page d'accueil afin qu'elle explique le club dès le premier scroll : communauté BMW, sorties, rencontres et passion partagée.",
+    title: "Bienvenue, communauté et mémoire BMW au cœur de l'accueil du club.",
+    body: "La page d'accueil présente dès le premier scroll la communauté BMW du club, les sorties, les rencontres et la passion partagée.",
     primary: "Découvrir le club",
     secondary: "Ouvrir la galerie",
     assistant: "Parler à l'assistant IA",
@@ -66,8 +66,8 @@ const translations: Record<LanguageCode, Record<string, string | string[]>> = {
   },
   en: {
     eyebrow: "Club welcome",
-    title: "The old welcome page now has a better place: on the homepage and with more weight.",
-    body: "I folded the spirit of the original welcome page into the homepage so it explains the club from the very first scroll: BMW community, outings, gatherings and shared passion.",
+    title: "Welcome, community and BMW heritage at the heart of the club homepage.",
+    body: "The homepage presents the club's BMW community, outings, gatherings and shared passion from the very first scroll.",
     primary: "Discover the club",
     secondary: "Open gallery",
     assistant: "Talk to the AI concierge",
@@ -84,8 +84,8 @@ const translations: Record<LanguageCode, Record<string, string | string[]>> = {
   },
   pt: {
     eyebrow: "Bem-vindo ao clube",
-    title: "A antiga página de boas-vindas agora está no melhor sítio: na home e com mais peso.",
-    body: "Integrei o espírito da página de boas-vindas original na homepage para que explique o clube desde o primeiro scroll: comunidade BMW, passeios, encontros e paixão partilhada.",
+    title: "Boas-vindas, comunidade e memória BMW na homepage do clube.",
+    body: "A homepage apresenta desde o primeiro scroll a comunidade BMW do clube, os passeios, os encontros e a paixão partilhada.",
     primary: "Descobrir o clube",
     secondary: "Abrir galeria",
     assistant: "Falar com o assistente IA",
@@ -102,8 +102,8 @@ const translations: Record<LanguageCode, Record<string, string | string[]>> = {
   },
   de: {
     eyebrow: "Club-Willkommen",
-    title: "Die alte Willkommensseite hat jetzt den besseren Platz: auf der Startseite und mit mehr Gewicht.",
-    body: "Ich habe den Geist der ursprünglichen Willkommensseite in die Startseite integriert, damit sie den Club schon beim ersten Scroll erklärt: BMW-Community, Ausfahrten, Treffen und gemeinsame Leidenschaft.",
+    title: "Willkommen, Community und BMW-Tradition im Mittelpunkt der Club-Startseite.",
+    body: "Die Startseite zeigt schon beim ersten Scroll die BMW-Community des Clubs, Ausfahrten, Treffen und die gemeinsame Leidenschaft.",
     primary: "Club entdecken",
     secondary: "Galerie öffnen",
     assistant: "Mit dem KI-Assistenten sprechen",
@@ -120,8 +120,8 @@ const translations: Record<LanguageCode, Record<string, string | string[]>> = {
   },
   ru: {
     eyebrow: "Приветствие клуба",
-    title: "Старая приветственная страница теперь стоит там, где нужно: на главной и с большим весом.",
-    body: "Я встроил дух оригинальной приветственной страницы в главную, чтобы сайт сразу объяснял клуб: сообщество BMW, выезды, встречи и общую страсть.",
+    title: "Приветствие, сообщество и наследие BMW в центре главной страницы клуба.",
+    body: "Главная страница с первого экрана показывает BMW-сообщество клуба, выезды, встречи и общую страсть.",
     primary: "Узнать о клубе",
     secondary: "Открыть галерею",
     assistant: "Поговорить с ИИ помощником",
