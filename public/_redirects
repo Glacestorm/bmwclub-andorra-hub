@@ -15,3 +15,6 @@
 /index.php/ca/recull-fotos/fotos-sortides/any-2025 /galeria/sortides/2025 301
 /index.php/ca/recull-fotos/fotos-sortides/any-2026 /galeria/sortides/2026 301
 /index.php/ca/component/dpcalendar/event/4o-cars-coffee /esdeveniments/cars-coffee-2026-07-12 301
+
+# React SPA fallback for direct visits and refreshes on nested routes
+/* /index.html 200
