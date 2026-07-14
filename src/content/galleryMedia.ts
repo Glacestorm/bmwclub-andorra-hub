@@ -1602,6 +1602,163 @@ export const galleryMediaByPage: Record<string, GalleryMediaSection[]> = {
           "filename": "photo-2024-09-22-16-37-39.jpg"
         }
       ]
+    },
+    {
+      "title": "V Ral·li Turístic Lloret 07/10/2024",
+      "sourceFolder": "phocagallery/sortides (origen)",
+      "images": [
+        {
+          "src": "/legacy-mirror/images/phocagallery/sortides/photo-2024-10-07-13-42-27.jpg",
+          "alt": "V Ral·li Turístic Lloret 07/10/2024 1",
+          "filename": "photo-2024-10-07-13-42-27.jpg"
+        },
+        {
+          "src": "/legacy-mirror/images/phocagallery/sortides/photo-2024-10-07-13-42-28.jpg",
+          "alt": "V Ral·li Turístic Lloret 07/10/2024 2",
+          "filename": "photo-2024-10-07-13-42-28.jpg"
+        },
+        {
+          "src": "/legacy-mirror/images/phocagallery/sortides/photo-2024-10-07-13-42-28_1.jpg",
+          "alt": "V Ral·li Turístic Lloret 07/10/2024 3",
+          "filename": "photo-2024-10-07-13-42-28_1.jpg"
+        },
+        {
+          "src": "/legacy-mirror/images/phocagallery/sortides/photo-2024-10-07-13-42-28_2.jpg",
+          "alt": "V Ral·li Turístic Lloret 07/10/2024 4",
+          "filename": "photo-2024-10-07-13-42-28_2.jpg"
+        },
+        {
+          "src": "/legacy-mirror/images/phocagallery/sortides/photo-2024-10-07-13-42-28_3.jpg",
+          "alt": "V Ral·li Turístic Lloret 07/10/2024 5",
+          "filename": "photo-2024-10-07-13-42-28_3.jpg"
+        },
+        {
+          "src": "/legacy-mirror/images/phocagallery/sortides/photo-2024-10-07-13-42-28_4.jpg",
+          "alt": "V Ral·li Turístic Lloret 07/10/2024 6",
+          "filename": "photo-2024-10-07-13-42-28_4.jpg"
+        },
+        {
+          "src": "/legacy-mirror/images/phocagallery/sortides/photo-2024-10-07-13-42-28_5.jpg",
+          "alt": "V Ral·li Turístic Lloret 07/10/2024 7",
+          "filename": "photo-2024-10-07-13-42-28_5.jpg"
+        },
+        {
+          "src": "/legacy-mirror/images/phocagallery/sortides/photo-2024-10-07-13-42-29.jpg",
+          "alt": "V Ral·li Turístic Lloret 07/10/2024 8",
+          "filename": "photo-2024-10-07-13-42-29.jpg"
+        },
+        {
+          "src": "/legacy-mirror/images/phocagallery/sortides/photo-2024-10-07-13-42-29_1.jpg",
+          "alt": "V Ral·li Turístic Lloret 07/10/2024 9",
+          "filename": "photo-2024-10-07-13-42-29_1.jpg"
+        },
+        {
+          "src": "/legacy-mirror/images/phocagallery/sortides/photo-2024-10-07-13-42-29_2.jpg",
+          "alt": "V Ral·li Turístic Lloret 07/10/2024 10",
+          "filename": "photo-2024-10-07-13-42-29_2.jpg"
+        },
+        {
+          "src": "/legacy-mirror/images/phocagallery/sortides/photo-2024-10-07-13-42-29_3.jpg",
+          "alt": "V Ral·li Turístic Lloret 07/10/2024 11",
+          "filename": "photo-2024-10-07-13-42-29_3.jpg"
+        },
+        {
+          "src": "/legacy-mirror/images/phocagallery/sortides/photo-2024-10-07-13-42-29_4.jpg",
+          "alt": "V Ral·li Turístic Lloret 07/10/2024 12",
+          "filename": "photo-2024-10-07-13-42-29_4.jpg"
+        },
+        {
+          "src": "/legacy-mirror/images/phocagallery/sortides/photo-2024-10-07-13-42-30.jpg",
+          "alt": "V Ral·li Turístic Lloret 07/10/2024 13",
+          "filename": "photo-2024-10-07-13-42-30.jpg"
+        },
+        {
+          "src": "/legacy-mirror/images/phocagallery/sortides/photo-2024-10-07-13-42-30_1.jpg",
+          "alt": "V Ral·li Turístic Lloret 07/10/2024 14",
+          "filename": "photo-2024-10-07-13-42-30_1.jpg"
+        },
+        {
+          "src": "/legacy-mirror/images/phocagallery/sortides/photo-2024-10-07-13-42-30_2.jpg",
+          "alt": "V Ral·li Turístic Lloret 07/10/2024 15",
+          "filename": "photo-2024-10-07-13-42-30_2.jpg"
+        },
+        {
+          "src": "/legacy-mirror/images/phocagallery/sortides/photo-2024-10-07-13-42-30_3.jpg",
+          "alt": "V Ral·li Turístic Lloret 07/10/2024 16",
+          "filename": "photo-2024-10-07-13-42-30_3.jpg"
+        },
+        {
+          "src": "/legacy-mirror/images/phocagallery/sortides/photo-2024-10-07-13-42-30_4.jpg",
+          "alt": "V Ral·li Turístic Lloret 07/10/2024 17",
+          "filename": "photo-2024-10-07-13-42-30_4.jpg"
+        }
+      ]
+    },
+    {
+      "title": "Cloenda 11/11/2024",
+      "sourceFolder": "phocagallery/sortides (origen)",
+      "images": [
+        {
+          "src": "/legacy-mirror/images/phocagallery/sortides/photo-2024-11-11-09-49-36.jpg",
+          "alt": "Cloenda 11/11/2024 1",
+          "filename": "photo-2024-11-11-09-49-36.jpg"
+        },
+        {
+          "src": "/legacy-mirror/images/phocagallery/sortides/photo-2024-11-11-09-49-36_1.jpg",
+          "alt": "Cloenda 11/11/2024 2",
+          "filename": "photo-2024-11-11-09-49-36_1.jpg"
+        },
+        {
+          "src": "/legacy-mirror/images/phocagallery/sortides/photo-2024-11-11-09-49-36_2.jpg",
+          "alt": "Cloenda 11/11/2024 3",
+          "filename": "photo-2024-11-11-09-49-36_2.jpg"
+        },
+        {
+          "src": "/legacy-mirror/images/phocagallery/sortides/photo-2024-11-11-09-49-36_3.jpg",
+          "alt": "Cloenda 11/11/2024 4",
+          "filename": "photo-2024-11-11-09-49-36_3.jpg"
+        },
+        {
+          "src": "/legacy-mirror/images/phocagallery/sortides/photo-2024-11-11-09-49-37.jpg",
+          "alt": "Cloenda 11/11/2024 5",
+          "filename": "photo-2024-11-11-09-49-37.jpg"
+        },
+        {
+          "src": "/legacy-mirror/images/phocagallery/sortides/photo-2024-11-11-09-49-37_1.jpg",
+          "alt": "Cloenda 11/11/2024 6",
+          "filename": "photo-2024-11-11-09-49-37_1.jpg"
+        },
+        {
+          "src": "/legacy-mirror/images/phocagallery/sortides/photo-2024-11-11-09-49-37_2.jpg",
+          "alt": "Cloenda 11/11/2024 7",
+          "filename": "photo-2024-11-11-09-49-37_2.jpg"
+        },
+        {
+          "src": "/legacy-mirror/images/phocagallery/sortides/photo-2024-11-11-09-49-37_3.jpg",
+          "alt": "Cloenda 11/11/2024 8",
+          "filename": "photo-2024-11-11-09-49-37_3.jpg"
+        },
+        {
+          "src": "/legacy-mirror/images/phocagallery/sortides/photo-2024-11-11-09-49-37_4.jpg",
+          "alt": "Cloenda 11/11/2024 9",
+          "filename": "photo-2024-11-11-09-49-37_4.jpg"
+        },
+        {
+          "src": "/legacy-mirror/images/phocagallery/sortides/photo-2024-11-11-09-49-37_5.jpg",
+          "alt": "Cloenda 11/11/2024 10",
+          "filename": "photo-2024-11-11-09-49-37_5.jpg"
+        },
+        {
+          "src": "/legacy-mirror/images/phocagallery/sortides/photo-2024-11-11-09-49-37_6.jpg",
+          "alt": "Cloenda 11/11/2024 11",
+          "filename": "photo-2024-11-11-09-49-37_6.jpg"
+        },
+        {
+          "src": "/legacy-mirror/images/phocagallery/sortides/photo-2024-11-11-09-49-38.jpg",
+          "alt": "Cloenda 11/11/2024 12",
+          "filename": "photo-2024-11-11-09-49-38.jpg"
+        }
+      ]
     }
   ],
   "sortides_2025": [
