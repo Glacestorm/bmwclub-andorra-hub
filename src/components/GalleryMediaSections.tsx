@@ -1,4 +1,4 @@
-import { useMemo, useState } from "react";
+import { useEffect, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Dialog, DialogContent, DialogDescription, DialogTitle } from "@/components/ui/dialog";
@@ -12,38 +12,27 @@ interface GalleryMediaSectionsProps {
   sections?: GalleryMediaSection[];
 }
 
-const INITIAL_VISIBLE = 7;
-const LOAD_MORE_STEP = 8;
-
-const translations: Record<LanguageCode, { sourceFolder: string; photos: string; recovered: string; openImage: string; openArchive: string; closeArchive: string; loadMore: string; showing: string; progressive: string; backToGallery: string; openNewTab: string; }> = {
-  ca: { sourceFolder: "Carpeta origen", photos: "fotos", recovered: "Arxiu recuperat", openImage: "Obrir imatge", openArchive: "Obrir arxiu visual", closeArchive: "Plegar arxiu", loadMore: "Carregar més fotos", showing: "Mostrant", progressive: "Càrrega progressiva per evitar descarregar tota la galeria de cop.", backToGallery: "Tornar a la galeria", openNewTab: "Obrir en pestanya nova" },
-  es: { sourceFolder: "Carpeta origen", photos: "fotos", recovered: "Archivo recuperado", openImage: "Abrir imagen", openArchive: "Abrir archivo visual", closeArchive: "Plegar archivo", loadMore: "Cargar más fotos", showing: "Mostrando", progressive: "Carga progresiva para evitar descargar toda la galería de golpe.", backToGallery: "Volver a la galería", openNewTab: "Abrir en pestaña nueva" },
-  fr: { sourceFolder: "Dossier source", photos: "photos", recovered: "Archive récupérée", openImage: "Ouvrir l'image", openArchive: "Ouvrir l'archive visuelle", closeArchive: "Réduire l'archive", loadMore: "Charger plus de photos", showing: "Affichage", progressive: "Chargement progressif pour éviter de télécharger toute la galerie d'un coup.", backToGallery: "Retour à la galerie", openNewTab: "Ouvrir dans un nouvel onglet" },
-  en: { sourceFolder: "Source folder", photos: "photos", recovered: "Recovered archive", openImage: "Open image", openArchive: "Open visual archive", closeArchive: "Collapse archive", loadMore: "Load more photos", showing: "Showing", progressive: "Progressive loading avoids downloading the full gallery at once.", backToGallery: "Back to gallery", openNewTab: "Open in new tab" },
-  pt: { sourceFolder: "Pasta de origem", photos: "fotos", recovered: "Arquivo recuperado", openImage: "Abrir imagem", openArchive: "Abrir arquivo visual", closeArchive: "Recolher arquivo", loadMore: "Carregar mais fotos", showing: "A mostrar", progressive: "Carregamento progressivo para evitar descarregar toda a galeria de uma vez.", backToGallery: "Voltar à galeria", openNewTab: "Abrir em novo separador" },
-  de: { sourceFolder: "Quellordner", photos: "Fotos", recovered: "Wiederhergestelltes Archiv", openImage: "Bild öffnen", openArchive: "Visuelles Archiv öffnen", closeArchive: "Archiv einklappen", loadMore: "Mehr Fotos laden", showing: "Angezeigt", progressive: "Progressives Laden verhindert das sofortige Herunterladen der gesamten Galerie.", backToGallery: "Zurück zur Galerie", openNewTab: "In neuem Tab öffnen" },
-  ru: { sourceFolder: "Исходная папка", photos: "фото", recovered: "Восстановленный архив", openImage: "Открыть изображение", openArchive: "Открыть визуальный архив", closeArchive: "Свернуть архив", loadMore: "Загрузить больше фото", showing: "Показано", progressive: "Постепенная загрузка не даёт скачивать всю галерею сразу.", backToGallery: "Назад в галерею", openNewTab: "Открыть в новой вкладке" },
+const translations: Record<LanguageCode, { sourceFolder: string; photos: string; recovered: string; openImage: string; openArchive: string; closeArchive: string; showing: string; readyLoad: string; backToGallery: string; openNewTab: string; }> = {
+  ca: { sourceFolder: "Carpeta origen", photos: "fotos", recovered: "Arxiu recuperat", openImage: "Obrir imatge", openArchive: "Obrir arxiu visual", closeArchive: "Plegar arxiu", showing: "Mostrant", readyLoad: "La col·lecció carrega totes les fotos del bloc per obrir-les sense espera.", backToGallery: "Tornar a la galeria", openNewTab: "Obrir en pestanya nova" },
+  es: { sourceFolder: "Carpeta origen", photos: "fotos", recovered: "Archivo recuperado", openImage: "Abrir imagen", openArchive: "Abrir archivo visual", closeArchive: "Plegar archivo", showing: "Mostrando", readyLoad: "La colección carga todas las fotos del bloque para abrirlas sin espera.", backToGallery: "Volver a la galería", openNewTab: "Abrir en pestaña nueva" },
+  fr: { sourceFolder: "Dossier source", photos: "photos", recovered: "Archive récupérée", openImage: "Ouvrir l'image", openArchive: "Ouvrir l'archive visuelle", closeArchive: "Réduire l'archive", showing: "Affichage", readyLoad: "La collection charge toutes les photos du bloc pour les ouvrir sans attente.", backToGallery: "Retour à la galerie", openNewTab: "Ouvrir dans un nouvel onglet" },
+  en: { sourceFolder: "Source folder", photos: "photos", recovered: "Recovered archive", openImage: "Open image", openArchive: "Open visual archive", closeArchive: "Collapse archive", showing: "Showing", readyLoad: "The collection loads every photo in the section so it opens without waiting.", backToGallery: "Back to gallery", openNewTab: "Open in new tab" },
+  pt: { sourceFolder: "Pasta de origem", photos: "fotos", recovered: "Arquivo recuperado", openImage: "Abrir imagem", openArchive: "Abrir arquivo visual", closeArchive: "Recolher arquivo", showing: "A mostrar", readyLoad: "A coleção carrega todas as fotos do bloco para abrir sem espera.", backToGallery: "Voltar à galeria", openNewTab: "Abrir em novo separador" },
+  de: { sourceFolder: "Quellordner", photos: "Fotos", recovered: "Wiederhergestelltes Archiv", openImage: "Bild öffnen", openArchive: "Visuelles Archiv öffnen", closeArchive: "Archiv einklappen", showing: "Angezeigt", readyLoad: "Die Sammlung lädt alle Fotos des Bereichs, damit sie ohne Wartezeit geöffnet werden.", backToGallery: "Zurück zur Galerie", openNewTab: "In neuem Tab öffnen" },
+  ru: { sourceFolder: "Исходная папка", photos: "фото", recovered: "Восстановленный архив", openImage: "Открыть изображение", openArchive: "Открыть визуальный архив", closeArchive: "Свернуть архив", showing: "Показано", readyLoad: "Коллекция загружает все фото блока заранее, чтобы открывать их без ожидания.", backToGallery: "Назад в галерею", openNewTab: "Открыть в новой вкладке" },
 };
 
 const GallerySectionCard = ({ section, isInitiallyOpen, language }: { section: GalleryMediaSection; isInitiallyOpen: boolean; language: LanguageCode }) => {
   const t = translations[language];
   const [isOpen, setIsOpen] = useState(isInitiallyOpen);
-  const [visibleCount, setVisibleCount] = useState(isInitiallyOpen ? INITIAL_VISIBLE : 0);
   const [selectedIndex, setSelectedIndex] = useState<number | null>(null);
 
-  const visibleImages = useMemo(() => section.images.slice(0, visibleCount), [section.images, visibleCount]);
-  const hasMore = visibleCount < section.images.length;
   const heroImage = section.images[0];
   const selectedImage = selectedIndex !== null ? section.images[selectedIndex] : null;
 
-  const openSection = () => {
-    setIsOpen(true);
-    setVisibleCount((current) => Math.max(current, INITIAL_VISIBLE));
-  };
-
   const toggleSection = () => {
     if (!isOpen) {
-      openSection();
+      setIsOpen(true);
       return;
     }
     setIsOpen(false);
@@ -64,7 +53,7 @@ const GallerySectionCard = ({ section, isInitiallyOpen, language }: { section: G
               {t.sourceFolder}: {section.sourceFolder}
             </div>
             {section.note ? <p className="mt-4 text-sm text-amber-700">{section.note}</p> : null}
-            <p className="mt-3 text-sm text-muted-foreground">{t.progressive}</p>
+            <p className="mt-3 text-sm text-muted-foreground">{t.readyLoad}</p>
           </div>
 
           <div className="flex flex-col items-start gap-3 lg:items-end">
@@ -83,23 +72,18 @@ const GallerySectionCard = ({ section, isInitiallyOpen, language }: { section: G
       {isOpen ? (
         <div className="space-y-5">
           <div className="flex items-center justify-between gap-4 text-sm text-muted-foreground">
-            <span>{t.showing} {visibleImages.length} / {section.images.length} {t.photos}</span>
-            {hasMore ? (
-              <Button variant="outline" size="sm" className="rounded-full" onClick={() => setVisibleCount((current) => Math.min(current + LOAD_MORE_STEP, section.images.length))}>
-                {t.loadMore}
-              </Button>
-            ) : null}
+            <span>{t.showing} {section.images.length} / {section.images.length} {t.photos}</span>
           </div>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-5 content-auto-block">
-            {visibleImages.map((image, index) => (
+            {section.images.map((image, index) => (
               <button key={image.src} type="button" onClick={() => setSelectedIndex(index)} className={`block text-left ${index === 0 ? "xl:col-span-2" : ""}`}>
                 <Card className="overflow-hidden p-0 premium-card border-0 hover-tilt h-full shadow-sm">
                   <div className={`relative overflow-hidden ${index === 0 ? "xl:h-[26rem] h-72" : "h-60"}`}>
                     <img
                       src={image.src}
                       alt={image.alt}
-                      loading={index < 2 ? "eager" : "lazy"}
+                      loading={index < 8 ? "eager" : "lazy"}
                       fetchPriority={index === 0 ? "high" : "auto"}
                       decoding="async"
                       sizes={index === 0 ? "(min-width: 1280px) 66vw, 100vw" : "(min-width: 1280px) 33vw, (min-width: 640px) 50vw, 100vw"}
@@ -139,7 +123,7 @@ const GallerySectionCard = ({ section, isInitiallyOpen, language }: { section: G
               <div className="p-6 md:p-8 flex flex-col justify-center">
                 <p className="text-xs uppercase tracking-[0.22em] text-primary font-semibold">{t.openArchive}</p>
                 <h3 className="mt-3 text-2xl font-bold text-balance">{section.title}</h3>
-                <p className="mt-3 text-muted-foreground">{t.showing} 1 / {section.images.length} {t.photos}</p>
+                <p className="mt-3 text-muted-foreground">{t.showing} {section.images.length} / {section.images.length} {t.photos}</p>
               </div>
             </div>
           </Card>
@@ -193,6 +177,18 @@ export const GalleryMediaSections = ({ pageKey = "gallery", sections: sectionsPr
   const sections = sectionsProp ?? galleryMediaByPage[pageKey] ?? [];
   const { language } = useLanguage();
 
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+
+    sections.forEach((section) => {
+      section.images.forEach((image) => {
+        const preloadImage = new window.Image();
+        preloadImage.decoding = "async";
+        preloadImage.src = image.src;
+      });
+    });
+  }, [sections]);
+
   if (!sections.length) return null;
 
   return (
@@ -202,7 +198,7 @@ export const GalleryMediaSections = ({ pageKey = "gallery", sections: sectionsPr
           <GallerySectionCard
             key={`${pageKey}-${section.title}-${index}`}
             section={section}
-            isInitiallyOpen={sections.length === 1 ? true : index === 0}
+            isInitiallyOpen={true}
             language={language}
           />
         ))}

@@ -5,13 +5,13 @@ import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
 import { LanguageProvider } from "@/components/LanguageProvider";
+import Galeria from "./pages/Galeria";
+import GaleriaCollection from "./pages/GaleriaCollection";
 
 const Index = lazy(() => import("./pages/Index"));
 const ElClub = lazy(() => import("./pages/ElClub"));
 const Contacte = lazy(() => import("./pages/Contacte"));
 const Patrocinadors = lazy(() => import("./pages/Patrocinadors"));
-const Galeria = lazy(() => import("./pages/Galeria"));
-const GaleriaCollection = lazy(() => import("./pages/GaleriaCollection"));
 const Meteo = lazy(() => import("./pages/Meteo"));
 const Calendari = lazy(() => import("./pages/Calendari"));
 const CalendariYear = lazy(() => import("./pages/CalendariYear"));

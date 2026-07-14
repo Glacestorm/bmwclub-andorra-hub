@@ -3,6 +3,7 @@ import { Link, useLocation } from "react-router-dom";
 import { Menu, X, ChevronDown } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
+import { Dialog, DialogContent, DialogDescription, DialogTitle } from "@/components/ui/dialog";
 import { LanguageCode, supportedLanguages } from "@/lib/i18n";
 
 interface NavbarProps {
@@ -22,6 +23,7 @@ const translations: Record<LanguageCode, Record<string, string>> = {
 
 export const Navbar = ({ language, setLanguage }: NavbarProps) => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [isLogoOpen, setIsLogoOpen] = useState(false);
   const location = useLocation();
   const t = translations[language];
 
@@ -42,10 +44,11 @@ export const Navbar = ({ language, setLanguage }: NavbarProps) => {
   const isActive = (path: string) => location.pathname === path || (path !== "/" && location.pathname.startsWith(path));
 
   return (
+    <>
     <nav className="fixed top-0 left-0 right-0 z-50 bg-background/72 backdrop-blur-xl border-b border-white/40 shadow-[0_14px_48px_-28px_rgba(15,23,42,.28)]">
-      <div className="container mx-auto px-4">
+      <div className="container mx-auto max-w-[1440px] px-4">
         <div className="flex items-center justify-between h-20 md:h-[5.7rem] gap-4">
-          <Link to="/" className="flex items-center space-x-3 shrink-0 rounded-full pr-2 transition-base hover:bg-white/35">
+          <button type="button" onClick={() => setIsLogoOpen((current) => !current)} className="flex items-center space-x-3 shrink-0 rounded-full pr-2 transition-base hover:bg-white/35">
             <div className="flex h-14 w-14 items-center justify-center rounded-2xl border border-white/55 bg-white/88 shadow-[0_16px_40px_-24px_rgba(15,23,42,.55)] md:h-16 md:w-16">
               <img src="/club/logo-small.png" alt="BMW Club Andorra" className="h-11 w-11 object-contain md:h-12 md:w-12" />
             </div>
@@ -53,15 +56,15 @@ export const Navbar = ({ language, setLanguage }: NavbarProps) => {
               <span className="font-bold text-[1.05rem] leading-tight tracking-[0.08em]">BMW CLUB</span>
               <span className="text-sm font-medium text-muted-foreground leading-tight tracking-[0.22em]">ANDORRA</span>
             </div>
-          </Link>
+          </button>
 
-          <div className="hidden xl:flex min-w-0 flex-1 justify-center px-2">
-            <div className="glass-panel flex max-w-full flex-nowrap items-center gap-1 overflow-x-auto rounded-full px-2 py-2 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
+          <div className="hidden lg:flex min-w-0 flex-1 justify-center px-1 xl:px-2">
+            <div className="glass-panel flex max-w-full flex-nowrap items-center gap-0.5 overflow-x-auto rounded-full px-1.5 py-2 xl:gap-1 xl:px-2 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
               {navLinks.map((link) => (
                 <Link
                   key={link.path}
                   to={link.path}
-                  className={`shrink-0 whitespace-nowrap rounded-full px-3 py-2 text-[13px] font-medium transition-base 2xl:px-4 2xl:text-sm ${isActive(link.path) ? "text-primary bg-white shadow-sm" : "text-foreground hover:text-primary hover:bg-white/60"}`}
+                  className={`shrink-0 whitespace-nowrap rounded-full px-2.5 py-2 text-[12px] font-medium transition-base xl:px-3 xl:text-[13px] 2xl:px-4 2xl:text-sm ${isActive(link.path) ? "text-primary bg-white shadow-sm" : "text-foreground hover:text-primary hover:bg-white/60"}`}
                 >
                   {link.label}
                 </Link>
@@ -86,18 +89,18 @@ export const Navbar = ({ language, setLanguage }: NavbarProps) => {
               </DropdownMenuContent>
             </DropdownMenu>
 
-            <Link to="/calendari/2026" className="hidden md:block">
+            <Link to="/calendari/2026" className="hidden 2xl:block">
               <Button variant="hero" size="sm" className="rounded-full">{t.calendarCta}</Button>
             </Link>
 
-            <Button variant="ghost" size="icon" className="xl:hidden rounded-full border border-white/40 bg-white/55 backdrop-blur-md" onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}>
+            <Button variant="ghost" size="icon" className="lg:hidden rounded-full border border-white/40 bg-white/55 backdrop-blur-md" onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}>
               {isMobileMenuOpen ? <X /> : <Menu />}
             </Button>
           </div>
         </div>
 
         {isMobileMenuOpen && (
-          <div className="xl:hidden py-4 border-t border-border/60">
+          <div className="lg:hidden py-4 border-t border-border/60">
             <div className="glass-panel rounded-[1.5rem] p-3 flex flex-col space-y-2">
               {navLinks.map((link) => (
                 <Link key={link.path} to={link.path} onClick={() => setIsMobileMenuOpen(false)} className={`px-4 py-3 text-sm font-medium transition-base rounded-2xl ${isActive(link.path) ? "text-primary bg-white shadow-sm" : "text-foreground hover:bg-white/60"}`}>
@@ -110,5 +113,19 @@ export const Navbar = ({ language, setLanguage }: NavbarProps) => {
         )}
       </div>
     </nav>
+    <Dialog open={isLogoOpen} onOpenChange={setIsLogoOpen}>
+      <DialogContent className="max-w-[min(92vw,560px)] border border-white/10 bg-white/95 p-0 shadow-2xl">
+        <DialogTitle className="sr-only">BMW Club Andorra</DialogTitle>
+        <DialogDescription className="sr-only">Logo ampliado del BMW Club Andorra.</DialogDescription>
+        <button type="button" onClick={() => setIsLogoOpen(false)} className="block w-full rounded-[1.8rem] p-8 text-center transition-base hover:bg-slate-50">
+          <img src="/club/logo.png" alt="BMW Club Andorra" className="mx-auto max-h-[360px] w-full max-w-[320px] object-contain" loading="eager" decoding="async" />
+          <div className="mt-6">
+            <div className="text-2xl font-bold tracking-[0.08em] text-slate-950">BMW CLUB</div>
+            <div className="mt-1 text-sm font-medium tracking-[0.26em] text-slate-500">ANDORRA</div>
+          </div>
+        </button>
+      </DialogContent>
+    </Dialog>
+    </>
   );
 };
