@@ -27,7 +27,8 @@ const translations: Record<LanguageCode, { photos: string; outingLabel: string; 
 };
 
 const getSectionContext = (section: GalleryMediaSection, t: (typeof translations)[LanguageCode]) => {
-  const isHistoric = section.sourceFolder.includes("historiques");
+  const sourceFolder = section.sourceFolder || "";
+  const isHistoric = sourceFolder.includes("historiques");
   return {
     label: isHistoric ? t.historicLabel : t.outingLabel,
     summary: isHistoric ? t.historicSummary : t.outingSummary,
@@ -286,7 +287,8 @@ const GallerySectionCard = ({ section, isInitiallyOpen, language }: { section: G
 };
 
 export const GalleryMediaSections = ({ pageKey = "gallery", sections: sectionsProp }: GalleryMediaSectionsProps) => {
-  const sections = sectionsProp ?? galleryMediaByPage[pageKey] ?? [];
+  const rawSections = sectionsProp ?? galleryMediaByPage[pageKey] ?? [];
+  const sections = rawSections.filter((section): section is GalleryMediaSection => Boolean(section) && Array.isArray(section.images) && section.images.length > 0);
   const { language } = useLanguage();
 
   if (!sections.length) return null;

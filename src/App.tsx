@@ -5,6 +5,7 @@ import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
 import { LanguageProvider } from "@/components/LanguageProvider";
+import { AppErrorBoundary } from "@/components/AppErrorBoundary";
 import Galeria from "./pages/Galeria";
 import GaleriaCollection from "./pages/GaleriaCollection";
 
@@ -41,14 +42,15 @@ const RouteFallback = () => (
 );
 
 const App = () => (
-  <QueryClientProvider client={queryClient}>
-    <TooltipProvider>
-      <Toaster />
-      <Sonner />
-      <LanguageProvider>
-        <BrowserRouter>
-          <Suspense fallback={<RouteFallback />}>
-            <Routes>
+  <AppErrorBoundary>
+    <QueryClientProvider client={queryClient}>
+      <TooltipProvider>
+        <Toaster />
+        <Sonner />
+        <LanguageProvider>
+          <BrowserRouter>
+            <Suspense fallback={<RouteFallback />}>
+              <Routes>
               <Route path="/" element={<Index />} />
               <Route path="/el-club" element={<ElClub />} />
               <Route path="/contacte" element={<Contacte />} />
@@ -93,12 +95,13 @@ const App = () => (
               <Route path="/cookies" element={<LegalPage pageKey="cookies" />} />
               <Route path="/condicions" element={<LegalPage pageKey="condicions" />} />
               <Route path="*" element={<NotFound />} />
-            </Routes>
-          </Suspense>
-        </BrowserRouter>
-      </LanguageProvider>
-    </TooltipProvider>
-  </QueryClientProvider>
+              </Routes>
+            </Suspense>
+          </BrowserRouter>
+        </LanguageProvider>
+      </TooltipProvider>
+    </QueryClientProvider>
+  </AppErrorBoundary>
 );
 
 export default App;

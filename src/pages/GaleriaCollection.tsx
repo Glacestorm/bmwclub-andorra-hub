@@ -125,7 +125,7 @@ const translations: Record<LanguageCode, Record<string, string>> = {
 const GaleriaCollection = () => {
   const location = useLocation();
   const { language } = useLanguage();
-  const t = translations[language];
+  const t = translations[language] ?? translations.ca;
   const key = pageByPath[location.pathname];
 
   if (!key) {
@@ -134,7 +134,9 @@ const GaleriaCollection = () => {
 
   const page = bmwContent[key];
   const { data: dynamicSections } = usePublishedGallerySections(key);
-  const sections = mergeGallerySections(galleryMediaByPage[key] ?? [], dynamicSections);
+  const sections = mergeGallerySections(galleryMediaByPage[key] ?? [], dynamicSections).filter(
+    (section) => Boolean(section) && Array.isArray(section.images),
+  );
   const photoCount = sections.reduce((acc, section) => acc + section.images.length, 0);
 
   return (
