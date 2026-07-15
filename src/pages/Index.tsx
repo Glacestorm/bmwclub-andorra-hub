@@ -427,7 +427,7 @@ const Index = () => {
       <Hero language={language} />
       <HomeWelcomeShowcase />
 
-      <section className="pb-10">
+      <section className="pt-6 pb-10 md:pt-8">
         <div className="container mx-auto px-4">
           <Card className="glass-panel rounded-[2rem] border-0 max-w-6xl mx-auto p-6 md:p-8">
             <div className="grid md:grid-cols-[1.2fr_0.8fr] gap-8 items-center">
