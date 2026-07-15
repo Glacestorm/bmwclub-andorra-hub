@@ -77,6 +77,10 @@ const translations: Record<LanguageCode, Record<string, string>> = {
     openDriveExperiencePage: "Obrir Drive Experience",
     openEventModePage: "Obrir Event Mode",
     openPostDrivePage: "Obrir Post-Drive Report",
+    quickView: "Vista ràpida",
+    fullView: "Ruta completa",
+    hideRoute: "Tancar",
+    collapsedRouteHint: "Obre només el resum o desplega la ruta sencera.",
   },
   es: {
     eyebrow: "Itinerarios BMW en Andorra",
@@ -141,6 +145,10 @@ const translations: Record<LanguageCode, Record<string, string>> = {
     openDriveExperiencePage: "Abrir Drive Experience",
     openEventModePage: "Abrir Event Mode",
     openPostDrivePage: "Abrir Post-Drive Report",
+    quickView: "Vista rápida",
+    fullView: "Ruta completa",
+    hideRoute: "Cerrar",
+    collapsedRouteHint: "Abre solo el resumen o despliega la ruta entera.",
   },
   fr: {
     eyebrow: "Itinéraires BMW en Andorre",
@@ -205,6 +213,10 @@ const translations: Record<LanguageCode, Record<string, string>> = {
     openDriveExperiencePage: "Ouvrir Drive Experience",
     openEventModePage: "Ouvrir Event Mode",
     openPostDrivePage: "Ouvrir Post-Drive Report",
+    quickView: "Vue rapide",
+    fullView: "Itinéraire complet",
+    hideRoute: "Fermer",
+    collapsedRouteHint: "Ouvrez seulement le résumé ou déployez l’itinéraire complet.",
   },
   en: {
     eyebrow: "BMW itineraries in Andorra",
@@ -269,6 +281,10 @@ const translations: Record<LanguageCode, Record<string, string>> = {
     openDriveExperiencePage: "Open Drive Experience",
     openEventModePage: "Open Event Mode",
     openPostDrivePage: "Open Post-Drive Report",
+    quickView: "Quick view",
+    fullView: "Full route",
+    hideRoute: "Close",
+    collapsedRouteHint: "Open only the summary or expand the full route.",
   },
   pt: {
     eyebrow: "Itinerários BMW em Andorra",
@@ -333,6 +349,10 @@ const translations: Record<LanguageCode, Record<string, string>> = {
     openDriveExperiencePage: "Abrir Drive Experience",
     openEventModePage: "Abrir Event Mode",
     openPostDrivePage: "Abrir Post-Drive Report",
+    quickView: "Vista rápida",
+    fullView: "Rota completa",
+    hideRoute: "Fechar",
+    collapsedRouteHint: "Abra só o resumo ou desdobre a rota completa.",
   },
   de: {
     eyebrow: "BMW-Routen in Andorra",
@@ -397,6 +417,10 @@ const translations: Record<LanguageCode, Record<string, string>> = {
     openDriveExperiencePage: "Drive Experience öffnen",
     openEventModePage: "Event Mode öffnen",
     openPostDrivePage: "Post-Drive Report öffnen",
+    quickView: "Schnellansicht",
+    fullView: "Komplette Route",
+    hideRoute: "Schließen",
+    collapsedRouteHint: "Nur die Zusammenfassung öffnen oder die ganze Route ausklappen.",
   },
   ru: {
     eyebrow: "BMW-маршруты по Андорре",
@@ -461,6 +485,10 @@ const translations: Record<LanguageCode, Record<string, string>> = {
     openDriveExperiencePage: "Открыть Drive Experience",
     openEventModePage: "Открыть Event Mode",
     openPostDrivePage: "Открыть Post-Drive Report",
+    quickView: "Быстрый просмотр",
+    fullView: "Полный маршрут",
+    hideRoute: "Закрыть",
+    collapsedRouteHint: "Откройте только краткий вид или разверните весь маршрут.",
   },
 };
 
@@ -922,6 +950,8 @@ type EventModeData = {
   timeline: Array<{ time: string; label: Record<LanguageCode, string> }>;
   checklist: Record<LanguageCode, string[]>;
 };
+
+type RouteViewMode = "closed" | "summary" | "full";
 
 type PostDriveReportData = {
   summary: Record<LanguageCode, string>;
@@ -1890,6 +1920,8 @@ const Itineraris = () => {
   const { language } = useLanguage();
   const t = translations[language];
   const { data: routes = [] } = useMergedItineraries();
+  const [activeRouteId, setActiveRouteId] = useState<string | null>(null);
+  const [activeRouteMode, setActiveRouteMode] = useState<RouteViewMode>("closed");
   const showcaseRoutes = routes.slice(0, 3);
   const [selectedEventRouteId, setSelectedEventRouteId] = useState<string>("grand-tour-central");
   const [conciergeDuration, setConciergeDuration] = useState<ConciergeDuration>("halfday");
@@ -1929,6 +1961,16 @@ const Itineraris = () => {
   const reportRoutes = routes.filter((route) => postDriveReportByRouteId[route.id]);
   const activeReportRoute = reportRoutes.find((route) => route.id === selectedReportRouteId) ?? reportRoutes[0] ?? null;
   const activeReportData = activeReportRoute ? postDriveReportByRouteId[activeReportRoute.id] : null;
+
+  const openRoute = (routeId: string, mode: RouteViewMode) => {
+    setActiveRouteId(routeId);
+    setActiveRouteMode(mode);
+  };
+
+  const closeRoute = () => {
+    setActiveRouteId(null);
+    setActiveRouteMode("closed");
+  };
 
   return (
     <PageShell>
@@ -1975,9 +2017,13 @@ const Itineraris = () => {
           {routes.map((route) => {
             const profile = getProfileMeta(route, t);
             const ProfileIcon = profile.icon;
+            const routeMode: RouteViewMode = activeRouteId === route.id ? activeRouteMode : "closed";
+            const isClosed = routeMode === "closed";
+            const isSummary = routeMode === "summary";
+            const isFull = routeMode === "full";
             return (
               <Card key={route.id} className="premium-card border-0 rounded-[2rem] p-6 md:p-8 shadow-elegant overflow-hidden">
-                <div className="grid lg:grid-cols-[0.92fr_1.08fr] gap-8 items-start">
+                <div className={`grid gap-8 items-start ${isClosed ? "lg:grid-cols-1" : "lg:grid-cols-[0.92fr_1.08fr]"}`}>
                   <div>
                     <div className="flex flex-wrap items-center gap-3">
                       <div className="inline-flex items-center gap-2 rounded-full bg-primary/10 px-4 py-2 text-xs font-semibold uppercase tracking-[0.2em] text-primary">
@@ -1994,6 +2040,34 @@ const Itineraris = () => {
 
                     <h2 className="mt-5 text-3xl md:text-4xl font-bold text-balance">{route.title[language]}</h2>
                     <p className="mt-4 text-lg text-muted-foreground">{route.strapline[language]}</p>
+
+                    <p className="mt-4 text-sm text-muted-foreground">{t.collapsedRouteHint}</p>
+
+                    <div className="mt-5 flex flex-wrap gap-3">
+                      <button
+                        type="button"
+                        onClick={() => openRoute(route.id, "summary")}
+                        className={`inline-flex items-center gap-2 rounded-full px-4 py-2 text-xs font-semibold uppercase tracking-[0.14em] transition ${isSummary ? "bg-primary text-white" : "border border-slate-200 bg-white text-slate-800 hover:border-primary hover:text-primary"}`}
+                      >
+                        {t.quickView}
+                      </button>
+                      <button
+                        type="button"
+                        onClick={() => openRoute(route.id, "full")}
+                        className={`inline-flex items-center gap-2 rounded-full px-4 py-2 text-xs font-semibold uppercase tracking-[0.14em] transition ${isFull ? "bg-slate-950 text-white" : "border border-slate-200 bg-white text-slate-800 hover:border-primary hover:text-primary"}`}
+                      >
+                        {t.fullView}
+                      </button>
+                      {!isClosed ? (
+                        <button
+                          type="button"
+                          onClick={closeRoute}
+                          className="inline-flex items-center gap-2 rounded-full border border-slate-200 bg-white px-4 py-2 text-xs font-semibold uppercase tracking-[0.14em] text-slate-800 transition hover:border-primary hover:text-primary"
+                        >
+                          {t.hideRoute}
+                        </button>
+                      ) : null}
+                    </div>
 
                     {route.clubRecommended && route.clubRecommendation ? (
                       <div className="mt-5 rounded-[1.5rem] border border-accent/10 bg-accent text-white p-5 shadow-[0_20px_50px_-35px_rgba(15,23,42,.65)]">
@@ -2025,44 +2099,51 @@ const Itineraris = () => {
                     </div>
                   </div>
 
-                  <div className="grid gap-5">
-                    <RoutePhoto route={route} t={t} language={language} />
-                    <RouteSchematic route={route} t={t} language={language} />
-                    <RouteStopsPanel route={route} t={t} />
+                  {!isClosed ? (
+                    <div className="grid gap-5">
+                      <RoutePhoto route={route} t={t} language={language} />
+                      <RouteSchematic route={route} t={t} language={language} />
 
-                    <div className="rounded-[1.6rem] border border-border/70 bg-white/70 p-5">
-                      <div className="flex items-center gap-2 text-primary font-semibold text-sm uppercase tracking-[0.18em]"><CalendarRange className="h-4 w-4" /> {t.route}</div>
-                      <div className="mt-4 text-sm text-muted-foreground"><span className="font-semibold text-foreground">{t.start}:</span> {route.start} · <span className="font-semibold text-foreground">{t.finish}:</span> {route.finish}</div>
-                      <div className="mt-4 flex flex-wrap gap-2">
-                        {route.waypoints.map((point) => (
-                          <span key={point} className="rounded-full border border-border/80 bg-background/85 px-3 py-1 text-xs font-medium text-foreground/82">{point}</span>
-                        ))}
+                      <div className="rounded-[1.6rem] border border-border/70 bg-white/70 p-5">
+                        <div className="flex items-center gap-2 text-primary font-semibold text-sm uppercase tracking-[0.18em]"><CalendarRange className="h-4 w-4" /> {t.route}</div>
+                        <div className="mt-4 text-sm text-muted-foreground"><span className="font-semibold text-foreground">{t.start}:</span> {route.start} · <span className="font-semibold text-foreground">{t.finish}:</span> {route.finish}</div>
+                        <div className="mt-4 flex flex-wrap gap-2">
+                          {route.waypoints.map((point) => (
+                            <span key={point} className="rounded-full border border-border/80 bg-background/85 px-3 py-1 text-xs font-medium text-foreground/82">{point}</span>
+                          ))}
+                        </div>
                       </div>
-                    </div>
 
-                    <div className="rounded-[1.6rem] border border-border/70 bg-white/70 p-5">
-                      <div className="text-sm uppercase tracking-[0.18em] text-primary font-semibold">{t.highlights}</div>
-                      <ul className="mt-4 space-y-3 text-sm text-foreground/86">
-                        {route.highlights.map((item, index) => (
-                          <li key={`${route.id}-highlight-${index}`} className="flex gap-3"><ArrowRight className="h-4 w-4 text-primary shrink-0 mt-0.5" /> <span>{item[language]}</span></li>
-                        ))}
-                      </ul>
-                    </div>
+                      {isFull ? (
+                        <>
+                          <RouteStopsPanel route={route} t={t} />
 
-                    <div className="rounded-[1.6rem] border border-border/70 bg-white/70 p-5">
-                      <div className="text-sm uppercase tracking-[0.18em] text-primary font-semibold">{t.bmw}</div>
-                      <p className="mt-4 text-sm text-foreground/86">{route.bmwAngle[language]}</p>
-                    </div>
+                          <div className="rounded-[1.6rem] border border-border/70 bg-white/70 p-5">
+                            <div className="text-sm uppercase tracking-[0.18em] text-primary font-semibold">{t.highlights}</div>
+                            <ul className="mt-4 space-y-3 text-sm text-foreground/86">
+                              {route.highlights.map((item, index) => (
+                                <li key={`${route.id}-highlight-${index}`} className="flex gap-3"><ArrowRight className="h-4 w-4 text-primary shrink-0 mt-0.5" /> <span>{item[language]}</span></li>
+                              ))}
+                            </ul>
+                          </div>
 
-                    <div className="rounded-[1.6rem] border border-border/70 bg-white/70 p-5">
-                      <div className="text-sm uppercase tracking-[0.18em] text-primary font-semibold">{t.notes}</div>
-                      <ul className="mt-4 space-y-3 text-sm text-foreground/82">
-                        {route.notes.map((item, index) => (
-                          <li key={`${route.id}-note-${index}`} className="flex gap-3"><ShieldCheck className="h-4 w-4 text-primary shrink-0 mt-0.5" /> <span>{item[language]}</span></li>
-                        ))}
-                      </ul>
+                          <div className="rounded-[1.6rem] border border-border/70 bg-white/70 p-5">
+                            <div className="text-sm uppercase tracking-[0.18em] text-primary font-semibold">{t.bmw}</div>
+                            <p className="mt-4 text-sm text-foreground/86">{route.bmwAngle[language]}</p>
+                          </div>
+
+                          <div className="rounded-[1.6rem] border border-border/70 bg-white/70 p-5">
+                            <div className="text-sm uppercase tracking-[0.18em] text-primary font-semibold">{t.notes}</div>
+                            <ul className="mt-4 space-y-3 text-sm text-foreground/82">
+                              {route.notes.map((item, index) => (
+                                <li key={`${route.id}-note-${index}`} className="flex gap-3"><ShieldCheck className="h-4 w-4 text-primary shrink-0 mt-0.5" /> <span>{item[language]}</span></li>
+                              ))}
+                            </ul>
+                          </div>
+                        </>
+                      ) : null}
                     </div>
-                  </div>
+                  ) : null}
                 </div>
               </Card>
             );
