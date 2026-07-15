@@ -25,7 +25,7 @@ const translations: Record<LanguageCode, Record<string, string>> = {
     finish: "Final",
     route: "Traçat recomanat",
     scheme: "Esquema visual",
-    schemeNote: "Mapa estilitzat del recorregut, pensat per entendre el flux de la ruta d’un cop d’ull.",
+    schemeNote: "Mapa de referència d’Andorra amb els punts reals del recorregut i el traçat principal de la ruta.",
     highlights: "Per què val la pena",
     bmw: "Per què és molt BMW",
     notes: "Notes pràctiques",
@@ -59,7 +59,7 @@ const translations: Record<LanguageCode, Record<string, string>> = {
     finish: "Final",
     route: "Trazado recomendado",
     scheme: "Esquema visual",
-    schemeNote: "Mapa estilizado del recorrido, pensado para entender el flujo de la ruta de un vistazo.",
+    schemeNote: "Mapa de referencia de Andorra con los puntos reales del recorrido y el trazado principal de la ruta.",
     highlights: "Por qué merece la pena",
     bmw: "Por qué es muy BMW",
     notes: "Notas prácticas",
@@ -93,7 +93,7 @@ const translations: Record<LanguageCode, Record<string, string>> = {
     finish: "Arrivée",
     route: "Tracé recommandé",
     scheme: "Schéma visuel",
-    schemeNote: "Carte stylisée du parcours pour comprendre immédiatement le flux de la route.",
+    schemeNote: "Carte de référence de l’Andorre avec les points réels du parcours et son tracé principal.",
     highlights: "Pourquoi ça vaut le coup",
     bmw: "Pourquoi c’est très BMW",
     notes: "Notes pratiques",
@@ -127,7 +127,7 @@ const translations: Record<LanguageCode, Record<string, string>> = {
     finish: "Finish",
     route: "Recommended route",
     scheme: "Visual schematic",
-    schemeNote: "A stylised route map designed to show the route flow at a glance.",
+    schemeNote: "Reference map of Andorra with the route placed on real locations and traced across the country.",
     highlights: "Why it is worth it",
     bmw: "Why it feels BMW",
     notes: "Practical notes",
@@ -161,7 +161,7 @@ const translations: Record<LanguageCode, Record<string, string>> = {
     finish: "Fim",
     route: "Traçado recomendado",
     scheme: "Esquema visual",
-    schemeNote: "Mapa estilizado do percurso para perceber o fluxo da rota num relance.",
+    schemeNote: "Mapa de referência de Andorra com os pontos reais do percurso e o traçado principal da rota.",
     highlights: "Porque vale a pena",
     bmw: "Porque é muito BMW",
     notes: "Notas práticas",
@@ -195,7 +195,7 @@ const translations: Record<LanguageCode, Record<string, string>> = {
     finish: "Ziel",
     route: "Empfohlene Linie",
     scheme: "Visuelles Schema",
-    schemeNote: "Stilisierte Kartenlogik, damit der Routenfluss auf einen Blick verständlich wird.",
+    schemeNote: "Referenzkarte von Andorra mit realen Wegpunkten und eingezeichneter Hauptroute.",
     highlights: "Warum es sich lohnt",
     bmw: "Warum es sehr BMW ist",
     notes: "Praktische Hinweise",
@@ -229,7 +229,7 @@ const translations: Record<LanguageCode, Record<string, string>> = {
     finish: "Финиш",
     route: "Рекомендуемый маршрут",
     scheme: "Визуальная схема",
-    schemeNote: "Стилизованная карта маршрута, чтобы сразу понимать его логику и поток.",
+    schemeNote: "Опорная карта Андорры с реальными точками маршрута и нанесённой линией движения.",
     highlights: "Почему стоит ехать",
     bmw: "Почему это очень BMW",
     notes: "Практические заметки",
@@ -255,14 +255,115 @@ const getProfileMeta = (route: ClubItinerary, t: Record<string, string>) => {
   return { label: t.kindBoth, icon: Route };
 };
 
+type MapCoordinate = {
+  lat: number;
+  lon: number;
+  dx?: number;
+  dy?: number;
+  anchor?: "start" | "middle" | "end";
+};
+
+const ANDORRA_BOUNDS = {
+  minLat: 42.43,
+  maxLat: 42.66,
+  minLon: 1.41,
+  maxLon: 1.79,
+};
+
+const andorraOutline: Array<{ lat: number; lon: number }> = [
+  { lat: 42.649, lon: 1.417 },
+  { lat: 42.64, lon: 1.446 },
+  { lat: 42.628, lon: 1.463 },
+  { lat: 42.618, lon: 1.49 },
+  { lat: 42.604, lon: 1.506 },
+  { lat: 42.594, lon: 1.534 },
+  { lat: 42.584, lon: 1.563 },
+  { lat: 42.572, lon: 1.591 },
+  { lat: 42.558, lon: 1.621 },
+  { lat: 42.544, lon: 1.65 },
+  { lat: 42.526, lon: 1.655 },
+  { lat: 42.509, lon: 1.642 },
+  { lat: 42.497, lon: 1.623 },
+  { lat: 42.491, lon: 1.597 },
+  { lat: 42.489, lon: 1.566 },
+  { lat: 42.493, lon: 1.54 },
+  { lat: 42.499, lon: 1.514 },
+  { lat: 42.507, lon: 1.485 },
+  { lat: 42.519, lon: 1.459 },
+  { lat: 42.533, lon: 1.435 },
+  { lat: 42.553, lon: 1.419 },
+  { lat: 42.577, lon: 1.412 },
+  { lat: 42.601, lon: 1.406 },
+  { lat: 42.625, lon: 1.404 },
+  { lat: 42.641, lon: 1.408 },
+];
+
+const waypointCoordinates: Record<string, MapCoordinate> = {
+  "andorra la vella": { lat: 42.5063, lon: 1.5218, dx: -6, dy: 22, anchor: "end" },
+  "escaldes engordany": { lat: 42.5096, lon: 1.5341, dx: 10, dy: 34, anchor: "start" },
+  engolasters: { lat: 42.5188, lon: 1.5792, dx: 0, dy: -14, anchor: "middle" },
+  canillo: { lat: 42.5676, lon: 1.5976, dx: 0, dy: 24, anchor: "middle" },
+  meritxell: { lat: 42.5618, lon: 1.5961, dx: 0, dy: -14, anchor: "middle" },
+  ordino: { lat: 42.5562, lon: 1.5332, dx: 0, dy: 24, anchor: "middle" },
+  "coll d ordino": { lat: 42.5793, lon: 1.5255, dx: 16, dy: -8, anchor: "start" },
+  "la massana": { lat: 42.54499, lon: 1.5148, dx: -2, dy: 24, anchor: "middle" },
+  pal: { lat: 42.5567, lon: 1.4935, dx: -2, dy: -14, anchor: "middle" },
+  "coll de la botella": { lat: 42.5722, lon: 1.4637, dx: 20, dy: -10, anchor: "start" },
+  arinsal: { lat: 42.572, lon: 1.4845, dx: 22, dy: 10, anchor: "start" },
+  erts: { lat: 42.5551, lon: 1.4922, dx: -14, dy: 22, anchor: "end" },
+};
+
+const normalizeWaypoint = (value: string) =>
+  value
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .replace(/[’']/g, " ")
+    .replace(/[^a-zA-Z0-9]+/g, " ")
+    .trim()
+    .toLowerCase();
+
+const projectMapPoint = (lat: number, lon: number, width: number, height: number) => {
+  const paddingX = 34;
+  const paddingY = 22;
+  const x = paddingX + ((lon - ANDORRA_BOUNDS.minLon) / (ANDORRA_BOUNDS.maxLon - ANDORRA_BOUNDS.minLon)) * (width - paddingX * 2);
+  const y = paddingY + ((ANDORRA_BOUNDS.maxLat - lat) / (ANDORRA_BOUNDS.maxLat - ANDORRA_BOUNDS.minLat)) * (height - paddingY * 2);
+  return { x, y };
+};
+
+const buildSmoothPath = (points: Array<{ x: number; y: number }>) => {
+  if (!points.length) return "";
+  if (points.length === 1) return `M ${points[0].x} ${points[0].y}`;
+
+  let d = `M ${points[0].x} ${points[0].y}`;
+  for (let index = 1; index < points.length; index += 1) {
+    const current = points[index];
+    const previous = points[index - 1];
+    const controlX = (previous.x + current.x) / 2;
+    d += ` Q ${controlX} ${previous.y}, ${current.x} ${current.y}`;
+  }
+  return d;
+};
+
 const RouteSchematic = ({ route, t }: { route: ClubItinerary; t: Record<string, string> }) => {
-  const count = route.waypoints.length;
-  const points = route.waypoints.map((point, index) => {
-    const x = 34 + (index * (252 / Math.max(count - 1, 1)));
-    const y = index % 2 === 0 ? 46 : 112;
-    return { point, x, y };
-  });
-  const polyline = points.map((point) => `${point.x},${point.y}`).join(" ");
+  const width = 360;
+  const height = 220;
+  const routePoints = route.waypoints
+    .map((waypoint, index) => {
+      const coordinate = waypointCoordinates[normalizeWaypoint(waypoint)];
+      if (!coordinate) return null;
+      const projected = projectMapPoint(coordinate.lat, coordinate.lon, width, height);
+      return {
+        point: waypoint,
+        index,
+        ...coordinate,
+        ...projected,
+      };
+    })
+    .filter(Boolean) as Array<{ point: string; index: number; lat: number; lon: number; x: number; y: number; dx?: number; dy?: number; anchor?: "start" | "middle" | "end" }>;
+
+  const routePath = buildSmoothPath(routePoints);
+  const outlinePoints = andorraOutline.map((point) => projectMapPoint(point.lat, point.lon, width, height));
+  const outlinePath = `${outlinePoints.map((point, index) => `${index === 0 ? "M" : "L"} ${point.x} ${point.y}`).join(" ")} Z`;
 
   return (
     <div className="rounded-[1.6rem] border border-border/70 bg-white/72 p-5 overflow-hidden">
@@ -273,31 +374,49 @@ const RouteSchematic = ({ route, t }: { route: ClubItinerary; t: Record<string, 
       <p className="mt-2 text-sm text-muted-foreground">{t.schemeNote}</p>
 
       <div className="mt-5 overflow-x-auto">
-        <div className="min-w-[320px]">
-          <svg viewBox="0 0 320 160" className="w-full h-auto">
+        <div className="min-w-[340px]">
+          <svg viewBox={`0 0 ${width} ${height}`} className="w-full h-auto">
             <defs>
-              <linearGradient id={`route-gradient-${route.id}`} x1="0%" x2="100%" y1="0%" y2="0%">
-                <stop offset="0%" stopColor="rgba(0,102,177,0.45)" />
-                <stop offset="100%" stopColor="rgba(15,23,42,0.72)" />
+              <linearGradient id={`andorra-relief-${route.id}`} x1="0%" x2="100%" y1="0%" y2="100%">
+                <stop offset="0%" stopColor="#f8fafc" />
+                <stop offset="100%" stopColor="#dbeafe" />
               </linearGradient>
+              <linearGradient id={`route-gradient-${route.id}`} x1="0%" x2="100%" y1="0%" y2="0%">
+                <stop offset="0%" stopColor="#0284c7" />
+                <stop offset="100%" stopColor="#0f172a" />
+              </linearGradient>
+              <filter id={`shadow-${route.id}`} x="-20%" y="-20%" width="140%" height="140%">
+                <feDropShadow dx="0" dy="10" stdDeviation="10" floodColor="#0f172a" floodOpacity="0.08" />
+              </filter>
             </defs>
-            <polyline
-              points={polyline}
-              fill="none"
-              stroke={`url(#route-gradient-${route.id})`}
-              strokeWidth="6"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeDasharray="0"
-            />
-            {points.map((point, index) => (
-              <g key={`${route.id}-${point.point}-${index}`}>
-                <circle cx={point.x} cy={point.y} r={index === 0 || index === points.length - 1 ? 10 : 7} fill={index === 0 ? "#0066B1" : index === points.length - 1 ? "#111827" : "#ffffff"} stroke="#0f172a" strokeWidth="2" />
-                <text x={point.x} y={point.y + 28} textAnchor="middle" fontSize="10" fontWeight="700" fill="#334155">
-                  {point.point.length > 18 ? `${point.point.slice(0, 16)}…` : point.point}
-                </text>
-              </g>
-            ))}
+
+            <rect x="8" y="8" width={width - 16} height={height - 16} rx="28" fill="#f8fafc" />
+            <path d={outlinePath} fill={`url(#andorra-relief-${route.id})`} stroke="#cbd5e1" strokeWidth="2" filter={`url(#shadow-${route.id})`} />
+
+            <path d="M 112 34 C 148 76, 154 126, 188 184" fill="none" stroke="#e2e8f0" strokeWidth="8" strokeLinecap="round" opacity="0.9" />
+            <path d="M 162 48 C 196 78, 222 114, 248 164" fill="none" stroke="#dbeafe" strokeWidth="6" strokeLinecap="round" opacity="0.8" />
+            <path d="M 74 116 C 132 106, 214 108, 288 122" fill="none" stroke="#e5e7eb" strokeWidth="4" strokeLinecap="round" opacity="0.8" />
+
+            {routePath ? (
+              <>
+                <path d={routePath} fill="none" stroke="#ffffff" strokeWidth="10" strokeLinecap="round" strokeLinejoin="round" opacity="0.95" />
+                <path d={routePath} fill="none" stroke={`url(#route-gradient-${route.id})`} strokeWidth="6" strokeLinecap="round" strokeLinejoin="round" />
+              </>
+            ) : null}
+
+            {routePoints.map((point) => {
+              const isTerminal = point.index === 0 || point.index === routePoints.length - 1;
+              const label = point.point.length > 21 ? `${point.point.slice(0, 19)}…` : point.point;
+              return (
+                <g key={`${route.id}-${point.point}-${point.index}`}>
+                  <circle cx={point.x} cy={point.y} r={isTerminal ? 8.5 : 6.5} fill={point.index === 0 ? "#0284c7" : point.index === routePoints.length - 1 ? "#0f172a" : "#ffffff"} stroke="#0f172a" strokeWidth="2" />
+                  <circle cx={point.x} cy={point.y} r={isTerminal ? 15 : 11} fill="none" stroke={point.index === 0 ? "rgba(2,132,199,0.22)" : "rgba(15,23,42,0.12)"} strokeWidth="2" />
+                  <text x={point.x + (point.dx ?? 0)} y={point.y + (point.dy ?? 22)} textAnchor={point.anchor ?? "middle"} fontSize="10.5" fontWeight="700" fill="#334155">
+                    {label}
+                  </text>
+                </g>
+              );
+            })}
           </svg>
         </div>
       </div>
