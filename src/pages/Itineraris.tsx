@@ -411,29 +411,36 @@ type RouteStop = {
 const routeStopsById: Record<string, RouteStop[]> = {
   "grand-tour-central": [
     { name: "Llac d’Engolasters", place: "Escaldes-Engordany", category: "nature", lat: 42.5188, lon: 1.5792, note: "Parada natural clásica para abrir la ruta con lago y bosque." },
+    { name: "El Läk", place: "Engolasters", category: "restaurant", lat: 42.5194, lon: 1.5784, note: "Terraza junto al lago para una parada más lifestyle y fotogénica." },
     { name: "Mirador Roc del Quer", place: "Canillo", category: "viewpoint", lat: 42.5759, lon: 1.6491, note: "Mirador icónico sobre el valle, muy potente para foto de club." },
     { name: "Santuari de Meritxell", place: "Meritxell", category: "heritage", lat: 42.5604, lon: 1.5957, note: "Punto patrimonial limpio y reconocible para una parada elegante." },
+    { name: "L’Era del Rossell", place: "Meritxell", category: "restaurant", lat: 42.5599, lon: 1.5972, note: "Muy cerca de la basílica, ideal para elevar la parada gourmet." },
     { name: "Borda de l’Avi", place: "Canillo", category: "restaurant", lat: 42.5671, lon: 1.6008, note: "Cocina de montaña, buena opción para cierre de mediodía." },
   ],
   "west-viewpoints-loop": [
     { name: "Sant Climent de Pal", place: "Pal", category: "heritage", lat: 42.5564, lon: 1.4934, note: "Iglesia románica y parada con carácter muy andorrano." },
     { name: "Mirador Coll de la Botella", place: "Pal / Arinsal", category: "viewpoint", lat: 42.5722, lon: 1.4637, note: "Mirador abierto y muy agradecido para fotos de carretera." },
     { name: "Farga Rossell", place: "La Massana", category: "heritage", lat: 42.5472, lon: 1.5146, note: "Punto industrial histórico para añadir cultura a la ruta." },
+    { name: "Restaurant Coll de la Botella", place: "Pal", category: "restaurant", lat: 42.5719, lon: 1.4643, note: "Cocina de montaña con terraza y acceso cómodo en plena ruta." },
     { name: "Pla de la Cot", place: "Pal", category: "restaurant", lat: 42.5568, lon: 1.4946, note: "Borda de montaña ideal para una parada gastronómica." },
   ],
   "envalira-high-mountain": [
     { name: "Andorra Circuit", place: "Pas de la Casa", category: "motorsport", lat: 42.534, lon: 1.7144, note: "Punto motor directo, coherente con el tono BMW de la ruta." },
     { name: "Port d’Envalira", place: "Pas de la Casa", category: "viewpoint", lat: 42.5394, lon: 1.7337, note: "El gran balcón de alta montaña del país." },
     { name: "Estanys de Pessons", place: "Grau Roig", category: "nature", lat: 42.5305, lon: 1.7168, note: "Parada paisajística potente si quieres añadir aire alpino." },
-    { name: "La Fromagerie", place: "Grau Roig", category: "restaurant", lat: 42.5319, lon: 1.731, note: "Parada gastronómica cálida en el tramo más de montaña." },
+    { name: "Restaurant dels Llacs de Pessons", place: "Grau Roig", category: "restaurant", lat: 42.5319, lon: 1.731, note: "Refugio-restaurante junto a los lagos, perfecto para reforzar el carácter alpino de la ruta." },
+    { name: "Restaurant Abelletes", place: "Pas de la Casa", category: "restaurant", lat: 42.5433, lon: 1.7338, note: "Parada alta de montaña junto al tramo final, útil para rematar la subida." },
   ],
   "ordino-tristaina-touring": [
     { name: "Casa d’Areny-Plandolit", place: "Ordino", category: "heritage", lat: 42.5566, lon: 1.5332, note: "Parada patrimonial premium en el corazón de Ordino." },
     { name: "Mirador Solar de Tristaina", place: "Arcalís", category: "viewpoint", lat: 42.6482, lon: 1.5337, note: "Uno de los miradores más espectaculares y fotogénicos de Andorra." },
     { name: "Parc natural de Sorteny", place: "El Serrat", category: "nature", lat: 42.5966, lon: 1.5334, note: "Naturaleza de alta montaña para dar profundidad a la ruta." },
-    { name: "Hotel Bringué", place: "El Serrat", category: "restaurant", lat: 42.5907, lon: 1.5239, note: "Parada gastronómica sólida antes o después de Tristaina." },
+    { name: "Refugi de Sorteny", place: "Sorteny", category: "restaurant", lat: 42.5977, lon: 1.5179, note: "Restaurante en pleno parque natural, muy potente para una parada de montaña." },
+    { name: "Restaurant de la Coma d’Arcalís", place: "Arcalís", category: "restaurant", lat: 42.6332, lon: 1.4992, note: "Terraza de alta montaña muy alineada con el final más espectacular de la ruta." },
   ],
 };
+
+const stopLegendCategories: RouteStopCategory[] = ["restaurant", "viewpoint", "heritage", "nature", "motorsport"];
 
 const normalizeWaypoint = (value: string) =>
   value
@@ -526,6 +533,24 @@ const RouteSchematic = ({ route, t }: { route: ClubItinerary; t: Record<string, 
         </MapContainer>
       </div>
 
+      <div className="mt-4 flex flex-wrap gap-2">
+        {stopLegendCategories.map((category) => {
+          const meta = getStopMeta(category, t);
+          const Icon = meta.icon;
+          return (
+            <div
+              key={`${route.id}-${category}`}
+              className="inline-flex items-center gap-2 rounded-full border border-border/70 bg-white/85 px-3 py-1.5 text-[11px] font-semibold uppercase tracking-[0.14em] text-slate-700"
+            >
+              <span className="inline-flex h-5 w-5 items-center justify-center rounded-full" style={{ backgroundColor: `${meta.color}18`, color: meta.color }}>
+                <Icon className="h-3.5 w-3.5" />
+              </span>
+              {meta.label}
+            </div>
+          );
+        })}
+      </div>
+
       <div className="mt-4 flex flex-wrap gap-3 text-xs uppercase tracking-[0.18em] text-muted-foreground font-semibold">
         <span>{t.mapStart}: {route.start}</span>
         <span>•</span>
@@ -573,6 +598,7 @@ const RouteStopsPanel = ({ route, t }: { route: ClubItinerary; t: Record<string,
               </div>
               <div className="mt-3 text-base font-semibold text-foreground">{stop.name}</div>
               <div className="mt-1 text-sm text-muted-foreground">{stop.place}</div>
+              <p className="mt-2 text-sm leading-6 text-slate-600">{stop.note}</p>
             </div>
           );
         })}
