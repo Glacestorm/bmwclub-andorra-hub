@@ -427,9 +427,9 @@ const Index = () => {
       <Hero language={language} />
       <HomeWelcomeShowcase />
 
-      <section className="pt-6 pb-10 md:pt-8">
+      <section className="relative z-20 pt-6 pb-10 md:-mt-10 md:pt-0 md:pb-12 lg:-mt-12">
         <div className="container mx-auto px-4">
-          <Card className="glass-panel rounded-[2rem] border-0 max-w-6xl mx-auto p-6 md:p-8">
+          <Card className="glass-panel rounded-[2rem] border-0 max-w-6xl mx-auto p-6 md:p-8 shadow-[0_28px_90px_-42px_rgba(15,23,42,.4)]">
             <div className="grid md:grid-cols-[1.2fr_0.8fr] gap-8 items-center">
               <div>
                 <div className="inline-flex items-center gap-2 rounded-full bg-primary/10 px-4 py-2 text-sm font-medium text-primary mb-4"><Sparkles className="h-4 w-4" /> {t.pillars}</div>

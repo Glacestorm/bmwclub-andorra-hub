@@ -173,20 +173,20 @@ export const Hero = ({ language }: HeroProps) => {
             </div>
           </div>
 
-          <div className="hidden gap-3 md:grid md:grid-cols-2 lg:ml-auto lg:max-w-xl lg:grid-cols-1 lg:gap-4">
+          <div className="hidden gap-3 md:grid md:grid-cols-2 md:gap-4 lg:ml-auto lg:max-w-xl lg:grid-cols-1 lg:gap-4">
             {[
               { icon: Calendar, title: t.card1t, desc: t.card1d },
               { icon: Compass, title: t.card2t, desc: t.card2d },
               { icon: Sparkles, title: t.card3t, desc: t.card3d },
-            ].map((item) => {
+            ].map((item, index) => {
               const Icon = item.icon;
               return (
-                <div key={item.title} className="glass-panel rounded-[1.45rem] p-4 hover-tilt sm:rounded-[1.75rem] sm:p-5">
+                <div key={item.title} className={`glass-panel rounded-[1.6rem] p-5 hover-tilt md:min-h-[168px] lg:min-h-0 ${index === 2 ? "md:col-span-2 lg:col-span-1" : ""}`}>
                   <div className="flex items-start gap-4">
                     <div className="rounded-2xl bg-primary/10 p-3"><Icon className="h-5 w-5 text-primary" /></div>
                     <div>
                       <h3 className="text-lg font-semibold text-slate-900">{item.title}</h3>
-                      <p className="mt-2 text-sm text-slate-600">{item.desc}</p>
+                      <p className="mt-2 text-sm leading-relaxed text-slate-600">{item.desc}</p>
                     </div>
                   </div>
                 </div>
