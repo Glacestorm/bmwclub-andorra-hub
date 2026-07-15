@@ -59,6 +59,13 @@ const translations: Record<LanguageCode, Record<string, string>> = {
     mapClose: "Tancar mapa",
     openGoogleMaps: "Obrir a Google Maps",
     openFullRoute: "Obrir ruta completa",
+    visionEyebrow: "Drive Experience",
+    visionTitle: "El següent pas: convertir el club en una plataforma premium de rutes, esdeveniments i experiències BMW.",
+    visionIntro: "Això ja no seria només una pàgina d’itineraris. Seria una capa digital pensada per planificar sortides, fer-les memorables i convertir-les en contingut premium de club.",
+    modulesTitle: "Mòduls clau",
+    roadmapTitle: "Roadmap recomanat",
+    bmwTitle: "Per què això pot interessar fins i tot a BMW Official",
+    bmwIntro: "Perquè uneix ruta, hospitality, contingut, dades i experiència de marca en una sola superfície exportable a esdeveniments, concessionaris o llançaments.",
   },
   es: {
     eyebrow: "Itinerarios BMW en Andorra",
@@ -105,6 +112,13 @@ const translations: Record<LanguageCode, Record<string, string>> = {
     mapClose: "Cerrar mapa",
     openGoogleMaps: "Abrir en Google Maps",
     openFullRoute: "Abrir ruta completa",
+    visionEyebrow: "Drive Experience",
+    visionTitle: "El siguiente paso: convertir el club en una plataforma premium de rutas, eventos y experiencias BMW.",
+    visionIntro: "Esto ya no sería solo una página de itinerarios. Sería una capa digital pensada para planificar salidas, hacerlas memorables y convertirlas en contenido premium de club.",
+    modulesTitle: "Módulos clave",
+    roadmapTitle: "Roadmap recomendado",
+    bmwTitle: "Por qué esto puede interesar incluso a BMW Official",
+    bmwIntro: "Porque une ruta, hospitality, contenido, datos y experiencia de marca en una sola superficie exportable a eventos, concesionarios o lanzamientos.",
   },
   fr: {
     eyebrow: "Itinéraires BMW en Andorre",
@@ -151,6 +165,13 @@ const translations: Record<LanguageCode, Record<string, string>> = {
     mapClose: "Fermer la carte",
     openGoogleMaps: "Ouvrir dans Google Maps",
     openFullRoute: "Ouvrir l’itinéraire complet",
+    visionEyebrow: "Drive Experience",
+    visionTitle: "L’étape suivante : transformer le club en plateforme premium de routes, d’événements et d’expériences BMW.",
+    visionIntro: "Ce ne serait plus une simple page d’itinéraires, mais une couche digitale pour planifier des sorties, les rendre mémorables et les convertir en contenu premium du club.",
+    modulesTitle: "Modules clés",
+    roadmapTitle: "Feuille de route recommandée",
+    bmwTitle: "Pourquoi cela peut intéresser même BMW Official",
+    bmwIntro: "Parce que cela réunit route, hospitality, contenu, données et expérience de marque dans une seule surface exportable.",
   },
   en: {
     eyebrow: "BMW itineraries in Andorra",
@@ -197,6 +218,13 @@ const translations: Record<LanguageCode, Record<string, string>> = {
     mapClose: "Close map",
     openGoogleMaps: "Open in Google Maps",
     openFullRoute: "Open full route",
+    visionEyebrow: "Drive Experience",
+    visionTitle: "The next step: turn the club into a premium platform for BMW routes, events and experiences.",
+    visionIntro: "This would no longer be just an itinerary page. It would become a digital layer to plan drives, make them memorable and turn them into premium club content.",
+    modulesTitle: "Key modules",
+    roadmapTitle: "Recommended roadmap",
+    bmwTitle: "Why this could interest even BMW Official",
+    bmwIntro: "Because it combines route planning, hospitality, content, data and brand experience in one exportable surface for events, dealers or launches.",
   },
   pt: {
     eyebrow: "Itinerários BMW em Andorra",
@@ -243,6 +271,13 @@ const translations: Record<LanguageCode, Record<string, string>> = {
     mapClose: "Fechar mapa",
     openGoogleMaps: "Abrir no Google Maps",
     openFullRoute: "Abrir rota completa",
+    visionEyebrow: "Drive Experience",
+    visionTitle: "O próximo passo: transformar o clube numa plataforma premium de rotas, eventos e experiências BMW.",
+    visionIntro: "Isto deixaria de ser apenas uma página de itinerários. Passaria a ser uma camada digital para planear saídas, torná-las memoráveis e convertê-las em conteúdo premium do clube.",
+    modulesTitle: "Módulos-chave",
+    roadmapTitle: "Roadmap recomendado",
+    bmwTitle: "Porque isto pode interessar até à BMW Official",
+    bmwIntro: "Porque junta rota, hospitalidade, conteúdo, dados e experiência de marca numa superfície exportável.",
   },
   de: {
     eyebrow: "BMW-Routen in Andorra",
@@ -289,6 +324,13 @@ const translations: Record<LanguageCode, Record<string, string>> = {
     mapClose: "Karte schließen",
     openGoogleMaps: "In Google Maps öffnen",
     openFullRoute: "Komplette Route öffnen",
+    visionEyebrow: "Drive Experience",
+    visionTitle: "Der nächste Schritt: den Club in eine Premium-Plattform für BMW-Routen, Events und Erlebnisse verwandeln.",
+    visionIntro: "Das wäre nicht mehr nur eine Routenseite, sondern eine digitale Ebene, um Ausfahrten zu planen, unvergesslich zu machen und in Premium-Club-Content zu verwandeln.",
+    modulesTitle: "Kernmodule",
+    roadmapTitle: "Empfohlene Roadmap",
+    bmwTitle: "Warum das sogar für BMW Official interessant sein kann",
+    bmwIntro: "Weil es Route, Hospitality, Content, Daten und Markenerlebnis in einer exportierbaren Fläche vereint.",
   },
   ru: {
     eyebrow: "BMW-маршруты по Андорре",
@@ -335,6 +377,13 @@ const translations: Record<LanguageCode, Record<string, string>> = {
     mapClose: "Закрыть карту",
     openGoogleMaps: "Открыть в Google Maps",
     openFullRoute: "Открыть весь маршрут",
+    visionEyebrow: "Drive Experience",
+    visionTitle: "Следующий шаг: превратить клуб в премиальную платформу маршрутов, событий и BMW-опыта.",
+    visionIntro: "Это будет уже не просто страница маршрутов, а цифровой слой для планирования выездов, превращения их в запоминающийся опыт и премиальный контент клуба.",
+    modulesTitle: "Ключевые модули",
+    roadmapTitle: "Рекомендуемый roadmap",
+    bmwTitle: "Почему это может заинтересовать даже BMW Official",
+    bmwIntro: "Потому что здесь объединяются маршрут, hospitality, контент, данные и бренд-опыт в одной экспортируемой поверхности.",
   },
 };
 
@@ -478,6 +527,198 @@ const routeStopsById: Record<string, RouteStop[]> = {
 };
 
 const stopLegendCategories: RouteStopCategory[] = ["restaurant", "viewpoint", "heritage", "nature", "motorsport"];
+
+const driveExperienceModules = [
+  {
+    icon: Sparkles,
+    title: {
+      ca: "Route Concierge IA",
+      es: "Route Concierge IA",
+      fr: "Concierge IA des routes",
+      en: "AI Route Concierge",
+      pt: "Concierge IA de rotas",
+      de: "KI-Route-Concierge",
+      ru: "ИИ-консьерж маршрутов",
+    },
+    body: {
+      ca: "Planifica una sortida segons cotxe, temps, ritme, restaurant i finestra òptima de llum.",
+      es: "Planifica una salida según coche, tiempo, ritmo, restaurante y ventana óptima de luz.",
+      fr: "Planifie une sortie selon la voiture, le temps, le rythme, le restaurant et la meilleure lumière.",
+      en: "Plans a drive based on car, time, rhythm, restaurant and best light window.",
+      pt: "Planeia uma saída segundo carro, tempo, ritmo, restaurante e melhor luz.",
+      de: "Plant eine Ausfahrt nach Auto, Zeit, Rhythmus, Restaurant und bestem Lichtfenster.",
+      ru: "Планирует выезд по машине, времени, ритму, ресторану и лучшему свету.",
+    },
+  },
+  {
+    icon: Crown,
+    title: {
+      ca: "Official Event Mode",
+      es: "Official Event Mode",
+      fr: "Official Event Mode",
+      en: "Official Event Mode",
+      pt: "Official Event Mode",
+      de: "Official Event Mode",
+      ru: "Official Event Mode",
+    },
+    body: {
+      ca: "Briefing, punt de trobada, timing de convoy, QR d’event i operativa per a sortides oficials.",
+      es: "Briefing, punto de encuentro, timing de convoy, QR de evento y operativa para salidas oficiales.",
+      fr: "Briefing, point de rendez-vous, timing du convoi, QR d’événement et opération officielle.",
+      en: "Briefing, meeting point, convoy timing, event QR and operations layer for official drives.",
+      pt: "Briefing, ponto de encontro, timing do comboio, QR do evento e camada operacional.",
+      de: "Briefing, Treffpunkt, Convoy-Timing, Event-QR und operative Ebene für offizielle Ausfahrten.",
+      ru: "Брифинг, точка сбора, тайминг колонны, QR события и операционный слой для клубных выездов.",
+    },
+  },
+  {
+    icon: Map,
+    title: {
+      ca: "Route Atlas viu",
+      es: "Route Atlas vivo",
+      fr: "Atlas vivant des routes",
+      en: "Live Route Atlas",
+      pt: "Atlas vivo de rotas",
+      de: "Lebendiger Routenatlas",
+      ru: "Живой атлас маршрутов",
+    },
+    body: {
+      ca: "Mapa premium, POIs, gastronomia, clima, ports i exportació completa a navegació externa.",
+      es: "Mapa premium, POIs, gastronomía, clima, puertos y exportación completa a navegación externa.",
+      fr: "Carte premium, POI, gastronomie, météo, cols et export complet vers la navigation externe.",
+      en: "Premium mapping, POIs, gastronomy, weather, mountain passes and full export to external navigation.",
+      pt: "Mapa premium, POIs, gastronomia, clima, portos e exportação completa para navegação externa.",
+      de: "Premium-Karte, POIs, Gastronomie, Wetter, Pässe und kompletter Export in externe Navigation.",
+      ru: "Премиальная карта, POI, гастрономия, погода, перевалы и полный экспорт во внешнюю навигацию.",
+    },
+  },
+  {
+    icon: CalendarRange,
+    title: {
+      ca: "Post-Drive Report",
+      es: "Post-Drive Report",
+      fr: "Post-Drive Report",
+      en: "Post-Drive Report",
+      pt: "Post-Drive Report",
+      de: "Post-Drive Report",
+      ru: "Post-Drive Report",
+    },
+    body: {
+      ca: "Recap automàtic amb mapa final, highlights, galeria, parades i pàgina compartible de l’esdeveniment.",
+      es: "Recap automático con mapa final, highlights, galería, paradas y página compartible del evento.",
+      fr: "Récapitulatif automatique avec carte finale, highlights, galerie, arrêts et page partageable.",
+      en: "Automatic recap with final map, highlights, gallery, stops and a shareable event page.",
+      pt: "Recap automático com mapa final, highlights, galeria, paragens e página partilhável.",
+      de: "Automatischer Recap mit finaler Karte, Highlights, Galerie, Stopps und teilbarer Event-Seite.",
+      ru: "Автоматический recap с финальной картой, highlights, галереей, остановками и shareable-страницей.",
+    },
+  },
+] as const;
+
+const driveExperienceRoadmap = [
+  {
+    phase: "01",
+    title: {
+      ca: "Base premium de rutes",
+      es: "Base premium de rutas",
+      fr: "Base premium des routes",
+      en: "Premium route base",
+      pt: "Base premium de rotas",
+      de: "Premium-Routenbasis",
+      ru: "Премиальная база маршрутов",
+    },
+    body: {
+      ca: "Tancar mapes, POIs, filtres, UX mòbil, exportació i narrativa editorial de cada ruta.",
+      es: "Cerrar mapas, POIs, filtros, UX móvil, exportación y narrativa editorial de cada ruta.",
+      fr: "Finaliser cartes, POI, filtres, UX mobile, export et narration éditoriale de chaque route.",
+      en: "Finish maps, POIs, filters, mobile UX, exports and editorial storytelling for each route.",
+      pt: "Fechar mapas, POIs, filtros, UX móvel, exportação e narrativa editorial de cada rota.",
+      de: "Karten, POIs, Filter, Mobile-UX, Export und redaktionelles Storytelling pro Route abschließen.",
+      ru: "Довести до конца карты, POI, фильтры, mobile UX, экспорт и редакторский слой каждой трассы.",
+    },
+  },
+  {
+    phase: "02",
+    title: {
+      ca: "Concierge + Event Mode",
+      es: "Concierge + Event Mode",
+      fr: "Concierge + Event Mode",
+      en: "Concierge + Event Mode",
+      pt: "Concierge + Event Mode",
+      de: "Concierge + Event Mode",
+      ru: "Concierge + Event Mode",
+    },
+    body: {
+      ca: "Afegir assistent IA, briefings de sortida, pàgines d’event oficial i operativa per a convoys.",
+      es: "Añadir asistente IA, briefings de salida, páginas de evento oficial y operativa para convoys.",
+      fr: "Ajouter assistant IA, briefings de sortie, pages d’événement officiel et gestion des convois.",
+      en: "Add the AI assistant, drive briefings, official event pages and convoy operations.",
+      pt: "Adicionar assistente IA, briefings de saída, páginas de evento oficial e operativa de comboios.",
+      de: "KI-Assistent, Drive-Briefings, offizielle Event-Seiten und Convoy-Operations ergänzen.",
+      ru: "Добавить ИИ-ассистента, брифинги, страницы официальных выездов и механику колонн.",
+    },
+  },
+  {
+    phase: "03",
+    title: {
+      ca: "BMW Alpine Intelligence",
+      es: "BMW Alpine Intelligence",
+      fr: "BMW Alpine Intelligence",
+      en: "BMW Alpine Intelligence",
+      pt: "BMW Alpine Intelligence",
+      de: "BMW Alpine Intelligence",
+      ru: "BMW Alpine Intelligence",
+    },
+    body: {
+      ca: "Recomanació dinàmica segons clima, llum, altitud, vehicle, temporada i objectiu de la sortida.",
+      es: "Recomendación dinámica según clima, luz, altitud, vehículo, temporada y objetivo de la salida.",
+      fr: "Recommandation dynamique selon météo, lumière, altitude, véhicule, saison et objectif de la sortie.",
+      en: "Dynamic recommendation layer based on weather, light, altitude, vehicle, season and drive goal.",
+      pt: "Recomendação dinâmica segundo clima, luz, altitude, veículo, estação e objetivo da saída.",
+      de: "Dynamische Empfehlung nach Wetter, Licht, Höhe, Fahrzeug, Saison und Fahrziel.",
+      ru: "Динамические рекомендации по погоде, свету, высоте, машине, сезону и цели выезда.",
+    },
+  },
+] as const;
+
+const bmwValueProps = [
+  {
+    icon: ShieldCheck,
+    title: {
+      ca: "Experiència de marca reutilitzable",
+      es: "Experiencia de marca reutilizable",
+      fr: "Expérience de marque réutilisable",
+      en: "Reusable brand experience",
+      pt: "Experiência de marca reutilizável",
+      de: "Wiederverwendbares Markenerlebnis",
+      ru: "Переиспользуемый бренд-опыт",
+    },
+  },
+  {
+    icon: Crown,
+    title: {
+      ca: "Activable per concessionari o llançament",
+      es: "Activable para concesionario o lanzamiento",
+      fr: "Activable pour concessionnaire ou lancement",
+      en: "Activatable for dealers or launches",
+      pt: "Ativável para concessionário ou lançamento",
+      de: "Für Händler oder Launches aktivierbar",
+      ru: "Подходит для дилеров и запусков",
+    },
+  },
+  {
+    icon: Route,
+    title: {
+      ca: "Exportable a altres territoris BMW",
+      es: "Exportable a otros territorios BMW",
+      fr: "Exportable à d’autres territoires BMW",
+      en: "Exportable to other BMW territories",
+      pt: "Exportável para outros territórios BMW",
+      de: "Auf andere BMW-Territorien übertragbar",
+      ru: "Масштабируемо на другие территории BMW",
+    },
+  },
+] as const;
 
 const buildGoogleMapsUrl = (stop: RouteStop) => {
   const query = encodeURIComponent(`${stop.name}, ${stop.place}, ${stop.lat}, ${stop.lon}`);
@@ -983,6 +1224,72 @@ const Itineraris = () => {
               </Card>
             );
           })}
+        </div>
+      </section>
+
+      <section className="pb-20">
+        <div className="container mx-auto px-4 max-w-6xl">
+          <Card className="glass-dark border-0 rounded-[2rem] overflow-hidden p-6 md:p-10 text-white shadow-elegant">
+            <div className="grid gap-8 lg:grid-cols-[1.05fr_0.95fr]">
+              <div>
+                <div className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/10 px-4 py-2 text-xs font-semibold uppercase tracking-[0.24em] text-white/80">
+                  <Sparkles className="h-4 w-4" />
+                  {t.visionEyebrow}
+                </div>
+                <h2 className="mt-5 max-w-4xl text-3xl md:text-5xl font-bold text-balance">{t.visionTitle}</h2>
+                <p className="mt-5 max-w-3xl text-lg text-white/72">{t.visionIntro}</p>
+
+                <div className="mt-8">
+                  <div className="text-sm font-semibold uppercase tracking-[0.18em] text-primary">{t.modulesTitle}</div>
+                  <div className="mt-4 grid gap-4 md:grid-cols-2">
+                    {driveExperienceModules.map((module) => {
+                      const Icon = module.icon;
+                      return (
+                        <div key={module.title.en} className="rounded-[1.6rem] border border-white/10 bg-white/8 p-5 backdrop-blur-xl">
+                          <Icon className="h-5 w-5 text-primary" />
+                          <div className="mt-4 text-lg font-semibold text-white">{module.title[language]}</div>
+                          <p className="mt-2 text-sm leading-6 text-white/72">{module.body[language]}</p>
+                        </div>
+                      );
+                    })}
+                  </div>
+                </div>
+              </div>
+
+              <div className="grid gap-5">
+                <div className="rounded-[1.75rem] border border-white/10 bg-white/8 p-5 backdrop-blur-xl">
+                  <div className="text-sm font-semibold uppercase tracking-[0.18em] text-primary">{t.roadmapTitle}</div>
+                  <div className="mt-4 space-y-4">
+                    {driveExperienceRoadmap.map((phase) => (
+                      <div key={phase.phase} className="rounded-[1.35rem] border border-white/10 bg-slate-950/25 p-4">
+                        <div className="inline-flex rounded-full bg-primary/12 px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.16em] text-primary">Phase {phase.phase}</div>
+                        <div className="mt-3 text-lg font-semibold text-white">{phase.title[language]}</div>
+                        <p className="mt-2 text-sm leading-6 text-white/72">{phase.body[language]}</p>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+
+                <div className="rounded-[1.75rem] border border-white/10 bg-white/8 p-5 backdrop-blur-xl">
+                  <div className="text-sm font-semibold uppercase tracking-[0.18em] text-primary">{t.bmwTitle}</div>
+                  <p className="mt-3 text-sm leading-6 text-white/72">{t.bmwIntro}</p>
+                  <div className="mt-4 grid gap-3">
+                    {bmwValueProps.map((item) => {
+                      const Icon = item.icon;
+                      return (
+                        <div key={item.title.en} className="flex items-center gap-3 rounded-[1.2rem] border border-white/10 bg-slate-950/20 px-4 py-3">
+                          <span className="inline-flex h-10 w-10 items-center justify-center rounded-full bg-primary/12 text-primary">
+                            <Icon className="h-4 w-4" />
+                          </span>
+                          <span className="text-sm font-medium text-white/88">{item.title[language]}</span>
+                        </div>
+                      );
+                    })}
+                  </div>
+                </div>
+              </div>
+            </div>
+          </Card>
         </div>
       </section>
     </PageShell>
