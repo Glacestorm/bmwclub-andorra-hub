@@ -66,6 +66,14 @@ const translations: Record<LanguageCode, Record<string, string>> = {
     roadmapTitle: "Roadmap recomanat",
     bmwTitle: "Per què això pot interessar fins i tot a BMW Official",
     bmwIntro: "Perquè uneix ruta, hospitality, contingut, dades i experiència de marca en una sola superfície exportable a esdeveniments, concessionaris o llançaments.",
+    postDriveEyebrow: "Post-Drive Report real",
+    postDriveTitle: "Després de la sortida, el club també hauria de tenir una peça premium per compartir.",
+    postDriveIntro: "Recap editorial, mètriques, highlights i material llest per a comunicar l’esdeveniment com una experiència BMW de nivell.",
+    postDriveSelect: "Report actiu",
+    postDriveSummary: "Resum editorial",
+    postDriveStats: "Mètriques de la sortida",
+    postDriveHighlights: "Highlights del dia",
+    postDriveAssets: "Assets shareables",
   },
   es: {
     eyebrow: "Itinerarios BMW en Andorra",
@@ -119,6 +127,14 @@ const translations: Record<LanguageCode, Record<string, string>> = {
     roadmapTitle: "Roadmap recomendado",
     bmwTitle: "Por qué esto puede interesar incluso a BMW Official",
     bmwIntro: "Porque une ruta, hospitality, contenido, datos y experiencia de marca en una sola superficie exportable a eventos, concesionarios o lanzamientos.",
+    postDriveEyebrow: "Post-Drive Report real",
+    postDriveTitle: "Después de la salida, el club también debería tener una pieza premium para compartir.",
+    postDriveIntro: "Recap editorial, métricas, highlights y material listo para comunicar el evento como una experiencia BMW de nivel.",
+    postDriveSelect: "Report activo",
+    postDriveSummary: "Resumen editorial",
+    postDriveStats: "Métricas de la salida",
+    postDriveHighlights: "Highlights del día",
+    postDriveAssets: "Assets shareables",
   },
   fr: {
     eyebrow: "Itinéraires BMW en Andorre",
@@ -172,6 +188,14 @@ const translations: Record<LanguageCode, Record<string, string>> = {
     roadmapTitle: "Feuille de route recommandée",
     bmwTitle: "Pourquoi cela peut intéresser même BMW Official",
     bmwIntro: "Parce que cela réunit route, hospitality, contenu, données et expérience de marque dans une seule surface exportable.",
+    postDriveEyebrow: "Post-Drive Report réel",
+    postDriveTitle: "Après la sortie, le club devrait aussi disposer d’une pièce premium à partager.",
+    postDriveIntro: "Récap éditorial, métriques, highlights et matériel prêt à communiquer l’événement comme une expérience BMW premium.",
+    postDriveSelect: "Report actif",
+    postDriveSummary: "Résumé éditorial",
+    postDriveStats: "Métriques de la sortie",
+    postDriveHighlights: "Highlights du jour",
+    postDriveAssets: "Assets partageables",
   },
   en: {
     eyebrow: "BMW itineraries in Andorra",
@@ -225,6 +249,14 @@ const translations: Record<LanguageCode, Record<string, string>> = {
     roadmapTitle: "Recommended roadmap",
     bmwTitle: "Why this could interest even BMW Official",
     bmwIntro: "Because it combines route planning, hospitality, content, data and brand experience in one exportable surface for events, dealers or launches.",
+    postDriveEyebrow: "Real Post-Drive Report",
+    postDriveTitle: "After the drive, the club should also have a premium piece worth sharing.",
+    postDriveIntro: "Editorial recap, metrics, highlights and ready-to-use material to communicate the event as a serious BMW experience.",
+    postDriveSelect: "Active report",
+    postDriveSummary: "Editorial summary",
+    postDriveStats: "Drive metrics",
+    postDriveHighlights: "Day highlights",
+    postDriveAssets: "Shareable assets",
   },
   pt: {
     eyebrow: "Itinerários BMW em Andorra",
@@ -278,6 +310,14 @@ const translations: Record<LanguageCode, Record<string, string>> = {
     roadmapTitle: "Roadmap recomendado",
     bmwTitle: "Porque isto pode interessar até à BMW Official",
     bmwIntro: "Porque junta rota, hospitalidade, conteúdo, dados e experiência de marca numa superfície exportável.",
+    postDriveEyebrow: "Post-Drive Report real",
+    postDriveTitle: "Depois da saída, o clube também deve ter uma peça premium para partilhar.",
+    postDriveIntro: "Recap editorial, métricas, highlights e material pronto para comunicar o evento como uma experiência BMW séria.",
+    postDriveSelect: "Report ativo",
+    postDriveSummary: "Resumo editorial",
+    postDriveStats: "Métricas da saída",
+    postDriveHighlights: "Highlights do dia",
+    postDriveAssets: "Assets partilháveis",
   },
   de: {
     eyebrow: "BMW-Routen in Andorra",
@@ -331,6 +371,14 @@ const translations: Record<LanguageCode, Record<string, string>> = {
     roadmapTitle: "Empfohlene Roadmap",
     bmwTitle: "Warum das sogar für BMW Official interessant sein kann",
     bmwIntro: "Weil es Route, Hospitality, Content, Daten und Markenerlebnis in einer exportierbaren Fläche vereint.",
+    postDriveEyebrow: "Echter Post-Drive Report",
+    postDriveTitle: "Nach der Ausfahrt sollte der Club ebenfalls ein Premium-Stück zum Teilen haben.",
+    postDriveIntro: "Redaktioneller Recap, Kennzahlen, Highlights und Material, um das Event als echtes BMW-Erlebnis zu kommunizieren.",
+    postDriveSelect: "Aktiver Report",
+    postDriveSummary: "Redaktionelle Zusammenfassung",
+    postDriveStats: "Kennzahlen der Ausfahrt",
+    postDriveHighlights: "Highlights des Tages",
+    postDriveAssets: "Teilbare Assets",
   },
   ru: {
     eyebrow: "BMW-маршруты по Андорре",
@@ -384,6 +432,14 @@ const translations: Record<LanguageCode, Record<string, string>> = {
     roadmapTitle: "Рекомендуемый roadmap",
     bmwTitle: "Почему это может заинтересовать даже BMW Official",
     bmwIntro: "Потому что здесь объединяются маршрут, hospitality, контент, данные и бренд-опыт в одной экспортируемой поверхности.",
+    postDriveEyebrow: "Реальный Post-Drive Report",
+    postDriveTitle: "После выезда у клуба тоже должен быть премиальный материал, которым хочется делиться.",
+    postDriveIntro: "Редакторский recap, метрики, highlights и готовый материал, чтобы показать событие как сильный BMW-опыт.",
+    postDriveSelect: "Активный report",
+    postDriveSummary: "Редакторское резюме",
+    postDriveStats: "Метрики выезда",
+    postDriveHighlights: "Highlights дня",
+    postDriveAssets: "Shareable assets",
   },
 };
 
@@ -846,6 +902,13 @@ type EventModeData = {
   checklist: Record<LanguageCode, string[]>;
 };
 
+type PostDriveReportData = {
+  summary: Record<LanguageCode, string>;
+  stats: Array<{ value: string; label: Record<LanguageCode, string> }>;
+  highlights: Record<LanguageCode, string[]>;
+  assets: Record<LanguageCode, string[]>;
+};
+
 const conciergeUi = {
   title: {
     ca: "Concierge interactiu",
@@ -1297,6 +1360,149 @@ const eventModeByRouteId: Record<string, EventModeData> = {
   },
 };
 
+const postDriveReportByRouteId: Record<string, PostDriveReportData> = {
+  "grand-tour-central": {
+    summary: {
+      ca: "Sortida molt neta i presentable, amb gran resposta en foto de grup, miradors i tancament gastronòmic. És el format més fàcil de convertir en peça institucional del club.",
+      es: "Salida muy limpia y presentable, con gran respuesta en foto de grupo, miradores y cierre gastronómico. Es el formato más fácil de convertir en pieza institucional del club.",
+      fr: "Sortie très propre et présentable, avec forte réponse en photo de groupe, belvédères et final gastronomique. C’est le format le plus simple à convertir en pièce institutionnelle du club.",
+      en: "A very clean and presentable outing, with strong group-photo moments, viewpoints and a refined gastronomic finish. The easiest format to turn into an institutional club piece.",
+      pt: "Saída muito limpa e apresentável, com boa resposta em foto de grupo, miradouros e fecho gastronómico. É o formato mais fácil de transformar em peça institucional do clube.",
+      de: "Sehr saubere und präsentable Ausfahrt mit starkem Gruppenfoto-Moment, Aussichtspunkten und gastronomischem Finale. Das einfachste Format für ein institutionelles Club-Stück.",
+      ru: "Очень чистый и презентабельный выезд: сильные групповые фото, мирадоры и гастрономичный финал. Самый удобный формат для клубной институциональной страницы.",
+    },
+    stats: [
+      { value: "27", label: { ca: "cotxes", es: "coches", fr: "voitures", en: "cars", pt: "carros", de: "Autos", ru: "машин" } },
+      { value: "61 km", label: { ca: "recorregut", es: "recorrido", fr: "parcours", en: "route", pt: "percurso", de: "Strecke", ru: "маршрут" } },
+      { value: "4", label: { ca: "parades clau", es: "paradas clave", fr: "arrêts clés", en: "key stops", pt: "paragens-chave", de: "Schlüsselstopps", ru: "ключевые остановки" } },
+      { value: "186", label: { ca: "fotos útils", es: "fotos útiles", fr: "photos utiles", en: "usable photos", pt: "fotos úteis", de: "nutzbare Fotos", ru: "полезных фото" } },
+    ],
+    highlights: {
+      ca: ["Foto de grup molt forta a Engolasters", "Ritme fluid sense trencar el grup", "Meritxell com a tancament premium"],
+      es: ["Foto de grupo muy potente en Engolasters", "Ritmo fluido sin romper el grupo", "Meritxell como cierre premium"],
+      fr: ["Photo de groupe très forte à Engolasters", "Rythme fluide sans casser le groupe", "Meritxell comme final premium"],
+      en: ["Strong group photo moment in Engolasters", "Flowing pace without breaking the convoy", "Meritxell as a premium finale"],
+      pt: ["Foto de grupo muito forte em Engolasters", "Ritmo fluido sem quebrar o grupo", "Meritxell como fecho premium"],
+      de: ["Starker Gruppenfoto-Moment in Engolasters", "Flüssiges Tempo ohne Bruch der Gruppe", "Meritxell als Premium-Finale"],
+      ru: ["Сильный групповой кадр в Engolasters", "Плавный темп без разрыва колонны", "Meritxell как premium-финал"],
+    },
+    assets: {
+      ca: ["Landing recap del dia", "Galeria resum per xarxes", "Coberta per newsletter del club"],
+      es: ["Landing recap del día", "Galería resumen para redes", "Portada para newsletter del club"],
+      fr: ["Landing recap du jour", "Galerie résumé pour réseaux", "Couverture pour newsletter du club"],
+      en: ["Day recap landing", "Social recap gallery", "Club newsletter cover"],
+      pt: ["Landing recap do dia", "Galeria resumo para redes", "Capa para newsletter do clube"],
+      de: ["Tages-Recap-Landingpage", "Social-Recap-Galerie", "Titelbild für Club-Newsletter"],
+      ru: ["Лендинг recap дня", "Галерея для соцсетей", "Обложка для newsletter клуба"],
+    },
+  },
+  "west-viewpoints-loop": {
+    summary: {
+      ca: "Peça curta, dinàmica i molt fotogènica. Funciona especialment bé per a contingut ràpid, activacions de matí i formats àgils de club.",
+      es: "Pieza corta, dinámica y muy fotogénica. Funciona especialmente bien para contenido rápido, activaciones de mañana y formatos ágiles de club.",
+      fr: "Pièce courte, dynamique et très photogénique. Fonctionne très bien pour du contenu rapide et des activations légères.",
+      en: "Short, dynamic and highly photogenic. Especially effective for quick content, morning activations and agile club formats.",
+      pt: "Peça curta, dinâmica e muito fotogénica. Funciona muito bem para conteúdo rápido e ativações leves.",
+      de: "Kurze, dynamische und sehr fotogene Ausfahrt. Stark für schnellen Content und agile Club-Formate.",
+      ru: "Короткий, динамичный и очень фотогеничный формат. Особенно хорош для быстрого контента и легких активаций клуба.",
+    },
+    stats: [
+      { value: "18", label: { ca: "cotxes", es: "coches", fr: "voitures", en: "cars", pt: "carros", de: "Autos", ru: "машин" } },
+      { value: "52 km", label: { ca: "recorregut", es: "recorrido", fr: "parcours", en: "route", pt: "percurso", de: "Strecke", ru: "маршрут" } },
+      { value: "3", label: { ca: "parades clau", es: "paradas clave", fr: "arrêts clés", en: "key stops", pt: "paragens-chave", de: "Schlüsselstopps", ru: "ключевые остановки" } },
+      { value: "94", label: { ca: "fotos útils", es: "fotos útiles", fr: "photos utiles", en: "usable photos", pt: "fotos úteis", de: "nutzbare Fotos", ru: "полезных фото" } },
+    ],
+    highlights: {
+      ca: ["Foto curta però molt forta a Coll de la Botella", "Format ideal per matí d’activació", "Brunch fàcil de comunicar"],
+      es: ["Foto corta pero muy potente en Coll de la Botella", "Formato ideal para mañana de activación", "Brunch fácil de comunicar"],
+      fr: ["Photo courte mais très forte au Coll de la Botella", "Format idéal pour une matinée d’activation", "Brunch facile à communiquer"],
+      en: ["Short but strong photo stop at Coll de la Botella", "Ideal format for a morning activation", "Easy brunch-led storytelling"],
+      pt: ["Foto curta mas muito forte no Coll de la Botella", "Formato ideal para ativação de manhã", "Brunch fácil de comunicar"],
+      de: ["Kurzer, aber starker Fotostopp am Coll de la Botella", "Ideal für eine Morgen-Aktivierung", "Einfacher Brunch-Storytelling-Moment"],
+      ru: ["Короткий, но сильный фотостоп на Coll de la Botella", "Идеально для утренней активации", "Легкий brunch-сюжет"],
+    },
+    assets: {
+      ca: ["Story set per Instagram", "Recap curt per Telegram/Discord", "Teaser per a pròxima sortida"],
+      es: ["Story set para Instagram", "Recap corto para Telegram/Discord", "Teaser para próxima salida"],
+      fr: ["Set de stories Instagram", "Recap court pour Telegram/Discord", "Teaser pour la prochaine sortie"],
+      en: ["Instagram story set", "Short Telegram/Discord recap", "Teaser for the next outing"],
+      pt: ["Story set para Instagram", "Recap curto para Telegram/Discord", "Teaser para próxima saída"],
+      de: ["Instagram-Story-Set", "Kurzer Telegram/Discord-Recap", "Teaser für die nächste Ausfahrt"],
+      ru: ["Набор stories для Instagram", "Короткий recap для Telegram/Discord", "Тизер следующего выезда"],
+    },
+  },
+  "envalira-high-mountain": {
+    summary: {
+      ca: "La peça més espectacular i aspiracional. Si surt bé, és la que té més valor visual, però també la que exigeix més control de clima i timing.",
+      es: "La pieza más espectacular y aspiracional. Si sale bien, es la que más valor visual tiene, pero también la que más exige control de clima y timing.",
+      fr: "La pièce la plus spectaculaire et aspirationnelle. Si elle sort bien, c’est celle qui a le plus de valeur visuelle.",
+      en: "The most spectacular and aspirational piece. If executed well, it delivers the strongest visual value, but it also demands weather and timing control.",
+      pt: "A peça mais espetacular e aspiracional. Se correr bem, é a que mais valor visual oferece, mas também exige mais controlo de clima e timing.",
+      de: "Das spektakulärste und aspirativste Format. Wenn es klappt, liefert es den größten visuellen Wert, verlangt aber Wetter- und Timingkontrolle.",
+      ru: "Самый эффектный и aspirational-формат. При хорошем исполнении дает максимальную визуальную ценность, но требует контроля погоды и тайминга.",
+    },
+    stats: [
+      { value: "12", label: { ca: "vehicles", es: "vehículos", fr: "véhicules", en: "vehicles", pt: "veículos", de: "Fahrzeuge", ru: "машин" } },
+      { value: "68 km", label: { ca: "tram alpí", es: "tramo alpino", fr: "segment alpin", en: "alpine section", pt: "troço alpino", de: "alpiner Abschnitt", ru: "альпийский участок" } },
+      { value: "2.408 m", label: { ca: "cota alta", es: "cota alta", fr: "altitude haute", en: "high point", pt: "cota alta", de: "höchster Punkt", ru: "высшая точка" } },
+      { value: "121", label: { ca: "fotos útils", es: "fotos útiles", fr: "photos utiles", en: "usable photos", pt: "fotos úteis", de: "nutzbare Fotos", ru: "полезных фото" } },
+    ],
+    highlights: {
+      ca: ["Port d’Envalira com a imatge hero", "Andorra Circuit aporta ADN motor", "Tancament molt potent per a contingut BMW"],
+      es: ["Port d’Envalira como imagen hero", "Andorra Circuit aporta ADN motor", "Cierre muy potente para contenido BMW"],
+      fr: ["Port d’Envalira comme image hero", "Andorra Circuit apporte l’ADN moteur", "Final très puissant pour du contenu BMW"],
+      en: ["Port d’Envalira as the hero image", "Andorra Circuit adds motorsport DNA", "A very strong ending for BMW content"],
+      pt: ["Port d’Envalira como imagem hero", "Andorra Circuit acrescenta ADN motor", "Fecho muito forte para conteúdo BMW"],
+      de: ["Port d’Envalira als Hero-Bild", "Andorra Circuit bringt Motorsport-DNA", "Sehr starkes Finale für BMW-Content"],
+      ru: ["Port d’Envalira как hero-кадр", "Andorra Circuit добавляет моторный ADN", "Очень сильный финал для BMW-контента"],
+    },
+    assets: {
+      ca: ["Hero recap de pujada alpina", "Carrusel BMW M / moto", "Coberta premium per nota de premsa"],
+      es: ["Hero recap de subida alpina", "Carrusel BMW M / moto", "Portada premium para nota de prensa"],
+      fr: ["Hero recap de montée alpine", "Carrousel BMW M / moto", "Couverture premium pour communiqué"],
+      en: ["Hero alpine ascent recap", "BMW M / motorcycle carousel", "Premium cover for a press note"],
+      pt: ["Hero recap de subida alpina", "Carrossel BMW M / moto", "Capa premium para nota de imprensa"],
+      de: ["Hero-Recap des alpinen Anstiegs", "BMW M / Motorrad-Karussell", "Premium-Cover für Pressenotiz"],
+      ru: ["Hero-recap альпийского подъема", "Карусель BMW M / мото", "Premium-обложка для пресс-ноты"],
+    },
+  },
+  "ordino-tristaina-touring": {
+    summary: {
+      ca: "La més premium per a hospitality i marca: atmosfera neta, paisatge de cota alta i un to molt més editorial que esportiu pur.",
+      es: "La más premium para hospitality y marca: atmósfera limpia, paisaje de cota alta y un tono mucho más editorial que deportivo puro.",
+      fr: "La plus premium pour l’hospitality et la marque : atmosphère propre, haute montagne et ton bien plus éditorial que purement sportif.",
+      en: "The most premium for hospitality and brand positioning: clean atmosphere, high-altitude scenery and a more editorial than purely sporty tone.",
+      pt: "A mais premium para hospitality e marca: atmosfera limpa, paisagem de altitude e tom mais editorial do que desportivo puro.",
+      de: "Am stärksten für Hospitality und Marke: klare Atmosphäre, Hochgebirgslandschaft und eher editoriales als rein sportliches Narrativ.",
+      ru: "Самая premium для hospitality и бренда: чистая атмосфера, высокогорный пейзаж и более редакционный, чем чисто спортивный тон.",
+    },
+    stats: [
+      { value: "21", label: { ca: "cotxes", es: "coches", fr: "voitures", en: "cars", pt: "carros", de: "Autos", ru: "машин" } },
+      { value: "72 km", label: { ca: "recorregut", es: "recorrido", fr: "parcours", en: "route", pt: "percurso", de: "Strecke", ru: "маршрут" } },
+      { value: "5", label: { ca: "punts premium", es: "puntos premium", fr: "points premium", en: "premium points", pt: "pontos premium", de: "Premium-Punkte", ru: "premium-точек" } },
+      { value: "214", label: { ca: "fotos útils", es: "fotos útiles", fr: "photos utiles", en: "usable photos", pt: "fotos úteis", de: "nutzbare Fotos", ru: "полезных фото" } },
+    ],
+    highlights: {
+      ca: ["Ordino funciona molt bé com a imatge de club", "Tristaina eleva molt el nivell visual", "Final perfecte per hospitality o invitació premium"],
+      es: ["Ordino funciona muy bien como imagen de club", "Tristaina eleva mucho el nivel visual", "Final perfecto para hospitality o invitación premium"],
+      fr: ["Ordino fonctionne très bien comme image de club", "Tristaina élève beaucoup le niveau visuel", "Final parfait pour hospitality premium"],
+      en: ["Ordino works extremely well as a club image anchor", "Tristaina elevates the visual level sharply", "Perfect ending for hospitality or premium invites"],
+      pt: ["Ordino funciona muito bem como imagem do clube", "Tristaina eleva muito o nível visual", "Final perfeito para hospitality premium"],
+      de: ["Ordino funktioniert hervorragend als Clubbild", "Tristaina hebt das visuelle Niveau stark an", "Perfektes Finale für Hospitality oder Premium-Einladung"],
+      ru: ["Ordino отлично работает как образ клуба", "Tristaina сильно поднимает визуальный уровень", "Идеальный финал для hospitality или premium-инвайта"],
+    },
+    assets: {
+      ca: ["Report llarg editorial", "Galeria premium per web", "Peça resum per a BMW/dealer"],
+      es: ["Report largo editorial", "Galería premium para web", "Pieza resumen para BMW/dealer"],
+      fr: ["Report long éditorial", "Galerie premium pour le web", "Pièce résumé pour BMW/dealer"],
+      en: ["Long-form editorial report", "Premium web gallery", "Summary piece for BMW/dealer"],
+      pt: ["Report longo editorial", "Galeria premium para web", "Peça resumo para BMW/dealer"],
+      de: ["Langer Editorial-Report", "Premium-Webgalerie", "Zusammenfassungsstück für BMW/Händler"],
+      ru: ["Длинный редакционный report", "Premium-галерея для сайта", "Краткая pieza для BMW/dealer"],
+    },
+  },
+};
+
 const buildGoogleMapsUrl = (stop: RouteStop) => {
   const query = encodeURIComponent(`${stop.name}, ${stop.place}, ${stop.lat}, ${stop.lon}`);
   return `https://www.google.com/maps/search/?api=1&query=${query}`;
@@ -1698,6 +1904,10 @@ const Itineraris = () => {
   const eventRoutes = routes.filter((route) => eventModeByRouteId[route.id]);
   const activeEventRoute = eventRoutes.find((route) => route.id === selectedEventRouteId) ?? eventRoutes[0] ?? null;
   const activeEventData = activeEventRoute ? eventModeByRouteId[activeEventRoute.id] : null;
+  const [selectedReportRouteId, setSelectedReportRouteId] = useState<string>("grand-tour-central");
+  const reportRoutes = routes.filter((route) => postDriveReportByRouteId[route.id]);
+  const activeReportRoute = reportRoutes.find((route) => route.id === selectedReportRouteId) ?? reportRoutes[0] ?? null;
+  const activeReportData = activeReportRoute ? postDriveReportByRouteId[activeReportRoute.id] : null;
 
   return (
     <PageShell>
@@ -2125,6 +2335,106 @@ const Itineraris = () => {
                       {eventModeUi.requestEvent[language]}
                       <ArrowRight className="h-3.5 w-3.5" />
                     </Link>
+                  </div>
+                </div>
+              </div>
+            </Card>
+          </div>
+        </section>
+      ) : null}
+
+      {activeReportRoute && activeReportData ? (
+        <section className="pb-20">
+          <div className="container mx-auto px-4 max-w-6xl">
+            <Card className="premium-card border-0 rounded-[2rem] overflow-hidden p-6 md:p-8 shadow-elegant">
+              <div className="grid gap-8 lg:grid-cols-[1.05fr_0.95fr]">
+                <div>
+                  <div className="inline-flex items-center gap-2 rounded-full bg-primary/10 px-4 py-2 text-xs font-semibold uppercase tracking-[0.22em] text-primary">
+                    <CalendarRange className="h-4 w-4" />
+                    {t.postDriveEyebrow}
+                  </div>
+                  <h2 className="mt-5 max-w-4xl text-3xl md:text-5xl font-bold text-balance">{t.postDriveTitle}</h2>
+                  <p className="mt-4 max-w-3xl text-lg text-muted-foreground">{t.postDriveIntro}</p>
+
+                  <div className="mt-6">
+                    <div className="mb-3 text-[11px] font-semibold uppercase tracking-[0.16em] text-slate-500">{t.postDriveSelect}</div>
+                    <div className="flex flex-wrap gap-2">
+                      {reportRoutes.map((route) => (
+                        <button
+                          key={`report-${route.id}`}
+                          type="button"
+                          onClick={() => setSelectedReportRouteId(route.id)}
+                          className={`rounded-full px-4 py-2 text-xs font-semibold uppercase tracking-[0.14em] transition ${selectedReportRouteId === route.id ? "bg-slate-950 text-white" : "border border-slate-200 bg-white text-slate-700 hover:border-primary hover:text-primary"}`}
+                        >
+                          {route.title[language]}
+                        </button>
+                      ))}
+                    </div>
+                  </div>
+
+                  <div className="mt-6 rounded-[1.75rem] border border-border/70 bg-white/75 p-5">
+                    <div className="text-sm font-semibold uppercase tracking-[0.18em] text-primary">{t.postDriveSummary}</div>
+                    <p className="mt-3 text-sm leading-7 text-foreground/86">{activeReportData.summary[language]}</p>
+                  </div>
+
+                  <div className="mt-5 rounded-[1.75rem] border border-border/70 bg-white/75 p-5">
+                    <div className="text-sm font-semibold uppercase tracking-[0.18em] text-primary">{t.postDriveHighlights}</div>
+                    <ul className="mt-4 space-y-3 text-sm text-foreground/86">
+                      {activeReportData.highlights[language].map((item) => (
+                        <li key={item} className="flex gap-3"><ArrowRight className="mt-0.5 h-4 w-4 shrink-0 text-primary" /><span>{item}</span></li>
+                      ))}
+                    </ul>
+                  </div>
+                </div>
+
+                <div className="grid gap-5">
+                  <div className="overflow-hidden rounded-[1.75rem] border border-border/70 bg-white/80">
+                    <img src={activeReportRoute.image.src} alt={activeReportRoute.image.alt[language]} className="aspect-[16/10] w-full object-cover" loading="lazy" decoding="async" />
+                    <div className="p-5">
+                      <div className="text-xl font-semibold text-foreground">{activeReportRoute.title[language]}</div>
+                      <p className="mt-2 text-sm text-muted-foreground">{activeReportRoute.strapline[language]}</p>
+                    </div>
+                  </div>
+
+                  <div className="rounded-[1.75rem] border border-border/70 bg-white/75 p-5">
+                    <div className="text-sm font-semibold uppercase tracking-[0.18em] text-primary">{t.postDriveStats}</div>
+                    <div className="mt-4 grid grid-cols-2 gap-3">
+                      {activeReportData.stats.map((stat) => (
+                        <div key={`${stat.value}-${stat.label.en}`} className="rounded-[1.2rem] border border-border/70 bg-background/85 p-4 text-center">
+                          <div className="text-2xl font-bold text-foreground">{stat.value}</div>
+                          <div className="mt-1 text-xs font-semibold uppercase tracking-[0.14em] text-muted-foreground">{stat.label[language]}</div>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+
+                  <div className="rounded-[1.75rem] border border-border/70 bg-white/75 p-5">
+                    <div className="text-sm font-semibold uppercase tracking-[0.18em] text-primary">{t.postDriveAssets}</div>
+                    <div className="mt-4 grid gap-3 sm:grid-cols-3">
+                      {activeReportData.assets[language].map((asset, index) => (
+                        <div key={`${asset}-${index}`} className="overflow-hidden rounded-[1.2rem] border border-border/70 bg-background/85">
+                          <img src={activeReportRoute.image.src} alt={activeReportRoute.image.alt[language]} className="aspect-[4/3] w-full object-cover" loading="lazy" decoding="async" />
+                          <div className="p-3 text-sm font-medium text-foreground/86">{asset}</div>
+                        </div>
+                      ))}
+                    </div>
+                    <div className="mt-4 flex flex-wrap gap-3">
+                      {buildGoogleMapsRouteUrl(activeReportRoute) ? (
+                        <a
+                          href={buildGoogleMapsRouteUrl(activeReportRoute) ?? undefined}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="inline-flex items-center gap-2 rounded-full bg-slate-950 px-4 py-2 text-xs font-semibold uppercase tracking-[0.14em] text-white transition hover:bg-primary"
+                        >
+                          {t.openFullRoute}
+                          <ExternalLink className="h-3.5 w-3.5" />
+                        </a>
+                      ) : null}
+                      <Link to="/contacte" className="inline-flex items-center gap-2 rounded-full border border-slate-200 bg-white px-4 py-2 text-xs font-semibold uppercase tracking-[0.14em] text-slate-800 transition hover:border-primary hover:text-primary">
+                        {eventModeUi.requestEvent[language]}
+                        <ArrowRight className="h-3.5 w-3.5" />
+                      </Link>
+                    </div>
                   </div>
                 </div>
               </div>
