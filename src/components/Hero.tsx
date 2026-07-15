@@ -1,7 +1,6 @@
 import { Link } from "react-router-dom";
 import { ArrowRight, Calendar, Compass, Sparkles, Star } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import heroImage from "@/assets/hero-bmw.jpg";
 import { LanguageCode } from "@/lib/i18n";
 
 interface HeroProps {
@@ -136,7 +135,7 @@ export const Hero = ({ language }: HeroProps) => {
   return (
     <section className="relative min-h-[86vh] md:min-h-[92vh] flex items-center justify-center overflow-hidden pt-20">
       <div className="absolute inset-0 z-0">
-        <img src={heroImage} alt="BMW in Andorra mountains" className="w-full h-full object-cover scale-[1.03]" loading="eager" />
+        <img src="/legacy-mirror/images/portades-banner24.jpg" alt="BMW Club Andorra portada històrica" className="w-full h-full object-cover scale-[1.03]" loading="eager" />
         <div className="absolute inset-0 gradient-overlay" />
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_80%_10%,rgba(0,102,177,.32),transparent_22%),radial-gradient(circle_at_10%_25%,rgba(255,255,255,.12),transparent_18%)]" />
       </div>
