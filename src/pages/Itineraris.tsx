@@ -6,7 +6,7 @@ import { divIcon, type LatLngExpression, type LatLngTuple } from "leaflet";
 import { PageShell } from "@/components/PageShell";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { Dialog, DialogContent, DialogDescription, DialogTitle } from "@/components/ui/dialog";
+import { Dialog, DialogClose, DialogContent, DialogDescription, DialogTitle } from "@/components/ui/dialog";
 import { useLanguage } from "@/components/LanguageProvider";
 import { LanguageCode } from "@/lib/i18n";
 import { type ClubItinerary } from "@/content/itineraryGuide";
@@ -56,6 +56,7 @@ const translations: Record<LanguageCode, Record<string, string>> = {
     license: "Llicència",
     mapExpand: "Obrir mapa gran",
     mapExpandHint: "Zoom amb la roda o els botons. Clica per obrir el mapa operatiu en gran.",
+    mapClose: "Tancar mapa",
     openGoogleMaps: "Obrir a Google Maps",
   },
   es: {
@@ -100,6 +101,7 @@ const translations: Record<LanguageCode, Record<string, string>> = {
     license: "Licencia",
     mapExpand: "Abrir mapa grande",
     mapExpandHint: "Haz zoom con la rueda o los botones. Haz clic para abrir el mapa operativo en grande.",
+    mapClose: "Cerrar mapa",
     openGoogleMaps: "Abrir en Google Maps",
   },
   fr: {
@@ -144,6 +146,7 @@ const translations: Record<LanguageCode, Record<string, string>> = {
     license: "Licence",
     mapExpand: "Ouvrir la grande carte",
     mapExpandHint: "Zoomez avec la molette ou les boutons. Cliquez pour ouvrir la carte en grand.",
+    mapClose: "Fermer la carte",
     openGoogleMaps: "Ouvrir dans Google Maps",
   },
   en: {
@@ -188,6 +191,7 @@ const translations: Record<LanguageCode, Record<string, string>> = {
     license: "License",
     mapExpand: "Open large map",
     mapExpandHint: "Zoom with the wheel or buttons. Click to open the full interactive map.",
+    mapClose: "Close map",
     openGoogleMaps: "Open in Google Maps",
   },
   pt: {
@@ -232,6 +236,7 @@ const translations: Record<LanguageCode, Record<string, string>> = {
     license: "Licença",
     mapExpand: "Abrir mapa grande",
     mapExpandHint: "Faça zoom com a roda ou os botões. Clique para abrir o mapa operacional em grande.",
+    mapClose: "Fechar mapa",
     openGoogleMaps: "Abrir no Google Maps",
   },
   de: {
@@ -276,6 +281,7 @@ const translations: Record<LanguageCode, Record<string, string>> = {
     license: "Lizenz",
     mapExpand: "Große Karte öffnen",
     mapExpandHint: "Mit Mausrad oder Buttons zoomen. Klicken Sie, um die große interaktive Karte zu öffnen.",
+    mapClose: "Karte schließen",
     openGoogleMaps: "In Google Maps öffnen",
   },
   ru: {
@@ -320,6 +326,7 @@ const translations: Record<LanguageCode, Record<string, string>> = {
     license: "Лицензия",
     mapExpand: "Открыть большую карту",
     mapExpandHint: "Масштабируйте колесом или кнопками. Нажмите, чтобы открыть большую интерактивную карту.",
+    mapClose: "Закрыть карту",
     openGoogleMaps: "Открыть в Google Maps",
   },
 };
@@ -660,12 +667,28 @@ const RouteSchematic = ({ route, t }: { route: ClubItinerary; t: Record<string, 
       </div>
 
       <Dialog open={isMapOpen} onOpenChange={setIsMapOpen}>
-        <DialogContent className="max-w-[min(96vw,1440px)] border-0 bg-white p-0 shadow-2xl">
+        <DialogContent className="left-3 right-3 top-3 bottom-3 z-50 max-w-none translate-x-0 translate-y-0 gap-0 rounded-[1.5rem] border-0 bg-white p-0 shadow-2xl sm:left-6 sm:right-6 sm:top-6 sm:bottom-6 sm:rounded-[1.75rem]">
           <DialogTitle className="sr-only">{t.mapExpand}</DialogTitle>
           <DialogDescription className="sr-only">{t.mapExpandHint}</DialogDescription>
           {isMapOpen ? (
-            <div className="p-3 md:p-4">
-              <RouteMapCanvas route={route} t={t} heightClassName="h-[78vh] min-h-[520px]" />
+            <div className="flex h-full min-h-0 flex-col overflow-hidden rounded-[1.5rem] bg-white sm:rounded-[1.75rem]">
+              <div className="flex items-center justify-between gap-3 border-b border-slate-200 px-4 py-3 sm:px-5">
+                <div>
+                  <div className="text-sm font-semibold uppercase tracking-[0.18em] text-primary">{t.scheme}</div>
+                  <div className="mt-1 text-sm text-slate-500">{route.title[language]}</div>
+                </div>
+                <DialogClose asChild>
+                  <button
+                    type="button"
+                    className="inline-flex items-center gap-2 rounded-full border border-slate-200 bg-white px-4 py-2 text-xs font-semibold uppercase tracking-[0.14em] text-slate-800 shadow-sm transition hover:border-primary hover:text-primary"
+                  >
+                    {t.mapClose}
+                  </button>
+                </DialogClose>
+              </div>
+              <div className="min-h-0 flex-1 p-3 sm:p-4">
+                <RouteMapCanvas route={route} t={t} heightClassName="h-full min-h-[420px]" />
+              </div>
             </div>
           ) : null}
         </DialogContent>
