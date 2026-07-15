@@ -2024,37 +2024,58 @@ const Itineraris = () => {
             return (
               <Card key={route.id} className="premium-card border-0 rounded-[2rem] p-6 md:p-8 shadow-elegant overflow-hidden">
                 <div className={`grid gap-8 items-start ${isClosed ? "lg:grid-cols-1" : "lg:grid-cols-[0.92fr_1.08fr]"}`}>
-                  <div>
-                    <div className="flex flex-wrap items-center gap-3">
-                      <div className="inline-flex items-center gap-2 rounded-full bg-primary/10 px-4 py-2 text-xs font-semibold uppercase tracking-[0.2em] text-primary">
+                  <div className={`relative overflow-hidden rounded-[1.85rem] border ${isClosed ? "border-border/70 bg-white/68 p-5 md:p-6" : "border-slate-900/10 bg-slate-950 p-5 text-white md:p-6"}`}>
+                    {!isClosed ? (
+                      <>
+                        <img
+                          src={route.image.src}
+                          alt={route.image.alt[language]}
+                          className="absolute inset-0 h-full w-full scale-110 object-cover blur-2xl saturate-[1.05]"
+                          loading="lazy"
+                          decoding="async"
+                        />
+                        <div className="absolute inset-0 bg-gradient-to-br from-slate-950/82 via-slate-950/74 to-primary/30" />
+                      </>
+                    ) : null}
+
+                    <div className="relative z-10 flex flex-wrap items-center gap-3">
+                      <div className={`inline-flex items-center gap-2 rounded-full px-4 py-2 text-xs font-semibold uppercase tracking-[0.2em] ${isClosed ? "bg-primary/10 text-primary" : "border border-white/12 bg-white/10 text-white/88"}`}>
                         <ProfileIcon className="h-4 w-4" />
                         {profile.label}
                       </div>
                       {route.clubRecommended ? (
-                        <div className="inline-flex items-center gap-2 rounded-full bg-accent px-4 py-2 text-xs font-semibold uppercase tracking-[0.2em] text-white shadow-sm">
+                        <div className={`inline-flex items-center gap-2 rounded-full px-4 py-2 text-xs font-semibold uppercase tracking-[0.2em] text-white shadow-sm ${isClosed ? "bg-accent" : "bg-white/12 backdrop-blur-md"}`}>
                           <Crown className="h-4 w-4 text-primary" />
                           {t.clubPick}
                         </div>
                       ) : null}
                     </div>
 
-                    <h2 className="mt-5 text-3xl md:text-4xl font-bold text-balance">{route.title[language]}</h2>
-                    <p className="mt-4 text-lg text-muted-foreground">{route.strapline[language]}</p>
+                    <div className="relative z-10">
+                      <h2 className={`mt-5 text-3xl md:text-4xl font-bold text-balance ${isClosed ? "text-foreground" : "text-white"}`}>{route.title[language]}</h2>
+                      <p className={`mt-4 text-lg ${isClosed ? "text-muted-foreground" : "text-white/78"}`}>{route.strapline[language]}</p>
+                    </div>
 
-                    <p className="mt-4 text-sm text-muted-foreground">{t.collapsedRouteHint}</p>
+                    <p className={`relative z-10 mt-4 text-sm ${isClosed ? "text-muted-foreground" : "text-white/66"}`}>{t.collapsedRouteHint}</p>
 
-                    <div className="mt-5 flex flex-wrap gap-3">
+                    <div className="relative z-10 mt-4 flex flex-wrap gap-2 text-[11px] font-semibold uppercase tracking-[0.14em]">
+                      <span className={`rounded-full px-3 py-1 ${isClosed ? "bg-white text-slate-700 border border-slate-200" : "border border-white/12 bg-white/10 text-white/88"}`}>{route.duration}</span>
+                      <span className={`rounded-full px-3 py-1 ${isClosed ? "bg-white text-slate-700 border border-slate-200" : "border border-white/12 bg-white/10 text-white/88"}`}>{route.distance}</span>
+                      <span className={`rounded-full px-3 py-1 ${isClosed ? "bg-white text-slate-700 border border-slate-200" : "border border-white/12 bg-white/10 text-white/88"}`}>{route.rhythm[language]}</span>
+                    </div>
+
+                    <div className="relative z-10 mt-5 flex flex-wrap gap-3">
                       <button
                         type="button"
                         onClick={() => openRoute(route.id, "summary")}
-                        className={`inline-flex items-center gap-2 rounded-full px-4 py-2 text-xs font-semibold uppercase tracking-[0.14em] transition ${isSummary ? "bg-primary text-white" : "border border-slate-200 bg-white text-slate-800 hover:border-primary hover:text-primary"}`}
+                        className={`inline-flex items-center gap-2 rounded-full px-4 py-2 text-xs font-semibold uppercase tracking-[0.14em] transition ${isSummary ? "bg-primary text-white" : isClosed ? "border border-slate-200 bg-white text-slate-800 hover:border-primary hover:text-primary" : "border border-white/15 bg-white/10 text-white hover:bg-white/14"}`}
                       >
                         {t.quickView}
                       </button>
                       <button
                         type="button"
                         onClick={() => openRoute(route.id, "full")}
-                        className={`inline-flex items-center gap-2 rounded-full px-4 py-2 text-xs font-semibold uppercase tracking-[0.14em] transition ${isFull ? "bg-slate-950 text-white" : "border border-slate-200 bg-white text-slate-800 hover:border-primary hover:text-primary"}`}
+                        className={`inline-flex items-center gap-2 rounded-full px-4 py-2 text-xs font-semibold uppercase tracking-[0.14em] transition ${isFull ? "bg-white text-slate-950" : isClosed ? "border border-slate-200 bg-white text-slate-800 hover:border-primary hover:text-primary" : "border border-white/15 bg-white/10 text-white hover:bg-white/14"}`}
                       >
                         {t.fullView}
                       </button>
@@ -2062,15 +2083,15 @@ const Itineraris = () => {
                         <button
                           type="button"
                           onClick={closeRoute}
-                          className="inline-flex items-center gap-2 rounded-full border border-slate-200 bg-white px-4 py-2 text-xs font-semibold uppercase tracking-[0.14em] text-slate-800 transition hover:border-primary hover:text-primary"
+                          className={`inline-flex items-center gap-2 rounded-full px-4 py-2 text-xs font-semibold uppercase tracking-[0.14em] transition ${isClosed ? "border border-slate-200 bg-white text-slate-800 hover:border-primary hover:text-primary" : "border border-white/15 bg-white/10 text-white hover:bg-white/14"}`}
                         >
                           {t.hideRoute}
                         </button>
                       ) : null}
                     </div>
 
-                    {route.clubRecommended && route.clubRecommendation ? (
-                      <div className="mt-5 rounded-[1.5rem] border border-accent/10 bg-accent text-white p-5 shadow-[0_20px_50px_-35px_rgba(15,23,42,.65)]">
+                    {!isClosed && route.clubRecommended && route.clubRecommendation ? (
+                      <div className={`relative z-10 mt-5 rounded-[1.5rem] p-5 shadow-[0_20px_50px_-35px_rgba(15,23,42,.65)] ${isFull ? "border border-white/12 bg-white/10 backdrop-blur-md text-white" : "border border-white/10 bg-slate-950/28 text-white/92"}`}>
                         <div className="inline-flex items-center gap-2 rounded-full bg-white/10 px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.18em] text-white/84">
                           <Crown className="h-3.5 w-3.5 text-primary" />
                           {t.clubPickBody}
@@ -2079,24 +2100,26 @@ const Itineraris = () => {
                       </div>
                     ) : null}
 
-                    <div className="mt-6 grid sm:grid-cols-2 gap-4">
-                      <div className="rounded-[1.5rem] bg-white/70 p-4">
-                        <div className="text-xs uppercase tracking-[0.18em] text-primary font-semibold">{t.duration}</div>
-                        <div className="mt-2 font-semibold">{route.duration}</div>
+                    {!isClosed ? (
+                      <div className="relative z-10 mt-6 grid gap-4 sm:grid-cols-2">
+                        <div className={`rounded-[1.5rem] p-4 ${isFull ? "border border-white/10 bg-white/10 text-white backdrop-blur-md" : "border border-white/10 bg-slate-950/24 text-white"}`}>
+                          <div className="text-xs uppercase tracking-[0.18em] text-primary font-semibold">{t.duration}</div>
+                          <div className="mt-2 font-semibold">{route.duration}</div>
+                        </div>
+                        <div className={`rounded-[1.5rem] p-4 ${isFull ? "border border-white/10 bg-white/10 text-white backdrop-blur-md" : "border border-white/10 bg-slate-950/24 text-white"}`}>
+                          <div className="text-xs uppercase tracking-[0.18em] text-primary font-semibold">{t.distance}</div>
+                          <div className="mt-2 font-semibold">{route.distance}</div>
+                        </div>
+                        <div className={`rounded-[1.5rem] p-4 ${isFull ? "border border-white/10 bg-white/10 text-white backdrop-blur-md" : "border border-white/10 bg-slate-950/24 text-white"}`}>
+                          <div className="text-xs uppercase tracking-[0.18em] text-primary font-semibold">{t.season}</div>
+                          <div className="mt-2 font-semibold">{route.bestSeason[language]}</div>
+                        </div>
+                        <div className={`rounded-[1.5rem] p-4 ${isFull ? "border border-white/10 bg-white/10 text-white backdrop-blur-md" : "border border-white/10 bg-slate-950/24 text-white"}`}>
+                          <div className="text-xs uppercase tracking-[0.18em] text-primary font-semibold">{t.rhythm}</div>
+                          <div className="mt-2 font-semibold">{route.rhythm[language]}</div>
+                        </div>
                       </div>
-                      <div className="rounded-[1.5rem] bg-white/70 p-4">
-                        <div className="text-xs uppercase tracking-[0.18em] text-primary font-semibold">{t.distance}</div>
-                        <div className="mt-2 font-semibold">{route.distance}</div>
-                      </div>
-                      <div className="rounded-[1.5rem] bg-white/70 p-4">
-                        <div className="text-xs uppercase tracking-[0.18em] text-primary font-semibold">{t.season}</div>
-                        <div className="mt-2 font-semibold">{route.bestSeason[language]}</div>
-                      </div>
-                      <div className="rounded-[1.5rem] bg-white/70 p-4">
-                        <div className="text-xs uppercase tracking-[0.18em] text-primary font-semibold">{t.rhythm}</div>
-                        <div className="mt-2 font-semibold">{route.rhythm[language]}</div>
-                      </div>
-                    </div>
+                    ) : null}
                   </div>
 
                   {!isClosed ? (
