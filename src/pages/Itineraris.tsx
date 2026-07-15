@@ -836,6 +836,16 @@ type ConciergeVehicle = "touring" | "mperformance" | "motorcycle" | "electric";
 type ConciergeMood = "scenic" | "dynamic" | "official";
 type ConciergeFood = "signature" | "mountain" | "light";
 
+type EventModeData = {
+  meetingPoint: Record<LanguageCode, string>;
+  coffee: Record<LanguageCode, string>;
+  convoyNote: Record<LanguageCode, string>;
+  participants: number;
+  guestCars: number;
+  timeline: Array<{ time: string; label: Record<LanguageCode, string> }>;
+  checklist: Record<LanguageCode, string[]>;
+};
+
 const conciergeUi = {
   title: {
     ca: "Concierge interactiu",
@@ -994,6 +1004,295 @@ const conciergeRouteFit: Record<string, { duration: ConciergeDuration[]; vehicle
       pt: "É a rota mais premium em paisagem e atmosfera: Ordino, Sorteny e Tristaina dão um final muito forte e apresentável.",
       de: "Die premiumhafteste Route in Landschaft und Atmosphäre: Ordino, Sorteny und Tristaina liefern ein starkes Finale.",
       ru: "Самый премиальный маршрут по атмосфере и пейзажу: Ordino, Sorteny и Tristaina дают очень сильный финал.",
+    },
+  },
+};
+
+const eventModeUi = {
+  eyebrow: {
+    ca: "Official Event Mode real",
+    es: "Official Event Mode real",
+    fr: "Official Event Mode réel",
+    en: "Real Official Event Mode",
+    pt: "Official Event Mode real",
+    de: "Echter Official Event Mode",
+    ru: "Реальный Official Event Mode",
+  },
+  title: {
+    ca: "Una sortida oficial del club ja hauria de veure’s així.",
+    es: "Una salida oficial del club ya debería verse así.",
+    fr: "Une sortie officielle du club devrait déjà se voir comme ça.",
+    en: "This is how an official club outing should already look.",
+    pt: "Uma saída oficial do clube já deveria ver-se assim.",
+    de: "So sollte eine offizielle Club-Ausfahrt bereits aussehen.",
+    ru: "Именно так уже должен выглядеть официальный выезд клуба.",
+  },
+  intro: {
+    ca: "Selector de ruta, punt de trobada, timing, briefing i operativa mínima per portar una sortida de nivell.",
+    es: "Selector de ruta, punto de encuentro, timing, briefing y operativa mínima para llevar una salida con nivel.",
+    fr: "Sélecteur de route, point de rendez-vous, timing, briefing et base opérationnelle pour une vraie sortie premium.",
+    en: "Route selector, meeting point, timing, briefing and the minimum operations layer for a serious premium outing.",
+    pt: "Seletor de rota, ponto de encontro, timing, briefing e camada mínima de operação para uma saída premium.",
+    de: "Routenwahl, Treffpunkt, Timing, Briefing und minimale Operations-Schicht für eine hochwertige Ausfahrt.",
+    ru: "Выбор маршрута, точка сбора, тайминг, брифинг и минимальный операционный слой для премиального выезда.",
+  },
+  selectRoute: {
+    ca: "Sortida activa",
+    es: "Salida activa",
+    fr: "Sortie active",
+    en: "Active outing",
+    pt: "Saída ativa",
+    de: "Aktive Ausfahrt",
+    ru: "Активный выезд",
+  },
+  meetingPoint: {
+    ca: "Punt de trobada",
+    es: "Punto de encuentro",
+    fr: "Point de rendez-vous",
+    en: "Meeting point",
+    pt: "Ponto de encontro",
+    de: "Treffpunkt",
+    ru: "Точка сбора",
+  },
+  coffee: {
+    ca: "Coffee point",
+    es: "Coffee point",
+    fr: "Coffee point",
+    en: "Coffee point",
+    pt: "Coffee point",
+    de: "Coffee point",
+    ru: "Coffee point",
+  },
+  participants: {
+    ca: "Cotxes previstos",
+    es: "Coches previstos",
+    fr: "Voitures prévues",
+    en: "Expected cars",
+    pt: "Carros previstos",
+    de: "Erwartete Autos",
+    ru: "Ожидаемые машины",
+  },
+  guestCars: {
+    ca: "Guest cars",
+    es: "Guest cars",
+    fr: "Guest cars",
+    en: "Guest cars",
+    pt: "Guest cars",
+    de: "Guest cars",
+    ru: "Guest cars",
+  },
+  timeline: {
+    ca: "Timeline de la sortida",
+    es: "Timeline de la salida",
+    fr: "Timeline de la sortie",
+    en: "Outing timeline",
+    pt: "Timeline da saída",
+    de: "Zeitplan der Ausfahrt",
+    ru: "Таймлайн выезда",
+  },
+  briefing: {
+    ca: "Briefing de convoy",
+    es: "Briefing de convoy",
+    fr: "Briefing du convoi",
+    en: "Convoy briefing",
+    pt: "Briefing do comboio",
+    de: "Convoy-Briefing",
+    ru: "Брифинг колонны",
+  },
+  requestEvent: {
+    ca: "Demanar aquesta sortida",
+    es: "Solicitar esta salida",
+    fr: "Demander cette sortie",
+    en: "Request this outing",
+    pt: "Pedir esta saída",
+    de: "Diese Ausfahrt anfragen",
+    ru: "Запросить этот выезд",
+  },
+} as const;
+
+const eventModeByRouteId: Record<string, EventModeData> = {
+  "grand-tour-central": {
+    meetingPoint: {
+      ca: "Andorra la Vella, aparcament Prada Casadet",
+      es: "Andorra la Vella, aparcamiento Prada Casadet",
+      fr: "Andorre-la-Vieille, parking Prada Casadet",
+      en: "Andorra la Vella, Prada Casadet parking",
+      pt: "Andorra-a-Velha, parque Prada Casadet",
+      de: "Andorra la Vella, Parkplatz Prada Casadet",
+      ru: "Andorra la Vella, парковка Prada Casadet",
+    },
+    coffee: {
+      ca: "Coffee point: centre d’Andorra la Vella abans de pujar a Engolasters.",
+      es: "Coffee point: centro de Andorra la Vella antes de subir a Engolasters.",
+      fr: "Coffee point : centre d’Andorre-la-Vieille avant la montée vers Engolasters.",
+      en: "Coffee point: central Andorra la Vella before climbing to Engolasters.",
+      pt: "Coffee point: centro de Andorra la Vella antes de subir a Engolasters.",
+      de: "Coffee point: Zentrum von Andorra la Vella vor dem Anstieg nach Engolasters.",
+      ru: "Coffee point: центр Andorra la Vella перед подъемом на Engolasters.",
+    },
+    convoyNote: {
+      ca: "Ruta elegant per a 20-30 cotxes, molt adequada per a una sortida oficial neta, amb foto i sopar premium.",
+      es: "Ruta elegante para 20-30 coches, muy adecuada para una salida oficial limpia, con foto y cena premium.",
+      fr: "Route élégante pour 20-30 voitures, parfaite pour une sortie officielle propre avec photo et dîner premium.",
+      en: "Elegant route for 20-30 cars, ideal for a clean official outing with photo stop and premium dinner.",
+      pt: "Rota elegante para 20-30 carros, muito adequada para uma saída oficial com foto e jantar premium.",
+      de: "Elegante Route für 20-30 Autos, ideal für eine saubere offizielle Ausfahrt mit Fotostopp und Premium-Dinner.",
+      ru: "Элегантный маршрут для 20-30 машин, идеален для официального выезда с фотостопом и premium-ужином.",
+    },
+    participants: 24,
+    guestCars: 5,
+    timeline: [
+      { time: "08:30", label: { ca: "Check-in i cafè", es: "Check-in y café", fr: "Check-in et café", en: "Check-in and coffee", pt: "Check-in e café", de: "Check-in und Kaffee", ru: "Check-in и кофе" } },
+      { time: "09:00", label: { ca: "Briefing i QR de ruta", es: "Briefing y QR de ruta", fr: "Briefing et QR de route", en: "Briefing and route QR", pt: "Briefing e QR da rota", de: "Briefing und Routen-QR", ru: "Брифинг и QR маршрута" } },
+      { time: "10:10", label: { ca: "Mirador a Engolasters", es: "Mirador en Engolasters", fr: "Belvédère à Engolasters", en: "Viewpoint at Engolasters", pt: "Miradouro em Engolasters", de: "Aussichtspunkt in Engolasters", ru: "Мирадор в Engolasters" } },
+      { time: "13:20", label: { ca: "Dinar premium a Meritxell", es: "Comida premium en Meritxell", fr: "Déjeuner premium à Meritxell", en: "Premium lunch in Meritxell", pt: "Almoço premium em Meritxell", de: "Premium-Lunch in Meritxell", ru: "Premium-обед в Meritxell" } },
+    ],
+    checklist: {
+      ca: ["Briefing curt de radio i gaps", "Cotxe guia + cotxe tancament", "QR de ruta compartit abans de sortir"],
+      es: ["Briefing corto de radio y gaps", "Coche guía + coche cierre", "QR de ruta compartido antes de salir"],
+      fr: ["Briefing court radio et gaps", "Voiture guide + voiture balai", "QR de route partagé avant le départ"],
+      en: ["Short radio and gap briefing", "Lead car + sweep car", "Route QR shared before departure"],
+      pt: ["Briefing curto de rádio e gaps", "Carro guia + carro fecho", "QR da rota partilhado antes da saída"],
+      de: ["Kurzes Funk- und Gap-Briefing", "Lead Car + Sweep Car", "Routen-QR vor Abfahrt teilen"],
+      ru: ["Короткий брифинг по радио и дистанциям", "Ведущий + замыкающий автомобиль", "QR маршрута отправлен до старта"],
+    },
+  },
+  "west-viewpoints-loop": {
+    meetingPoint: {
+      ca: "La Massana, telecabina i plaça central",
+      es: "La Massana, telecabina y plaza central",
+      fr: "La Massana, télécabine et place centrale",
+      en: "La Massana, gondola station and central square",
+      pt: "La Massana, telecabine e praça central",
+      de: "La Massana, Gondelstation und zentraler Platz",
+      ru: "La Massana, телекабина и центральная площадь",
+    },
+    coffee: {
+      ca: "Coffee point: arrencada ràpida per a una sortida curta i intensa.",
+      es: "Coffee point: arranque rápido para una salida corta e intensa.",
+      fr: "Coffee point : départ rapide pour une sortie courte et intense.",
+      en: "Coffee point: quick launch for a short, intense outing.",
+      pt: "Coffee point: arranque rápido para uma saída curta e intensa.",
+      de: "Coffee point: schneller Start für eine kurze intensive Ausfahrt.",
+      ru: "Coffee point: быстрый старт для короткого и интенсивного выезда.",
+    },
+    convoyNote: {
+      ca: "Ideal per a una activació curta, amb menys logística i molta recompensa visual i dinàmica.",
+      es: "Ideal para una activación corta, con menos logística y mucha recompensa visual y dinámica.",
+      fr: "Idéal pour une activation courte, avec moins de logistique et beaucoup de retour visuel et dynamique.",
+      en: "Ideal for a short activation with lighter logistics and strong visual and dynamic payoff.",
+      pt: "Ideal para uma ativação curta, com menos logística e grande retorno visual e dinâmico.",
+      de: "Ideal für eine kurze Aktivierung mit weniger Logistik und starkem visuellen sowie fahrdynamischen Effekt.",
+      ru: "Идеально для короткой активации: меньше логистики, больше визуальной и динамической отдачи.",
+    },
+    participants: 16,
+    guestCars: 3,
+    timeline: [
+      { time: "09:00", label: { ca: "Meet & coffee", es: "Meet & coffee", fr: "Meet & coffee", en: "Meet & coffee", pt: "Meet & coffee", de: "Meet & coffee", ru: "Meet & coffee" } },
+      { time: "09:30", label: { ca: "Briefing curt", es: "Briefing corto", fr: "Briefing court", en: "Short briefing", pt: "Briefing curto", de: "Kurzes Briefing", ru: "Короткий брифинг" } },
+      { time: "10:10", label: { ca: "Parada foto a Coll de la Botella", es: "Parada foto en Coll de la Botella", fr: "Stop photo au Coll de la Botella", en: "Photo stop at Coll de la Botella", pt: "Paragem foto no Coll de la Botella", de: "Fotostopp am Coll de la Botella", ru: "Фотостоп на Coll de la Botella" } },
+      { time: "11:45", label: { ca: "Brunch de muntanya", es: "Brunch de montaña", fr: "Brunch montagne", en: "Mountain brunch", pt: "Brunch de montanha", de: "Mountain-Brunch", ru: "Горный brunch" } },
+    ],
+    checklist: {
+      ca: ["Grups més petits i àgils", "Control de gaps en tram de baixada", "Parada foto ràpida coordinada"],
+      es: ["Grupos más pequeños y ágiles", "Control de gaps en tramo de bajada", "Parada foto rápida coordinada"],
+      fr: ["Groupes plus petits et agiles", "Contrôle des gaps en descente", "Stop photo rapide coordonné"],
+      en: ["Smaller agile groups", "Gap control on the descent", "Coordinated quick photo stop"],
+      pt: ["Grupos menores e ágeis", "Controlo de gaps na descida", "Paragem foto rápida coordenada"],
+      de: ["Kleinere agile Gruppen", "Gap-Kontrolle bergab", "Koordinierter schneller Fotostopp"],
+      ru: ["Небольшие быстрые группы", "Контроль дистанции на спуске", "Координированный быстрый фотостоп"],
+    },
+  },
+  "envalira-high-mountain": {
+    meetingPoint: {
+      ca: "Encamp, punt de trobada abans de pujar cap a Grau Roig",
+      es: "Encamp, punto de encuentro antes de subir hacia Grau Roig",
+      fr: "Encamp, point de rendez-vous avant la montée vers Grau Roig",
+      en: "Encamp, meeting point before climbing toward Grau Roig",
+      pt: "Encamp, ponto de encontro antes da subida para Grau Roig",
+      de: "Encamp, Treffpunkt vor dem Anstieg nach Grau Roig",
+      ru: "Encamp, точка сбора перед подъемом к Grau Roig",
+    },
+    coffee: {
+      ca: "Coffee point: base baixa abans del tram alpí.",
+      es: "Coffee point: base baja antes del tramo alpino.",
+      fr: "Coffee point : base basse avant la section alpine.",
+      en: "Coffee point: lower base before the alpine section.",
+      pt: "Coffee point: base baixa antes do tramo alpino.",
+      de: "Coffee point: tieferer Ausgangspunkt vor dem alpinen Abschnitt.",
+      ru: "Coffee point: нижняя база перед альпийским участком.",
+    },
+    convoyNote: {
+      ca: "Només per a dies clars i grups molt ordenats: és la versió més espectacular però també la més sensible a clima i trànsit.",
+      es: "Solo para días claros y grupos muy ordenados: es la versión más espectacular pero también la más sensible a clima y tráfico.",
+      fr: "Seulement pour jours clairs et groupes ordonnés : c’est la version la plus spectaculaire mais aussi la plus sensible à la météo.",
+      en: "For clear days and orderly groups only: the most spectacular version, but also the most weather-sensitive.",
+      pt: "Só para dias claros e grupos muito ordenados: é a versão mais espetacular, mas também a mais sensível ao clima.",
+      de: "Nur für klare Tage und geordnete Gruppen: spektakulärste Variante, aber auch am empfindlichsten für Wetter und Verkehr.",
+      ru: "Только для ясных дней и дисциплинированных групп: самая эффектная, но и самая чувствительная к погоде версия.",
+    },
+    participants: 12,
+    guestCars: 2,
+    timeline: [
+      { time: "08:45", label: { ca: "Check d’equipament", es: "Check de equipamiento", fr: "Check équipement", en: "Equipment check", pt: "Check de equipamento", de: "Equipment-Check", ru: "Проверка экипировки" } },
+      { time: "09:15", label: { ca: "Sortida cap a Grau Roig", es: "Salida hacia Grau Roig", fr: "Départ vers Grau Roig", en: "Departure to Grau Roig", pt: "Saída para Grau Roig", de: "Abfahrt nach Grau Roig", ru: "Выезд в Grau Roig" } },
+      { time: "10:30", label: { ca: "Foto alta a Envalira", es: "Foto alta en Envalira", fr: "Photo haute à Envalira", en: "High-altitude photo at Envalira", pt: "Foto alta em Envalira", de: "Hochgebirgsfoto in Envalira", ru: "Высотное фото на Envalira" } },
+      { time: "12:30", label: { ca: "Parada mountain lunch", es: "Parada mountain lunch", fr: "Pause mountain lunch", en: "Mountain lunch stop", pt: "Paragem mountain lunch", de: "Mountain-Lunch-Stopp", ru: "Горный lunch-стоп" } },
+    ],
+    checklist: {
+      ca: ["Meteorologia validada el mateix matí", "Ordre de sortida definit", "Punts de reagrupament clars"],
+      es: ["Meteorología validada la misma mañana", "Orden de salida definido", "Puntos de reagrupación claros"],
+      fr: ["Météo validée le matin même", "Ordre de départ défini", "Points de regroupement clairs"],
+      en: ["Weather validated that same morning", "Defined departure order", "Clear regroup points"],
+      pt: ["Meteorologia validada na mesma manhã", "Ordem de saída definida", "Pontos claros de reagrupamento"],
+      de: ["Wetter am selben Morgen validiert", "Abfahrtsreihenfolge definiert", "Klare Sammelpunkte"],
+      ru: ["Погода проверена утром", "Определен порядок старта", "Понятные точки сбора"],
+    },
+  },
+  "ordino-tristaina-touring": {
+    meetingPoint: {
+      ca: "Ordino, centre històric i aparcament principal",
+      es: "Ordino, centro histórico y aparcamiento principal",
+      fr: "Ordino, centre historique et parking principal",
+      en: "Ordino, historic center and main parking",
+      pt: "Ordino, centro histórico e estacionamento principal",
+      de: "Ordino, historisches Zentrum und Hauptparkplatz",
+      ru: "Ordino, исторический центр и главная парковка",
+    },
+    coffee: {
+      ca: "Coffee point: arrencada elegant al nucli d’Ordino.",
+      es: "Coffee point: arranque elegante en el núcleo de Ordino.",
+      fr: "Coffee point : départ élégant dans le cœur d’Ordino.",
+      en: "Coffee point: elegant launch in the heart of Ordino.",
+      pt: "Coffee point: arranque elegante no núcleo de Ordino.",
+      de: "Coffee point: eleganter Start im Herzen von Ordino.",
+      ru: "Coffee point: элегантный старт в центре Ordino.",
+    },
+    convoyNote: {
+      ca: "La versió més presentable per a hospitality premium: paisatge, patrimoni, alta muntanya i bon final gastronòmic.",
+      es: "La versión más presentable para hospitality premium: paisaje, patrimonio, alta montaña y buen final gastronómico.",
+      fr: "La version la plus présentable pour une hospitality premium : paysage, patrimoine, haute montagne et finale gastronomique.",
+      en: "The most presentable version for premium hospitality: scenery, heritage, alpine character and a strong gastronomic finish.",
+      pt: "A versão mais apresentável para hospitality premium: paisagem, património, alta montanha e final gastronómico forte.",
+      de: "Die präsentabelste Version für Premium-Hospitality: Landschaft, Heritage, Hochgebirge und starkes gastronomisches Finale.",
+      ru: "Самая презентабельная версия для premium hospitality: пейзаж, heritage, высокогорье и сильный гастрономический финал.",
+    },
+    participants: 18,
+    guestCars: 4,
+    timeline: [
+      { time: "08:40", label: { ca: "Check-in a Ordino", es: "Check-in en Ordino", fr: "Check-in à Ordino", en: "Check-in in Ordino", pt: "Check-in em Ordino", de: "Check-in in Ordino", ru: "Check-in в Ordino" } },
+      { time: "09:10", label: { ca: "Briefing de ruta i safety", es: "Briefing de ruta y safety", fr: "Briefing route et safety", en: "Route and safety briefing", pt: "Briefing de rota e safety", de: "Routen- und Safety-Briefing", ru: "Брифинг по маршруту и safety" } },
+      { time: "11:10", label: { ca: "Parada panoràmica a Tristaina", es: "Parada panorámica en Tristaina", fr: "Pause panoramique à Tristaina", en: "Panoramic stop at Tristaina", pt: "Paragem panorâmica em Tristaina", de: "Panoramastopp in Tristaina", ru: "Панорамная остановка в Tristaina" } },
+      { time: "13:40", label: { ca: "Dinar de tancament a Arcalís", es: "Comida de cierre en Arcalís", fr: "Déjeuner de clôture à Arcalís", en: "Closing lunch in Arcalís", pt: "Almoço final em Arcalís", de: "Abschluss-Lunch in Arcalís", ru: "Финальный lunch в Arcalís" } },
+    ],
+    checklist: {
+      ca: ["Foto de grup a Ordino abans de sortir", "Reagrupament a El Serrat", "Tancament premium a la cota alta"],
+      es: ["Foto de grupo en Ordino antes de salir", "Reagrupación en El Serrat", "Cierre premium en cota alta"],
+      fr: ["Photo de groupe à Ordino avant départ", "Regroupement à El Serrat", "Clôture premium en altitude"],
+      en: ["Group photo in Ordino before departure", "Regroup in El Serrat", "Premium high-altitude finish"],
+      pt: ["Foto de grupo em Ordino antes da saída", "Reagrupamento em El Serrat", "Fecho premium em altitude"],
+      de: ["Gruppenfoto in Ordino vor Abfahrt", "Regruppierung in El Serrat", "Premium-Finale in großer Höhe"],
+      ru: ["Групповое фото в Ordino до старта", "Сбор в El Serrat", "Premium-финиш на высоте"],
     },
   },
 };
@@ -1365,6 +1664,7 @@ const Itineraris = () => {
   const t = translations[language];
   const { data: routes = [] } = useMergedItineraries();
   const showcaseRoutes = routes.slice(0, 3);
+  const [selectedEventRouteId, setSelectedEventRouteId] = useState<string>("grand-tour-central");
   const [conciergeDuration, setConciergeDuration] = useState<ConciergeDuration>("halfday");
   const [conciergeVehicle, setConciergeVehicle] = useState<ConciergeVehicle>("touring");
   const [conciergeMood, setConciergeMood] = useState<ConciergeMood>("scenic");
@@ -1394,6 +1694,10 @@ const Itineraris = () => {
     ranked.sort((a, b) => b.score - a.score);
     return ranked[0] ?? null;
   }, [routes, conciergeDuration, conciergeVehicle, conciergeMood, conciergeFood, language]);
+
+  const eventRoutes = routes.filter((route) => eventModeByRouteId[route.id]);
+  const activeEventRoute = eventRoutes.find((route) => route.id === selectedEventRouteId) ?? eventRoutes[0] ?? null;
+  const activeEventData = activeEventRoute ? eventModeByRouteId[activeEventRoute.id] : null;
 
   return (
     <PageShell>
@@ -1724,6 +2028,110 @@ const Itineraris = () => {
           </Card>
         </div>
       </section>
+
+      {activeEventRoute && activeEventData ? (
+        <section className="pb-20">
+          <div className="container mx-auto px-4 max-w-6xl">
+            <Card className="glass-dark border-0 rounded-[2rem] overflow-hidden p-6 md:p-8 text-white shadow-elegant">
+              <div className="grid gap-8 lg:grid-cols-[1.05fr_0.95fr]">
+                <div>
+                  <div className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/10 px-4 py-2 text-xs font-semibold uppercase tracking-[0.22em] text-white/82">
+                    <Crown className="h-4 w-4 text-primary" />
+                    {eventModeUi.eyebrow[language]}
+                  </div>
+                  <h2 className="mt-5 max-w-4xl text-3xl md:text-5xl font-bold text-balance">{eventModeUi.title[language]}</h2>
+                  <p className="mt-4 max-w-3xl text-lg text-white/72">{eventModeUi.intro[language]}</p>
+
+                  <div className="mt-6">
+                    <div className="mb-3 text-[11px] font-semibold uppercase tracking-[0.16em] text-white/55">{eventModeUi.selectRoute[language]}</div>
+                    <div className="flex flex-wrap gap-2">
+                      {eventRoutes.map((route) => (
+                        <button
+                          key={`event-${route.id}`}
+                          type="button"
+                          onClick={() => setSelectedEventRouteId(route.id)}
+                          className={`rounded-full px-4 py-2 text-xs font-semibold uppercase tracking-[0.14em] transition ${selectedEventRouteId === route.id ? "bg-white text-slate-950" : "border border-white/15 bg-white/8 text-white/82 hover:bg-white/12"}`}
+                        >
+                          {route.title[language]}
+                        </button>
+                      ))}
+                    </div>
+                  </div>
+
+                  <div className="mt-6 grid gap-4 sm:grid-cols-2">
+                    <div className="rounded-[1.5rem] border border-white/10 bg-white/8 p-4 backdrop-blur-xl">
+                      <div className="text-[11px] font-semibold uppercase tracking-[0.16em] text-white/55">{eventModeUi.meetingPoint[language]}</div>
+                      <div className="mt-2 text-sm font-medium text-white/88">{activeEventData.meetingPoint[language]}</div>
+                    </div>
+                    <div className="rounded-[1.5rem] border border-white/10 bg-white/8 p-4 backdrop-blur-xl">
+                      <div className="text-[11px] font-semibold uppercase tracking-[0.16em] text-white/55">{eventModeUi.coffee[language]}</div>
+                      <div className="mt-2 text-sm font-medium text-white/88">{activeEventData.coffee[language]}</div>
+                    </div>
+                    <div className="rounded-[1.5rem] border border-white/10 bg-white/8 p-4 backdrop-blur-xl">
+                      <div className="text-[11px] font-semibold uppercase tracking-[0.16em] text-white/55">{eventModeUi.participants[language]}</div>
+                      <div className="mt-2 text-2xl font-bold text-white">{activeEventData.participants}</div>
+                    </div>
+                    <div className="rounded-[1.5rem] border border-white/10 bg-white/8 p-4 backdrop-blur-xl">
+                      <div className="text-[11px] font-semibold uppercase tracking-[0.16em] text-white/55">{eventModeUi.guestCars[language]}</div>
+                      <div className="mt-2 text-2xl font-bold text-white">{activeEventData.guestCars}</div>
+                    </div>
+                  </div>
+
+                  <div className="mt-6 rounded-[1.6rem] border border-white/10 bg-white/8 p-5 backdrop-blur-xl">
+                    <div className="text-sm font-semibold uppercase tracking-[0.18em] text-primary">{eventModeUi.briefing[language]}</div>
+                    <p className="mt-3 text-sm leading-6 text-white/80">{activeEventData.convoyNote[language]}</p>
+                    <ul className="mt-4 space-y-3 text-sm text-white/82">
+                      {activeEventData.checklist[language].map((item) => (
+                        <li key={item} className="flex gap-3"><ShieldCheck className="mt-0.5 h-4 w-4 shrink-0 text-primary" /><span>{item}</span></li>
+                      ))}
+                    </ul>
+                  </div>
+                </div>
+
+                <div className="grid gap-5">
+                  <div className="overflow-hidden rounded-[1.75rem] border border-white/10 bg-white/8 backdrop-blur-xl">
+                    <img src={activeEventRoute.image.src} alt={activeEventRoute.image.alt[language]} className="aspect-[16/10] w-full object-cover" loading="lazy" decoding="async" />
+                    <div className="p-5">
+                      <div className="text-xl font-semibold text-white">{activeEventRoute.title[language]}</div>
+                      <p className="mt-2 text-sm text-white/72">{activeEventRoute.strapline[language]}</p>
+                    </div>
+                  </div>
+
+                  <div className="rounded-[1.75rem] border border-white/10 bg-white/8 p-5 backdrop-blur-xl">
+                    <div className="text-sm font-semibold uppercase tracking-[0.18em] text-primary">{eventModeUi.timeline[language]}</div>
+                    <div className="mt-4 space-y-3">
+                      {activeEventData.timeline.map((item) => (
+                        <div key={`${item.time}-${item.label.en}`} className="flex items-start gap-3 rounded-[1.25rem] border border-white/10 bg-slate-950/24 px-4 py-3">
+                          <span className="inline-flex min-w-[62px] justify-center rounded-full bg-white/10 px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.14em] text-white">{item.time}</span>
+                          <span className="pt-1 text-sm text-white/84">{item.label[language]}</span>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+
+                  <div className="flex flex-wrap gap-3">
+                    {buildGoogleMapsRouteUrl(activeEventRoute) ? (
+                      <a
+                        href={buildGoogleMapsRouteUrl(activeEventRoute) ?? undefined}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-flex items-center gap-2 rounded-full bg-white px-4 py-2 text-xs font-semibold uppercase tracking-[0.14em] text-slate-950 transition hover:bg-primary hover:text-white"
+                      >
+                        {t.openFullRoute}
+                        <ExternalLink className="h-3.5 w-3.5" />
+                      </a>
+                    ) : null}
+                    <Link to="/contacte" className="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/8 px-4 py-2 text-xs font-semibold uppercase tracking-[0.14em] text-white transition hover:bg-white/12">
+                      {eventModeUi.requestEvent[language]}
+                      <ArrowRight className="h-3.5 w-3.5" />
+                    </Link>
+                  </div>
+                </div>
+              </div>
+            </Card>
+          </div>
+        </section>
+      ) : null}
     </PageShell>
   );
 };
