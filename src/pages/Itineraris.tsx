@@ -1607,6 +1607,60 @@ const buildGoogleMapsRouteUrl = (route: ClubItinerary) => {
   return `https://www.google.com/maps/dir/?${params.toString()}`;
 };
 
+const defaultRouteVisualTone = {
+  closedOverlay: "linear-gradient(135deg, rgba(255,255,255,.88) 0%, rgba(255,255,255,.78) 36%, rgba(241,245,249,.74) 100%)",
+  closedGlow: "radial-gradient(circle at top right, rgba(2,132,199,.12), transparent 34%)",
+  summaryOverlay: "linear-gradient(135deg, rgba(2,6,23,.80) 0%, rgba(15,23,42,.72) 56%, rgba(2,132,199,.24) 100%)",
+  fullOverlay: "linear-gradient(135deg, rgba(2,6,23,.86) 0%, rgba(15,23,42,.76) 48%, rgba(2,132,199,.36) 100%)",
+  closedPillBg: "rgba(255,255,255,.82)",
+  closedPillBorder: "rgba(255,255,255,.72)",
+  closedPillText: "#334155",
+  closedCardBorder: "rgba(226,232,240,.82)",
+};
+
+const routeVisualToneById: Record<string, typeof defaultRouteVisualTone> = {
+  "grand-tour-central": {
+    closedOverlay: "linear-gradient(135deg, rgba(255,255,255,.84) 0%, rgba(248,250,252,.76) 34%, rgba(239,246,255,.74) 100%)",
+    closedGlow: "radial-gradient(circle at top right, rgba(37,99,235,.14), transparent 36%)",
+    summaryOverlay: "linear-gradient(135deg, rgba(15,23,42,.80) 0%, rgba(30,41,59,.72) 54%, rgba(37,99,235,.28) 100%)",
+    fullOverlay: "linear-gradient(135deg, rgba(15,23,42,.86) 0%, rgba(30,41,59,.78) 48%, rgba(37,99,235,.40) 100%)",
+    closedPillBg: "rgba(255,255,255,.84)",
+    closedPillBorder: "rgba(191,219,254,.92)",
+    closedPillText: "#1e3a8a",
+    closedCardBorder: "rgba(191,219,254,.82)",
+  },
+  "west-viewpoints-loop": {
+    closedOverlay: "linear-gradient(135deg, rgba(255,255,255,.82) 0%, rgba(254,252,232,.74) 36%, rgba(254,249,195,.68) 100%)",
+    closedGlow: "radial-gradient(circle at top right, rgba(202,138,4,.16), transparent 34%)",
+    summaryOverlay: "linear-gradient(135deg, rgba(24,24,27,.80) 0%, rgba(63,63,70,.72) 52%, rgba(202,138,4,.26) 100%)",
+    fullOverlay: "linear-gradient(135deg, rgba(24,24,27,.86) 0%, rgba(63,63,70,.78) 48%, rgba(202,138,4,.38) 100%)",
+    closedPillBg: "rgba(255,251,235,.84)",
+    closedPillBorder: "rgba(253,224,71,.84)",
+    closedPillText: "#854d0e",
+    closedCardBorder: "rgba(253,224,71,.52)",
+  },
+  "envalira-high-mountain": {
+    closedOverlay: "linear-gradient(135deg, rgba(255,255,255,.80) 0%, rgba(248,250,252,.70) 30%, rgba(224,242,254,.66) 100%)",
+    closedGlow: "radial-gradient(circle at top right, rgba(14,165,233,.18), transparent 36%)",
+    summaryOverlay: "linear-gradient(135deg, rgba(8,47,73,.82) 0%, rgba(15,23,42,.74) 48%, rgba(14,165,233,.28) 100%)",
+    fullOverlay: "linear-gradient(135deg, rgba(8,47,73,.88) 0%, rgba(15,23,42,.80) 44%, rgba(14,165,233,.40) 100%)",
+    closedPillBg: "rgba(240,249,255,.84)",
+    closedPillBorder: "rgba(125,211,252,.84)",
+    closedPillText: "#0c4a6e",
+    closedCardBorder: "rgba(125,211,252,.56)",
+  },
+  "ordino-tristaina-touring": {
+    closedOverlay: "linear-gradient(135deg, rgba(255,255,255,.82) 0%, rgba(247,254,231,.72) 34%, rgba(220,252,231,.68) 100%)",
+    closedGlow: "radial-gradient(circle at top right, rgba(22,163,74,.16), transparent 36%)",
+    summaryOverlay: "linear-gradient(135deg, rgba(20,83,45,.82) 0%, rgba(15,23,42,.72) 50%, rgba(22,163,74,.24) 100%)",
+    fullOverlay: "linear-gradient(135deg, rgba(20,83,45,.88) 0%, rgba(15,23,42,.78) 46%, rgba(22,163,74,.38) 100%)",
+    closedPillBg: "rgba(240,253,244,.84)",
+    closedPillBorder: "rgba(134,239,172,.86)",
+    closedPillText: "#166534",
+    closedCardBorder: "rgba(134,239,172,.54)",
+  },
+};
+
 const RouteMapCanvas = ({ route, t, language, heightClassName, openOnClick = false, onOpen }: RouteMapCanvasProps) => {
   const routePoints = route.waypoints
     .map((waypoint) => {
@@ -2017,6 +2071,7 @@ const Itineraris = () => {
           {routes.map((route) => {
             const profile = getProfileMeta(route, t);
             const ProfileIcon = profile.icon;
+            const routeTone = routeVisualToneById[route.id] ?? defaultRouteVisualTone;
             const routeMode: RouteViewMode = activeRouteId === route.id ? activeRouteMode : "closed";
             const isClosed = routeMode === "closed";
             const isSummary = routeMode === "summary";
@@ -2024,7 +2079,10 @@ const Itineraris = () => {
             return (
               <Card key={route.id} className="premium-card border-0 rounded-[2rem] p-6 md:p-8 shadow-elegant overflow-hidden transition-all duration-500 ease-out">
                 <div className={`grid gap-8 items-start ${isClosed ? "lg:grid-cols-1" : "lg:grid-cols-[0.92fr_1.08fr]"}`}>
-                  <div className={`relative overflow-hidden rounded-[1.85rem] border transition-all duration-500 ease-out ${isClosed ? "border-slate-200/80 bg-slate-100/80 p-5 md:p-6" : "border-slate-900/10 bg-slate-950 p-5 text-white md:p-6 shadow-[0_30px_90px_-45px_rgba(15,23,42,.7)]"}`}>
+                  <div
+                    className={`relative overflow-hidden rounded-[1.85rem] border transition-all duration-500 ease-out ${isClosed ? "bg-slate-100/80 p-5 md:p-6" : "border-slate-900/10 bg-slate-950 p-5 text-white md:p-6 shadow-[0_30px_90px_-45px_rgba(15,23,42,.7)]"}`}
+                    style={isClosed ? { borderColor: routeTone.closedCardBorder } : undefined}
+                  >
                     <>
                       <img
                         src={route.image.src}
@@ -2033,8 +2091,11 @@ const Itineraris = () => {
                         loading="lazy"
                         decoding="async"
                       />
-                      <div className={`absolute inset-0 transition-all duration-700 ease-out ${isClosed ? "bg-[linear-gradient(135deg,rgba(255,255,255,.88)_0%,rgba(255,255,255,.78)_36%,rgba(241,245,249,.74)_100%)]" : isSummary ? "bg-gradient-to-br from-slate-950/80 via-slate-950/72 to-primary/24" : "bg-gradient-to-br from-slate-950/86 via-slate-950/76 to-primary/36"}`} />
-                      {isClosed ? <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(2,132,199,.12),transparent_34%)]" /> : null}
+                      <div
+                        className="absolute inset-0 transition-all duration-700 ease-out"
+                        style={{ background: isClosed ? routeTone.closedOverlay : isSummary ? routeTone.summaryOverlay : routeTone.fullOverlay }}
+                      />
+                      {isClosed ? <div className="absolute inset-0" style={{ background: routeTone.closedGlow }} /> : null}
                     </>
 
                     <div className="relative z-10 flex flex-wrap items-center gap-3">
@@ -2058,23 +2119,25 @@ const Itineraris = () => {
                     <p className={`relative z-10 mt-4 text-sm ${isClosed ? "text-slate-700/88" : "text-white/66"}`}>{t.collapsedRouteHint}</p>
 
                     <div className="relative z-10 mt-4 flex flex-wrap gap-2 text-[11px] font-semibold uppercase tracking-[0.14em]">
-                      <span className={`rounded-full px-3 py-1 ${isClosed ? "border border-white/70 bg-white/82 text-slate-700 shadow-sm backdrop-blur" : "border border-white/12 bg-white/10 text-white/88"}`}>{route.duration}</span>
-                      <span className={`rounded-full px-3 py-1 ${isClosed ? "border border-white/70 bg-white/82 text-slate-700 shadow-sm backdrop-blur" : "border border-white/12 bg-white/10 text-white/88"}`}>{route.distance}</span>
-                      <span className={`rounded-full px-3 py-1 ${isClosed ? "border border-white/70 bg-white/82 text-slate-700 shadow-sm backdrop-blur" : "border border-white/12 bg-white/10 text-white/88"}`}>{route.rhythm[language]}</span>
+                      <span className={`${isClosed ? "rounded-full px-3 py-1 shadow-sm backdrop-blur" : "rounded-full px-3 py-1 border border-white/12 bg-white/10 text-white/88"}`} style={isClosed ? { background: routeTone.closedPillBg, border: `1px solid ${routeTone.closedPillBorder}`, color: routeTone.closedPillText } : undefined}>{route.duration}</span>
+                      <span className={`${isClosed ? "rounded-full px-3 py-1 shadow-sm backdrop-blur" : "rounded-full px-3 py-1 border border-white/12 bg-white/10 text-white/88"}`} style={isClosed ? { background: routeTone.closedPillBg, border: `1px solid ${routeTone.closedPillBorder}`, color: routeTone.closedPillText } : undefined}>{route.distance}</span>
+                      <span className={`${isClosed ? "rounded-full px-3 py-1 shadow-sm backdrop-blur" : "rounded-full px-3 py-1 border border-white/12 bg-white/10 text-white/88"}`} style={isClosed ? { background: routeTone.closedPillBg, border: `1px solid ${routeTone.closedPillBorder}`, color: routeTone.closedPillText } : undefined}>{route.rhythm[language]}</span>
                     </div>
 
                     <div className="relative z-10 mt-5 flex flex-wrap gap-3">
                       <button
                         type="button"
                         onClick={() => openRoute(route.id, "summary")}
-                        className={`inline-flex items-center gap-2 rounded-full px-4 py-2 text-xs font-semibold uppercase tracking-[0.14em] transition ${isSummary ? "bg-primary text-white" : isClosed ? "border border-white/70 bg-white/88 text-slate-800 shadow-sm backdrop-blur hover:border-primary hover:text-primary" : "border border-white/15 bg-white/10 text-white hover:bg-white/14"}`}
+                        className={`inline-flex items-center gap-2 rounded-full px-4 py-2 text-xs font-semibold uppercase tracking-[0.14em] transition ${isSummary ? "bg-primary text-white" : isClosed ? "shadow-sm backdrop-blur hover:opacity-90" : "border border-white/15 bg-white/10 text-white hover:bg-white/14"}`}
+                        style={!isSummary && isClosed ? { background: routeTone.closedPillBg, border: `1px solid ${routeTone.closedPillBorder}`, color: routeTone.closedPillText } : undefined}
                       >
                         {t.quickView}
                       </button>
                       <button
                         type="button"
                         onClick={() => openRoute(route.id, "full")}
-                        className={`inline-flex items-center gap-2 rounded-full px-4 py-2 text-xs font-semibold uppercase tracking-[0.14em] transition ${isFull ? "bg-white text-slate-950" : isClosed ? "border border-white/70 bg-white/88 text-slate-800 shadow-sm backdrop-blur hover:border-primary hover:text-primary" : "border border-white/15 bg-white/10 text-white hover:bg-white/14"}`}
+                        className={`inline-flex items-center gap-2 rounded-full px-4 py-2 text-xs font-semibold uppercase tracking-[0.14em] transition ${isFull ? "bg-white text-slate-950" : isClosed ? "shadow-sm backdrop-blur hover:opacity-90" : "border border-white/15 bg-white/10 text-white hover:bg-white/14"}`}
+                        style={!isFull && isClosed ? { background: routeTone.closedPillBg, border: `1px solid ${routeTone.closedPillBorder}`, color: routeTone.closedPillText } : undefined}
                       >
                         {t.fullView}
                       </button>

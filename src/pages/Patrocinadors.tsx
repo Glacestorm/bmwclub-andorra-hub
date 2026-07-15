@@ -295,8 +295,12 @@ const Patrocinadors = () => {
       {featuredSponsor && (
         <section className="pb-10">
           <div className="container mx-auto px-4 max-w-6xl">
-            <Card className="glass-dark border border-white/10 rounded-[2rem] md:rounded-[2.75rem] overflow-hidden p-6 md:p-10 text-white relative shadow-[0_40px_110px_-48px_rgba(15,23,42,.75)]">
-              <div className="absolute inset-0 bg-[radial-gradient(circle_at_12%_18%,rgba(255,255,255,.08),transparent_18%),radial-gradient(circle_at_82%_12%,rgba(0,102,177,.42),transparent_30%)]" />
+            <Card
+              className="glass-dark border rounded-[2rem] md:rounded-[2.75rem] overflow-hidden p-6 md:p-10 text-white relative shadow-[0_40px_110px_-48px_rgba(15,23,42,.75)]"
+              style={{ borderColor: featuredSponsor.brand.border }}
+            >
+              <div className="absolute inset-0" style={{ background: `radial-gradient(circle at 12% 18%, rgba(255,255,255,.08), transparent 18%), radial-gradient(circle at 82% 12%, ${featuredSponsor.brand.accent}66, transparent 30%)` }} />
+              <div className="absolute inset-y-0 right-0 hidden w-[34%] lg:block" style={{ background: `linear-gradient(180deg, ${featuredSponsor.brand.accent}14 0%, transparent 100%)` }} />
               <div className="relative z-10 grid lg:grid-cols-[1.15fr_0.85fr] gap-8 items-start">
                 <div>
                   <div className="inline-flex items-center gap-2 rounded-full bg-white/10 px-4 py-2 text-xs font-semibold uppercase tracking-[0.22em] text-white/80">
@@ -304,7 +308,7 @@ const Patrocinadors = () => {
                     {t.featuredLabel}
                   </div>
                   <div className="mt-5 flex flex-wrap items-center gap-3">
-                    <h2 className="text-3xl sm:text-4xl md:text-6xl font-bold text-balance leading-[0.95]">{featuredSponsor.name}</h2>
+                    <h2 className="text-3xl sm:text-5xl md:text-7xl font-bold text-balance leading-[0.92]">{featuredSponsor.name}</h2>
                     {featuredSponsor.accent && <span className="rounded-full border border-white/10 bg-white/8 px-4 py-2 text-xs font-semibold uppercase tracking-[0.2em] text-white/70">{featuredSponsor.accent}</span>}
                   </div>
                   <p className="mt-5 max-w-3xl text-lg md:text-xl text-white/80">{t.featuredStatement}</p>
@@ -328,8 +332,23 @@ const Patrocinadors = () => {
                   </div>
                 </div>
 
-                <div className="glass-panel rounded-[2rem] p-6 md:p-7 border border-white/10">
+                <div className="relative overflow-hidden rounded-[2.2rem] border p-6 md:p-7" style={{ borderColor: featuredSponsor.brand.border, background: `linear-gradient(160deg, rgba(255,255,255,.08) 0%, rgba(255,255,255,.03) 100%)`, boxShadow: `0 38px 80px -52px ${featuredSponsor.brand.accent}80` }}>
+                  <div className="absolute -right-8 top-4 text-[84px] font-bold leading-none opacity-[0.06] hidden md:block">01</div>
+                  <div className="relative z-10 flex flex-wrap items-center justify-between gap-3 mb-5">
+                    <div>
+                      <div className="text-[11px] uppercase tracking-[0.24em] text-white/55">{t.visualIdentity}</div>
+                      <div className="mt-2 text-sm font-semibold text-white/82">{featuredSponsor.category}</div>
+                    </div>
+                    {featuredSponsor.link && (
+                      <a href={featuredSponsor.link.href} target="_blank" rel="noreferrer" className="inline-flex items-center gap-2 rounded-full border border-white/12 bg-white/10 px-4 py-2 text-xs font-semibold uppercase tracking-[0.14em] text-white transition-base hover:bg-white/14">
+                        {t.openSite}
+                        <ArrowUpRight className="h-4 w-4" />
+                      </a>
+                    )}
+                  </div>
+
                   <SponsorLogoPlate sponsor={featuredSponsor} dark />
+
                   <div className="rounded-[1.75rem] bg-white text-slate-950 p-6 shadow-elegant mt-5">
                     <div className="inline-flex items-center gap-2 rounded-full bg-primary/10 px-3 py-1 text-xs font-semibold uppercase tracking-[0.2em] text-primary">
                       <BadgeCheck className="h-4 w-4" />
@@ -344,12 +363,9 @@ const Patrocinadors = () => {
                       </div>
                     )}
                     <p className="mt-5 text-sm text-slate-600">{t.benefitsSummary}</p>
-                    {featuredSponsor.link && (
-                      <a href={featuredSponsor.link.href} target="_blank" rel="noreferrer" className="inline-flex w-full sm:w-auto justify-center items-center gap-2 mt-6 rounded-full bg-accent px-5 py-3 text-sm font-semibold text-white transition-base hover:bg-accent/90">
-                        {t.openSite}
-                        <ArrowUpRight className="h-4 w-4" />
-                      </a>
-                    )}
+                    <div className="mt-6 rounded-[1.4rem] p-4 text-sm font-medium" style={{ background: featuredSponsor.brand.badge, color: featuredSponsor.brand.text }}>
+                      {featuredSponsor.accent ?? t.featuredLabel}
+                    </div>
                   </div>
                 </div>
               </div>
