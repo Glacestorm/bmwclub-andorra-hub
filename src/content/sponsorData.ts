@@ -143,7 +143,7 @@ export const sponsorItems: SponsorItem[] = [
       de: "Ein starker Name im lokalen Wirtschaftsnetz Andorras. Er bringt Glaubwürdigkeit, Verwurzelung und kommerzielle Präsenz.",
       ru: "Сильное имя в локальной деловой среде Андорры. Даёт доверие, локальную опору и коммерческое присутствие.",
     },
-    link: { label: "Web oficial", href: "https://santeloi.ad/" },
+    link: { label: "Web oficial", href: "https://santeloi.com/" },
   },
   {
     id: "obrador-toni",
