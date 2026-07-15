@@ -1205,68 +1205,823 @@ export const galleryMediaByPage: Record<string, GalleryMediaSection[]> = {
   ],
   "historiques_2022": [
     {
+      "title": "Sortida Calçotada 27/03/2022",
+      "sourceFolder": "phocagallery/historiques/Calsotada_27_03_22",
+      "images": [
+        {
+          "src": "/legacy-mirror/images/phocagallery/historiques/Calsotada_27_03_22/dsc-0291.jpg",
+          "alt": "Sortida Calçotada 27/03/2022 1",
+          "filename": "dsc-0291.jpg"
+        },
+        {
+          "src": "/legacy-mirror/images/phocagallery/historiques/Calsotada_27_03_22/dsc-0293.jpg",
+          "alt": "Sortida Calçotada 27/03/2022 2",
+          "filename": "dsc-0293.jpg"
+        },
+        {
+          "src": "/legacy-mirror/images/phocagallery/historiques/Calsotada_27_03_22/dsc-0294.jpg",
+          "alt": "Sortida Calçotada 27/03/2022 3",
+          "filename": "dsc-0294.jpg"
+        },
+        {
+          "src": "/legacy-mirror/images/phocagallery/historiques/Calsotada_27_03_22/dsc-0295.jpg",
+          "alt": "Sortida Calçotada 27/03/2022 4",
+          "filename": "dsc-0295.jpg"
+        },
+        {
+          "src": "/legacy-mirror/images/phocagallery/historiques/Calsotada_27_03_22/dsc-0303.jpg",
+          "alt": "Sortida Calçotada 27/03/2022 5",
+          "filename": "dsc-0303.jpg"
+        },
+        {
+          "src": "/legacy-mirror/images/phocagallery/historiques/Calsotada_27_03_22/dsc-0304.jpg",
+          "alt": "Sortida Calçotada 27/03/2022 6",
+          "filename": "dsc-0304.jpg"
+        },
+        {
+          "src": "/legacy-mirror/images/phocagallery/historiques/Calsotada_27_03_22/dsc-0305.jpg",
+          "alt": "Sortida Calçotada 27/03/2022 7",
+          "filename": "dsc-0305.jpg"
+        },
+        {
+          "src": "/legacy-mirror/images/phocagallery/historiques/Calsotada_27_03_22/dsc-0306.jpg",
+          "alt": "Sortida Calçotada 27/03/2022 8",
+          "filename": "dsc-0306.jpg"
+        },
+        {
+          "src": "/legacy-mirror/images/phocagallery/historiques/Calsotada_27_03_22/dsc-0307.jpg",
+          "alt": "Sortida Calçotada 27/03/2022 9",
+          "filename": "dsc-0307.jpg"
+        },
+        {
+          "src": "/legacy-mirror/images/phocagallery/historiques/Calsotada_27_03_22/dsc-0308.jpg",
+          "alt": "Sortida Calçotada 27/03/2022 10",
+          "filename": "dsc-0308.jpg"
+        },
+        {
+          "src": "/legacy-mirror/images/phocagallery/historiques/Calsotada_27_03_22/dsc-0311.jpg",
+          "alt": "Sortida Calçotada 27/03/2022 11",
+          "filename": "dsc-0311.jpg"
+        },
+        {
+          "src": "/legacy-mirror/images/phocagallery/historiques/Calsotada_27_03_22/dsc-0312.jpg",
+          "alt": "Sortida Calçotada 27/03/2022 12",
+          "filename": "dsc-0312.jpg"
+        },
+        {
+          "src": "/legacy-mirror/images/phocagallery/historiques/Calsotada_27_03_22/dsc-0314.jpg",
+          "alt": "Sortida Calçotada 27/03/2022 13",
+          "filename": "dsc-0314.jpg"
+        },
+        {
+          "src": "/legacy-mirror/images/phocagallery/historiques/Calsotada_27_03_22/dsc-0316.jpg",
+          "alt": "Sortida Calçotada 27/03/2022 14",
+          "filename": "dsc-0316.jpg"
+        },
+        {
+          "src": "/legacy-mirror/images/phocagallery/historiques/Calsotada_27_03_22/dsc-0317.jpg",
+          "alt": "Sortida Calçotada 27/03/2022 15",
+          "filename": "dsc-0317.jpg"
+        },
+        {
+          "src": "/legacy-mirror/images/phocagallery/historiques/Calsotada_27_03_22/dsc-0318.jpg",
+          "alt": "Sortida Calçotada 27/03/2022 16",
+          "filename": "dsc-0318.jpg"
+        },
+        {
+          "src": "/legacy-mirror/images/phocagallery/historiques/Calsotada_27_03_22/dsc-0319.jpg",
+          "alt": "Sortida Calçotada 27/03/2022 17",
+          "filename": "dsc-0319.jpg"
+        },
+        {
+          "src": "/legacy-mirror/images/phocagallery/historiques/Calsotada_27_03_22/dsc-0322.jpg",
+          "alt": "Sortida Calçotada 27/03/2022 18",
+          "filename": "dsc-0322.jpg"
+        },
+        {
+          "src": "/legacy-mirror/images/phocagallery/historiques/Calsotada_27_03_22/dsc-0323.jpg",
+          "alt": "Sortida Calçotada 27/03/2022 19",
+          "filename": "dsc-0323.jpg"
+        },
+        {
+          "src": "/legacy-mirror/images/phocagallery/historiques/Calsotada_27_03_22/dsc-0324.jpg",
+          "alt": "Sortida Calçotada 27/03/2022 20",
+          "filename": "dsc-0324.jpg"
+        },
+        {
+          "src": "/legacy-mirror/images/phocagallery/historiques/Calsotada_27_03_22/dsc-0325.jpg",
+          "alt": "Sortida Calçotada 27/03/2022 21",
+          "filename": "dsc-0325.jpg"
+        },
+        {
+          "src": "/legacy-mirror/images/phocagallery/historiques/Calsotada_27_03_22/dsc-0327.jpg",
+          "alt": "Sortida Calçotada 27/03/2022 22",
+          "filename": "dsc-0327.jpg"
+        },
+        {
+          "src": "/legacy-mirror/images/phocagallery/historiques/Calsotada_27_03_22/dsc-0328.jpg",
+          "alt": "Sortida Calçotada 27/03/2022 23",
+          "filename": "dsc-0328.jpg"
+        },
+        {
+          "src": "/legacy-mirror/images/phocagallery/historiques/Calsotada_27_03_22/dsc-0329.jpg",
+          "alt": "Sortida Calçotada 27/03/2022 24",
+          "filename": "dsc-0329.jpg"
+        },
+        {
+          "src": "/legacy-mirror/images/phocagallery/historiques/Calsotada_27_03_22/dsc-0330.jpg",
+          "alt": "Sortida Calçotada 27/03/2022 25",
+          "filename": "dsc-0330.jpg"
+        },
+        {
+          "src": "/legacy-mirror/images/phocagallery/historiques/Calsotada_27_03_22/dsc-0331.jpg",
+          "alt": "Sortida Calçotada 27/03/2022 26",
+          "filename": "dsc-0331.jpg"
+        },
+        {
+          "src": "/legacy-mirror/images/phocagallery/historiques/Calsotada_27_03_22/dsc-0332.jpg",
+          "alt": "Sortida Calçotada 27/03/2022 27",
+          "filename": "dsc-0332.jpg"
+        },
+        {
+          "src": "/legacy-mirror/images/phocagallery/historiques/Calsotada_27_03_22/dsc-0333.jpg",
+          "alt": "Sortida Calçotada 27/03/2022 28",
+          "filename": "dsc-0333.jpg"
+        },
+        {
+          "src": "/legacy-mirror/images/phocagallery/historiques/Calsotada_27_03_22/dsc-0334.jpg",
+          "alt": "Sortida Calçotada 27/03/2022 29",
+          "filename": "dsc-0334.jpg"
+        },
+        {
+          "src": "/legacy-mirror/images/phocagallery/historiques/Calsotada_27_03_22/dsc-0335.jpg",
+          "alt": "Sortida Calçotada 27/03/2022 30",
+          "filename": "dsc-0335.jpg"
+        },
+        {
+          "src": "/legacy-mirror/images/phocagallery/historiques/Calsotada_27_03_22/dsc-0338.jpg",
+          "alt": "Sortida Calçotada 27/03/2022 31",
+          "filename": "dsc-0338.jpg"
+        },
+        {
+          "src": "/legacy-mirror/images/phocagallery/historiques/Calsotada_27_03_22/dsc-0339.jpg",
+          "alt": "Sortida Calçotada 27/03/2022 32",
+          "filename": "dsc-0339.jpg"
+        },
+        {
+          "src": "/legacy-mirror/images/phocagallery/historiques/Calsotada_27_03_22/img-2978.jpg",
+          "alt": "Sortida Calçotada 27/03/2022 33",
+          "filename": "img-2978.jpg"
+        }
+      ]
+    },
+    {
+      "title": "Tour Auto 24 al 30/04/2022",
+      "sourceFolder": "phocagallery/historiques/Tour_auto_2022_24_04_30_04",
+      "images": [
+        {
+          "src": "/legacy-mirror/images/phocagallery/historiques/Tour_auto_2022_24_04_30_04/dsc_0343.jpg",
+          "alt": "Tour Auto 24 al 30/04/2022 1",
+          "filename": "dsc_0343.jpg"
+        },
+        {
+          "src": "/legacy-mirror/images/phocagallery/historiques/Tour_auto_2022_24_04_30_04/dsc_0346.jpg",
+          "alt": "Tour Auto 24 al 30/04/2022 2",
+          "filename": "dsc_0346.jpg"
+        },
+        {
+          "src": "/legacy-mirror/images/phocagallery/historiques/Tour_auto_2022_24_04_30_04/dsc_0357.jpg",
+          "alt": "Tour Auto 24 al 30/04/2022 3",
+          "filename": "dsc_0357.jpg"
+        },
+        {
+          "src": "/legacy-mirror/images/phocagallery/historiques/Tour_auto_2022_24_04_30_04/dsc_0363.jpg",
+          "alt": "Tour Auto 24 al 30/04/2022 4",
+          "filename": "dsc_0363.jpg"
+        },
+        {
+          "src": "/legacy-mirror/images/phocagallery/historiques/Tour_auto_2022_24_04_30_04/dsc_0364.jpg",
+          "alt": "Tour Auto 24 al 30/04/2022 5",
+          "filename": "dsc_0364.jpg"
+        },
+        {
+          "src": "/legacy-mirror/images/phocagallery/historiques/Tour_auto_2022_24_04_30_04/dsc_0410.jpg",
+          "alt": "Tour Auto 24 al 30/04/2022 6",
+          "filename": "dsc_0410.jpg"
+        },
+        {
+          "src": "/legacy-mirror/images/phocagallery/historiques/Tour_auto_2022_24_04_30_04/dsc_0413.jpg",
+          "alt": "Tour Auto 24 al 30/04/2022 7",
+          "filename": "dsc_0413.jpg"
+        },
+        {
+          "src": "/legacy-mirror/images/phocagallery/historiques/Tour_auto_2022_24_04_30_04/img-4219.jpg",
+          "alt": "Tour Auto 24 al 30/04/2022 8",
+          "filename": "img-4219.jpg"
+        },
+        {
+          "src": "/legacy-mirror/images/phocagallery/historiques/Tour_auto_2022_24_04_30_04/img-4231.jpg",
+          "alt": "Tour Auto 24 al 30/04/2022 9",
+          "filename": "img-4231.jpg"
+        },
+        {
+          "src": "/legacy-mirror/images/phocagallery/historiques/Tour_auto_2022_24_04_30_04/imgp2370.jpg",
+          "alt": "Tour Auto 24 al 30/04/2022 10",
+          "filename": "imgp2370.jpg"
+        },
+        {
+          "src": "/legacy-mirror/images/phocagallery/historiques/Tour_auto_2022_24_04_30_04/imgp2371.jpg",
+          "alt": "Tour Auto 24 al 30/04/2022 11",
+          "filename": "imgp2371.jpg"
+        },
+        {
+          "src": "/legacy-mirror/images/phocagallery/historiques/Tour_auto_2022_24_04_30_04/imgp2385.jpg",
+          "alt": "Tour Auto 24 al 30/04/2022 12",
+          "filename": "imgp2385.jpg"
+        },
+        {
+          "src": "/legacy-mirror/images/phocagallery/historiques/Tour_auto_2022_24_04_30_04/imgp2387.jpg",
+          "alt": "Tour Auto 24 al 30/04/2022 13",
+          "filename": "imgp2387.jpg"
+        },
+        {
+          "src": "/legacy-mirror/images/phocagallery/historiques/Tour_auto_2022_24_04_30_04/imgp2393.jpg",
+          "alt": "Tour Auto 24 al 30/04/2022 14",
+          "filename": "imgp2393.jpg"
+        },
+        {
+          "src": "/legacy-mirror/images/phocagallery/historiques/Tour_auto_2022_24_04_30_04/imgp2405.jpg",
+          "alt": "Tour Auto 24 al 30/04/2022 15",
+          "filename": "imgp2405.jpg"
+        },
+        {
+          "src": "/legacy-mirror/images/phocagallery/historiques/Tour_auto_2022_24_04_30_04/imgp2407.jpg",
+          "alt": "Tour Auto 24 al 30/04/2022 16",
+          "filename": "imgp2407.jpg"
+        },
+        {
+          "src": "/legacy-mirror/images/phocagallery/historiques/Tour_auto_2022_24_04_30_04/imgp2414.jpg",
+          "alt": "Tour Auto 24 al 30/04/2022 17",
+          "filename": "imgp2414.jpg"
+        },
+        {
+          "src": "/legacy-mirror/images/phocagallery/historiques/Tour_auto_2022_24_04_30_04/imgp2484.jpg",
+          "alt": "Tour Auto 24 al 30/04/2022 18",
+          "filename": "imgp2484.jpg"
+        },
+        {
+          "src": "/legacy-mirror/images/phocagallery/historiques/Tour_auto_2022_24_04_30_04/imgp2486.jpg",
+          "alt": "Tour Auto 24 al 30/04/2022 19",
+          "filename": "imgp2486.jpg"
+        },
+        {
+          "src": "/legacy-mirror/images/phocagallery/historiques/Tour_auto_2022_24_04_30_04/imgp2494.jpg",
+          "alt": "Tour Auto 24 al 30/04/2022 20",
+          "filename": "imgp2494.jpg"
+        }
+      ]
+    },
+    {
+      "title": "Sortida França 15/05/2022",
+      "sourceFolder": "phocagallery/historiques/Sortida_Franca_15_05_22",
+      "images": [
+        {
+          "src": "/legacy-mirror/images/phocagallery/historiques/Sortida_Franca_15_05_22/dsc_0426.jpg",
+          "alt": "Sortida França 15/05/2022 1",
+          "filename": "dsc_0426.jpg"
+        },
+        {
+          "src": "/legacy-mirror/images/phocagallery/historiques/Sortida_Franca_15_05_22/dsc_0427.jpg",
+          "alt": "Sortida França 15/05/2022 2",
+          "filename": "dsc_0427.jpg"
+        },
+        {
+          "src": "/legacy-mirror/images/phocagallery/historiques/Sortida_Franca_15_05_22/dsc_0429.jpg",
+          "alt": "Sortida França 15/05/2022 3",
+          "filename": "dsc_0429.jpg"
+        },
+        {
+          "src": "/legacy-mirror/images/phocagallery/historiques/Sortida_Franca_15_05_22/dsc_0431.jpg",
+          "alt": "Sortida França 15/05/2022 4",
+          "filename": "dsc_0431.jpg"
+        },
+        {
+          "src": "/legacy-mirror/images/phocagallery/historiques/Sortida_Franca_15_05_22/dsc_0432.jpg",
+          "alt": "Sortida França 15/05/2022 5",
+          "filename": "dsc_0432.jpg"
+        },
+        {
+          "src": "/legacy-mirror/images/phocagallery/historiques/Sortida_Franca_15_05_22/dsc_0433.jpg",
+          "alt": "Sortida França 15/05/2022 6",
+          "filename": "dsc_0433.jpg"
+        },
+        {
+          "src": "/legacy-mirror/images/phocagallery/historiques/Sortida_Franca_15_05_22/dsc_0434.jpg",
+          "alt": "Sortida França 15/05/2022 7",
+          "filename": "dsc_0434.jpg"
+        },
+        {
+          "src": "/legacy-mirror/images/phocagallery/historiques/Sortida_Franca_15_05_22/dsc_0435.jpg",
+          "alt": "Sortida França 15/05/2022 8",
+          "filename": "dsc_0435.jpg"
+        },
+        {
+          "src": "/legacy-mirror/images/phocagallery/historiques/Sortida_Franca_15_05_22/dsc_0436.jpg",
+          "alt": "Sortida França 15/05/2022 9",
+          "filename": "dsc_0436.jpg"
+        },
+        {
+          "src": "/legacy-mirror/images/phocagallery/historiques/Sortida_Franca_15_05_22/dsc_0437.jpg",
+          "alt": "Sortida França 15/05/2022 10",
+          "filename": "dsc_0437.jpg"
+        },
+        {
+          "src": "/legacy-mirror/images/phocagallery/historiques/Sortida_Franca_15_05_22/dsc_0438.jpg",
+          "alt": "Sortida França 15/05/2022 11",
+          "filename": "dsc_0438.jpg"
+        },
+        {
+          "src": "/legacy-mirror/images/phocagallery/historiques/Sortida_Franca_15_05_22/dsc_0440.jpg",
+          "alt": "Sortida França 15/05/2022 12",
+          "filename": "dsc_0440.jpg"
+        },
+        {
+          "src": "/legacy-mirror/images/phocagallery/historiques/Sortida_Franca_15_05_22/dsc_0441.jpg",
+          "alt": "Sortida França 15/05/2022 13",
+          "filename": "dsc_0441.jpg"
+        },
+        {
+          "src": "/legacy-mirror/images/phocagallery/historiques/Sortida_Franca_15_05_22/dsc_0442.jpg",
+          "alt": "Sortida França 15/05/2022 14",
+          "filename": "dsc_0442.jpg"
+        },
+        {
+          "src": "/legacy-mirror/images/phocagallery/historiques/Sortida_Franca_15_05_22/dsc_0443.jpg",
+          "alt": "Sortida França 15/05/2022 15",
+          "filename": "dsc_0443.jpg"
+        },
+        {
+          "src": "/legacy-mirror/images/phocagallery/historiques/Sortida_Franca_15_05_22/dsc_0445.jpg",
+          "alt": "Sortida França 15/05/2022 16",
+          "filename": "dsc_0445.jpg"
+        },
+        {
+          "src": "/legacy-mirror/images/phocagallery/historiques/Sortida_Franca_15_05_22/dsc_0446.jpg",
+          "alt": "Sortida França 15/05/2022 17",
+          "filename": "dsc_0446.jpg"
+        },
+        {
+          "src": "/legacy-mirror/images/phocagallery/historiques/Sortida_Franca_15_05_22/dsc_0447.jpg",
+          "alt": "Sortida França 15/05/2022 18",
+          "filename": "dsc_0447.jpg"
+        },
+        {
+          "src": "/legacy-mirror/images/phocagallery/historiques/Sortida_Franca_15_05_22/dsc_0448.jpg",
+          "alt": "Sortida França 15/05/2022 19",
+          "filename": "dsc_0448.jpg"
+        },
+        {
+          "src": "/legacy-mirror/images/phocagallery/historiques/Sortida_Franca_15_05_22/dsc_0449.jpg",
+          "alt": "Sortida França 15/05/2022 20",
+          "filename": "dsc_0449.jpg"
+        },
+        {
+          "src": "/legacy-mirror/images/phocagallery/historiques/Sortida_Franca_15_05_22/dsc_0450.jpg",
+          "alt": "Sortida França 15/05/2022 21",
+          "filename": "dsc_0450.jpg"
+        },
+        {
+          "src": "/legacy-mirror/images/phocagallery/historiques/Sortida_Franca_15_05_22/dsc_0451.jpg",
+          "alt": "Sortida França 15/05/2022 22",
+          "filename": "dsc_0451.jpg"
+        },
+        {
+          "src": "/legacy-mirror/images/phocagallery/historiques/Sortida_Franca_15_05_22/dsc_0452.jpg",
+          "alt": "Sortida França 15/05/2022 23",
+          "filename": "dsc_0452.jpg"
+        },
+        {
+          "src": "/legacy-mirror/images/phocagallery/historiques/Sortida_Franca_15_05_22/dsc_0453.jpg",
+          "alt": "Sortida França 15/05/2022 24",
+          "filename": "dsc_0453.jpg"
+        },
+        {
+          "src": "/legacy-mirror/images/phocagallery/historiques/Sortida_Franca_15_05_22/dsc_0454.jpg",
+          "alt": "Sortida França 15/05/2022 25",
+          "filename": "dsc_0454.jpg"
+        },
+        {
+          "src": "/legacy-mirror/images/phocagallery/historiques/Sortida_Franca_15_05_22/dsc_0458.jpg",
+          "alt": "Sortida França 15/05/2022 26",
+          "filename": "dsc_0458.jpg"
+        },
+        {
+          "src": "/legacy-mirror/images/phocagallery/historiques/Sortida_Franca_15_05_22/dsc_0459.jpg",
+          "alt": "Sortida França 15/05/2022 27",
+          "filename": "dsc_0459.jpg"
+        },
+        {
+          "src": "/legacy-mirror/images/phocagallery/historiques/Sortida_Franca_15_05_22/dsc_0460.jpg",
+          "alt": "Sortida França 15/05/2022 28",
+          "filename": "dsc_0460.jpg"
+        },
+        {
+          "src": "/legacy-mirror/images/phocagallery/historiques/Sortida_Franca_15_05_22/dsc_0461.jpg",
+          "alt": "Sortida França 15/05/2022 29",
+          "filename": "dsc_0461.jpg"
+        },
+        {
+          "src": "/legacy-mirror/images/phocagallery/historiques/Sortida_Franca_15_05_22/dsc_0462.jpg",
+          "alt": "Sortida França 15/05/2022 30",
+          "filename": "dsc_0462.jpg"
+        },
+        {
+          "src": "/legacy-mirror/images/phocagallery/historiques/Sortida_Franca_15_05_22/dsc_0463.jpg",
+          "alt": "Sortida França 15/05/2022 31",
+          "filename": "dsc_0463.jpg"
+        },
+        {
+          "src": "/legacy-mirror/images/phocagallery/historiques/Sortida_Franca_15_05_22/dsc_0464.jpg",
+          "alt": "Sortida França 15/05/2022 32",
+          "filename": "dsc_0464.jpg"
+        },
+        {
+          "src": "/legacy-mirror/images/phocagallery/historiques/Sortida_Franca_15_05_22/dsc_0465.jpg",
+          "alt": "Sortida França 15/05/2022 33",
+          "filename": "dsc_0465.jpg"
+        },
+        {
+          "src": "/legacy-mirror/images/phocagallery/historiques/Sortida_Franca_15_05_22/dsc_0466.jpg",
+          "alt": "Sortida França 15/05/2022 34",
+          "filename": "dsc_0466.jpg"
+        },
+        {
+          "src": "/legacy-mirror/images/phocagallery/historiques/Sortida_Franca_15_05_22/dsc_0467.jpg",
+          "alt": "Sortida França 15/05/2022 35",
+          "filename": "dsc_0467.jpg"
+        },
+        {
+          "src": "/legacy-mirror/images/phocagallery/historiques/Sortida_Franca_15_05_22/dsc_0468.jpg",
+          "alt": "Sortida França 15/05/2022 36",
+          "filename": "dsc_0468.jpg"
+        },
+        {
+          "src": "/legacy-mirror/images/phocagallery/historiques/Sortida_Franca_15_05_22/dsc_0469.jpg",
+          "alt": "Sortida França 15/05/2022 37",
+          "filename": "dsc_0469.jpg"
+        },
+        {
+          "src": "/legacy-mirror/images/phocagallery/historiques/Sortida_Franca_15_05_22/dsc_0470.jpg",
+          "alt": "Sortida França 15/05/2022 38",
+          "filename": "dsc_0470.jpg"
+        },
+        {
+          "src": "/legacy-mirror/images/phocagallery/historiques/Sortida_Franca_15_05_22/dsc_0471.jpg",
+          "alt": "Sortida França 15/05/2022 39",
+          "filename": "dsc_0471.jpg"
+        },
+        {
+          "src": "/legacy-mirror/images/phocagallery/historiques/Sortida_Franca_15_05_22/dsc_0472.jpg",
+          "alt": "Sortida França 15/05/2022 40",
+          "filename": "dsc_0472.jpg"
+        },
+        {
+          "src": "/legacy-mirror/images/phocagallery/historiques/Sortida_Franca_15_05_22/dsc_0473.jpg",
+          "alt": "Sortida França 15/05/2022 41",
+          "filename": "dsc_0473.jpg"
+        },
+        {
+          "src": "/legacy-mirror/images/phocagallery/historiques/Sortida_Franca_15_05_22/dsc_0474.jpg",
+          "alt": "Sortida França 15/05/2022 42",
+          "filename": "dsc_0474.jpg"
+        },
+        {
+          "src": "/legacy-mirror/images/phocagallery/historiques/Sortida_Franca_15_05_22/dsc_0475.jpg",
+          "alt": "Sortida França 15/05/2022 43",
+          "filename": "dsc_0475.jpg"
+        },
+        {
+          "src": "/legacy-mirror/images/phocagallery/historiques/Sortida_Franca_15_05_22/dsc_0476.jpg",
+          "alt": "Sortida França 15/05/2022 44",
+          "filename": "dsc_0476.jpg"
+        },
+        {
+          "src": "/legacy-mirror/images/phocagallery/historiques/Sortida_Franca_15_05_22/dsc_0477.jpg",
+          "alt": "Sortida França 15/05/2022 45",
+          "filename": "dsc_0477.jpg"
+        },
+        {
+          "src": "/legacy-mirror/images/phocagallery/historiques/Sortida_Franca_15_05_22/dsc_0478.jpg",
+          "alt": "Sortida França 15/05/2022 46",
+          "filename": "dsc_0478.jpg"
+        },
+        {
+          "src": "/legacy-mirror/images/phocagallery/historiques/Sortida_Franca_15_05_22/dsc_0480.jpg",
+          "alt": "Sortida França 15/05/2022 47",
+          "filename": "dsc_0480.jpg"
+        },
+        {
+          "src": "/legacy-mirror/images/phocagallery/historiques/Sortida_Franca_15_05_22/dsc_0481.jpg",
+          "alt": "Sortida França 15/05/2022 48",
+          "filename": "dsc_0481.jpg"
+        },
+        {
+          "src": "/legacy-mirror/images/phocagallery/historiques/Sortida_Franca_15_05_22/dsc_0494.jpg",
+          "alt": "Sortida França 15/05/2022 49",
+          "filename": "dsc_0494.jpg"
+        },
+        {
+          "src": "/legacy-mirror/images/phocagallery/historiques/Sortida_Franca_15_05_22/dsc_0496.jpg",
+          "alt": "Sortida França 15/05/2022 50",
+          "filename": "dsc_0496.jpg"
+        },
+        {
+          "src": "/legacy-mirror/images/phocagallery/historiques/Sortida_Franca_15_05_22/dsc_0497.jpg",
+          "alt": "Sortida França 15/05/2022 51",
+          "filename": "dsc_0497.jpg"
+        },
+        {
+          "src": "/legacy-mirror/images/phocagallery/historiques/Sortida_Franca_15_05_22/dsc_0498.jpg",
+          "alt": "Sortida França 15/05/2022 52",
+          "filename": "dsc_0498.jpg"
+        }
+      ]
+    },
+    {
+      "title": "Sortida Andorra 19/06/2022",
+      "sourceFolder": "phocagallery/historiques/Sortida_Andorra_19_06_22",
+      "images": [
+        {
+          "src": "/legacy-mirror/images/phocagallery/historiques/Sortida_Andorra_19_06_22/2c3253f9-3736-4d4a-8000-7c26eeef63e4.jpg",
+          "alt": "Sortida Andorra 19/06/2022 1",
+          "filename": "2c3253f9-3736-4d4a-8000-7c26eeef63e4.jpg"
+        },
+        {
+          "src": "/legacy-mirror/images/phocagallery/historiques/Sortida_Andorra_19_06_22/img-5593.jpg",
+          "alt": "Sortida Andorra 19/06/2022 2",
+          "filename": "img-5593.jpg"
+        },
+        {
+          "src": "/legacy-mirror/images/phocagallery/historiques/Sortida_Andorra_19_06_22/img-5595.jpg",
+          "alt": "Sortida Andorra 19/06/2022 3",
+          "filename": "img-5595.jpg"
+        },
+        {
+          "src": "/legacy-mirror/images/phocagallery/historiques/Sortida_Andorra_19_06_22/img-5597.jpg",
+          "alt": "Sortida Andorra 19/06/2022 4",
+          "filename": "img-5597.jpg"
+        },
+        {
+          "src": "/legacy-mirror/images/phocagallery/historiques/Sortida_Andorra_19_06_22/img-5599.jpg",
+          "alt": "Sortida Andorra 19/06/2022 5",
+          "filename": "img-5599.jpg"
+        },
+        {
+          "src": "/legacy-mirror/images/phocagallery/historiques/Sortida_Andorra_19_06_22/img-5601.jpg",
+          "alt": "Sortida Andorra 19/06/2022 6",
+          "filename": "img-5601.jpg"
+        },
+        {
+          "src": "/legacy-mirror/images/phocagallery/historiques/Sortida_Andorra_19_06_22/img-5603.jpg",
+          "alt": "Sortida Andorra 19/06/2022 7",
+          "filename": "img-5603.jpg"
+        },
+        {
+          "src": "/legacy-mirror/images/phocagallery/historiques/Sortida_Andorra_19_06_22/img-5606.jpg",
+          "alt": "Sortida Andorra 19/06/2022 8",
+          "filename": "img-5606.jpg"
+        },
+        {
+          "src": "/legacy-mirror/images/phocagallery/historiques/Sortida_Andorra_19_06_22/img-5612.jpg",
+          "alt": "Sortida Andorra 19/06/2022 9",
+          "filename": "img-5612.jpg"
+        },
+        {
+          "src": "/legacy-mirror/images/phocagallery/historiques/Sortida_Andorra_19_06_22/img-5613.jpg",
+          "alt": "Sortida Andorra 19/06/2022 10",
+          "filename": "img-5613.jpg"
+        },
+        {
+          "src": "/legacy-mirror/images/phocagallery/historiques/Sortida_Andorra_19_06_22/img-5614.jpg",
+          "alt": "Sortida Andorra 19/06/2022 11",
+          "filename": "img-5614.jpg"
+        },
+        {
+          "src": "/legacy-mirror/images/phocagallery/historiques/Sortida_Andorra_19_06_22/img-5615.jpg",
+          "alt": "Sortida Andorra 19/06/2022 12",
+          "filename": "img-5615.jpg"
+        },
+        {
+          "src": "/legacy-mirror/images/phocagallery/historiques/Sortida_Andorra_19_06_22/img-5619.jpg",
+          "alt": "Sortida Andorra 19/06/2022 13",
+          "filename": "img-5619.jpg"
+        },
+        {
+          "src": "/legacy-mirror/images/phocagallery/historiques/Sortida_Andorra_19_06_22/img-5620.jpg",
+          "alt": "Sortida Andorra 19/06/2022 14",
+          "filename": "img-5620.jpg"
+        },
+        {
+          "src": "/legacy-mirror/images/phocagallery/historiques/Sortida_Andorra_19_06_22/img-5626.jpg",
+          "alt": "Sortida Andorra 19/06/2022 15",
+          "filename": "img-5626.jpg"
+        },
+        {
+          "src": "/legacy-mirror/images/phocagallery/historiques/Sortida_Andorra_19_06_22/img-5630.jpg",
+          "alt": "Sortida Andorra 19/06/2022 16",
+          "filename": "img-5630.jpg"
+        },
+        {
+          "src": "/legacy-mirror/images/phocagallery/historiques/Sortida_Andorra_19_06_22/img-5635.jpg",
+          "alt": "Sortida Andorra 19/06/2022 17",
+          "filename": "img-5635.jpg"
+        },
+        {
+          "src": "/legacy-mirror/images/phocagallery/historiques/Sortida_Andorra_19_06_22/img-5639.jpg",
+          "alt": "Sortida Andorra 19/06/2022 18",
+          "filename": "img-5639.jpg"
+        },
+        {
+          "src": "/legacy-mirror/images/phocagallery/historiques/Sortida_Andorra_19_06_22/img-5640.jpg",
+          "alt": "Sortida Andorra 19/06/2022 19",
+          "filename": "img-5640.jpg"
+        },
+        {
+          "src": "/legacy-mirror/images/phocagallery/historiques/Sortida_Andorra_19_06_22/img-5644.jpg",
+          "alt": "Sortida Andorra 19/06/2022 20",
+          "filename": "img-5644.jpg"
+        }
+      ]
+    },
+    {
+      "title": "Rally Turístic 01/10/2022",
+      "sourceFolder": "phocagallery",
+      "images": [
+        {
+          "src": "/legacy-mirror/images/phocagallery/img_8903.jpg",
+          "alt": "Rally Turístic 01/10/2022 1",
+          "filename": "img_8903.jpg"
+        },
+        {
+          "src": "/legacy-mirror/images/phocagallery/img_8904.jpg",
+          "alt": "Rally Turístic 01/10/2022 2",
+          "filename": "img_8904.jpg"
+        },
+        {
+          "src": "/legacy-mirror/images/phocagallery/img_8907.jpg",
+          "alt": "Rally Turístic 01/10/2022 3",
+          "filename": "img_8907.jpg"
+        },
+        {
+          "src": "/legacy-mirror/images/phocagallery/img_8911.jpg",
+          "alt": "Rally Turístic 01/10/2022 4",
+          "filename": "img_8911.jpg"
+        },
+        {
+          "src": "/legacy-mirror/images/phocagallery/img_8914.jpg",
+          "alt": "Rally Turístic 01/10/2022 5",
+          "filename": "img_8914.jpg"
+        },
+        {
+          "src": "/legacy-mirror/images/phocagallery/img_8915.jpg",
+          "alt": "Rally Turístic 01/10/2022 6",
+          "filename": "img_8915.jpg"
+        },
+        {
+          "src": "/legacy-mirror/images/phocagallery/img_8918.jpg",
+          "alt": "Rally Turístic 01/10/2022 7",
+          "filename": "img_8918.jpg"
+        },
+        {
+          "src": "/legacy-mirror/images/phocagallery/img_8984.jpg",
+          "alt": "Rally Turístic 01/10/2022 8",
+          "filename": "img_8984.jpg"
+        },
+        {
+          "src": "/legacy-mirror/images/phocagallery/img_8987.jpg",
+          "alt": "Rally Turístic 01/10/2022 9",
+          "filename": "img_8987.jpg"
+        },
+        {
+          "src": "/legacy-mirror/images/phocagallery/img_8990.jpg",
+          "alt": "Rally Turístic 01/10/2022 10",
+          "filename": "img_8990.jpg"
+        },
+        {
+          "src": "/legacy-mirror/images/phocagallery/img_8992.jpg",
+          "alt": "Rally Turístic 01/10/2022 11",
+          "filename": "img_8992.jpg"
+        },
+        {
+          "src": "/legacy-mirror/images/phocagallery/img_8995.jpg",
+          "alt": "Rally Turístic 01/10/2022 12",
+          "filename": "img_8995.jpg"
+        },
+        {
+          "src": "/legacy-mirror/images/phocagallery/img_8999.jpg",
+          "alt": "Rally Turístic 01/10/2022 13",
+          "filename": "img_8999.jpg"
+        },
+        {
+          "src": "/legacy-mirror/images/phocagallery/img_9010.jpg",
+          "alt": "Rally Turístic 01/10/2022 14",
+          "filename": "img_9010.jpg"
+        },
+        {
+          "src": "/legacy-mirror/images/phocagallery/img_9019.jpg",
+          "alt": "Rally Turístic 01/10/2022 15",
+          "filename": "img_9019.jpg"
+        },
+        {
+          "src": "/legacy-mirror/images/phocagallery/img_9021.jpg",
+          "alt": "Rally Turístic 01/10/2022 16",
+          "filename": "img_9021.jpg"
+        },
+        {
+          "src": "/legacy-mirror/images/phocagallery/img_9024.jpg",
+          "alt": "Rally Turístic 01/10/2022 17",
+          "filename": "img_9024.jpg"
+        },
+        {
+          "src": "/legacy-mirror/images/phocagallery/img_9028.jpg",
+          "alt": "Rally Turístic 01/10/2022 18",
+          "filename": "img_9028.jpg"
+        },
+        {
+          "src": "/legacy-mirror/images/phocagallery/img_9029.jpg",
+          "alt": "Rally Turístic 01/10/2022 19",
+          "filename": "img_9029.jpg"
+        },
+        {
+          "src": "/legacy-mirror/images/phocagallery/img_9048.jpg",
+          "alt": "Rally Turístic 01/10/2022 20",
+          "filename": "img_9048.jpg"
+        }
+      ]
+    },
+    {
       "title": "Cloenda 13/11/2022",
       "sourceFolder": "phocagallery/sortides (origen) → classificat a històriques/2022",
       "images": [
         {
-          "src": "/legacy-mirror/images/phocagallery/sortides/91fbd5de-c6aa-4015-9bf3-aa6a71b4a618.jpg",
+          "src": "/legacy-mirror/images/phocagallery/img-0159.jpg",
           "alt": "Cloenda 13/11/2022 1",
+          "filename": "img-0159.jpg"
+        },
+        {
+          "src": "/legacy-mirror/images/phocagallery/91fbd5de-c6aa-4015-9bf3-aa6a71b4a618.jpg",
+          "alt": "Cloenda 13/11/2022 2",
           "filename": "91fbd5de-c6aa-4015-9bf3-aa6a71b4a618.jpg"
         },
         {
-          "src": "/legacy-mirror/images/phocagallery/sortides/f330e16d-9d12-4541-8ee1-566d836b454f.jpg",
-          "alt": "Cloenda 13/11/2022 2",
+          "src": "/legacy-mirror/images/phocagallery/f330e16d-9d12-4541-8ee1-566d836b454f.jpg",
+          "alt": "Cloenda 13/11/2022 3",
           "filename": "f330e16d-9d12-4541-8ee1-566d836b454f.jpg"
         },
         {
-          "src": "/legacy-mirror/images/phocagallery/sortides/foto_no_exif.jpg",
-          "alt": "Cloenda 13/11/2022 3",
+          "src": "/legacy-mirror/images/phocagallery/foto_no_exif.jpg",
+          "alt": "Cloenda 13/11/2022 4",
           "filename": "foto_no_exif.jpg"
         },
         {
-          "src": "/legacy-mirror/images/phocagallery/sortides/foto_no_exif_1.jpg",
-          "alt": "Cloenda 13/11/2022 4",
+          "src": "/legacy-mirror/images/phocagallery/foto_no_exif_1.jpg",
+          "alt": "Cloenda 13/11/2022 5",
           "filename": "foto_no_exif_1.jpg"
         },
         {
-          "src": "/legacy-mirror/images/phocagallery/sortides/foto_no_exif_2.jpg",
-          "alt": "Cloenda 13/11/2022 5",
+          "src": "/legacy-mirror/images/phocagallery/foto_no_exif_2.jpg",
+          "alt": "Cloenda 13/11/2022 6",
           "filename": "foto_no_exif_2.jpg"
         },
         {
-          "src": "/legacy-mirror/images/phocagallery/sortides/foto_no_exif_3.jpg",
-          "alt": "Cloenda 13/11/2022 6",
+          "src": "/legacy-mirror/images/phocagallery/foto_no_exif_3.jpg",
+          "alt": "Cloenda 13/11/2022 7",
           "filename": "foto_no_exif_3.jpg"
         },
         {
-          "src": "/legacy-mirror/images/phocagallery/sortides/foto_no_exif_4.jpg",
-          "alt": "Cloenda 13/11/2022 7",
+          "src": "/legacy-mirror/images/phocagallery/foto_no_exif_4.jpg",
+          "alt": "Cloenda 13/11/2022 8",
           "filename": "foto_no_exif_4.jpg"
         },
         {
-          "src": "/legacy-mirror/images/phocagallery/sortides/img-0151.jpg",
-          "alt": "Cloenda 13/11/2022 8",
+          "src": "/legacy-mirror/images/phocagallery/img-0151.jpg",
+          "alt": "Cloenda 13/11/2022 9",
           "filename": "img-0151.jpg"
         },
         {
-          "src": "/legacy-mirror/images/phocagallery/sortides/img-0154.jpg",
-          "alt": "Cloenda 13/11/2022 9",
+          "src": "/legacy-mirror/images/phocagallery/img-0154.jpg",
+          "alt": "Cloenda 13/11/2022 10",
           "filename": "img-0154.jpg"
         },
         {
-          "src": "/legacy-mirror/images/phocagallery/sortides/img-0155.jpg",
-          "alt": "Cloenda 13/11/2022 10",
+          "src": "/legacy-mirror/images/phocagallery/img-0155.jpg",
+          "alt": "Cloenda 13/11/2022 11",
           "filename": "img-0155.jpg"
         },
         {
-          "src": "/legacy-mirror/images/phocagallery/sortides/img-0158.jpg",
-          "alt": "Cloenda 13/11/2022 11",
-          "filename": "img-0158.jpg"
-        },
-        {
-          "src": "/legacy-mirror/images/phocagallery/sortides/img-0159.jpg",
+          "src": "/legacy-mirror/images/phocagallery/img-0158.jpg",
           "alt": "Cloenda 13/11/2022 12",
-          "filename": "img-0159.jpg"
+          "filename": "img-0158.jpg"
         }
       ],
       "note": "Agrupat amb EXIF 2022-11-13 i coincidència visual."
@@ -1764,7 +2519,7 @@ export const galleryMediaByPage: Record<string, GalleryMediaSection[]> = {
   "sortides_2025": [
     {
       "title": "Cars & Coffee 23/02/2025",
-      "sourceFolder": "phocagallery/sortides/Any_2025 (origen)",
+      "sourceFolder": "phocagallery/sortides/Any_2025",
       "images": [
         {
           "src": "/legacy-mirror/images/phocagallery/sortides/Any_2025/photo-2025-02-25-09-00-41.jpg",
@@ -1777,26 +2532,81 @@ export const galleryMediaByPage: Record<string, GalleryMediaSection[]> = {
           "filename": "photo-2025-02-25-09-00-41_1.jpg"
         },
         {
-          "src": "/legacy-mirror/images/phocagallery/sortides/Any_2025/photo-2025-02-25-09-00-41_3.jpg",
+          "src": "/legacy-mirror/images/phocagallery/sortides/Any_2025/photo-2025-02-25-09-00-41_2.jpg",
           "alt": "Cars & Coffee 23/02/2025 3",
+          "filename": "photo-2025-02-25-09-00-41_2.jpg"
+        },
+        {
+          "src": "/legacy-mirror/images/phocagallery/sortides/Any_2025/photo-2025-02-25-09-00-41_3.jpg",
+          "alt": "Cars & Coffee 23/02/2025 4",
           "filename": "photo-2025-02-25-09-00-41_3.jpg"
         },
         {
+          "src": "/legacy-mirror/images/phocagallery/sortides/Any_2025/photo-2025-02-25-09-00-42.jpg",
+          "alt": "Cars & Coffee 23/02/2025 5",
+          "filename": "photo-2025-02-25-09-00-42.jpg"
+        },
+        {
+          "src": "/legacy-mirror/images/phocagallery/sortides/Any_2025/photo-2025-02-25-09-00-42_1.jpg",
+          "alt": "Cars & Coffee 23/02/2025 6",
+          "filename": "photo-2025-02-25-09-00-42_1.jpg"
+        },
+        {
           "src": "/legacy-mirror/images/phocagallery/sortides/Any_2025/photo-2025-02-25-09-00-42_2.jpg",
-          "alt": "Cars & Coffee 23/02/2025 4",
+          "alt": "Cars & Coffee 23/02/2025 7",
           "filename": "photo-2025-02-25-09-00-42_2.jpg"
         },
         {
+          "src": "/legacy-mirror/images/phocagallery/sortides/Any_2025/photo-2025-02-25-09-00-42_3.jpg",
+          "alt": "Cars & Coffee 23/02/2025 8",
+          "filename": "photo-2025-02-25-09-00-42_3.jpg"
+        },
+        {
+          "src": "/legacy-mirror/images/phocagallery/sortides/Any_2025/photo-2025-02-25-09-00-42_4.jpg",
+          "alt": "Cars & Coffee 23/02/2025 9",
+          "filename": "photo-2025-02-25-09-00-42_4.jpg"
+        },
+        {
           "src": "/legacy-mirror/images/phocagallery/sortides/Any_2025/photo-2025-02-25-09-01-09.jpg",
-          "alt": "Cars & Coffee 23/02/2025 5",
+          "alt": "Cars & Coffee 23/02/2025 10",
           "filename": "photo-2025-02-25-09-01-09.jpg"
+        },
+        {
+          "src": "/legacy-mirror/images/phocagallery/sortides/Any_2025/photo-2025-02-25-09-01-09_1.jpg",
+          "alt": "Cars & Coffee 23/02/2025 11",
+          "filename": "photo-2025-02-25-09-01-09_1.jpg"
+        },
+        {
+          "src": "/legacy-mirror/images/phocagallery/sortides/Any_2025/photo-2025-02-25-09-01-09_2.jpg",
+          "alt": "Cars & Coffee 23/02/2025 12",
+          "filename": "photo-2025-02-25-09-01-09_2.jpg"
+        },
+        {
+          "src": "/legacy-mirror/images/phocagallery/sortides/Any_2025/photo-2025-02-25-09-01-10.jpg",
+          "alt": "Cars & Coffee 23/02/2025 13",
+          "filename": "photo-2025-02-25-09-01-10.jpg"
+        },
+        {
+          "src": "/legacy-mirror/images/phocagallery/sortides/Any_2025/photo-2025-02-25-09-01-55.jpg",
+          "alt": "Cars & Coffee 23/02/2025 14",
+          "filename": "photo-2025-02-25-09-01-55.jpg"
+        },
+        {
+          "src": "/legacy-mirror/images/phocagallery/sortides/Any_2025/photo-2025-02-25-09-33-55.jpg",
+          "alt": "Cars & Coffee 23/02/2025 15",
+          "filename": "photo-2025-02-25-09-33-55.jpg"
+        },
+        {
+          "src": "/legacy-mirror/images/phocagallery/sortides/Any_2025/photo-2025-02-25-09-35-59.jpg",
+          "alt": "Cars & Coffee 23/02/2025 16",
+          "filename": "photo-2025-02-25-09-35-59.jpg"
         }
       ],
       "note": "Recuperat segons data del fitxer origen."
     },
     {
       "title": "Sortida a Espanya 30/03/2025",
-      "sourceFolder": "phocagallery/sortides/Any_2025 (origen)",
+      "sourceFolder": "phocagallery/sortides/Any_2025",
       "images": [
         {
           "src": "/legacy-mirror/images/phocagallery/sortides/Any_2025/photo-2025-03-30-19-13-28.jpg",
@@ -1804,124 +2614,1101 @@ export const galleryMediaByPage: Record<string, GalleryMediaSection[]> = {
           "filename": "photo-2025-03-30-19-13-28.jpg"
         },
         {
-          "src": "/legacy-mirror/images/phocagallery/sortides/Any_2025/photo-2025-03-30-19-13-29_1.jpg",
+          "src": "/legacy-mirror/images/phocagallery/sortides/Any_2025/photo-2025-03-30-19-13-29.jpg",
           "alt": "Sortida a Espanya 30/03/2025 2",
+          "filename": "photo-2025-03-30-19-13-29.jpg"
+        },
+        {
+          "src": "/legacy-mirror/images/phocagallery/sortides/Any_2025/photo-2025-03-30-19-13-29_1.jpg",
+          "alt": "Sortida a Espanya 30/03/2025 3",
           "filename": "photo-2025-03-30-19-13-29_1.jpg"
         },
         {
           "src": "/legacy-mirror/images/phocagallery/sortides/Any_2025/photo-2025-03-30-19-13-29_2.jpg",
-          "alt": "Sortida a Espanya 30/03/2025 3",
+          "alt": "Sortida a Espanya 30/03/2025 4",
           "filename": "photo-2025-03-30-19-13-29_2.jpg"
         },
         {
           "src": "/legacy-mirror/images/phocagallery/sortides/Any_2025/photo-2025-03-30-19-13-29_3.jpg",
-          "alt": "Sortida a Espanya 30/03/2025 4",
+          "alt": "Sortida a Espanya 30/03/2025 5",
           "filename": "photo-2025-03-30-19-13-29_3.jpg"
         },
         {
+          "src": "/legacy-mirror/images/phocagallery/sortides/Any_2025/photo-2025-03-30-19-13-29_4.jpg",
+          "alt": "Sortida a Espanya 30/03/2025 6",
+          "filename": "photo-2025-03-30-19-13-29_4.jpg"
+        },
+        {
           "src": "/legacy-mirror/images/phocagallery/sortides/Any_2025/photo-2025-03-30-19-13-29_5.jpg",
-          "alt": "Sortida a Espanya 30/03/2025 5",
+          "alt": "Sortida a Espanya 30/03/2025 7",
           "filename": "photo-2025-03-30-19-13-29_5.jpg"
         },
         {
           "src": "/legacy-mirror/images/phocagallery/sortides/Any_2025/photo-2025-03-31-09-17-39.jpg",
-          "alt": "Sortida a Espanya 30/03/2025 6",
+          "alt": "Sortida a Espanya 30/03/2025 8",
           "filename": "photo-2025-03-31-09-17-39.jpg"
         },
         {
+          "src": "/legacy-mirror/images/phocagallery/sortides/Any_2025/photo-2025-03-31-09-17-40.jpg",
+          "alt": "Sortida a Espanya 30/03/2025 9",
+          "filename": "photo-2025-03-31-09-17-40.jpg"
+        },
+        {
           "src": "/legacy-mirror/images/phocagallery/sortides/Any_2025/photo-2025-03-31-09-17-40_1.jpg",
-          "alt": "Sortida a Espanya 30/03/2025 7",
+          "alt": "Sortida a Espanya 30/03/2025 10",
           "filename": "photo-2025-03-31-09-17-40_1.jpg"
         },
         {
           "src": "/legacy-mirror/images/phocagallery/sortides/Any_2025/photo-2025-03-31-09-17-40_2.jpg",
-          "alt": "Sortida a Espanya 30/03/2025 8",
+          "alt": "Sortida a Espanya 30/03/2025 11",
           "filename": "photo-2025-03-31-09-17-40_2.jpg"
         },
         {
           "src": "/legacy-mirror/images/phocagallery/sortides/Any_2025/photo-2025-03-31-09-17-40_3.jpg",
-          "alt": "Sortida a Espanya 30/03/2025 9",
+          "alt": "Sortida a Espanya 30/03/2025 12",
           "filename": "photo-2025-03-31-09-17-40_3.jpg"
         },
         {
           "src": "/legacy-mirror/images/phocagallery/sortides/Any_2025/photo-2025-03-31-09-17-40_4.jpg",
-          "alt": "Sortida a Espanya 30/03/2025 10",
+          "alt": "Sortida a Espanya 30/03/2025 13",
           "filename": "photo-2025-03-31-09-17-40_4.jpg"
         }
       ]
     },
     {
       "title": "Cars & Coffee 13/04/2025",
-      "sourceFolder": "phocagallery/sortides/Any_2025 (origen)",
+      "sourceFolder": "phocagallery/sortides/Any_2025",
       "images": [
         {
-          "src": "/legacy-mirror/images/phocagallery/sortides/Any_2025/photo-2025-04-13-13-06-46_1.jpg",
+          "src": "/legacy-mirror/images/phocagallery/sortides/Any_2025/photo-2025-04-13-13-06-46.jpg",
           "alt": "Cars & Coffee 13/04/2025 1",
+          "filename": "photo-2025-04-13-13-06-46.jpg"
+        },
+        {
+          "src": "/legacy-mirror/images/phocagallery/sortides/Any_2025/photo-2025-04-13-13-06-46_1.jpg",
+          "alt": "Cars & Coffee 13/04/2025 2",
           "filename": "photo-2025-04-13-13-06-46_1.jpg"
         },
         {
           "src": "/legacy-mirror/images/phocagallery/sortides/Any_2025/photo-2025-04-13-13-06-46_2.jpg",
-          "alt": "Cars & Coffee 13/04/2025 2",
+          "alt": "Cars & Coffee 13/04/2025 3",
           "filename": "photo-2025-04-13-13-06-46_2.jpg"
         },
         {
+          "src": "/legacy-mirror/images/phocagallery/sortides/Any_2025/photo-2025-04-13-13-06-46_3.jpg",
+          "alt": "Cars & Coffee 13/04/2025 4",
+          "filename": "photo-2025-04-13-13-06-46_3.jpg"
+        },
+        {
           "src": "/legacy-mirror/images/phocagallery/sortides/Any_2025/photo-2025-04-13-13-06-46_4.jpg",
-          "alt": "Cars & Coffee 13/04/2025 3",
+          "alt": "Cars & Coffee 13/04/2025 5",
           "filename": "photo-2025-04-13-13-06-46_4.jpg"
         },
         {
+          "src": "/legacy-mirror/images/phocagallery/sortides/Any_2025/photo-2025-04-13-13-06-46_5.jpg",
+          "alt": "Cars & Coffee 13/04/2025 6",
+          "filename": "photo-2025-04-13-13-06-46_5.jpg"
+        },
+        {
           "src": "/legacy-mirror/images/phocagallery/sortides/Any_2025/photo-2025-04-13-13-06-46_6.jpg",
-          "alt": "Cars & Coffee 13/04/2025 4",
+          "alt": "Cars & Coffee 13/04/2025 7",
           "filename": "photo-2025-04-13-13-06-46_6.jpg"
         },
         {
           "src": "/legacy-mirror/images/phocagallery/sortides/Any_2025/photo-2025-04-13-13-06-47.jpg",
-          "alt": "Cars & Coffee 13/04/2025 5",
+          "alt": "Cars & Coffee 13/04/2025 8",
           "filename": "photo-2025-04-13-13-06-47.jpg"
         },
         {
           "src": "/legacy-mirror/images/phocagallery/sortides/Any_2025/photo-2025-04-13-13-06-47_1.jpg",
-          "alt": "Cars & Coffee 13/04/2025 6",
+          "alt": "Cars & Coffee 13/04/2025 9",
           "filename": "photo-2025-04-13-13-06-47_1.jpg"
         },
         {
+          "src": "/legacy-mirror/images/phocagallery/sortides/Any_2025/photo-2025-04-13-13-06-47_2.jpg",
+          "alt": "Cars & Coffee 13/04/2025 10",
+          "filename": "photo-2025-04-13-13-06-47_2.jpg"
+        },
+        {
           "src": "/legacy-mirror/images/phocagallery/sortides/Any_2025/photo-2025-04-13-13-06-47_3.jpg",
-          "alt": "Cars & Coffee 13/04/2025 7",
+          "alt": "Cars & Coffee 13/04/2025 11",
           "filename": "photo-2025-04-13-13-06-47_3.jpg"
+        },
+        {
+          "src": "/legacy-mirror/images/phocagallery/sortides/Any_2025/photo-2025-04-13-13-06-47_4.jpg",
+          "alt": "Cars & Coffee 13/04/2025 12",
+          "filename": "photo-2025-04-13-13-06-47_4.jpg"
+        },
+        {
+          "src": "/legacy-mirror/images/phocagallery/sortides/Any_2025/photo-2025-04-13-13-06-47_5.jpg",
+          "alt": "Cars & Coffee 13/04/2025 13",
+          "filename": "photo-2025-04-13-13-06-47_5.jpg"
+        },
+        {
+          "src": "/legacy-mirror/images/phocagallery/sortides/Any_2025/photo-2025-04-13-13-06-47_6.jpg",
+          "alt": "Cars & Coffee 13/04/2025 14",
+          "filename": "photo-2025-04-13-13-06-47_6.jpg"
         }
       ]
     },
     {
       "title": "Sortida a França 18/05/2025",
-      "sourceFolder": "phocagallery/sortides/Any_2025 (origen)",
+      "sourceFolder": "phocagallery/sortides/Any_2025",
       "images": [
         {
-          "src": "/legacy-mirror/images/phocagallery/sortides/Any_2025/photo-2025-05-19-16-20-11_1.jpg",
+          "src": "/legacy-mirror/images/phocagallery/sortides/Any_2025/photo-2025-05-19-16-20-10.jpg",
           "alt": "Sortida a França 18/05/2025 1",
+          "filename": "photo-2025-05-19-16-20-10.jpg"
+        },
+        {
+          "src": "/legacy-mirror/images/phocagallery/sortides/Any_2025/photo-2025-05-19-16-20-10_1.jpg",
+          "alt": "Sortida a França 18/05/2025 2",
+          "filename": "photo-2025-05-19-16-20-10_1.jpg"
+        },
+        {
+          "src": "/legacy-mirror/images/phocagallery/sortides/Any_2025/photo-2025-05-19-16-20-10_2.jpg",
+          "alt": "Sortida a França 18/05/2025 3",
+          "filename": "photo-2025-05-19-16-20-10_2.jpg"
+        },
+        {
+          "src": "/legacy-mirror/images/phocagallery/sortides/Any_2025/photo-2025-05-19-16-20-10_3.jpg",
+          "alt": "Sortida a França 18/05/2025 4",
+          "filename": "photo-2025-05-19-16-20-10_3.jpg"
+        },
+        {
+          "src": "/legacy-mirror/images/phocagallery/sortides/Any_2025/photo-2025-05-19-16-20-11.jpg",
+          "alt": "Sortida a França 18/05/2025 5",
+          "filename": "photo-2025-05-19-16-20-11.jpg"
+        },
+        {
+          "src": "/legacy-mirror/images/phocagallery/sortides/Any_2025/photo-2025-05-19-16-20-11_1.jpg",
+          "alt": "Sortida a França 18/05/2025 6",
           "filename": "photo-2025-05-19-16-20-11_1.jpg"
         },
         {
           "src": "/legacy-mirror/images/phocagallery/sortides/Any_2025/photo-2025-05-19-16-20-11_2.jpg",
-          "alt": "Sortida a França 18/05/2025 2",
+          "alt": "Sortida a França 18/05/2025 7",
           "filename": "photo-2025-05-19-16-20-11_2.jpg"
         },
         {
+          "src": "/legacy-mirror/images/phocagallery/sortides/Any_2025/photo-2025-05-19-16-20-11_3.jpg",
+          "alt": "Sortida a França 18/05/2025 8",
+          "filename": "photo-2025-05-19-16-20-11_3.jpg"
+        },
+        {
+          "src": "/legacy-mirror/images/phocagallery/sortides/Any_2025/photo-2025-05-19-16-20-11_4.jpg",
+          "alt": "Sortida a França 18/05/2025 9",
+          "filename": "photo-2025-05-19-16-20-11_4.jpg"
+        },
+        {
           "src": "/legacy-mirror/images/phocagallery/sortides/Any_2025/photo-2025-05-19-16-20-11_5.jpg",
-          "alt": "Sortida a França 18/05/2025 3",
+          "alt": "Sortida a França 18/05/2025 10",
           "filename": "photo-2025-05-19-16-20-11_5.jpg"
         },
         {
+          "src": "/legacy-mirror/images/phocagallery/sortides/Any_2025/photo-2025-05-19-16-20-59.jpg",
+          "alt": "Sortida a França 18/05/2025 11",
+          "filename": "photo-2025-05-19-16-20-59.jpg"
+        },
+        {
+          "src": "/legacy-mirror/images/phocagallery/sortides/Any_2025/photo-2025-05-19-16-20-59_1.jpg",
+          "alt": "Sortida a França 18/05/2025 12",
+          "filename": "photo-2025-05-19-16-20-59_1.jpg"
+        },
+        {
+          "src": "/legacy-mirror/images/phocagallery/sortides/Any_2025/photo-2025-05-19-16-20-59_2.jpg",
+          "alt": "Sortida a França 18/05/2025 13",
+          "filename": "photo-2025-05-19-16-20-59_2.jpg"
+        },
+        {
+          "src": "/legacy-mirror/images/phocagallery/sortides/Any_2025/photo-2025-05-19-16-21-00.jpg",
+          "alt": "Sortida a França 18/05/2025 14",
+          "filename": "photo-2025-05-19-16-21-00.jpg"
+        },
+        {
+          "src": "/legacy-mirror/images/phocagallery/sortides/Any_2025/photo-2025-05-19-16-21-00_1.jpg",
+          "alt": "Sortida a França 18/05/2025 15",
+          "filename": "photo-2025-05-19-16-21-00_1.jpg"
+        },
+        {
+          "src": "/legacy-mirror/images/phocagallery/sortides/Any_2025/photo-2025-05-19-16-21-00_2.jpg",
+          "alt": "Sortida a França 18/05/2025 16",
+          "filename": "photo-2025-05-19-16-21-00_2.jpg"
+        },
+        {
+          "src": "/legacy-mirror/images/phocagallery/sortides/Any_2025/photo-2025-05-19-16-21-00_3.jpg",
+          "alt": "Sortida a França 18/05/2025 17",
+          "filename": "photo-2025-05-19-16-21-00_3.jpg"
+        },
+        {
           "src": "/legacy-mirror/images/phocagallery/sortides/Any_2025/photo-2025-05-19-16-21-00_4.jpg",
-          "alt": "Sortida a França 18/05/2025 4",
+          "alt": "Sortida a França 18/05/2025 18",
           "filename": "photo-2025-05-19-16-21-00_4.jpg"
         },
         {
+          "src": "/legacy-mirror/images/phocagallery/sortides/Any_2025/photo-2025-05-19-16-21-00_5.jpg",
+          "alt": "Sortida a França 18/05/2025 19",
+          "filename": "photo-2025-05-19-16-21-00_5.jpg"
+        },
+        {
+          "src": "/legacy-mirror/images/phocagallery/sortides/Any_2025/photo-2025-05-19-16-21-00_6.jpg",
+          "alt": "Sortida a França 18/05/2025 20",
+          "filename": "photo-2025-05-19-16-21-00_6.jpg"
+        },
+        {
           "src": "/legacy-mirror/images/phocagallery/sortides/Any_2025/photo-2025-05-19-16-21-01.jpg",
-          "alt": "Sortida a França 18/05/2025 5",
+          "alt": "Sortida a França 18/05/2025 21",
           "filename": "photo-2025-05-19-16-21-01.jpg"
+        },
+        {
+          "src": "/legacy-mirror/images/phocagallery/sortides/Any_2025/photo-2025-05-19-16-21-01_1.jpg",
+          "alt": "Sortida a França 18/05/2025 22",
+          "filename": "photo-2025-05-19-16-21-01_1.jpg"
         }
       ],
       "note": "Recuperat segons data del fitxer origen."
+    },
+    {
+      "title": "Cars & Coffee 22/06/2025",
+      "sourceFolder": "phocagallery/sortides/Any_2025/Cars",
+      "images": [
+        {
+          "src": "/legacy-mirror/images/phocagallery/sortides/Any_2025/Cars/photo-2025-06-24-15-02-05.jpg",
+          "alt": "Cars & Coffee 22/06/2025 1",
+          "filename": "photo-2025-06-24-15-02-05.jpg"
+        },
+        {
+          "src": "/legacy-mirror/images/phocagallery/sortides/Any_2025/Cars/photo-2025-06-24-15-02-05_1.jpg",
+          "alt": "Cars & Coffee 22/06/2025 2",
+          "filename": "photo-2025-06-24-15-02-05_1.jpg"
+        },
+        {
+          "src": "/legacy-mirror/images/phocagallery/sortides/Any_2025/Cars/photo-2025-06-24-15-02-05_2.jpg",
+          "alt": "Cars & Coffee 22/06/2025 3",
+          "filename": "photo-2025-06-24-15-02-05_2.jpg"
+        },
+        {
+          "src": "/legacy-mirror/images/phocagallery/sortides/Any_2025/Cars/photo-2025-06-24-15-02-05_3.jpg",
+          "alt": "Cars & Coffee 22/06/2025 4",
+          "filename": "photo-2025-06-24-15-02-05_3.jpg"
+        },
+        {
+          "src": "/legacy-mirror/images/phocagallery/sortides/Any_2025/Cars/photo-2025-06-24-15-02-05_4.jpg",
+          "alt": "Cars & Coffee 22/06/2025 5",
+          "filename": "photo-2025-06-24-15-02-05_4.jpg"
+        },
+        {
+          "src": "/legacy-mirror/images/phocagallery/sortides/Any_2025/Cars/photo-2025-06-24-15-02-05_5.jpg",
+          "alt": "Cars & Coffee 22/06/2025 6",
+          "filename": "photo-2025-06-24-15-02-05_5.jpg"
+        },
+        {
+          "src": "/legacy-mirror/images/phocagallery/sortides/Any_2025/Cars/photo-2025-06-24-15-02-05_6.jpg",
+          "alt": "Cars & Coffee 22/06/2025 7",
+          "filename": "photo-2025-06-24-15-02-05_6.jpg"
+        },
+        {
+          "src": "/legacy-mirror/images/phocagallery/sortides/Any_2025/Cars/photo-2025-06-24-15-02-06.jpg",
+          "alt": "Cars & Coffee 22/06/2025 8",
+          "filename": "photo-2025-06-24-15-02-06.jpg"
+        },
+        {
+          "src": "/legacy-mirror/images/phocagallery/sortides/Any_2025/Cars/photo-2025-06-24-15-04-17.jpg",
+          "alt": "Cars & Coffee 22/06/2025 9",
+          "filename": "photo-2025-06-24-15-04-17.jpg"
+        },
+        {
+          "src": "/legacy-mirror/images/phocagallery/sortides/Any_2025/Cars/photo-2025-06-24-15-04-17_1.jpg",
+          "alt": "Cars & Coffee 22/06/2025 10",
+          "filename": "photo-2025-06-24-15-04-17_1.jpg"
+        },
+        {
+          "src": "/legacy-mirror/images/phocagallery/sortides/Any_2025/Cars/photo-2025-06-24-15-04-17_2.jpg",
+          "alt": "Cars & Coffee 22/06/2025 11",
+          "filename": "photo-2025-06-24-15-04-17_2.jpg"
+        },
+        {
+          "src": "/legacy-mirror/images/phocagallery/sortides/Any_2025/Cars/photo-2025-06-24-15-04-17_3.jpg",
+          "alt": "Cars & Coffee 22/06/2025 12",
+          "filename": "photo-2025-06-24-15-04-17_3.jpg"
+        }
+      ]
+    },
+    {
+      "title": "Viatge al Museu BMW - Munich 03/07/2025 - 06/07/2025",
+      "sourceFolder": "phocagallery/sortides/Any_2025/Viatge_Museu_BMW_03_07_2025",
+      "images": [
+        {
+          "src": "/legacy-mirror/images/phocagallery/sortides/Any_2025/Viatge_Museu_BMW_03_07_2025/photo-2025-07-09-08-21-26.jpg",
+          "alt": "Viatge al Museu BMW - Munich 03/07/2025 - 06/07/2025 1",
+          "filename": "photo-2025-07-09-08-21-26.jpg"
+        },
+        {
+          "src": "/legacy-mirror/images/phocagallery/sortides/Any_2025/Viatge_Museu_BMW_03_07_2025/photo-2025-07-09-08-21-26_1.jpg",
+          "alt": "Viatge al Museu BMW - Munich 03/07/2025 - 06/07/2025 2",
+          "filename": "photo-2025-07-09-08-21-26_1.jpg"
+        },
+        {
+          "src": "/legacy-mirror/images/phocagallery/sortides/Any_2025/Viatge_Museu_BMW_03_07_2025/photo-2025-07-09-08-21-26_2.jpg",
+          "alt": "Viatge al Museu BMW - Munich 03/07/2025 - 06/07/2025 3",
+          "filename": "photo-2025-07-09-08-21-26_2.jpg"
+        },
+        {
+          "src": "/legacy-mirror/images/phocagallery/sortides/Any_2025/Viatge_Museu_BMW_03_07_2025/photo-2025-07-09-08-21-26_3.jpg",
+          "alt": "Viatge al Museu BMW - Munich 03/07/2025 - 06/07/2025 4",
+          "filename": "photo-2025-07-09-08-21-26_3.jpg"
+        },
+        {
+          "src": "/legacy-mirror/images/phocagallery/sortides/Any_2025/Viatge_Museu_BMW_03_07_2025/photo-2025-07-09-08-21-27.jpg",
+          "alt": "Viatge al Museu BMW - Munich 03/07/2025 - 06/07/2025 5",
+          "filename": "photo-2025-07-09-08-21-27.jpg"
+        },
+        {
+          "src": "/legacy-mirror/images/phocagallery/sortides/Any_2025/Viatge_Museu_BMW_03_07_2025/photo-2025-07-09-08-21-27_1.jpg",
+          "alt": "Viatge al Museu BMW - Munich 03/07/2025 - 06/07/2025 6",
+          "filename": "photo-2025-07-09-08-21-27_1.jpg"
+        },
+        {
+          "src": "/legacy-mirror/images/phocagallery/sortides/Any_2025/Viatge_Museu_BMW_03_07_2025/photo-2025-07-09-08-21-27_2.jpg",
+          "alt": "Viatge al Museu BMW - Munich 03/07/2025 - 06/07/2025 7",
+          "filename": "photo-2025-07-09-08-21-27_2.jpg"
+        },
+        {
+          "src": "/legacy-mirror/images/phocagallery/sortides/Any_2025/Viatge_Museu_BMW_03_07_2025/photo-2025-07-09-08-22-32.jpg",
+          "alt": "Viatge al Museu BMW - Munich 03/07/2025 - 06/07/2025 8",
+          "filename": "photo-2025-07-09-08-22-32.jpg"
+        },
+        {
+          "src": "/legacy-mirror/images/phocagallery/sortides/Any_2025/Viatge_Museu_BMW_03_07_2025/photo-2025-07-09-08-22-33.jpg",
+          "alt": "Viatge al Museu BMW - Munich 03/07/2025 - 06/07/2025 9",
+          "filename": "photo-2025-07-09-08-22-33.jpg"
+        },
+        {
+          "src": "/legacy-mirror/images/phocagallery/sortides/Any_2025/Viatge_Museu_BMW_03_07_2025/photo-2025-07-09-08-22-33_1.jpg",
+          "alt": "Viatge al Museu BMW - Munich 03/07/2025 - 06/07/2025 10",
+          "filename": "photo-2025-07-09-08-22-33_1.jpg"
+        },
+        {
+          "src": "/legacy-mirror/images/phocagallery/sortides/Any_2025/Viatge_Museu_BMW_03_07_2025/photo-2025-07-09-08-22-33_2.jpg",
+          "alt": "Viatge al Museu BMW - Munich 03/07/2025 - 06/07/2025 11",
+          "filename": "photo-2025-07-09-08-22-33_2.jpg"
+        },
+        {
+          "src": "/legacy-mirror/images/phocagallery/sortides/Any_2025/Viatge_Museu_BMW_03_07_2025/photo-2025-07-09-08-22-33_3.jpg",
+          "alt": "Viatge al Museu BMW - Munich 03/07/2025 - 06/07/2025 12",
+          "filename": "photo-2025-07-09-08-22-33_3.jpg"
+        },
+        {
+          "src": "/legacy-mirror/images/phocagallery/sortides/Any_2025/Viatge_Museu_BMW_03_07_2025/photo-2025-07-09-08-23-30.jpg",
+          "alt": "Viatge al Museu BMW - Munich 03/07/2025 - 06/07/2025 13",
+          "filename": "photo-2025-07-09-08-23-30.jpg"
+        },
+        {
+          "src": "/legacy-mirror/images/phocagallery/sortides/Any_2025/Viatge_Museu_BMW_03_07_2025/photo-2025-07-09-08-23-31.jpg",
+          "alt": "Viatge al Museu BMW - Munich 03/07/2025 - 06/07/2025 14",
+          "filename": "photo-2025-07-09-08-23-31.jpg"
+        },
+        {
+          "src": "/legacy-mirror/images/phocagallery/sortides/Any_2025/Viatge_Museu_BMW_03_07_2025/photo-2025-07-09-08-23-31_1.jpg",
+          "alt": "Viatge al Museu BMW - Munich 03/07/2025 - 06/07/2025 15",
+          "filename": "photo-2025-07-09-08-23-31_1.jpg"
+        },
+        {
+          "src": "/legacy-mirror/images/phocagallery/sortides/Any_2025/Viatge_Museu_BMW_03_07_2025/photo-2025-07-09-08-23-31_2.jpg",
+          "alt": "Viatge al Museu BMW - Munich 03/07/2025 - 06/07/2025 16",
+          "filename": "photo-2025-07-09-08-23-31_2.jpg"
+        },
+        {
+          "src": "/legacy-mirror/images/phocagallery/sortides/Any_2025/Viatge_Museu_BMW_03_07_2025/photo-2025-07-09-08-23-31_3.jpg",
+          "alt": "Viatge al Museu BMW - Munich 03/07/2025 - 06/07/2025 17",
+          "filename": "photo-2025-07-09-08-23-31_3.jpg"
+        },
+        {
+          "src": "/legacy-mirror/images/phocagallery/sortides/Any_2025/Viatge_Museu_BMW_03_07_2025/photo-2025-07-09-08-33-35.jpg",
+          "alt": "Viatge al Museu BMW - Munich 03/07/2025 - 06/07/2025 18",
+          "filename": "photo-2025-07-09-08-33-35.jpg"
+        },
+        {
+          "src": "/legacy-mirror/images/phocagallery/sortides/Any_2025/Viatge_Museu_BMW_03_07_2025/photo-2025-07-09-08-33-36.jpg",
+          "alt": "Viatge al Museu BMW - Munich 03/07/2025 - 06/07/2025 19",
+          "filename": "photo-2025-07-09-08-33-36.jpg"
+        },
+        {
+          "src": "/legacy-mirror/images/phocagallery/sortides/Any_2025/Viatge_Museu_BMW_03_07_2025/photo-2025-07-09-08-33-36_1.jpg",
+          "alt": "Viatge al Museu BMW - Munich 03/07/2025 - 06/07/2025 20",
+          "filename": "photo-2025-07-09-08-33-36_1.jpg"
+        },
+        {
+          "src": "/legacy-mirror/images/phocagallery/sortides/Any_2025/Viatge_Museu_BMW_03_07_2025/photo-2025-07-09-08-33-36_2.jpg",
+          "alt": "Viatge al Museu BMW - Munich 03/07/2025 - 06/07/2025 21",
+          "filename": "photo-2025-07-09-08-33-36_2.jpg"
+        },
+        {
+          "src": "/legacy-mirror/images/phocagallery/sortides/Any_2025/Viatge_Museu_BMW_03_07_2025/photo-2025-07-09-08-33-36_3.jpg",
+          "alt": "Viatge al Museu BMW - Munich 03/07/2025 - 06/07/2025 22",
+          "filename": "photo-2025-07-09-08-33-36_3.jpg"
+        },
+        {
+          "src": "/legacy-mirror/images/phocagallery/sortides/Any_2025/Viatge_Museu_BMW_03_07_2025/photo-2025-07-09-08-33-37.jpg",
+          "alt": "Viatge al Museu BMW - Munich 03/07/2025 - 06/07/2025 23",
+          "filename": "photo-2025-07-09-08-33-37.jpg"
+        },
+        {
+          "src": "/legacy-mirror/images/phocagallery/sortides/Any_2025/Viatge_Museu_BMW_03_07_2025/photo-2025-07-09-08-33-37_1.jpg",
+          "alt": "Viatge al Museu BMW - Munich 03/07/2025 - 06/07/2025 24",
+          "filename": "photo-2025-07-09-08-33-37_1.jpg"
+        },
+        {
+          "src": "/legacy-mirror/images/phocagallery/sortides/Any_2025/Viatge_Museu_BMW_03_07_2025/photo-2025-07-09-08-33-37_2.jpg",
+          "alt": "Viatge al Museu BMW - Munich 03/07/2025 - 06/07/2025 25",
+          "filename": "photo-2025-07-09-08-33-37_2.jpg"
+        },
+        {
+          "src": "/legacy-mirror/images/phocagallery/sortides/Any_2025/Viatge_Museu_BMW_03_07_2025/photo-2025-07-09-08-33-37_3.jpg",
+          "alt": "Viatge al Museu BMW - Munich 03/07/2025 - 06/07/2025 26",
+          "filename": "photo-2025-07-09-08-33-37_3.jpg"
+        },
+        {
+          "src": "/legacy-mirror/images/phocagallery/sortides/Any_2025/Viatge_Museu_BMW_03_07_2025/photo-2025-07-09-08-34-26.jpg",
+          "alt": "Viatge al Museu BMW - Munich 03/07/2025 - 06/07/2025 27",
+          "filename": "photo-2025-07-09-08-34-26.jpg"
+        },
+        {
+          "src": "/legacy-mirror/images/phocagallery/sortides/Any_2025/Viatge_Museu_BMW_03_07_2025/photo-2025-07-09-08-34-27.jpg",
+          "alt": "Viatge al Museu BMW - Munich 03/07/2025 - 06/07/2025 28",
+          "filename": "photo-2025-07-09-08-34-27.jpg"
+        },
+        {
+          "src": "/legacy-mirror/images/phocagallery/sortides/Any_2025/Viatge_Museu_BMW_03_07_2025/photo-2025-07-09-08-34-27_1.jpg",
+          "alt": "Viatge al Museu BMW - Munich 03/07/2025 - 06/07/2025 29",
+          "filename": "photo-2025-07-09-08-34-27_1.jpg"
+        },
+        {
+          "src": "/legacy-mirror/images/phocagallery/sortides/Any_2025/Viatge_Museu_BMW_03_07_2025/photo-2025-07-09-08-37-55.jpg",
+          "alt": "Viatge al Museu BMW - Munich 03/07/2025 - 06/07/2025 30",
+          "filename": "photo-2025-07-09-08-37-55.jpg"
+        },
+        {
+          "src": "/legacy-mirror/images/phocagallery/sortides/Any_2025/Viatge_Museu_BMW_03_07_2025/photo-2025-07-09-08-37-55_1.jpg",
+          "alt": "Viatge al Museu BMW - Munich 03/07/2025 - 06/07/2025 31",
+          "filename": "photo-2025-07-09-08-37-55_1.jpg"
+        },
+        {
+          "src": "/legacy-mirror/images/phocagallery/sortides/Any_2025/Viatge_Museu_BMW_03_07_2025/photo-2025-07-09-08-37-55_2.jpg",
+          "alt": "Viatge al Museu BMW - Munich 03/07/2025 - 06/07/2025 32",
+          "filename": "photo-2025-07-09-08-37-55_2.jpg"
+        },
+        {
+          "src": "/legacy-mirror/images/phocagallery/sortides/Any_2025/Viatge_Museu_BMW_03_07_2025/photo-2025-07-09-08-37-55_3.jpg",
+          "alt": "Viatge al Museu BMW - Munich 03/07/2025 - 06/07/2025 33",
+          "filename": "photo-2025-07-09-08-37-55_3.jpg"
+        }
+      ]
+    },
+    {
+      "title": "Cars & Coffee 20/07/2025",
+      "sourceFolder": "phocagallery/sortides/Any_2025/Cars",
+      "images": [
+        {
+          "src": "/legacy-mirror/images/phocagallery/sortides/Any_2025/Cars/photo-2025-07-20-16-50-17.jpg",
+          "alt": "Cars & Coffee 20/07/2025 1",
+          "filename": "photo-2025-07-20-16-50-17.jpg"
+        },
+        {
+          "src": "/legacy-mirror/images/phocagallery/sortides/Any_2025/Cars/photo-2025-07-20-16-50-17_1.jpg",
+          "alt": "Cars & Coffee 20/07/2025 2",
+          "filename": "photo-2025-07-20-16-50-17_1.jpg"
+        },
+        {
+          "src": "/legacy-mirror/images/phocagallery/sortides/Any_2025/Cars/photo-2025-07-20-16-50-17_2.jpg",
+          "alt": "Cars & Coffee 20/07/2025 3",
+          "filename": "photo-2025-07-20-16-50-17_2.jpg"
+        },
+        {
+          "src": "/legacy-mirror/images/phocagallery/sortides/Any_2025/Cars/photo-2025-07-20-16-50-17_3.jpg",
+          "alt": "Cars & Coffee 20/07/2025 4",
+          "filename": "photo-2025-07-20-16-50-17_3.jpg"
+        },
+        {
+          "src": "/legacy-mirror/images/phocagallery/sortides/Any_2025/Cars/photo-2025-07-20-16-50-17_4.jpg",
+          "alt": "Cars & Coffee 20/07/2025 5",
+          "filename": "photo-2025-07-20-16-50-17_4.jpg"
+        },
+        {
+          "src": "/legacy-mirror/images/phocagallery/sortides/Any_2025/Cars/photo-2025-07-20-16-50-17_5.jpg",
+          "alt": "Cars & Coffee 20/07/2025 6",
+          "filename": "photo-2025-07-20-16-50-17_5.jpg"
+        },
+        {
+          "src": "/legacy-mirror/images/phocagallery/sortides/Any_2025/Cars/photo-2025-07-20-16-50-44.jpg",
+          "alt": "Cars & Coffee 20/07/2025 7",
+          "filename": "photo-2025-07-20-16-50-44.jpg"
+        },
+        {
+          "src": "/legacy-mirror/images/phocagallery/sortides/Any_2025/Cars/photo-2025-07-20-16-50-44_1.jpg",
+          "alt": "Cars & Coffee 20/07/2025 8",
+          "filename": "photo-2025-07-20-16-50-44_1.jpg"
+        },
+        {
+          "src": "/legacy-mirror/images/phocagallery/sortides/Any_2025/Cars/photo-2025-07-20-16-50-45.jpg",
+          "alt": "Cars & Coffee 20/07/2025 9",
+          "filename": "photo-2025-07-20-16-50-45.jpg"
+        },
+        {
+          "src": "/legacy-mirror/images/phocagallery/sortides/Any_2025/Cars/photo-2025-07-20-16-50-45_1.jpg",
+          "alt": "Cars & Coffee 20/07/2025 10",
+          "filename": "photo-2025-07-20-16-50-45_1.jpg"
+        },
+        {
+          "src": "/legacy-mirror/images/phocagallery/sortides/Any_2025/Cars/photo-2025-07-20-16-50-45_2.jpg",
+          "alt": "Cars & Coffee 20/07/2025 11",
+          "filename": "photo-2025-07-20-16-50-45_2.jpg"
+        },
+        {
+          "src": "/legacy-mirror/images/phocagallery/sortides/Any_2025/Cars/photo-2025-07-20-16-50-45_3.jpg",
+          "alt": "Cars & Coffee 20/07/2025 12",
+          "filename": "photo-2025-07-20-16-50-45_3.jpg"
+        },
+        {
+          "src": "/legacy-mirror/images/phocagallery/sortides/Any_2025/Cars/photo-2025-07-20-16-50-45_4.jpg",
+          "alt": "Cars & Coffee 20/07/2025 13",
+          "filename": "photo-2025-07-20-16-50-45_4.jpg"
+        },
+        {
+          "src": "/legacy-mirror/images/phocagallery/sortides/Any_2025/Cars/photo-2025-07-20-16-50-45_5.jpg",
+          "alt": "Cars & Coffee 20/07/2025 14",
+          "filename": "photo-2025-07-20-16-50-45_5.jpg"
+        },
+        {
+          "src": "/legacy-mirror/images/phocagallery/sortides/Any_2025/Cars/photo-2025-07-20-16-50-45_6.jpg",
+          "alt": "Cars & Coffee 20/07/2025 15",
+          "filename": "photo-2025-07-20-16-50-45_6.jpg"
+        },
+        {
+          "src": "/legacy-mirror/images/phocagallery/sortides/Any_2025/Cars/photo-2025-07-20-16-50-46.jpg",
+          "alt": "Cars & Coffee 20/07/2025 16",
+          "filename": "photo-2025-07-20-16-50-46.jpg"
+        }
+      ]
+    },
+    {
+      "title": "Cars & Coffee 14/09/2025",
+      "sourceFolder": "phocagallery/sortides/Any_2025/Cars",
+      "images": [
+        {
+          "src": "/legacy-mirror/images/phocagallery/sortides/Any_2025/Cars/photo-2025-09-16-08-54-39.jpg",
+          "alt": "Cars & Coffee 14/09/2025 1",
+          "filename": "photo-2025-09-16-08-54-39.jpg"
+        },
+        {
+          "src": "/legacy-mirror/images/phocagallery/sortides/Any_2025/Cars/photo-2025-09-16-08-54-39_1.jpg",
+          "alt": "Cars & Coffee 14/09/2025 2",
+          "filename": "photo-2025-09-16-08-54-39_1.jpg"
+        },
+        {
+          "src": "/legacy-mirror/images/phocagallery/sortides/Any_2025/Cars/photo-2025-09-16-08-54-40.jpg",
+          "alt": "Cars & Coffee 14/09/2025 3",
+          "filename": "photo-2025-09-16-08-54-40.jpg"
+        },
+        {
+          "src": "/legacy-mirror/images/phocagallery/sortides/Any_2025/Cars/photo-2025-09-16-08-54-40_1.jpg",
+          "alt": "Cars & Coffee 14/09/2025 4",
+          "filename": "photo-2025-09-16-08-54-40_1.jpg"
+        },
+        {
+          "src": "/legacy-mirror/images/phocagallery/sortides/Any_2025/Cars/photo-2025-09-16-08-54-40_2.jpg",
+          "alt": "Cars & Coffee 14/09/2025 5",
+          "filename": "photo-2025-09-16-08-54-40_2.jpg"
+        },
+        {
+          "src": "/legacy-mirror/images/phocagallery/sortides/Any_2025/Cars/photo-2025-09-16-08-54-40_3.jpg",
+          "alt": "Cars & Coffee 14/09/2025 6",
+          "filename": "photo-2025-09-16-08-54-40_3.jpg"
+        },
+        {
+          "src": "/legacy-mirror/images/phocagallery/sortides/Any_2025/Cars/photo-2025-09-16-08-54-40_4.jpg",
+          "alt": "Cars & Coffee 14/09/2025 7",
+          "filename": "photo-2025-09-16-08-54-40_4.jpg"
+        },
+        {
+          "src": "/legacy-mirror/images/phocagallery/sortides/Any_2025/Cars/photo-2025-09-16-08-54-40_5.jpg",
+          "alt": "Cars & Coffee 14/09/2025 8",
+          "filename": "photo-2025-09-16-08-54-40_5.jpg"
+        },
+        {
+          "src": "/legacy-mirror/images/phocagallery/sortides/Any_2025/Cars/photo-2025-09-16-08-54-41.jpg",
+          "alt": "Cars & Coffee 14/09/2025 9",
+          "filename": "photo-2025-09-16-08-54-41.jpg"
+        },
+        {
+          "src": "/legacy-mirror/images/phocagallery/sortides/Any_2025/Cars/photo-2025-09-16-08-54-41_1.jpg",
+          "alt": "Cars & Coffee 14/09/2025 10",
+          "filename": "photo-2025-09-16-08-54-41_1.jpg"
+        },
+        {
+          "src": "/legacy-mirror/images/phocagallery/sortides/Any_2025/Cars/photo-2025-09-16-08-54-41_2.jpg",
+          "alt": "Cars & Coffee 14/09/2025 11",
+          "filename": "photo-2025-09-16-08-54-41_2.jpg"
+        },
+        {
+          "src": "/legacy-mirror/images/phocagallery/sortides/Any_2025/Cars/photo-2025-09-16-08-54-41_3.jpg",
+          "alt": "Cars & Coffee 14/09/2025 12",
+          "filename": "photo-2025-09-16-08-54-41_3.jpg"
+        },
+        {
+          "src": "/legacy-mirror/images/phocagallery/sortides/Any_2025/Cars/photo-2025-09-16-08-54-41_4.jpg",
+          "alt": "Cars & Coffee 14/09/2025 13",
+          "filename": "photo-2025-09-16-08-54-41_4.jpg"
+        },
+        {
+          "src": "/legacy-mirror/images/phocagallery/sortides/Any_2025/Cars/photo-2025-09-16-08-54-41_5.jpg",
+          "alt": "Cars & Coffee 14/09/2025 14",
+          "filename": "photo-2025-09-16-08-54-41_5.jpg"
+        }
+      ]
+    },
+    {
+      "title": "VI Rally Turistic 04-05/10/2025",
+      "sourceFolder": "phocagallery/sortides/Any_2025/VI_Rally_Turistic_10_2025",
+      "images": [
+        {
+          "src": "/legacy-mirror/images/phocagallery/sortides/Any_2025/VI_Rally_Turistic_10_2025/photo-2025-10-06-12-19-50.jpg",
+          "alt": "VI Rally Turistic 04-05/10/2025 1",
+          "filename": "photo-2025-10-06-12-19-50.jpg"
+        },
+        {
+          "src": "/legacy-mirror/images/phocagallery/sortides/Any_2025/VI_Rally_Turistic_10_2025/photo-2025-10-06-12-19-50_1.jpg",
+          "alt": "VI Rally Turistic 04-05/10/2025 2",
+          "filename": "photo-2025-10-06-12-19-50_1.jpg"
+        },
+        {
+          "src": "/legacy-mirror/images/phocagallery/sortides/Any_2025/VI_Rally_Turistic_10_2025/photo-2025-10-06-12-19-50_2.jpg",
+          "alt": "VI Rally Turistic 04-05/10/2025 3",
+          "filename": "photo-2025-10-06-12-19-50_2.jpg"
+        },
+        {
+          "src": "/legacy-mirror/images/phocagallery/sortides/Any_2025/VI_Rally_Turistic_10_2025/photo-2025-10-06-12-19-50_3.jpg",
+          "alt": "VI Rally Turistic 04-05/10/2025 4",
+          "filename": "photo-2025-10-06-12-19-50_3.jpg"
+        },
+        {
+          "src": "/legacy-mirror/images/phocagallery/sortides/Any_2025/VI_Rally_Turistic_10_2025/photo-2025-10-06-12-20-39.jpg",
+          "alt": "VI Rally Turistic 04-05/10/2025 5",
+          "filename": "photo-2025-10-06-12-20-39.jpg"
+        },
+        {
+          "src": "/legacy-mirror/images/phocagallery/sortides/Any_2025/VI_Rally_Turistic_10_2025/photo-2025-10-06-12-20-39_1.jpg",
+          "alt": "VI Rally Turistic 04-05/10/2025 6",
+          "filename": "photo-2025-10-06-12-20-39_1.jpg"
+        },
+        {
+          "src": "/legacy-mirror/images/phocagallery/sortides/Any_2025/VI_Rally_Turistic_10_2025/photo-2025-10-06-12-20-39_2.jpg",
+          "alt": "VI Rally Turistic 04-05/10/2025 7",
+          "filename": "photo-2025-10-06-12-20-39_2.jpg"
+        },
+        {
+          "src": "/legacy-mirror/images/phocagallery/sortides/Any_2025/VI_Rally_Turistic_10_2025/photo-2025-10-06-12-20-39_3.jpg",
+          "alt": "VI Rally Turistic 04-05/10/2025 8",
+          "filename": "photo-2025-10-06-12-20-39_3.jpg"
+        },
+        {
+          "src": "/legacy-mirror/images/phocagallery/sortides/Any_2025/VI_Rally_Turistic_10_2025/photo-2025-10-06-12-20-39_4.jpg",
+          "alt": "VI Rally Turistic 04-05/10/2025 9",
+          "filename": "photo-2025-10-06-12-20-39_4.jpg"
+        },
+        {
+          "src": "/legacy-mirror/images/phocagallery/sortides/Any_2025/VI_Rally_Turistic_10_2025/photo-2025-10-06-12-21-11.jpg",
+          "alt": "VI Rally Turistic 04-05/10/2025 10",
+          "filename": "photo-2025-10-06-12-21-11.jpg"
+        },
+        {
+          "src": "/legacy-mirror/images/phocagallery/sortides/Any_2025/VI_Rally_Turistic_10_2025/photo-2025-10-06-12-21-11_1.jpg",
+          "alt": "VI Rally Turistic 04-05/10/2025 11",
+          "filename": "photo-2025-10-06-12-21-11_1.jpg"
+        },
+        {
+          "src": "/legacy-mirror/images/phocagallery/sortides/Any_2025/VI_Rally_Turistic_10_2025/photo-2025-10-06-12-21-11_2.jpg",
+          "alt": "VI Rally Turistic 04-05/10/2025 12",
+          "filename": "photo-2025-10-06-12-21-11_2.jpg"
+        },
+        {
+          "src": "/legacy-mirror/images/phocagallery/sortides/Any_2025/VI_Rally_Turistic_10_2025/photo-2025-10-06-12-21-12.jpg",
+          "alt": "VI Rally Turistic 04-05/10/2025 13",
+          "filename": "photo-2025-10-06-12-21-12.jpg"
+        },
+        {
+          "src": "/legacy-mirror/images/phocagallery/sortides/Any_2025/VI_Rally_Turistic_10_2025/photo-2025-10-06-12-21-12_1.jpg",
+          "alt": "VI Rally Turistic 04-05/10/2025 14",
+          "filename": "photo-2025-10-06-12-21-12_1.jpg"
+        },
+        {
+          "src": "/legacy-mirror/images/phocagallery/sortides/Any_2025/VI_Rally_Turistic_10_2025/photo-2025-10-06-12-21-51.jpg",
+          "alt": "VI Rally Turistic 04-05/10/2025 15",
+          "filename": "photo-2025-10-06-12-21-51.jpg"
+        },
+        {
+          "src": "/legacy-mirror/images/phocagallery/sortides/Any_2025/VI_Rally_Turistic_10_2025/photo-2025-10-06-12-21-51_1.jpg",
+          "alt": "VI Rally Turistic 04-05/10/2025 16",
+          "filename": "photo-2025-10-06-12-21-51_1.jpg"
+        },
+        {
+          "src": "/legacy-mirror/images/phocagallery/sortides/Any_2025/VI_Rally_Turistic_10_2025/photo-2025-10-06-12-21-52.jpg",
+          "alt": "VI Rally Turistic 04-05/10/2025 17",
+          "filename": "photo-2025-10-06-12-21-52.jpg"
+        },
+        {
+          "src": "/legacy-mirror/images/phocagallery/sortides/Any_2025/VI_Rally_Turistic_10_2025/photo-2025-10-06-12-21-52_1.jpg",
+          "alt": "VI Rally Turistic 04-05/10/2025 18",
+          "filename": "photo-2025-10-06-12-21-52_1.jpg"
+        },
+        {
+          "src": "/legacy-mirror/images/phocagallery/sortides/Any_2025/VI_Rally_Turistic_10_2025/photo-2025-10-06-12-21-52_2.jpg",
+          "alt": "VI Rally Turistic 04-05/10/2025 19",
+          "filename": "photo-2025-10-06-12-21-52_2.jpg"
+        },
+        {
+          "src": "/legacy-mirror/images/phocagallery/sortides/Any_2025/VI_Rally_Turistic_10_2025/photo-2025-10-06-12-21-52_3.jpg",
+          "alt": "VI Rally Turistic 04-05/10/2025 20",
+          "filename": "photo-2025-10-06-12-21-52_3.jpg"
+        },
+        {
+          "src": "/legacy-mirror/images/phocagallery/sortides/Any_2025/VI_Rally_Turistic_10_2025/photo-2025-10-06-12-22-57.jpg",
+          "alt": "VI Rally Turistic 04-05/10/2025 21",
+          "filename": "photo-2025-10-06-12-22-57.jpg"
+        },
+        {
+          "src": "/legacy-mirror/images/phocagallery/sortides/Any_2025/VI_Rally_Turistic_10_2025/photo-2025-10-06-12-22-58.jpg",
+          "alt": "VI Rally Turistic 04-05/10/2025 22",
+          "filename": "photo-2025-10-06-12-22-58.jpg"
+        },
+        {
+          "src": "/legacy-mirror/images/phocagallery/sortides/Any_2025/VI_Rally_Turistic_10_2025/photo-2025-10-06-12-22-58_1.jpg",
+          "alt": "VI Rally Turistic 04-05/10/2025 23",
+          "filename": "photo-2025-10-06-12-22-58_1.jpg"
+        },
+        {
+          "src": "/legacy-mirror/images/phocagallery/sortides/Any_2025/VI_Rally_Turistic_10_2025/photo-2025-10-06-12-22-58_2.jpg",
+          "alt": "VI Rally Turistic 04-05/10/2025 24",
+          "filename": "photo-2025-10-06-12-22-58_2.jpg"
+        },
+        {
+          "src": "/legacy-mirror/images/phocagallery/sortides/Any_2025/VI_Rally_Turistic_10_2025/photo-2025-10-06-12-22-58_3.jpg",
+          "alt": "VI Rally Turistic 04-05/10/2025 25",
+          "filename": "photo-2025-10-06-12-22-58_3.jpg"
+        },
+        {
+          "src": "/legacy-mirror/images/phocagallery/sortides/Any_2025/VI_Rally_Turistic_10_2025/photo-2025-10-06-12-22-58_4.jpg",
+          "alt": "VI Rally Turistic 04-05/10/2025 26",
+          "filename": "photo-2025-10-06-12-22-58_4.jpg"
+        },
+        {
+          "src": "/legacy-mirror/images/phocagallery/sortides/Any_2025/VI_Rally_Turistic_10_2025/photo-2025-10-06-12-22-58_5.jpg",
+          "alt": "VI Rally Turistic 04-05/10/2025 27",
+          "filename": "photo-2025-10-06-12-22-58_5.jpg"
+        },
+        {
+          "src": "/legacy-mirror/images/phocagallery/sortides/Any_2025/VI_Rally_Turistic_10_2025/photo-2025-10-06-12-23-35.jpg",
+          "alt": "VI Rally Turistic 04-05/10/2025 28",
+          "filename": "photo-2025-10-06-12-23-35.jpg"
+        }
+      ]
+    },
+    {
+      "title": "Cars & Coffee 26/10/2025",
+      "sourceFolder": "phocagallery/sortides/Any_2025/Cars",
+      "images": [
+        {
+          "src": "/legacy-mirror/images/phocagallery/sortides/Any_2025/Cars/photo-2025-10-26-18-09-13.jpg",
+          "alt": "Cars & Coffee 26/10/2025 1",
+          "filename": "photo-2025-10-26-18-09-13.jpg"
+        },
+        {
+          "src": "/legacy-mirror/images/phocagallery/sortides/Any_2025/Cars/photo-2025-10-26-18-09-14.jpg",
+          "alt": "Cars & Coffee 26/10/2025 2",
+          "filename": "photo-2025-10-26-18-09-14.jpg"
+        },
+        {
+          "src": "/legacy-mirror/images/phocagallery/sortides/Any_2025/Cars/photo-2025-10-26-18-09-14_1.jpg",
+          "alt": "Cars & Coffee 26/10/2025 3",
+          "filename": "photo-2025-10-26-18-09-14_1.jpg"
+        },
+        {
+          "src": "/legacy-mirror/images/phocagallery/sortides/Any_2025/Cars/photo-2025-10-26-18-09-15.jpg",
+          "alt": "Cars & Coffee 26/10/2025 4",
+          "filename": "photo-2025-10-26-18-09-15.jpg"
+        },
+        {
+          "src": "/legacy-mirror/images/phocagallery/sortides/Any_2025/Cars/photo-2025-10-26-18-09-15_1.jpg",
+          "alt": "Cars & Coffee 26/10/2025 5",
+          "filename": "photo-2025-10-26-18-09-15_1.jpg"
+        },
+        {
+          "src": "/legacy-mirror/images/phocagallery/sortides/Any_2025/Cars/photo-2025-10-26-18-09-15_2.jpg",
+          "alt": "Cars & Coffee 26/10/2025 6",
+          "filename": "photo-2025-10-26-18-09-15_2.jpg"
+        },
+        {
+          "src": "/legacy-mirror/images/phocagallery/sortides/Any_2025/Cars/photo-2025-10-26-18-09-55.jpg",
+          "alt": "Cars & Coffee 26/10/2025 7",
+          "filename": "photo-2025-10-26-18-09-55.jpg"
+        },
+        {
+          "src": "/legacy-mirror/images/phocagallery/sortides/Any_2025/Cars/photo-2025-10-26-18-09-55_1.jpg",
+          "alt": "Cars & Coffee 26/10/2025 8",
+          "filename": "photo-2025-10-26-18-09-55_1.jpg"
+        },
+        {
+          "src": "/legacy-mirror/images/phocagallery/sortides/Any_2025/Cars/photo-2025-10-26-18-09-56.jpg",
+          "alt": "Cars & Coffee 26/10/2025 9",
+          "filename": "photo-2025-10-26-18-09-56.jpg"
+        },
+        {
+          "src": "/legacy-mirror/images/phocagallery/sortides/Any_2025/Cars/photo-2025-10-26-18-09-56_1.jpg",
+          "alt": "Cars & Coffee 26/10/2025 10",
+          "filename": "photo-2025-10-26-18-09-56_1.jpg"
+        },
+        {
+          "src": "/legacy-mirror/images/phocagallery/sortides/Any_2025/Cars/photo-2025-10-26-18-09-56_2.jpg",
+          "alt": "Cars & Coffee 26/10/2025 11",
+          "filename": "photo-2025-10-26-18-09-56_2.jpg"
+        }
+      ]
+    },
+    {
+      "title": "SOPAR 20 ANIVERSARI ANDORRA 08/11/2025",
+      "sourceFolder": "phocagallery/sortides/Any_2025/Sopar_20_Aniversari",
+      "images": [
+        {
+          "src": "/legacy-mirror/images/phocagallery/sortides/Any_2025/Sopar_20_Aniversari/photo-2025-11-22-09-52-40.jpg",
+          "alt": "SOPAR 20 ANIVERSARI ANDORRA 08/11/2025 1",
+          "filename": "photo-2025-11-22-09-52-40.jpg"
+        },
+        {
+          "src": "/legacy-mirror/images/phocagallery/sortides/Any_2025/Sopar_20_Aniversari/photo-2025-11-22-09-52-41.jpg",
+          "alt": "SOPAR 20 ANIVERSARI ANDORRA 08/11/2025 2",
+          "filename": "photo-2025-11-22-09-52-41.jpg"
+        },
+        {
+          "src": "/legacy-mirror/images/phocagallery/sortides/Any_2025/Sopar_20_Aniversari/photo-2025-11-22-09-52-41_1.jpg",
+          "alt": "SOPAR 20 ANIVERSARI ANDORRA 08/11/2025 3",
+          "filename": "photo-2025-11-22-09-52-41_1.jpg"
+        },
+        {
+          "src": "/legacy-mirror/images/phocagallery/sortides/Any_2025/Sopar_20_Aniversari/photo-2025-11-22-09-52-41_2.jpg",
+          "alt": "SOPAR 20 ANIVERSARI ANDORRA 08/11/2025 4",
+          "filename": "photo-2025-11-22-09-52-41_2.jpg"
+        },
+        {
+          "src": "/legacy-mirror/images/phocagallery/sortides/Any_2025/Sopar_20_Aniversari/photo-2025-11-22-09-53-44.jpg",
+          "alt": "SOPAR 20 ANIVERSARI ANDORRA 08/11/2025 5",
+          "filename": "photo-2025-11-22-09-53-44.jpg"
+        },
+        {
+          "src": "/legacy-mirror/images/phocagallery/sortides/Any_2025/Sopar_20_Aniversari/photo-2025-11-22-09-53-44_1.jpg",
+          "alt": "SOPAR 20 ANIVERSARI ANDORRA 08/11/2025 6",
+          "filename": "photo-2025-11-22-09-53-44_1.jpg"
+        },
+        {
+          "src": "/legacy-mirror/images/phocagallery/sortides/Any_2025/Sopar_20_Aniversari/photo-2025-11-22-09-53-45.jpg",
+          "alt": "SOPAR 20 ANIVERSARI ANDORRA 08/11/2025 7",
+          "filename": "photo-2025-11-22-09-53-45.jpg"
+        },
+        {
+          "src": "/legacy-mirror/images/phocagallery/sortides/Any_2025/Sopar_20_Aniversari/photo-2025-11-22-09-53-45_1.jpg",
+          "alt": "SOPAR 20 ANIVERSARI ANDORRA 08/11/2025 8",
+          "filename": "photo-2025-11-22-09-53-45_1.jpg"
+        },
+        {
+          "src": "/legacy-mirror/images/phocagallery/sortides/Any_2025/Sopar_20_Aniversari/photo-2025-11-22-09-53-45_2.jpg",
+          "alt": "SOPAR 20 ANIVERSARI ANDORRA 08/11/2025 9",
+          "filename": "photo-2025-11-22-09-53-45_2.jpg"
+        },
+        {
+          "src": "/legacy-mirror/images/phocagallery/sortides/Any_2025/Sopar_20_Aniversari/photo-2025-11-22-09-53-45_3.jpg",
+          "alt": "SOPAR 20 ANIVERSARI ANDORRA 08/11/2025 10",
+          "filename": "photo-2025-11-22-09-53-45_3.jpg"
+        },
+        {
+          "src": "/legacy-mirror/images/phocagallery/sortides/Any_2025/Sopar_20_Aniversari/photo-2025-11-22-09-53-46.jpg",
+          "alt": "SOPAR 20 ANIVERSARI ANDORRA 08/11/2025 11",
+          "filename": "photo-2025-11-22-09-53-46.jpg"
+        },
+        {
+          "src": "/legacy-mirror/images/phocagallery/sortides/Any_2025/Sopar_20_Aniversari/photo-2025-11-22-09-54-39.jpg",
+          "alt": "SOPAR 20 ANIVERSARI ANDORRA 08/11/2025 12",
+          "filename": "photo-2025-11-22-09-54-39.jpg"
+        },
+        {
+          "src": "/legacy-mirror/images/phocagallery/sortides/Any_2025/Sopar_20_Aniversari/photo-2025-11-22-09-54-40.jpg",
+          "alt": "SOPAR 20 ANIVERSARI ANDORRA 08/11/2025 13",
+          "filename": "photo-2025-11-22-09-54-40.jpg"
+        },
+        {
+          "src": "/legacy-mirror/images/phocagallery/sortides/Any_2025/Sopar_20_Aniversari/photo-2025-11-22-09-54-40_1.jpg",
+          "alt": "SOPAR 20 ANIVERSARI ANDORRA 08/11/2025 14",
+          "filename": "photo-2025-11-22-09-54-40_1.jpg"
+        },
+        {
+          "src": "/legacy-mirror/images/phocagallery/sortides/Any_2025/Sopar_20_Aniversari/photo-2025-11-22-09-54-40_2.jpg",
+          "alt": "SOPAR 20 ANIVERSARI ANDORRA 08/11/2025 15",
+          "filename": "photo-2025-11-22-09-54-40_2.jpg"
+        },
+        {
+          "src": "/legacy-mirror/images/phocagallery/sortides/Any_2025/Sopar_20_Aniversari/photo-2025-11-22-09-54-40_3.jpg",
+          "alt": "SOPAR 20 ANIVERSARI ANDORRA 08/11/2025 16",
+          "filename": "photo-2025-11-22-09-54-40_3.jpg"
+        },
+        {
+          "src": "/legacy-mirror/images/phocagallery/sortides/Any_2025/Sopar_20_Aniversari/photo-2025-11-22-09-54-41.jpg",
+          "alt": "SOPAR 20 ANIVERSARI ANDORRA 08/11/2025 17",
+          "filename": "photo-2025-11-22-09-54-41.jpg"
+        },
+        {
+          "src": "/legacy-mirror/images/phocagallery/sortides/Any_2025/Sopar_20_Aniversari/photo-2025-11-22-09-54-41_1.jpg",
+          "alt": "SOPAR 20 ANIVERSARI ANDORRA 08/11/2025 18",
+          "filename": "photo-2025-11-22-09-54-41_1.jpg"
+        },
+        {
+          "src": "/legacy-mirror/images/phocagallery/sortides/Any_2025/Sopar_20_Aniversari/photo-2025-11-22-09-55-30.jpg",
+          "alt": "SOPAR 20 ANIVERSARI ANDORRA 08/11/2025 19",
+          "filename": "photo-2025-11-22-09-55-30.jpg"
+        },
+        {
+          "src": "/legacy-mirror/images/phocagallery/sortides/Any_2025/Sopar_20_Aniversari/photo-2025-11-22-09-55-32.jpg",
+          "alt": "SOPAR 20 ANIVERSARI ANDORRA 08/11/2025 20",
+          "filename": "photo-2025-11-22-09-55-32.jpg"
+        },
+        {
+          "src": "/legacy-mirror/images/phocagallery/sortides/Any_2025/Sopar_20_Aniversari/photo-2025-11-22-09-55-32_1.jpg",
+          "alt": "SOPAR 20 ANIVERSARI ANDORRA 08/11/2025 21",
+          "filename": "photo-2025-11-22-09-55-32_1.jpg"
+        },
+        {
+          "src": "/legacy-mirror/images/phocagallery/sortides/Any_2025/Sopar_20_Aniversari/photo-2025-11-22-09-55-33.jpg",
+          "alt": "SOPAR 20 ANIVERSARI ANDORRA 08/11/2025 22",
+          "filename": "photo-2025-11-22-09-55-33.jpg"
+        },
+        {
+          "src": "/legacy-mirror/images/phocagallery/sortides/Any_2025/Sopar_20_Aniversari/photo-2025-11-22-09-55-33_1.jpg",
+          "alt": "SOPAR 20 ANIVERSARI ANDORRA 08/11/2025 23",
+          "filename": "photo-2025-11-22-09-55-33_1.jpg"
+        },
+        {
+          "src": "/legacy-mirror/images/phocagallery/sortides/Any_2025/Sopar_20_Aniversari/photo-2025-11-22-09-55-33_2.jpg",
+          "alt": "SOPAR 20 ANIVERSARI ANDORRA 08/11/2025 24",
+          "filename": "photo-2025-11-22-09-55-33_2.jpg"
+        },
+        {
+          "src": "/legacy-mirror/images/phocagallery/sortides/Any_2025/Sopar_20_Aniversari/photo-2025-11-22-09-55-33_3.jpg",
+          "alt": "SOPAR 20 ANIVERSARI ANDORRA 08/11/2025 25",
+          "filename": "photo-2025-11-22-09-55-33_3.jpg"
+        },
+        {
+          "src": "/legacy-mirror/images/phocagallery/sortides/Any_2025/Sopar_20_Aniversari/photo-2025-11-22-09-55-34.jpg",
+          "alt": "SOPAR 20 ANIVERSARI ANDORRA 08/11/2025 26",
+          "filename": "photo-2025-11-22-09-55-34.jpg"
+        },
+        {
+          "src": "/legacy-mirror/images/phocagallery/sortides/Any_2025/Sopar_20_Aniversari/photo-2025-11-22-09-55-34_1.jpg",
+          "alt": "SOPAR 20 ANIVERSARI ANDORRA 08/11/2025 27",
+          "filename": "photo-2025-11-22-09-55-34_1.jpg"
+        },
+        {
+          "src": "/legacy-mirror/images/phocagallery/sortides/Any_2025/Sopar_20_Aniversari/photo-2025-11-22-09-56-06.jpg",
+          "alt": "SOPAR 20 ANIVERSARI ANDORRA 08/11/2025 28",
+          "filename": "photo-2025-11-22-09-56-06.jpg"
+        },
+        {
+          "src": "/legacy-mirror/images/phocagallery/sortides/Any_2025/Sopar_20_Aniversari/photo-2025-11-22-09-56-07.jpg",
+          "alt": "SOPAR 20 ANIVERSARI ANDORRA 08/11/2025 29",
+          "filename": "photo-2025-11-22-09-56-07.jpg"
+        },
+        {
+          "src": "/legacy-mirror/images/phocagallery/sortides/Any_2025/Sopar_20_Aniversari/photo-2025-11-22-09-56-07_1.jpg",
+          "alt": "SOPAR 20 ANIVERSARI ANDORRA 08/11/2025 30",
+          "filename": "photo-2025-11-22-09-56-07_1.jpg"
+        },
+        {
+          "src": "/legacy-mirror/images/phocagallery/sortides/Any_2025/Sopar_20_Aniversari/photo-2025-11-22-09-56-36.jpg",
+          "alt": "SOPAR 20 ANIVERSARI ANDORRA 08/11/2025 31",
+          "filename": "photo-2025-11-22-09-56-36.jpg"
+        },
+        {
+          "src": "/legacy-mirror/images/phocagallery/sortides/Any_2025/Sopar_20_Aniversari/photo-2025-11-22-09-56-36_1.jpg",
+          "alt": "SOPAR 20 ANIVERSARI ANDORRA 08/11/2025 32",
+          "filename": "photo-2025-11-22-09-56-36_1.jpg"
+        },
+        {
+          "src": "/legacy-mirror/images/phocagallery/sortides/Any_2025/Sopar_20_Aniversari/photo-2025-11-22-09-56-37.jpg",
+          "alt": "SOPAR 20 ANIVERSARI ANDORRA 08/11/2025 33",
+          "filename": "photo-2025-11-22-09-56-37.jpg"
+        },
+        {
+          "src": "/legacy-mirror/images/phocagallery/sortides/Any_2025/Sopar_20_Aniversari/photo-2025-11-22-09-56-37_1.jpg",
+          "alt": "SOPAR 20 ANIVERSARI ANDORRA 08/11/2025 34",
+          "filename": "photo-2025-11-22-09-56-37_1.jpg"
+        },
+        {
+          "src": "/legacy-mirror/images/phocagallery/sortides/Any_2025/Sopar_20_Aniversari/photo-2025-11-22-09-56-37_2.jpg",
+          "alt": "SOPAR 20 ANIVERSARI ANDORRA 08/11/2025 35",
+          "filename": "photo-2025-11-22-09-56-37_2.jpg"
+        },
+        {
+          "src": "/legacy-mirror/images/phocagallery/sortides/Any_2025/Sopar_20_Aniversari/photo-2025-11-22-09-56-37_3.jpg",
+          "alt": "SOPAR 20 ANIVERSARI ANDORRA 08/11/2025 36",
+          "filename": "photo-2025-11-22-09-56-37_3.jpg"
+        },
+        {
+          "src": "/legacy-mirror/images/phocagallery/sortides/Any_2025/Sopar_20_Aniversari/photo-2025-11-22-09-57-26.jpg",
+          "alt": "SOPAR 20 ANIVERSARI ANDORRA 08/11/2025 37",
+          "filename": "photo-2025-11-22-09-57-26.jpg"
+        },
+        {
+          "src": "/legacy-mirror/images/phocagallery/sortides/Any_2025/Sopar_20_Aniversari/photo-2025-11-22-09-57-27.jpg",
+          "alt": "SOPAR 20 ANIVERSARI ANDORRA 08/11/2025 38",
+          "filename": "photo-2025-11-22-09-57-27.jpg"
+        },
+        {
+          "src": "/legacy-mirror/images/phocagallery/sortides/Any_2025/Sopar_20_Aniversari/photo-2025-11-22-09-57-27_1.jpg",
+          "alt": "SOPAR 20 ANIVERSARI ANDORRA 08/11/2025 39",
+          "filename": "photo-2025-11-22-09-57-27_1.jpg"
+        },
+        {
+          "src": "/legacy-mirror/images/phocagallery/sortides/Any_2025/Sopar_20_Aniversari/photo-2025-11-22-09-57-27_2.jpg",
+          "alt": "SOPAR 20 ANIVERSARI ANDORRA 08/11/2025 40",
+          "filename": "photo-2025-11-22-09-57-27_2.jpg"
+        },
+        {
+          "src": "/legacy-mirror/images/phocagallery/sortides/Any_2025/Sopar_20_Aniversari/photo-2025-11-22-09-57-27_3.jpg",
+          "alt": "SOPAR 20 ANIVERSARI ANDORRA 08/11/2025 41",
+          "filename": "photo-2025-11-22-09-57-27_3.jpg"
+        },
+        {
+          "src": "/legacy-mirror/images/phocagallery/sortides/Any_2025/Sopar_20_Aniversari/photo-2025-11-22-09-57-28.jpg",
+          "alt": "SOPAR 20 ANIVERSARI ANDORRA 08/11/2025 42",
+          "filename": "photo-2025-11-22-09-57-28.jpg"
+        },
+        {
+          "src": "/legacy-mirror/images/phocagallery/sortides/Any_2025/Sopar_20_Aniversari/photo-2025-11-22-09-57-28_1.jpg",
+          "alt": "SOPAR 20 ANIVERSARI ANDORRA 08/11/2025 43",
+          "filename": "photo-2025-11-22-09-57-28_1.jpg"
+        },
+        {
+          "src": "/legacy-mirror/images/phocagallery/sortides/Any_2025/Sopar_20_Aniversari/photo-2025-11-22-09-57-28_2.jpg",
+          "alt": "SOPAR 20 ANIVERSARI ANDORRA 08/11/2025 44",
+          "filename": "photo-2025-11-22-09-57-28_2.jpg"
+        },
+        {
+          "src": "/legacy-mirror/images/phocagallery/sortides/Any_2025/Sopar_20_Aniversari/photo-2025-11-22-09-57-53.jpg",
+          "alt": "SOPAR 20 ANIVERSARI ANDORRA 08/11/2025 45",
+          "filename": "photo-2025-11-22-09-57-53.jpg"
+        },
+        {
+          "src": "/legacy-mirror/images/phocagallery/sortides/Any_2025/Sopar_20_Aniversari/photo-2025-11-22-09-57-53_1.jpg",
+          "alt": "SOPAR 20 ANIVERSARI ANDORRA 08/11/2025 46",
+          "filename": "photo-2025-11-22-09-57-53_1.jpg"
+        }
+      ]
     }
   ],
   "sortides_2026": [
