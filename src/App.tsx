@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { Suspense, useEffect, type ReactNode } from "react";
 import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
@@ -6,29 +6,46 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
 import { LanguageProvider } from "@/components/LanguageProvider";
 import { AppErrorBoundary } from "@/components/AppErrorBoundary";
+import { lazyWithAutoReload } from "@/lib/lazyWithAutoReload";
 import Index from "./pages/Index";
-import ElClub from "./pages/ElClub";
 import Contacte from "./pages/Contacte";
-import Patrocinadors from "./pages/Patrocinadors";
-import Meteo from "./pages/Meteo";
-import Calendari from "./pages/Calendari";
-import CalendariYear from "./pages/CalendariYear";
-import Destacats from "./pages/Destacats";
-import Arxiu from "./pages/Arxiu";
-import BmwOficial from "./pages/BmwOficial";
-import ClubAssistant from "./pages/ClubAssistant";
 import Itineraris from "./pages/Itineraris";
-import DriveExperience from "./pages/DriveExperience";
-import EventMode from "./pages/EventMode";
-import PostDriveReport from "./pages/PostDriveReport";
-import GestioClub from "./pages/GestioClub";
-import EventDetail from "./pages/EventDetail";
-import LegalPage from "./pages/LegalPage";
-import NotFound from "./pages/NotFound";
 import Galeria from "./pages/Galeria";
 import GaleriaCollection from "./pages/GaleriaCollection";
 
+const ElClub = lazyWithAutoReload(() => import("./pages/ElClub"));
+const Patrocinadors = lazyWithAutoReload(() => import("./pages/Patrocinadors"));
+const Meteo = lazyWithAutoReload(() => import("./pages/Meteo"));
+const Calendari = lazyWithAutoReload(() => import("./pages/Calendari"));
+const CalendariYear = lazyWithAutoReload(() => import("./pages/CalendariYear"));
+const Destacats = lazyWithAutoReload(() => import("./pages/Destacats"));
+const Arxiu = lazyWithAutoReload(() => import("./pages/Arxiu"));
+const BmwOficial = lazyWithAutoReload(() => import("./pages/BmwOficial"));
+const ClubAssistant = lazyWithAutoReload(() => import("./pages/ClubAssistant"));
+const DriveExperience = lazyWithAutoReload(() => import("./pages/DriveExperience"));
+const EventMode = lazyWithAutoReload(() => import("./pages/EventMode"));
+const PostDriveReport = lazyWithAutoReload(() => import("./pages/PostDriveReport"));
+const GestioClub = lazyWithAutoReload(() => import("./pages/GestioClub"));
+const EventDetail = lazyWithAutoReload(() => import("./pages/EventDetail"));
+const LegalPage = lazyWithAutoReload(() => import("./pages/LegalPage"));
+const NotFound = lazyWithAutoReload(() => import("./pages/NotFound"));
+
 const queryClient = new QueryClient();
+
+const RouteFallback = () => (
+  <div className="min-h-[42vh] bg-background">
+    <div className="container mx-auto flex min-h-[42vh] items-center justify-center px-4 py-10">
+      <div className="premium-card w-full max-w-lg rounded-[2rem] border-0 p-8 text-center shadow-elegant">
+        <p className="text-xs font-semibold uppercase tracking-[0.35em] text-primary">BMW Club Andorra</p>
+        <div className="mx-auto mt-5 h-10 w-10 animate-spin rounded-full border-2 border-primary/20 border-t-primary" />
+        <h2 className="mt-5 text-xl font-bold text-balance">Carregant la secció…</h2>
+        <p className="mt-3 text-sm text-muted-foreground">Si el mòdul tarda massa, la web forçarà una recàrrega neta automàticament.</p>
+      </div>
+    </div>
+  </div>
+);
+
+const withRouteFallback = (node: ReactNode) => <Suspense fallback={<RouteFallback />}>{node}</Suspense>;
 
 const App = () => {
   useEffect(() => {
@@ -47,7 +64,7 @@ const App = () => {
           <BrowserRouter>
               <Routes>
               <Route path="/" element={<Index />} />
-              <Route path="/el-club" element={<ElClub />} />
+              <Route path="/el-club" element={withRouteFallback(<ElClub />)} />
               <Route path="/contacte" element={<Contacte />} />
               <Route path="/alta-soci" element={<Contacte />} />
               <Route path="/galeria/sortides" element={<Navigate to="/galeria" replace />} />
@@ -66,19 +83,19 @@ const App = () => {
               <Route path="/index.php/ca/recull-fotos/fotos-sortides/any-2025" element={<Navigate to="/galeria/sortides/2025" replace />} />
               <Route path="/index.php/ca/recull-fotos/fotos-sortides/any-2026" element={<Navigate to="/galeria/sortides/2026" replace />} />
               <Route path="/index.php/ca/component/dpcalendar/event/4o-cars-coffee" element={<Navigate to="/esdeveniments/cars-coffee-2026-07-12" replace />} />
-              <Route path="/patrocinadors" element={<Patrocinadors />} />
-              <Route path="/calendari" element={<Calendari />} />
-              <Route path="/calendari/:year" element={<CalendariYear />} />
-              <Route path="/destacats" element={<Destacats />} />
-              <Route path="/arxiu" element={<Arxiu />} />
-              <Route path="/bmw-oficial" element={<BmwOficial />} />
-              <Route path="/assistent-ia" element={<ClubAssistant />} />
+              <Route path="/patrocinadors" element={withRouteFallback(<Patrocinadors />)} />
+              <Route path="/calendari" element={withRouteFallback(<Calendari />)} />
+              <Route path="/calendari/:year" element={withRouteFallback(<CalendariYear />)} />
+              <Route path="/destacats" element={withRouteFallback(<Destacats />)} />
+              <Route path="/arxiu" element={withRouteFallback(<Arxiu />)} />
+              <Route path="/bmw-oficial" element={withRouteFallback(<BmwOficial />)} />
+              <Route path="/assistent-ia" element={withRouteFallback(<ClubAssistant />)} />
               <Route path="/itineraris" element={<Itineraris />} />
-              <Route path="/drive-experience" element={<DriveExperience />} />
-              <Route path="/event-mode" element={<EventMode />} />
-              <Route path="/post-drive-report" element={<PostDriveReport />} />
-              <Route path="/gestio-club" element={<GestioClub />} />
-              <Route path="/esdeveniments/:eventId" element={<EventDetail />} />
+              <Route path="/drive-experience" element={withRouteFallback(<DriveExperience />)} />
+              <Route path="/event-mode" element={withRouteFallback(<EventMode />)} />
+              <Route path="/post-drive-report" element={withRouteFallback(<PostDriveReport />)} />
+              <Route path="/gestio-club" element={withRouteFallback(<GestioClub />)} />
+              <Route path="/esdeveniments/:eventId" element={withRouteFallback(<EventDetail />)} />
               <Route path="/galeria" element={<Galeria />} />
               <Route path="/galeria/historiques" element={<GaleriaCollection />} />
               <Route path="/galeria/historiques/2011-2012" element={<GaleriaCollection />} />
@@ -88,11 +105,11 @@ const App = () => {
               <Route path="/galeria/sortides/2024" element={<GaleriaCollection />} />
               <Route path="/galeria/sortides/2025" element={<GaleriaCollection />} />
               <Route path="/galeria/sortides/2026" element={<GaleriaCollection />} />
-              <Route path="/meteo" element={<Meteo />} />
-              <Route path="/privacitat" element={<LegalPage pageKey="privacitat" />} />
-              <Route path="/cookies" element={<LegalPage pageKey="cookies" />} />
-              <Route path="/condicions" element={<LegalPage pageKey="condicions" />} />
-              <Route path="*" element={<NotFound />} />
+              <Route path="/meteo" element={withRouteFallback(<Meteo />)} />
+              <Route path="/privacitat" element={withRouteFallback(<LegalPage pageKey="privacitat" />)} />
+              <Route path="/cookies" element={withRouteFallback(<LegalPage pageKey="cookies" />)} />
+              <Route path="/condicions" element={withRouteFallback(<LegalPage pageKey="condicions" />)} />
+              <Route path="*" element={withRouteFallback(<NotFound />)} />
               </Routes>
           </BrowserRouter>
         </LanguageProvider>

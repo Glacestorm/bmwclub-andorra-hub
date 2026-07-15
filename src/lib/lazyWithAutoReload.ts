@@ -1,6 +1,7 @@
 import { lazy, type ComponentType } from "react";
 
 const RELOAD_KEY = "bmwclub-lazy-reload-once";
+const IMPORT_TIMEOUT_MS = 8000;
 
 type ModuleWithDefault<T> = { default: T };
 
@@ -25,10 +26,17 @@ export const lazyWithAutoReload = <T extends ComponentType<any>>(
 ) =>
   lazy(async () => {
     try {
-      const module = await importer();
+      const module = await Promise.race([
+        importer(),
+        new Promise<never>((_, reject) => {
+          window.setTimeout(() => reject(new Error("Lazy module import timeout")), IMPORT_TIMEOUT_MS);
+        }),
+      ]);
+
       if (!module?.default) {
         return scheduleReloadOnce();
       }
+
       return module;
     } catch (error) {
       return scheduleReloadOnce();
