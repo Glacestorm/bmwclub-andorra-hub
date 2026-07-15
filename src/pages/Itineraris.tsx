@@ -1,8 +1,8 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { ArrowRight, CalendarRange, CarFront, Compass, Mountain, Route, ShieldCheck, Bike, Crown, Map, ImageIcon, ExternalLink, UtensilsCrossed, Landmark, Trees, Flag, Telescope, Sparkles, Maximize2 } from "lucide-react";
-import { CircleMarker, MapContainer, Polygon, Polyline, Popup, TileLayer, Tooltip, ZoomControl, useMapEvents } from "react-leaflet";
-import type { LatLngExpression, LatLngTuple } from "leaflet";
+import { CircleMarker, MapContainer, Marker, Polygon, Polyline, Popup, TileLayer, Tooltip, ZoomControl, useMapEvents } from "react-leaflet";
+import { divIcon, type LatLngExpression, type LatLngTuple } from "leaflet";
 import { PageShell } from "@/components/PageShell";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
@@ -56,6 +56,7 @@ const translations: Record<LanguageCode, Record<string, string>> = {
     license: "Llicència",
     mapExpand: "Obrir mapa gran",
     mapExpandHint: "Zoom amb la roda o els botons. Clica per obrir el mapa operatiu en gran.",
+    openGoogleMaps: "Obrir a Google Maps",
   },
   es: {
     eyebrow: "Itinerarios BMW en Andorra",
@@ -99,6 +100,7 @@ const translations: Record<LanguageCode, Record<string, string>> = {
     license: "Licencia",
     mapExpand: "Abrir mapa grande",
     mapExpandHint: "Haz zoom con la rueda o los botones. Haz clic para abrir el mapa operativo en grande.",
+    openGoogleMaps: "Abrir en Google Maps",
   },
   fr: {
     eyebrow: "Itinéraires BMW en Andorre",
@@ -142,6 +144,7 @@ const translations: Record<LanguageCode, Record<string, string>> = {
     license: "Licence",
     mapExpand: "Ouvrir la grande carte",
     mapExpandHint: "Zoomez avec la molette ou les boutons. Cliquez pour ouvrir la carte en grand.",
+    openGoogleMaps: "Ouvrir dans Google Maps",
   },
   en: {
     eyebrow: "BMW itineraries in Andorra",
@@ -185,6 +188,7 @@ const translations: Record<LanguageCode, Record<string, string>> = {
     license: "License",
     mapExpand: "Open large map",
     mapExpandHint: "Zoom with the wheel or buttons. Click to open the full interactive map.",
+    openGoogleMaps: "Open in Google Maps",
   },
   pt: {
     eyebrow: "Itinerários BMW em Andorra",
@@ -228,6 +232,7 @@ const translations: Record<LanguageCode, Record<string, string>> = {
     license: "Licença",
     mapExpand: "Abrir mapa grande",
     mapExpandHint: "Faça zoom com a roda ou os botões. Clique para abrir o mapa operacional em grande.",
+    openGoogleMaps: "Abrir no Google Maps",
   },
   de: {
     eyebrow: "BMW-Routen in Andorra",
@@ -271,6 +276,7 @@ const translations: Record<LanguageCode, Record<string, string>> = {
     license: "Lizenz",
     mapExpand: "Große Karte öffnen",
     mapExpandHint: "Mit Mausrad oder Buttons zoomen. Klicken Sie, um die große interaktive Karte zu öffnen.",
+    openGoogleMaps: "In Google Maps öffnen",
   },
   ru: {
     eyebrow: "BMW-маршруты по Андорре",
@@ -314,6 +320,7 @@ const translations: Record<LanguageCode, Record<string, string>> = {
     license: "Лицензия",
     mapExpand: "Открыть большую карту",
     mapExpandHint: "Масштабируйте колесом или кнопками. Нажмите, чтобы открыть большую интерактивную карту.",
+    openGoogleMaps: "Открыть в Google Maps",
   },
 };
 
@@ -458,6 +465,11 @@ const routeStopsById: Record<string, RouteStop[]> = {
 
 const stopLegendCategories: RouteStopCategory[] = ["restaurant", "viewpoint", "heritage", "nature", "motorsport"];
 
+const buildGoogleMapsUrl = (stop: RouteStop) => {
+  const query = encodeURIComponent(`${stop.name}, ${stop.place}, ${stop.lat}, ${stop.lon}`);
+  return `https://www.google.com/maps/search/?api=1&query=${query}`;
+};
+
 const normalizeWaypoint = (value: string) =>
   value
     .normalize("NFD")
@@ -502,6 +514,21 @@ const RouteMapCanvas = ({ route, t, heightClassName, openOnClick = false, onOpen
     [ANDORRA_BOUNDS.maxLat, ANDORRA_BOUNDS.maxLon],
   ];
 
+  const createStopMarkerIcon = (color: string) =>
+    divIcon({
+      className: "",
+      iconSize: [24, 32],
+      iconAnchor: [12, 30],
+      popupAnchor: [0, -26],
+      html: `
+        <div style="position:relative;width:24px;height:32px;display:flex;align-items:flex-start;justify-content:center;">
+          <span style="position:absolute;top:1px;width:18px;height:18px;border-radius:9999px;background:${color};border:3px solid #ffffff;box-shadow:0 10px 20px rgba(15,23,42,.22);"></span>
+          <span style="position:absolute;top:8px;width:6px;height:6px;border-radius:9999px;background:#ffffff;opacity:.95;"></span>
+          <span style="position:absolute;top:18px;width:0;height:0;border-left:6px solid transparent;border-right:6px solid transparent;border-top:11px solid ${color};filter:drop-shadow(0 5px 6px rgba(15,23,42,.18));"></span>
+        </div>
+      `,
+    });
+
   return (
     <div className={`relative overflow-hidden rounded-[1.4rem] border border-border/70 ${openOnClick ? "cursor-zoom-in" : ""}`}>
       <MapContainer
@@ -538,23 +565,37 @@ const RouteMapCanvas = ({ route, t, heightClassName, openOnClick = false, onOpen
 
         {stopPoints.map((stop) => {
           const meta = getStopMeta(stop.category, t);
+          const StopIcon = meta.icon;
           return (
-            <CircleMarker
+            <Marker
               key={`${route.id}-${stop.name}`}
-              center={[stop.lat, stop.lon] as LatLngTuple}
-              radius={5}
-              pathOptions={{ color: meta.color, weight: 2, fillColor: "#ffffff", fillOpacity: 0.95 }}
+              position={[stop.lat, stop.lon] as LatLngTuple}
+              icon={createStopMarkerIcon(meta.color)}
             >
               <Tooltip direction="top" offset={[0, -6]}>{stop.name}</Tooltip>
               <Popup>
-                <div className="space-y-1">
-                  <div className="font-semibold">{stop.name}</div>
-                  <div className="text-xs uppercase tracking-wide text-slate-500">{meta.label}</div>
-                  <div className="text-sm text-slate-700">{stop.place}</div>
-                  <div className="text-sm text-slate-600">{stop.note}</div>
+                <div className="w-[250px] space-y-3 py-1">
+                  <div className="inline-flex items-center gap-2 rounded-full px-2.5 py-1 text-[11px] font-semibold uppercase tracking-[0.16em]" style={{ backgroundColor: `${meta.color}14`, color: meta.color }}>
+                    <StopIcon className="h-3.5 w-3.5" />
+                    {meta.label}
+                  </div>
+                  <div>
+                    <div className="text-base font-semibold text-slate-900">{stop.name}</div>
+                    <div className="mt-1 text-sm font-medium text-slate-600">{stop.place}</div>
+                  </div>
+                  <div className="text-sm leading-6 text-slate-700">{stop.note}</div>
+                  <a
+                    href={buildGoogleMapsUrl(stop)}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-2 rounded-full bg-slate-950 px-3.5 py-2 text-xs font-semibold uppercase tracking-[0.14em] text-white transition hover:bg-primary"
+                  >
+                    {t.openGoogleMaps}
+                    <ExternalLink className="h-3.5 w-3.5" />
+                  </a>
                 </div>
               </Popup>
-            </CircleMarker>
+            </Marker>
           );
         })}
       </MapContainer>
@@ -672,6 +713,15 @@ const RouteStopsPanel = ({ route, t }: { route: ClubItinerary; t: Record<string,
               <div className="mt-3 text-base font-semibold text-foreground">{stop.name}</div>
               <div className="mt-1 text-sm text-muted-foreground">{stop.place}</div>
               <p className="mt-2 text-sm leading-6 text-slate-600">{stop.note}</p>
+              <a
+                href={buildGoogleMapsUrl(stop)}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="mt-3 inline-flex items-center gap-2 rounded-full border border-slate-200 bg-white px-3 py-2 text-[11px] font-semibold uppercase tracking-[0.14em] text-slate-800 transition hover:border-primary hover:text-primary"
+              >
+                {t.openGoogleMaps}
+                <ExternalLink className="h-3.5 w-3.5" />
+              </a>
             </div>
           );
         })}
