@@ -7,6 +7,7 @@ export type SponsorLink = {
 
 export type SponsorBrand = {
   logoPath: string;
+  logoFit?: "standard" | "wide" | "tall";
   accent: string;
   surface: string;
   border: string;
@@ -35,6 +36,7 @@ export const sponsorItems: SponsorItem[] = [
     accent: "Sponsor principal",
     brand: {
       logoPath: "/sponsors/pyrenees-andorra-source.png",
+      logoFit: "standard",
       accent: "#d4af37",
       surface: "linear-gradient(135deg, rgba(17,24,39,0.98) 0%, rgba(38,38,38,0.96) 100%)",
       border: "rgba(212,175,55,0.34)",
@@ -69,6 +71,7 @@ export const sponsorItems: SponsorItem[] = [
     accent: "Partner premium",
     brand: {
       logoPath: "/sponsors/coma-hotel.svg",
+      logoFit: "wide",
       accent: "#a16207",
       surface: "linear-gradient(135deg, rgba(250,245,235,0.96) 0%, rgba(255,255,255,0.96) 100%)",
       border: "rgba(161,98,7,0.24)",
@@ -94,6 +97,7 @@ export const sponsorItems: SponsorItem[] = [
     accent: "Benefici per a socis",
     brand: {
       logoPath: "/sponsors/basar-valira-source.jpg",
+      logoFit: "wide",
       accent: "#2563eb",
       surface: "linear-gradient(135deg, rgba(239,246,255,0.96) 0%, rgba(255,255,255,0.98) 100%)",
       border: "rgba(37,99,235,0.22)",
@@ -128,6 +132,7 @@ export const sponsorItems: SponsorItem[] = [
     accent: "Partner local",
     brand: {
       logoPath: "/sponsors/santeloi-source.png",
+      logoFit: "wide",
       accent: "#16a34a",
       surface: "linear-gradient(135deg, rgba(240,253,244,0.96) 0%, rgba(255,255,255,0.98) 100%)",
       border: "rgba(22,163,74,0.22)",
@@ -153,6 +158,7 @@ export const sponsorItems: SponsorItem[] = [
     accent: "Partner gourmet",
     brand: {
       logoPath: "/sponsors/obrador-toni-source.png",
+      logoFit: "tall",
       accent: "#d97706",
       surface: "linear-gradient(135deg, rgba(255,247,237,0.96) 0%, rgba(255,255,255,0.98) 100%)",
       border: "rgba(217,119,6,0.22)",
@@ -178,6 +184,7 @@ export const sponsorItems: SponsorItem[] = [
     accent: "Marca global",
     brand: {
       logoPath: "/sponsors/totalenergies-source.png",
+      logoFit: "tall",
       accent: "#ef4444",
       surface: "linear-gradient(135deg, rgba(255,255,255,0.98) 0%, rgba(255,245,245,0.96) 100%)",
       border: "rgba(239,68,68,0.20)",
@@ -202,6 +209,7 @@ export const sponsorItems: SponsorItem[] = [
     category: "Partner de suport",
     brand: {
       logoPath: "/sponsors/ada-sl.svg",
+      logoFit: "standard",
       accent: "#38bdf8",
       surface: "linear-gradient(135deg, rgba(248,250,252,0.98) 0%, rgba(239,246,255,0.96) 100%)",
       border: "rgba(56,189,248,0.20)",
@@ -225,6 +233,7 @@ export const sponsorItems: SponsorItem[] = [
     category: "Finances / assegurances",
     brand: {
       logoPath: "/sponsors/financera-assegurances-source.png",
+      logoFit: "wide",
       accent: "#14b8a6",
       surface: "linear-gradient(135deg, rgba(240,253,250,0.98) 0%, rgba(255,255,255,0.96) 100%)",
       border: "rgba(20,184,166,0.20)",
@@ -249,6 +258,7 @@ export const sponsorItems: SponsorItem[] = [
     category: "Col·laborador",
     brand: {
       logoPath: "/sponsors/eric.svg",
+      logoFit: "standard",
       accent: "#8b5cf6",
       surface: "linear-gradient(135deg, rgba(250,245,255,0.98) 0%, rgba(255,255,255,0.96) 100%)",
       border: "rgba(139,92,246,0.20)",
@@ -272,6 +282,7 @@ export const sponsorItems: SponsorItem[] = [
     category: "Taller / carrosseria",
     brand: {
       logoPath: "/sponsors/planxisteria-auto-parc-source.png",
+      logoFit: "wide",
       accent: "#f97316",
       surface: "linear-gradient(135deg, rgba(255,247,237,0.98) 0%, rgba(255,255,255,0.96) 100%)",
       border: "rgba(249,115,22,0.20)",

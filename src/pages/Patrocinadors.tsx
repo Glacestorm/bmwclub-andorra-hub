@@ -200,44 +200,63 @@ const translations: Record<LanguageCode, Record<string, string>> = {
   },
 };
 
-const SponsorLogoPlate = ({ sponsor, dark = false, compact = false }: { sponsor: SponsorItem; dark?: boolean; compact?: boolean }) => (
-  <div
-    className={`relative overflow-hidden rounded-[1.6rem] border ${compact ? "p-4" : "p-5 md:p-6"}`}
-    style={{
-      background: sponsor.brand.surface,
-      borderColor: sponsor.brand.border,
-      color: sponsor.brand.text,
-      boxShadow: dark ? `0 30px 70px -40px ${sponsor.brand.accent}55` : `0 18px 45px -35px ${sponsor.brand.accent}40`,
-    }}
-  >
-    <div className="absolute inset-0 opacity-70" style={{ background: `radial-gradient(circle at top right, ${sponsor.brand.accent}22, transparent 38%)` }} />
-    <div className="relative z-10 flex flex-col gap-4">
-      <div className="flex items-start justify-between gap-3">
-        <div className="text-[10px] font-semibold uppercase tracking-[0.24em]" style={{ color: sponsor.brand.text, opacity: 0.62 }}>
-          {sponsor.accent ?? sponsor.name}
-        </div>
-        <div className="rounded-full px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.18em] max-w-full break-words" style={{ background: sponsor.brand.badge, color: sponsor.brand.text }}>
-        {sponsor.category}
-        </div>
-      </div>
+const SponsorLogoPlate = ({ sponsor, dark = false, compact = false }: { sponsor: SponsorItem; dark?: boolean; compact?: boolean }) => {
+  const logoFit = sponsor.brand.logoFit ?? "standard";
 
-      <div className={`flex items-center justify-center rounded-[1.4rem] border px-4 ${compact ? "min-h-[108px] py-4" : "min-h-[148px] py-6 md:min-h-[172px]"}`} style={{ borderColor: sponsor.brand.border, background: dark ? "rgba(255,255,255,0.03)" : "rgba(255,255,255,0.38)" }}>
-        <img
-          src={sponsor.brand.logoPath}
-          alt={`${sponsor.name} logo`}
-          className={`${compact ? "max-h-16 sm:max-h-20" : "max-h-20 sm:max-h-24 md:max-h-28"} w-auto max-w-[92%] object-contain`}
-          loading="lazy"
-        />
-      </div>
+  const logoClassByFit = {
+    standard: compact
+      ? "max-h-[4.25rem] sm:max-h-[4.9rem] max-w-[90%]"
+      : "max-h-[5.25rem] sm:max-h-[6rem] md:max-h-[6.75rem] max-w-[88%]",
+    wide: compact
+      ? "max-h-[3.5rem] sm:max-h-[4rem] w-full max-w-[15rem]"
+      : "max-h-[4.4rem] sm:max-h-[5rem] md:max-h-[5.6rem] w-full max-w-[22rem]",
+    tall: compact
+      ? "max-h-[4.9rem] sm:max-h-[5.5rem] max-w-[8rem]"
+      : "max-h-[6rem] sm:max-h-[6.8rem] md:max-h-[7.6rem] max-w-[11rem]",
+  } as const;
 
-      <div>
-        <div className={`${compact ? "text-xl" : "text-2xl md:text-[1.9rem]"} font-bold leading-tight text-balance`}>
-          {sponsor.name}
+  return (
+    <div
+      className={`relative overflow-hidden rounded-[1.6rem] border ${compact ? "p-4" : "p-5 md:p-6"}`}
+      style={{
+        background: sponsor.brand.surface,
+        borderColor: sponsor.brand.border,
+        color: sponsor.brand.text,
+        boxShadow: dark ? `0 30px 70px -40px ${sponsor.brand.accent}55` : `0 18px 45px -35px ${sponsor.brand.accent}40`,
+      }}
+    >
+      <div className="absolute inset-0 opacity-70" style={{ background: `radial-gradient(circle at top right, ${sponsor.brand.accent}22, transparent 38%)` }} />
+      <div className="relative z-10 flex flex-col gap-4">
+        <div className="flex items-start justify-between gap-3">
+          <div className="text-[10px] font-semibold uppercase tracking-[0.24em]" style={{ color: sponsor.brand.text, opacity: 0.62 }}>
+            {sponsor.accent ?? sponsor.name}
+          </div>
+          <div className="rounded-full px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.18em] max-w-full break-words" style={{ background: sponsor.brand.badge, color: sponsor.brand.text }}>
+          {sponsor.category}
+          </div>
+        </div>
+
+        <div
+          className={`flex items-center justify-center rounded-[1.4rem] border px-4 ${compact ? "h-[120px] sm:h-[132px] py-4" : "h-[160px] sm:h-[184px] md:h-[208px] py-6"}`}
+          style={{ borderColor: sponsor.brand.border, background: dark ? "rgba(255,255,255,0.03)" : "rgba(255,255,255,0.38)" }}
+        >
+          <img
+            src={sponsor.brand.logoPath}
+            alt={`${sponsor.name} logo`}
+            className={`${logoClassByFit[logoFit]} h-full w-auto object-contain`}
+            loading="lazy"
+          />
+        </div>
+
+        <div>
+          <div className={`${compact ? "text-xl" : "text-2xl md:text-[1.9rem]"} font-bold leading-tight text-balance`}>
+            {sponsor.name}
+          </div>
         </div>
       </div>
     </div>
-  </div>
-);
+  );
+};
 
 const Patrocinadors = () => {
   const { language } = useLanguage();
