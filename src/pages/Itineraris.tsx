@@ -2022,19 +2022,19 @@ const Itineraris = () => {
             const isSummary = routeMode === "summary";
             const isFull = routeMode === "full";
             return (
-              <Card key={route.id} className="premium-card border-0 rounded-[2rem] p-6 md:p-8 shadow-elegant overflow-hidden">
+              <Card key={route.id} className="premium-card border-0 rounded-[2rem] p-6 md:p-8 shadow-elegant overflow-hidden transition-all duration-500 ease-out">
                 <div className={`grid gap-8 items-start ${isClosed ? "lg:grid-cols-1" : "lg:grid-cols-[0.92fr_1.08fr]"}`}>
-                  <div className={`relative overflow-hidden rounded-[1.85rem] border ${isClosed ? "border-border/70 bg-white/68 p-5 md:p-6" : "border-slate-900/10 bg-slate-950 p-5 text-white md:p-6"}`}>
+                  <div className={`relative overflow-hidden rounded-[1.85rem] border transition-all duration-500 ease-out ${isClosed ? "border-border/70 bg-white/68 p-5 md:p-6" : "border-slate-900/10 bg-slate-950 p-5 text-white md:p-6 shadow-[0_30px_90px_-45px_rgba(15,23,42,.7)]"}`}>
                     {!isClosed ? (
                       <>
                         <img
                           src={route.image.src}
                           alt={route.image.alt[language]}
-                          className="absolute inset-0 h-full w-full scale-110 object-cover blur-2xl saturate-[1.05]"
+                          className={`absolute inset-0 h-full w-full object-cover transition-all duration-700 ease-out ${isSummary ? "scale-[1.08] blur-2xl opacity-80" : "scale-[1.14] blur-[30px] opacity-90"}`}
                           loading="lazy"
                           decoding="async"
                         />
-                        <div className="absolute inset-0 bg-gradient-to-br from-slate-950/82 via-slate-950/74 to-primary/30" />
+                        <div className={`absolute inset-0 transition-all duration-700 ease-out ${isSummary ? "bg-gradient-to-br from-slate-950/80 via-slate-950/72 to-primary/24" : "bg-gradient-to-br from-slate-950/86 via-slate-950/76 to-primary/36"}`} />
                       </>
                     ) : null}
 
@@ -2051,9 +2051,9 @@ const Itineraris = () => {
                       ) : null}
                     </div>
 
-                    <div className="relative z-10">
-                      <h2 className={`mt-5 text-3xl md:text-4xl font-bold text-balance ${isClosed ? "text-foreground" : "text-white"}`}>{route.title[language]}</h2>
-                      <p className={`mt-4 text-lg ${isClosed ? "text-muted-foreground" : "text-white/78"}`}>{route.strapline[language]}</p>
+                    <div className={`relative z-10 transition-all duration-500 ease-out ${isClosed ? "" : "animate-in fade-in-0 slide-in-from-bottom-2"}`}>
+                      <h2 className={`mt-5 text-3xl md:text-4xl font-bold text-balance transition-colors duration-500 ${isClosed ? "text-foreground" : "text-white"}`}>{route.title[language]}</h2>
+                      <p className={`mt-4 text-lg transition-colors duration-500 ${isClosed ? "text-muted-foreground" : "text-white/78"}`}>{route.strapline[language]}</p>
                     </div>
 
                     <p className={`relative z-10 mt-4 text-sm ${isClosed ? "text-muted-foreground" : "text-white/66"}`}>{t.collapsedRouteHint}</p>
@@ -2101,7 +2101,7 @@ const Itineraris = () => {
                     ) : null}
 
                     {!isClosed ? (
-                      <div className="relative z-10 mt-6 grid gap-4 sm:grid-cols-2">
+                      <div className={`relative z-10 mt-6 grid gap-4 sm:grid-cols-2 animate-in fade-in-0 slide-in-from-bottom-3 duration-500 ${isFull ? "delay-75" : ""}`}>
                         <div className={`rounded-[1.5rem] p-4 ${isFull ? "border border-white/10 bg-white/10 text-white backdrop-blur-md" : "border border-white/10 bg-slate-950/24 text-white"}`}>
                           <div className="text-xs uppercase tracking-[0.18em] text-primary font-semibold">{t.duration}</div>
                           <div className="mt-2 font-semibold">{route.duration}</div>
@@ -2123,7 +2123,7 @@ const Itineraris = () => {
                   </div>
 
                   {!isClosed ? (
-                    <div className="grid gap-5">
+                    <div className={`grid gap-5 animate-in fade-in-0 slide-in-from-right-3 duration-500 ${isFull ? "delay-100" : ""}`}>
                       <RoutePhoto route={route} t={t} language={language} />
                       <RouteSchematic route={route} t={t} language={language} />
 
