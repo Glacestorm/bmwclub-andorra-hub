@@ -720,6 +720,117 @@ const bmwValueProps = [
   },
 ] as const;
 
+const driveExperienceShowcase = {
+  eyebrow: {
+    ca: "Fase 1 en producte",
+    es: "Fase 1 en producto",
+    fr: "Phase 1 produit",
+    en: "Phase 1 in product",
+    pt: "Fase 1 em produto",
+    de: "Phase 1 im Produkt",
+    ru: "Фаза 1 в продукте",
+  },
+  title: {
+    ca: "Així hauria de començar a sentir-se la plataforma del club.",
+    es: "Así debería empezar a sentirse la plataforma del club.",
+    fr: "Voilà comment la plateforme du club devrait commencer à se sentir.",
+    en: "This is how the club platform should start to feel.",
+    pt: "É assim que a plataforma do clube deve começar a sentir-se.",
+    de: "So sollte sich die Club-Plattform langsam anfühlen.",
+    ru: "Именно так должна начать ощущаться платформа клуба.",
+  },
+  intro: {
+    ca: "Tres superfícies reals per passar de pàgina informativa a experiència BMW viva.",
+    es: "Tres superficies reales para pasar de página informativa a experiencia BMW viva.",
+    fr: "Trois surfaces concrètes pour passer d’une page informative à une expérience BMW vivante.",
+    en: "Three real surfaces to move from an informative page to a live BMW experience.",
+    pt: "Três superfícies reais para passar de página informativa a experiência BMW viva.",
+    de: "Drei reale Flächen, um von einer Informationsseite zu einem lebendigen BMW-Erlebnis zu kommen.",
+    ru: "Три реальные поверхности, чтобы перейти от информационной страницы к живому BMW-опыту.",
+  },
+} as const;
+
+const conciergePrototype = {
+  title: {
+    ca: "Route Concierge IA",
+    es: "Route Concierge IA",
+    fr: "Concierge IA des routes",
+    en: "AI Route Concierge",
+    pt: "Concierge IA de rotas",
+    de: "KI-Route-Concierge",
+    ru: "ИИ-консьерж маршрутов",
+  },
+  prompt: {
+    ca: "Vull una ruta BMW de 3 hores, amb bon asfalt, parada gourmet i mirador fort per a fotos.",
+    es: "Quiero una ruta BMW de 3 horas, con buen asfalto, parada gourmet y mirador potente para fotos.",
+    fr: "Je veux une route BMW de 3 heures, bon asphalte, arrêt gourmand et grand point photo.",
+    en: "I want a 3-hour BMW route with good tarmac, a gourmet stop and a strong viewpoint for photos.",
+    pt: "Quero uma rota BMW de 3 horas, bom asfalto, paragem gourmet e miradouro forte para fotos.",
+    de: "Ich will eine 3-Stunden-BMW-Route mit gutem Asphalt, Gourmet-Stopp und starkem Aussichtspunkt für Fotos.",
+    ru: "Хочу BMW-маршрут на 3 часа: хороший асфальт, gourmet-остановка и сильная фототочка.",
+  },
+  answer: {
+    ca: "Resposta ideal: Grand Tour Central, sortida 18:10, Engolasters + Roc del Quer + sopar a Meritxell.",
+    es: "Respuesta ideal: Grand Tour Central, salida 18:10, Engolasters + Roc del Quer + cena en Meritxell.",
+    fr: "Réponse idéale : Grand Tour Central, départ 18h10, Engolasters + Roc del Quer + dîner à Meritxell.",
+    en: "Ideal answer: Grand Tour Central, 18:10 departure, Engolasters + Roc del Quer + dinner in Meritxell.",
+    pt: "Resposta ideal: Grand Tour Central, saída 18:10, Engolasters + Roc del Quer + jantar em Meritxell.",
+    de: "Ideale Antwort: Grand Tour Central, Start 18:10, Engolasters + Roc del Quer + Dinner in Meritxell.",
+    ru: "Идеальный ответ: Grand Tour Central, выезд 18:10, Engolasters + Roc del Quer + ужин в Meritxell.",
+  },
+  chips: {
+    ca: ["BMW M", "Gourmet", "Golden hour"],
+    es: ["BMW M", "Gourmet", "Golden hour"],
+    fr: ["BMW M", "Gourmet", "Golden hour"],
+    en: ["BMW M", "Gourmet", "Golden hour"],
+    pt: ["BMW M", "Gourmet", "Golden hour"],
+    de: ["BMW M", "Gourmet", "Golden hour"],
+    ru: ["BMW M", "Gourmet", "Golden hour"],
+  },
+} as const;
+
+const eventModePrototype = {
+  title: {
+    ca: "Official Event Mode",
+    es: "Official Event Mode",
+    fr: "Official Event Mode",
+    en: "Official Event Mode",
+    pt: "Official Event Mode",
+    de: "Official Event Mode",
+    ru: "Official Event Mode",
+  },
+  items: {
+    ca: ["08:30 Check-in i cafè", "09:00 Briefing + QR de ruta", "09:20 Sortida del convoy", "11:00 Mirador / foto oficial"],
+    es: ["08:30 Check-in y café", "09:00 Briefing + QR de ruta", "09:20 Salida del convoy", "11:00 Mirador / foto oficial"],
+    fr: ["08:30 Check-in et café", "09:00 Briefing + QR de route", "09:20 Départ du convoi", "11:00 Belvédère / photo officielle"],
+    en: ["08:30 Check-in and coffee", "09:00 Briefing + route QR", "09:20 Convoy departure", "11:00 Viewpoint / official photo"],
+    pt: ["08:30 Check-in e café", "09:00 Briefing + QR da rota", "09:20 Saída do comboio", "11:00 Miradouro / foto oficial"],
+    de: ["08:30 Check-in und Kaffee", "09:00 Briefing + Routen-QR", "09:20 Start des Konvois", "11:00 Aussichtspunkt / offizielles Foto"],
+    ru: ["08:30 Check-in и кофе", "09:00 Брифинг + QR маршрута", "09:20 Старт колонны", "11:00 Мирадор / официальное фото"],
+  },
+} as const;
+
+const recapPrototype = {
+  title: {
+    ca: "Post-Drive Report",
+    es: "Post-Drive Report",
+    fr: "Post-Drive Report",
+    en: "Post-Drive Report",
+    pt: "Post-Drive Report",
+    de: "Post-Drive Report",
+    ru: "Post-Drive Report",
+  },
+  stats: {
+    ca: ["26 cotxes", "4 parades", "183 fotos", "1 pàgina shareable"],
+    es: ["26 coches", "4 paradas", "183 fotos", "1 página shareable"],
+    fr: ["26 voitures", "4 arrêts", "183 photos", "1 page partageable"],
+    en: ["26 cars", "4 stops", "183 photos", "1 shareable page"],
+    pt: ["26 carros", "4 paragens", "183 fotos", "1 página partilhável"],
+    de: ["26 Autos", "4 Stopps", "183 Fotos", "1 teilbare Seite"],
+    ru: ["26 машин", "4 остановки", "183 фото", "1 shareable-страница"],
+  },
+} as const;
+
 const buildGoogleMapsUrl = (stop: RouteStop) => {
   const query = encodeURIComponent(`${stop.name}, ${stop.place}, ${stop.lat}, ${stop.lon}`);
   return `https://www.google.com/maps/search/?api=1&query=${query}`;
@@ -1085,7 +1196,8 @@ const RoutePhoto = ({ route, t, language }: { route: ClubItinerary; t: Record<st
 const Itineraris = () => {
   const { language } = useLanguage();
   const t = translations[language];
-  const { data: routes } = useMergedItineraries();
+  const { data: routes = [] } = useMergedItineraries();
+  const showcaseRoutes = routes.slice(0, 3);
 
   return (
     <PageShell>
@@ -1286,6 +1398,77 @@ const Itineraris = () => {
                       );
                     })}
                   </div>
+                </div>
+              </div>
+            </div>
+          </Card>
+        </div>
+      </section>
+
+      <section className="pb-20">
+        <div className="container mx-auto px-4 max-w-6xl">
+          <Card className="premium-card border-0 rounded-[2rem] p-6 md:p-8 shadow-elegant overflow-hidden">
+            <div className="inline-flex items-center gap-2 rounded-full bg-primary/10 px-4 py-2 text-xs font-semibold uppercase tracking-[0.22em] text-primary">
+              <Sparkles className="h-4 w-4" />
+              {driveExperienceShowcase.eyebrow[language]}
+            </div>
+            <h2 className="mt-5 max-w-4xl text-3xl md:text-5xl font-bold text-balance">{driveExperienceShowcase.title[language]}</h2>
+            <p className="mt-4 max-w-3xl text-lg text-muted-foreground">{driveExperienceShowcase.intro[language]}</p>
+
+            <div className="mt-8 grid gap-6 xl:grid-cols-[1.05fr_0.95fr_0.9fr]">
+              <div className="rounded-[1.75rem] border border-border/70 bg-white/75 p-5">
+                <div className="flex items-center gap-2 text-primary font-semibold text-sm uppercase tracking-[0.18em]">
+                  <Sparkles className="h-4 w-4" />
+                  {conciergePrototype.title[language]}
+                </div>
+                <div className="mt-4 rounded-[1.4rem] bg-slate-950 p-4 text-white">
+                  <div className="text-[11px] font-semibold uppercase tracking-[0.16em] text-white/55">Prompt</div>
+                  <p className="mt-2 text-sm leading-6 text-white/88">{conciergePrototype.prompt[language]}</p>
+                  <div className="mt-4 flex flex-wrap gap-2">
+                    {conciergePrototype.chips[language].map((chip) => (
+                      <span key={chip} className="rounded-full border border-white/12 bg-white/10 px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.14em] text-white/84">{chip}</span>
+                    ))}
+                  </div>
+                </div>
+                <div className="mt-4 rounded-[1.4rem] border border-primary/15 bg-primary/5 p-4">
+                  <div className="text-[11px] font-semibold uppercase tracking-[0.16em] text-primary">Output</div>
+                  <p className="mt-2 text-sm leading-6 text-foreground/86">{conciergePrototype.answer[language]}</p>
+                </div>
+              </div>
+
+              <div className="rounded-[1.75rem] border border-border/70 bg-white/75 p-5">
+                <div className="flex items-center gap-2 text-primary font-semibold text-sm uppercase tracking-[0.18em]">
+                  <Crown className="h-4 w-4" />
+                  {eventModePrototype.title[language]}
+                </div>
+                <div className="mt-4 space-y-3">
+                  {eventModePrototype.items[language].map((item, index) => (
+                    <div key={`${item}-${index}`} className="flex items-start gap-3 rounded-[1.25rem] border border-border/70 bg-background/85 px-4 py-3">
+                      <span className="inline-flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-primary/10 text-xs font-semibold text-primary">{index + 1}</span>
+                      <span className="pt-1 text-sm font-medium text-foreground/86">{item}</span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              <div className="rounded-[1.75rem] border border-border/70 bg-white/75 p-5">
+                <div className="flex items-center gap-2 text-primary font-semibold text-sm uppercase tracking-[0.18em]">
+                  <CalendarRange className="h-4 w-4" />
+                  {recapPrototype.title[language]}
+                </div>
+                <div className="mt-4 grid grid-cols-2 gap-3">
+                  {recapPrototype.stats[language].map((stat) => (
+                    <div key={stat} className="rounded-[1.2rem] border border-border/70 bg-background/85 p-3 text-center text-sm font-semibold text-foreground/86">
+                      {stat}
+                    </div>
+                  ))}
+                </div>
+                <div className="mt-4 grid grid-cols-3 gap-2">
+                  {showcaseRoutes.map((route) => (
+                    <div key={`showcase-${route.id}`} className="overflow-hidden rounded-[1rem] border border-border/70 bg-slate-100">
+                      <img src={route.image.src} alt={route.image.alt[language]} className="aspect-[4/5] h-full w-full object-cover" loading="lazy" decoding="async" />
+                    </div>
+                  ))}
                 </div>
               </div>
             </div>
