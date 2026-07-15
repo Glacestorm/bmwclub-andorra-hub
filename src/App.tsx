@@ -1,4 +1,4 @@
-import { Suspense, lazy } from "react";
+import { Suspense, useEffect } from "react";
 import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
@@ -6,25 +6,26 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
 import { LanguageProvider } from "@/components/LanguageProvider";
 import { AppErrorBoundary } from "@/components/AppErrorBoundary";
+import { lazyWithAutoReload } from "@/lib/lazyWithAutoReload";
 import Galeria from "./pages/Galeria";
 import GaleriaCollection from "./pages/GaleriaCollection";
 
-const Index = lazy(() => import("./pages/Index"));
-const ElClub = lazy(() => import("./pages/ElClub"));
-const Contacte = lazy(() => import("./pages/Contacte"));
-const Patrocinadors = lazy(() => import("./pages/Patrocinadors"));
-const Meteo = lazy(() => import("./pages/Meteo"));
-const Calendari = lazy(() => import("./pages/Calendari"));
-const CalendariYear = lazy(() => import("./pages/CalendariYear"));
-const Destacats = lazy(() => import("./pages/Destacats"));
-const Arxiu = lazy(() => import("./pages/Arxiu"));
-const BmwOficial = lazy(() => import("./pages/BmwOficial"));
-const ClubAssistant = lazy(() => import("./pages/ClubAssistant"));
-const Itineraris = lazy(() => import("./pages/Itineraris"));
-const GestioClub = lazy(() => import("./pages/GestioClub"));
-const EventDetail = lazy(() => import("./pages/EventDetail"));
-const LegalPage = lazy(() => import("./pages/LegalPage"));
-const NotFound = lazy(() => import("./pages/NotFound"));
+const Index = lazyWithAutoReload(() => import("./pages/Index"));
+const ElClub = lazyWithAutoReload(() => import("./pages/ElClub"));
+const Contacte = lazyWithAutoReload(() => import("./pages/Contacte"));
+const Patrocinadors = lazyWithAutoReload(() => import("./pages/Patrocinadors"));
+const Meteo = lazyWithAutoReload(() => import("./pages/Meteo"));
+const Calendari = lazyWithAutoReload(() => import("./pages/Calendari"));
+const CalendariYear = lazyWithAutoReload(() => import("./pages/CalendariYear"));
+const Destacats = lazyWithAutoReload(() => import("./pages/Destacats"));
+const Arxiu = lazyWithAutoReload(() => import("./pages/Arxiu"));
+const BmwOficial = lazyWithAutoReload(() => import("./pages/BmwOficial"));
+const ClubAssistant = lazyWithAutoReload(() => import("./pages/ClubAssistant"));
+const Itineraris = lazyWithAutoReload(() => import("./pages/Itineraris"));
+const GestioClub = lazyWithAutoReload(() => import("./pages/GestioClub"));
+const EventDetail = lazyWithAutoReload(() => import("./pages/EventDetail"));
+const LegalPage = lazyWithAutoReload(() => import("./pages/LegalPage"));
+const NotFound = lazyWithAutoReload(() => import("./pages/NotFound"));
 
 const queryClient = new QueryClient();
 
@@ -41,7 +42,14 @@ const RouteFallback = () => (
   </div>
 );
 
-const App = () => (
+const App = () => {
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      window.sessionStorage.removeItem("bmwclub-lazy-reload-once");
+    }
+  }, []);
+
+  return (
   <AppErrorBoundary>
     <QueryClientProvider client={queryClient}>
       <TooltipProvider>
@@ -102,6 +110,7 @@ const App = () => (
       </TooltipProvider>
     </QueryClientProvider>
   </AppErrorBoundary>
-);
+  );
+};
 
 export default App;
