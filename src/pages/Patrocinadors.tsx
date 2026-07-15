@@ -200,9 +200,9 @@ const translations: Record<LanguageCode, Record<string, string>> = {
   },
 };
 
-const SponsorLogoPlate = ({ sponsor, dark = false }: { sponsor: SponsorItem; dark?: boolean }) => (
+const SponsorLogoPlate = ({ sponsor, dark = false, compact = false }: { sponsor: SponsorItem; dark?: boolean; compact?: boolean }) => (
   <div
-    className="rounded-[1.6rem] p-4 border"
+    className={`relative overflow-hidden rounded-[1.6rem] border ${compact ? "p-4" : "p-5 md:p-6"}`}
     style={{
       background: sponsor.brand.surface,
       borderColor: sponsor.brand.border,
@@ -210,10 +210,30 @@ const SponsorLogoPlate = ({ sponsor, dark = false }: { sponsor: SponsorItem; dar
       boxShadow: dark ? `0 30px 70px -40px ${sponsor.brand.accent}55` : `0 18px 45px -35px ${sponsor.brand.accent}40`,
     }}
   >
-    <div className="flex flex-col items-start gap-3 sm:flex-row sm:items-center sm:justify-between">
-      <img src={sponsor.brand.logoPath} alt={`${sponsor.name} logo`} className="h-14 sm:h-16 w-auto max-w-full object-contain" loading="lazy" />
-      <div className="rounded-full px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.18em] max-w-full break-words" style={{ background: sponsor.brand.badge, color: sponsor.brand.text }}>
+    <div className="absolute inset-0 opacity-70" style={{ background: `radial-gradient(circle at top right, ${sponsor.brand.accent}22, transparent 38%)` }} />
+    <div className="relative z-10 flex flex-col gap-4">
+      <div className="flex items-start justify-between gap-3">
+        <div className="text-[10px] font-semibold uppercase tracking-[0.24em]" style={{ color: sponsor.brand.text, opacity: 0.62 }}>
+          {sponsor.accent ?? sponsor.name}
+        </div>
+        <div className="rounded-full px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.18em] max-w-full break-words" style={{ background: sponsor.brand.badge, color: sponsor.brand.text }}>
         {sponsor.category}
+        </div>
+      </div>
+
+      <div className={`flex items-center justify-center rounded-[1.4rem] border px-4 ${compact ? "min-h-[108px] py-4" : "min-h-[148px] py-6 md:min-h-[172px]"}`} style={{ borderColor: sponsor.brand.border, background: dark ? "rgba(255,255,255,0.03)" : "rgba(255,255,255,0.38)" }}>
+        <img
+          src={sponsor.brand.logoPath}
+          alt={`${sponsor.name} logo`}
+          className={`${compact ? "max-h-16 sm:max-h-20" : "max-h-20 sm:max-h-24 md:max-h-28"} w-auto max-w-[92%] object-contain`}
+          loading="lazy"
+        />
+      </div>
+
+      <div>
+        <div className={`${compact ? "text-xl" : "text-2xl md:text-[1.9rem]"} font-bold leading-tight text-balance`}>
+          {sponsor.name}
+        </div>
       </div>
     </div>
   </div>
@@ -348,16 +368,8 @@ const Patrocinadors = () => {
           <div className="grid lg:grid-cols-2 xl:grid-cols-3 gap-6">
             {premiumSponsors.map((sponsor) => (
               <Card key={sponsor.id} className="border rounded-[1.75rem] md:rounded-[2rem] p-5 md:p-6 hover-tilt h-full flex flex-col shadow-sm" style={{ background: sponsor.brand.surface, borderColor: sponsor.brand.border }}>
-                <SponsorLogoPlate sponsor={sponsor} />
-                <div className="flex flex-col items-start gap-3 mt-5 sm:flex-row sm:justify-between">
-                  <div>
-                    <div className="text-xs uppercase tracking-[0.22em] font-semibold" style={{ color: sponsor.brand.accent }}>{t.visualIdentity}</div>
-                    <h3 className="mt-3 text-2xl font-bold text-balance">{sponsor.name}</h3>
-                  </div>
-                  <div className="rounded-full px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.18em]" style={{ background: sponsor.brand.badge, color: sponsor.brand.accent }}>
-                    {sponsor.category}
-                  </div>
-                </div>
+                <SponsorLogoPlate sponsor={sponsor} compact />
+                <div className="mt-5 text-xs uppercase tracking-[0.22em] font-semibold" style={{ color: sponsor.brand.accent }}>{t.visualIdentity}</div>
                 <p className="mt-4 text-muted-foreground flex-1">{getLocalizedText(sponsor.summary, language)}</p>
                 {sponsor.benefit && (
                   <div className="mt-5 rounded-[1.35rem] p-4 text-sm text-foreground/85" style={{ background: sponsor.brand.badge }}>
@@ -388,9 +400,7 @@ const Patrocinadors = () => {
               <div className="grid sm:grid-cols-2 gap-4">
                 {supportSponsors.map((sponsor) => (
                   <div key={sponsor.id} className="rounded-[1.5rem] border p-5 shadow-[0_20px_45px_-35px_rgba(15,23,42,.35)]" style={{ background: sponsor.brand.surface, borderColor: sponsor.brand.border }}>
-                    <img src={sponsor.brand.logoPath} alt={`${sponsor.name} logo`} className="h-12 w-auto max-w-full object-contain" loading="lazy" />
-                    <div className="mt-4 text-xs uppercase tracking-[0.2em] font-semibold" style={{ color: sponsor.brand.accent }}>{sponsor.category}</div>
-                    <div className="mt-3 text-xl font-bold text-balance">{sponsor.name}</div>
+                    <SponsorLogoPlate sponsor={sponsor} compact />
                     <p className="mt-3 text-sm text-muted-foreground">{getLocalizedText(sponsor.summary, language)}</p>
                     {sponsor.link && (
                       <a href={sponsor.link.href} target="_blank" rel="noreferrer" className="inline-flex items-center gap-2 mt-4 text-sm font-semibold" style={{ color: sponsor.brand.accent }}>

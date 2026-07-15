@@ -2024,19 +2024,18 @@ const Itineraris = () => {
             return (
               <Card key={route.id} className="premium-card border-0 rounded-[2rem] p-6 md:p-8 shadow-elegant overflow-hidden transition-all duration-500 ease-out">
                 <div className={`grid gap-8 items-start ${isClosed ? "lg:grid-cols-1" : "lg:grid-cols-[0.92fr_1.08fr]"}`}>
-                  <div className={`relative overflow-hidden rounded-[1.85rem] border transition-all duration-500 ease-out ${isClosed ? "border-border/70 bg-white/68 p-5 md:p-6" : "border-slate-900/10 bg-slate-950 p-5 text-white md:p-6 shadow-[0_30px_90px_-45px_rgba(15,23,42,.7)]"}`}>
-                    {!isClosed ? (
-                      <>
-                        <img
-                          src={route.image.src}
-                          alt={route.image.alt[language]}
-                          className={`absolute inset-0 h-full w-full object-cover transition-all duration-700 ease-out ${isSummary ? "scale-[1.08] blur-2xl opacity-80" : "scale-[1.14] blur-[30px] opacity-90"}`}
-                          loading="lazy"
-                          decoding="async"
-                        />
-                        <div className={`absolute inset-0 transition-all duration-700 ease-out ${isSummary ? "bg-gradient-to-br from-slate-950/80 via-slate-950/72 to-primary/24" : "bg-gradient-to-br from-slate-950/86 via-slate-950/76 to-primary/36"}`} />
-                      </>
-                    ) : null}
+                  <div className={`relative overflow-hidden rounded-[1.85rem] border transition-all duration-500 ease-out ${isClosed ? "border-slate-200/80 bg-slate-100/80 p-5 md:p-6" : "border-slate-900/10 bg-slate-950 p-5 text-white md:p-6 shadow-[0_30px_90px_-45px_rgba(15,23,42,.7)]"}`}>
+                    <>
+                      <img
+                        src={route.image.src}
+                        alt={route.image.alt[language]}
+                        className={`absolute inset-0 h-full w-full object-cover transition-all duration-700 ease-out ${isClosed ? "scale-[1.12] blur-[18px] opacity-38 saturate-[1.08]" : isSummary ? "scale-[1.08] blur-2xl opacity-80" : "scale-[1.14] blur-[30px] opacity-90"}`}
+                        loading="lazy"
+                        decoding="async"
+                      />
+                      <div className={`absolute inset-0 transition-all duration-700 ease-out ${isClosed ? "bg-[linear-gradient(135deg,rgba(255,255,255,.88)_0%,rgba(255,255,255,.78)_36%,rgba(241,245,249,.74)_100%)]" : isSummary ? "bg-gradient-to-br from-slate-950/80 via-slate-950/72 to-primary/24" : "bg-gradient-to-br from-slate-950/86 via-slate-950/76 to-primary/36"}`} />
+                      {isClosed ? <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(2,132,199,.12),transparent_34%)]" /> : null}
+                    </>
 
                     <div className="relative z-10 flex flex-wrap items-center gap-3">
                       <div className={`inline-flex items-center gap-2 rounded-full px-4 py-2 text-xs font-semibold uppercase tracking-[0.2em] ${isClosed ? "bg-primary/10 text-primary" : "border border-white/12 bg-white/10 text-white/88"}`}>
@@ -2056,26 +2055,26 @@ const Itineraris = () => {
                       <p className={`mt-4 text-lg transition-colors duration-500 ${isClosed ? "text-muted-foreground" : "text-white/78"}`}>{route.strapline[language]}</p>
                     </div>
 
-                    <p className={`relative z-10 mt-4 text-sm ${isClosed ? "text-muted-foreground" : "text-white/66"}`}>{t.collapsedRouteHint}</p>
+                    <p className={`relative z-10 mt-4 text-sm ${isClosed ? "text-slate-700/88" : "text-white/66"}`}>{t.collapsedRouteHint}</p>
 
                     <div className="relative z-10 mt-4 flex flex-wrap gap-2 text-[11px] font-semibold uppercase tracking-[0.14em]">
-                      <span className={`rounded-full px-3 py-1 ${isClosed ? "bg-white text-slate-700 border border-slate-200" : "border border-white/12 bg-white/10 text-white/88"}`}>{route.duration}</span>
-                      <span className={`rounded-full px-3 py-1 ${isClosed ? "bg-white text-slate-700 border border-slate-200" : "border border-white/12 bg-white/10 text-white/88"}`}>{route.distance}</span>
-                      <span className={`rounded-full px-3 py-1 ${isClosed ? "bg-white text-slate-700 border border-slate-200" : "border border-white/12 bg-white/10 text-white/88"}`}>{route.rhythm[language]}</span>
+                      <span className={`rounded-full px-3 py-1 ${isClosed ? "border border-white/70 bg-white/82 text-slate-700 shadow-sm backdrop-blur" : "border border-white/12 bg-white/10 text-white/88"}`}>{route.duration}</span>
+                      <span className={`rounded-full px-3 py-1 ${isClosed ? "border border-white/70 bg-white/82 text-slate-700 shadow-sm backdrop-blur" : "border border-white/12 bg-white/10 text-white/88"}`}>{route.distance}</span>
+                      <span className={`rounded-full px-3 py-1 ${isClosed ? "border border-white/70 bg-white/82 text-slate-700 shadow-sm backdrop-blur" : "border border-white/12 bg-white/10 text-white/88"}`}>{route.rhythm[language]}</span>
                     </div>
 
                     <div className="relative z-10 mt-5 flex flex-wrap gap-3">
                       <button
                         type="button"
                         onClick={() => openRoute(route.id, "summary")}
-                        className={`inline-flex items-center gap-2 rounded-full px-4 py-2 text-xs font-semibold uppercase tracking-[0.14em] transition ${isSummary ? "bg-primary text-white" : isClosed ? "border border-slate-200 bg-white text-slate-800 hover:border-primary hover:text-primary" : "border border-white/15 bg-white/10 text-white hover:bg-white/14"}`}
+                        className={`inline-flex items-center gap-2 rounded-full px-4 py-2 text-xs font-semibold uppercase tracking-[0.14em] transition ${isSummary ? "bg-primary text-white" : isClosed ? "border border-white/70 bg-white/88 text-slate-800 shadow-sm backdrop-blur hover:border-primary hover:text-primary" : "border border-white/15 bg-white/10 text-white hover:bg-white/14"}`}
                       >
                         {t.quickView}
                       </button>
                       <button
                         type="button"
                         onClick={() => openRoute(route.id, "full")}
-                        className={`inline-flex items-center gap-2 rounded-full px-4 py-2 text-xs font-semibold uppercase tracking-[0.14em] transition ${isFull ? "bg-white text-slate-950" : isClosed ? "border border-slate-200 bg-white text-slate-800 hover:border-primary hover:text-primary" : "border border-white/15 bg-white/10 text-white hover:bg-white/14"}`}
+                        className={`inline-flex items-center gap-2 rounded-full px-4 py-2 text-xs font-semibold uppercase tracking-[0.14em] transition ${isFull ? "bg-white text-slate-950" : isClosed ? "border border-white/70 bg-white/88 text-slate-800 shadow-sm backdrop-blur hover:border-primary hover:text-primary" : "border border-white/15 bg-white/10 text-white hover:bg-white/14"}`}
                       >
                         {t.fullView}
                       </button>
