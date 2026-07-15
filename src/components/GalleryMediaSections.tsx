@@ -34,6 +34,18 @@ const getSectionContext = (section: GalleryMediaSection, t: (typeof translations
   };
 };
 
+const getThumbnailSrc = (src: string) => {
+  if (src.includes("/legacy-mirror/images/phocagallery/")) {
+    const lastSlashIndex = src.lastIndexOf("/");
+    const dir = src.slice(0, lastSlashIndex);
+    const filename = src.slice(lastSlashIndex + 1);
+    return `${dir}/thumbs/phoca_thumb_m_${filename}`;
+  }
+
+  const relativePath = src.replace("/legacy-mirror/images/", "");
+  return `/legacy-thumbs/${relativePath}.webp`;
+};
+
 const GallerySectionCard = ({ section, isInitiallyOpen, language }: { section: GalleryMediaSection; isInitiallyOpen: boolean; language: LanguageCode }) => {
   const t = translations[language];
   const { toast } = useToast();
@@ -120,7 +132,7 @@ const GallerySectionCard = ({ section, isInitiallyOpen, language }: { section: G
                 <Card className="overflow-hidden p-0 premium-card border-0 hover-tilt h-full shadow-sm">
                   <div className={`relative overflow-hidden ${index === 0 ? "xl:h-[26rem] h-72" : "h-60"}`}>
                     <img
-                      src={image.src}
+                      src={getThumbnailSrc(image.src)}
                       alt={image.alt}
                       loading={index < 2 ? "eager" : "lazy"}
                       fetchPriority={index === 0 ? "high" : "auto"}
@@ -129,7 +141,12 @@ const GallerySectionCard = ({ section, isInitiallyOpen, language }: { section: G
                       referrerPolicy="no-referrer"
                       className="h-full w-full object-cover bg-muted transition-transform duration-500 hover:scale-[1.03]"
                       onError={(event) => {
-                        event.currentTarget.style.display = "none";
+                        if (event.currentTarget.dataset.fallbackApplied === "true") {
+                          event.currentTarget.style.display = "none";
+                          return;
+                        }
+                        event.currentTarget.dataset.fallbackApplied = "true";
+                        event.currentTarget.src = image.src;
                       }}
                     />
                   </div>
@@ -144,13 +161,21 @@ const GallerySectionCard = ({ section, isInitiallyOpen, language }: { section: G
             <div className="grid lg:grid-cols-[0.95fr_1.05fr] items-stretch">
               <div className="relative min-h-[240px] overflow-hidden">
                 <img
-                  src={heroImage.src}
+                  src={getThumbnailSrc(heroImage.src)}
                   alt={heroImage.alt}
                   loading="lazy"
                   decoding="async"
                   sizes="(min-width: 1024px) 40vw, 100vw"
                   referrerPolicy="no-referrer"
                   className="absolute inset-0 h-full w-full object-cover"
+                  onError={(event) => {
+                    if (event.currentTarget.dataset.fallbackApplied === "true") {
+                      event.currentTarget.style.display = "none";
+                      return;
+                    }
+                    event.currentTarget.dataset.fallbackApplied = "true";
+                    event.currentTarget.src = heroImage.src;
+                  }}
                 />
                 <div className="absolute inset-0 bg-gradient-to-r from-black/45 via-black/10 to-transparent" />
               </div>
