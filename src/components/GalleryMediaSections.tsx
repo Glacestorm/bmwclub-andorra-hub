@@ -35,12 +35,19 @@ const getSectionContext = (section: GalleryMediaSection, t: (typeof translations
   };
 };
 
+const LEGACY_MEDIA_ORIGIN = "https://bca.jcarranca.com";
+
+const resolveLegacyImageSrc = (src: string) => {
+  if (!src.startsWith("/legacy-mirror/images/")) return src;
+  return `${LEGACY_MEDIA_ORIGIN}/images/${src.replace("/legacy-mirror/images/", "")}`;
+};
+
 const getThumbnailSrc = (src: string) => {
   if (src.includes("/legacy-mirror/images/phocagallery/")) {
     const lastSlashIndex = src.lastIndexOf("/");
     const dir = src.slice(0, lastSlashIndex);
     const filename = src.slice(lastSlashIndex + 1);
-    return `${dir}/thumbs/phoca_thumb_m_${filename}`;
+    return resolveLegacyImageSrc(`${dir}/thumbs/phoca_thumb_m_${filename}`);
   }
 
   const relativePath = src.replace("/legacy-mirror/images/", "");
@@ -147,7 +154,7 @@ const GallerySectionCard = ({ section, isInitiallyOpen, language }: { section: G
                           return;
                         }
                         event.currentTarget.dataset.fallbackApplied = "true";
-                        event.currentTarget.src = image.src;
+                        event.currentTarget.src = resolveLegacyImageSrc(image.src);
                       }}
                     />
                   </div>
@@ -175,7 +182,7 @@ const GallerySectionCard = ({ section, isInitiallyOpen, language }: { section: G
                       return;
                     }
                     event.currentTarget.dataset.fallbackApplied = "true";
-                    event.currentTarget.src = heroImage.src;
+                    event.currentTarget.src = resolveLegacyImageSrc(heroImage.src);
                   }}
                 />
                 <div className="absolute inset-0 bg-gradient-to-r from-black/45 via-black/10 to-transparent" />
@@ -198,7 +205,7 @@ const GallerySectionCard = ({ section, isInitiallyOpen, language }: { section: G
               <DialogDescription className="sr-only">{selectedImage.alt}</DialogDescription>
               <div className="grid gap-0 lg:grid-cols-[1.2fr_0.8fr]">
                 <div className="relative bg-black">
-                  <img src={selectedImage.src} alt={selectedImage.alt} className="max-h-[80vh] w-full object-contain" loading="eager" decoding="async" />
+                  <img src={resolveLegacyImageSrc(selectedImage.src)} alt={selectedImage.alt} className="max-h-[80vh] w-full object-contain" loading="eager" decoding="async" referrerPolicy="no-referrer" />
                 </div>
                 <div className="flex flex-col justify-between p-6">
                   <div>
@@ -269,7 +276,7 @@ const GallerySectionCard = ({ section, isInitiallyOpen, language }: { section: G
                       <ArrowLeft className="h-4 w-4" />
                       {t.backToGallery}
                     </Button>
-                    <a href={selectedImage.src} target="_blank" rel="noreferrer">
+                    <a href={resolveLegacyImageSrc(selectedImage.src)} target="_blank" rel="noreferrer">
                       <Button variant="hero" className="rounded-full">
                         <ExternalLink className="h-4 w-4" />
                         {t.openNewTab}
