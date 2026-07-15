@@ -1,4 +1,4 @@
-import { Suspense, useEffect } from "react";
+import { useEffect } from "react";
 import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
@@ -6,44 +6,29 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
 import { LanguageProvider } from "@/components/LanguageProvider";
 import { AppErrorBoundary } from "@/components/AppErrorBoundary";
-import { lazyWithAutoReload } from "@/lib/lazyWithAutoReload";
+import Index from "./pages/Index";
+import ElClub from "./pages/ElClub";
+import Contacte from "./pages/Contacte";
+import Patrocinadors from "./pages/Patrocinadors";
+import Meteo from "./pages/Meteo";
+import Calendari from "./pages/Calendari";
+import CalendariYear from "./pages/CalendariYear";
+import Destacats from "./pages/Destacats";
+import Arxiu from "./pages/Arxiu";
+import BmwOficial from "./pages/BmwOficial";
+import ClubAssistant from "./pages/ClubAssistant";
+import Itineraris from "./pages/Itineraris";
+import DriveExperience from "./pages/DriveExperience";
+import EventMode from "./pages/EventMode";
+import PostDriveReport from "./pages/PostDriveReport";
+import GestioClub from "./pages/GestioClub";
+import EventDetail from "./pages/EventDetail";
+import LegalPage from "./pages/LegalPage";
+import NotFound from "./pages/NotFound";
 import Galeria from "./pages/Galeria";
 import GaleriaCollection from "./pages/GaleriaCollection";
 
-const Index = lazyWithAutoReload(() => import("./pages/Index"));
-const ElClub = lazyWithAutoReload(() => import("./pages/ElClub"));
-const Contacte = lazyWithAutoReload(() => import("./pages/Contacte"));
-const Patrocinadors = lazyWithAutoReload(() => import("./pages/Patrocinadors"));
-const Meteo = lazyWithAutoReload(() => import("./pages/Meteo"));
-const Calendari = lazyWithAutoReload(() => import("./pages/Calendari"));
-const CalendariYear = lazyWithAutoReload(() => import("./pages/CalendariYear"));
-const Destacats = lazyWithAutoReload(() => import("./pages/Destacats"));
-const Arxiu = lazyWithAutoReload(() => import("./pages/Arxiu"));
-const BmwOficial = lazyWithAutoReload(() => import("./pages/BmwOficial"));
-const ClubAssistant = lazyWithAutoReload(() => import("./pages/ClubAssistant"));
-const Itineraris = lazyWithAutoReload(() => import("./pages/Itineraris"));
-const DriveExperience = lazyWithAutoReload(() => import("./pages/DriveExperience"));
-const EventMode = lazyWithAutoReload(() => import("./pages/EventMode"));
-const PostDriveReport = lazyWithAutoReload(() => import("./pages/PostDriveReport"));
-const GestioClub = lazyWithAutoReload(() => import("./pages/GestioClub"));
-const EventDetail = lazyWithAutoReload(() => import("./pages/EventDetail"));
-const LegalPage = lazyWithAutoReload(() => import("./pages/LegalPage"));
-const NotFound = lazyWithAutoReload(() => import("./pages/NotFound"));
-
 const queryClient = new QueryClient();
-
-const RouteFallback = () => (
-  <div className="min-h-screen bg-background">
-    <div className="container mx-auto flex min-h-screen items-center justify-center px-4">
-      <div className="premium-card w-full max-w-xl rounded-[2rem] border-0 p-10 text-center shadow-elegant">
-        <p className="text-xs font-semibold uppercase tracking-[0.35em] text-primary">BMW Club Andorra</p>
-        <div className="mx-auto mt-5 h-12 w-12 animate-spin rounded-full border-2 border-primary/20 border-t-primary" />
-        <h2 className="mt-6 text-2xl font-bold text-balance">Carregant experiència premium…</h2>
-        <p className="mt-3 text-sm text-muted-foreground">Estem obrint la següent secció del club amb càrrega diferida per reduir el pes inicial.</p>
-      </div>
-    </div>
-  </div>
-);
 
 const App = () => {
   useEffect(() => {
@@ -60,7 +45,6 @@ const App = () => {
         <Sonner />
         <LanguageProvider>
           <BrowserRouter>
-            <Suspense fallback={<RouteFallback />}>
               <Routes>
               <Route path="/" element={<Index />} />
               <Route path="/el-club" element={<ElClub />} />
@@ -110,7 +94,6 @@ const App = () => {
               <Route path="/condicions" element={<LegalPage pageKey="condicions" />} />
               <Route path="*" element={<NotFound />} />
               </Routes>
-            </Suspense>
           </BrowserRouter>
         </LanguageProvider>
       </TooltipProvider>
