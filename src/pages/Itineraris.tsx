@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { ArrowRight, CalendarRange, CarFront, Compass, Mountain, Route, ShieldCheck, Bike, Crown, Map, ImageIcon, ExternalLink } from "lucide-react";
+import { ArrowRight, CalendarRange, CarFront, Compass, Mountain, Route, ShieldCheck, Bike, Crown, Map, ImageIcon, ExternalLink, UtensilsCrossed, Landmark, Trees, Flag, Telescope, Sparkles } from "lucide-react";
 import { PageShell } from "@/components/PageShell";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
@@ -39,6 +39,13 @@ const translations: Record<LanguageCode, Record<string, string>> = {
     mapFinish: "Finish",
     routePhoto: "Foto del recorregut",
     routePhotoNote: "Fotografia real del paisatge vinculat a aquesta ruta.",
+    stops: "Parades gourmet i punts clau",
+    stopsNote: "Restaurants, miradors i punts d’interès reals per fer la ruta més rodona.",
+    stopRestaurant: "Restaurant",
+    stopViewpoint: "Mirador",
+    stopHeritage: "Patrimoni",
+    stopNature: "Natura",
+    stopMotorsport: "Motor",
     credits: "Crèdits",
     source: "Font",
     license: "Llicència",
@@ -73,6 +80,13 @@ const translations: Record<LanguageCode, Record<string, string>> = {
     mapFinish: "Finish",
     routePhoto: "Foto del itinerario",
     routePhotoNote: "Fotografía real del paisaje vinculado a esta ruta.",
+    stops: "Paradas gourmet y puntos clave",
+    stopsNote: "Restaurantes, miradores y puntos de interés reales para hacer la ruta más atractiva.",
+    stopRestaurant: "Restaurante",
+    stopViewpoint: "Mirador",
+    stopHeritage: "Patrimonio",
+    stopNature: "Naturaleza",
+    stopMotorsport: "Motor",
     credits: "Créditos",
     source: "Fuente",
     license: "Licencia",
@@ -107,6 +121,13 @@ const translations: Record<LanguageCode, Record<string, string>> = {
     mapFinish: "Finish",
     routePhoto: "Photo de l'itinéraire",
     routePhotoNote: "Photographie réelle du paysage lié à cette route.",
+    stops: "Haltes gourmandes et points clés",
+    stopsNote: "Restaurants, belvédères et points d’intérêt réels pour enrichir l’itinéraire.",
+    stopRestaurant: "Restaurant",
+    stopViewpoint: "Belvédère",
+    stopHeritage: "Patrimoine",
+    stopNature: "Nature",
+    stopMotorsport: "Moteur",
     credits: "Crédits",
     source: "Source",
     license: "Licence",
@@ -141,6 +162,13 @@ const translations: Record<LanguageCode, Record<string, string>> = {
     mapFinish: "Finish",
     routePhoto: "Route photography",
     routePhotoNote: "Real landscape photography linked to this route.",
+    stops: "Gourmet stops and key highlights",
+    stopsNote: "Real restaurants, viewpoints and notable stops to make the route more compelling.",
+    stopRestaurant: "Restaurant",
+    stopViewpoint: "Viewpoint",
+    stopHeritage: "Heritage",
+    stopNature: "Nature",
+    stopMotorsport: "Motorsport",
     credits: "Credits",
     source: "Source",
     license: "License",
@@ -175,6 +203,13 @@ const translations: Record<LanguageCode, Record<string, string>> = {
     mapFinish: "Finish",
     routePhoto: "Foto do itinerário",
     routePhotoNote: "Fotografia real da paisagem ligada a esta rota.",
+    stops: "Paragens gourmet e pontos-chave",
+    stopsNote: "Restaurantes, miradouros e pontos de interesse reais para tornar a rota mais atrativa.",
+    stopRestaurant: "Restaurante",
+    stopViewpoint: "Miradouro",
+    stopHeritage: "Património",
+    stopNature: "Natureza",
+    stopMotorsport: "Motor",
     credits: "Créditos",
     source: "Fonte",
     license: "Licença",
@@ -209,6 +244,13 @@ const translations: Record<LanguageCode, Record<string, string>> = {
     mapFinish: "Finish",
     routePhoto: "Routenfoto",
     routePhotoNote: "Echte Landschaftsfotografie aus dem Umfeld dieser Route.",
+    stops: "Gourmet-Stopps und Highlights",
+    stopsNote: "Reale Restaurants, Aussichtspunkte und interessante Stopps für eine attraktivere Route.",
+    stopRestaurant: "Restaurant",
+    stopViewpoint: "Aussichtspunkt",
+    stopHeritage: "Kultur",
+    stopNature: "Natur",
+    stopMotorsport: "Motorsport",
     credits: "Credits",
     source: "Quelle",
     license: "Lizenz",
@@ -243,6 +285,13 @@ const translations: Record<LanguageCode, Record<string, string>> = {
     mapFinish: "Finish",
     routePhoto: "Фото маршрута",
     routePhotoNote: "Реальная фотография пейзажа, связанного с этим маршрутом.",
+    stops: "Гастро-остановки и ключевые точки",
+    stopsNote: "Реальные рестораны, смотровые и интересные точки, чтобы маршрут выглядел богаче.",
+    stopRestaurant: "Ресторан",
+    stopViewpoint: "Смотровая",
+    stopHeritage: "Наследие",
+    stopNature: "Природа",
+    stopMotorsport: "Автоспорт",
     credits: "Авторство",
     source: "Источник",
     license: "Лицензия",
@@ -271,31 +320,57 @@ const ANDORRA_BOUNDS = {
 };
 
 const andorraOutline: Array<{ lat: number; lon: number }> = [
-  { lat: 42.649, lon: 1.417 },
-  { lat: 42.64, lon: 1.446 },
-  { lat: 42.628, lon: 1.463 },
-  { lat: 42.618, lon: 1.49 },
-  { lat: 42.604, lon: 1.506 },
-  { lat: 42.594, lon: 1.534 },
-  { lat: 42.584, lon: 1.563 },
-  { lat: 42.572, lon: 1.591 },
-  { lat: 42.558, lon: 1.621 },
-  { lat: 42.544, lon: 1.65 },
-  { lat: 42.526, lon: 1.655 },
-  { lat: 42.509, lon: 1.642 },
-  { lat: 42.497, lon: 1.623 },
-  { lat: 42.491, lon: 1.597 },
-  { lat: 42.489, lon: 1.566 },
-  { lat: 42.493, lon: 1.54 },
-  { lat: 42.499, lon: 1.514 },
-  { lat: 42.507, lon: 1.485 },
-  { lat: 42.519, lon: 1.459 },
-  { lat: 42.533, lon: 1.435 },
-  { lat: 42.553, lon: 1.419 },
-  { lat: 42.577, lon: 1.412 },
-  { lat: 42.601, lon: 1.406 },
-  { lat: 42.625, lon: 1.404 },
-  { lat: 42.641, lon: 1.408 },
+  { lon: 1.707006, lat: 42.502781 },
+  { lon: 1.697498, lat: 42.494462 },
+  { lon: 1.686336, lat: 42.490612 },
+  { lon: 1.674244, lat: 42.490508 },
+  { lon: 1.662358, lat: 42.493712 },
+  { lon: 1.659774, lat: 42.496813 },
+  { lon: 1.656984, lat: 42.49764 },
+  { lon: 1.653986, lat: 42.496529 },
+  { lon: 1.650369, lat: 42.493402 },
+  { lon: 1.639517, lat: 42.466427 },
+  { lon: 1.607478, lat: 42.456428 },
+  { lon: 1.544432, lat: 42.450356 },
+  { lon: 1.538851, lat: 42.445653 },
+  { lon: 1.534511, lat: 42.439917 },
+  { lon: 1.528206, lat: 42.434233 },
+  { lon: 1.51663, lat: 42.429504 },
+  { lon: 1.508466, lat: 42.428677 },
+  { lon: 1.447901, lat: 42.434646 },
+  { lon: 1.436429, lat: 42.440951 },
+  { lon: 1.436429, lat: 42.453482 },
+  { lon: 1.407593, lat: 42.486762 },
+  { lon: 1.424543, lat: 42.492472 },
+  { lon: 1.430227, lat: 42.493557 },
+  { lon: 1.449968, lat: 42.504073 },
+  { lon: 1.446557, lat: 42.519886 },
+  { lon: 1.428987, lat: 42.531462 },
+  { lon: 1.406456, lat: 42.52924 },
+  { lon: 1.409764, lat: 42.540609 },
+  { lon: 1.4263, lat: 42.561796 },
+  { lon: 1.426403, lat: 42.565646 },
+  { lon: 1.418032, lat: 42.569832 },
+  { lon: 1.419272, lat: 42.579263 },
+  { lon: 1.424853, lat: 42.589365 },
+  { lon: 1.429297, lat: 42.595386 },
+  { lon: 1.451415, lat: 42.602052 },
+  { lon: 1.466814, lat: 42.641455 },
+  { lon: 1.49844, lat: 42.640241 },
+  { lon: 1.527793, lat: 42.648535 },
+  { lon: 1.543089, lat: 42.649362 },
+  { lon: 1.597349, lat: 42.621921 },
+  { lon: 1.608304, lat: 42.618123 },
+  { lon: 1.721993, lat: 42.609855 },
+  { lon: 1.713311, lat: 42.589546 },
+  { lon: 1.729434, lat: 42.582001 },
+  { lon: 1.752688, lat: 42.576679 },
+  { lon: 1.761107, lat: 42.567646 },
+  { lon: 1.765091, lat: 42.563372 },
+  { lon: 1.739976, lat: 42.561641 },
+  { lon: 1.721683, lat: 42.548515 },
+  { lon: 1.710624, lat: 42.527741 },
+  { lon: 1.707006, lat: 42.502781 },
 ];
 
 const waypointCoordinates: Record<string, MapCoordinate> = {
@@ -311,6 +386,50 @@ const waypointCoordinates: Record<string, MapCoordinate> = {
   "coll de la botella": { lat: 42.5722, lon: 1.4637, dx: 20, dy: -10, anchor: "start" },
   arinsal: { lat: 42.572, lon: 1.4845, dx: 22, dy: 10, anchor: "start" },
   erts: { lat: 42.5551, lon: 1.4922, dx: -14, dy: 22, anchor: "end" },
+  encamp: { lat: 42.5347, lon: 1.5801, dx: 0, dy: 24, anchor: "middle" },
+  "grau roig": { lat: 42.5311, lon: 1.6971, dx: -14, dy: -10, anchor: "end" },
+  "pas de la casa": { lat: 42.5426, lon: 1.7336, dx: -10, dy: 24, anchor: "end" },
+  "port d envalira": { lat: 42.5394, lon: 1.7337, dx: 18, dy: -8, anchor: "start" },
+  "andorra circuit": { lat: 42.534, lon: 1.7144, dx: -12, dy: 26, anchor: "end" },
+  "la cortinada": { lat: 42.5777, lon: 1.5222, dx: -12, dy: -10, anchor: "end" },
+  arans: { lat: 42.5827, lon: 1.5237, dx: 12, dy: 22, anchor: "start" },
+  "el serrat": { lat: 42.5909, lon: 1.5246, dx: 18, dy: -8, anchor: "start" },
+  arcalis: { lat: 42.6222, lon: 1.5028, dx: -8, dy: -10, anchor: "end" },
+};
+
+type RouteStopCategory = "restaurant" | "viewpoint" | "heritage" | "nature" | "motorsport";
+
+type RouteStop = {
+  name: string;
+  place: string;
+  category: RouteStopCategory;
+};
+
+const routeStopsById: Record<string, RouteStop[]> = {
+  "grand-tour-central": [
+    { name: "Llac d’Engolasters", place: "Escaldes-Engordany", category: "nature" },
+    { name: "Mirador Roc del Quer", place: "Canillo", category: "viewpoint" },
+    { name: "Santuari de Meritxell", place: "Meritxell", category: "heritage" },
+    { name: "Borda de l’Avi", place: "Canillo", category: "restaurant" },
+  ],
+  "west-viewpoints-loop": [
+    { name: "Sant Climent de Pal", place: "Pal", category: "heritage" },
+    { name: "Mirador Coll de la Botella", place: "Pal / Arinsal", category: "viewpoint" },
+    { name: "Farga Rossell", place: "La Massana", category: "heritage" },
+    { name: "Pla de la Cot", place: "Pal", category: "restaurant" },
+  ],
+  "envalira-high-mountain": [
+    { name: "Andorra Circuit", place: "Pas de la Casa", category: "motorsport" },
+    { name: "Port d’Envalira", place: "Pas de la Casa", category: "viewpoint" },
+    { name: "Estanys de Pessons", place: "Grau Roig", category: "nature" },
+    { name: "La Fromagerie", place: "Grau Roig", category: "restaurant" },
+  ],
+  "ordino-tristaina-touring": [
+    { name: "Casa d’Areny-Plandolit", place: "Ordino", category: "heritage" },
+    { name: "Mirador Solar de Tristaina", place: "Arcalís", category: "viewpoint" },
+    { name: "Parc natural de Sorteny", place: "El Serrat", category: "nature" },
+    { name: "Refugi de Sorteny", place: "Ordino", category: "restaurant" },
+  ],
 };
 
 const normalizeWaypoint = (value: string) =>
@@ -425,6 +544,52 @@ const RouteSchematic = ({ route, t }: { route: ClubItinerary; t: Record<string, 
         <span>{t.mapStart}: {route.start}</span>
         <span>•</span>
         <span>{t.mapFinish}: {route.finish}</span>
+      </div>
+    </div>
+  );
+};
+
+const getStopMeta = (category: RouteStopCategory, t: Record<string, string>) => {
+  switch (category) {
+    case "restaurant":
+      return { label: t.stopRestaurant, icon: UtensilsCrossed };
+    case "viewpoint":
+      return { label: t.stopViewpoint, icon: Telescope };
+    case "heritage":
+      return { label: t.stopHeritage, icon: Landmark };
+    case "motorsport":
+      return { label: t.stopMotorsport, icon: Flag };
+    default:
+      return { label: t.stopNature, icon: Trees };
+  }
+};
+
+const RouteStopsPanel = ({ route, t }: { route: ClubItinerary; t: Record<string, string> }) => {
+  const stops = routeStopsById[route.id] ?? [];
+  if (!stops.length) return null;
+
+  return (
+    <div className="rounded-[1.6rem] border border-border/70 bg-white/72 p-5">
+      <div className="flex items-center gap-2 text-primary font-semibold text-sm uppercase tracking-[0.18em]">
+        <Sparkles className="h-4 w-4" />
+        {t.stops}
+      </div>
+      <p className="mt-2 text-sm text-muted-foreground">{t.stopsNote}</p>
+      <div className="mt-4 grid gap-3 sm:grid-cols-2">
+        {stops.map((stop) => {
+          const meta = getStopMeta(stop.category, t);
+          const Icon = meta.icon;
+          return (
+            <div key={`${route.id}-${stop.name}`} className="rounded-[1.25rem] border border-border/70 bg-background/85 p-4">
+              <div className="inline-flex items-center gap-2 rounded-full bg-primary/10 px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.18em] text-primary">
+                <Icon className="h-3.5 w-3.5" />
+                {meta.label}
+              </div>
+              <div className="mt-3 text-base font-semibold text-foreground">{stop.name}</div>
+              <div className="mt-1 text-sm text-muted-foreground">{stop.place}</div>
+            </div>
+          );
+        })}
       </div>
     </div>
   );
@@ -571,6 +736,7 @@ const Itineraris = () => {
                   <div className="grid gap-5">
                     <RoutePhoto route={route} t={t} language={language} />
                     <RouteSchematic route={route} t={t} />
+                    <RouteStopsPanel route={route} t={t} />
 
                     <div className="rounded-[1.6rem] border border-border/70 bg-white/70 p-5">
                       <div className="flex items-center gap-2 text-primary font-semibold text-sm uppercase tracking-[0.18em]"><CalendarRange className="h-4 w-4" /> {t.route}</div>
