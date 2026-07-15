@@ -133,47 +133,47 @@ export const Hero = ({ language }: HeroProps) => {
   const t = translations[language];
 
   return (
-    <section className="relative min-h-[86vh] md:min-h-[92vh] flex items-center justify-center overflow-hidden pt-20">
+    <section className="relative flex min-h-[74vh] items-center justify-center overflow-hidden pt-16 sm:min-h-[78vh] sm:pt-[4.5rem] md:min-h-[84vh] md:pt-20 lg:min-h-[92vh]">
       <div className="absolute inset-0 z-0">
-        <img src="/legacy-mirror/images/portades-banner24.jpg" alt="BMW Club Andorra portada històrica" className="w-full h-full object-cover scale-[1.03]" loading="eager" />
-        <div className="absolute inset-0 gradient-overlay" />
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_80%_10%,rgba(0,102,177,.32),transparent_22%),radial-gradient(circle_at_10%_25%,rgba(255,255,255,.12),transparent_18%)]" />
+        <img src="/legacy-mirror/images/portades-banner24.jpg" alt="BMW Club Andorra portada històrica" className="h-full w-full object-cover object-[56%_center] scale-100 sm:object-center sm:scale-[1.01] md:scale-[1.03]" loading="eager" />
+        <div className="absolute inset-0 gradient-overlay opacity-70 sm:opacity-80 md:opacity-100" />
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_78%_12%,rgba(0,102,177,.22),transparent_24%),radial-gradient(circle_at_12%_18%,rgba(255,255,255,.10),transparent_18%)] md:bg-[radial-gradient(circle_at_80%_10%,rgba(0,102,177,.32),transparent_22%),radial-gradient(circle_at_10%_25%,rgba(255,255,255,.12),transparent_18%)]" />
       </div>
 
-      <div className="relative z-10 container mx-auto px-4 py-24">
-        <div className="max-w-6xl mx-auto grid lg:grid-cols-[1.05fr_0.95fr] gap-8 items-end">
-          <div className="space-y-7 text-white">
-            <div className="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/8 px-4 py-2 text-sm font-medium backdrop-blur-md">
+      <div className="relative z-10 container mx-auto px-4 py-14 sm:py-16 md:py-20 lg:py-24">
+        <div className="mx-auto grid max-w-6xl gap-6 md:gap-7 lg:grid-cols-[1.05fr_0.95fr] lg:gap-8 items-end">
+          <div className="space-y-5 sm:space-y-6 md:space-y-7 text-white">
+            <div className="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/8 px-3 py-1.5 text-xs font-medium backdrop-blur-md sm:px-4 sm:py-2 sm:text-sm">
               <Sparkles className="h-4 w-4" /> {t.eyebrow}
             </div>
-            <div className="space-y-4">
-              <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-balance leading-[0.95]">{t.title}</h1>
-              <p className="text-lg sm:text-xl md:text-2xl font-light text-white/85 max-w-3xl">{t.subtitle}</p>
+            <div className="space-y-3 sm:space-y-4">
+              <h1 className="text-3xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-balance leading-[0.95]">{t.title}</h1>
+              <p className="max-w-3xl text-base font-light text-white/85 sm:text-xl md:text-2xl">{t.subtitle}</p>
             </div>
-            <p className="text-base md:text-lg text-white/74 max-w-2xl leading-relaxed">{t.description}</p>
-            <div className="flex flex-col sm:flex-row items-stretch sm:items-start gap-4 pt-2">
-              <Link to="/calendari/2026" className="w-full sm:w-auto"><Button variant="hero" size="xl" className="gap-2 w-full sm:w-auto">{t.primary}<ArrowRight className="h-5 w-5" /></Button></Link>
-              <Link to="/destacats" className="w-full sm:w-auto"><Button variant="outline" size="xl" className="w-full sm:w-auto bg-white/8 text-white border-white/20 hover:bg-white/14">{t.secondary}</Button></Link>
+            <p className="max-w-2xl text-sm leading-relaxed text-white/74 sm:text-base md:text-lg">{t.description}</p>
+            <div className="flex flex-col items-stretch gap-3 pt-1 sm:flex-row sm:items-start sm:gap-4 sm:pt-2">
+              <Link to="/calendari/2026" className="w-full sm:w-auto"><Button variant="hero" className="h-12 w-full gap-2 px-6 text-base sm:h-14 sm:w-auto sm:px-10 sm:text-lg">{t.primary}<ArrowRight className="h-5 w-5" /></Button></Link>
+              <Link to="/destacats" className="w-full sm:w-auto"><Button variant="outline" className="h-12 w-full border-white/20 bg-white/8 px-6 text-base text-white hover:bg-white/14 sm:h-14 sm:w-auto sm:px-10 sm:text-lg">{t.secondary}</Button></Link>
             </div>
 
-            <div className="glass-dark rounded-[1.65rem] border border-white/10 p-5 max-w-2xl">
+            <div className="glass-dark max-w-2xl rounded-[1.4rem] border border-white/10 p-4 sm:rounded-[1.65rem] sm:p-5">
               <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
                 <div>
                   <div className="inline-flex items-center gap-2 rounded-full bg-white/10 px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.2em] text-white/70">
                     <Star className="h-3.5 w-3.5 text-primary" />
                     {t.sponsorLabel}
                   </div>
-                  <div className="mt-3 text-xl font-semibold">Pyrénées Andorra</div>
-                  <p className="mt-2 text-sm text-white/68">{t.sponsorText}</p>
+                  <div className="mt-3 text-lg font-semibold sm:text-xl">Pyrénées Andorra</div>
+                  <p className="mt-2 text-sm text-white/68 sm:text-sm">{t.sponsorText}</p>
                 </div>
                 <Link to="/patrocinadors" className="shrink-0 w-full sm:w-auto">
-                  <Button variant="outline" className="w-full sm:w-auto rounded-full border-white/15 bg-white/6 text-white hover:bg-white/10">{t.sponsorCta}</Button>
+                  <Button variant="outline" className="h-11 w-full rounded-full border-white/15 bg-white/6 px-5 text-sm text-white hover:bg-white/10 sm:h-auto sm:w-auto">{t.sponsorCta}</Button>
                 </Link>
               </div>
             </div>
           </div>
 
-          <div className="grid gap-4 lg:max-w-xl lg:ml-auto">
+          <div className="grid gap-3 sm:gap-4 lg:ml-auto lg:max-w-xl">
             {[
               { icon: Calendar, title: t.card1t, desc: t.card1d },
               { icon: Compass, title: t.card2t, desc: t.card2d },
@@ -181,7 +181,7 @@ export const Hero = ({ language }: HeroProps) => {
             ].map((item) => {
               const Icon = item.icon;
               return (
-                <div key={item.title} className="glass-panel rounded-[1.75rem] p-5 hover-tilt">
+                <div key={item.title} className="glass-panel rounded-[1.45rem] p-4 hover-tilt sm:rounded-[1.75rem] sm:p-5">
                   <div className="flex items-start gap-4">
                     <div className="rounded-2xl bg-primary/10 p-3"><Icon className="h-5 w-5 text-primary" /></div>
                     <div>
