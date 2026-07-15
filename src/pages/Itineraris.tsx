@@ -58,6 +58,7 @@ const translations: Record<LanguageCode, Record<string, string>> = {
     mapExpandHint: "Zoom amb la roda o els botons. Clica per obrir el mapa operatiu en gran.",
     mapClose: "Tancar mapa",
     openGoogleMaps: "Obrir a Google Maps",
+    openFullRoute: "Obrir ruta completa",
   },
   es: {
     eyebrow: "Itinerarios BMW en Andorra",
@@ -103,6 +104,7 @@ const translations: Record<LanguageCode, Record<string, string>> = {
     mapExpandHint: "Haz zoom con la rueda o los botones. Haz clic para abrir el mapa operativo en grande.",
     mapClose: "Cerrar mapa",
     openGoogleMaps: "Abrir en Google Maps",
+    openFullRoute: "Abrir ruta completa",
   },
   fr: {
     eyebrow: "Itinéraires BMW en Andorre",
@@ -148,6 +150,7 @@ const translations: Record<LanguageCode, Record<string, string>> = {
     mapExpandHint: "Zoomez avec la molette ou les boutons. Cliquez pour ouvrir la carte en grand.",
     mapClose: "Fermer la carte",
     openGoogleMaps: "Ouvrir dans Google Maps",
+    openFullRoute: "Ouvrir l’itinéraire complet",
   },
   en: {
     eyebrow: "BMW itineraries in Andorra",
@@ -193,6 +196,7 @@ const translations: Record<LanguageCode, Record<string, string>> = {
     mapExpandHint: "Zoom with the wheel or buttons. Click to open the full interactive map.",
     mapClose: "Close map",
     openGoogleMaps: "Open in Google Maps",
+    openFullRoute: "Open full route",
   },
   pt: {
     eyebrow: "Itinerários BMW em Andorra",
@@ -238,6 +242,7 @@ const translations: Record<LanguageCode, Record<string, string>> = {
     mapExpandHint: "Faça zoom com a roda ou os botões. Clique para abrir o mapa operacional em grande.",
     mapClose: "Fechar mapa",
     openGoogleMaps: "Abrir no Google Maps",
+    openFullRoute: "Abrir rota completa",
   },
   de: {
     eyebrow: "BMW-Routen in Andorra",
@@ -283,6 +288,7 @@ const translations: Record<LanguageCode, Record<string, string>> = {
     mapExpandHint: "Mit Mausrad oder Buttons zoomen. Klicken Sie, um die große interaktive Karte zu öffnen.",
     mapClose: "Karte schließen",
     openGoogleMaps: "In Google Maps öffnen",
+    openFullRoute: "Komplette Route öffnen",
   },
   ru: {
     eyebrow: "BMW-маршруты по Андорре",
@@ -328,6 +334,7 @@ const translations: Record<LanguageCode, Record<string, string>> = {
     mapExpandHint: "Масштабируйте колесом или кнопками. Нажмите, чтобы открыть большую интерактивную карту.",
     mapClose: "Закрыть карту",
     openGoogleMaps: "Открыть в Google Maps",
+    openFullRoute: "Открыть весь маршрут",
   },
 };
 
@@ -497,12 +504,35 @@ const MapOpenOnClick = ({ onOpen }: { onOpen: () => void }) => {
 type RouteMapCanvasProps = {
   route: ClubItinerary;
   t: Record<string, string>;
+  language: LanguageCode;
   heightClassName: string;
   openOnClick?: boolean;
   onOpen?: () => void;
 };
 
-const RouteMapCanvas = ({ route, t, heightClassName, openOnClick = false, onOpen }: RouteMapCanvasProps) => {
+const buildGoogleMapsRouteUrl = (route: ClubItinerary) => {
+  const points = route.waypoints
+    .map((waypoint) => waypointCoordinates[normalizeWaypoint(waypoint)])
+    .filter(Boolean) as MapCoordinate[];
+
+  if (points.length < 2) return null;
+
+  const origin = `${points[0].lat},${points[0].lon}`;
+  const destination = `${points[points.length - 1].lat},${points[points.length - 1].lon}`;
+  const waypoints = points.slice(1, -1).map((point) => `${point.lat},${point.lon}`).join("|");
+  const params = new URLSearchParams({
+    api: "1",
+    origin,
+    destination,
+    travelmode: "driving",
+  });
+
+  if (waypoints) params.set("waypoints", waypoints);
+
+  return `https://www.google.com/maps/dir/?${params.toString()}`;
+};
+
+const RouteMapCanvas = ({ route, t, language, heightClassName, openOnClick = false, onOpen }: RouteMapCanvasProps) => {
   const routePoints = route.waypoints
     .map((waypoint) => {
       const coordinate = waypointCoordinates[normalizeWaypoint(waypoint)];
@@ -547,8 +577,8 @@ const RouteMapCanvas = ({ route, t, heightClassName, openOnClick = false, onOpen
         className={`w-full ${heightClassName}`}
       >
         <TileLayer
-          attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-          url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+          attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>'
+          url="https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png"
         />
         <ZoomControl position="topright" />
         {openOnClick && onOpen ? <MapOpenOnClick onOpen={onOpen} /> : null}
@@ -581,7 +611,11 @@ const RouteMapCanvas = ({ route, t, heightClassName, openOnClick = false, onOpen
             >
               <Tooltip direction="top" offset={[0, -6]}>{stop.name}</Tooltip>
               <Popup>
-                <div className="w-[250px] space-y-3 py-1">
+                <div className="w-[258px] overflow-hidden rounded-2xl bg-white shadow-sm">
+                  <div className="aspect-[16/9] overflow-hidden bg-slate-100">
+                    <img src={route.image.src} alt={route.image.alt[language]} className="h-full w-full object-cover" loading="lazy" decoding="async" />
+                  </div>
+                  <div className="space-y-3 p-3">
                   <div className="inline-flex items-center gap-2 rounded-full px-2.5 py-1 text-[11px] font-semibold uppercase tracking-[0.16em]" style={{ backgroundColor: `${meta.color}14`, color: meta.color }}>
                     <StopIcon className="h-3.5 w-3.5" />
                     {meta.label}
@@ -600,6 +634,7 @@ const RouteMapCanvas = ({ route, t, heightClassName, openOnClick = false, onOpen
                     {t.openGoogleMaps}
                     <ExternalLink className="h-3.5 w-3.5" />
                   </a>
+                  </div>
                 </div>
               </Popup>
             </Marker>
@@ -624,8 +659,9 @@ const RouteMapCanvas = ({ route, t, heightClassName, openOnClick = false, onOpen
   );
 };
 
-const RouteSchematic = ({ route, t }: { route: ClubItinerary; t: Record<string, string> }) => {
+const RouteSchematic = ({ route, t, language }: { route: ClubItinerary; t: Record<string, string>; language: LanguageCode }) => {
   const [isMapOpen, setIsMapOpen] = useState(false);
+  const fullRouteUrl = buildGoogleMapsRouteUrl(route);
 
   return (
     <>
@@ -638,7 +674,7 @@ const RouteSchematic = ({ route, t }: { route: ClubItinerary; t: Record<string, 
         <p className="mt-2 text-xs font-medium text-slate-500">{t.mapExpandHint}</p>
 
         <div className="mt-5">
-          <RouteMapCanvas route={route} t={t} heightClassName="h-[360px]" openOnClick onOpen={() => setIsMapOpen(true)} />
+          <RouteMapCanvas route={route} t={t} language={language} heightClassName="h-[360px]" openOnClick onOpen={() => setIsMapOpen(true)} />
         </div>
 
         <div className="mt-4 flex flex-wrap gap-2">
@@ -664,6 +700,20 @@ const RouteSchematic = ({ route, t }: { route: ClubItinerary; t: Record<string, 
           <span>•</span>
           <span>{t.mapFinish}: {route.finish}</span>
         </div>
+
+        {fullRouteUrl ? (
+          <div className="mt-4">
+            <a
+              href={fullRouteUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 rounded-full border border-slate-200 bg-white px-4 py-2 text-xs font-semibold uppercase tracking-[0.14em] text-slate-800 transition hover:border-primary hover:text-primary"
+            >
+              {t.openFullRoute}
+              <ExternalLink className="h-3.5 w-3.5" />
+            </a>
+          </div>
+        ) : null}
       </div>
 
       <Dialog open={isMapOpen} onOpenChange={setIsMapOpen}>
@@ -687,7 +737,7 @@ const RouteSchematic = ({ route, t }: { route: ClubItinerary; t: Record<string, 
                 </DialogClose>
               </div>
               <div className="min-h-0 flex-1 p-3 sm:p-4">
-                <RouteMapCanvas route={route} t={t} heightClassName="h-full min-h-[420px]" />
+                <RouteMapCanvas route={route} t={t} language={language} heightClassName="h-full min-h-[420px]" />
               </div>
             </div>
           ) : null}
@@ -893,7 +943,7 @@ const Itineraris = () => {
 
                   <div className="grid gap-5">
                     <RoutePhoto route={route} t={t} language={language} />
-                    <RouteSchematic route={route} t={t} />
+                    <RouteSchematic route={route} t={t} language={language} />
                     <RouteStopsPanel route={route} t={t} />
 
                     <div className="rounded-[1.6rem] border border-border/70 bg-white/70 p-5">
