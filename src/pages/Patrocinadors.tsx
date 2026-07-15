@@ -205,14 +205,14 @@ const SponsorLogoPlate = ({ sponsor, dark = false, compact = false }: { sponsor:
 
   const logoClassByFit = {
     standard: compact
-      ? "max-h-[4.25rem] sm:max-h-[4.9rem] max-w-[90%]"
-      : "max-h-[5.25rem] sm:max-h-[6rem] md:max-h-[6.75rem] max-w-[88%]",
+      ? "max-h-[84%] max-w-[94%] w-auto"
+      : "max-h-[88%] max-w-[96%] w-auto",
     wide: compact
-      ? "max-h-[3.5rem] sm:max-h-[4rem] w-full max-w-[15rem]"
-      : "max-h-[4.4rem] sm:max-h-[5rem] md:max-h-[5.6rem] w-full max-w-[22rem]",
+      ? "w-[94%] max-h-[72%]"
+      : "w-[96%] max-h-[78%]",
     tall: compact
-      ? "max-h-[4.9rem] sm:max-h-[5.5rem] max-w-[8rem]"
-      : "max-h-[6rem] sm:max-h-[6.8rem] md:max-h-[7.6rem] max-w-[11rem]",
+      ? "max-h-[88%] max-w-[76%] w-auto"
+      : "max-h-[92%] max-w-[82%] w-auto",
   } as const;
 
   return (
@@ -237,13 +237,13 @@ const SponsorLogoPlate = ({ sponsor, dark = false, compact = false }: { sponsor:
         </div>
 
         <div
-          className={`flex items-center justify-center rounded-[1.4rem] border px-4 ${compact ? "h-[120px] sm:h-[132px] py-4" : "h-[160px] sm:h-[184px] md:h-[208px] py-6"}`}
+          className={`flex items-center justify-center rounded-[1.4rem] border ${compact ? "h-[120px] sm:h-[132px] p-3" : "h-[168px] sm:h-[192px] md:h-[216px] p-3 md:p-4"}`}
           style={{ borderColor: sponsor.brand.border, background: dark ? "rgba(255,255,255,0.03)" : "rgba(255,255,255,0.38)" }}
         >
           <img
             src={sponsor.brand.logoPath}
             alt={`${sponsor.name} logo`}
-            className={`${logoClassByFit[logoFit]} h-full w-auto object-contain`}
+            className={`${logoClassByFit[logoFit]} object-contain`}
             loading="lazy"
           />
         </div>
