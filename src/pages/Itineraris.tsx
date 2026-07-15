@@ -74,6 +74,9 @@ const translations: Record<LanguageCode, Record<string, string>> = {
     postDriveStats: "Mètriques de la sortida",
     postDriveHighlights: "Highlights del dia",
     postDriveAssets: "Assets shareables",
+    openDriveExperiencePage: "Obrir Drive Experience",
+    openEventModePage: "Obrir Event Mode",
+    openPostDrivePage: "Obrir Post-Drive Report",
   },
   es: {
     eyebrow: "Itinerarios BMW en Andorra",
@@ -135,6 +138,9 @@ const translations: Record<LanguageCode, Record<string, string>> = {
     postDriveStats: "Métricas de la salida",
     postDriveHighlights: "Highlights del día",
     postDriveAssets: "Assets shareables",
+    openDriveExperiencePage: "Abrir Drive Experience",
+    openEventModePage: "Abrir Event Mode",
+    openPostDrivePage: "Abrir Post-Drive Report",
   },
   fr: {
     eyebrow: "Itinéraires BMW en Andorre",
@@ -196,6 +202,9 @@ const translations: Record<LanguageCode, Record<string, string>> = {
     postDriveStats: "Métriques de la sortie",
     postDriveHighlights: "Highlights du jour",
     postDriveAssets: "Assets partageables",
+    openDriveExperiencePage: "Ouvrir Drive Experience",
+    openEventModePage: "Ouvrir Event Mode",
+    openPostDrivePage: "Ouvrir Post-Drive Report",
   },
   en: {
     eyebrow: "BMW itineraries in Andorra",
@@ -257,6 +266,9 @@ const translations: Record<LanguageCode, Record<string, string>> = {
     postDriveStats: "Drive metrics",
     postDriveHighlights: "Day highlights",
     postDriveAssets: "Shareable assets",
+    openDriveExperiencePage: "Open Drive Experience",
+    openEventModePage: "Open Event Mode",
+    openPostDrivePage: "Open Post-Drive Report",
   },
   pt: {
     eyebrow: "Itinerários BMW em Andorra",
@@ -318,6 +330,9 @@ const translations: Record<LanguageCode, Record<string, string>> = {
     postDriveStats: "Métricas da saída",
     postDriveHighlights: "Highlights do dia",
     postDriveAssets: "Assets partilháveis",
+    openDriveExperiencePage: "Abrir Drive Experience",
+    openEventModePage: "Abrir Event Mode",
+    openPostDrivePage: "Abrir Post-Drive Report",
   },
   de: {
     eyebrow: "BMW-Routen in Andorra",
@@ -379,6 +394,9 @@ const translations: Record<LanguageCode, Record<string, string>> = {
     postDriveStats: "Kennzahlen der Ausfahrt",
     postDriveHighlights: "Highlights des Tages",
     postDriveAssets: "Teilbare Assets",
+    openDriveExperiencePage: "Drive Experience öffnen",
+    openEventModePage: "Event Mode öffnen",
+    openPostDrivePage: "Post-Drive Report öffnen",
   },
   ru: {
     eyebrow: "BMW-маршруты по Андорре",
@@ -440,6 +458,9 @@ const translations: Record<LanguageCode, Record<string, string>> = {
     postDriveStats: "Метрики выезда",
     postDriveHighlights: "Highlights дня",
     postDriveAssets: "Shareable assets",
+    openDriveExperiencePage: "Открыть Drive Experience",
+    openEventModePage: "Открыть Event Mode",
+    openPostDrivePage: "Открыть Post-Drive Report",
   },
 };
 
@@ -2107,6 +2128,20 @@ const Itineraris = () => {
                         </div>
                       );
                     })}
+                  </div>
+                  <div className="mt-5 flex flex-wrap gap-3">
+                    <Link to="/drive-experience" className="inline-flex items-center gap-2 rounded-full bg-white px-4 py-2 text-xs font-semibold uppercase tracking-[0.14em] text-slate-950 transition hover:bg-primary hover:text-white">
+                      {t.openDriveExperiencePage}
+                      <ArrowRight className="h-3.5 w-3.5" />
+                    </Link>
+                    <Link to="/event-mode" className="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/8 px-4 py-2 text-xs font-semibold uppercase tracking-[0.14em] text-white transition hover:bg-white/12">
+                      {t.openEventModePage}
+                      <ArrowRight className="h-3.5 w-3.5" />
+                    </Link>
+                    <Link to="/post-drive-report" className="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/8 px-4 py-2 text-xs font-semibold uppercase tracking-[0.14em] text-white transition hover:bg-white/12">
+                      {t.openPostDrivePage}
+                      <ArrowRight className="h-3.5 w-3.5" />
+                    </Link>
                   </div>
                 </div>
               </div>

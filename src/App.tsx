@@ -22,6 +22,9 @@ const Arxiu = lazyWithAutoReload(() => import("./pages/Arxiu"));
 const BmwOficial = lazyWithAutoReload(() => import("./pages/BmwOficial"));
 const ClubAssistant = lazyWithAutoReload(() => import("./pages/ClubAssistant"));
 const Itineraris = lazyWithAutoReload(() => import("./pages/Itineraris"));
+const DriveExperience = lazyWithAutoReload(() => import("./pages/DriveExperience"));
+const EventMode = lazyWithAutoReload(() => import("./pages/EventMode"));
+const PostDriveReport = lazyWithAutoReload(() => import("./pages/PostDriveReport"));
 const GestioClub = lazyWithAutoReload(() => import("./pages/GestioClub"));
 const EventDetail = lazyWithAutoReload(() => import("./pages/EventDetail"));
 const LegalPage = lazyWithAutoReload(() => import("./pages/LegalPage"));
@@ -87,6 +90,9 @@ const App = () => {
               <Route path="/bmw-oficial" element={<BmwOficial />} />
               <Route path="/assistent-ia" element={<ClubAssistant />} />
               <Route path="/itineraris" element={<Itineraris />} />
+              <Route path="/drive-experience" element={<DriveExperience />} />
+              <Route path="/event-mode" element={<EventMode />} />
+              <Route path="/post-drive-report" element={<PostDriveReport />} />
               <Route path="/gestio-club" element={<GestioClub />} />
               <Route path="/esdeveniments/:eventId" element={<EventDetail />} />
               <Route path="/galeria" element={<Galeria />} />
