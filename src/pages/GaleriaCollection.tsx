@@ -33,8 +33,8 @@ const translations: Record<LanguageCode, Record<string, string>> = {
     collectionsBody: "Cada any o bloc històric ara s'obre com una peça pròpia, amb àlbums, arxiu fotogràfic i millor jerarquia visual.",
     openMedia: "Obrir arxiu visual",
     performance: "Galeria preparada",
-    performanceBody: "La pàgina prepara totes les fotos de la col·lecció per obrir cada sortida sense temps d'espera addicional.",
-    progressive: "càrrega completa",
+    performanceBody: "La pàgina carrega primer la vista resum i només descarrega les fotos completes quan obres cada àlbum.",
+    progressive: "càrrega progressiva",
   },
   es: {
     gallery: "Galería",
@@ -47,8 +47,8 @@ const translations: Record<LanguageCode, Record<string, string>> = {
     collectionsBody: "Cada año o bloque histórico se abre ahora como una pieza propia, con álbumes, archivo fotográfico y mejor jerarquía visual.",
     openMedia: "Abrir archivo visual",
     performance: "Galería preparada",
-    performanceBody: "La página prepara todas las fotos de la colección para abrir cada salida sin tiempo de espera adicional.",
-    progressive: "carga completa",
+    performanceBody: "La página carga primero la vista resumen y solo descarga las fotos completas cuando abres cada álbum.",
+    progressive: "carga progresiva",
   },
   fr: {
     gallery: "Galerie",
@@ -61,8 +61,8 @@ const translations: Record<LanguageCode, Record<string, string>> = {
     collectionsBody: "Chaque année ou bloc historique s'ouvre désormais comme une pièce propre, avec albums, archive photographique et meilleure hiérarchie visuelle.",
     openMedia: "Ouvrir l'archive visuelle",
     performance: "Galerie préparée",
-    performanceBody: "La page prépare toutes les photos de la collection afin d'ouvrir chaque sortie sans attente supplémentaire.",
-    progressive: "chargement complet",
+    performanceBody: "La page charge d'abord la vue résumée et ne télécharge les photos complètes que lorsque vous ouvrez chaque album.",
+    progressive: "chargement progressif",
   },
   en: {
     gallery: "Gallery",
@@ -75,8 +75,8 @@ const translations: Record<LanguageCode, Record<string, string>> = {
     collectionsBody: "Each year or historical block now opens as its own piece, with albums, photographic archive and better visual hierarchy.",
     openMedia: "Open visual archive",
     performance: "Gallery ready",
-    performanceBody: "The page prepares every photo in the collection so each outing opens without extra waiting time.",
-    progressive: "full loading",
+    performanceBody: "The page loads the summary view first and only downloads full photos when you open each album.",
+    progressive: "progressive loading",
   },
   pt: {
     gallery: "Galeria",
@@ -89,8 +89,8 @@ const translations: Record<LanguageCode, Record<string, string>> = {
     collectionsBody: "Cada ano ou bloco histórico abre agora como uma peça própria, com álbuns, arquivo fotográfico e melhor hierarquia visual.",
     openMedia: "Abrir arquivo visual",
     performance: "Galeria preparada",
-    performanceBody: "A página prepara todas as fotos da coleção para abrir cada passeio sem tempo de espera adicional.",
-    progressive: "carregamento completo",
+    performanceBody: "A página carrega primeiro a vista resumida e só descarrega as fotos completas quando abre cada álbum.",
+    progressive: "carregamento progressivo",
   },
   de: {
     gallery: "Galerie",
@@ -103,8 +103,8 @@ const translations: Record<LanguageCode, Record<string, string>> = {
     collectionsBody: "Jedes Jahr oder jeder historische Block öffnet sich jetzt als eigener Bereich mit Alben, Bildarchiv und besserer visueller Hierarchie.",
     openMedia: "Visuelles Archiv öffnen",
     performance: "Galerie bereit",
-    performanceBody: "Die Seite bereitet alle Fotos der Sammlung vor, damit jede Ausfahrt ohne zusätzliche Wartezeit geöffnet wird.",
-    progressive: "vollständiges Laden",
+    performanceBody: "Die Seite lädt zuerst die Übersicht und lädt vollständige Fotos erst dann, wenn ein Album geöffnet wird.",
+    progressive: "progressives Laden",
   },
   ru: {
     gallery: "Галерея",
@@ -117,8 +117,8 @@ const translations: Record<LanguageCode, Record<string, string>> = {
     collectionsBody: "Каждый год или исторический блок теперь открывается как отдельный материал с альбомами, фотоархивом и лучшей визуальной иерархией.",
     openMedia: "Открыть визуальный архив",
     performance: "Галерея готова",
-    performanceBody: "Страница заранее подготавливает все фото коллекции, чтобы каждый выезд открывался без дополнительного ожидания.",
-    progressive: "полная загрузка",
+    performanceBody: "Страница сначала загружает обзор, а полные фотографии скачиваются только при открытии альбома.",
+    progressive: "прогрессивная загрузка",
   },
 };
 

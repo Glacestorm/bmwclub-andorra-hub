@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
@@ -122,7 +122,7 @@ const GallerySectionCard = ({ section, isInitiallyOpen, language }: { section: G
                     <img
                       src={image.src}
                       alt={image.alt}
-                      loading={index < 8 ? "eager" : "lazy"}
+                      loading={index < 2 ? "eager" : "lazy"}
                       fetchPriority={index === 0 ? "high" : "auto"}
                       decoding="async"
                       sizes={index === 0 ? "(min-width: 1280px) 66vw, 100vw" : "(min-width: 1280px) 33vw, (min-width: 640px) 50vw, 100vw"}
@@ -264,18 +264,6 @@ export const GalleryMediaSections = ({ pageKey = "gallery", sections: sectionsPr
   const sections = sectionsProp ?? galleryMediaByPage[pageKey] ?? [];
   const { language } = useLanguage();
 
-  useEffect(() => {
-    if (typeof window === "undefined") return;
-
-    sections.forEach((section) => {
-      section.images.forEach((image) => {
-        const preloadImage = new window.Image();
-        preloadImage.decoding = "async";
-        preloadImage.src = image.src;
-      });
-    });
-  }, [sections]);
-
   if (!sections.length) return null;
 
   return (
@@ -285,7 +273,7 @@ export const GalleryMediaSections = ({ pageKey = "gallery", sections: sectionsPr
           <GallerySectionCard
             key={`${pageKey}-${section.title}-${index}`}
             section={section}
-            isInitiallyOpen={true}
+            isInitiallyOpen={false}
             language={language}
           />
         ))}
