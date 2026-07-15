@@ -1,10 +1,12 @@
+import { useState } from "react";
 import { Link } from "react-router-dom";
-import { ArrowRight, CalendarRange, CarFront, Compass, Mountain, Route, ShieldCheck, Bike, Crown, Map, ImageIcon, ExternalLink, UtensilsCrossed, Landmark, Trees, Flag, Telescope, Sparkles } from "lucide-react";
-import { CircleMarker, MapContainer, Polygon, Polyline, Popup, TileLayer, Tooltip } from "react-leaflet";
+import { ArrowRight, CalendarRange, CarFront, Compass, Mountain, Route, ShieldCheck, Bike, Crown, Map, ImageIcon, ExternalLink, UtensilsCrossed, Landmark, Trees, Flag, Telescope, Sparkles, Maximize2 } from "lucide-react";
+import { CircleMarker, MapContainer, Polygon, Polyline, Popup, TileLayer, Tooltip, ZoomControl, useMapEvents } from "react-leaflet";
 import type { LatLngExpression, LatLngTuple } from "leaflet";
 import { PageShell } from "@/components/PageShell";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
+import { Dialog, DialogContent, DialogDescription, DialogTitle } from "@/components/ui/dialog";
 import { useLanguage } from "@/components/LanguageProvider";
 import { LanguageCode } from "@/lib/i18n";
 import { type ClubItinerary } from "@/content/itineraryGuide";
@@ -52,6 +54,8 @@ const translations: Record<LanguageCode, Record<string, string>> = {
     credits: "Crèdits",
     source: "Font",
     license: "Llicència",
+    mapExpand: "Obrir mapa gran",
+    mapExpandHint: "Zoom amb la roda o els botons. Clica per obrir el mapa operatiu en gran.",
   },
   es: {
     eyebrow: "Itinerarios BMW en Andorra",
@@ -93,6 +97,8 @@ const translations: Record<LanguageCode, Record<string, string>> = {
     credits: "Créditos",
     source: "Fuente",
     license: "Licencia",
+    mapExpand: "Abrir mapa grande",
+    mapExpandHint: "Haz zoom con la rueda o los botones. Haz clic para abrir el mapa operativo en grande.",
   },
   fr: {
     eyebrow: "Itinéraires BMW en Andorre",
@@ -134,6 +140,8 @@ const translations: Record<LanguageCode, Record<string, string>> = {
     credits: "Crédits",
     source: "Source",
     license: "Licence",
+    mapExpand: "Ouvrir la grande carte",
+    mapExpandHint: "Zoomez avec la molette ou les boutons. Cliquez pour ouvrir la carte en grand.",
   },
   en: {
     eyebrow: "BMW itineraries in Andorra",
@@ -175,6 +183,8 @@ const translations: Record<LanguageCode, Record<string, string>> = {
     credits: "Credits",
     source: "Source",
     license: "License",
+    mapExpand: "Open large map",
+    mapExpandHint: "Zoom with the wheel or buttons. Click to open the full interactive map.",
   },
   pt: {
     eyebrow: "Itinerários BMW em Andorra",
@@ -216,6 +226,8 @@ const translations: Record<LanguageCode, Record<string, string>> = {
     credits: "Créditos",
     source: "Fonte",
     license: "Licença",
+    mapExpand: "Abrir mapa grande",
+    mapExpandHint: "Faça zoom com a roda ou os botões. Clique para abrir o mapa operacional em grande.",
   },
   de: {
     eyebrow: "BMW-Routen in Andorra",
@@ -257,6 +269,8 @@ const translations: Record<LanguageCode, Record<string, string>> = {
     credits: "Credits",
     source: "Quelle",
     license: "Lizenz",
+    mapExpand: "Große Karte öffnen",
+    mapExpandHint: "Mit Mausrad oder Buttons zoomen. Klicken Sie, um die große interaktive Karte zu öffnen.",
   },
   ru: {
     eyebrow: "BMW-маршруты по Андорре",
@@ -298,6 +312,8 @@ const translations: Record<LanguageCode, Record<string, string>> = {
     credits: "Авторство",
     source: "Источник",
     license: "Лицензия",
+    mapExpand: "Открыть большую карту",
+    mapExpandHint: "Масштабируйте колесом или кнопками. Нажмите, чтобы открыть большую интерактивную карту.",
   },
 };
 
@@ -451,7 +467,23 @@ const normalizeWaypoint = (value: string) =>
     .trim()
     .toLowerCase();
 
-const RouteSchematic = ({ route, t }: { route: ClubItinerary; t: Record<string, string> }) => {
+const MapOpenOnClick = ({ onOpen }: { onOpen: () => void }) => {
+  useMapEvents({
+    click: () => onOpen(),
+  });
+
+  return null;
+};
+
+type RouteMapCanvasProps = {
+  route: ClubItinerary;
+  t: Record<string, string>;
+  heightClassName: string;
+  openOnClick?: boolean;
+  onOpen?: () => void;
+};
+
+const RouteMapCanvas = ({ route, t, heightClassName, openOnClick = false, onOpen }: RouteMapCanvasProps) => {
   const routePoints = route.waypoints
     .map((waypoint) => {
       const coordinate = waypointCoordinates[normalizeWaypoint(waypoint)];
@@ -471,92 +503,133 @@ const RouteSchematic = ({ route, t }: { route: ClubItinerary; t: Record<string, 
   ];
 
   return (
-    <div className="rounded-[1.6rem] border border-border/70 bg-white/72 p-5 overflow-hidden">
-      <div className="flex items-center gap-2 text-primary font-semibold text-sm uppercase tracking-[0.18em]">
-        <Map className="h-4 w-4" />
-        {t.scheme}
-      </div>
-      <p className="mt-2 text-sm text-muted-foreground">{t.schemeNote}</p>
+    <div className={`relative overflow-hidden rounded-[1.4rem] border border-border/70 ${openOnClick ? "cursor-zoom-in" : ""}`}>
+      <MapContainer
+        bounds={countryBounds}
+        boundsOptions={{ padding: [18, 18] }}
+        scrollWheelZoom={true}
+        dragging={true}
+        zoomControl={false}
+        className={`w-full ${heightClassName}`}
+      >
+        <TileLayer
+          attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+          url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+        />
+        <ZoomControl position="topright" />
+        {openOnClick && onOpen ? <MapOpenOnClick onOpen={onOpen} /> : null}
+        <Polygon positions={andorraShape as LatLngExpression[]} pathOptions={{ color: "#94a3b8", weight: 2, fillColor: "#dbeafe", fillOpacity: 0.08 }} />
+        <Polyline positions={routePoints.map((point) => point.position)} pathOptions={{ color: "#0f172a", weight: 8, opacity: 0.24 }} />
+        <Polyline positions={routePoints.map((point) => point.position)} pathOptions={{ color: "#0284c7", weight: 5, opacity: 0.92 }} />
 
-      <div className="mt-5 overflow-hidden rounded-[1.4rem] border border-border/70">
-        <MapContainer
-          bounds={countryBounds}
-          boundsOptions={{ padding: [18, 18] }}
-          scrollWheelZoom={false}
-          dragging={true}
-          zoomControl={false}
-          className="h-[360px] w-full"
-        >
-          <TileLayer
-            attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-            url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-          />
-          <Polygon positions={andorraShape as LatLngExpression[]} pathOptions={{ color: "#94a3b8", weight: 2, fillColor: "#dbeafe", fillOpacity: 0.08 }} />
-          <Polyline positions={routePoints.map((point) => point.position)} pathOptions={{ color: "#0f172a", weight: 8, opacity: 0.24 }} />
-          <Polyline positions={routePoints.map((point) => point.position)} pathOptions={{ color: "#0284c7", weight: 5, opacity: 0.92 }} />
-
-          {routePoints.map((point, index) => {
-            const terminal = index === 0 || index === routePoints.length - 1;
-            return (
-              <CircleMarker
-                key={`${route.id}-${point.point}`}
-                center={point.position}
-                radius={terminal ? 8 : 6}
-                pathOptions={{ color: "#0f172a", weight: 2, fillColor: index === 0 ? "#0284c7" : terminal ? "#0f172a" : "#ffffff", fillOpacity: 1 }}
-              >
-                <Tooltip direction="top" offset={[0, -8]}>{point.point}</Tooltip>
-              </CircleMarker>
-            );
-          })}
-
-          {stopPoints.map((stop) => {
-            const meta = getStopMeta(stop.category, t);
-            return (
-              <CircleMarker
-                key={`${route.id}-${stop.name}`}
-                center={[stop.lat, stop.lon] as LatLngTuple}
-                radius={5}
-                pathOptions={{ color: meta.color, weight: 2, fillColor: "#ffffff", fillOpacity: 0.95 }}
-              >
-                <Tooltip direction="top" offset={[0, -6]}>{stop.name}</Tooltip>
-                <Popup>
-                  <div className="space-y-1">
-                    <div className="font-semibold">{stop.name}</div>
-                    <div className="text-xs uppercase tracking-wide text-slate-500">{meta.label}</div>
-                    <div className="text-sm text-slate-700">{stop.place}</div>
-                    <div className="text-sm text-slate-600">{stop.note}</div>
-                  </div>
-                </Popup>
-              </CircleMarker>
-            );
-          })}
-        </MapContainer>
-      </div>
-
-      <div className="mt-4 flex flex-wrap gap-2">
-        {stopLegendCategories.map((category) => {
-          const meta = getStopMeta(category, t);
-          const Icon = meta.icon;
+        {routePoints.map((point, index) => {
+          const terminal = index === 0 || index === routePoints.length - 1;
           return (
-            <div
-              key={`${route.id}-${category}`}
-              className="inline-flex items-center gap-2 rounded-full border border-border/70 bg-white/85 px-3 py-1.5 text-[11px] font-semibold uppercase tracking-[0.14em] text-slate-700"
+            <CircleMarker
+              key={`${route.id}-${point.point}`}
+              center={point.position}
+              radius={terminal ? 8 : 6}
+              pathOptions={{ color: "#0f172a", weight: 2, fillColor: index === 0 ? "#0284c7" : terminal ? "#0f172a" : "#ffffff", fillOpacity: 1 }}
             >
-              <span className="inline-flex h-5 w-5 items-center justify-center rounded-full" style={{ backgroundColor: `${meta.color}18`, color: meta.color }}>
-                <Icon className="h-3.5 w-3.5" />
-              </span>
-              {meta.label}
-            </div>
+              <Tooltip direction="top" offset={[0, -8]}>{point.point}</Tooltip>
+            </CircleMarker>
           );
         })}
+
+        {stopPoints.map((stop) => {
+          const meta = getStopMeta(stop.category, t);
+          return (
+            <CircleMarker
+              key={`${route.id}-${stop.name}`}
+              center={[stop.lat, stop.lon] as LatLngTuple}
+              radius={5}
+              pathOptions={{ color: meta.color, weight: 2, fillColor: "#ffffff", fillOpacity: 0.95 }}
+            >
+              <Tooltip direction="top" offset={[0, -6]}>{stop.name}</Tooltip>
+              <Popup>
+                <div className="space-y-1">
+                  <div className="font-semibold">{stop.name}</div>
+                  <div className="text-xs uppercase tracking-wide text-slate-500">{meta.label}</div>
+                  <div className="text-sm text-slate-700">{stop.place}</div>
+                  <div className="text-sm text-slate-600">{stop.note}</div>
+                </div>
+              </Popup>
+            </CircleMarker>
+          );
+        })}
+      </MapContainer>
+
+      {openOnClick ? (
+        <button
+          type="button"
+          onClick={(event) => {
+            event.stopPropagation();
+            onOpen?.();
+          }}
+          className="absolute left-3 top-3 z-[500] inline-flex items-center gap-2 rounded-full border border-white/70 bg-white/92 px-3 py-1.5 text-[11px] font-semibold uppercase tracking-[0.14em] text-slate-800 shadow-sm backdrop-blur"
+        >
+          <Maximize2 className="h-3.5 w-3.5" />
+          {t.mapExpand}
+        </button>
+      ) : null}
+    </div>
+  );
+};
+
+const RouteSchematic = ({ route, t }: { route: ClubItinerary; t: Record<string, string> }) => {
+  const [isMapOpen, setIsMapOpen] = useState(false);
+
+  return (
+    <>
+      <div className="rounded-[1.6rem] border border-border/70 bg-white/72 p-5 overflow-hidden">
+        <div className="flex items-center gap-2 text-primary font-semibold text-sm uppercase tracking-[0.18em]">
+          <Map className="h-4 w-4" />
+          {t.scheme}
+        </div>
+        <p className="mt-2 text-sm text-muted-foreground">{t.schemeNote}</p>
+        <p className="mt-2 text-xs font-medium text-slate-500">{t.mapExpandHint}</p>
+
+        <div className="mt-5">
+          <RouteMapCanvas route={route} t={t} heightClassName="h-[360px]" openOnClick onOpen={() => setIsMapOpen(true)} />
+        </div>
+
+        <div className="mt-4 flex flex-wrap gap-2">
+          {stopLegendCategories.map((category) => {
+            const meta = getStopMeta(category, t);
+            const Icon = meta.icon;
+            return (
+              <div
+                key={`${route.id}-${category}`}
+                className="inline-flex items-center gap-2 rounded-full border border-border/70 bg-white/85 px-3 py-1.5 text-[11px] font-semibold uppercase tracking-[0.14em] text-slate-700"
+              >
+                <span className="inline-flex h-5 w-5 items-center justify-center rounded-full" style={{ backgroundColor: `${meta.color}18`, color: meta.color }}>
+                  <Icon className="h-3.5 w-3.5" />
+                </span>
+                {meta.label}
+              </div>
+            );
+          })}
+        </div>
+
+        <div className="mt-4 flex flex-wrap gap-3 text-xs uppercase tracking-[0.18em] text-muted-foreground font-semibold">
+          <span>{t.mapStart}: {route.start}</span>
+          <span>•</span>
+          <span>{t.mapFinish}: {route.finish}</span>
+        </div>
       </div>
 
-      <div className="mt-4 flex flex-wrap gap-3 text-xs uppercase tracking-[0.18em] text-muted-foreground font-semibold">
-        <span>{t.mapStart}: {route.start}</span>
-        <span>•</span>
-        <span>{t.mapFinish}: {route.finish}</span>
-      </div>
-    </div>
+      <Dialog open={isMapOpen} onOpenChange={setIsMapOpen}>
+        <DialogContent className="max-w-[min(96vw,1440px)] border-0 bg-white p-0 shadow-2xl">
+          <DialogTitle className="sr-only">{t.mapExpand}</DialogTitle>
+          <DialogDescription className="sr-only">{t.mapExpandHint}</DialogDescription>
+          {isMapOpen ? (
+            <div className="p-3 md:p-4">
+              <RouteMapCanvas route={route} t={t} heightClassName="h-[78vh] min-h-[520px]" />
+            </div>
+          ) : null}
+        </DialogContent>
+      </Dialog>
+    </>
   );
 };
 
