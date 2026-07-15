@@ -1,5 +1,7 @@
 import { Link } from "react-router-dom";
 import { ArrowRight, CalendarRange, CarFront, Compass, Mountain, Route, ShieldCheck, Bike, Crown, Map, ImageIcon, ExternalLink, UtensilsCrossed, Landmark, Trees, Flag, Telescope, Sparkles } from "lucide-react";
+import { CircleMarker, MapContainer, Polygon, Polyline, Popup, TileLayer, Tooltip } from "react-leaflet";
+import type { LatLngExpression, LatLngTuple } from "leaflet";
 import { PageShell } from "@/components/PageShell";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
@@ -7,6 +9,7 @@ import { useLanguage } from "@/components/LanguageProvider";
 import { LanguageCode } from "@/lib/i18n";
 import { type ClubItinerary } from "@/content/itineraryGuide";
 import { useMergedItineraries } from "@/lib/clubCms";
+import "leaflet/dist/leaflet.css";
 
 const translations: Record<LanguageCode, Record<string, string>> = {
   ca: {
@@ -307,9 +310,6 @@ const getProfileMeta = (route: ClubItinerary, t: Record<string, string>) => {
 type MapCoordinate = {
   lat: number;
   lon: number;
-  dx?: number;
-  dy?: number;
-  anchor?: "start" | "middle" | "end";
 };
 
 const ANDORRA_BOUNDS = {
@@ -374,27 +374,27 @@ const andorraOutline: Array<{ lat: number; lon: number }> = [
 ];
 
 const waypointCoordinates: Record<string, MapCoordinate> = {
-  "andorra la vella": { lat: 42.5063, lon: 1.5218, dx: -6, dy: 22, anchor: "end" },
-  "escaldes engordany": { lat: 42.5096, lon: 1.5341, dx: 10, dy: 34, anchor: "start" },
-  engolasters: { lat: 42.5188, lon: 1.5792, dx: 0, dy: -14, anchor: "middle" },
-  canillo: { lat: 42.5676, lon: 1.5976, dx: 0, dy: 24, anchor: "middle" },
-  meritxell: { lat: 42.5618, lon: 1.5961, dx: 0, dy: -14, anchor: "middle" },
-  ordino: { lat: 42.5562, lon: 1.5332, dx: 0, dy: 24, anchor: "middle" },
-  "coll d ordino": { lat: 42.5793, lon: 1.5255, dx: 16, dy: -8, anchor: "start" },
-  "la massana": { lat: 42.54499, lon: 1.5148, dx: -2, dy: 24, anchor: "middle" },
-  pal: { lat: 42.5567, lon: 1.4935, dx: -2, dy: -14, anchor: "middle" },
-  "coll de la botella": { lat: 42.5722, lon: 1.4637, dx: 20, dy: -10, anchor: "start" },
-  arinsal: { lat: 42.572, lon: 1.4845, dx: 22, dy: 10, anchor: "start" },
-  erts: { lat: 42.5551, lon: 1.4922, dx: -14, dy: 22, anchor: "end" },
-  encamp: { lat: 42.5347, lon: 1.5801, dx: 0, dy: 24, anchor: "middle" },
-  "grau roig": { lat: 42.5311, lon: 1.6971, dx: -14, dy: -10, anchor: "end" },
-  "pas de la casa": { lat: 42.5426, lon: 1.7336, dx: -10, dy: 24, anchor: "end" },
-  "port d envalira": { lat: 42.5394, lon: 1.7337, dx: 18, dy: -8, anchor: "start" },
-  "andorra circuit": { lat: 42.534, lon: 1.7144, dx: -12, dy: 26, anchor: "end" },
-  "la cortinada": { lat: 42.5777, lon: 1.5222, dx: -12, dy: -10, anchor: "end" },
-  arans: { lat: 42.5827, lon: 1.5237, dx: 12, dy: 22, anchor: "start" },
-  "el serrat": { lat: 42.5909, lon: 1.5246, dx: 18, dy: -8, anchor: "start" },
-  arcalis: { lat: 42.6222, lon: 1.5028, dx: -8, dy: -10, anchor: "end" },
+  "andorra la vella": { lat: 42.5063, lon: 1.5218 },
+  "escaldes engordany": { lat: 42.5096, lon: 1.5341 },
+  engolasters: { lat: 42.5188, lon: 1.5792 },
+  canillo: { lat: 42.5676, lon: 1.5976 },
+  meritxell: { lat: 42.5618, lon: 1.5961 },
+  ordino: { lat: 42.5562, lon: 1.5332 },
+  "coll d ordino": { lat: 42.5793, lon: 1.5255 },
+  "la massana": { lat: 42.545, lon: 1.5148 },
+  pal: { lat: 42.5567, lon: 1.4935 },
+  "coll de la botella": { lat: 42.5722, lon: 1.4637 },
+  arinsal: { lat: 42.572, lon: 1.4845 },
+  erts: { lat: 42.5551, lon: 1.4922 },
+  encamp: { lat: 42.5347, lon: 1.5801 },
+  "grau roig": { lat: 42.5311, lon: 1.6971 },
+  "pas de la casa": { lat: 42.5426, lon: 1.7336 },
+  "port d envalira": { lat: 42.5394, lon: 1.7337 },
+  "andorra circuit": { lat: 42.534, lon: 1.7144 },
+  "la cortinada": { lat: 42.5777, lon: 1.5222 },
+  arans: { lat: 42.5827, lon: 1.5237 },
+  "el serrat": { lat: 42.5909, lon: 1.5246 },
+  arcalis: { lat: 42.6222, lon: 1.5028 },
 };
 
 type RouteStopCategory = "restaurant" | "viewpoint" | "heritage" | "nature" | "motorsport";
@@ -403,32 +403,35 @@ type RouteStop = {
   name: string;
   place: string;
   category: RouteStopCategory;
+  lat: number;
+  lon: number;
+  note: string;
 };
 
 const routeStopsById: Record<string, RouteStop[]> = {
   "grand-tour-central": [
-    { name: "Llac d’Engolasters", place: "Escaldes-Engordany", category: "nature" },
-    { name: "Mirador Roc del Quer", place: "Canillo", category: "viewpoint" },
-    { name: "Santuari de Meritxell", place: "Meritxell", category: "heritage" },
-    { name: "Borda de l’Avi", place: "Canillo", category: "restaurant" },
+    { name: "Llac d’Engolasters", place: "Escaldes-Engordany", category: "nature", lat: 42.5188, lon: 1.5792, note: "Parada natural clásica para abrir la ruta con lago y bosque." },
+    { name: "Mirador Roc del Quer", place: "Canillo", category: "viewpoint", lat: 42.5759, lon: 1.6491, note: "Mirador icónico sobre el valle, muy potente para foto de club." },
+    { name: "Santuari de Meritxell", place: "Meritxell", category: "heritage", lat: 42.5604, lon: 1.5957, note: "Punto patrimonial limpio y reconocible para una parada elegante." },
+    { name: "Borda de l’Avi", place: "Canillo", category: "restaurant", lat: 42.5671, lon: 1.6008, note: "Cocina de montaña, buena opción para cierre de mediodía." },
   ],
   "west-viewpoints-loop": [
-    { name: "Sant Climent de Pal", place: "Pal", category: "heritage" },
-    { name: "Mirador Coll de la Botella", place: "Pal / Arinsal", category: "viewpoint" },
-    { name: "Farga Rossell", place: "La Massana", category: "heritage" },
-    { name: "Pla de la Cot", place: "Pal", category: "restaurant" },
+    { name: "Sant Climent de Pal", place: "Pal", category: "heritage", lat: 42.5564, lon: 1.4934, note: "Iglesia románica y parada con carácter muy andorrano." },
+    { name: "Mirador Coll de la Botella", place: "Pal / Arinsal", category: "viewpoint", lat: 42.5722, lon: 1.4637, note: "Mirador abierto y muy agradecido para fotos de carretera." },
+    { name: "Farga Rossell", place: "La Massana", category: "heritage", lat: 42.5472, lon: 1.5146, note: "Punto industrial histórico para añadir cultura a la ruta." },
+    { name: "Pla de la Cot", place: "Pal", category: "restaurant", lat: 42.5568, lon: 1.4946, note: "Borda de montaña ideal para una parada gastronómica." },
   ],
   "envalira-high-mountain": [
-    { name: "Andorra Circuit", place: "Pas de la Casa", category: "motorsport" },
-    { name: "Port d’Envalira", place: "Pas de la Casa", category: "viewpoint" },
-    { name: "Estanys de Pessons", place: "Grau Roig", category: "nature" },
-    { name: "La Fromagerie", place: "Grau Roig", category: "restaurant" },
+    { name: "Andorra Circuit", place: "Pas de la Casa", category: "motorsport", lat: 42.534, lon: 1.7144, note: "Punto motor directo, coherente con el tono BMW de la ruta." },
+    { name: "Port d’Envalira", place: "Pas de la Casa", category: "viewpoint", lat: 42.5394, lon: 1.7337, note: "El gran balcón de alta montaña del país." },
+    { name: "Estanys de Pessons", place: "Grau Roig", category: "nature", lat: 42.5305, lon: 1.7168, note: "Parada paisajística potente si quieres añadir aire alpino." },
+    { name: "La Fromagerie", place: "Grau Roig", category: "restaurant", lat: 42.5319, lon: 1.731, note: "Parada gastronómica cálida en el tramo más de montaña." },
   ],
   "ordino-tristaina-touring": [
-    { name: "Casa d’Areny-Plandolit", place: "Ordino", category: "heritage" },
-    { name: "Mirador Solar de Tristaina", place: "Arcalís", category: "viewpoint" },
-    { name: "Parc natural de Sorteny", place: "El Serrat", category: "nature" },
-    { name: "Refugi de Sorteny", place: "Ordino", category: "restaurant" },
+    { name: "Casa d’Areny-Plandolit", place: "Ordino", category: "heritage", lat: 42.5566, lon: 1.5332, note: "Parada patrimonial premium en el corazón de Ordino." },
+    { name: "Mirador Solar de Tristaina", place: "Arcalís", category: "viewpoint", lat: 42.6482, lon: 1.5337, note: "Uno de los miradores más espectaculares y fotogénicos de Andorra." },
+    { name: "Parc natural de Sorteny", place: "El Serrat", category: "nature", lat: 42.5966, lon: 1.5334, note: "Naturaleza de alta montaña para dar profundidad a la ruta." },
+    { name: "Hotel Bringué", place: "El Serrat", category: "restaurant", lat: 42.5907, lon: 1.5239, note: "Parada gastronómica sólida antes o después de Tristaina." },
   ],
 };
 
@@ -441,48 +444,24 @@ const normalizeWaypoint = (value: string) =>
     .trim()
     .toLowerCase();
 
-const projectMapPoint = (lat: number, lon: number, width: number, height: number) => {
-  const paddingX = 34;
-  const paddingY = 22;
-  const x = paddingX + ((lon - ANDORRA_BOUNDS.minLon) / (ANDORRA_BOUNDS.maxLon - ANDORRA_BOUNDS.minLon)) * (width - paddingX * 2);
-  const y = paddingY + ((ANDORRA_BOUNDS.maxLat - lat) / (ANDORRA_BOUNDS.maxLat - ANDORRA_BOUNDS.minLat)) * (height - paddingY * 2);
-  return { x, y };
-};
-
-const buildSmoothPath = (points: Array<{ x: number; y: number }>) => {
-  if (!points.length) return "";
-  if (points.length === 1) return `M ${points[0].x} ${points[0].y}`;
-
-  let d = `M ${points[0].x} ${points[0].y}`;
-  for (let index = 1; index < points.length; index += 1) {
-    const current = points[index];
-    const previous = points[index - 1];
-    const controlX = (previous.x + current.x) / 2;
-    d += ` Q ${controlX} ${previous.y}, ${current.x} ${current.y}`;
-  }
-  return d;
-};
-
 const RouteSchematic = ({ route, t }: { route: ClubItinerary; t: Record<string, string> }) => {
-  const width = 360;
-  const height = 220;
   const routePoints = route.waypoints
-    .map((waypoint, index) => {
+    .map((waypoint) => {
       const coordinate = waypointCoordinates[normalizeWaypoint(waypoint)];
       if (!coordinate) return null;
-      const projected = projectMapPoint(coordinate.lat, coordinate.lon, width, height);
       return {
         point: waypoint,
-        index,
-        ...coordinate,
-        ...projected,
+        position: [coordinate.lat, coordinate.lon] as LatLngTuple,
       };
     })
-    .filter(Boolean) as Array<{ point: string; index: number; lat: number; lon: number; x: number; y: number; dx?: number; dy?: number; anchor?: "start" | "middle" | "end" }>;
+    .filter(Boolean) as Array<{ point: string; position: LatLngTuple }>;
 
-  const routePath = buildSmoothPath(routePoints);
-  const outlinePoints = andorraOutline.map((point) => projectMapPoint(point.lat, point.lon, width, height));
-  const outlinePath = `${outlinePoints.map((point, index) => `${index === 0 ? "M" : "L"} ${point.x} ${point.y}`).join(" ")} Z`;
+  const stopPoints = routeStopsById[route.id] ?? [];
+  const andorraShape = andorraOutline.map((point) => [point.lat, point.lon] as LatLngTuple);
+  const countryBounds: [LatLngTuple, LatLngTuple] = [
+    [ANDORRA_BOUNDS.minLat, ANDORRA_BOUNDS.minLon],
+    [ANDORRA_BOUNDS.maxLat, ANDORRA_BOUNDS.maxLon],
+  ];
 
   return (
     <div className="rounded-[1.6rem] border border-border/70 bg-white/72 p-5 overflow-hidden">
@@ -492,52 +471,59 @@ const RouteSchematic = ({ route, t }: { route: ClubItinerary; t: Record<string, 
       </div>
       <p className="mt-2 text-sm text-muted-foreground">{t.schemeNote}</p>
 
-      <div className="mt-5 overflow-x-auto">
-        <div className="min-w-[340px]">
-          <svg viewBox={`0 0 ${width} ${height}`} className="w-full h-auto">
-            <defs>
-              <linearGradient id={`andorra-relief-${route.id}`} x1="0%" x2="100%" y1="0%" y2="100%">
-                <stop offset="0%" stopColor="#f8fafc" />
-                <stop offset="100%" stopColor="#dbeafe" />
-              </linearGradient>
-              <linearGradient id={`route-gradient-${route.id}`} x1="0%" x2="100%" y1="0%" y2="0%">
-                <stop offset="0%" stopColor="#0284c7" />
-                <stop offset="100%" stopColor="#0f172a" />
-              </linearGradient>
-              <filter id={`shadow-${route.id}`} x="-20%" y="-20%" width="140%" height="140%">
-                <feDropShadow dx="0" dy="10" stdDeviation="10" floodColor="#0f172a" floodOpacity="0.08" />
-              </filter>
-            </defs>
+      <div className="mt-5 overflow-hidden rounded-[1.4rem] border border-border/70">
+        <MapContainer
+          bounds={countryBounds}
+          boundsOptions={{ padding: [18, 18] }}
+          scrollWheelZoom={false}
+          dragging={true}
+          zoomControl={false}
+          className="h-[360px] w-full"
+        >
+          <TileLayer
+            attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+            url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+          />
+          <Polygon positions={andorraShape as LatLngExpression[]} pathOptions={{ color: "#94a3b8", weight: 2, fillColor: "#dbeafe", fillOpacity: 0.08 }} />
+          <Polyline positions={routePoints.map((point) => point.position)} pathOptions={{ color: "#0f172a", weight: 8, opacity: 0.24 }} />
+          <Polyline positions={routePoints.map((point) => point.position)} pathOptions={{ color: "#0284c7", weight: 5, opacity: 0.92 }} />
 
-            <rect x="8" y="8" width={width - 16} height={height - 16} rx="28" fill="#f8fafc" />
-            <path d={outlinePath} fill={`url(#andorra-relief-${route.id})`} stroke="#cbd5e1" strokeWidth="2" filter={`url(#shadow-${route.id})`} />
+          {routePoints.map((point, index) => {
+            const terminal = index === 0 || index === routePoints.length - 1;
+            return (
+              <CircleMarker
+                key={`${route.id}-${point.point}`}
+                center={point.position}
+                radius={terminal ? 8 : 6}
+                pathOptions={{ color: "#0f172a", weight: 2, fillColor: index === 0 ? "#0284c7" : terminal ? "#0f172a" : "#ffffff", fillOpacity: 1 }}
+              >
+                <Tooltip direction="top" offset={[0, -8]}>{point.point}</Tooltip>
+              </CircleMarker>
+            );
+          })}
 
-            <path d="M 112 34 C 148 76, 154 126, 188 184" fill="none" stroke="#e2e8f0" strokeWidth="8" strokeLinecap="round" opacity="0.9" />
-            <path d="M 162 48 C 196 78, 222 114, 248 164" fill="none" stroke="#dbeafe" strokeWidth="6" strokeLinecap="round" opacity="0.8" />
-            <path d="M 74 116 C 132 106, 214 108, 288 122" fill="none" stroke="#e5e7eb" strokeWidth="4" strokeLinecap="round" opacity="0.8" />
-
-            {routePath ? (
-              <>
-                <path d={routePath} fill="none" stroke="#ffffff" strokeWidth="10" strokeLinecap="round" strokeLinejoin="round" opacity="0.95" />
-                <path d={routePath} fill="none" stroke={`url(#route-gradient-${route.id})`} strokeWidth="6" strokeLinecap="round" strokeLinejoin="round" />
-              </>
-            ) : null}
-
-            {routePoints.map((point) => {
-              const isTerminal = point.index === 0 || point.index === routePoints.length - 1;
-              const label = point.point.length > 21 ? `${point.point.slice(0, 19)}…` : point.point;
-              return (
-                <g key={`${route.id}-${point.point}-${point.index}`}>
-                  <circle cx={point.x} cy={point.y} r={isTerminal ? 8.5 : 6.5} fill={point.index === 0 ? "#0284c7" : point.index === routePoints.length - 1 ? "#0f172a" : "#ffffff"} stroke="#0f172a" strokeWidth="2" />
-                  <circle cx={point.x} cy={point.y} r={isTerminal ? 15 : 11} fill="none" stroke={point.index === 0 ? "rgba(2,132,199,0.22)" : "rgba(15,23,42,0.12)"} strokeWidth="2" />
-                  <text x={point.x + (point.dx ?? 0)} y={point.y + (point.dy ?? 22)} textAnchor={point.anchor ?? "middle"} fontSize="10.5" fontWeight="700" fill="#334155">
-                    {label}
-                  </text>
-                </g>
-              );
-            })}
-          </svg>
-        </div>
+          {stopPoints.map((stop) => {
+            const meta = getStopMeta(stop.category, t);
+            return (
+              <CircleMarker
+                key={`${route.id}-${stop.name}`}
+                center={[stop.lat, stop.lon] as LatLngTuple}
+                radius={5}
+                pathOptions={{ color: meta.color, weight: 2, fillColor: "#ffffff", fillOpacity: 0.95 }}
+              >
+                <Tooltip direction="top" offset={[0, -6]}>{stop.name}</Tooltip>
+                <Popup>
+                  <div className="space-y-1">
+                    <div className="font-semibold">{stop.name}</div>
+                    <div className="text-xs uppercase tracking-wide text-slate-500">{meta.label}</div>
+                    <div className="text-sm text-slate-700">{stop.place}</div>
+                    <div className="text-sm text-slate-600">{stop.note}</div>
+                  </div>
+                </Popup>
+              </CircleMarker>
+            );
+          })}
+        </MapContainer>
       </div>
 
       <div className="mt-4 flex flex-wrap gap-3 text-xs uppercase tracking-[0.18em] text-muted-foreground font-semibold">
@@ -552,15 +538,15 @@ const RouteSchematic = ({ route, t }: { route: ClubItinerary; t: Record<string, 
 const getStopMeta = (category: RouteStopCategory, t: Record<string, string>) => {
   switch (category) {
     case "restaurant":
-      return { label: t.stopRestaurant, icon: UtensilsCrossed };
+      return { label: t.stopRestaurant, icon: UtensilsCrossed, color: "#b45309" };
     case "viewpoint":
-      return { label: t.stopViewpoint, icon: Telescope };
+      return { label: t.stopViewpoint, icon: Telescope, color: "#7c3aed" };
     case "heritage":
-      return { label: t.stopHeritage, icon: Landmark };
+      return { label: t.stopHeritage, icon: Landmark, color: "#be123c" };
     case "motorsport":
-      return { label: t.stopMotorsport, icon: Flag };
+      return { label: t.stopMotorsport, icon: Flag, color: "#0f172a" };
     default:
-      return { label: t.stopNature, icon: Trees };
+      return { label: t.stopNature, icon: Trees, color: "#15803d" };
   }
 };
 
