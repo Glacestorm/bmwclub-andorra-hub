@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useMemo, useState } from "react";
 import { Link } from "react-router-dom";
 import { ArrowRight, CalendarRange, CarFront, Compass, Mountain, Route, ShieldCheck, Bike, Crown, Map, ImageIcon, ExternalLink, UtensilsCrossed, Landmark, Trees, Flag, Telescope, Sparkles, Maximize2 } from "lucide-react";
 import { CircleMarker, MapContainer, Marker, Polygon, Polyline, Popup, TileLayer, Tooltip, ZoomControl, useMapEvents } from "react-leaflet";
@@ -831,6 +831,173 @@ const recapPrototype = {
   },
 } as const;
 
+type ConciergeDuration = "short" | "halfday" | "alpine";
+type ConciergeVehicle = "touring" | "mperformance" | "motorcycle" | "electric";
+type ConciergeMood = "scenic" | "dynamic" | "official";
+type ConciergeFood = "signature" | "mountain" | "light";
+
+const conciergeUi = {
+  title: {
+    ca: "Concierge interactiu",
+    es: "Concierge interactivo",
+    fr: "Concierge interactif",
+    en: "Interactive concierge",
+    pt: "Concierge interativo",
+    de: "Interaktiver Concierge",
+    ru: "Интерактивный concierge",
+  },
+  intro: {
+    ca: "Tria el tipus de sortida i et recomana una ruta real del club.",
+    es: "Elige el tipo de salida y te recomienda una ruta real del club.",
+    fr: "Choisissez le type de sortie et le système recommande une vraie route du club.",
+    en: "Choose the kind of drive and the system recommends a real club route.",
+    pt: "Escolhe o tipo de saída e o sistema recomenda uma rota real do clube.",
+    de: "Wähle den Ausfahrtstyp und das System empfiehlt eine echte Club-Route.",
+    ru: "Выберите тип выезда, и система порекомендует реальный маршрут клуба.",
+  },
+  duration: {
+    ca: "Durada",
+    es: "Duración",
+    fr: "Durée",
+    en: "Duration",
+    pt: "Duração",
+    de: "Dauer",
+    ru: "Длительность",
+  },
+  vehicle: {
+    ca: "Vehicle",
+    es: "Vehículo",
+    fr: "Véhicule",
+    en: "Vehicle",
+    pt: "Veículo",
+    de: "Fahrzeug",
+    ru: "Автомобиль",
+  },
+  mood: {
+    ca: "Mood",
+    es: "Mood",
+    fr: "Mood",
+    en: "Mood",
+    pt: "Mood",
+    de: "Mood",
+    ru: "Mood",
+  },
+  food: {
+    ca: "Parada",
+    es: "Parada",
+    fr: "Arrêt",
+    en: "Stop style",
+    pt: "Paragem",
+    de: "Stopp",
+    ru: "Остановка",
+  },
+  recommendation: {
+    ca: "Recomanació actual",
+    es: "Recomendación actual",
+    fr: "Recommandation actuelle",
+    en: "Current recommendation",
+    pt: "Recomendação atual",
+    de: "Aktuelle Empfehlung",
+    ru: "Текущая рекомендация",
+  },
+  why: {
+    ca: "Per què encaixa",
+    es: "Por qué encaja",
+    fr: "Pourquoi ça colle",
+    en: "Why it fits",
+    pt: "Porque encaixa",
+    de: "Warum es passt",
+    ru: "Почему подходит",
+  },
+} as const;
+
+const conciergeOptions = {
+  duration: [
+    { id: "short", label: { ca: "2-3 h", es: "2-3 h", fr: "2-3 h", en: "2-3 h", pt: "2-3 h", de: "2-3 h", ru: "2-3 ч" } },
+    { id: "halfday", label: { ca: "3-4 h", es: "3-4 h", fr: "3-4 h", en: "3-4 h", pt: "3-4 h", de: "3-4 h", ru: "3-4 ч" } },
+    { id: "alpine", label: { ca: "Alta muntanya", es: "Alta montaña", fr: "Haute montagne", en: "High alpine", pt: "Alta montanha", de: "Hochalpin", ru: "Высокогорье" } },
+  ],
+  vehicle: [
+    { id: "touring", label: { ca: "Touring", es: "Touring", fr: "Touring", en: "Touring", pt: "Touring", de: "Touring", ru: "Touring" } },
+    { id: "mperformance", label: { ca: "M / dinàmic", es: "M / dinámico", fr: "M / dynamique", en: "M / dynamic", pt: "M / dinâmico", de: "M / dynamisch", ru: "M / динамика" } },
+    { id: "motorcycle", label: { ca: "Moto", es: "Moto", fr: "Moto", en: "Motorcycle", pt: "Moto", de: "Motorrad", ru: "Мото" } },
+    { id: "electric", label: { ca: "BMW elèctric", es: "BMW eléctrico", fr: "BMW électrique", en: "Electric BMW", pt: "BMW elétrico", de: "Elektrischer BMW", ru: "Электрический BMW" } },
+  ],
+  mood: [
+    { id: "scenic", label: { ca: "Panoràmic", es: "Panorámico", fr: "Panoramique", en: "Scenic", pt: "Panorâmico", de: "Panoramisch", ru: "Панорамный" } },
+    { id: "dynamic", label: { ca: "Carretera amb ritme", es: "Carretera con ritmo", fr: "Route rythmée", en: "Dynamic road", pt: "Estrada com ritmo", de: "Straße mit Rhythmus", ru: "Дорога с ритмом" } },
+    { id: "official", label: { ca: "Sortida oficial", es: "Salida oficial", fr: "Sortie officielle", en: "Official outing", pt: "Saída oficial", de: "Offizielle Ausfahrt", ru: "Официальный выезд" } },
+  ],
+  food: [
+    { id: "signature", label: { ca: "Gourmet", es: "Gourmet", fr: "Gourmet", en: "Gourmet", pt: "Gourmet", de: "Gourmet", ru: "Gourmet" } },
+    { id: "mountain", label: { ca: "Borda de muntanya", es: "Borda de montaña", fr: "Table de montagne", en: "Mountain table", pt: "Borda de montanha", de: "Bergrestaurant", ru: "Горная кухня" } },
+    { id: "light", label: { ca: "Parada ràpida", es: "Parada rápida", fr: "Arrêt rapide", en: "Quick stop", pt: "Paragem rápida", de: "Schneller Stopp", ru: "Быстрая остановка" } },
+  ],
+} as const;
+
+const conciergeRouteFit: Record<string, { duration: ConciergeDuration[]; vehicle: ConciergeVehicle[]; mood: ConciergeMood[]; food: ConciergeFood[]; why: Record<LanguageCode, string> }> = {
+  "grand-tour-central": {
+    duration: ["halfday"],
+    vehicle: ["touring", "electric"],
+    mood: ["scenic", "official"],
+    food: ["signature", "light"],
+    why: {
+      ca: "És la ruta més elegant i equilibrada del catàleg: vista, vall oberta, punts fotogènics i molt bon encaix per a club o touring premium.",
+      es: "Es la ruta más elegante y equilibrada del catálogo: vista, valle abierto, puntos fotogénicos y muy buen encaje para club o touring premium.",
+      fr: "C’est la route la plus élégante et équilibrée du catalogue : panorama, vallée ouverte, arrêts photogéniques et fort potentiel club.",
+      en: "It is the most elegant and balanced route in the catalogue: panoramic, photogenic and especially strong for premium touring or club use.",
+      pt: "É a rota mais elegante e equilibrada do catálogo: panorâmica, fotogénica e muito forte para touring premium ou clube.",
+      de: "Die eleganteste und ausgewogenste Route im Katalog: Panorama, fotogene Stopps und sehr stark für Touring oder Clubformat.",
+      ru: "Самый элегантный и сбалансированный маршрут: панорамы, фототочки и отличный вариант для клуба или touring.",
+    },
+  },
+  "west-viewpoints-loop": {
+    duration: ["short"],
+    vehicle: ["mperformance", "motorcycle"],
+    mood: ["dynamic"],
+    food: ["mountain", "light"],
+    why: {
+      ca: "Ruta curta i intensa, ideal quan vols xassís, revolts nets i una parada de muntanya sense convertir-ho en jornada llarga.",
+      es: "Ruta corta e intensa, ideal cuando quieres chasis, curvas limpias y una parada de montaña sin convertirlo en jornada larga.",
+      fr: "Route courte et intense, parfaite si vous voulez du châssis, des virages nets et un arrêt montagne sans journée complète.",
+      en: "Short and intense, ideal when you want chassis feel, clean bends and a mountain stop without committing to a full day.",
+      pt: "Rota curta e intensa, ideal quando queres chassis, curvas limpas e uma paragem de montanha sem um dia inteiro.",
+      de: "Kurz und intensiv, ideal für Fahrwerk, saubere Kurven und einen Bergstopp ohne Ganztageseinsatz.",
+      ru: "Короткий и интенсивный маршрут: шасси, чистые повороты и горная остановка без полного дня.",
+    },
+  },
+  "envalira-high-mountain": {
+    duration: ["alpine", "halfday"],
+    vehicle: ["motorcycle", "mperformance"],
+    mood: ["dynamic", "scenic"],
+    food: ["mountain", "light"],
+    why: {
+      ca: "La proposta més alpina i més extrema: port, cota alta, caràcter motor i sensació clara d’experiència de muntanya BMW.",
+      es: "La propuesta más alpina y más extrema: puerto, cota alta, carácter motor y sensación clara de experiencia de montaña BMW.",
+      fr: "La proposition la plus alpine et la plus extrême : col, haute altitude, caractère moteur et vraie sensation BMW en montagne.",
+      en: "The most alpine and most extreme proposal: high pass, altitude, motorsport flavour and a clear BMW mountain experience feel.",
+      pt: "A proposta mais alpina e mais extrema: porto, altitude, carácter motor e clara experiência BMW de montanha.",
+      de: "Die alpinste und extremste Variante: Pass, Höhe, Motor-Charakter und klares BMW-Berggefühl.",
+      ru: "Самая альпийская и экстремальная идея: перевал, высота, моторный характер и яркий BMW-опыт в горах.",
+    },
+  },
+  "ordino-tristaina-touring": {
+    duration: ["alpine", "halfday"],
+    vehicle: ["touring", "electric"],
+    mood: ["scenic", "official"],
+    food: ["signature", "mountain"],
+    why: {
+      ca: "És la ruta més premium en paisatge i atmosfera: Ordino, Sorteny i Tristaina donen un final molt fort i molt presentable.",
+      es: "Es la ruta más premium en paisaje y atmósfera: Ordino, Sorteny y Tristaina dan un final muy fuerte y muy presentable.",
+      fr: "C’est la route la plus premium en paysage et en atmosphère : Ordino, Sorteny et Tristaina offrent une finale très présentable.",
+      en: "It is the most premium in atmosphere and scenery: Ordino, Sorteny and Tristaina deliver a very strong, very presentable finish.",
+      pt: "É a rota mais premium em paisagem e atmosfera: Ordino, Sorteny e Tristaina dão um final muito forte e apresentável.",
+      de: "Die premiumhafteste Route in Landschaft und Atmosphäre: Ordino, Sorteny und Tristaina liefern ein starkes Finale.",
+      ru: "Самый премиальный маршрут по атмосфере и пейзажу: Ordino, Sorteny и Tristaina дают очень сильный финал.",
+    },
+  },
+};
+
 const buildGoogleMapsUrl = (stop: RouteStop) => {
   const query = encodeURIComponent(`${stop.name}, ${stop.place}, ${stop.lat}, ${stop.lon}`);
   return `https://www.google.com/maps/search/?api=1&query=${query}`;
@@ -1198,6 +1365,35 @@ const Itineraris = () => {
   const t = translations[language];
   const { data: routes = [] } = useMergedItineraries();
   const showcaseRoutes = routes.slice(0, 3);
+  const [conciergeDuration, setConciergeDuration] = useState<ConciergeDuration>("halfday");
+  const [conciergeVehicle, setConciergeVehicle] = useState<ConciergeVehicle>("touring");
+  const [conciergeMood, setConciergeMood] = useState<ConciergeMood>("scenic");
+  const [conciergeFood, setConciergeFood] = useState<ConciergeFood>("signature");
+
+  const conciergeRecommendation = useMemo(() => {
+    if (!routes.length) return null;
+
+    const ranked = routes
+      .map((route) => {
+        const fit = conciergeRouteFit[route.id];
+        if (!fit) return null;
+
+        let score = 0;
+        if (fit.duration.includes(conciergeDuration)) score += 3;
+        if (fit.vehicle.includes(conciergeVehicle)) score += 3;
+        if (fit.mood.includes(conciergeMood)) score += 2;
+        if (fit.food.includes(conciergeFood)) score += 2;
+        if (route.clubRecommended && conciergeMood === "official") score += 2;
+        if (route.profile === "both") score += 1;
+        if (conciergeVehicle === "electric" && route.notes.some((item) => /electric|eléctric|electrique|elektrisch|электр/i.test(item[language]))) score += 1;
+
+        return { route, fit, score };
+      })
+      .filter(Boolean) as Array<{ route: ClubItinerary; fit: (typeof conciergeRouteFit)[string]; score: number }>;
+
+    ranked.sort((a, b) => b.score - a.score);
+    return ranked[0] ?? null;
+  }, [routes, conciergeDuration, conciergeVehicle, conciergeMood, conciergeFood, language]);
 
   return (
     <PageShell>
@@ -1419,21 +1615,74 @@ const Itineraris = () => {
               <div className="rounded-[1.75rem] border border-border/70 bg-white/75 p-5">
                 <div className="flex items-center gap-2 text-primary font-semibold text-sm uppercase tracking-[0.18em]">
                   <Sparkles className="h-4 w-4" />
-                  {conciergePrototype.title[language]}
+                  {conciergeUi.title[language]}
                 </div>
-                <div className="mt-4 rounded-[1.4rem] bg-slate-950 p-4 text-white">
-                  <div className="text-[11px] font-semibold uppercase tracking-[0.16em] text-white/55">Prompt</div>
-                  <p className="mt-2 text-sm leading-6 text-white/88">{conciergePrototype.prompt[language]}</p>
-                  <div className="mt-4 flex flex-wrap gap-2">
-                    {conciergePrototype.chips[language].map((chip) => (
-                      <span key={chip} className="rounded-full border border-white/12 bg-white/10 px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.14em] text-white/84">{chip}</span>
-                    ))}
+                <p className="mt-3 text-sm leading-6 text-muted-foreground">{conciergeUi.intro[language]}</p>
+                <div className="mt-4 grid gap-4 sm:grid-cols-2">
+                  {[
+                    { label: conciergeUi.duration[language], value: conciergeDuration, setValue: setConciergeDuration, options: conciergeOptions.duration },
+                    { label: conciergeUi.vehicle[language], value: conciergeVehicle, setValue: setConciergeVehicle, options: conciergeOptions.vehicle },
+                    { label: conciergeUi.mood[language], value: conciergeMood, setValue: setConciergeMood, options: conciergeOptions.mood },
+                    { label: conciergeUi.food[language], value: conciergeFood, setValue: setConciergeFood, options: conciergeOptions.food },
+                  ].map((group) => (
+                    <div key={group.label}>
+                      <div className="mb-2 text-[11px] font-semibold uppercase tracking-[0.16em] text-slate-500">{group.label}</div>
+                      <div className="flex flex-wrap gap-2">
+                        {group.options.map((option) => (
+                          <button
+                            key={option.id}
+                            type="button"
+                            onClick={() => group.setValue(option.id as never)}
+                            className={`rounded-full px-3 py-2 text-xs font-semibold uppercase tracking-[0.14em] transition ${group.value === option.id ? "bg-slate-950 text-white" : "border border-slate-200 bg-white text-slate-700 hover:border-primary hover:text-primary"}`}
+                          >
+                            {option.label[language]}
+                          </button>
+                        ))}
+                      </div>
+                    </div>
+                  ))}
+                </div>
+
+                {conciergeRecommendation ? (
+                  <div className="mt-5 rounded-[1.4rem] border border-primary/15 bg-primary/5 p-4">
+                    <div className="text-[11px] font-semibold uppercase tracking-[0.16em] text-primary">{conciergeUi.recommendation[language]}</div>
+                    <div className="mt-3 flex items-start gap-4">
+                      <img
+                        src={conciergeRecommendation.route.image.src}
+                        alt={conciergeRecommendation.route.image.alt[language]}
+                        className="h-20 w-20 rounded-[1rem] object-cover"
+                        loading="lazy"
+                        decoding="async"
+                      />
+                      <div className="min-w-0 flex-1">
+                        <div className="text-lg font-semibold text-foreground">{conciergeRecommendation.route.title[language]}</div>
+                        <p className="mt-1 text-sm text-muted-foreground">{conciergeRecommendation.route.strapline[language]}</p>
+                        <div className="mt-3 flex flex-wrap gap-2 text-[11px] font-semibold uppercase tracking-[0.14em] text-slate-600">
+                          <span className="rounded-full bg-white px-3 py-1">{conciergeRecommendation.route.duration}</span>
+                          <span className="rounded-full bg-white px-3 py-1">{conciergeRecommendation.route.distance}</span>
+                          <span className="rounded-full bg-white px-3 py-1">{conciergeRecommendation.route.rhythm[language]}</span>
+                        </div>
+                      </div>
+                    </div>
+                    <div className="mt-4 text-[11px] font-semibold uppercase tracking-[0.16em] text-primary">{conciergeUi.why[language]}</div>
+                    <p className="mt-2 text-sm leading-6 text-foreground/86">{conciergeRecommendation.fit.why[language]}</p>
+                    {buildGoogleMapsRouteUrl(conciergeRecommendation.route) ? (
+                      <a
+                        href={buildGoogleMapsRouteUrl(conciergeRecommendation.route) ?? undefined}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="mt-4 inline-flex items-center gap-2 rounded-full bg-slate-950 px-4 py-2 text-xs font-semibold uppercase tracking-[0.14em] text-white transition hover:bg-primary"
+                      >
+                        {t.openFullRoute}
+                        <ExternalLink className="h-3.5 w-3.5" />
+                      </a>
+                    ) : null}
                   </div>
-                </div>
-                <div className="mt-4 rounded-[1.4rem] border border-primary/15 bg-primary/5 p-4">
-                  <div className="text-[11px] font-semibold uppercase tracking-[0.16em] text-primary">Output</div>
-                  <p className="mt-2 text-sm leading-6 text-foreground/86">{conciergePrototype.answer[language]}</p>
-                </div>
+                ) : (
+                  <div className="mt-4 rounded-[1.4rem] border border-primary/15 bg-primary/5 p-4 text-sm text-foreground/86">
+                    {conciergePrototype.answer[language]}
+                  </div>
+                )}
               </div>
 
               <div className="rounded-[1.75rem] border border-border/70 bg-white/75 p-5">
