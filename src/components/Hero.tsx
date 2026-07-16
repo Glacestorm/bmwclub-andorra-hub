@@ -10,7 +10,7 @@ interface HeroProps {
 const translations: Record<LanguageCode, Record<string, string>> = {
   ca: {
     eyebrow: "BMW Club Andorra",
-    title: "BMW Club Andorra, La passió per BMW",
+    title: "BMW Club Andorra, La passió per BMW",
     subtitle: "Calendari viu, meteo útil, arxiu real i una experiència digital més potent per al club.",
     description: "El club presenta una experiència digital més neta, més elegant i més útil per a socis i visitants, amb calendari, arxiu i accessos clars a la informació principal.",
     primary: "Obrir calendari 2026",
