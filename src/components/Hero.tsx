@@ -154,16 +154,15 @@ export const Hero = ({ language }: HeroProps) => {
             <div className="space-y-3 sm:space-y-4">
               <div className="relative isolate inline-block max-w-5xl">
                 <div
-                  className="pointer-events-none absolute -left-[6%] top-[2%] -z-10 hidden h-[108%] w-[92%] opacity-70 blur-2xl md:block"
+                  className="pointer-events-none absolute -left-[4%] top-[6%] -z-10 hidden h-[92%] w-[88%] rounded-[999px] opacity-62 blur-3xl md:block"
                   style={{
-                    background: "linear-gradient(90deg, rgba(0,56,168,0.40) 0%, rgba(0,56,168,0.40) 31%, rgba(252,208,22,0.28) 31%, rgba(252,208,22,0.28) 64%, rgba(210,16,52,0.36) 64%, rgba(210,16,52,0.36) 100%)",
-                    transform: "rotate(-7deg)",
-                    clipPath: "polygon(5% 25%, 18% 12%, 42% 8%, 69% 13%, 92% 24%, 98% 43%, 95% 62%, 84% 79%, 60% 89%, 35% 92%, 15% 84%, 4% 66%, 1% 45%)",
-                    maskImage: "radial-gradient(circle at 32% 48%, black 0%, black 46%, transparent 78%), radial-gradient(circle at 74% 42%, black 0%, black 40%, transparent 74%), linear-gradient(180deg, transparent 0%, black 18%, black 78%, transparent 100%)",
-                    WebkitMaskImage: "radial-gradient(circle at 32% 48%, black 0%, black 46%, transparent 78%), radial-gradient(circle at 74% 42%, black 0%, black 40%, transparent 74%), linear-gradient(180deg, transparent 0%, black 18%, black 78%, transparent 100%)",
+                    background: "linear-gradient(90deg, rgba(0,56,168,0.30) 0%, rgba(0,56,168,0.30) 32%, rgba(252,208,22,0.22) 32%, rgba(252,208,22,0.22) 66%, rgba(210,16,52,0.28) 66%, rgba(210,16,52,0.28) 100%)",
+                    transform: "rotate(-6deg)",
+                    maskImage: "radial-gradient(ellipse at 24% 52%, black 0%, black 28%, transparent 56%), radial-gradient(ellipse at 52% 48%, black 0%, black 30%, transparent 58%), radial-gradient(ellipse at 80% 46%, black 0%, black 26%, transparent 54%)",
+                    WebkitMaskImage: "radial-gradient(ellipse at 24% 52%, black 0%, black 28%, transparent 56%), radial-gradient(ellipse at 52% 48%, black 0%, black 30%, transparent 58%), radial-gradient(ellipse at 80% 46%, black 0%, black 26%, transparent 54%)",
                   }}
                 />
-                <div className="pointer-events-none absolute left-[8%] top-[18%] -z-10 hidden h-[58%] w-[52%] rounded-full bg-white/8 blur-3xl md:block" />
+                <div className="pointer-events-none absolute left-[10%] top-[20%] -z-10 hidden h-[54%] w-[48%] rounded-full bg-white/7 blur-[72px] md:block" />
                 <h1 className="text-[2.35rem] sm:text-5xl md:text-6xl lg:text-7xl font-bold text-balance leading-[0.95]">{t.title}</h1>
               </div>
             </div>
