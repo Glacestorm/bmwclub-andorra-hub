@@ -36,7 +36,7 @@ export const sponsorItems: SponsorItem[] = [
     accent: "Sponsor principal",
     brand: {
       logoPath: "/sponsors/pyrenees-andorra-source.png",
-      logoFit: "standard",
+      logoFit: "wide",
       accent: "#d4af37",
       surface: "linear-gradient(135deg, rgba(17,24,39,0.98) 0%, rgba(38,38,38,0.96) 100%)",
       border: "rgba(212,175,55,0.34)",

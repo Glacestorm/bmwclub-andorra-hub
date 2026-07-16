@@ -202,6 +202,7 @@ const translations: Record<LanguageCode, Record<string, string>> = {
 
 const SponsorLogoPlate = ({ sponsor, dark = false, compact = false }: { sponsor: SponsorItem; dark?: boolean; compact?: boolean }) => {
   const logoFit = sponsor.brand.logoFit ?? "standard";
+  const isPyrenees = sponsor.id === "pyrenees-andorra";
 
   const logoClassByFit = {
     standard: compact
@@ -238,12 +239,20 @@ const SponsorLogoPlate = ({ sponsor, dark = false, compact = false }: { sponsor:
 
         <div
           className={`flex items-center justify-center rounded-[1.4rem] border ${compact ? "h-[120px] sm:h-[132px] p-3" : "h-[168px] sm:h-[192px] md:h-[216px] p-3 md:p-4"}`}
-          style={{ borderColor: sponsor.brand.border, background: dark ? "rgba(255,255,255,0.03)" : "rgba(255,255,255,0.38)" }}
+          style={{
+            borderColor: isPyrenees ? "rgba(255,255,255,0.82)" : sponsor.brand.border,
+            background: isPyrenees
+              ? "linear-gradient(180deg, rgba(255,255,255,0.98) 0%, rgba(248,250,252,0.98) 100%)"
+              : dark
+                ? "rgba(255,255,255,0.03)"
+                : "rgba(255,255,255,0.38)",
+            boxShadow: isPyrenees ? "inset 0 1px 0 rgba(255,255,255,0.75), 0 18px 40px -28px rgba(255,255,255,0.28)" : undefined,
+          }}
         >
           <img
             src={sponsor.brand.logoPath}
             alt={`${sponsor.name} logo`}
-            className={`${logoClassByFit[logoFit]} object-contain`}
+            className={`${logoClassByFit[logoFit]} object-contain ${isPyrenees ? "drop-shadow-[0_1px_1px_rgba(255,255,255,0.18)]" : ""}`}
             loading="lazy"
           />
         </div>

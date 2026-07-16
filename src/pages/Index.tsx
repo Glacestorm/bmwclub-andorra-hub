@@ -420,6 +420,7 @@ const Index = () => {
   const t = translations[language];
   const highlightCards = featuredEventMeta.slice(0, 3).map((item) => ({ meta: item, event: getEventById(item.eventId) })).filter((item) => item.event);
   const featuredSponsor = sponsorItems.find((item) => item.tier === "featured");
+  const featuredSponsorHasLightLogoPlate = featuredSponsor?.id === "pyrenees-andorra";
   const homeSponsors = sponsorItems.filter((item) => item.link && item.tier !== "featured").slice(0, 3);
 
   return (
@@ -582,8 +583,17 @@ const Index = () => {
                 {featuredSponsor && (
                   <a href={featuredSponsor.link?.href} target="_blank" rel="noreferrer" className="rounded-[1.75rem] md:rounded-[2rem] border border-white/12 bg-white/8 p-5 md:p-8 block hover:bg-white/10 transition-base shadow-[0_25px_70px_-38px_rgba(15,23,42,.5)]">
                     <div className="inline-flex items-center gap-2 rounded-full bg-white/10 px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.2em] text-white/75">{t.featuredSponsorLabel}</div>
-                    <div className="mt-5 rounded-[1.6rem] p-5" style={{ background: featuredSponsor.brand.surface, border: `1px solid ${featuredSponsor.brand.border}` }}>
-                      <img src={featuredSponsor.brand.logoPath} alt={`${featuredSponsor.name} logo`} className="h-16 w-auto max-w-full object-contain" loading="lazy" />
+                    <div
+                      className="mt-5 rounded-[1.6rem] p-5"
+                      style={{
+                        background: featuredSponsorHasLightLogoPlate
+                          ? "linear-gradient(180deg, rgba(255,255,255,0.99) 0%, rgba(248,250,252,0.98) 100%)"
+                          : featuredSponsor.brand.surface,
+                        border: `1px solid ${featuredSponsorHasLightLogoPlate ? "rgba(255,255,255,0.82)" : featuredSponsor.brand.border}`,
+                        boxShadow: featuredSponsorHasLightLogoPlate ? "inset 0 1px 0 rgba(255,255,255,0.78), 0 16px 32px -24px rgba(255,255,255,0.22)" : undefined,
+                      }}
+                    >
+                      <img src={featuredSponsor.brand.logoPath} alt={`${featuredSponsor.name} logo`} className="mx-auto h-20 w-auto max-w-full object-contain" loading="lazy" />
                     </div>
                     <div className="mt-4 text-2xl sm:text-3xl md:text-4xl font-bold text-balance">{featuredSponsor.name}</div>
                     <div className="mt-3 text-sm uppercase tracking-[0.2em] text-white/55">{featuredSponsor.category}</div>
