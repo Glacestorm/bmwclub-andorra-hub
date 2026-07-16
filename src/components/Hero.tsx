@@ -143,14 +143,6 @@ export const Hero = ({ language }: HeroProps) => {
         <img src="/legacy-mirror/images/portades-banner24.jpg" alt="BMW Club Andorra portada històrica" className="h-full w-full object-cover object-[56%_center] scale-100 sm:object-center sm:scale-[1.01] md:scale-[1.03]" loading="eager" />
         <div className="absolute inset-0 gradient-overlay opacity-70 sm:opacity-80 md:opacity-100" />
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_78%_12%,rgba(0,102,177,.22),transparent_24%),radial-gradient(circle_at_12%_18%,rgba(255,255,255,.10),transparent_18%)] md:bg-[radial-gradient(circle_at_80%_10%,rgba(0,102,177,.32),transparent_22%),radial-gradient(circle_at_10%_25%,rgba(255,255,255,.12),transparent_18%)]" />
-        <div className="pointer-events-none absolute right-[-4%] top-[10%] hidden h-[52%] w-[46%] rounded-[3rem] opacity-65 blur-xl md:block"
-          style={{
-            background: "linear-gradient(90deg, rgba(0,56,168,0.44) 0%, rgba(0,56,168,0.44) 33%, rgba(252,208,22,0.32) 33%, rgba(252,208,22,0.32) 66%, rgba(210,16,52,0.40) 66%, rgba(210,16,52,0.40) 100%)",
-            transform: "rotate(-9deg)",
-            maskImage: "radial-gradient(circle at center, black 48%, transparent 82%)",
-            WebkitMaskImage: "radial-gradient(circle at center, black 48%, transparent 82%)",
-          }}
-        />
       </div>
 
       <div className="relative z-10 container mx-auto px-4 pt-8 pb-12 sm:pt-10 sm:pb-14 md:pt-12 md:pb-16 lg:pt-16 lg:pb-24">
@@ -160,7 +152,18 @@ export const Hero = ({ language }: HeroProps) => {
               <Sparkles className="h-4 w-4" /> {t.eyebrow}
             </div>
             <div className="space-y-3 sm:space-y-4">
-              <h1 className="text-[2.35rem] sm:text-5xl md:text-6xl lg:text-7xl font-bold text-balance leading-[0.95]">{t.title}</h1>
+              <div className="relative isolate inline-block max-w-5xl">
+                <div
+                  className="pointer-events-none absolute -left-[3%] top-[6%] -z-10 hidden h-[92%] w-[86%] rounded-[3rem] opacity-75 blur-xl md:block"
+                  style={{
+                    background: "linear-gradient(90deg, rgba(0,56,168,0.50) 0%, rgba(0,56,168,0.50) 33%, rgba(252,208,22,0.38) 33%, rgba(252,208,22,0.38) 66%, rgba(210,16,52,0.46) 66%, rgba(210,16,52,0.46) 100%)",
+                    transform: "rotate(-7deg)",
+                    maskImage: "radial-gradient(circle at center, black 52%, transparent 84%)",
+                    WebkitMaskImage: "radial-gradient(circle at center, black 52%, transparent 84%)",
+                  }}
+                />
+                <h1 className="text-[2.35rem] sm:text-5xl md:text-6xl lg:text-7xl font-bold text-balance leading-[0.95]">{t.title}</h1>
+              </div>
             </div>
             <div className="flex flex-col items-stretch gap-2.5 pt-1 sm:flex-row sm:items-start sm:gap-4 sm:pt-2">
               <Link to="/calendari/2026" className="w-full sm:w-auto"><Button variant="hero" className="h-12 w-full gap-2 px-6 text-base sm:h-14 sm:w-auto sm:px-10 sm:text-lg">{t.primary}<ArrowRight className="h-5 w-5" /></Button></Link>
