@@ -422,6 +422,7 @@ const Index = () => {
   const featuredSponsor = sponsorItems.find((item) => item.tier === "featured");
   const featuredSponsorHasLightLogoPlate = featuredSponsor?.id === "pyrenees-andorra";
   const homeSponsors = sponsorItems.filter((item) => item.link && item.tier !== "featured").slice(0, 3);
+  const homeSponsorsWithLightLogoPlate = new Set(["coma-hotel", "basar-valira", "santeloi"]);
 
   return (
     <PageShell>
@@ -606,17 +607,36 @@ const Index = () => {
                 )}
 
                 <div className="grid gap-4">
-                  {homeSponsors.map((sponsor) => (
-                    <a key={sponsor.id} href={sponsor.link?.href} target="_blank" rel="noreferrer" className="rounded-2xl border border-white/10 bg-white/5 p-4 block hover:bg-white/10 transition-base">
-                      <div className="rounded-[1.15rem] px-4 py-4" style={{ background: sponsor.brand.surface, border: `1px solid ${sponsor.brand.border}` }}>
-                        <img src={sponsor.brand.logoPath} alt={`${sponsor.name} logo`} className="h-10 w-auto max-w-full object-contain" loading="lazy" />
-                      </div>
-                      <div className="mt-4 text-xs uppercase tracking-[0.2em] text-white/60 font-semibold">{sponsor.category}</div>
-                      <div className="mt-2 font-semibold text-balance">{sponsor.name}</div>
-                      <div className="mt-2 text-sm text-white/68">{getLocalizedText(sponsor.summary, language)}</div>
-                      <div className="mt-4 inline-flex items-center gap-2 text-sm text-white">{t.sponsorsOpen} <ArrowRight className="h-4 w-4" /></div>
-                    </a>
-                  ))}
+                  {homeSponsors.map((sponsor) => {
+                    const hasLightLogoPlate = homeSponsorsWithLightLogoPlate.has(sponsor.id);
+                    const isWideLogo = (sponsor.brand.logoFit ?? "standard") === "wide";
+
+                    return (
+                      <a key={sponsor.id} href={sponsor.link?.href} target="_blank" rel="noreferrer" className="rounded-2xl border border-white/10 bg-white/5 p-4 block hover:bg-white/10 transition-base">
+                        <div
+                          className="flex min-h-[136px] items-center justify-center rounded-[1.25rem] px-5 py-5"
+                          style={{
+                            background: hasLightLogoPlate
+                              ? "linear-gradient(180deg, rgba(255,255,255,0.99) 0%, rgba(248,250,252,0.98) 100%)"
+                              : sponsor.brand.surface,
+                            border: `1px solid ${hasLightLogoPlate ? "rgba(255,255,255,0.82)" : sponsor.brand.border}`,
+                            boxShadow: hasLightLogoPlate ? "inset 0 1px 0 rgba(255,255,255,0.78), 0 14px 28px -24px rgba(255,255,255,0.22)" : undefined,
+                          }}
+                        >
+                          <img
+                            src={sponsor.brand.logoPath}
+                            alt={`${sponsor.name} logo`}
+                            className={isWideLogo ? "max-h-[84px] w-full object-contain" : "max-h-[88px] w-auto max-w-full object-contain"}
+                            loading="lazy"
+                          />
+                        </div>
+                        <div className="mt-4 text-xs uppercase tracking-[0.2em] text-white/60 font-semibold">{sponsor.category}</div>
+                        <div className="mt-2 font-semibold text-balance">{sponsor.name}</div>
+                        <div className="mt-2 text-sm text-white/68">{getLocalizedText(sponsor.summary, language)}</div>
+                        <div className="mt-4 inline-flex items-center gap-2 text-sm text-white">{t.sponsorsOpen} <ArrowRight className="h-4 w-4" /></div>
+                      </a>
+                    );
+                  })}
                 </div>
               </div>
             </div>

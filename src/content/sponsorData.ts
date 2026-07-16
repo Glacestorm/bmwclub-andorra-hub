@@ -73,7 +73,7 @@ export const sponsorItems: SponsorItem[] = [
       logoPath: "/sponsors/coma-hotel.svg",
       logoFit: "wide",
       accent: "#a16207",
-      surface: "linear-gradient(135deg, rgba(250,245,235,0.96) 0%, rgba(255,255,255,0.96) 100%)",
+      surface: "linear-gradient(180deg, rgba(255,255,255,0.99) 0%, rgba(248,250,252,0.98) 100%)",
       border: "rgba(161,98,7,0.24)",
       text: "#1f2937",
       badge: "rgba(161,98,7,0.10)",
