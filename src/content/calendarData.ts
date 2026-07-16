@@ -6,6 +6,22 @@ export type ClubLocation = {
   timezone?: string;
 };
 
+export type ClubEventTimelineStop = {
+  time: string;
+  title: string;
+  note?: string;
+};
+
+export type ClubEventLink = {
+  label: string;
+  href: string;
+};
+
+export type ClubEventSponsor = {
+  name: string;
+  href?: string;
+};
+
 export type ClubEvent = {
   id: string;
   year: number;
@@ -15,11 +31,21 @@ export type ClubEvent = {
   displayDate: string;
   category: "sortida" | "esmorzar" | "cars-coffee" | "rally" | "viatge" | "sopar" | "historica";
   summary?: string;
+  briefing?: string;
   notes?: string[];
+  highlights?: string[];
+  checklist?: string[];
+  timeline?: ClubEventTimelineStop[];
   source: ClubLocation;
   destination?: ClubLocation;
+  meetingPoint?: string;
+  meetingTime?: string;
   galleryHref?: string;
   legacyHref?: string;
+  roadbook?: ClubEventLink;
+  callToAction?: ClubEventLink;
+  sponsors?: ClubEventSponsor[];
+  heroImage?: string;
   evidence: "original-site" | "gallery-title" | "media-inferred" | "mixed";
   featured?: boolean;
 };

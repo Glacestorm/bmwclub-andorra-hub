@@ -31,11 +31,12 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { clubEvents } from "@/content/calendarData";
+import { clubEvents, type ClubEvent } from "@/content/calendarData";
 import { galleryMediaByPage } from "@/content/galleryMedia";
 import { itineraryGuide } from "@/content/itineraryGuide";
 import {
   buildCmsPublicPath,
+  buildEventPreviewUrl,
   canRole,
   clubCmsConfig,
   collectionKeyByGalleryHref,
@@ -47,6 +48,7 @@ import {
   restoreClubEntry,
   roleLabel,
   saveClubEntry,
+  saveEventPreview,
   signInClubAdmin,
   signOutClubAdmin,
   slugify,
@@ -128,6 +130,18 @@ const defaultEventDraft = () => ({
   destinationTimezone: "Europe/Andorra",
   galleryHref: "/galeria/sortides/2026",
   summary: "Sortida oficial del club amb parada per esmorzar i fotografia.",
+  briefing: "Briefing premium de la sortida amb to, ritme i punts clau.",
+  meetingPoint: "Parking principal Andorra la Vella",
+  meetingTime: "08:30",
+  highlightsText: "Ruta panoràmica\nParada gastronòmica\nFoto oficial del club",
+  checklistText: "Confirmar meteo\nCompartir punt de trobada\nRevisar galeria i roadbook",
+  timelineText: "08:30 | Trobada | Parking principal\n09:00 | Briefing | Distribució de cotxes i ràdios\n10:30 | Coffee stop | Parada curta i fotos\n13:30 | Dinar | Restaurant partner",
+  sponsorsText: "BMW Andorra|https://bmwclubandorra.com\nPartner local",
+  roadbookLabel: "Descarregar roadbook",
+  roadbookHref: "",
+  ctaLabel: "Reserva la teva plaça",
+  ctaHref: "",
+  heroImage: "",
   notesText: "",
   evidence: "mixed",
   featured: true,
@@ -138,6 +152,24 @@ const splitLines = (value: string) =>
     .split("\n")
     .map((item) => item.trim())
     .filter(Boolean);
+
+const parseTimelineLines = (value: string) =>
+  splitLines(value)
+    .map((line) => {
+      const [time = "", title = "", ...rest] = line.split("|").map((item) => item.trim());
+      if (!time && !title) return null;
+      return { time, title: title || time, note: rest.join(" | ") || undefined };
+    })
+    .filter(Boolean) as { time: string; title: string; note?: string }[];
+
+const parseSponsorsLines = (value: string) =>
+  splitLines(value)
+    .map((line) => {
+      const [name = "", href = ""] = line.split("|").map((item) => item.trim());
+      if (!name) return null;
+      return { name, href: href || undefined };
+    })
+    .filter(Boolean) as { name: string; href?: string }[];
 
 const galleryEntryToDraft = (entry: any) => ({
   recordId: entry.id,
@@ -210,6 +242,22 @@ const eventEntryToDraft = (entry: any) => ({
   destinationTimezone: String(entry.payload?.destination?.timezone ?? "Europe/Andorra"),
   galleryHref: String(entry.payload?.galleryHref ?? (entry.collection_key ? galleryHrefByCollectionKey[entry.collection_key] ?? "" : "")),
   summary: String(entry.payload?.summary ?? ""),
+  briefing: String(entry.payload?.briefing ?? ""),
+  meetingPoint: String(entry.payload?.meetingPoint ?? ""),
+  meetingTime: String(entry.payload?.meetingTime ?? ""),
+  highlightsText: Array.isArray(entry.payload?.highlights) ? entry.payload.highlights.join("\n") : "",
+  checklistText: Array.isArray(entry.payload?.checklist) ? entry.payload.checklist.join("\n") : "",
+  timelineText: Array.isArray(entry.payload?.timeline)
+    ? entry.payload.timeline.map((item: any) => [String(item?.time ?? ""), String(item?.title ?? ""), String(item?.note ?? "")].filter(Boolean).join(" | ")).join("\n")
+    : "",
+  sponsorsText: Array.isArray(entry.payload?.sponsors)
+    ? entry.payload.sponsors.map((item: any) => [String(item?.name ?? ""), String(item?.href ?? "")].filter(Boolean).join("|")).join("\n")
+    : "",
+  roadbookLabel: String(entry.payload?.roadbook?.label ?? ""),
+  roadbookHref: String(entry.payload?.roadbook?.href ?? ""),
+  ctaLabel: String(entry.payload?.callToAction?.label ?? ""),
+  ctaHref: String(entry.payload?.callToAction?.href ?? ""),
+  heroImage: String(entry.payload?.heroImage ?? entry.cover_image_url ?? ""),
   notesText: Array.isArray(entry.payload?.notes) ? entry.payload.notes.join("\n") : "",
   evidence: String(entry.payload?.evidence ?? "mixed"),
   featured: Boolean(entry.payload?.featured),
@@ -510,6 +558,7 @@ const GestioClub = () => {
         collectionKey,
         year: Number(eventDraft.year),
         sortOrder: eventDraft.sortOrder,
+        coverImageUrl: eventDraft.heroImage || null,
         scheduledFor: eventDraft.scheduledFor,
         publishedAt: eventDraft.publishedAt,
         payload: {
@@ -535,6 +584,16 @@ const GestioClub = () => {
             : undefined,
           galleryHref: eventDraft.galleryHref || undefined,
           summary: eventDraft.summary || undefined,
+          briefing: eventDraft.briefing || undefined,
+          meetingPoint: eventDraft.meetingPoint || undefined,
+          meetingTime: eventDraft.meetingTime || undefined,
+          highlights: splitLines(eventDraft.highlightsText),
+          checklist: splitLines(eventDraft.checklistText),
+          timeline: parseTimelineLines(eventDraft.timelineText),
+          sponsors: parseSponsorsLines(eventDraft.sponsorsText),
+          roadbook: eventDraft.roadbookLabel && eventDraft.roadbookHref ? { label: eventDraft.roadbookLabel, href: eventDraft.roadbookHref } : undefined,
+          callToAction: eventDraft.ctaLabel && eventDraft.ctaHref ? { label: eventDraft.ctaLabel, href: eventDraft.ctaHref } : undefined,
+          heroImage: eventDraft.heroImage || undefined,
           notes: splitLines(eventDraft.notesText),
           evidence: eventDraft.evidence,
           featured: eventDraft.featured,
@@ -625,6 +684,61 @@ const GestioClub = () => {
 
     setEventDraft((current) => duplicateClubEntryDraft({ ...current, title: `${current.title} copy` }));
     setSuccess("Esdeveniment duplicat al formulari.");
+  };
+
+  const buildEventPreviewModel = (): ClubEvent => ({
+    id: eventDraft.slug || slugify(eventDraft.title),
+    year: Number(eventDraft.year) || new Date().getFullYear(),
+    title: eventDraft.title,
+    start: eventDraft.start || undefined,
+    end: eventDraft.end || undefined,
+    displayDate: eventDraft.displayDate,
+    category: eventDraft.category as ClubEvent["category"],
+    summary: eventDraft.summary || undefined,
+    briefing: eventDraft.briefing || undefined,
+    notes: splitLines(eventDraft.notesText),
+    highlights: splitLines(eventDraft.highlightsText),
+    checklist: splitLines(eventDraft.checklistText),
+    timeline: parseTimelineLines(eventDraft.timelineText),
+    source: {
+      name: eventDraft.sourceName,
+      label: eventDraft.sourceLabel || undefined,
+      lat: parseFloatSafe(eventDraft.sourceLat, 42.5063),
+      lon: parseFloatSafe(eventDraft.sourceLon, 1.5218),
+      timezone: eventDraft.sourceTimezone || "Europe/Andorra",
+    },
+    destination: eventDraft.destinationName
+      ? {
+          name: eventDraft.destinationName,
+          label: eventDraft.destinationLabel || undefined,
+          lat: parseFloatSafe(eventDraft.destinationLat, 42.5562),
+          lon: parseFloatSafe(eventDraft.destinationLon, 1.5332),
+          timezone: eventDraft.destinationTimezone || "Europe/Andorra",
+        }
+      : undefined,
+    meetingPoint: eventDraft.meetingPoint || undefined,
+    meetingTime: eventDraft.meetingTime || undefined,
+    galleryHref: eventDraft.galleryHref || undefined,
+    roadbook: eventDraft.roadbookLabel && eventDraft.roadbookHref ? { label: eventDraft.roadbookLabel, href: eventDraft.roadbookHref } : undefined,
+    callToAction: eventDraft.ctaLabel && eventDraft.ctaHref ? { label: eventDraft.ctaLabel, href: eventDraft.ctaHref } : undefined,
+    sponsors: parseSponsorsLines(eventDraft.sponsorsText),
+    heroImage: eventDraft.heroImage || undefined,
+    legacyHref: undefined,
+    evidence: eventDraft.evidence as ClubEvent["evidence"],
+    featured: eventDraft.featured,
+  });
+
+  const openEventPreview = async () => {
+    if (!eventDraft.title) {
+      setBanner({ tone: "info", text: "Posa com a mínim un títol abans d'obrir la preview." });
+      return;
+    }
+
+    const previewEvent = buildEventPreviewModel();
+    saveEventPreview(previewEvent);
+    const previewUrl = buildEventPreviewUrl(previewEvent.id);
+    await copyText(`${window.location.origin}${previewUrl}`, "URL de preview privada");
+    openExternal(previewUrl);
   };
 
   const projectRef = useMemo(() => {
@@ -1566,7 +1680,38 @@ const GestioClub = () => {
                         </select>
                       </Field>
                     </div>
+                    <div className="mt-5 rounded-[1.5rem] border border-primary/15 bg-primary/5 p-5">
+                      <div className="flex flex-wrap items-start justify-between gap-4">
+                        <div>
+                          <div className="text-sm font-semibold uppercase tracking-[0.18em] text-primary">Microsite preview</div>
+                          <p className="mt-2 text-sm text-muted-foreground">Genera una vista privada immediata amb els camps del formulari, sense guardar ni tocar el routing.</p>
+                          <div className="mt-3 rounded-xl bg-white/80 px-3 py-2 text-xs text-muted-foreground break-all">{buildEventPreviewUrl(eventDraft.slug || slugify(eventDraft.title || "nova-sortida"))}</div>
+                        </div>
+                        <Button variant="outline" className="rounded-full" onClick={openEventPreview}>
+                          <Rocket className="h-4 w-4" />
+                          Obrir preview
+                        </Button>
+                      </div>
+                    </div>
                     <Field label="Resum" className="mt-4"><Textarea value={eventDraft.summary} onChange={(event) => setEventDraft((current) => ({ ...current, summary: event.target.value }))} /></Field>
+                    <Field label="Briefing / hero copy" className="mt-4"><Textarea value={eventDraft.briefing} onChange={(event) => setEventDraft((current) => ({ ...current, briefing: event.target.value }))} /></Field>
+                    <div className="grid gap-4 md:grid-cols-2 mt-4">
+                      <Field label="Punt de trobada"><Input value={eventDraft.meetingPoint} onChange={(event) => setEventDraft((current) => ({ ...current, meetingPoint: event.target.value }))} /></Field>
+                      <Field label="Hora de trobada"><Input value={eventDraft.meetingTime} onChange={(event) => setEventDraft((current) => ({ ...current, meetingTime: event.target.value }))} /></Field>
+                    </div>
+                    <Field label="Hero image URL" className="mt-4"><Input value={eventDraft.heroImage} onChange={(event) => setEventDraft((current) => ({ ...current, heroImage: event.target.value }))} /></Field>
+                    <div className="grid gap-4 md:grid-cols-2 mt-4">
+                      <Field label="Roadbook label"><Input value={eventDraft.roadbookLabel} onChange={(event) => setEventDraft((current) => ({ ...current, roadbookLabel: event.target.value }))} /></Field>
+                      <Field label="Roadbook href"><Input value={eventDraft.roadbookHref} onChange={(event) => setEventDraft((current) => ({ ...current, roadbookHref: event.target.value }))} /></Field>
+                    </div>
+                    <div className="grid gap-4 md:grid-cols-2 mt-4">
+                      <Field label="CTA label"><Input value={eventDraft.ctaLabel} onChange={(event) => setEventDraft((current) => ({ ...current, ctaLabel: event.target.value }))} /></Field>
+                      <Field label="CTA href"><Input value={eventDraft.ctaHref} onChange={(event) => setEventDraft((current) => ({ ...current, ctaHref: event.target.value }))} /></Field>
+                    </div>
+                    <Field label="Highlights (una línia = un punt)" className="mt-4"><Textarea value={eventDraft.highlightsText} onChange={(event) => setEventDraft((current) => ({ ...current, highlightsText: event.target.value }))} /></Field>
+                    <Field label="Checklist (una línia = un ítem)" className="mt-4"><Textarea value={eventDraft.checklistText} onChange={(event) => setEventDraft((current) => ({ ...current, checklistText: event.target.value }))} /></Field>
+                    <Field label="Timeline (format: hora | títol | nota)" className="mt-4"><Textarea value={eventDraft.timelineText} onChange={(event) => setEventDraft((current) => ({ ...current, timelineText: event.target.value }))} /></Field>
+                    <Field label="Sponsors (format: nom|url opcional)" className="mt-4"><Textarea value={eventDraft.sponsorsText} onChange={(event) => setEventDraft((current) => ({ ...current, sponsorsText: event.target.value }))} /></Field>
                     <Field label="Notes" className="mt-4"><Textarea value={eventDraft.notesText} onChange={(event) => setEventDraft((current) => ({ ...current, notesText: event.target.value }))} /></Field>
                     <ActionsRow onSave={saveEvent} onDuplicate={() => duplicateCurrent("event")} onTrash={() => trashCurrent("event")} onRestore={() => restoreCurrent("event")} onHardDelete={() => hardDeleteCurrent("event")} busy={busy} canDelete={canDelete} isDeleted={Boolean(eventDraft.recordId && eventItems.find((item) => item.id === eventDraft.recordId)?.deleted_at)} />
                   </Card>

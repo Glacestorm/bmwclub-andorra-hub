@@ -2,7 +2,16 @@ import { useEffect, useMemo, useState } from "react";
 import { format } from "date-fns";
 import { useQuery } from "@tanstack/react-query";
 import { createClient, type Session, type SupabaseClient } from "@supabase/supabase-js";
-import { clubEvents, type ClubEvent, type ClubLocation, calendarYears, type ClubLocation as ClubLocationType } from "@/content/calendarData";
+import {
+  clubEvents,
+  type ClubEvent,
+  type ClubEventLink,
+  type ClubEventSponsor,
+  type ClubEventTimelineStop,
+  type ClubLocation,
+  calendarYears,
+  type ClubLocation as ClubLocationType,
+} from "@/content/calendarData";
 import { galleryMediaByPage, type GalleryMediaImage, type GalleryMediaSection } from "@/content/galleryMedia";
 import { itineraryGuide, type ClubItinerary, type ItineraryProfile, type LocalizedText } from "@/content/itineraryGuide";
 import { type LanguageCode } from "@/lib/i18n";
@@ -152,6 +161,40 @@ const toLocation = (value: unknown, fallbackName: string): ClubLocation => {
   };
 };
 
+const toEventTimeline = (value: unknown): ClubEventTimelineStop[] =>
+  Array.isArray(value)
+    ? value
+        .map((item) => {
+          const raw = typeof item === "object" && item !== null ? (item as Record<string, unknown>) : {};
+          const time = typeof raw.time === "string" ? raw.time.trim() : "";
+          const title = typeof raw.title === "string" ? raw.title.trim() : "";
+          const note = typeof raw.note === "string" ? raw.note.trim() : "";
+          if (!time && !title) return null;
+          return { time, title: title || time, note: note || undefined };
+        })
+        .filter(Boolean) as ClubEventTimelineStop[]
+    : [];
+
+const toEventLinks = (value: unknown): ClubEventLink | undefined => {
+  const raw = typeof value === "object" && value !== null ? (value as Record<string, unknown>) : {};
+  const label = typeof raw.label === "string" ? raw.label.trim() : "";
+  const href = typeof raw.href === "string" ? raw.href.trim() : "";
+  return label && href ? { label, href } : undefined;
+};
+
+const toEventSponsors = (value: unknown): ClubEventSponsor[] =>
+  Array.isArray(value)
+    ? value
+        .map((item) => {
+          const raw = typeof item === "object" && item !== null ? (item as Record<string, unknown>) : {};
+          const name = typeof raw.name === "string" ? raw.name.trim() : "";
+          const href = typeof raw.href === "string" ? raw.href.trim() : "";
+          if (!name) return null;
+          return { name, href: href || undefined };
+        })
+        .filter(Boolean) as ClubEventSponsor[]
+    : [];
+
 const normalizeGalleryImage = (image: unknown, index: number): GalleryMediaImage | null => {
   const raw = typeof image === "object" && image !== null ? (image as Record<string, unknown>) : {};
   const src = typeof raw.src === "string" ? raw.src.trim() : "";
@@ -229,11 +272,21 @@ export const mapEventEntryToClubEvent = (entry: ClubAdminEntryRow): ClubEvent =>
     displayDate: typeof payload.displayDate === "string" ? payload.displayDate : "",
     category,
     summary: typeof payload.summary === "string" && payload.summary ? payload.summary : undefined,
+    briefing: typeof payload.briefing === "string" && payload.briefing ? payload.briefing : undefined,
     notes: toStringArray(payload.notes),
+    highlights: toStringArray(payload.highlights),
+    checklist: toStringArray(payload.checklist),
+    timeline: toEventTimeline(payload.timeline),
     source: toLocation(payload.source, "Andorra la Vella"),
     destination: payload.destination ? toLocation(payload.destination, "Andorra la Vella") : undefined,
+    meetingPoint: typeof payload.meetingPoint === "string" && payload.meetingPoint ? payload.meetingPoint : undefined,
+    meetingTime: typeof payload.meetingTime === "string" && payload.meetingTime ? payload.meetingTime : undefined,
     galleryHref: typeof payload.galleryHref === "string" && payload.galleryHref ? payload.galleryHref : (entry.collection_key ? galleryHrefByCollectionKey[entry.collection_key] : undefined),
     legacyHref: typeof payload.legacyHref === "string" && payload.legacyHref ? payload.legacyHref : undefined,
+    roadbook: toEventLinks(payload.roadbook),
+    callToAction: toEventLinks(payload.callToAction),
+    sponsors: toEventSponsors(payload.sponsors),
+    heroImage: typeof payload.heroImage === "string" && payload.heroImage ? payload.heroImage : entry.cover_image_url || undefined,
     evidence,
     featured: Boolean(payload.featured),
   };
@@ -551,6 +604,28 @@ export const buildCmsPublicPath = (entry: ClubAdminEntryRow) => {
   if (entry.content_type === "itinerary") return "/itineraris";
   if (entry.content_type === "event") return `/esdeveniments/${entry.slug}`;
   return "/";
+};
+
+const EVENT_PREVIEW_STORAGE_KEY = "club-event-preview";
+
+export const buildEventPreviewUrl = (eventId: string) => `/esdeveniments/${eventId}?preview=1`;
+
+export const saveEventPreview = (event: ClubEvent) => {
+  if (typeof window === "undefined") return;
+  window.localStorage.setItem(EVENT_PREVIEW_STORAGE_KEY, JSON.stringify({ event, savedAt: Date.now() }));
+};
+
+export const loadEventPreview = (eventId: string) => {
+  if (typeof window === "undefined") return null as ClubEvent | null;
+  const raw = window.localStorage.getItem(EVENT_PREVIEW_STORAGE_KEY);
+  if (!raw) return null;
+
+  try {
+    const parsed = JSON.parse(raw) as { event?: ClubEvent };
+    return parsed?.event?.id === eventId ? parsed.event : null;
+  } catch {
+    return null;
+  }
 };
 
 const getSectionFromPath = (pathname: string) => {
