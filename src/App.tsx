@@ -3,10 +3,11 @@ import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
+import { BrowserRouter, Navigate, Route, Routes, useLocation } from "react-router-dom";
 import { LanguageProvider } from "@/components/LanguageProvider";
 import { AppErrorBoundary } from "@/components/AppErrorBoundary";
 import { lazyWithAutoReload } from "@/lib/lazyWithAutoReload";
+import { trackClubVisit } from "@/lib/clubCms";
 import Index from "./pages/Index";
 import Contacte from "./pages/Contacte";
 import Itineraris from "./pages/Itineraris";
@@ -47,6 +48,23 @@ const RouteFallback = () => (
 
 const withRouteFallback = (node: ReactNode) => <Suspense fallback={<RouteFallback />}>{node}</Suspense>;
 
+const ClubVisitTracker = () => {
+  const location = useLocation();
+
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+    trackClubVisit({
+      pathname: location.pathname,
+      referrer: document.referrer || null,
+      locale: document.documentElement.lang || null,
+      pageTitle: document.title || null,
+      userAgent: navigator.userAgent || null,
+    }).catch(() => undefined);
+  }, [location.pathname]);
+
+  return null;
+};
+
 const App = () => {
   useEffect(() => {
     if (typeof window !== "undefined") {
@@ -62,6 +80,7 @@ const App = () => {
         <Sonner />
         <LanguageProvider>
           <BrowserRouter>
+              <ClubVisitTracker />
               <Routes>
               <Route path="/" element={<Index />} />
               <Route path="/el-club" element={withRouteFallback(<ElClub />)} />

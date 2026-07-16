@@ -1,4 +1,5 @@
 import { useEffect, useMemo, useState } from "react";
+import { format } from "date-fns";
 import { useQuery } from "@tanstack/react-query";
 import { createClient, type Session, type SupabaseClient } from "@supabase/supabase-js";
 import { clubEvents, type ClubEvent, type ClubLocation, calendarYears, type ClubLocation as ClubLocationType } from "@/content/calendarData";
@@ -7,7 +8,8 @@ import { itineraryGuide, type ClubItinerary, type ItineraryProfile, type Localiz
 import { type LanguageCode } from "@/lib/i18n";
 
 export type ClubCmsContentType = "gallery" | "itinerary" | "event";
-export type ClubCmsStatus = "draft" | "published";
+export type ClubCmsStatus = "draft" | "published" | "scheduled" | "archived";
+export type ClubAdminRole = "admin" | "editor" | "viewer";
 
 export type ClubAdminEntryRow = {
   id: string;
@@ -19,7 +21,11 @@ export type ClubAdminEntryRow = {
   year: number | null;
   sort_order: number;
   cover_image_url: string | null;
-  payload: Record<string, unknown>;
+  scheduled_for: string | null;
+  published_at: string | null;
+  deleted_at: string | null;
+  deleted_by_email: string | null;
+  payload: Record<string, any>;
   created_at: string;
   updated_at: string;
 };
@@ -33,11 +39,31 @@ export type ClubPhotoFeedbackRow = {
   created_at: string;
 };
 
+export type ClubPageViewRow = {
+  id: string;
+  pathname: string;
+  referrer: string | null;
+  locale: string | null;
+  page_title: string | null;
+  user_agent: string | null;
+  created_at: string;
+};
+
+export type ClubAdminRoleRow = {
+  user_id: string;
+  role: ClubAdminRole;
+  display_name: string | null;
+  created_at: string;
+  updated_at: string;
+};
+
 const SUPABASE_URL = import.meta.env.VITE_SUPABASE_URL?.trim() ?? "";
 const SUPABASE_ANON_KEY = (import.meta.env.VITE_SUPABASE_ANON_KEY?.trim() || import.meta.env.VITE_SUPABASE_PUBLISHABLE_KEY?.trim() || "");
 const SUPABASE_BUCKET = import.meta.env.VITE_SUPABASE_STORAGE_BUCKET?.trim() || "club-media";
 const CLUB_ENTRIES_TABLE = "club_admin_entries";
 const CLUB_PHOTO_FEEDBACK_TABLE = "gallery_photo_feedback";
+const CLUB_PAGE_VIEWS_TABLE = "club_page_views";
+const CLUB_USER_ROLES_TABLE = "club_admin_user_roles";
 
 export const galleryCollectionOptions = [
   { key: "historiques", href: "/galeria/historiques", label: "Històriques" },
@@ -219,6 +245,33 @@ const uniqueByKey = <T,>(items: T[], getKey: (item: T) => string) => {
   return Array.from(map.values());
 };
 
+const roleRank: Record<ClubAdminRole, number> = {
+  viewer: 1,
+  editor: 2,
+  admin: 3,
+};
+
+export const roleLabel: Record<ClubAdminRole, string> = {
+  admin: "Admin",
+  editor: "Editor",
+  viewer: "Viewer",
+};
+
+export const canRole = (currentRole: ClubAdminRole | null | undefined, requiredRole: ClubAdminRole) => {
+  if (!currentRole) return false;
+  return roleRank[currentRole] >= roleRank[requiredRole];
+};
+
+const isEntryLive = (entry: ClubAdminEntryRow) => {
+  if (entry.deleted_at) return false;
+  if (entry.status === "published") return true;
+  if (entry.status === "scheduled") {
+    if (!entry.scheduled_for) return false;
+    return new Date(entry.scheduled_for).getTime() <= Date.now();
+  }
+  return false;
+};
+
 export const mergeRoutes = (staticRoutes: ClubItinerary[], dynamicRoutes: ClubItinerary[]) =>
   uniqueByKey([...staticRoutes, ...dynamicRoutes], (item) => item.id);
 
@@ -227,19 +280,24 @@ export const mergeEvents = (staticEvents: ClubEvent[], dynamicEvents: ClubEvent[
 
 export const mergeGallerySections = (staticSections: GalleryMediaSection[], dynamicSections: GalleryMediaSection[]) => [...staticSections, ...dynamicSections];
 
-const fetchEntries = async (contentType?: ClubCmsContentType, filters?: { status?: ClubCmsStatus; collectionKey?: string }) => {
+const fetchEntries = async (
+  contentType?: ClubCmsContentType,
+  filters?: { status?: ClubCmsStatus; statuses?: ClubCmsStatus[]; collectionKey?: string; includeDeleted?: boolean },
+) => {
   const client = getSupabaseClient();
   if (!client) return [] as ClubAdminEntryRow[];
 
   let query = client
     .from(CLUB_ENTRIES_TABLE)
-    .select("id, slug, content_type, status, title, collection_key, year, sort_order, cover_image_url, payload, created_at, updated_at")
+    .select("id, slug, content_type, status, title, collection_key, year, sort_order, cover_image_url, scheduled_for, published_at, deleted_at, deleted_by_email, payload, created_at, updated_at")
     .order("sort_order", { ascending: true })
     .order("created_at", { ascending: true });
 
   if (contentType) query = query.eq("content_type", contentType);
   if (filters?.status) query = query.eq("status", filters.status);
+  if (filters?.statuses?.length) query = query.in("status", filters.statuses);
   if (filters?.collectionKey) query = query.eq("collection_key", filters.collectionKey);
+  if (!filters?.includeDeleted) query = query.is("deleted_at", null);
 
   const { data, error } = await query;
   if (error) throw error;
@@ -278,10 +336,41 @@ export const useCmsSession = () => {
   return { session, ready, client: getSupabaseClient() };
 };
 
-export const useClubAdminEntries = (contentType: ClubCmsContentType, enabled = true) =>
+export const useClubAdminRole = (userId?: string | null, enabled = true) =>
   useQuery({
-    queryKey: ["club-cms-admin", contentType],
-    queryFn: () => fetchEntries(contentType),
+    queryKey: ["club-cms-admin-role", userId],
+    queryFn: async () => {
+      const client = getSupabaseClient();
+      if (!client || !userId) return { role: null as ClubAdminRole | null, row: null as ClubAdminRoleRow | null };
+
+      const { data, error } = await client
+        .from(CLUB_USER_ROLES_TABLE)
+        .select("user_id, role, display_name, created_at, updated_at")
+        .eq("user_id", userId)
+        .maybeSingle();
+
+      if (error) {
+        if (/club_admin_user_roles|schema cache|does not exist/i.test(error.message)) {
+          return { role: null as ClubAdminRole | null, row: null as ClubAdminRoleRow | null };
+        }
+        throw error;
+      }
+
+      const row = (data ?? null) as ClubAdminRoleRow | null;
+      return { role: row?.role ?? null, row };
+    },
+    enabled: enabled && clubCmsConfig.enabled && Boolean(userId),
+    staleTime: 60_000,
+  });
+
+export const useClubAdminEntries = (
+  contentType: ClubCmsContentType,
+  enabled = true,
+  options?: { includeDeleted?: boolean },
+) =>
+  useQuery({
+    queryKey: ["club-cms-admin", contentType, options?.includeDeleted ? "with-deleted" : "active-only"],
+    queryFn: () => fetchEntries(contentType, { includeDeleted: options?.includeDeleted }),
     enabled: enabled && clubCmsConfig.enabled,
     staleTime: 15_000,
   });
@@ -290,8 +379,8 @@ export const usePublishedGallerySections = (collectionKey: string) => {
   const query = useQuery({
     queryKey: ["club-cms-gallery", collectionKey],
     queryFn: async () => {
-      const entries = await fetchEntries("gallery", { status: "published", collectionKey });
-      return entries.map(mapGalleryEntryToSection).filter(Boolean) as GalleryMediaSection[];
+      const entries = await fetchEntries("gallery", { statuses: ["published", "scheduled"], collectionKey });
+      return entries.filter(isEntryLive).map(mapGalleryEntryToSection).filter(Boolean) as GalleryMediaSection[];
     },
     enabled: clubCmsConfig.enabled && Boolean(collectionKey),
     staleTime: 60_000,
@@ -331,12 +420,61 @@ export const usePhotoFeedback = (photoSrc: string, enabled = true) => {
   };
 };
 
+export const usePhotoFeedbackOverview = (enabled = true) =>
+  useQuery({
+    queryKey: ["club-photo-feedback-overview"],
+    queryFn: async () => {
+      const client = getSupabaseClient();
+      if (!client) {
+        return {
+          total: 0,
+          recent: [] as ClubPhotoFeedbackRow[],
+          topPhotos: [] as { photo_src: string; reviews: number; averageRating: number }[],
+        };
+      }
+
+      const { data, error } = await client
+        .from(CLUB_PHOTO_FEEDBACK_TABLE)
+        .select("id, photo_src, author_name, rating, comment, created_at")
+        .order("created_at", { ascending: false })
+        .limit(5000);
+
+      if (error) throw error;
+
+      const entries = (data ?? []) as ClubPhotoFeedbackRow[];
+      const grouped = new Map<string, { reviews: number; ratingSum: number }>();
+      entries.forEach((entry) => {
+        const current = grouped.get(entry.photo_src) ?? { reviews: 0, ratingSum: 0 };
+        current.reviews += 1;
+        current.ratingSum += entry.rating;
+        grouped.set(entry.photo_src, current);
+      });
+
+      const topPhotos = Array.from(grouped.entries())
+        .map(([photo_src, value]) => ({
+          photo_src,
+          reviews: value.reviews,
+          averageRating: value.reviews ? value.ratingSum / value.reviews : 0,
+        }))
+        .sort((a, b) => b.reviews - a.reviews)
+        .slice(0, 8);
+
+      return {
+        total: entries.length,
+        recent: entries.slice(0, 10),
+        topPhotos,
+      };
+    },
+    enabled: enabled && clubCmsConfig.enabled,
+    staleTime: 30_000,
+  });
+
 export const usePublishedItineraries = () => {
   const query = useQuery({
     queryKey: ["club-cms-itineraries"],
     queryFn: async () => {
-      const entries = await fetchEntries("itinerary", { status: "published" });
-      return entries.map(mapItineraryEntryToRoute);
+      const entries = await fetchEntries("itinerary", { statuses: ["published", "scheduled"] });
+      return entries.filter(isEntryLive).map(mapItineraryEntryToRoute);
     },
     enabled: clubCmsConfig.enabled,
     staleTime: 60_000,
@@ -349,8 +487,8 @@ export const usePublishedEvents = () => {
   const query = useQuery({
     queryKey: ["club-cms-events"],
     queryFn: async () => {
-      const entries = await fetchEntries("event", { status: "published" });
-      return entries.map(mapEventEntryToClubEvent);
+      const entries = await fetchEntries("event", { statuses: ["published", "scheduled"] });
+      return entries.filter(isEntryLive).map(mapEventEntryToClubEvent);
     },
     enabled: clubCmsConfig.enabled,
     staleTime: 60_000,
@@ -371,6 +509,172 @@ export const useMergedEvents = () => {
 
 export const getCalendarYearsFromEvents = (events: ClubEvent[]) => Array.from(new Set(events.map((event) => event.year))).sort((a, b) => b - a);
 export const fallbackCalendarYears = Array.from(calendarYears);
+
+const emptyVisitStats = {
+  supported: false,
+  total: 0,
+  last7d: 0,
+  last30d: 0,
+  uniquePaths: 0,
+  topPaths: [] as { pathname: string; visits: number }[],
+  topSections: [] as { section: string; visits: number }[],
+  topLocales: [] as { locale: string; visits: number }[],
+  recent: [] as ClubPageViewRow[],
+  daily: [] as { day: string; visits: number }[],
+};
+
+export const formatDateTimeLocalInput = (value?: string | null) => {
+  if (!value) return "";
+  const date = new Date(value);
+  if (Number.isNaN(date.getTime())) return "";
+  return format(date, "yyyy-MM-dd'T'HH:mm");
+};
+
+export const normalizeDateTimeInput = (value?: string | null) => {
+  const trimmed = value?.trim();
+  if (!trimmed) return null;
+  const date = new Date(trimmed);
+  if (Number.isNaN(date.getTime())) return null;
+  return date.toISOString();
+};
+
+export const duplicateClubEntryDraft = <T extends { recordId: string; slug: string; title?: string }>(draft: T) => ({
+  ...draft,
+  recordId: "",
+  slug: slugify(`${draft.slug || draft.title || "copia"}-copia`),
+});
+
+export const buildCmsPublicPath = (entry: ClubAdminEntryRow) => {
+  if (entry.content_type === "gallery") {
+    return entry.collection_key ? galleryHrefByCollectionKey[entry.collection_key] ?? "/galeria" : "/galeria";
+  }
+  if (entry.content_type === "itinerary") return "/itineraris";
+  if (entry.content_type === "event") return `/esdeveniments/${entry.slug}`;
+  return "/";
+};
+
+const getSectionFromPath = (pathname: string) => {
+  if (!pathname || pathname === "/") return "home";
+  const firstSegment = pathname.split("/").filter(Boolean)[0] ?? "altres";
+  return firstSegment;
+};
+
+const summarizePageViews = (entries: ClubPageViewRow[]) => {
+  const now = Date.now();
+  const sevenDaysAgo = now - 7 * 24 * 60 * 60 * 1000;
+  const thirtyDaysAgo = now - 30 * 24 * 60 * 60 * 1000;
+  const perPath = new Map<string, number>();
+  const perDay = new Map<string, number>();
+  const perSection = new Map<string, number>();
+  const perLocale = new Map<string, number>();
+
+  let last7d = 0;
+  let last30d = 0;
+
+  entries.forEach((entry) => {
+    const createdAt = new Date(entry.created_at).getTime();
+    if (Number.isFinite(createdAt)) {
+      if (createdAt >= sevenDaysAgo) last7d += 1;
+      if (createdAt >= thirtyDaysAgo) last30d += 1;
+      const day = new Date(createdAt).toISOString().slice(0, 10);
+      perDay.set(day, (perDay.get(day) ?? 0) + 1);
+    }
+
+    perPath.set(entry.pathname, (perPath.get(entry.pathname) ?? 0) + 1);
+    const section = getSectionFromPath(entry.pathname);
+    perSection.set(section, (perSection.get(section) ?? 0) + 1);
+    const locale = entry.locale?.trim() || "unknown";
+    perLocale.set(locale, (perLocale.get(locale) ?? 0) + 1);
+  });
+
+  const topPaths = Array.from(perPath.entries())
+    .map(([pathname, visits]) => ({ pathname, visits }))
+    .sort((a, b) => b.visits - a.visits)
+    .slice(0, 6);
+
+  const topSections = Array.from(perSection.entries())
+    .map(([section, visits]) => ({ section, visits }))
+    .sort((a, b) => b.visits - a.visits)
+    .slice(0, 6);
+
+  const topLocales = Array.from(perLocale.entries())
+    .map(([locale, visits]) => ({ locale, visits }))
+    .sort((a, b) => b.visits - a.visits)
+    .slice(0, 6);
+
+  const daily = Array.from(perDay.entries())
+    .map(([day, visits]) => ({ day, visits }))
+    .sort((a, b) => a.day.localeCompare(b.day))
+    .slice(-14);
+
+  return {
+    supported: true,
+    total: entries.length,
+    last7d,
+    last30d,
+    uniquePaths: perPath.size,
+    topPaths,
+    topSections,
+    topLocales,
+    recent: entries.slice(0, 8),
+    daily,
+  };
+};
+
+export const useClubVisitStats = (enabled = true) =>
+  useQuery({
+    queryKey: ["club-cms-page-views"],
+    queryFn: async () => {
+      const client = getSupabaseClient();
+      if (!client) return emptyVisitStats;
+
+      const { data, error } = await client
+        .from(CLUB_PAGE_VIEWS_TABLE)
+        .select("id, pathname, referrer, locale, page_title, user_agent, created_at")
+        .order("created_at", { ascending: false })
+        .limit(5000);
+
+      if (error) {
+        if (/club_page_views|schema cache|does not exist/i.test(error.message)) {
+          return emptyVisitStats;
+        }
+        throw error;
+      }
+
+      return summarizePageViews((data ?? []) as ClubPageViewRow[]);
+    },
+    enabled: enabled && clubCmsConfig.enabled,
+    staleTime: 60_000,
+  });
+
+export const trackClubVisit = async (input: {
+  pathname: string;
+  referrer?: string | null;
+  locale?: string | null;
+  pageTitle?: string | null;
+  userAgent?: string | null;
+}) => {
+  const client = getSupabaseClient();
+  if (!client || !input.pathname || typeof window === "undefined") return;
+
+  const dedupeKey = `club-page-view:${input.pathname}`;
+  if (window.sessionStorage.getItem(dedupeKey)) return;
+
+  const { error } = await client.from(CLUB_PAGE_VIEWS_TABLE).insert({
+    pathname: input.pathname,
+    referrer: input.referrer ?? null,
+    locale: input.locale ?? null,
+    page_title: input.pageTitle ?? null,
+    user_agent: input.userAgent ?? null,
+  });
+
+  if (error) {
+    if (/club_page_views|schema cache|does not exist/i.test(error.message)) return;
+    throw error;
+  }
+
+  window.sessionStorage.setItem(dedupeKey, String(Date.now()));
+};
 
 export const uploadClubMedia = async (file: File, path: string) => {
   const client = getSupabaseClient();
@@ -426,10 +730,19 @@ export const saveClubEntry = async (input: {
   year?: number | null;
   sortOrder?: number;
   coverImageUrl?: string | null;
+  scheduledFor?: string | null;
+  publishedAt?: string | null;
   payload: Record<string, unknown>;
 }) => {
   const client = getSupabaseClient();
   if (!client) throw new Error("Supabase is not configured");
+
+  const normalizedScheduledFor = input.status === "scheduled" ? normalizeDateTimeInput(input.scheduledFor) : null;
+  const normalizedPublishedAt = input.status === "published"
+    ? normalizeDateTimeInput(input.publishedAt) ?? new Date().toISOString()
+    : input.status === "scheduled"
+      ? null
+      : normalizeDateTimeInput(input.publishedAt);
 
   const record = {
     id: input.id,
@@ -441,6 +754,8 @@ export const saveClubEntry = async (input: {
     year: input.year ?? null,
     sort_order: input.sortOrder ?? 0,
     cover_image_url: input.coverImageUrl ?? null,
+    scheduled_for: normalizedScheduledFor,
+    published_at: normalizedPublishedAt,
     payload: input.payload,
   };
 
@@ -449,7 +764,27 @@ export const saveClubEntry = async (input: {
   return data as ClubAdminEntryRow;
 };
 
-export const deleteClubEntry = async (id: string) => {
+export const trashClubEntry = async (id: string, deletedByEmail?: string | null) => {
+  const client = getSupabaseClient();
+  if (!client) throw new Error("Supabase is not configured");
+  const { error } = await client
+    .from(CLUB_ENTRIES_TABLE)
+    .update({ deleted_at: new Date().toISOString(), deleted_by_email: deletedByEmail ?? null })
+    .eq("id", id);
+  if (error) throw error;
+};
+
+export const restoreClubEntry = async (id: string) => {
+  const client = getSupabaseClient();
+  if (!client) throw new Error("Supabase is not configured");
+  const { error } = await client
+    .from(CLUB_ENTRIES_TABLE)
+    .update({ deleted_at: null, deleted_by_email: null })
+    .eq("id", id);
+  if (error) throw error;
+};
+
+export const hardDeleteClubEntry = async (id: string) => {
   const client = getSupabaseClient();
   if (!client) throw new Error("Supabase is not configured");
   const { error } = await client.from(CLUB_ENTRIES_TABLE).delete().eq("id", id);
