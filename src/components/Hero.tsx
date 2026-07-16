@@ -10,7 +10,7 @@ interface HeroProps {
 const translations: Record<LanguageCode, Record<string, string>> = {
   ca: {
     eyebrow: "BMW Club Andorra",
-    title: "BMW Club Andorra, La passió per BMW",
+    title: "BMW Club Andorra La passió per BMW",
     subtitle: "Calendari viu, meteo útil, arxiu real i una experiència digital més potent per al club.",
     description: "El club presenta una experiència digital més neta, més elegant i més útil per a socis i visitants, amb calendari, arxiu i accessos clars a la informació principal.",
     primary: "Obrir calendari 2026",
@@ -138,14 +138,14 @@ export const Hero = ({ language }: HeroProps) => {
   ];
 
   return (
-    <section className="relative flex min-h-[68vh] items-center justify-center overflow-hidden pt-16 sm:min-h-[72vh] sm:pt-[4.25rem] md:min-h-[78vh] md:pt-[4.75rem] lg:min-h-[92vh] lg:pt-20">
+    <section className="relative flex min-h-[68vh] items-start justify-center overflow-hidden pt-16 sm:min-h-[72vh] sm:pt-[4.25rem] md:min-h-[78vh] md:pt-[4.75rem] lg:min-h-[92vh] lg:pt-20">
       <div className="absolute inset-0 z-0">
         <img src="/legacy-mirror/images/portades-banner24.jpg" alt="BMW Club Andorra portada històrica" className="h-full w-full object-cover object-[56%_center] scale-100 sm:object-center sm:scale-[1.01] md:scale-[1.03]" loading="eager" />
         <div className="absolute inset-0 gradient-overlay opacity-70 sm:opacity-80 md:opacity-100" />
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_78%_12%,rgba(0,102,177,.22),transparent_24%),radial-gradient(circle_at_12%_18%,rgba(255,255,255,.10),transparent_18%)] md:bg-[radial-gradient(circle_at_80%_10%,rgba(0,102,177,.32),transparent_22%),radial-gradient(circle_at_10%_25%,rgba(255,255,255,.12),transparent_18%)]" />
       </div>
 
-      <div className="relative z-10 container mx-auto px-4 py-12 sm:py-14 md:py-16 lg:py-24">
+      <div className="relative z-10 container mx-auto px-4 pt-8 pb-12 sm:pt-10 sm:pb-14 md:pt-12 md:pb-16 lg:pt-16 lg:pb-24">
         <div className="mx-auto grid max-w-6xl gap-5 md:gap-6 lg:grid-cols-[1.05fr_0.95fr] lg:gap-8 items-start">
           <div className="space-y-4 sm:space-y-5 md:space-y-6 text-white">
             <div className="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/8 px-3 py-1.5 text-xs font-medium backdrop-blur-md sm:px-4 sm:py-2 sm:text-sm">
