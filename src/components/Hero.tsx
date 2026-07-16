@@ -154,14 +154,16 @@ export const Hero = ({ language }: HeroProps) => {
             <div className="space-y-3 sm:space-y-4">
               <div className="relative isolate inline-block max-w-5xl">
                 <div
-                  className="pointer-events-none absolute -left-[3%] top-[6%] -z-10 hidden h-[92%] w-[86%] rounded-[3rem] opacity-75 blur-xl md:block"
+                  className="pointer-events-none absolute -left-[6%] top-[2%] -z-10 hidden h-[108%] w-[92%] opacity-70 blur-2xl md:block"
                   style={{
-                    background: "linear-gradient(90deg, rgba(0,56,168,0.50) 0%, rgba(0,56,168,0.50) 33%, rgba(252,208,22,0.38) 33%, rgba(252,208,22,0.38) 66%, rgba(210,16,52,0.46) 66%, rgba(210,16,52,0.46) 100%)",
+                    background: "linear-gradient(90deg, rgba(0,56,168,0.40) 0%, rgba(0,56,168,0.40) 31%, rgba(252,208,22,0.28) 31%, rgba(252,208,22,0.28) 64%, rgba(210,16,52,0.36) 64%, rgba(210,16,52,0.36) 100%)",
                     transform: "rotate(-7deg)",
-                    maskImage: "radial-gradient(circle at center, black 52%, transparent 84%)",
-                    WebkitMaskImage: "radial-gradient(circle at center, black 52%, transparent 84%)",
+                    clipPath: "polygon(5% 25%, 18% 12%, 42% 8%, 69% 13%, 92% 24%, 98% 43%, 95% 62%, 84% 79%, 60% 89%, 35% 92%, 15% 84%, 4% 66%, 1% 45%)",
+                    maskImage: "radial-gradient(circle at 32% 48%, black 0%, black 46%, transparent 78%), radial-gradient(circle at 74% 42%, black 0%, black 40%, transparent 74%), linear-gradient(180deg, transparent 0%, black 18%, black 78%, transparent 100%)",
+                    WebkitMaskImage: "radial-gradient(circle at 32% 48%, black 0%, black 46%, transparent 78%), radial-gradient(circle at 74% 42%, black 0%, black 40%, transparent 74%), linear-gradient(180deg, transparent 0%, black 18%, black 78%, transparent 100%)",
                   }}
                 />
+                <div className="pointer-events-none absolute left-[8%] top-[18%] -z-10 hidden h-[58%] w-[52%] rounded-full bg-white/8 blur-3xl md:block" />
                 <h1 className="text-[2.35rem] sm:text-5xl md:text-6xl lg:text-7xl font-bold text-balance leading-[0.95]">{t.title}</h1>
               </div>
             </div>
