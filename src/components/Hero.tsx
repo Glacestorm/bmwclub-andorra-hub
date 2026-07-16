@@ -140,11 +140,9 @@ export const Hero = ({ language }: HeroProps) => {
   return (
     <section className="relative flex min-h-[68vh] items-start justify-center overflow-hidden pt-16 sm:min-h-[72vh] sm:pt-[4.25rem] md:min-h-[78vh] md:pt-[4.75rem] lg:min-h-[92vh] lg:pt-20">
       <div className="absolute inset-0 z-0">
-        <img src="/legacy-mirror/images/portades-banner24.jpg" alt="BMW Club Andorra portada històrica" className="h-full w-full object-cover object-[56%_center] scale-100 brightness-[1.17] contrast-[1.15] saturate-[1.10] sm:object-center sm:scale-[1.01] md:scale-[1.03]" loading="eager" />
-        <div className="absolute inset-0 gradient-overlay opacity-58 sm:opacity-66 md:opacity-76" />
+        <img src="/legacy-mirror/images/portades-banner24.jpg" alt="BMW Club Andorra portada històrica" className="h-full w-full object-cover object-[56%_center] scale-100 brightness-[1.16] contrast-[1.14] saturate-[1.10] sm:object-center sm:scale-[1.01] md:scale-[1.03]" loading="eager" />
+        <div className="absolute inset-0 gradient-overlay opacity-60 sm:opacity-68 md:opacity-78" />
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_78%_12%,rgba(0,102,177,.20),transparent_24%),radial-gradient(circle_at_12%_18%,rgba(255,255,255,.10),transparent_18%),radial-gradient(circle_at_44%_60%,rgba(255,255,255,.18),transparent_26%)] md:bg-[radial-gradient(circle_at_80%_10%,rgba(0,102,177,.28),transparent_22%),radial-gradient(circle_at_10%_25%,rgba(255,255,255,.12),transparent_18%),radial-gradient(circle_at_46%_60%,rgba(255,255,255,.22),transparent_28%)]" />
-        <div className="pointer-events-none absolute inset-x-[8%] bottom-[17%] h-[24%] rounded-[999px] bg-white/12 blur-3xl md:inset-x-[16%] md:bottom-[18%] md:h-[26%] md:bg-white/16" />
-        <div className="pointer-events-none absolute inset-x-[14%] bottom-[21%] h-[16%] rounded-[999px] bg-white/10 blur-2xl md:inset-x-[24%] md:bottom-[22%] md:h-[18%] md:bg-white/14" />
       </div>
 
       <div className="relative z-10 container mx-auto px-4 pt-8 pb-12 sm:pt-10 sm:pb-14 md:pt-12 md:pb-16 lg:pt-16 lg:pb-24">
