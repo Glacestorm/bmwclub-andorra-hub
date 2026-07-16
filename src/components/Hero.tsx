@@ -153,9 +153,7 @@ export const Hero = ({ language }: HeroProps) => {
             </div>
             <div className="space-y-3 sm:space-y-4">
               <h1 className="text-[2.35rem] sm:text-5xl md:text-6xl lg:text-7xl font-bold text-balance leading-[0.95]">{t.title}</h1>
-              <p className="max-w-3xl text-[0.98rem] font-light text-white/85 sm:text-xl md:text-2xl">{t.subtitle}</p>
             </div>
-            <p className="max-w-2xl text-[0.92rem] leading-relaxed text-white/74 sm:text-base md:text-lg">{t.description}</p>
             <div className="flex flex-col items-stretch gap-2.5 pt-1 sm:flex-row sm:items-start sm:gap-4 sm:pt-2">
               <Link to="/calendari/2026" className="w-full sm:w-auto"><Button variant="hero" className="h-12 w-full gap-2 px-6 text-base sm:h-14 sm:w-auto sm:px-10 sm:text-lg">{t.primary}<ArrowRight className="h-5 w-5" /></Button></Link>
               <Link to="/destacats" className="w-full sm:w-auto"><Button variant="outline" className="h-12 w-full border-white/20 bg-white/8 px-6 text-base text-white hover:bg-white/14 sm:h-14 sm:w-auto sm:px-10 sm:text-lg">{t.secondary}</Button></Link>
