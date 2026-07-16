@@ -131,6 +131,11 @@ const translations: Record<LanguageCode, Record<string, string>> = {
 
 export const Hero = ({ language }: HeroProps) => {
   const t = translations[language];
+  const heroCards = [
+    { icon: Calendar, title: t.card1t, desc: t.card1d, href: "/calendari/2026" },
+    { icon: Compass, title: t.card2t, desc: t.card2d, href: "/arxiu" },
+    { icon: Sparkles, title: t.card3t, desc: t.card3d, href: "/bmw-oficial" },
+  ];
 
   return (
     <section className="relative flex min-h-[68vh] items-center justify-center overflow-hidden pt-16 sm:min-h-[72vh] sm:pt-[4.25rem] md:min-h-[78vh] md:pt-[4.75rem] lg:min-h-[92vh] lg:pt-20">
@@ -141,7 +146,7 @@ export const Hero = ({ language }: HeroProps) => {
       </div>
 
       <div className="relative z-10 container mx-auto px-4 py-12 sm:py-14 md:py-16 lg:py-24">
-        <div className="mx-auto grid max-w-6xl gap-5 md:gap-6 lg:grid-cols-[1.05fr_0.95fr] lg:gap-8 items-end">
+        <div className="mx-auto grid max-w-6xl gap-5 md:gap-6 lg:grid-cols-[1.05fr_0.95fr] lg:gap-8 items-start">
           <div className="space-y-4 sm:space-y-5 md:space-y-6 text-white">
             <div className="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/8 px-3 py-1.5 text-xs font-medium backdrop-blur-md sm:px-4 sm:py-2 sm:text-sm">
               <Sparkles className="h-4 w-4" /> {t.eyebrow}
@@ -173,15 +178,15 @@ export const Hero = ({ language }: HeroProps) => {
             </div>
           </div>
 
-          <div className="hidden gap-3 md:grid md:grid-cols-2 md:gap-4 lg:ml-auto lg:max-w-xl lg:grid-cols-1 lg:gap-4">
-            {[
-              { icon: Calendar, title: t.card1t, desc: t.card1d },
-              { icon: Compass, title: t.card2t, desc: t.card2d },
-              { icon: Sparkles, title: t.card3t, desc: t.card3d },
-            ].map((item, index) => {
+          <div className="hidden self-start gap-3 md:grid md:grid-cols-2 md:gap-4 lg:ml-auto lg:max-w-xl lg:grid-cols-1 lg:gap-4">
+            {heroCards.map((item, index) => {
               const Icon = item.icon;
               return (
-                <div key={item.title} className={`glass-panel rounded-[1.6rem] p-5 hover-tilt md:min-h-[168px] lg:min-h-0 ${index === 2 ? "md:col-span-2 lg:col-span-1" : ""}`}>
+                <Link
+                  key={item.title}
+                  to={item.href}
+                  className={`glass-panel block rounded-[1.6rem] p-5 transition-base hover:-translate-y-1 hover:shadow-elegant md:min-h-[168px] lg:min-h-0 ${index === 2 ? "md:col-span-2 lg:col-span-1" : ""}`}
+                >
                   <div className="flex items-start gap-4">
                     <div className="rounded-2xl bg-primary/10 p-3"><Icon className="h-5 w-5 text-primary" /></div>
                     <div>
@@ -189,7 +194,7 @@ export const Hero = ({ language }: HeroProps) => {
                       <p className="mt-2 text-sm leading-relaxed text-slate-600">{item.desc}</p>
                     </div>
                   </div>
-                </div>
+                </Link>
               );
             })}
           </div>
