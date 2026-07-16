@@ -140,7 +140,7 @@ export const Hero = ({ language }: HeroProps) => {
   return (
     <section className="relative flex min-h-[68vh] items-start justify-center overflow-hidden pt-16 sm:min-h-[72vh] sm:pt-[4.25rem] md:min-h-[78vh] md:pt-[4.75rem] lg:min-h-[92vh] lg:pt-20">
       <div className="absolute inset-0 z-0">
-        <img src="/legacy-mirror/images/portades-banner24.jpg" alt="BMW Club Andorra portada històrica" className="h-full w-full object-cover object-[56%_center] scale-100 sm:object-center sm:scale-[1.01] md:scale-[1.03]" loading="eager" />
+        <img src="/legacy-mirror/images/portades-banner24.jpg" alt="BMW Club Andorra portada històrica" className="h-full w-full object-cover object-[56%_center] scale-100 brightness-[1.08] contrast-[1.08] saturate-[1.06] sm:object-center sm:scale-[1.01] md:scale-[1.03]" loading="eager" />
         <div className="absolute inset-0 gradient-overlay opacity-70 sm:opacity-80 md:opacity-100" />
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_78%_12%,rgba(0,102,177,.22),transparent_24%),radial-gradient(circle_at_12%_18%,rgba(255,255,255,.10),transparent_18%)] md:bg-[radial-gradient(circle_at_80%_10%,rgba(0,102,177,.32),transparent_22%),radial-gradient(circle_at_10%_25%,rgba(255,255,255,.12),transparent_18%)]" />
       </div>
@@ -178,7 +178,6 @@ export const Hero = ({ language }: HeroProps) => {
                     {t.sponsorLabel}
                   </div>
                   <div className="mt-3 text-lg font-semibold sm:text-xl">Pyrénées Andorra</div>
-                  <p className="mt-2 text-sm text-white/68 sm:text-sm">{t.sponsorText}</p>
                 </div>
                 <Link to="/patrocinadors" className="shrink-0 w-full sm:w-auto">
                   <Button variant="outline" className="h-11 w-full rounded-full border-white/15 bg-white/6 px-5 text-sm text-white hover:bg-white/10 sm:h-auto sm:w-auto">{t.sponsorCta}</Button>
