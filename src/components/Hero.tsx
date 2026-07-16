@@ -154,15 +154,15 @@ export const Hero = ({ language }: HeroProps) => {
             <div className="space-y-3 sm:space-y-4">
               <div className="relative isolate inline-block max-w-5xl">
                 <div
-                  className="pointer-events-none absolute -left-[4%] top-[6%] -z-10 hidden h-[92%] w-[88%] rounded-[999px] opacity-62 blur-3xl md:block"
+                  className="pointer-events-none absolute -left-[7%] top-[2%] -z-10 hidden h-[106%] w-[98%] rounded-[999px] opacity-72 blur-3xl md:block"
                   style={{
-                    background: "linear-gradient(90deg, rgba(0,56,168,0.30) 0%, rgba(0,56,168,0.30) 32%, rgba(252,208,22,0.22) 32%, rgba(252,208,22,0.22) 66%, rgba(210,16,52,0.28) 66%, rgba(210,16,52,0.28) 100%)",
+                    background: "linear-gradient(90deg, rgba(0,56,168,0.36) 0%, rgba(0,56,168,0.36) 32%, rgba(252,208,22,0.28) 32%, rgba(252,208,22,0.28) 66%, rgba(210,16,52,0.34) 66%, rgba(210,16,52,0.34) 100%)",
                     transform: "rotate(-6deg)",
-                    maskImage: "radial-gradient(ellipse at 24% 52%, black 0%, black 28%, transparent 56%), radial-gradient(ellipse at 52% 48%, black 0%, black 30%, transparent 58%), radial-gradient(ellipse at 80% 46%, black 0%, black 26%, transparent 54%)",
-                    WebkitMaskImage: "radial-gradient(ellipse at 24% 52%, black 0%, black 28%, transparent 56%), radial-gradient(ellipse at 52% 48%, black 0%, black 30%, transparent 58%), radial-gradient(ellipse at 80% 46%, black 0%, black 26%, transparent 54%)",
+                    maskImage: "radial-gradient(ellipse at 22% 52%, black 0%, black 31%, transparent 60%), radial-gradient(ellipse at 52% 48%, black 0%, black 34%, transparent 62%), radial-gradient(ellipse at 82% 46%, black 0%, black 29%, transparent 58%)",
+                    WebkitMaskImage: "radial-gradient(ellipse at 22% 52%, black 0%, black 31%, transparent 60%), radial-gradient(ellipse at 52% 48%, black 0%, black 34%, transparent 62%), radial-gradient(ellipse at 82% 46%, black 0%, black 29%, transparent 58%)",
                   }}
                 />
-                <div className="pointer-events-none absolute left-[10%] top-[20%] -z-10 hidden h-[54%] w-[48%] rounded-full bg-white/7 blur-[72px] md:block" />
+                <div className="pointer-events-none absolute left-[8%] top-[16%] -z-10 hidden h-[60%] w-[56%] rounded-full bg-white/8 blur-[78px] md:block" />
                 <h1 className="text-[2.35rem] sm:text-5xl md:text-6xl lg:text-7xl font-bold text-balance leading-[0.95]">{t.title}</h1>
               </div>
             </div>
