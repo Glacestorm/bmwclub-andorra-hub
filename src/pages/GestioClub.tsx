@@ -4,6 +4,7 @@ import {
   Activity,
   ArrowUpRight,
   BarChart3,
+  CalendarDays,
   CalendarRange,
   Copy,
   Database,
@@ -40,11 +41,13 @@ import {
   canRole,
   clubCmsConfig,
   collectionKeyByGalleryHref,
+  defaultCountdownConfig,
   duplicateClubEntryDraft,
   formatDateTimeLocalInput,
   galleryCollectionOptions,
   galleryHrefByCollectionKey,
   hardDeleteClubEntry,
+  normalizeCountdownConfig,
   restoreClubEntry,
   roleLabel,
   saveClubEntry,
@@ -58,6 +61,7 @@ import {
   useClubAdminRole,
   useCmsSession,
   useClubVisitStats,
+  useMergedEvents,
   usePhotoFeedbackOverview,
 } from "@/lib/clubCms";
 
@@ -145,6 +149,16 @@ const defaultEventDraft = () => ({
   notesText: "",
   evidence: "mixed",
   featured: true,
+});
+
+const defaultCountdownDraft = () => ({
+  recordId: "",
+  slug: "countdown-home",
+  status: "published" as const,
+  mode: defaultCountdownConfig.mode,
+  primaryEventId: defaultCountdownConfig.primaryEventId ?? "",
+  showSecondary: defaultCountdownConfig.showSecondary,
+  secondaryEventId: defaultCountdownConfig.secondaryEventId ?? "",
 });
 
 const splitLines = (value: string) =>
@@ -263,6 +277,19 @@ const eventEntryToDraft = (entry: any) => ({
   featured: Boolean(entry.payload?.featured),
 });
 
+const settingEntryToCountdownDraft = (entry: any) => {
+  const config = normalizeCountdownConfig(entry.payload);
+  return {
+    recordId: entry.id,
+    slug: entry.slug,
+    status: entry.status,
+    mode: config.mode,
+    primaryEventId: config.primaryEventId ?? "",
+    showSecondary: config.showSecondary,
+    secondaryEventId: config.secondaryEventId ?? "",
+  };
+};
+
 const parseFloatSafe = (value: string, fallback: number) => {
   const parsed = Number(value);
   return Number.isFinite(parsed) ? parsed : fallback;
@@ -296,6 +323,8 @@ const GestioClub = () => {
   const galleryEntries = useClubAdminEntries("gallery", Boolean(session), { includeDeleted: showDeleted });
   const itineraryEntries = useClubAdminEntries("itinerary", Boolean(session), { includeDeleted: showDeleted });
   const eventEntries = useClubAdminEntries("event", Boolean(session), { includeDeleted: showDeleted });
+  const settingEntries = useClubAdminEntries("setting", Boolean(session), { includeDeleted: showDeleted });
+  const { data: mergedEvents } = useMergedEvents();
   const roleQuery = useClubAdminRole(session?.user?.id, Boolean(session));
   const visitStatsQuery = useClubVisitStats(Boolean(session));
   const feedbackOverviewQuery = usePhotoFeedbackOverview(Boolean(session));
@@ -307,6 +336,7 @@ const GestioClub = () => {
   const [galleryDraft, setGalleryDraft] = useState(defaultGalleryDraft());
   const [itineraryDraft, setItineraryDraft] = useState(defaultItineraryDraft());
   const [eventDraft, setEventDraft] = useState(defaultEventDraft());
+  const [countdownDraft, setCountdownDraft] = useState(defaultCountdownDraft());
 
   const staticPhotoCount = useMemo(() => Object.values(galleryMediaByPage).flat().reduce((acc, section) => acc + section.images.length, 0), []);
   const staticRouteCount = itineraryGuide.length;
@@ -315,6 +345,7 @@ const GestioClub = () => {
   const galleryItems = galleryEntries.data ?? [];
   const itineraryItems = itineraryEntries.data ?? [];
   const eventItems = eventEntries.data ?? [];
+  const settingItems = settingEntries.data ?? [];
   const visitStats = visitStatsQuery.data;
   const feedbackOverview = feedbackOverviewQuery.data;
   const currentRole = roleQuery.data?.role ?? null;
@@ -322,6 +353,10 @@ const GestioClub = () => {
   const effectiveRole = currentRole ?? "admin";
   const canEdit = Boolean(session) && canRole(effectiveRole, "editor");
   const canDelete = Boolean(session) && canRole(effectiveRole, "admin");
+  const countdownEventOptions = useMemo(
+    () => [...mergedEvents].sort((a, b) => (a.start ?? "9999").localeCompare(b.start ?? "9999")),
+    [mergedEvents],
+  );
 
   useEffect(() => {
     if (!galleryDraft.slug && galleryDraft.title) {
@@ -341,12 +376,22 @@ const GestioClub = () => {
     }
   }, [eventDraft.slug, eventDraft.title]);
 
+  useEffect(() => {
+    const currentCountdownEntry = settingItems.find((item) => item.slug === "countdown-home" && !item.deleted_at);
+    if (currentCountdownEntry) {
+      setCountdownDraft(settingEntryToCountdownDraft(currentCountdownEntry));
+    } else {
+      setCountdownDraft(defaultCountdownDraft());
+    }
+  }, [settingItems]);
+
   const invalidateCms = async () => {
     await Promise.all([
       queryClient.invalidateQueries({ queryKey: ["club-cms-admin"] }),
       queryClient.invalidateQueries({ queryKey: ["club-cms-gallery"] }),
       queryClient.invalidateQueries({ queryKey: ["club-cms-itineraries"] }),
       queryClient.invalidateQueries({ queryKey: ["club-cms-events"] }),
+      queryClient.invalidateQueries({ queryKey: ["club-cms-countdown-config"] }),
       queryClient.invalidateQueries({ queryKey: ["club-cms-page-views"] }),
     ]);
   };
@@ -604,6 +649,34 @@ const GestioClub = () => {
       setSuccess("Esdeveniment guardat a Supabase.");
     } catch (error) {
       setError(error, "No s'ha pogut guardar l'esdeveniment.");
+    } finally {
+      setBusy(false);
+    }
+  };
+
+  const saveCountdownSettings = async () => {
+    if (!requireRole("editor")) return;
+
+    try {
+      setBusy(true);
+      const saved = await saveClubEntry({
+        id: countdownDraft.recordId || undefined,
+        slug: "countdown-home",
+        contentType: "setting",
+        status: countdownDraft.status,
+        title: "Home countdown control",
+        payload: {
+          mode: countdownDraft.mode,
+          primaryEventId: countdownDraft.primaryEventId || null,
+          showSecondary: countdownDraft.showSecondary,
+          secondaryEventId: countdownDraft.showSecondary ? (countdownDraft.secondaryEventId || null) : null,
+        },
+      });
+      setCountdownDraft(settingEntryToCountdownDraft(saved));
+      await invalidateCms();
+      setSuccess("Control del compte enrere guardat.");
+    } catch (error) {
+      setError(error, "No s'ha pogut guardar el control del compte enrere.");
     } finally {
       setBusy(false);
     }
@@ -1606,7 +1679,60 @@ const GestioClub = () => {
                   </Card>
                 </TabsContent>
 
-                <TabsContent value="calendar">
+                <TabsContent value="calendar" className="space-y-6">
+                  <Card className="rounded-[2rem] border-0 bg-white/78 p-6 shadow-sm">
+                    <SectionHeader icon={CalendarDays} title="Control del compte enrere" body="Pots deixar-lo automàtic, aturar-lo o apuntar-lo a un esdeveniment concret. També pots afegir un segon compte enrere per a una cita més important." />
+                    <div className="grid gap-4 md:grid-cols-2 mt-5">
+                      <Field label="Status">
+                        <select className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm" value={countdownDraft.status} onChange={(event) => setCountdownDraft((current) => ({ ...current, status: event.target.value as typeof current.status }))}>
+                          <option value="draft">draft</option>
+                          <option value="published">published</option>
+                          <option value="archived">archived</option>
+                        </select>
+                      </Field>
+                      <Field label="Mode">
+                        <select className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm" value={countdownDraft.mode} onChange={(event) => setCountdownDraft((current) => ({ ...current, mode: event.target.value as typeof current.mode }))}>
+                          <option value="auto">auto</option>
+                          <option value="manual">manual</option>
+                          <option value="off">off</option>
+                        </select>
+                      </Field>
+                    </div>
+                    <div className="grid gap-4 md:grid-cols-2 mt-4">
+                      <Field label="Esdeveniment principal">
+                        <select className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm" value={countdownDraft.primaryEventId} onChange={(event) => setCountdownDraft((current) => ({ ...current, primaryEventId: event.target.value }))}>
+                          <option value="">Automàtic / següent</option>
+                          {countdownEventOptions.map((item) => <option key={item.id} value={item.id}>{item.title} · {item.displayDate}</option>)}
+                        </select>
+                      </Field>
+                      <Field label="Duplicar amb segon compte enrere">
+                        <select className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm" value={countdownDraft.showSecondary ? "yes" : "no"} onChange={(event) => setCountdownDraft((current) => ({ ...current, showSecondary: event.target.value === "yes" }))}>
+                          <option value="no">no</option>
+                          <option value="yes">yes</option>
+                        </select>
+                      </Field>
+                    </div>
+                    {countdownDraft.showSecondary ? (
+                      <div className="grid gap-4 md:grid-cols-2 mt-4">
+                        <Field label="Esdeveniment secundari">
+                          <select className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm" value={countdownDraft.secondaryEventId} onChange={(event) => setCountdownDraft((current) => ({ ...current, secondaryEventId: event.target.value }))}>
+                            <option value="">Sense segon esdeveniment</option>
+                            {countdownEventOptions.map((item) => <option key={`secondary-${item.id}`} value={item.id}>{item.title} · {item.displayDate}</option>)}
+                          </select>
+                        </Field>
+                      </div>
+                    ) : null}
+                    <div className="mt-5 rounded-[1.3rem] border border-border/70 bg-background/70 p-4 text-sm text-muted-foreground">
+                      <div><strong>Auto</strong>: segueix la propera sortida futura.</div>
+                      <div><strong>Manual</strong>: força el comptador principal a l'esdeveniment que triïs.</div>
+                      <div><strong>Off</strong>: apaga el bloc públic complet.</div>
+                    </div>
+                    <div className="mt-5 flex flex-wrap gap-3">
+                      <Button variant="hero" onClick={saveCountdownSettings} disabled={busy}><Save className="h-4 w-4" />Guardar control</Button>
+                      <Button variant="outline" onClick={() => setCountdownDraft(defaultCountdownDraft())} disabled={busy}>Reset</Button>
+                    </div>
+                  </Card>
+
                   <Card className="premium-card rounded-[2rem] border-0 p-6 md:p-8">
                     <SectionHeader icon={CalendarRange} title="Calendari real" body="Quan guardes en published, l'esdeveniment apareix a /calendari i a la fitxa /esdeveniments/:slug." />
                     <EditorToolbar

@@ -16,9 +16,17 @@ import { galleryMediaByPage, type GalleryMediaImage, type GalleryMediaSection } 
 import { itineraryGuide, type ClubItinerary, type ItineraryProfile, type LocalizedText } from "@/content/itineraryGuide";
 import { type LanguageCode } from "@/lib/i18n";
 
-export type ClubCmsContentType = "gallery" | "itinerary" | "event";
+export type ClubCmsContentType = "gallery" | "itinerary" | "event" | "setting";
 export type ClubCmsStatus = "draft" | "published" | "scheduled" | "archived";
 export type ClubAdminRole = "admin" | "editor" | "viewer";
+export type CountdownMode = "auto" | "manual" | "off";
+
+export type CountdownConfig = {
+  mode: CountdownMode;
+  primaryEventId: string | null;
+  showSecondary: boolean;
+  secondaryEventId: string | null;
+};
 
 export type ClubAdminEntryRow = {
   id: string;
@@ -105,6 +113,13 @@ export const clubCmsConfig = {
   anonKey: SUPABASE_ANON_KEY,
   bucket: SUPABASE_BUCKET,
   table: CLUB_ENTRIES_TABLE,
+};
+
+export const defaultCountdownConfig: CountdownConfig = {
+  mode: "auto",
+  primaryEventId: null,
+  showSecondary: false,
+  secondaryEventId: null,
 };
 
 export const isClubCmsEnabled = () => clubCmsConfig.enabled;
@@ -550,6 +565,21 @@ export const usePublishedEvents = () => {
   return { ...query, data: query.data ?? [] };
 };
 
+export const useCountdownConfig = () => {
+  const query = useQuery({
+    queryKey: ["club-cms-countdown-config"],
+    queryFn: async () => {
+      const entries = await fetchEntries("setting", { statuses: ["published", "scheduled"] });
+      const liveEntry = entries.filter(isEntryLive).find((entry) => entry.slug === "countdown-home") ?? null;
+      return normalizeCountdownConfig(liveEntry?.payload);
+    },
+    enabled: clubCmsConfig.enabled,
+    staleTime: 30_000,
+  });
+
+  return { ...query, data: query.data ?? defaultCountdownConfig };
+};
+
 export const useMergedItineraries = () => {
   const { data: dynamicRoutes, ...query } = usePublishedItineraries();
   return { ...query, data: useMemo(() => mergeRoutes(itineraryGuide, dynamicRoutes), [dynamicRoutes]) };
@@ -574,6 +604,16 @@ const emptyVisitStats = {
   topLocales: [] as { locale: string; visits: number }[],
   recent: [] as ClubPageViewRow[],
   daily: [] as { day: string; visits: number }[],
+};
+
+export const normalizeCountdownConfig = (payload: Record<string, any> | null | undefined): CountdownConfig => {
+  const mode = payload?.mode === "manual" || payload?.mode === "off" ? payload.mode : "auto";
+  return {
+    mode,
+    primaryEventId: typeof payload?.primaryEventId === "string" && payload.primaryEventId.trim() ? payload.primaryEventId.trim() : null,
+    showSecondary: Boolean(payload?.showSecondary),
+    secondaryEventId: typeof payload?.secondaryEventId === "string" && payload.secondaryEventId.trim() ? payload.secondaryEventId.trim() : null,
+  };
 };
 
 export const formatDateTimeLocalInput = (value?: string | null) => {
@@ -603,6 +643,7 @@ export const buildCmsPublicPath = (entry: ClubAdminEntryRow) => {
   }
   if (entry.content_type === "itinerary") return "/itineraris";
   if (entry.content_type === "event") return `/esdeveniments/${entry.slug}`;
+  if (entry.content_type === "setting") return "/gestio-club";
   return "/";
 };
 

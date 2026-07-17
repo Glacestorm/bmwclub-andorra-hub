@@ -40,7 +40,7 @@ begin
 
   alter table public.club_admin_entries
     add constraint club_admin_entries_content_type_check
-    check (content_type in ('gallery', 'itinerary', 'event'));
+    check (content_type in ('gallery', 'itinerary', 'event', 'setting'));
 exception
   when duplicate_object then null;
 end $$;
