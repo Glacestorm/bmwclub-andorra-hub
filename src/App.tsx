@@ -101,7 +101,7 @@ const App = () => {
               <Route path="/index.php/ca/recull-fotos/fotos-sortides/any-2024" element={<Navigate to="/galeria/sortides/2024" replace />} />
               <Route path="/index.php/ca/recull-fotos/fotos-sortides/any-2025" element={<Navigate to="/galeria/sortides/2025" replace />} />
               <Route path="/index.php/ca/recull-fotos/fotos-sortides/any-2026" element={<Navigate to="/galeria/sortides/2026" replace />} />
-              <Route path="/index.php/ca/component/dpcalendar/event/4o-cars-coffee" element={<Navigate to="/esdeveniments/cars-coffee-2026-07-12" replace />} />
+              <Route path="/index.php/ca/component/dpcalendar/event/4o-cars-coffee" element={<Navigate to="/esdeveniments/cars-coffee-2026-07-19" replace />} />
               <Route path="/patrocinadors" element={withRouteFallback(<Patrocinadors />)} />
               <Route path="/calendari" element={withRouteFallback(<Calendari />)} />
               <Route path="/calendari/:year" element={withRouteFallback(<CalendariYear />)} />
