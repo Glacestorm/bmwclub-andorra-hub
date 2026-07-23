@@ -137,7 +137,7 @@ export const Hero = ({ language }: HeroProps) => {
           <img
             src="/legacy-mirror/images/portades-banner24.jpg"
             alt="BMW Club Andorra portada històrica"
-            className="w-full h-auto rounded-[1.5rem] border border-slate-200 shadow-sm"
+            className="w-full h-auto"
             loading="eager"
           />
 
