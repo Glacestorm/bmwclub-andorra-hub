@@ -161,6 +161,16 @@ export const Hero = ({ language }: HeroProps) => {
             </div>
           </div>
 
+          <div className="hidden md:flex justify-end pt-2 lg:pt-4">
+            <div className="rounded-[1.5rem] border border-white/10 bg-white/92 p-3 shadow-elegant backdrop-blur-sm">
+              <img
+                src="/club/logo-small.png"
+                alt="BMW Club Andorra"
+                className="h-auto w-[clamp(150px,17vw,240px)] object-contain"
+                loading="eager"
+              />
+            </div>
+          </div>
         </div>
       </div>
     </section>
