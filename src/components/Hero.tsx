@@ -1,6 +1,4 @@
-import { Link } from "react-router-dom";
-import { ArrowRight, Sparkles, Star } from "lucide-react";
-import { Button } from "@/components/ui/button";
+import { Sparkles } from "lucide-react";
 import { LanguageCode } from "@/lib/i18n";
 
 interface HeroProps {
@@ -159,25 +157,6 @@ export const Hero = ({ language }: HeroProps) => {
                 />
                 <div className="pointer-events-none absolute left-[8%] top-[16%] -z-10 hidden h-[60%] w-[56%] rounded-full bg-white/8 blur-[78px] md:block" />
                 <h1 className="text-[2.35rem] sm:text-5xl md:text-6xl lg:text-7xl font-bold text-balance leading-[0.95]">{t.title}</h1>
-              </div>
-            </div>
-            <div className="flex flex-col items-stretch gap-2.5 pt-1 sm:flex-row sm:items-start sm:gap-4 sm:pt-2">
-              <Link to="/calendari/2026" className="w-full sm:w-auto"><Button variant="hero" className="h-12 w-full gap-2 px-6 text-base sm:h-14 sm:w-auto sm:px-10 sm:text-lg">{t.primary}<ArrowRight className="h-5 w-5" /></Button></Link>
-              <Link to="/destacats" className="w-full sm:w-auto"><Button variant="outline" className="h-12 w-full border-white/20 bg-white/8 px-6 text-base text-white hover:bg-white/14 sm:h-14 sm:w-auto sm:px-10 sm:text-lg">{t.secondary}</Button></Link>
-            </div>
-
-            <div className="glass-dark max-w-2xl rounded-[1.35rem] border border-white/10 p-3.5 sm:rounded-[1.65rem] sm:p-5">
-              <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
-                <div>
-                  <div className="inline-flex items-center gap-2 rounded-full bg-white/10 px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.2em] text-white/70">
-                    <Star className="h-3.5 w-3.5 text-primary" />
-                    {t.sponsorLabel}
-                  </div>
-                  <div className="mt-3 text-lg font-semibold sm:text-xl">Pyrénées Andorra</div>
-                </div>
-                <Link to="/patrocinadors" className="shrink-0 w-full sm:w-auto">
-                  <Button variant="outline" className="h-11 w-full rounded-full border-white/15 bg-white/6 px-5 text-sm text-white hover:bg-white/10 sm:h-auto sm:w-auto">{t.sponsorCta}</Button>
-                </Link>
               </div>
             </div>
           </div>
