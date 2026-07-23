@@ -36,13 +36,20 @@ const getSectionContext = (section: GalleryMediaSection, t: (typeof translations
 };
 
 const LEGACY_MEDIA_ORIGIN = "https://bca.jcarranca.com";
+const LOCAL_FIRST_GALLERY_PREFIXES = [
+  "/legacy-mirror/images/phocagallery/sortides/Any_2026/4_Cars_Coffee_19_07/",
+];
+
+const shouldUseLocalImage = (src: string) => LOCAL_FIRST_GALLERY_PREFIXES.some((prefix) => src.startsWith(prefix));
 
 const resolveLegacyImageSrc = (src: string) => {
-  if (!src.startsWith("/legacy-mirror/images/")) return src;
+  if (!src.startsWith("/legacy-mirror/images/") || shouldUseLocalImage(src)) return src;
   return `${LEGACY_MEDIA_ORIGIN}/images/${src.replace("/legacy-mirror/images/", "")}`;
 };
 
 const getThumbnailSrc = (src: string) => {
+  if (shouldUseLocalImage(src)) return src;
+
   if (src.includes("/legacy-mirror/images/phocagallery/")) {
     const lastSlashIndex = src.lastIndexOf("/");
     const dir = src.slice(0, lastSlashIndex);
