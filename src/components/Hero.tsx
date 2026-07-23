@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { ArrowRight, Calendar, Compass, Sparkles, Star } from "lucide-react";
+import { ArrowRight, Sparkles, Star } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { LanguageCode } from "@/lib/i18n";
 
@@ -131,11 +131,6 @@ const translations: Record<LanguageCode, Record<string, string>> = {
 
 export const Hero = ({ language }: HeroProps) => {
   const t = translations[language];
-  const heroCards = [
-    { icon: Calendar, title: t.card1t, desc: t.card1d, href: "/calendari/2026" },
-    { icon: Compass, title: t.card2t, desc: t.card2d, href: "/arxiu" },
-    { icon: Sparkles, title: t.card3t, desc: t.card3d, href: "/bmw-oficial" },
-  ];
 
   return (
     <section className="relative flex min-h-[68vh] items-start justify-center overflow-hidden pt-16 sm:min-h-[72vh] sm:pt-[4.25rem] md:min-h-[78vh] md:pt-[4.75rem] lg:min-h-[92vh] lg:pt-20">
@@ -187,26 +182,6 @@ export const Hero = ({ language }: HeroProps) => {
             </div>
           </div>
 
-          <div className="hidden self-start gap-3 md:grid md:grid-cols-2 md:gap-4 lg:ml-auto lg:max-w-xl lg:grid-cols-1 lg:gap-4">
-            {heroCards.map((item, index) => {
-              const Icon = item.icon;
-              return (
-                <Link
-                  key={item.title}
-                  to={item.href}
-                  className={`glass-panel block rounded-[1.6rem] p-5 transition-base hover:-translate-y-1 hover:shadow-elegant md:min-h-[168px] lg:min-h-0 ${index === 2 ? "md:col-span-2 lg:col-span-1" : ""}`}
-                >
-                  <div className="flex items-start gap-4">
-                    <div className="rounded-2xl bg-primary/10 p-3"><Icon className="h-5 w-5 text-primary" /></div>
-                    <div>
-                      <h3 className="text-lg font-semibold text-slate-900">{item.title}</h3>
-                      <p className="mt-2 text-sm leading-relaxed text-slate-600">{item.desc}</p>
-                    </div>
-                  </div>
-                </Link>
-              );
-            })}
-          </div>
         </div>
       </div>
     </section>
