@@ -400,7 +400,7 @@ const ClubAssistant = () => {
         title: t.club,
         body:
           language === "es"
-            ? "BMW Club Andorra es una comunidad de propietarios y aficionados BMW en Andorra. La web ya reúne calendario, salidas, archivo histórico, destacados, patrocinadores y conexión con BMW Oficial dentro de una experiencia mucho más cuidada."
+            ? "BMW Club Andorra es una comunidad de propietarios y aficionados BMW en Andorra. La web ya reúne calendario, salidas, archivo histórico, destacados y patrocinadores dentro de una experiencia mucho más cuidada."
             : t.fallbackBody,
         cta: { label: t.clubCta, href: "/el-club" },
       };

@@ -17,7 +17,6 @@ const Calendari = lazy(() => import("./pages/Calendari"));
 const CalendariYear = lazy(() => import("./pages/CalendariYear"));
 const Destacats = lazy(() => import("./pages/Destacats"));
 const Arxiu = lazy(() => import("./pages/Arxiu"));
-const BmwOficial = lazy(() => import("./pages/BmwOficial"));
 const ClubAssistant = lazy(() => import("./pages/ClubAssistant"));
 const Itineraris = lazy(() => import("./pages/Itineraris"));
 const GestioClub = lazy(() => import("./pages/GestioClub"));
@@ -74,7 +73,6 @@ const App = () => (
               <Route path="/calendari/:year" element={<CalendariYear />} />
               <Route path="/destacats" element={<Destacats />} />
               <Route path="/arxiu" element={<Arxiu />} />
-              <Route path="/bmw-oficial" element={<BmwOficial />} />
               <Route path="/assistent-ia" element={<ClubAssistant />} />
               <Route path="/itineraris" element={<Itineraris />} />
               <Route path="/gestio-club" element={<GestioClub />} />

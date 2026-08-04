@@ -177,7 +177,7 @@ export const HomeWelcomeShowcase = () => {
   }, [emblaApi]);
 
   return (
-    <section className="-mt-16 relative z-20 pb-10">
+    <section className="relative z-20 pt-6 pb-10 md:pt-8">
       <div className="container mx-auto px-4">
         <Card className="glass-panel rounded-[2rem] border-0 max-w-6xl mx-auto p-6 md:p-8 overflow-hidden shadow-elegant">
           <div className="grid xl:grid-cols-[1fr_1.05fr] gap-8 items-stretch">

@@ -16,7 +16,7 @@ const translations: Record<LanguageCode, Record<string, string>> = {
     assistant: "Assistent IA",
     routes: "Itineraris",
     gallery: "Galeria",
-    contact: "BMW Oficial",
+    contact: "Contacte",
     legal: "Legal",
     privacy: "Privacitat",
     cookies: "Cookies",
@@ -41,7 +41,7 @@ const translations: Record<LanguageCode, Record<string, string>> = {
     assistant: "Asistente IA",
     routes: "Itinerarios",
     gallery: "Galería",
-    contact: "BMW Oficial",
+    contact: "Contacto",
     legal: "Legal",
     privacy: "Privacidad",
     cookies: "Cookies",
@@ -66,7 +66,7 @@ const translations: Record<LanguageCode, Record<string, string>> = {
     assistant: "Assistant IA",
     routes: "Itinéraires",
     gallery: "Galerie",
-    contact: "BMW Officiel",
+    contact: "Contact",
     legal: "Légal",
     privacy: "Confidentialité",
     cookies: "Cookies",
@@ -91,7 +91,7 @@ const translations: Record<LanguageCode, Record<string, string>> = {
     assistant: "AI Concierge",
     routes: "Routes",
     gallery: "Gallery",
-    contact: "BMW Official",
+    contact: "Contact",
     legal: "Legal",
     privacy: "Privacy",
     cookies: "Cookies",
@@ -116,7 +116,7 @@ const translations: Record<LanguageCode, Record<string, string>> = {
     assistant: "Assistente IA",
     routes: "Itinerários",
     gallery: "Galeria",
-    contact: "BMW Oficial",
+    contact: "Contacto",
     legal: "Legal",
     privacy: "Privacidade",
     cookies: "Cookies",
@@ -141,7 +141,7 @@ const translations: Record<LanguageCode, Record<string, string>> = {
     assistant: "KI-Assistent",
     routes: "Routen",
     gallery: "Galerie",
-    contact: "BMW Offiziell",
+    contact: "Kontakt",
     legal: "Rechtliches",
     privacy: "Datenschutz",
     cookies: "Cookies",
@@ -166,7 +166,7 @@ const translations: Record<LanguageCode, Record<string, string>> = {
     assistant: "ИИ помощник",
     routes: "Маршруты",
     gallery: "Галерея",
-    contact: "BMW Official",
+    contact: "Контакты",
     legal: "Правовая информация",
     privacy: "Конфиденциальность",
     cookies: "Cookies",
@@ -220,7 +220,6 @@ export const Footer = ({ language }: FooterProps) => {
               <li><Link to="/assistent-ia" className="text-sm text-white/72 hover:text-white transition-base">{t.assistant}</Link></li>
               <li><Link to="/itineraris" className="text-sm text-white/72 hover:text-white transition-base">{t.routes}</Link></li>
               <li><Link to="/galeria" className="text-sm text-white/72 hover:text-white transition-base">{t.gallery}</Link></li>
-              <li><Link to="/bmw-oficial" className="text-sm text-white/72 hover:text-white transition-base">{t.contact}</Link></li>
             </ul>
           </div>
 
