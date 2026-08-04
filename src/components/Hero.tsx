@@ -174,7 +174,7 @@ export const Hero = ({ language }: HeroProps) => {
             </div>
           </div>
 
-          <div className="grid gap-4 lg:max-w-xl lg:ml-auto lg:translate-x-6 xl:translate-x-10">
+          <div className="grid gap-4 lg:max-w-xl lg:ml-auto lg:translate-x-10 xl:translate-x-14">
             {[
               { icon: Calendar, title: t.card1t, desc: t.card1d },
               { icon: Compass, title: t.card2t, desc: t.card2d },
