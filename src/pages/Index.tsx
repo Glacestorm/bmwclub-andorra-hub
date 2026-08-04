@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { ArrowRight, Archive, BadgeCheck, Calendar, Globe2, Mic, Sparkles, Stars, Volume2 } from "lucide-react";
+import { ArrowRight, Archive, BadgeCheck, Calendar, Mic, Sparkles, Stars, Volume2 } from "lucide-react";
 import { PageShell } from "@/components/PageShell";
 import { Hero } from "@/components/Hero";
 import { Button } from "@/components/ui/button";
@@ -9,7 +9,7 @@ import { HomeWelcomeShowcase } from "@/components/home/HomeWelcomeShowcase";
 import { useLanguage } from "@/components/LanguageProvider";
 import { LanguageCode } from "@/lib/i18n";
 import { getLocalizedText } from "@/lib/localized";
-import { archiveItems, featuredEventMeta, officialBmwLinks } from "@/content/siteExperience";
+import { archiveItems, featuredEventMeta } from "@/content/siteExperience";
 import { sponsorItems } from "@/content/sponsorData";
 import { getEventById } from "@/lib/calendar";
 
@@ -18,15 +18,15 @@ const translations: Record<LanguageCode, Record<string, string>> = {
     ethos: "Experiència BMW amb més pes, més context i millor disseny.",
     pillars: "Nou enfocament",
     pillarsTitle: "Web més potent, més moderna i amb narrativa pròpia",
-    pillarsSubtitle: "Calendari viu, meteo útil, arxiu real i accés directe a BMW Oficial dins una experiència clara, ordenada i orientada al club.",
+    pillarsSubtitle: "Calendari viu, meteo útil, arxiu real i accessos clars dins una experiència ordenada i orientada al club.",
     pillar1: "Calendari viu",
     pillar1d: "Sortides futures, historial i compte enrere connectats entre si.",
     pillar2: "Destacats editorials",
     pillar2d: "Els grans moments del club passen a tenir fitxa pròpia i valor de marca.",
     pillar3: "Arxiu recuperat",
     pillar3d: "Documents, vídeos i revistes que abans estaven dispersos ara passen a ser una hemeroteca útil.",
-    pillar4: "BMW Oficial",
-    pillar4d: "Hub especial per connectar el club amb novetats, configurador i univers oficial BMW.",
+    pillar4: "Partners premium",
+    pillar4d: "Patrocinadors i col·laboradors amb presència més clara dins l'ecosistema digital del club.",
     assistantEyebrow: "Conserge IA",
     assistantTitle: "Una entrada guiada perquè qualsevol visitant entengui el club en menys d'un minut",
     assistantBody: "No és només un chatbot decoratiu: orienta sobre properes sortides, socis, patrocinadors, contacte i lectura general del club amb veu opcional des del navegador.",
@@ -53,9 +53,9 @@ const translations: Record<LanguageCode, Record<string, string>> = {
     archiveEyebrow: "Arxiu del club",
     archiveTitle: "Memòria recuperada, sense aparença de CMS vell",
     archiveCta: "Obrir arxiu",
-    officialEyebrow: "BMW Oficial",
-    officialTitle: "Enllaç directe a la marca i a les novetats oficials",
-    officialCta: "Veure hub oficial",
+    officialEyebrow: "Partners premium",
+    officialTitle: "Marques i col·laboradors amb millor visibilitat dins la web",
+    officialCta: "Veure patrocinadors",
     sponsorsEyebrow: "Patrocinadors",
     sponsorsTitle: "Marques amb visibilitat real, no una llista discreta al peu de pàgina",
     sponsorsCta: "Veure patrocinadors",
@@ -66,7 +66,7 @@ const translations: Record<LanguageCode, Record<string, string>> = {
     journalTitle: "Tres entrades clares per entendre el club, reviure'l i connectar-lo amb la marca",
     journalClub: "El Club",
     journalGallery: "Galeria",
-    journalBrand: "BMW Oficial",
+    journalBrand: "Patrocinadors",
     journalOpen: "Entrar",
     visitEvent: "Obrir fitxa",
     openOfficial: "Obrir",
@@ -75,15 +75,15 @@ const translations: Record<LanguageCode, Record<string, string>> = {
     ethos: "Experiencia BMW con más peso, más contexto y mejor diseño.",
     pillars: "Nuevo enfoque",
     pillarsTitle: "Una web más potente, más moderna y con narrativa propia",
-    pillarsSubtitle: "Calendario vivo, meteo útil, archivo real y acceso directo a BMW Oficial dentro de una experiencia clara, ordenada y orientada al club.",
+    pillarsSubtitle: "Calendario vivo, meteo útil, archivo real y accesos claros dentro de una experiencia ordenada y orientada al club.",
     pillar1: "Calendario vivo",
     pillar1d: "Salidas futuras, histórico y cuenta atrás conectados entre sí.",
     pillar2: "Destacados editoriales",
     pillar2d: "Los grandes momentos del club pasan a tener ficha propia y valor de marca.",
     pillar3: "Archivo recuperado",
     pillar3d: "Documentos, vídeos y revistas que antes estaban dispersos pasan a ser una hemeroteca útil.",
-    pillar4: "BMW Oficial",
-    pillar4d: "Hub especial para conectar el club con novedades, configurador y universo oficial BMW.",
+    pillar4: "Partners premium",
+    pillar4d: "Patrocinadores y colaboradores con una presencia más clara dentro del ecosistema digital del club.",
     assistantEyebrow: "Conserje IA",
     assistantTitle: "Una entrada guiada para que cualquier visitante entienda el club en menos de un minuto",
     assistantBody: "No es un chatbot decorativo: orienta sobre próximas salidas, alta de socio, patrocinadores, contacto y lectura general del club, con voz opcional desde el navegador.",
@@ -110,9 +110,9 @@ const translations: Record<LanguageCode, Record<string, string>> = {
     archiveEyebrow: "Archivo del club",
     archiveTitle: "Memoria recuperada, sin apariencia de CMS viejo",
     archiveCta: "Abrir archivo",
-    officialEyebrow: "BMW Oficial",
-    officialTitle: "Enlace directo a la marca y a sus novedades oficiales",
-    officialCta: "Ver hub oficial",
+    officialEyebrow: "Partners premium",
+    officialTitle: "Marcas y colaboradores con mejor visibilidad dentro de la web",
+    officialCta: "Ver patrocinadores",
     sponsorsEyebrow: "Patrocinadores",
     sponsorsTitle: "Marcas con visibilidad real, no una lista discreta en el pie de página",
     sponsorsCta: "Ver patrocinadores",
@@ -123,7 +123,7 @@ const translations: Record<LanguageCode, Record<string, string>> = {
     journalTitle: "Tres entradas claras para entender el club, revivirlo y conectarlo con la marca",
     journalClub: "El Club",
     journalGallery: "Galería",
-    journalBrand: "BMW Oficial",
+    journalBrand: "Patrocinadores",
     journalOpen: "Entrar",
     visitEvent: "Abrir ficha",
     openOfficial: "Abrir",
@@ -132,15 +132,15 @@ const translations: Record<LanguageCode, Record<string, string>> = {
     ethos: "Une expérience BMW avec plus de poids, de contexte et un meilleur design.",
     pillars: "Nouvelle approche",
     pillarsTitle: "Un site plus fort, plus moderne et avec son propre récit",
-    pillarsSubtitle: "Calendrier vivant, météo utile, véritable archive et accès direct à BMW Officiel dans une expérience claire, ordonnée et fidèle au club.",
+    pillarsSubtitle: "Calendrier vivant, météo utile, véritable archive et accès clairs dans une expérience ordonnée et fidèle au club.",
     pillar1: "Calendrier vivant",
     pillar1d: "Sorties futures, historique et compte à rebours reliés entre eux.",
     pillar2: "Temps forts éditoriaux",
     pillar2d: "Les grands moments du club gagnent leur propre fiche et une vraie valeur de marque.",
     pillar3: "Archive récupérée",
     pillar3d: "Documents, vidéos et magazines auparavant dispersés deviennent une archive utile.",
-    pillar4: "BMW Officiel",
-    pillar4d: "Hub spécial pour relier le club aux nouveautés, au configurateur et à l'univers officiel BMW.",
+    pillar4: "Partenaires premium",
+    pillar4d: "Sponsors et collaborateurs avec une présence plus claire dans l'écosystème digital du club.",
     assistantEyebrow: "Concierge IA",
     assistantTitle: "Une entrée guidée pour qu'un visiteur comprenne le club en moins d'une minute",
     assistantBody: "Ce n'est pas un chatbot décoratif : il guide sur les prochaines sorties, l'adhésion, les sponsors, le contact et la lecture générale du club, avec une voix optionnelle depuis le navigateur.",
@@ -167,9 +167,9 @@ const translations: Record<LanguageCode, Record<string, string>> = {
     archiveEyebrow: "Archive du club",
     archiveTitle: "Mémoire récupérée, sans l'apparence d'un vieux CMS",
     archiveCta: "Ouvrir l'archive",
-    officialEyebrow: "BMW Officiel",
-    officialTitle: "Lien direct vers la marque et ses nouveautés officielles",
-    officialCta: "Voir le hub officiel",
+    officialEyebrow: "Partenaires premium",
+    officialTitle: "Marques et collaborateurs avec une meilleure visibilité sur le site",
+    officialCta: "Voir les sponsors",
     sponsorsEyebrow: "Sponsors",
     sponsorsTitle: "Des marques avec une vraie visibilité, pas une simple liste discrète en pied de page",
     sponsorsCta: "Voir les sponsors",
@@ -180,7 +180,7 @@ const translations: Record<LanguageCode, Record<string, string>> = {
     journalTitle: "Trois entrées claires pour comprendre le club, le revivre et le relier à la marque",
     journalClub: "Le Club",
     journalGallery: "Galerie",
-    journalBrand: "BMW Officiel",
+    journalBrand: "Sponsors",
     journalOpen: "Entrer",
     visitEvent: "Ouvrir la fiche",
     openOfficial: "Ouvrir",
@@ -189,15 +189,15 @@ const translations: Record<LanguageCode, Record<string, string>> = {
     ethos: "A BMW experience with more weight, more context and better design.",
     pillars: "New direction",
     pillarsTitle: "A stronger, more modern website with its own narrative",
-    pillarsSubtitle: "Live calendar, useful weather, real archive and direct access to BMW Official within a clear, well-structured experience focused on the club.",
+    pillarsSubtitle: "Live calendar, useful weather, real archive and clear access points within a well-structured experience focused on the club.",
     pillar1: "Live calendar",
     pillar1d: "Future outings, history and countdown are all connected.",
     pillar2: "Editorial highlights",
     pillar2d: "The club's biggest moments now get their own page and real brand value.",
     pillar3: "Recovered archive",
     pillar3d: "Documents, videos and magazines that were scattered now become a useful archive.",
-    pillar4: "BMW Official",
-    pillar4d: "Special hub connecting the club with official BMW updates, configurator and brand universe.",
+    pillar4: "Premium partners",
+    pillar4d: "Sponsors and collaborators with clearer presence across the club's digital ecosystem.",
     assistantEyebrow: "AI concierge",
     assistantTitle: "A guided entry point so any visitor understands the club in under a minute",
     assistantBody: "It is not a decorative chatbot: it guides visitors through upcoming outings, membership, sponsors, contact and the club story, with optional browser voice.",
@@ -224,9 +224,9 @@ const translations: Record<LanguageCode, Record<string, string>> = {
     archiveEyebrow: "Club archive",
     archiveTitle: "Recovered memory, without the look of an old CMS",
     archiveCta: "Open archive",
-    officialEyebrow: "BMW Official",
-    officialTitle: "Direct link to the brand and its official updates",
-    officialCta: "View official hub",
+    officialEyebrow: "Premium partners",
+    officialTitle: "Brands and collaborators with stronger visibility across the site",
+    officialCta: "View sponsors",
     sponsorsEyebrow: "Sponsors",
     sponsorsTitle: "Brands with real visibility, not a discreet list hidden in the footer",
     sponsorsCta: "View sponsors",
@@ -237,7 +237,7 @@ const translations: Record<LanguageCode, Record<string, string>> = {
     journalTitle: "Three clear entry points to understand the club, relive it and connect it with the brand",
     journalClub: "The Club",
     journalGallery: "Gallery",
-    journalBrand: "BMW Official",
+    journalBrand: "Sponsors",
     journalOpen: "Open",
     visitEvent: "Open detail",
     openOfficial: "Open",
@@ -246,15 +246,15 @@ const translations: Record<LanguageCode, Record<string, string>> = {
     ethos: "Experiência BMW com mais peso, mais contexto e melhor design.",
     pillars: "Nova direção",
     pillarsTitle: "Um site mais forte, mais moderno e com narrativa própria",
-    pillarsSubtitle: "Calendário vivo, meteorologia útil, arquivo real e acesso direto à BMW Oficial dentro de uma experiência clara, organizada e orientada ao clube.",
+    pillarsSubtitle: "Calendário vivo, meteorologia útil, arquivo real e acessos claros dentro de uma experiência organizada e orientada ao clube.",
     pillar1: "Calendário vivo",
     pillar1d: "Passeios futuros, histórico e contagem decrescente ligados entre si.",
     pillar2: "Destaques editoriais",
     pillar2d: "Os grandes momentos do clube passam a ter página própria e valor de marca.",
     pillar3: "Arquivo recuperado",
     pillar3d: "Documentos, vídeos e revistas que antes estavam dispersos passam a formar uma hemeroteca útil.",
-    pillar4: "BMW Oficial",
-    pillar4d: "Hub especial para ligar o clube às novidades, configurador e universo oficial BMW.",
+    pillar4: "Parceiros premium",
+    pillar4d: "Patrocinadores e colaboradores com presença mais clara no ecossistema digital do clube.",
     assistantEyebrow: "Concierge IA",
     assistantTitle: "Uma entrada guiada para que qualquer visitante perceba o clube em menos de um minuto",
     assistantBody: "Não é um chatbot decorativo: orienta sobre próximos passeios, adesão, patrocinadores, contacto e leitura geral do clube, com voz opcional no navegador.",
@@ -281,9 +281,9 @@ const translations: Record<LanguageCode, Record<string, string>> = {
     archiveEyebrow: "Arquivo do clube",
     archiveTitle: "Memória recuperada, sem aspeto de CMS antigo",
     archiveCta: "Abrir arquivo",
-    officialEyebrow: "BMW Oficial",
-    officialTitle: "Ligação direta à marca e às novidades oficiais",
-    officialCta: "Ver hub oficial",
+    officialEyebrow: "Parceiros premium",
+    officialTitle: "Marcas e colaboradores com melhor visibilidade no site",
+    officialCta: "Ver patrocinadores",
     sponsorsEyebrow: "Patrocinadores",
     sponsorsTitle: "Marcas com visibilidade real, não uma lista discreta no rodapé",
     sponsorsCta: "Ver patrocinadores",
@@ -294,7 +294,7 @@ const translations: Record<LanguageCode, Record<string, string>> = {
     journalTitle: "Três entradas claras para entender o clube, revivê-lo e ligá-lo à marca",
     journalClub: "O Clube",
     journalGallery: "Galeria",
-    journalBrand: "BMW Oficial",
+    journalBrand: "Patrocinadores",
     journalOpen: "Entrar",
     visitEvent: "Abrir ficha",
     openOfficial: "Abrir",
@@ -303,15 +303,15 @@ const translations: Record<LanguageCode, Record<string, string>> = {
     ethos: "BMW-Erlebnis mit mehr Gewicht, mehr Kontext und besserem Design.",
     pillars: "Neue Richtung",
     pillarsTitle: "Eine stärkere, modernere Website mit eigener Erzählung",
-    pillarsSubtitle: "Live-Kalender, nützliches Wetter, echtes Archiv und direkter Zugang zu BMW Offiziell in einem klaren, geordneten Erlebnis mit Fokus auf den Club.",
+    pillarsSubtitle: "Live-Kalender, nützliches Wetter, echtes Archiv und klare Zugänge in einem geordneten Erlebnis mit Fokus auf den Club.",
     pillar1: "Live-Kalender",
     pillar1d: "Zukünftige Ausfahrten, Historie und Countdown sind miteinander verbunden.",
     pillar2: "Redaktionelle Highlights",
     pillar2d: "Die wichtigsten Momente des Clubs erhalten eine eigene Seite und echten Markenwert.",
     pillar3: "Wiederhergestelltes Archiv",
     pillar3d: "Dokumente, Videos und Magazine werden aus verstreuten Dateien zu einem nützlichen Archiv.",
-    pillar4: "BMW Offiziell",
-    pillar4d: "Spezieller Hub, der den Club mit offiziellen BMW-Neuheiten, Konfigurator und Markenwelt verbindet.",
+    pillar4: "Premium-Partner",
+    pillar4d: "Sponsoren und Partner mit klarerer Präsenz im digitalen Club-Ökosystem.",
     assistantEyebrow: "KI-Concierge",
     assistantTitle: "Ein geführter Einstieg, damit jeder Besucher den Club in unter einer Minute versteht",
     assistantBody: "Kein dekorativer Chatbot: Er hilft bei Ausfahrten, Mitgliedschaft, Sponsoren, Kontakt und Club-Verständnis, inklusive optionaler Browser-Stimme.",
@@ -338,9 +338,9 @@ const translations: Record<LanguageCode, Record<string, string>> = {
     archiveEyebrow: "Club-Archiv",
     archiveTitle: "Wiederhergestellte Erinnerung ohne alten CMS-Look",
     archiveCta: "Archiv öffnen",
-    officialEyebrow: "BMW Offiziell",
-    officialTitle: "Direkter Link zur Marke und ihren offiziellen Neuheiten",
-    officialCta: "Offiziellen Hub ansehen",
+    officialEyebrow: "Premium-Partner",
+    officialTitle: "Marken und Partner mit stärkerer Sichtbarkeit auf der Website",
+    officialCta: "Sponsoren ansehen",
     sponsorsEyebrow: "Sponsoren",
     sponsorsTitle: "Marken mit echter Sichtbarkeit, nicht nur eine unauffällige Liste im Footer",
     sponsorsCta: "Sponsoren ansehen",
@@ -351,7 +351,7 @@ const translations: Record<LanguageCode, Record<string, string>> = {
     journalTitle: "Drei klare Einstiege, um den Club zu verstehen, neu zu erleben und mit der Marke zu verbinden",
     journalClub: "Der Club",
     journalGallery: "Galerie",
-    journalBrand: "BMW Offiziell",
+    journalBrand: "Sponsoren",
     journalOpen: "Öffnen",
     visitEvent: "Detail öffnen",
     openOfficial: "Öffnen",
@@ -360,15 +360,15 @@ const translations: Record<LanguageCode, Record<string, string>> = {
     ethos: "Опыт BMW с большим весом, контекстом и лучшим дизайном.",
     pillars: "Новый вектор",
     pillarsTitle: "Более сильный, современный сайт со своей собственной историей",
-    pillarsSubtitle: "Живой календарь, полезная погода, настоящий архив и прямой доступ к BMW Official в ясной и структурированной клубной подаче.",
+    pillarsSubtitle: "Живой календарь, полезная погода, настоящий архив и понятные точки входа в ясной и структурированной клубной подаче.",
     pillar1: "Живой календарь",
     pillar1d: "Будущие выезды, история и обратный отсчёт связаны между собой.",
     pillar2: "Редакционные акценты",
     pillar2d: "Главные моменты клуба получают собственные страницы и настоящий бренд-контекст.",
     pillar3: "Восстановленный архив",
     pillar3d: "Документы, видео и журналы, которые раньше были разбросаны, становятся полезным архивом.",
-    pillar4: "BMW Official",
-    pillar4d: "Специальный хаб, связывающий клуб с официальными новинками BMW, конфигуратором и миром бренда.",
+    pillar4: "Премиум-партнёры",
+    pillar4d: "Спонсоры и партнёры с более заметным присутствием в цифровой экосистеме клуба.",
     assistantEyebrow: "ИИ-консьерж",
     assistantTitle: "Понятная guided-входная точка, чтобы посетитель понял клуб меньше чем за минуту",
     assistantBody: "Это не декоративный чатбот: он помогает с ближайшими выездами, вступлением, спонсорами, контактами и общим пониманием клуба, включая голос в браузере.",
@@ -395,9 +395,9 @@ const translations: Record<LanguageCode, Record<string, string>> = {
     archiveEyebrow: "Архив клуба",
     archiveTitle: "Восстановленная память без ощущения старого CMS",
     archiveCta: "Открыть архив",
-    officialEyebrow: "BMW Official",
-    officialTitle: "Прямая связь с брендом и его официальными новинками",
-    officialCta: "Открыть официальный хаб",
+    officialEyebrow: "Премиум-партнёры",
+    officialTitle: "Бренды и партнёры с более сильной видимостью на сайте",
+    officialCta: "Открыть спонсоров",
     sponsorsEyebrow: "Спонсоры",
     sponsorsTitle: "Бренды с реальной заметностью, а не скромный список в футере",
     sponsorsCta: "Открыть спонсоров",
@@ -408,7 +408,7 @@ const translations: Record<LanguageCode, Record<string, string>> = {
     journalTitle: "Три ясные точки входа, чтобы понять клуб, пережить его заново и связать с брендом",
     journalClub: "Клуб",
     journalGallery: "Галерея",
-    journalBrand: "BMW Official",
+    journalBrand: "Спонсоры",
     journalOpen: "Открыть",
     visitEvent: "Открыть карточку",
     openOfficial: "Открыть",
@@ -443,7 +443,7 @@ const Index = () => {
                 <p className="mt-4 text-xl font-semibold text-balance">{t.ethos}</p>
                 <div className="mt-6 flex gap-3 flex-wrap">
                   <Link to="/destacats"><Button variant="hero">{t.highlightsCta}</Button></Link>
-                  <Link to="/bmw-oficial"><Button variant="outline" className="bg-white/5 text-white border-white/15 hover:bg-white/10">{t.officialCta}</Button></Link>
+                  <Link to="/patrocinadors"><Button variant="outline" className="bg-white/5 text-white border-white/15 hover:bg-white/10">{t.sponsorsCta}</Button></Link>
                 </div>
               </div>
             </div>
@@ -457,7 +457,6 @@ const Index = () => {
             { title: t.pillar1, desc: t.pillar1d, icon: Calendar },
             { title: t.pillar2, desc: t.pillar2d, icon: Sparkles },
             { title: t.pillar3, desc: t.pillar3d, icon: Archive },
-            { title: t.pillar4, desc: t.pillar4d, icon: Globe2 },
           ].map((item) => {
             const Icon = item.icon;
             return (
@@ -654,7 +653,7 @@ const Index = () => {
             {[
               { title: t.journalClub, href: "/el-club", text: t.pillar2d },
               { title: t.journalGallery, href: "/galeria", text: t.pillar3d },
-              { title: t.journalBrand, href: "/bmw-oficial", text: t.pillar4d },
+              { title: t.routesEyebrow, href: "/itineraris", text: t.routesBody },
             ].map((item) => (
               <Link key={item.href} to={item.href}>
                 <Card className="premium-card border-0 rounded-[2rem] p-6 hover-tilt h-full">
@@ -670,7 +669,7 @@ const Index = () => {
       </section>
 
       <section className="pb-16">
-        <div className="container mx-auto px-4 max-w-6xl grid lg:grid-cols-[0.95fr_1.05fr] gap-6 items-stretch">
+        <div className="container mx-auto px-4 max-w-4xl">
           <Card className="premium-card border-0 rounded-[2rem] p-8">
             <p className="text-sm uppercase tracking-[0.25em] text-primary">{t.archiveEyebrow}</p>
             <h2 className="mt-3 text-3xl md:text-4xl font-bold text-balance">{t.archiveTitle}</h2>
@@ -684,25 +683,6 @@ const Index = () => {
               ))}
             </div>
             <Link to="/arxiu" className="inline-block mt-6"><Button variant="outline">{t.archiveCta}</Button></Link>
-          </Card>
-
-          <Card className="glass-dark border-0 rounded-[2rem] p-8 text-white overflow-hidden relative">
-            <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(0,102,177,.28),transparent_30%)]" />
-            <div className="relative z-10">
-              <p className="text-sm uppercase tracking-[0.25em] text-white/70">{t.officialEyebrow}</p>
-              <h2 className="mt-3 text-3xl md:text-4xl font-bold text-balance">{t.officialTitle}</h2>
-              <div className="mt-6 grid sm:grid-cols-2 gap-4">
-                {officialBmwLinks.slice(0, 4).map((item) => (
-                  <a key={item.id} href={item.href} target="_blank" rel="noreferrer" className="rounded-2xl border border-white/10 bg-white/5 p-4 block hover:bg-white/10 transition-base">
-                    <div className="text-xs uppercase tracking-[0.2em] text-white/60 font-semibold">{getLocalizedText(item.tag, language)}</div>
-                    <div className="mt-2 font-semibold text-balance">{getLocalizedText(item.title, language)}</div>
-                    <div className="mt-2 text-sm text-white/68">{getLocalizedText(item.summary, language)}</div>
-                    <div className="mt-4 inline-flex items-center gap-2 text-sm text-white">{t.openOfficial} <ArrowRight className="h-4 w-4" /></div>
-                  </a>
-                ))}
-              </div>
-              <Link to="/bmw-oficial" className="inline-block mt-6"><Button variant="hero">{t.officialCta}</Button></Link>
-            </div>
           </Card>
         </div>
       </section>

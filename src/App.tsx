@@ -21,7 +21,6 @@ const Calendari = lazyWithAutoReload(() => import("./pages/Calendari"));
 const CalendariYear = lazyWithAutoReload(() => import("./pages/CalendariYear"));
 const Destacats = lazyWithAutoReload(() => import("./pages/Destacats"));
 const Arxiu = lazyWithAutoReload(() => import("./pages/Arxiu"));
-const BmwOficial = lazyWithAutoReload(() => import("./pages/BmwOficial"));
 const ClubAssistant = lazyWithAutoReload(() => import("./pages/ClubAssistant"));
 const DriveExperience = lazyWithAutoReload(() => import("./pages/DriveExperience"));
 const EventMode = lazyWithAutoReload(() => import("./pages/EventMode"));
@@ -107,7 +106,6 @@ const App = () => {
               <Route path="/calendari/:year" element={withRouteFallback(<CalendariYear />)} />
               <Route path="/destacats" element={withRouteFallback(<Destacats />)} />
               <Route path="/arxiu" element={withRouteFallback(<Arxiu />)} />
-              <Route path="/bmw-oficial" element={withRouteFallback(<BmwOficial />)} />
               <Route path="/assistent-ia" element={withRouteFallback(<ClubAssistant />)} />
               <Route path="/itineraris" element={<Itineraris />} />
               <Route path="/drive-experience" element={withRouteFallback(<DriveExperience />)} />
