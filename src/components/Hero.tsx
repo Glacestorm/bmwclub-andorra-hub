@@ -162,7 +162,7 @@ export const Hero = ({ language }: HeroProps) => {
           </div>
 
           <div className="hidden md:flex justify-end -mt-4 lg:-mt-6 pr-0 lg:pr-1 xl:pr-0">
-            <div className="rounded-[1.5rem] border border-white/10 bg-white/92 p-3 shadow-elegant backdrop-blur-sm translate-x-2 lg:translate-x-4">
+            <div className="rounded-[1.5rem] border border-white/10 bg-white/92 p-3 shadow-elegant backdrop-blur-sm translate-x-4 lg:translate-x-8 xl:translate-x-10">
               <img
                 src="/club/logo-small.png"
                 alt="BMW Club Andorra"
