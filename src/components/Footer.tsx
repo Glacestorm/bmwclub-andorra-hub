@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { ArrowUpRight, Facebook, Instagram, Mail, Sparkles } from "lucide-react";
+import { ArrowUpRight, Facebook, Instagram, Mail } from "lucide-react";
 import { LanguageCode } from "@/lib/i18n";
 import { sponsorItems } from "@/content/sponsorData";
 
@@ -12,9 +12,6 @@ const translations: Record<LanguageCode, Record<string, string>> = {
     about: "Club i contingut",
     club: "El Club",
     partners: "Patrocinadors",
-    sponsors: "Destacats",
-    assistant: "Assistent IA",
-    routes: "Itineraris",
     gallery: "Galeria",
     contact: "Contacte",
     legal: "Legal",
@@ -28,18 +25,12 @@ const translations: Record<LanguageCode, Record<string, string>> = {
     description: "Club de propietaris i entusiastes de BMW a Andorra",
     closing: "Experiència digital renovada amb calendari viu, arxiu recuperat i una galeria més cuidada.",
     contactCta: "Escriure al club",
-    assistantEyebrow: "Conserge IA",
-    assistantBody: "Guia el visitant sobre sortides, socis, contacte i vida del club.",
-    assistantCta: "Obrir assistent",
     admin: "Accés club",
   },
   es: {
     about: "Club y contenido",
     club: "El Club",
     partners: "Patrocinadores",
-    sponsors: "Destacados",
-    assistant: "Asistente IA",
-    routes: "Itinerarios",
     gallery: "Galería",
     contact: "Contacto",
     legal: "Legal",
@@ -53,18 +44,12 @@ const translations: Record<LanguageCode, Record<string, string>> = {
     description: "Club de propietarios y entusiastas de BMW en Andorra",
     closing: "Experiencia digital renovada con calendario vivo, archivo recuperado y una galería más cuidada.",
     contactCta: "Escribir al club",
-    assistantEyebrow: "Conserje IA",
-    assistantBody: "Guía al visitante sobre salidas, socios, contacto y vida del club.",
-    assistantCta: "Abrir asistente",
     admin: "Acceso club",
   },
   fr: {
     about: "Club et contenus",
     club: "Le Club",
     partners: "Sponsors",
-    sponsors: "Temps forts",
-    assistant: "Assistant IA",
-    routes: "Itinéraires",
     gallery: "Galerie",
     contact: "Contact",
     legal: "Légal",
@@ -78,18 +63,12 @@ const translations: Record<LanguageCode, Record<string, string>> = {
     description: "Club de propriétaires et passionnés de BMW en Andorre",
     closing: "Expérience numérique renouvelée avec calendrier vivant, archive restaurée et galerie plus soignée.",
     contactCta: "Écrire au club",
-    assistantEyebrow: "Concierge IA",
-    assistantBody: "Guide le visiteur sur les sorties, l'adhésion, le contact et la vie du club.",
-    assistantCta: "Ouvrir l'assistant",
     admin: "Accès club",
   },
   en: {
     about: "Club and content",
     club: "The Club",
     partners: "Sponsors",
-    sponsors: "Highlights",
-    assistant: "AI Concierge",
-    routes: "Routes",
     gallery: "Gallery",
     contact: "Contact",
     legal: "Legal",
@@ -103,18 +82,12 @@ const translations: Record<LanguageCode, Record<string, string>> = {
     description: "BMW owners and enthusiasts club in Andorra",
     closing: "Renewed digital experience with a live calendar, recovered archive and a more curated gallery.",
     contactCta: "Write to the club",
-    assistantEyebrow: "AI concierge",
-    assistantBody: "Guides visitors through outings, membership, contact and the club story.",
-    assistantCta: "Open assistant",
     admin: "Club access",
   },
   pt: {
     about: "Clube e conteúdo",
     club: "O Clube",
     partners: "Patrocinadores",
-    sponsors: "Destaques",
-    assistant: "Assistente IA",
-    routes: "Itinerários",
     gallery: "Galeria",
     contact: "Contacto",
     legal: "Legal",
@@ -128,18 +101,12 @@ const translations: Record<LanguageCode, Record<string, string>> = {
     description: "Clube de proprietários e entusiastas BMW em Andorra",
     closing: "Experiência digital renovada com calendário vivo, arquivo recuperado e uma galeria mais cuidada.",
     contactCta: "Escrever ao clube",
-    assistantEyebrow: "Concierge IA",
-    assistantBody: "Orienta o visitante sobre passeios, sócios, contacto e vida do clube.",
-    assistantCta: "Abrir assistente",
     admin: "Acesso clube",
   },
   de: {
     about: "Club und Inhalte",
     club: "Der Club",
     partners: "Sponsoren",
-    sponsors: "Highlights",
-    assistant: "KI-Assistent",
-    routes: "Routen",
     gallery: "Galerie",
     contact: "Kontakt",
     legal: "Rechtliches",
@@ -153,18 +120,12 @@ const translations: Record<LanguageCode, Record<string, string>> = {
     description: "Club für BMW-Besitzer und Enthusiasten in Andorra",
     closing: "Erneuerte digitale Erfahrung mit lebendigem Kalender, wiederhergestelltem Archiv und einer kuratierteren Galerie.",
     contactCta: "Dem Club schreiben",
-    assistantEyebrow: "KI-Concierge",
-    assistantBody: "Hilft Besuchern bei Ausfahrten, Mitgliedschaft, Kontakt und Clubverständnis.",
-    assistantCta: "Assistent öffnen",
     admin: "Club-Zugang",
   },
   ru: {
     about: "Клуб и контент",
     club: "Клуб",
     partners: "Спонсоры",
-    sponsors: "Главное",
-    assistant: "ИИ помощник",
-    routes: "Маршруты",
     gallery: "Галерея",
     contact: "Контакты",
     legal: "Правовая информация",
@@ -178,9 +139,6 @@ const translations: Record<LanguageCode, Record<string, string>> = {
     description: "Клуб владельцев и поклонников BMW в Андорре",
     closing: "Обновлённый цифровой опыт с живым календарём, восстановленным архивом и более продуманной галереей.",
     contactCta: "Написать клубу",
-    assistantEyebrow: "ИИ-консьерж",
-    assistantBody: "Помогает посетителю с выездами, участием, контактами и жизнью клуба.",
-    assistantCta: "Открыть помощника",
     admin: "Доступ клуба",
   },
 };
@@ -216,26 +174,11 @@ export const Footer = ({ language }: FooterProps) => {
             <ul className="space-y-3">
               <li><Link to="/el-club" className="text-sm text-white/72 hover:text-white transition-base">{t.club}</Link></li>
               <li><Link to="/patrocinadors" className="text-sm text-white/72 hover:text-white transition-base">{t.partners}</Link></li>
-              <li><Link to="/destacats" className="text-sm text-white/72 hover:text-white transition-base">{t.sponsors}</Link></li>
-              <li><Link to="/assistent-ia" className="text-sm text-white/72 hover:text-white transition-base">{t.assistant}</Link></li>
-              <li><Link to="/itineraris" className="text-sm text-white/72 hover:text-white transition-base">{t.routes}</Link></li>
               <li><Link to="/galeria" className="text-sm text-white/72 hover:text-white transition-base">{t.gallery}</Link></li>
             </ul>
           </div>
 
           <div className="grid gap-6">
-            <div className="rounded-[2rem] border border-white/8 bg-white/[0.03] p-6">
-              <div className="inline-flex items-center gap-2 rounded-full bg-white/8 px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.22em] text-white/72">
-                <Sparkles className="h-3.5 w-3.5 text-primary" />
-                {t.assistantEyebrow}
-              </div>
-              <p className="mt-4 text-sm text-white/68">{t.assistantBody}</p>
-              <Link to="/assistent-ia" className="mt-4 inline-flex items-center gap-2 text-sm font-semibold text-white">
-                {t.assistantCta}
-                <ArrowUpRight className="h-4 w-4" />
-              </Link>
-            </div>
-
             <div className="rounded-[2rem] border border-white/8 bg-white/[0.03] p-6">
               <h3 className="font-semibold text-lg mb-4">{t.premiumPartners}</h3>
               <ul className="space-y-3">

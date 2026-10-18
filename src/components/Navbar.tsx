@@ -12,13 +12,13 @@ interface NavbarProps {
 }
 
 const translations: Record<LanguageCode, Record<string, string>> = {
-  ca: { home: "Inici", club: "El Club", calendar: "Calendari", sponsors: "Patrocinadors", featured: "Destacats", archive: "Arxiu", routes: "Itineraris", assistant: "Assistent IA", gallery: "Galeria", contact: "Contacte", calendarCta: "Calendari 2026" },
-  es: { home: "Inicio", club: "El Club", calendar: "Calendario", sponsors: "Patrocinadores", featured: "Destacados", archive: "Archivo", routes: "Itinerarios", assistant: "Asistente IA", gallery: "Galería", contact: "Contacto", calendarCta: "Calendario 2026" },
-  fr: { home: "Accueil", club: "Le Club", calendar: "Calendrier", sponsors: "Sponsors", featured: "Temps forts", archive: "Archive", routes: "Itinéraires", assistant: "Assistant IA", gallery: "Galerie", contact: "Contact", calendarCta: "Calendrier 2026" },
-  en: { home: "Home", club: "The Club", calendar: "Calendar", sponsors: "Sponsors", featured: "Highlights", archive: "Archive", routes: "Routes", assistant: "AI Concierge", gallery: "Gallery", contact: "Contact", calendarCta: "Calendar 2026" },
-  pt: { home: "Início", club: "O Clube", calendar: "Calendário", sponsors: "Patrocinadores", featured: "Destaques", archive: "Arquivo", routes: "Itinerários", assistant: "Assistente IA", gallery: "Galeria", contact: "Contacto", calendarCta: "Calendário 2026" },
-  de: { home: "Startseite", club: "Der Club", calendar: "Kalender", sponsors: "Sponsoren", featured: "Highlights", archive: "Archiv", routes: "Routen", assistant: "KI-Assistent", gallery: "Galerie", contact: "Kontakt", calendarCta: "Kalender 2026" },
-  ru: { home: "Главная", club: "Клуб", calendar: "Календарь", sponsors: "Спонсоры", featured: "Главное", archive: "Архив", routes: "Маршруты", assistant: "ИИ помощник", gallery: "Галерея", contact: "Контакты", calendarCta: "Календарь 2026" },
+  ca: { home: "Inici", club: "El Club", calendar: "Calendari", sponsors: "Patrocinadors", archive: "Arxiu", gallery: "Galeria", contact: "Contacte", calendarCta: "Calendari 2026" },
+  es: { home: "Inicio", club: "El Club", calendar: "Calendario", sponsors: "Patrocinadores", archive: "Archivo", gallery: "Galería", contact: "Contacto", calendarCta: "Calendario 2026" },
+  fr: { home: "Accueil", club: "Le Club", calendar: "Calendrier", sponsors: "Sponsors", archive: "Archive", gallery: "Galerie", contact: "Contact", calendarCta: "Calendrier 2026" },
+  en: { home: "Home", club: "The Club", calendar: "Calendar", sponsors: "Sponsors", archive: "Archive", gallery: "Gallery", contact: "Contact", calendarCta: "Calendar 2026" },
+  pt: { home: "Início", club: "O Clube", calendar: "Calendário", sponsors: "Patrocinadores", archive: "Arquivo", gallery: "Galeria", contact: "Contacto", calendarCta: "Calendário 2026" },
+  de: { home: "Startseite", club: "Der Club", calendar: "Kalender", sponsors: "Sponsoren", archive: "Archiv", gallery: "Galerie", contact: "Kontakt", calendarCta: "Kalender 2026" },
+  ru: { home: "Главная", club: "Клуб", calendar: "Календарь", sponsors: "Спонсоры", archive: "Архив", gallery: "Галерея", contact: "Контакты", calendarCta: "Календарь 2026" },
 };
 
 export const Navbar = ({ language, setLanguage }: NavbarProps) => {
@@ -32,10 +32,7 @@ export const Navbar = ({ language, setLanguage }: NavbarProps) => {
     { path: "/el-club", label: t.club },
     { path: "/calendari", label: t.calendar },
     { path: "/patrocinadors", label: t.sponsors },
-    { path: "/destacats", label: t.featured },
     { path: "/arxiu", label: t.archive },
-    { path: "/itineraris", label: t.routes },
-    { path: "/assistent-ia", label: t.assistant },
     { path: "/galeria", label: t.gallery },
     { path: "/contacte", label: t.contact },
   ];

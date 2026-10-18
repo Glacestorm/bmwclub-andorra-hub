@@ -1067,7 +1067,6 @@ const GestioClub = () => {
   const publicLinks = [
     { title: "Web pública", url: "https://bmwclubandorra.com", icon: Globe },
     { title: "Galeria pública", url: "https://bmwclubandorra.com/galeria", icon: Images },
-    { title: "Itineraris", url: "https://bmwclubandorra.com/itineraris", icon: MapPinned },
     { title: "Calendari", url: "https://bmwclubandorra.com/calendari", icon: CalendarRange },
   ];
 
@@ -1162,7 +1161,7 @@ const GestioClub = () => {
               <ul className="mt-4 space-y-3 text-sm text-muted-foreground list-disc pl-5">
                 <li>CRUD de galeries a la taula <strong>club_admin_entries</strong>.</li>
                 <li>Uploads al bucket públic <strong>{clubCmsConfig.bucket}</strong>.</li>
-                <li>Itineraris i calendari visibles al frontend quan l'entrada està en estat <strong>published</strong>.</li>
+                <li>Calendari visible al frontend quan l'entrada està en estat <strong>published</strong>.</li>
                 <li>Fallback: el contingut estàtic actual continua viu encara que Supabase falli.</li>
               </ul>
             </Card>
@@ -1589,7 +1588,7 @@ const GestioClub = () => {
 
                 <TabsContent value="itineraries">
                   <Card className="premium-card rounded-[2rem] border-0 p-6 md:p-8">
-                    <SectionHeader icon={MapPinned} title="Itineraris reals" body="Quan guardes en published, la ruta apareix a /itineraris sense tocar el codi estàtic." />
+                    <SectionHeader icon={MapPinned} title="Itineraris reals" body="Arxiu intern d’itineraris. Aquesta secció ja no es publica a la web." />
                     <EditorToolbar
                       items={itineraryItems}
                       onNew={() => setItineraryDraft(defaultItineraryDraft())}

@@ -19,7 +19,7 @@ const translations: Record<LanguageCode, Record<string, string>> = {
     module3Body: "Tanca cada sortida amb recap, mètriques, highlights i galeria reutilitzable.",
     openEvent: "Obrir Event Mode",
     openReport: "Obrir Post-Drive Report",
-    back: "Tornar a Itineraris",
+    back: "Tornar al calendari",
   },
   es: {
     eyebrow: "Drive Experience",
@@ -33,7 +33,7 @@ const translations: Record<LanguageCode, Record<string, string>> = {
     module3Body: "Cierra cada salida con recap, métricas, highlights y galería reutilizable.",
     openEvent: "Abrir Event Mode",
     openReport: "Abrir Post-Drive Report",
-    back: "Volver a Itineraris",
+    back: "Volver al calendario",
   },
   fr: {
     eyebrow: "Drive Experience",
@@ -47,7 +47,7 @@ const translations: Record<LanguageCode, Record<string, string>> = {
     module3Body: "Clôture chaque sortie avec recap, métriques, highlights et galerie réutilisable.",
     openEvent: "Ouvrir Event Mode",
     openReport: "Ouvrir Post-Drive Report",
-    back: "Retour à Itineraris",
+    back: "Retour au calendrier",
   },
   en: {
     eyebrow: "Drive Experience",
@@ -61,7 +61,7 @@ const translations: Record<LanguageCode, Record<string, string>> = {
     module3Body: "Closes every outing with a recap, metrics, highlights and a reusable gallery.",
     openEvent: "Open Event Mode",
     openReport: "Open Post-Drive Report",
-    back: "Back to Itineraris",
+    back: "Back to calendar",
   },
   pt: {
     eyebrow: "Drive Experience",
@@ -75,7 +75,7 @@ const translations: Record<LanguageCode, Record<string, string>> = {
     module3Body: "Fecha cada saída com recap, métricas, highlights e galeria reutilizável.",
     openEvent: "Abrir Event Mode",
     openReport: "Abrir Post-Drive Report",
-    back: "Voltar a Itineraris",
+    back: "Voltar ao calendário",
   },
   de: {
     eyebrow: "Drive Experience",
@@ -89,7 +89,7 @@ const translations: Record<LanguageCode, Record<string, string>> = {
     module3Body: "Schließt jede Ausfahrt mit Recap, Kennzahlen, Highlights und wiederverwendbarer Galerie ab.",
     openEvent: "Event Mode öffnen",
     openReport: "Post-Drive Report öffnen",
-    back: "Zurück zu Itineraris",
+    back: "Zurück zum Kalender",
   },
   ru: {
     eyebrow: "Drive Experience",
@@ -103,7 +103,7 @@ const translations: Record<LanguageCode, Record<string, string>> = {
     module3Body: "Закрывает каждый выезд recap, метриками, highlights и переиспользуемой галереей.",
     openEvent: "Открыть Event Mode",
     openReport: "Открыть Post-Drive Report",
-    back: "Назад к Itineraris",
+    back: "Назад к календарю",
   },
 };
 
@@ -145,7 +145,7 @@ const DriveExperience = () => {
             <div className="mt-8 flex flex-wrap gap-3">
               <Link to="/event-mode"><Button variant="hero" size="lg" className="rounded-full">{t.openEvent}</Button></Link>
               <Link to="/post-drive-report"><Button variant="outline" size="lg" className="rounded-full border-white/15 bg-white/5 text-white hover:bg-white/10">{t.openReport}</Button></Link>
-              <Link to="/itineraris"><Button variant="outline" size="lg" className="rounded-full border-white/15 bg-white/5 text-white hover:bg-white/10">{t.back}</Button></Link>
+              <Link to="/calendari"><Button variant="outline" size="lg" className="rounded-full border-white/15 bg-white/5 text-white hover:bg-white/10">{t.back}</Button></Link>
             </div>
           </Card>
         </div>

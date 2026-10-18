@@ -16,7 +16,6 @@ const translations: Record<LanguageCode, Record<string, string | string[]>> = {
     body: "La portada presenta des del primer scroll la comunitat BMW del club, les sortides, les trobades i la passió compartida.",
     primary: "Descobrir el club",
     secondary: "Obrir galeria",
-    assistant: "Parlar amb l’assistent IA",
     carousel: "Moments del club",
     points: [
       "Comunitat de propietaris i aficionats BMW a Andorra.",
@@ -34,7 +33,6 @@ const translations: Record<LanguageCode, Record<string, string | string[]>> = {
     body: "La portada presenta desde el primer scroll la comunidad BMW del club, las salidas, los encuentros y la pasión compartida.",
     primary: "Descubrir el club",
     secondary: "Abrir galería",
-    assistant: "Hablar con el asistente IA",
     carousel: "Momentos del club",
     points: [
       "Comunidad de propietarios y aficionados BMW en Andorra.",
@@ -52,7 +50,6 @@ const translations: Record<LanguageCode, Record<string, string | string[]>> = {
     body: "La page d'accueil présente dès le premier scroll la communauté BMW du club, les sorties, les rencontres et la passion partagée.",
     primary: "Découvrir le club",
     secondary: "Ouvrir la galerie",
-    assistant: "Parler à l'assistant IA",
     carousel: "Moments du club",
     points: [
       "Communauté de propriétaires et passionnés BMW en Andorre.",
@@ -70,7 +67,6 @@ const translations: Record<LanguageCode, Record<string, string | string[]>> = {
     body: "The homepage presents the club's BMW community, outings, gatherings and shared passion from the very first scroll.",
     primary: "Discover the club",
     secondary: "Open gallery",
-    assistant: "Talk to the AI concierge",
     carousel: "Club moments",
     points: [
       "BMW owners and enthusiasts community in Andorra.",
@@ -88,7 +84,6 @@ const translations: Record<LanguageCode, Record<string, string | string[]>> = {
     body: "A homepage apresenta desde o primeiro scroll a comunidade BMW do clube, os passeios, os encontros e a paixão partilhada.",
     primary: "Descobrir o clube",
     secondary: "Abrir galeria",
-    assistant: "Falar com o assistente IA",
     carousel: "Momentos do clube",
     points: [
       "Comunidade de proprietários e entusiastas BMW em Andorra.",
@@ -106,7 +101,6 @@ const translations: Record<LanguageCode, Record<string, string | string[]>> = {
     body: "Die Startseite zeigt schon beim ersten Scroll die BMW-Community des Clubs, Ausfahrten, Treffen und die gemeinsame Leidenschaft.",
     primary: "Club entdecken",
     secondary: "Galerie öffnen",
-    assistant: "Mit dem KI-Assistenten sprechen",
     carousel: "Club-Momente",
     points: [
       "Community von BMW-Besitzern und Enthusiasten in Andorra.",
@@ -124,7 +118,6 @@ const translations: Record<LanguageCode, Record<string, string | string[]>> = {
     body: "Главная страница с первого экрана показывает BMW-сообщество клуба, выезды, встречи и общую страсть.",
     primary: "Узнать о клубе",
     secondary: "Открыть галерею",
-    assistant: "Поговорить с ИИ помощником",
     carousel: "Моменты клуба",
     points: [
       "Сообщество владельцев и поклонников BMW в Андорре.",
@@ -201,7 +194,6 @@ export const HomeWelcomeShowcase = () => {
               <div className="flex flex-col sm:flex-row sm:flex-wrap gap-3">
                 <Link to="/el-club" className="w-full sm:w-auto"><Button variant="hero" className="w-full sm:w-auto">{t.primary}</Button></Link>
                 <Link to="/galeria" className="w-full sm:w-auto"><Button variant="outline" className="w-full sm:w-auto">{t.secondary}</Button></Link>
-                <Link to="/assistent-ia" className="w-full sm:w-auto"><Button variant="outline" className="w-full sm:w-auto">{t.assistant}</Button></Link>
               </div>
             </div>
 

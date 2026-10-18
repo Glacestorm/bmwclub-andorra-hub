@@ -10,7 +10,6 @@ import { lazyWithAutoReload } from "@/lib/lazyWithAutoReload";
 import { trackClubVisit } from "@/lib/clubCms";
 import Index from "./pages/Index";
 import Contacte from "./pages/Contacte";
-import Itineraris from "./pages/Itineraris";
 import Galeria from "./pages/Galeria";
 import GaleriaCollection from "./pages/GaleriaCollection";
 
@@ -19,9 +18,7 @@ const Patrocinadors = lazyWithAutoReload(() => import("./pages/Patrocinadors"));
 const Meteo = lazyWithAutoReload(() => import("./pages/Meteo"));
 const Calendari = lazyWithAutoReload(() => import("./pages/Calendari"));
 const CalendariYear = lazyWithAutoReload(() => import("./pages/CalendariYear"));
-const Destacats = lazyWithAutoReload(() => import("./pages/Destacats"));
 const Arxiu = lazyWithAutoReload(() => import("./pages/Arxiu"));
-const ClubAssistant = lazyWithAutoReload(() => import("./pages/ClubAssistant"));
 const DriveExperience = lazyWithAutoReload(() => import("./pages/DriveExperience"));
 const EventMode = lazyWithAutoReload(() => import("./pages/EventMode"));
 const PostDriveReport = lazyWithAutoReload(() => import("./pages/PostDriveReport"));
@@ -104,10 +101,10 @@ const App = () => {
               <Route path="/patrocinadors" element={withRouteFallback(<Patrocinadors />)} />
               <Route path="/calendari" element={withRouteFallback(<Calendari />)} />
               <Route path="/calendari/:year" element={withRouteFallback(<CalendariYear />)} />
-              <Route path="/destacats" element={withRouteFallback(<Destacats />)} />
+              <Route path="/destacats" element={<Navigate to="/calendari" replace />} />
               <Route path="/arxiu" element={withRouteFallback(<Arxiu />)} />
-              <Route path="/assistent-ia" element={withRouteFallback(<ClubAssistant />)} />
-              <Route path="/itineraris" element={<Itineraris />} />
+              <Route path="/assistent-ia" element={<Navigate to="/contacte" replace />} />
+              <Route path="/itineraris" element={<Navigate to="/calendari" replace />} />
               <Route path="/drive-experience" element={withRouteFallback(<DriveExperience />)} />
               <Route path="/event-mode" element={withRouteFallback(<EventMode />)} />
               <Route path="/post-drive-report" element={withRouteFallback(<PostDriveReport />)} />

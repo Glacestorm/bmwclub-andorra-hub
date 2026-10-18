@@ -45,7 +45,7 @@ const galleryPageByHref: Record<string, string> = {
 
 const translations: Record<LanguageCode, Record<string, string>> = {
   ca: {
-    back: "Tornar a destacats",
+    back: "Tornar al calendari",
     agenda: "Calendari",
     weather: "Meteo",
     photos: "Fotos",
@@ -86,7 +86,7 @@ const translations: Record<LanguageCode, Record<string, string>> = {
     heroFallback: "Fitxa viva de la sortida amb meteo, ruta, recursos i materials del club.",
   },
   es: {
-    back: "Volver a destacados",
+    back: "Volver al calendario",
     agenda: "Calendario",
     weather: "Meteo",
     photos: "Fotos",
@@ -127,7 +127,7 @@ const translations: Record<LanguageCode, Record<string, string>> = {
     heroFallback: "Ficha viva de la salida con meteo, ruta, recursos y materiales del club.",
   },
   fr: {
-    back: "Retour aux temps forts",
+    back: "Retour au calendrier",
     agenda: "Calendrier",
     weather: "Météo",
     photos: "Photos",
@@ -168,7 +168,7 @@ const translations: Record<LanguageCode, Record<string, string>> = {
     heroFallback: "Fiche vivante de la sortie avec météo, itinéraire, ressources et matériel du club.",
   },
   en: {
-    back: "Back to highlights",
+    back: "Back to calendar",
     agenda: "Calendar",
     weather: "Weather",
     photos: "Photos",
@@ -209,7 +209,7 @@ const translations: Record<LanguageCode, Record<string, string>> = {
     heroFallback: "Live event page with weather, route, resources and club material.",
   },
   pt: {
-    back: "Voltar aos destaques",
+    back: "Voltar ao calendário",
     agenda: "Calendário",
     weather: "Meteorologia",
     photos: "Fotos",
@@ -250,7 +250,7 @@ const translations: Record<LanguageCode, Record<string, string>> = {
     heroFallback: "Ficha viva do passeio com meteorologia, rota, recursos e materiais do clube.",
   },
   de: {
-    back: "Zurück zu Highlights",
+    back: "Zurück zum Kalender",
     agenda: "Kalender",
     weather: "Wetter",
     photos: "Fotos",
@@ -291,7 +291,7 @@ const translations: Record<LanguageCode, Record<string, string>> = {
     heroFallback: "Lebendige Event-Seite mit Wetter, Route, Ressourcen und Clubmaterial.",
   },
   ru: {
-    back: "Назад к главному",
+    back: "Назад к календарю",
     agenda: "Календарь",
     weather: "Погода",
     photos: "Фото",
@@ -368,8 +368,8 @@ const EventDetail = () => {
     document.title = `${event.title} · BMW Club Andorra`;
   }, [event]);
 
-  if (!eventId) return <Navigate to="/destacats" replace />;
-  if (!event) return <Navigate to="/destacats" replace />;
+  if (!eventId) return <Navigate to="/calendari" replace />;
+  if (!event) return <Navigate to="/calendari" replace />;
 
   const quickLinks = [
     { label: `${t.agenda} ${event.year}`, href: `/calendari/${event.year}`, internal: true },
@@ -388,7 +388,7 @@ const EventDetail = () => {
               <div className="absolute inset-0 opacity-35" style={{ backgroundImage: heroImage ? `url(${heroImage})` : undefined, backgroundSize: "cover", backgroundPosition: "center" }} />
               <div className="absolute inset-0 bg-gradient-to-br from-black/70 via-black/35 to-primary/35" />
               <div className="relative z-10 space-y-6">
-                <Link to="/destacats" className="inline-flex items-center text-sm text-white/80 hover:text-white transition-base">← {t.back}</Link>
+                <Link to="/calendari" className="inline-flex items-center text-sm text-white/80 hover:text-white transition-base">← {t.back}</Link>
                 <div className="flex flex-wrap items-center gap-3">
                   <span className="glass-panel rounded-full px-4 py-1 text-xs font-semibold text-slate-900">{meta ? getLocalizedText(meta.tag, language) : t.microsite}</span>
                   <span className="rounded-full bg-white/10 border border-white/15 px-4 py-1 text-xs font-semibold">{statusLabel}</span>

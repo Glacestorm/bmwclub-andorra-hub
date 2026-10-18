@@ -641,7 +641,7 @@ export const buildCmsPublicPath = (entry: ClubAdminEntryRow) => {
   if (entry.content_type === "gallery") {
     return entry.collection_key ? galleryHrefByCollectionKey[entry.collection_key] ?? "/galeria" : "/galeria";
   }
-  if (entry.content_type === "itinerary") return "/itineraris";
+  if (entry.content_type === "itinerary") return "/gestio-club";
   if (entry.content_type === "event") return `/esdeveniments/${entry.slug}`;
   if (entry.content_type === "setting") return "/gestio-club";
   return "/";
