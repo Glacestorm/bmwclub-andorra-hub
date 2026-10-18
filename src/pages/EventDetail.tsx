@@ -346,11 +346,13 @@ const EventDetail = () => {
   const previewEvent = useMemo(() => (eventId && previewRequested ? loadEventPreview(eventId) : null), [eventId, previewRequested]);
   const event = previewEvent ?? liveEvent;
   const isPreview = Boolean(previewEvent && previewRequested);
-  const galleryKey = event?.galleryHref ? (galleryPageByHref[event.galleryHref] ?? collectionKeyByGalleryHref[event.galleryHref]) : "";
+  const [galleryPath, galleryQuery] = (event?.galleryHref ?? "").split("?");
+  const galleryAlbum = new URLSearchParams(galleryQuery).get("album");
+  const galleryKey = galleryPageByHref[galleryPath] ?? collectionKeyByGalleryHref[galleryPath] ?? "";
   const { data: dynamicSections } = usePublishedGallerySections(galleryKey);
   const meta = event && !isPreview ? featuredEventMeta.find((item) => item.eventId === event.id) : null;
   const gallerySections = event && galleryKey ? mergeGallerySections(galleryMediaByPage[galleryKey] ?? [], dynamicSections) : [];
-  const previewImages = gallerySections.flatMap((section) => section.images).slice(0, 6);
+  const previewImages = gallerySections.filter((section) => !galleryAlbum || section.id === galleryAlbum).flatMap((section) => section.images).slice(0, 6);
   const relatedArchive = meta ? archiveItems.filter((item) => meta.archiveIds?.includes(item.id)) : [];
   const status = event ? getEventStatus(event) : "historic";
   const statusLabel = status === "live" ? t.live : status === "upcoming" ? t.upcoming : status === "done" ? t.done : t.historic;

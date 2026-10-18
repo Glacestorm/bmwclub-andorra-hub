@@ -298,6 +298,7 @@ export const bmwContent: Record<string, PageContent> = {
       { title: "Sortida a Cerdanya 29/03/2026" },
       { title: "2n Cars & Coffee 19/04/2026" },
       { title: "4º Cars & Coffee 19/07/2026" },
+      { title: "Sortida a França · 20/09/2026" },
       { title: "5º Cars & Coffee 18/10/2026" },
     ],
   },

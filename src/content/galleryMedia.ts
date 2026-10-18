@@ -5,6 +5,7 @@ export type GalleryMediaImage = {
 };
 
 export type GalleryMediaSection = {
+  id?: string;
   title: string;
   sourceFolder: string;
   note?: string;
@@ -3712,6 +3713,198 @@ export const galleryMediaByPage: Record<string, GalleryMediaSection[]> = {
     }
   ],
   "sortides_2026": [
+    {
+      "id": "sortida-franca-2026",
+      "title": "Sortida a França · 20/09/2026",
+      "sourceFolder": "phocagallery/sortides/Any_2026/Sortida_Franca_20_09",
+      "images": [
+        {
+          "src": "/legacy-mirror/images/phocagallery/sortides/Any_2026/Sortida_Franca_20_09/sortida-franca-2026-09-20-01.jpg",
+          "alt": "Sortida a França · 20/09/2026 · Foto 1",
+          "filename": "sortida-franca-2026-09-20-01.jpg"
+        },
+        {
+          "src": "/legacy-mirror/images/phocagallery/sortides/Any_2026/Sortida_Franca_20_09/sortida-franca-2026-09-20-02.jpg",
+          "alt": "Sortida a França · 20/09/2026 · Foto 2",
+          "filename": "sortida-franca-2026-09-20-02.jpg"
+        },
+        {
+          "src": "/legacy-mirror/images/phocagallery/sortides/Any_2026/Sortida_Franca_20_09/sortida-franca-2026-09-20-03.jpg",
+          "alt": "Sortida a França · 20/09/2026 · Foto 3",
+          "filename": "sortida-franca-2026-09-20-03.jpg"
+        },
+        {
+          "src": "/legacy-mirror/images/phocagallery/sortides/Any_2026/Sortida_Franca_20_09/sortida-franca-2026-09-20-04.jpg",
+          "alt": "Sortida a França · 20/09/2026 · Foto 4",
+          "filename": "sortida-franca-2026-09-20-04.jpg"
+        },
+        {
+          "src": "/legacy-mirror/images/phocagallery/sortides/Any_2026/Sortida_Franca_20_09/sortida-franca-2026-09-20-05.jpg",
+          "alt": "Sortida a França · 20/09/2026 · Foto 5",
+          "filename": "sortida-franca-2026-09-20-05.jpg"
+        },
+        {
+          "src": "/legacy-mirror/images/phocagallery/sortides/Any_2026/Sortida_Franca_20_09/sortida-franca-2026-09-20-06.jpg",
+          "alt": "Sortida a França · 20/09/2026 · Foto 6",
+          "filename": "sortida-franca-2026-09-20-06.jpg"
+        },
+        {
+          "src": "/legacy-mirror/images/phocagallery/sortides/Any_2026/Sortida_Franca_20_09/sortida-franca-2026-09-20-07.jpg",
+          "alt": "Sortida a França · 20/09/2026 · Foto 7",
+          "filename": "sortida-franca-2026-09-20-07.jpg"
+        },
+        {
+          "src": "/legacy-mirror/images/phocagallery/sortides/Any_2026/Sortida_Franca_20_09/sortida-franca-2026-09-20-08.jpg",
+          "alt": "Sortida a França · 20/09/2026 · Foto 8",
+          "filename": "sortida-franca-2026-09-20-08.jpg"
+        },
+        {
+          "src": "/legacy-mirror/images/phocagallery/sortides/Any_2026/Sortida_Franca_20_09/sortida-franca-2026-09-20-09.jpg",
+          "alt": "Sortida a França · 20/09/2026 · Foto 9",
+          "filename": "sortida-franca-2026-09-20-09.jpg"
+        },
+        {
+          "src": "/legacy-mirror/images/phocagallery/sortides/Any_2026/Sortida_Franca_20_09/sortida-franca-2026-09-20-10.jpg",
+          "alt": "Sortida a França · 20/09/2026 · Foto 10",
+          "filename": "sortida-franca-2026-09-20-10.jpg"
+        },
+        {
+          "src": "/legacy-mirror/images/phocagallery/sortides/Any_2026/Sortida_Franca_20_09/sortida-franca-2026-09-20-11.jpg",
+          "alt": "Sortida a França · 20/09/2026 · Foto 11",
+          "filename": "sortida-franca-2026-09-20-11.jpg"
+        },
+        {
+          "src": "/legacy-mirror/images/phocagallery/sortides/Any_2026/Sortida_Franca_20_09/sortida-franca-2026-09-20-12.jpg",
+          "alt": "Sortida a França · 20/09/2026 · Foto 12",
+          "filename": "sortida-franca-2026-09-20-12.jpg"
+        },
+        {
+          "src": "/legacy-mirror/images/phocagallery/sortides/Any_2026/Sortida_Franca_20_09/sortida-franca-2026-09-20-13.jpg",
+          "alt": "Sortida a França · 20/09/2026 · Foto 13",
+          "filename": "sortida-franca-2026-09-20-13.jpg"
+        },
+        {
+          "src": "/legacy-mirror/images/phocagallery/sortides/Any_2026/Sortida_Franca_20_09/sortida-franca-2026-09-20-14.jpg",
+          "alt": "Sortida a França · 20/09/2026 · Foto 14",
+          "filename": "sortida-franca-2026-09-20-14.jpg"
+        },
+        {
+          "src": "/legacy-mirror/images/phocagallery/sortides/Any_2026/Sortida_Franca_20_09/sortida-franca-2026-09-20-15.jpg",
+          "alt": "Sortida a França · 20/09/2026 · Foto 15",
+          "filename": "sortida-franca-2026-09-20-15.jpg"
+        },
+        {
+          "src": "/legacy-mirror/images/phocagallery/sortides/Any_2026/Sortida_Franca_20_09/sortida-franca-2026-09-20-16.jpg",
+          "alt": "Sortida a França · 20/09/2026 · Foto 16",
+          "filename": "sortida-franca-2026-09-20-16.jpg"
+        },
+        {
+          "src": "/legacy-mirror/images/phocagallery/sortides/Any_2026/Sortida_Franca_20_09/sortida-franca-2026-09-20-17.jpg",
+          "alt": "Sortida a França · 20/09/2026 · Foto 17",
+          "filename": "sortida-franca-2026-09-20-17.jpg"
+        },
+        {
+          "src": "/legacy-mirror/images/phocagallery/sortides/Any_2026/Sortida_Franca_20_09/sortida-franca-2026-09-20-18.jpg",
+          "alt": "Sortida a França · 20/09/2026 · Foto 18",
+          "filename": "sortida-franca-2026-09-20-18.jpg"
+        },
+        {
+          "src": "/legacy-mirror/images/phocagallery/sortides/Any_2026/Sortida_Franca_20_09/sortida-franca-2026-09-20-19.jpg",
+          "alt": "Sortida a França · 20/09/2026 · Foto 19",
+          "filename": "sortida-franca-2026-09-20-19.jpg"
+        },
+        {
+          "src": "/legacy-mirror/images/phocagallery/sortides/Any_2026/Sortida_Franca_20_09/sortida-franca-2026-09-20-20.jpg",
+          "alt": "Sortida a França · 20/09/2026 · Foto 20",
+          "filename": "sortida-franca-2026-09-20-20.jpg"
+        },
+        {
+          "src": "/legacy-mirror/images/phocagallery/sortides/Any_2026/Sortida_Franca_20_09/sortida-franca-2026-09-20-21.jpg",
+          "alt": "Sortida a França · 20/09/2026 · Foto 21",
+          "filename": "sortida-franca-2026-09-20-21.jpg"
+        },
+        {
+          "src": "/legacy-mirror/images/phocagallery/sortides/Any_2026/Sortida_Franca_20_09/sortida-franca-2026-09-20-22.jpg",
+          "alt": "Sortida a França · 20/09/2026 · Foto 22",
+          "filename": "sortida-franca-2026-09-20-22.jpg"
+        },
+        {
+          "src": "/legacy-mirror/images/phocagallery/sortides/Any_2026/Sortida_Franca_20_09/sortida-franca-2026-09-20-23.jpg",
+          "alt": "Sortida a França · 20/09/2026 · Foto 23",
+          "filename": "sortida-franca-2026-09-20-23.jpg"
+        },
+        {
+          "src": "/legacy-mirror/images/phocagallery/sortides/Any_2026/Sortida_Franca_20_09/sortida-franca-2026-09-20-24.jpg",
+          "alt": "Sortida a França · 20/09/2026 · Foto 24",
+          "filename": "sortida-franca-2026-09-20-24.jpg"
+        },
+        {
+          "src": "/legacy-mirror/images/phocagallery/sortides/Any_2026/Sortida_Franca_20_09/sortida-franca-2026-09-20-25.jpg",
+          "alt": "Sortida a França · 20/09/2026 · Foto 25",
+          "filename": "sortida-franca-2026-09-20-25.jpg"
+        },
+        {
+          "src": "/legacy-mirror/images/phocagallery/sortides/Any_2026/Sortida_Franca_20_09/sortida-franca-2026-09-20-26.jpg",
+          "alt": "Sortida a França · 20/09/2026 · Foto 26",
+          "filename": "sortida-franca-2026-09-20-26.jpg"
+        },
+        {
+          "src": "/legacy-mirror/images/phocagallery/sortides/Any_2026/Sortida_Franca_20_09/sortida-franca-2026-09-20-27.jpg",
+          "alt": "Sortida a França · 20/09/2026 · Foto 27",
+          "filename": "sortida-franca-2026-09-20-27.jpg"
+        },
+        {
+          "src": "/legacy-mirror/images/phocagallery/sortides/Any_2026/Sortida_Franca_20_09/sortida-franca-2026-09-20-28.jpg",
+          "alt": "Sortida a França · 20/09/2026 · Foto 28",
+          "filename": "sortida-franca-2026-09-20-28.jpg"
+        },
+        {
+          "src": "/legacy-mirror/images/phocagallery/sortides/Any_2026/Sortida_Franca_20_09/sortida-franca-2026-09-20-29.jpg",
+          "alt": "Sortida a França · 20/09/2026 · Foto 29",
+          "filename": "sortida-franca-2026-09-20-29.jpg"
+        },
+        {
+          "src": "/legacy-mirror/images/phocagallery/sortides/Any_2026/Sortida_Franca_20_09/sortida-franca-2026-09-20-30.jpg",
+          "alt": "Sortida a França · 20/09/2026 · Foto 30",
+          "filename": "sortida-franca-2026-09-20-30.jpg"
+        },
+        {
+          "src": "/legacy-mirror/images/phocagallery/sortides/Any_2026/Sortida_Franca_20_09/sortida-franca-2026-09-20-31.jpg",
+          "alt": "Sortida a França · 20/09/2026 · Foto 31",
+          "filename": "sortida-franca-2026-09-20-31.jpg"
+        },
+        {
+          "src": "/legacy-mirror/images/phocagallery/sortides/Any_2026/Sortida_Franca_20_09/sortida-franca-2026-09-20-32.jpg",
+          "alt": "Sortida a França · 20/09/2026 · Foto 32",
+          "filename": "sortida-franca-2026-09-20-32.jpg"
+        },
+        {
+          "src": "/legacy-mirror/images/phocagallery/sortides/Any_2026/Sortida_Franca_20_09/sortida-franca-2026-09-20-33.jpg",
+          "alt": "Sortida a França · 20/09/2026 · Foto 33",
+          "filename": "sortida-franca-2026-09-20-33.jpg"
+        },
+        {
+          "src": "/legacy-mirror/images/phocagallery/sortides/Any_2026/Sortida_Franca_20_09/sortida-franca-2026-09-20-34.jpg",
+          "alt": "Sortida a França · 20/09/2026 · Foto 34",
+          "filename": "sortida-franca-2026-09-20-34.jpg"
+        },
+        {
+          "src": "/legacy-mirror/images/phocagallery/sortides/Any_2026/Sortida_Franca_20_09/sortida-franca-2026-09-20-35.jpg",
+          "alt": "Sortida a França · 20/09/2026 · Foto 35",
+          "filename": "sortida-franca-2026-09-20-35.jpg"
+        },
+        {
+          "src": "/legacy-mirror/images/phocagallery/sortides/Any_2026/Sortida_Franca_20_09/sortida-franca-2026-09-20-36.jpg",
+          "alt": "Sortida a França · 20/09/2026 · Foto 36",
+          "filename": "sortida-franca-2026-09-20-36.jpg"
+        },
+        {
+          "src": "/legacy-mirror/images/phocagallery/sortides/Any_2026/Sortida_Franca_20_09/sortida-franca-2026-09-20-37.jpg",
+          "alt": "Sortida a França · 20/09/2026 · Foto 37",
+          "filename": "sortida-franca-2026-09-20-37.jpg"
+        }
+      ]
+    },
     {
       "title": "4º Cars & Coffee 19/07/2026",
       "sourceFolder": "phocagallery/sortides/Any_2026/4_Cars_Coffee_19_07",

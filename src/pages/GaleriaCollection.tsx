@@ -133,9 +133,10 @@ const GaleriaCollection = () => {
   }
 
   const page = bmwContent[key];
+  const albumId = new URLSearchParams(location.search).get("album");
   const { data: dynamicSections } = usePublishedGallerySections(key);
   const sections = mergeGallerySections(galleryMediaByPage[key] ?? [], dynamicSections).filter(
-    (section) => Boolean(section) && Array.isArray(section.images),
+    (section) => Boolean(section) && Array.isArray(section.images) && (!albumId || section.id === albumId),
   );
   const photoCount = sections.reduce((acc, section) => acc + section.images.length, 0);
 
@@ -151,7 +152,7 @@ const GaleriaCollection = () => {
                   <Images className="h-4 w-4" />
                   {t.gallery}
                 </div>
-                <h1 className="mt-5 text-4xl md:text-6xl font-bold text-balance">{page.hero.title}</h1>
+                <h1 className="mt-5 text-4xl md:text-6xl font-bold text-balance">{albumId && sections[0] ? sections[0].title : page.hero.title}</h1>
                 {page.hero.subtitle ? <p className="mt-5 max-w-3xl text-lg text-white/76">{page.hero.subtitle}</p> : null}
                 <div className="mt-8 flex flex-wrap gap-3">
                   <NavigateButton href="/galeria" label={t.back} />
@@ -165,7 +166,7 @@ const GaleriaCollection = () => {
                 <p className="mt-4 text-muted-foreground">{t.collectionsBody}</p>
                 <div className="mt-6 grid grid-cols-3 gap-3">
                   <div className="rounded-[1.25rem] bg-secondary/80 p-4">
-                    <div className="text-2xl font-bold">{page.albums?.length ?? 0}</div>
+                    <div className="text-2xl font-bold">{albumId ? sections.length : page.albums?.length ?? 0}</div>
                     <div className="mt-1 text-xs uppercase tracking-[0.18em] text-muted-foreground">{t.albums}</div>
                   </div>
                   <div className="rounded-[1.25rem] bg-secondary/80 p-4">
@@ -187,7 +188,7 @@ const GaleriaCollection = () => {
         </div>
       </section>
 
-      {page.albums?.length ? (
+      {!albumId && page.albums?.length ? (
         <section className="pb-10">
           <div className="container mx-auto px-4 max-w-6xl">
             <div className="grid md:grid-cols-2 xl:grid-cols-3 gap-4">
@@ -202,7 +203,7 @@ const GaleriaCollection = () => {
         </section>
       ) : null}
 
-      {sections.length ? <GalleryMediaSections pageKey={key} sections={sections} /> : null}
+      {sections.length ? <GalleryMediaSections pageKey={key} sections={sections} initiallyOpen={Boolean(albumId)} /> : null}
 
       {!sections.length && page.groups?.length ? (
         <section className="pb-16">

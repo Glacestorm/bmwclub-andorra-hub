@@ -14,6 +14,7 @@ import { useToast } from "@/hooks/use-toast";
 interface GalleryMediaSectionsProps {
   pageKey?: string;
   sections?: GalleryMediaSection[];
+  initiallyOpen?: boolean;
 }
 
 const translations: Record<LanguageCode, { photos: string; outingLabel: string; historicLabel: string; outingSummary: string; historicSummary: string; openArchive: string; closeArchive: string; showing: string; backToGallery: string; openNewTab: string; rateTitle: string; noRatings: string; yourName: string; yourComment: string; sendReview: string; sentReview: string; reviews: string; unavailableReviews: string; }> = {
@@ -37,6 +38,7 @@ const getSectionContext = (section: GalleryMediaSection, t: (typeof translations
 
 const LEGACY_MEDIA_ORIGIN = "https://bca.jcarranca.com";
 const LOCAL_FIRST_GALLERY_PREFIXES = [
+  "/legacy-mirror/images/phocagallery/sortides/Any_2026/Sortida_Franca_20_09/",
   "/legacy-mirror/images/phocagallery/sortides/Any_2026/4_Cars_Coffee_19_07/",
 ];
 
@@ -300,7 +302,7 @@ const GallerySectionCard = ({ section, isInitiallyOpen, language }: { section: G
   );
 };
 
-export const GalleryMediaSections = ({ pageKey = "gallery", sections: sectionsProp }: GalleryMediaSectionsProps) => {
+export const GalleryMediaSections = ({ pageKey = "gallery", sections: sectionsProp, initiallyOpen = false }: GalleryMediaSectionsProps) => {
   const rawSections = sectionsProp ?? galleryMediaByPage[pageKey] ?? [];
   const sections = rawSections.filter((section): section is GalleryMediaSection => Boolean(section) && Array.isArray(section.images) && section.images.length > 0);
   const { language } = useLanguage();
@@ -314,7 +316,7 @@ export const GalleryMediaSections = ({ pageKey = "gallery", sections: sectionsPr
           <GallerySectionCard
             key={`${pageKey}-${section.title}-${index}`}
             section={section}
-            isInitiallyOpen={false}
+            isInitiallyOpen={initiallyOpen}
             language={language}
           />
         ))}
