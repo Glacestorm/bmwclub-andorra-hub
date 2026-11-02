@@ -57,8 +57,16 @@ export const getLastCompletedEventFromList = (events: ClubEvent[], reference = n
 
 export const getLastCompletedEvent = (reference = nowInAndorra()) => getLastCompletedEventFromList(clubEvents, reference);
 
+// Events with an unknown day or month keep a placeholder `start` (1 January, or the 1st) only so they sort;
+// the display date ("Any 2016", "11/2021") is what is actually known.
+const hasExactDay = (event: ClubEvent) => /\d{1,2}\/\d{1,2}\/\d{4}/.test(event.displayDate);
+const hasKnownMonth = (event: ClubEvent) => hasExactDay(event) || /\d{1,2}\/\d{4}/.test(event.displayDate);
+
+// Weather for an event only makes sense when the actual day is known.
+export const hasExactEventDate = (event: ClubEvent) => Boolean(event.start) && hasExactDay(event);
+
 export const formatEventDateRange = (event: ClubEvent, language: LanguageCode = defaultLanguage) => {
-  if (!event.start) return event.displayDate;
+  if (!event.start || !hasExactDay(event)) return event.displayDate;
 
   const start = new Date(event.start);
   const end = event.end ? new Date(event.end) : null;
@@ -95,6 +103,9 @@ export const formatEventDateRange = (event: ClubEvent, language: LanguageCode = 
 
 export const formatMonthGroup = (event: ClubEvent, language: LanguageCode = defaultLanguage) => {
   if (!event.start) return "Sense data exacta";
+  if (!hasKnownMonth(event)) {
+    return new Intl.DateTimeFormat(localeByLanguage[language], { year: "numeric", timeZone: ANDORRA_TZ }).format(new Date(event.start));
+  }
   return new Intl.DateTimeFormat(localeByLanguage[language], { month: "long", year: "numeric", timeZone: ANDORRA_TZ }).format(new Date(event.start));
 };
 

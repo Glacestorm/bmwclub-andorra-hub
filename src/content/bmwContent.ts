@@ -292,7 +292,7 @@ export const bmwContent: Record<string, PageContent> = {
   sortides_2026: {
     slug: "/galeria/sortides/2026",
     seoTitle: "Any 2026 | BMW Club Andorra",
-    hero: { title: "Any 2026", subtitle: "Recull de les primeres activitats i trobades del club durant el 2026." },
+    hero: { title: "Any 2026", subtitle: "Recull de les activitats i trobades del club durant el 2026." },
     albums: [
       { title: "1r Cars & Coffee 01/03/2026" },
       { title: "Sortida a Cerdanya 29/03/2026" },
@@ -310,11 +310,7 @@ export const bmwContent: Record<string, PageContent> = {
       title: "Meteo",
       subtitle: "Consulta la previsió meteorològica abans de les sortides i activitats del club.",
     },
-    intro:
-      "Aquest espai està reservat per a una integració meteorològica real per Andorra, útil per planificar trobades, esmorzars i rutes.",
     disclaimer: "Informació orientativa.",
-    implementationNote:
-      "La pàgina original no era fiable per migrar tal com estava. Quan hi hagi widget nou, es podrà publicar al menú.",
   },
 };
 

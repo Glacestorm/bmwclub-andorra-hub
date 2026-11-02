@@ -10,7 +10,6 @@ import {
   Image as ImageIcon,
   MapPin,
   Route,
-  ShieldCheck,
   Sparkles,
   Ticket,
 } from "lucide-react";
@@ -18,12 +17,13 @@ import { PageShell } from "@/components/PageShell";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { RouteWeatherPanel } from "@/components/calendar/RouteWeatherPanel";
+import { localizeEventNote } from "@/components/calendar/eventNotes";
 import { useLanguage } from "@/components/LanguageProvider";
 import { LanguageCode } from "@/lib/i18n";
 import { getLocalizedText } from "@/lib/localized";
 import { archiveItems, featuredEventMeta } from "@/content/siteExperience";
 import { galleryMediaByPage } from "@/content/galleryMedia";
-import { formatEventDateRange, getCountdownParts, getEventByIdFromList, getEventStart, getEventStatus } from "@/lib/calendar";
+import { formatEventDateRange, getCountdownParts, getEventByIdFromList, getEventStart, getEventStatus, hasExactEventDate } from "@/lib/calendar";
 import {
   buildEventPreviewUrl,
   collectionKeyByGalleryHref,
@@ -49,27 +49,20 @@ const translations: Record<LanguageCode, Record<string, string>> = {
     agenda: "Calendari",
     weather: "Meteo",
     photos: "Fotos",
-    officialSource: "Font original",
+    officialSource: "Enllaç extern",
     route: "Ruta",
+    date: "Data",
     source: "Origen",
     destination: "Destí",
     status: "Estat",
     archive: "Arxiu relacionat",
-    galleryPreview: "Previsualització de galeria",
-    noArchive: "Encara no hi ha material documental relacionat per a aquest esdeveniment.",
-    noGallery: "Aquest esdeveniment encara no té previsualització pròpia, però es pot consultar dins la galeria anual.",
     live: "En curs",
     upcoming: "Per fer",
     done: "Realitzada",
     historic: "Històrica",
-    evidence: "Traçabilitat",
-    archiveCount: "peces d'arxiu",
-    galleryCount: "imatges de previsualització",
-    microsite: "Microsite de sortida",
-    operationPack: "Pack operatiu",
-    briefing: "Briefing de la sortida",
+    about: "Sobre la sortida",
     highlights: "Punts forts",
-    checklist: "Checklist",
+    checklist: "Abans de sortir",
     timeline: "Pla del dia",
     sponsors: "Patrocinadors i partners",
     meetingPoint: "Punt de trobada",
@@ -80,37 +73,26 @@ const translations: Record<LanguageCode, Record<string, string>> = {
     openPreview: "Obrir preview",
     roadbook: "Roadbook",
     callToAction: "Acció principal",
-    noTimeline: "Encara no hi ha un pla horari detallat per a aquesta sortida.",
-    noSponsors: "Encara no hi ha patrocinadors o partners associats a aquesta sortida.",
-    noChecklist: "No hi ha checklist operativa definida encara.",
-    heroFallback: "Fitxa viva de la sortida amb meteo, ruta, recursos i materials del club.",
   },
   es: {
     back: "Volver al calendario",
     agenda: "Calendario",
     weather: "Meteo",
     photos: "Fotos",
-    officialSource: "Fuente original",
+    officialSource: "Enlace externo",
     route: "Ruta",
+    date: "Fecha",
     source: "Origen",
     destination: "Destino",
     status: "Estado",
     archive: "Archivo relacionado",
-    galleryPreview: "Previsualización de galería",
-    noArchive: "Todavía no hay material documental relacionado con este evento.",
-    noGallery: "Este evento aún no tiene previsualización propia, pero puede consultarse dentro de la galería anual.",
     live: "En curso",
     upcoming: "Pendiente",
     done: "Realizada",
     historic: "Histórica",
-    evidence: "Trazabilidad",
-    archiveCount: "piezas de archivo",
-    galleryCount: "imágenes de previsualización",
-    microsite: "Microsite de salida",
-    operationPack: "Pack operativo",
-    briefing: "Briefing de la salida",
+    about: "Sobre la salida",
     highlights: "Puntos fuertes",
-    checklist: "Checklist",
+    checklist: "Antes de salir",
     timeline: "Plan del día",
     sponsors: "Patrocinadores y partners",
     meetingPoint: "Punto de encuentro",
@@ -121,37 +103,26 @@ const translations: Record<LanguageCode, Record<string, string>> = {
     openPreview: "Abrir preview",
     roadbook: "Roadbook",
     callToAction: "Acción principal",
-    noTimeline: "Todavía no hay un plan horario detallado para esta salida.",
-    noSponsors: "Todavía no hay patrocinadores o partners asociados a esta salida.",
-    noChecklist: "Aún no hay checklist operativa definida.",
-    heroFallback: "Ficha viva de la salida con meteo, ruta, recursos y materiales del club.",
   },
   fr: {
     back: "Retour au calendrier",
     agenda: "Calendrier",
     weather: "Météo",
     photos: "Photos",
-    officialSource: "Source originale",
+    officialSource: "Lien externe",
     route: "Itinéraire",
+    date: "Date",
     source: "Origine",
     destination: "Destination",
     status: "État",
     archive: "Archive liée",
-    galleryPreview: "Aperçu de galerie",
-    noArchive: "Il n'y a pas encore de contenu documentaire associé à cet événement.",
-    noGallery: "Cet événement n'a pas encore d'aperçu propre, mais il peut être consulté dans la galerie annuelle.",
     live: "En cours",
     upcoming: "À venir",
     done: "Réalisée",
     historic: "Historique",
-    evidence: "Traçabilité",
-    archiveCount: "pièces d'archive",
-    galleryCount: "images d'aperçu",
-    microsite: "Microsite de sortie",
-    operationPack: "Pack opérationnel",
-    briefing: "Briefing de la sortie",
+    about: "À propos de la sortie",
     highlights: "Points forts",
-    checklist: "Checklist",
+    checklist: "Avant de partir",
     timeline: "Plan de la journée",
     sponsors: "Sponsors et partenaires",
     meetingPoint: "Point de rendez-vous",
@@ -162,37 +133,26 @@ const translations: Record<LanguageCode, Record<string, string>> = {
     openPreview: "Ouvrir l'aperçu",
     roadbook: "Roadbook",
     callToAction: "Action principale",
-    noTimeline: "Il n'y a pas encore de planning détaillé pour cette sortie.",
-    noSponsors: "Il n'y a pas encore de sponsors ou partenaires associés à cette sortie.",
-    noChecklist: "Aucune checklist opérationnelle définie pour le moment.",
-    heroFallback: "Fiche vivante de la sortie avec météo, itinéraire, ressources et matériel du club.",
   },
   en: {
     back: "Back to calendar",
     agenda: "Calendar",
     weather: "Weather",
     photos: "Photos",
-    officialSource: "Original source",
+    officialSource: "External link",
     route: "Route",
+    date: "Date",
     source: "Origin",
     destination: "Destination",
     status: "Status",
     archive: "Related archive",
-    galleryPreview: "Gallery preview",
-    noArchive: "There is no related documentary material for this event yet.",
-    noGallery: "This event does not have its own preview yet, but it can be explored inside the annual gallery.",
     live: "Live",
     upcoming: "Upcoming",
     done: "Completed",
     historic: "Historic",
-    evidence: "Traceability",
-    archiveCount: "archive pieces",
-    galleryCount: "preview images",
-    microsite: "Event microsite",
-    operationPack: "Operation pack",
-    briefing: "Event briefing",
+    about: "About this outing",
     highlights: "Highlights",
-    checklist: "Checklist",
+    checklist: "Before you go",
     timeline: "Day plan",
     sponsors: "Sponsors and partners",
     meetingPoint: "Meeting point",
@@ -203,37 +163,26 @@ const translations: Record<LanguageCode, Record<string, string>> = {
     openPreview: "Open preview",
     roadbook: "Roadbook",
     callToAction: "Primary action",
-    noTimeline: "There is no detailed timeline for this outing yet.",
-    noSponsors: "There are no sponsors or partners attached to this outing yet.",
-    noChecklist: "No operational checklist has been defined yet.",
-    heroFallback: "Live event page with weather, route, resources and club material.",
   },
   pt: {
     back: "Voltar ao calendário",
     agenda: "Calendário",
     weather: "Meteorologia",
     photos: "Fotos",
-    officialSource: "Fonte original",
+    officialSource: "Ligação externa",
     route: "Rota",
+    date: "Data",
     source: "Origem",
     destination: "Destino",
     status: "Estado",
     archive: "Arquivo relacionado",
-    galleryPreview: "Pré-visualização da galeria",
-    noArchive: "Ainda não existe material documental relacionado com este evento.",
-    noGallery: "Este evento ainda não tem pré-visualização própria, mas pode ser consultado dentro da galeria anual.",
     live: "Em curso",
     upcoming: "Por fazer",
     done: "Realizado",
     historic: "Histórica",
-    evidence: "Rastreabilidade",
-    archiveCount: "peças de arquivo",
-    galleryCount: "imagens de pré-visualização",
-    microsite: "Microsite do passeio",
-    operationPack: "Pack operativo",
-    briefing: "Briefing do passeio",
+    about: "Sobre o passeio",
     highlights: "Pontos fortes",
-    checklist: "Checklist",
+    checklist: "Antes de sair",
     timeline: "Plano do dia",
     sponsors: "Patrocinadores e parceiros",
     meetingPoint: "Ponto de encontro",
@@ -244,37 +193,26 @@ const translations: Record<LanguageCode, Record<string, string>> = {
     openPreview: "Abrir preview",
     roadbook: "Roadbook",
     callToAction: "Ação principal",
-    noTimeline: "Ainda não existe um plano horário detalhado para este passeio.",
-    noSponsors: "Ainda não existem patrocinadores ou parceiros associados a este passeio.",
-    noChecklist: "Ainda não existe checklist operacional definida.",
-    heroFallback: "Ficha viva do passeio com meteorologia, rota, recursos e materiais do clube.",
   },
   de: {
     back: "Zurück zum Kalender",
     agenda: "Kalender",
     weather: "Wetter",
     photos: "Fotos",
-    officialSource: "Originalquelle",
+    officialSource: "Externer Link",
     route: "Route",
+    date: "Datum",
     source: "Start",
     destination: "Ziel",
     status: "Status",
     archive: "Zugehöriges Archiv",
-    galleryPreview: "Galerie-Vorschau",
-    noArchive: "Für dieses Ereignis gibt es noch kein zugehöriges Dokumentmaterial.",
-    noGallery: "Für dieses Ereignis gibt es noch keine eigene Vorschau, es kann aber in der Jahresgalerie angesehen werden.",
     live: "Läuft",
     upcoming: "Bevorstehend",
     done: "Abgeschlossen",
     historic: "Historisch",
-    evidence: "Nachvollziehbarkeit",
-    archiveCount: "Archivstücke",
-    galleryCount: "Vorschaubilder",
-    microsite: "Event-Microsite",
-    operationPack: "Operationspaket",
-    briefing: "Event-Briefing",
+    about: "Über die Ausfahrt",
     highlights: "Highlights",
-    checklist: "Checkliste",
+    checklist: "Vor der Abfahrt",
     timeline: "Tagesplan",
     sponsors: "Sponsoren und Partner",
     meetingPoint: "Treffpunkt",
@@ -285,37 +223,26 @@ const translations: Record<LanguageCode, Record<string, string>> = {
     openPreview: "Vorschau öffnen",
     roadbook: "Roadbook",
     callToAction: "Hauptaktion",
-    noTimeline: "Für diese Ausfahrt gibt es noch keinen detaillierten Zeitplan.",
-    noSponsors: "Für diese Ausfahrt sind noch keine Sponsoren oder Partner hinterlegt.",
-    noChecklist: "Noch keine operative Checkliste definiert.",
-    heroFallback: "Lebendige Event-Seite mit Wetter, Route, Ressourcen und Clubmaterial.",
   },
   ru: {
     back: "Назад к календарю",
     agenda: "Календарь",
     weather: "Погода",
     photos: "Фото",
-    officialSource: "Оригинальный источник",
+    officialSource: "Внешняя ссылка",
     route: "Маршрут",
+    date: "Дата",
     source: "Старт",
     destination: "Финиш",
     status: "Статус",
     archive: "Связанный архив",
-    galleryPreview: "Предпросмотр галереи",
-    noArchive: "Связанных документальных материалов для этого события пока нет.",
-    noGallery: "У этого события пока нет собственного превью, но его можно посмотреть в годовой галерее.",
     live: "Сейчас",
     upcoming: "Скоро",
     done: "Завершено",
     historic: "Историческое",
-    evidence: "Прослеживаемость",
-    archiveCount: "архивных материалов",
-    galleryCount: "изображений превью",
-    microsite: "Микросайт события",
-    operationPack: "Операционный пакет",
-    briefing: "Брифинг события",
+    about: "О выезде",
     highlights: "Ключевые пункты",
-    checklist: "Чеклист",
+    checklist: "Перед выездом",
     timeline: "План дня",
     sponsors: "Спонсоры и партнёры",
     meetingPoint: "Точка сбора",
@@ -326,10 +253,6 @@ const translations: Record<LanguageCode, Record<string, string>> = {
     openPreview: "Открыть предпросмотр",
     roadbook: "Roadbook",
     callToAction: "Основное действие",
-    noTimeline: "Для этого выезда пока нет подробного плана по времени.",
-    noSponsors: "Для этого выезда пока не указаны спонсоры или партнёры.",
-    noChecklist: "Операционный чеклист пока не задан.",
-    heroFallback: "Живая страница выезда с погодой, маршрутом, ресурсами и материалами клуба.",
   },
 };
 
@@ -381,6 +304,13 @@ const EventDetail = () => {
     event.legacyHref ? { label: t.officialSource, href: event.legacyHref, internal: false } : null,
   ].filter(Boolean) as { label: string; href: string; internal: boolean }[];
 
+  const heroSummary = event.summary || (meta ? getLocalizedText(meta.summary, language) : "");
+  const aboutText = event.briefing ?? event.summary;
+  const hasAbout = Boolean(aboutText || event.highlights?.length || event.notes?.length);
+  const hasChecklist = Boolean(event.checklist?.length);
+  const hasArchive = relatedArchive.length > 0;
+  const hasSponsors = Boolean(event.sponsors?.length);
+
   return (
     <PageShell>
       <section className="pt-28 pb-14 section-shell">
@@ -392,30 +322,28 @@ const EventDetail = () => {
               <div className="relative z-10 space-y-6">
                 <Link to="/calendari" className="inline-flex items-center text-sm text-white/80 hover:text-white transition-base">← {t.back}</Link>
                 <div className="flex flex-wrap items-center gap-3">
-                  <span className="glass-panel rounded-full px-4 py-1 text-xs font-semibold text-slate-900">{meta ? getLocalizedText(meta.tag, language) : t.microsite}</span>
+                  {meta ? <span className="glass-panel rounded-full px-4 py-1 text-xs font-semibold text-slate-900">{getLocalizedText(meta.tag, language)}</span> : null}
                   <span className="rounded-full bg-white/10 border border-white/15 px-4 py-1 text-xs font-semibold">{statusLabel}</span>
                   {isPreview ? <span className="rounded-full border border-amber-300/30 bg-amber-300/15 px-4 py-1 text-xs font-semibold text-amber-100">{t.previewMode}</span> : null}
                 </div>
 
                 <div>
                   <h1 className="text-4xl md:text-6xl font-bold text-balance">{event.title}</h1>
-                  <p className="mt-4 text-lg text-white/78 max-w-3xl">{event.summary || (meta ? getLocalizedText(meta.summary, language) : "") || t.heroFallback}</p>
+                  {heroSummary ? <p className="mt-4 text-lg text-white/78 max-w-3xl">{heroSummary}</p> : null}
                   {isPreview ? <p className="mt-3 inline-flex rounded-2xl border border-white/10 bg-white/8 px-4 py-2 text-sm text-white/82">{t.previewNote}</p> : null}
                 </div>
 
-                <div className="grid gap-3 sm:grid-cols-3">
+                <div className={`grid gap-3 ${countdown ? "sm:grid-cols-2" : ""}`}>
                   <div className="rounded-2xl border border-white/10 bg-white/8 p-4">
                     <p className="text-xs uppercase tracking-[0.22em] text-white/55">{t.route}</p>
                     <p className="mt-2 font-semibold">{event.source.label ?? event.source.name} → {destination}</p>
                   </div>
-                  <div className="rounded-2xl border border-white/10 bg-white/8 p-4">
-                    <p className="text-xs uppercase tracking-[0.22em] text-white/55">{t.galleryPreview}</p>
-                    <p className="mt-2 text-3xl font-bold">{previewImages.length}</p>
-                  </div>
-                  <div className="rounded-2xl border border-white/10 bg-white/8 p-4">
-                    <p className="text-xs uppercase tracking-[0.22em] text-white/55">{countdown ? t.countdown : t.archive}</p>
-                    <p className="mt-2 text-3xl font-bold">{countdown ? `${countdown.days}d` : relatedArchive.length}</p>
-                  </div>
+                  {countdown ? (
+                    <div className="rounded-2xl border border-white/10 bg-white/8 p-4">
+                      <p className="text-xs uppercase tracking-[0.22em] text-white/55">{t.countdown}</p>
+                      <p className="mt-2 text-3xl font-bold">{`${countdown.days}d`}</p>
+                    </div>
+                  ) : null}
                 </div>
 
                 <div className="flex flex-wrap gap-3">
@@ -438,7 +366,7 @@ const EventDetail = () => {
                 <div className="flex items-center gap-3"><CalendarDays className="h-5 w-5 text-primary" /><div><p className="text-sm text-muted-foreground">{t.status}</p><p className="font-semibold">{statusLabel}</p></div></div>
                 <div className="h-px metal-line" />
                 <div className="space-y-2">
-                  <p className="text-sm text-muted-foreground">{t.route}</p>
+                  <p className="text-sm text-muted-foreground">{t.date}</p>
                   <p className="font-semibold">{formatEventDateRange(event, language)}</p>
                 </div>
                 <div className="grid sm:grid-cols-2 gap-4">
@@ -451,26 +379,22 @@ const EventDetail = () => {
                     <p className="mt-2 font-semibold">{destination}</p>
                   </div>
                 </div>
-                <div className="grid sm:grid-cols-2 gap-4">
-                  <div className="rounded-2xl border border-border/70 bg-background/80 p-4">
-                    <div className="flex items-center gap-2 text-sm text-muted-foreground"><Ticket className="h-4 w-4 text-primary" /> {t.meetingPoint}</div>
-                    <p className="mt-2 font-semibold">{event.meetingPoint ?? event.source.label ?? event.source.name}</p>
+                {event.meetingPoint || event.meetingTime ? (
+                  <div className="grid sm:grid-cols-2 gap-4">
+                    {event.meetingPoint ? (
+                      <div className="rounded-2xl border border-border/70 bg-background/80 p-4">
+                        <div className="flex items-center gap-2 text-sm text-muted-foreground"><Ticket className="h-4 w-4 text-primary" /> {t.meetingPoint}</div>
+                        <p className="mt-2 font-semibold">{event.meetingPoint}</p>
+                      </div>
+                    ) : null}
+                    {event.meetingTime ? (
+                      <div className="rounded-2xl border border-border/70 bg-background/80 p-4">
+                        <div className="flex items-center gap-2 text-sm text-muted-foreground"><Clock3 className="h-4 w-4 text-primary" /> {t.meetingTime}</div>
+                        <p className="mt-2 font-semibold">{event.meetingTime}</p>
+                      </div>
+                    ) : null}
                   </div>
-                  <div className="rounded-2xl border border-border/70 bg-background/80 p-4">
-                    <div className="flex items-center gap-2 text-sm text-muted-foreground"><Clock3 className="h-4 w-4 text-primary" /> {t.meetingTime}</div>
-                    <p className="mt-2 font-semibold">{event.meetingTime ?? event.displayDate}</p>
-                  </div>
-                </div>
-                <div className="grid grid-cols-2 gap-4">
-                  <div className="rounded-2xl border border-border/70 bg-background/80 p-4">
-                    <div className="flex items-center gap-2 text-sm text-muted-foreground"><ShieldCheck className="h-4 w-4 text-primary" /> {t.evidence}</div>
-                    <p className="mt-2 font-semibold">{event.evidence}</p>
-                  </div>
-                  <div className="rounded-2xl border border-border/70 bg-background/80 p-4">
-                    <div className="flex items-center gap-2 text-sm text-muted-foreground"><ImageIcon className="h-4 w-4 text-primary" /> {t.galleryCount}</div>
-                    <p className="mt-2 font-semibold">{previewImages.length}</p>
-                  </div>
-                </div>
+                ) : null}
                 {countdown ? (
                   <div className="rounded-2xl bg-primary/8 p-4">
                     <div className="text-sm text-muted-foreground">{t.countdown}</div>
@@ -488,53 +412,57 @@ const EventDetail = () => {
         </div>
       </section>
 
-      <section className="pb-12">
-        <div className="container mx-auto px-4 max-w-6xl grid gap-6 lg:grid-cols-[1fr_1fr]">
-          <Card className="premium-card rounded-[2rem] border-0 p-6 md:p-8 shadow-elegant">
-            <div className="flex items-center gap-3 mb-5"><Sparkles className="h-5 w-5 text-primary" /><h2 className="text-2xl font-bold">{t.briefing}</h2></div>
-            <p className="text-base text-muted-foreground">{event.briefing ?? event.summary ?? t.heroFallback}</p>
-            {event.highlights?.length ? (
-              <div className="mt-5">
-                <div className="text-sm font-semibold">{t.highlights}</div>
-                <div className="mt-3 flex flex-wrap gap-2">
-                  {event.highlights.map((item) => <span key={item} className="rounded-full border border-border/70 bg-background/70 px-4 py-2 text-sm">{item}</span>)}
-                </div>
-              </div>
-            ) : null}
-            {event.notes?.length ? <ul className="mt-5 space-y-2 text-sm text-muted-foreground list-disc pl-5">{event.notes.map((note) => <li key={note}>{note}</li>)}</ul> : null}
-          </Card>
-
-          <Card className="premium-card rounded-[2rem] border-0 p-6 md:p-8 shadow-elegant">
-            <div className="flex items-center gap-3 mb-5"><CheckCircle2 className="h-5 w-5 text-primary" /><h2 className="text-2xl font-bold">{t.checklist}</h2></div>
-            {event.checklist?.length ? (
-              <div className="space-y-3">
-                {event.checklist.map((item) => (
-                  <div key={item} className="flex items-start gap-3 rounded-2xl border border-border/70 bg-background/70 p-4">
-                    <CheckCircle2 className="mt-0.5 h-4 w-4 text-primary" />
-                    <span className="text-sm text-muted-foreground">{item}</span>
+      {hasAbout || hasChecklist ? (
+        <section className="pb-12">
+          <div className={`container mx-auto px-4 max-w-6xl grid gap-6 ${hasAbout && hasChecklist ? "lg:grid-cols-[1fr_1fr]" : ""}`}>
+            {hasAbout ? (
+              <Card className="premium-card rounded-[2rem] border-0 p-6 md:p-8 shadow-elegant">
+                <div className="flex items-center gap-3 mb-5"><Sparkles className="h-5 w-5 text-primary" /><h2 className="text-2xl font-bold">{t.about}</h2></div>
+                {aboutText ? <p className="text-base text-muted-foreground">{aboutText}</p> : null}
+                {event.highlights?.length ? (
+                  <div className={aboutText ? "mt-5" : ""}>
+                    <div className="text-sm font-semibold">{t.highlights}</div>
+                    <div className="mt-3 flex flex-wrap gap-2">
+                      {event.highlights.map((item) => <span key={item} className="rounded-full border border-border/70 bg-background/70 px-4 py-2 text-sm">{item}</span>)}
+                    </div>
                   </div>
-                ))}
-              </div>
-            ) : (
-              <p className="text-sm text-muted-foreground">{t.noChecklist}</p>
-            )}
-          </Card>
-        </div>
-      </section>
+                ) : null}
+                {event.notes?.length ? <ul className={`${aboutText || event.highlights?.length ? "mt-5 " : ""}space-y-2 text-sm text-muted-foreground list-disc pl-5`}>{event.notes.map((note) => <li key={note}>{localizeEventNote(note, language)}</li>)}</ul> : null}
+              </Card>
+            ) : null}
 
-      <section className="pb-12">
-        <div className="container mx-auto px-4 max-w-6xl">
-          <Card className="premium-card rounded-[2rem] border-0 p-6 md:p-8 shadow-elegant">
-            <RouteWeatherPanel event={event} />
-          </Card>
-        </div>
-      </section>
+            {hasChecklist ? (
+              <Card className="premium-card rounded-[2rem] border-0 p-6 md:p-8 shadow-elegant">
+                <div className="flex items-center gap-3 mb-5"><CheckCircle2 className="h-5 w-5 text-primary" /><h2 className="text-2xl font-bold">{t.checklist}</h2></div>
+                <div className="space-y-3">
+                  {event.checklist?.map((item) => (
+                    <div key={item} className="flex items-start gap-3 rounded-2xl border border-border/70 bg-background/70 p-4">
+                      <CheckCircle2 className="mt-0.5 h-4 w-4 text-primary" />
+                      <span className="text-sm text-muted-foreground">{item}</span>
+                    </div>
+                  ))}
+                </div>
+              </Card>
+            ) : null}
+          </div>
+        </section>
+      ) : null}
 
-      <section className="pb-12">
-        <div className="container mx-auto px-4 max-w-6xl grid gap-6 lg:grid-cols-[0.95fr_1.05fr]">
-          <Card className="premium-card rounded-[2rem] border-0 p-6 md:p-8 shadow-elegant">
-            <div className="flex items-center gap-3 mb-6"><Route className="h-5 w-5 text-primary" /><h2 className="text-2xl font-bold">{t.timeline}</h2></div>
-            {event.timeline?.length ? (
+      {hasExactEventDate(event) ? (
+        <section className="pb-12">
+          <div className="container mx-auto px-4 max-w-6xl">
+            <Card className="premium-card rounded-[2rem] border-0 p-6 md:p-8 shadow-elegant">
+              <RouteWeatherPanel event={event} />
+            </Card>
+          </div>
+        </section>
+      ) : null}
+
+      {event.timeline?.length ? (
+        <section className="pb-12">
+          <div className="container mx-auto px-4 max-w-6xl">
+            <Card className="premium-card rounded-[2rem] border-0 p-6 md:p-8 shadow-elegant">
+              <div className="flex items-center gap-3 mb-6"><Route className="h-5 w-5 text-primary" /><h2 className="text-2xl font-bold">{t.timeline}</h2></div>
               <div className="space-y-4">
                 {event.timeline.map((stop, index) => (
                   <div key={`${stop.time}-${stop.title}-${index}`} className="grid grid-cols-[92px_1fr] gap-4 rounded-2xl border border-border/70 bg-background/70 p-4">
@@ -546,47 +474,16 @@ const EventDetail = () => {
                   </div>
                 ))}
               </div>
-            ) : (
-              <p className="text-sm text-muted-foreground">{t.noTimeline}</p>
-            )}
-          </Card>
+            </Card>
+          </div>
+        </section>
+      ) : null}
 
-          <Card className="premium-card rounded-[2rem] border-0 p-6 md:p-8 shadow-elegant">
-            <div className="flex items-center gap-3 mb-6"><ArrowUpRight className="h-5 w-5 text-primary" /><h2 className="text-2xl font-bold">{t.operationPack}</h2></div>
-            <div className="grid gap-4 sm:grid-cols-2">
-              {quickLinks.map((link) => (
-                link.internal ? (
-                  <Link key={`${link.label}-${link.href}`} to={link.href} className="rounded-2xl border border-border bg-white/70 p-5 hover:shadow-elegant transition-base block hover:-translate-y-1">
-                    <div className="flex items-start justify-between gap-3">
-                      <div>
-                        <div className="text-xs uppercase tracking-[0.2em] text-primary font-semibold">Internal</div>
-                        <div className="mt-2 font-semibold">{link.label}</div>
-                      </div>
-                      <ArrowUpRight className="h-5 w-5 text-primary shrink-0" />
-                    </div>
-                  </Link>
-                ) : (
-                  <a key={`${link.label}-${link.href}`} href={link.href} target="_blank" rel="noreferrer" className="rounded-2xl border border-border bg-white/70 p-5 hover:shadow-elegant transition-base block hover:-translate-y-1">
-                    <div className="flex items-start justify-between gap-3">
-                      <div>
-                        <div className="text-xs uppercase tracking-[0.2em] text-primary font-semibold">External</div>
-                        <div className="mt-2 font-semibold">{link.label}</div>
-                      </div>
-                      <ArrowUpRight className="h-5 w-5 text-primary shrink-0" />
-                    </div>
-                  </a>
-                )
-              ))}
-            </div>
-          </Card>
-        </div>
-      </section>
-
-      <section className="pb-12">
-        <div className="container mx-auto px-4 max-w-6xl">
-          <Card className="premium-card rounded-[2rem] border-0 p-6 md:p-8 shadow-elegant">
-            <div className="flex items-center gap-3 mb-6"><ImageIcon className="h-5 w-5 text-primary" /><h2 className="text-2xl font-bold">{t.galleryPreview}</h2></div>
-            {previewImages.length ? (
+      {previewImages.length ? (
+        <section className={hasArchive || hasSponsors ? "pb-12" : "pb-20"}>
+          <div className="container mx-auto px-4 max-w-6xl">
+            <Card className="premium-card rounded-[2rem] border-0 p-6 md:p-8 shadow-elegant">
+              <div className="flex items-center gap-3 mb-6"><ImageIcon className="h-5 w-5 text-primary" /><h2 className="text-2xl font-bold">{t.photos}</h2></div>
               <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
                 {previewImages.map((image, index) => (
                   <a key={image.src} href={image.src} target="_blank" rel="noreferrer" className="group block rounded-2xl overflow-hidden hover-tilt relative">
@@ -595,58 +492,51 @@ const EventDetail = () => {
                   </a>
                 ))}
               </div>
-            ) : (
-              <p className="text-muted-foreground">{t.noGallery}</p>
-            )}
-          </Card>
-        </div>
-      </section>
+            </Card>
+          </div>
+        </section>
+      ) : null}
 
-      <section className="pb-20">
-        <div className="container mx-auto px-4 max-w-6xl grid gap-6 lg:grid-cols-[1fr_1fr]">
-          <Card className="premium-card rounded-[2rem] border-0 p-6 md:p-8 shadow-elegant">
-            <div className="flex items-center justify-between gap-4 mb-6">
-              <div className="flex items-center gap-3"><FolderArchive className="h-5 w-5 text-primary" /><h2 className="text-2xl font-bold">{t.archive}</h2></div>
-              <span className="stat-pill">{relatedArchive.length} {t.archiveCount}</span>
-            </div>
-            {relatedArchive.length ? (
-              <div className="grid gap-4">
-                {relatedArchive.map((item) => (
-                  <a key={item.id} href={item.href} target="_blank" rel="noreferrer" className="group rounded-2xl border border-border bg-white/70 p-5 hover:shadow-elegant transition-base block hover:-translate-y-1">
-                    <div className="flex items-start justify-between gap-4">
-                      <div>
-                        <div className="text-xs uppercase tracking-[0.2em] text-primary font-semibold">{item.accent}</div>
-                        <h3 className="mt-2 text-lg font-semibold group-hover:text-primary transition-base">{item.title}</h3>
-                        <p className="mt-2 text-sm text-muted-foreground">{getLocalizedText(item.summary, language)}</p>
+      {hasArchive || hasSponsors ? (
+        <section className="pb-20">
+          <div className={`container mx-auto px-4 max-w-6xl grid gap-6 ${hasArchive && hasSponsors ? "lg:grid-cols-[1fr_1fr]" : ""}`}>
+            {hasArchive ? (
+              <Card className="premium-card rounded-[2rem] border-0 p-6 md:p-8 shadow-elegant">
+                <div className="flex items-center gap-3 mb-6"><FolderArchive className="h-5 w-5 text-primary" /><h2 className="text-2xl font-bold">{t.archive}</h2></div>
+                <div className="grid gap-4">
+                  {relatedArchive.map((item) => (
+                    <a key={item.id} href={item.href} target="_blank" rel="noreferrer" className="group rounded-2xl border border-border bg-white/70 p-5 hover:shadow-elegant transition-base block hover:-translate-y-1">
+                      <div className="flex items-start justify-between gap-4">
+                        <div>
+                          <div className="text-xs uppercase tracking-[0.2em] text-primary font-semibold">{item.accent}</div>
+                          <h3 className="mt-2 text-lg font-semibold group-hover:text-primary transition-base">{item.title}</h3>
+                          <p className="mt-2 text-sm text-muted-foreground">{getLocalizedText(item.summary, language)}</p>
+                        </div>
+                        <ArrowUpRight className="h-5 w-5 text-primary shrink-0" />
                       </div>
-                      <ArrowUpRight className="h-5 w-5 text-primary shrink-0" />
-                    </div>
-                  </a>
-                ))}
-              </div>
-            ) : (
-              <p className="text-muted-foreground">{t.noArchive}</p>
-            )}
-          </Card>
+                    </a>
+                  ))}
+                </div>
+              </Card>
+            ) : null}
 
-          <Card className="premium-card rounded-[2rem] border-0 p-6 md:p-8 shadow-elegant">
-            <div className="flex items-center gap-3 mb-6"><Sparkles className="h-5 w-5 text-primary" /><h2 className="text-2xl font-bold">{t.sponsors}</h2></div>
-            {event.sponsors?.length ? (
-              <div className="flex flex-wrap gap-3">
-                {event.sponsors.map((item) =>
-                  item.href ? (
-                    <a key={`${item.name}-${item.href}`} href={item.href} target="_blank" rel="noreferrer" className="rounded-full border border-border/70 bg-background/70 px-4 py-2 text-sm font-medium hover:border-primary hover:text-primary transition-base">{item.name}</a>
-                  ) : (
-                    <span key={item.name} className="rounded-full border border-border/70 bg-background/70 px-4 py-2 text-sm font-medium">{item.name}</span>
-                  ),
-                )}
-              </div>
-            ) : (
-              <p className="text-sm text-muted-foreground">{t.noSponsors}</p>
-            )}
-          </Card>
-        </div>
-      </section>
+            {hasSponsors ? (
+              <Card className="premium-card rounded-[2rem] border-0 p-6 md:p-8 shadow-elegant">
+                <div className="flex items-center gap-3 mb-6"><Sparkles className="h-5 w-5 text-primary" /><h2 className="text-2xl font-bold">{t.sponsors}</h2></div>
+                <div className="flex flex-wrap gap-3">
+                  {event.sponsors?.map((item) =>
+                    item.href ? (
+                      <a key={`${item.name}-${item.href}`} href={item.href} target="_blank" rel="noreferrer" className="rounded-full border border-border/70 bg-background/70 px-4 py-2 text-sm font-medium hover:border-primary hover:text-primary transition-base">{item.name}</a>
+                    ) : (
+                      <span key={item.name} className="rounded-full border border-border/70 bg-background/70 px-4 py-2 text-sm font-medium">{item.name}</span>
+                    ),
+                  )}
+                </div>
+              </Card>
+            ) : null}
+          </div>
+        </section>
+      ) : null}
     </PageShell>
   );
 };

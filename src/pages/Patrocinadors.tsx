@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { ArrowUpRight, BadgeCheck, Crown, Handshake, ShieldCheck, Sparkles, Star } from "lucide-react";
+import { ArrowUpRight, Crown, Handshake } from "lucide-react";
 import { PageShell } from "@/components/PageShell";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
@@ -11,185 +11,115 @@ import { LanguageCode } from "@/lib/i18n";
 const translations: Record<LanguageCode, Record<string, string>> = {
   ca: {
     eyebrow: "Patrocinadors i partners",
-    title: "Un panell amb més valor, més visibilitat i millor presència per a les marques",
-    intro: "Els patrocinadors han de veure clarament que formen part d'un club cuidat, premium i amb una presentació a l'altura. Per això ara tenen més presència, millor jerarquia visual, color de marca com a accent i identitat pròpia dins cada targeta.",
+    title: "Les marques que donen suport al club",
+    intro: "Empreses i col·laboradors que acompanyen el BMW Club Andorra. Algunes ofereixen avantatges per als socis.",
     ctaPrimary: "Fer-me patrocinador",
     featuredLabel: "Sponsor principal",
     premiumLabel: "Partners destacats",
-    premiumTitle: "Un espai que projecta millor cada marca",
+    premiumTitle: "Patrocinadors del club",
     networkLabel: "Xarxa de col·laboradors",
-    networkIntro: "Un ecosistema visible i ordenat que reforça confiança, territori i qualitat percebuda.",
+    networkTitle: "Altres col·laboradors del club",
     openSite: "Obrir web oficial",
     memberBenefits: "Avantatges per a socis",
-    benefitsSummary: "Descomptes, condicions especials i presència destacada dins l'ecosistema del club.",
-    activeBrands: "marques visibles",
-    linkedPartners: "partners amb enllaç",
-    supportPartners: "col·laboradors de suport",
-    presentingPartner: "Partner presentador del club",
-    featuredStatement: "La marca que més ha de brillar dins aquest panell perquè connecta club, territori i experiència BMW.",
-    officialPresence: "Visibilitat digital",
-    officialPresenceDesc: "Presència destacada dins el panell, la portada i el peu de pàgina.",
-    memberValue: "Valor per als socis",
-    memberValueDesc: "Condicions especials, recanvis, accessoris i context comercial clar.",
-    trustLabel: "Confiança de marca",
-    trustDesc: "Una presentació més sòlida per a un sponsor que ha de sentir-se central.",
-    visualIdentity: "Identitat visual",
+    statBrands: "marques en total",
+    statSponsors: "patrocinadors",
+    statCollaborators: "col·laboradors",
   },
   es: {
     eyebrow: "Patrocinadores y partners",
-    title: "Un panel con más valor, más visibilidad y mejor presencia para las marcas",
-    intro: "Los patrocinadores tienen que percibir claramente que forman parte de un club cuidado, premium y con una presentación a la altura. Por eso ahora tienen más presencia, mejor jerarquía visual, color de marca como acento e identidad propia dentro de cada tarjeta.",
+    title: "Las marcas que apoyan al club",
+    intro: "Empresas y colaboradores que acompañan al BMW Club Andorra. Algunas ofrecen ventajas para los socios.",
     ctaPrimary: "Quiero ser patrocinador",
     featuredLabel: "Patrocinador principal",
     premiumLabel: "Partners destacados",
-    premiumTitle: "Un espacio que proyecta mejor a cada marca",
+    premiumTitle: "Patrocinadores del club",
     networkLabel: "Red de colaboradores",
-    networkIntro: "Un ecosistema visible y ordenado que refuerza confianza, territorio y calidad percibida.",
+    networkTitle: "Otros colaboradores del club",
     openSite: "Abrir web oficial",
     memberBenefits: "Ventajas para socios",
-    benefitsSummary: "Descuentos, condiciones especiales y presencia destacada dentro del ecosistema del club.",
-    activeBrands: "marcas visibles",
-    linkedPartners: "partners con enlace",
-    supportPartners: "colaboradores de soporte",
-    presentingPartner: "Partner presentador del club",
-    featuredStatement: "La marca que más debe brillar dentro de este panel porque conecta club, territorio y experiencia BMW.",
-    officialPresence: "Visibilidad digital",
-    officialPresenceDesc: "Presencia destacada dentro del panel, la home y el pie de página.",
-    memberValue: "Valor para socios",
-    memberValueDesc: "Condiciones especiales, recambios, accesorios y contexto comercial claro.",
-    trustLabel: "Confianza de marca",
-    trustDesc: "Una presentación más sólida para un patrocinador que debe sentirse central.",
-    visualIdentity: "Identidad visual",
+    statBrands: "marcas en total",
+    statSponsors: "patrocinadores",
+    statCollaborators: "colaboradores",
   },
   fr: {
     eyebrow: "Sponsors et partenaires",
-    title: "Un panneau avec plus de valeur, plus de visibilité et une meilleure présence pour les marques",
-    intro: "Les sponsors doivent percevoir clairement qu'ils font partie d'un club soigné, premium et présenté avec niveau. Ils disposent désormais de plus de présence, d'une meilleure hiérarchie visuelle, d'une couleur de marque en accent et d'une identité propre dans chaque carte.",
+    title: "Les marques qui soutiennent le club",
+    intro: "Entreprises et collaborateurs qui accompagnent le BMW Club Andorra. Certaines proposent des avantages aux membres.",
     ctaPrimary: "Devenir sponsor",
     featuredLabel: "Sponsor principal",
     premiumLabel: "Partenaires mis en avant",
-    premiumTitle: "Un espace qui valorise mieux chaque marque",
+    premiumTitle: "Sponsors du club",
     networkLabel: "Réseau de collaborateurs",
-    networkIntro: "Un écosystème visible et ordonné qui renforce la confiance, le territoire et la qualité perçue.",
+    networkTitle: "Autres collaborateurs du club",
     openSite: "Ouvrir le site officiel",
     memberBenefits: "Avantages membres",
-    benefitsSummary: "Réductions, conditions spéciales et présence mise en avant dans l'écosystème du club.",
-    activeBrands: "marques visibles",
-    linkedPartners: "partenaires avec lien",
-    supportPartners: "collaborateurs de soutien",
-    presentingPartner: "Partenaire référent du club",
-    featuredStatement: "La marque qui doit le plus rayonner dans ce panneau car elle relie club, territoire et expérience BMW.",
-    officialPresence: "Visibilité digitale",
-    officialPresenceDesc: "Présence mise en avant dans le panneau, l'accueil et le pied de page.",
-    memberValue: "Valeur membre",
-    memberValueDesc: "Conditions spéciales, pièces, accessoires et contexte commercial clair.",
-    trustLabel: "Confiance de marque",
-    trustDesc: "Une présentation plus solide pour un sponsor qui doit se sentir central.",
-    visualIdentity: "Identité visuelle",
+    statBrands: "marques au total",
+    statSponsors: "sponsors",
+    statCollaborators: "collaborateurs",
   },
   en: {
     eyebrow: "Sponsors and partners",
-    title: "A panel with more value, more visibility and better presence for partner brands",
-    intro: "Sponsors should immediately feel they are part of a carefully presented, premium club. That is why they now get more presence, clearer hierarchy, brand colour accents and a stronger identity on every card.",
+    title: "The brands that support the club",
+    intro: "Companies and collaborators working alongside BMW Club Andorra. Some of them offer benefits to members.",
     ctaPrimary: "Become a sponsor",
     featuredLabel: "Main sponsor",
     premiumLabel: "Featured partners",
-    premiumTitle: "A space that elevates each brand better",
+    premiumTitle: "Club sponsors",
     networkLabel: "Support network",
-    networkIntro: "A visible, well-ordered ecosystem that reinforces trust, local roots and perceived quality.",
+    networkTitle: "Other club collaborators",
     openSite: "Open official site",
     memberBenefits: "Member benefits",
-    benefitsSummary: "Discounts, special conditions and premium visibility inside the club ecosystem.",
-    activeBrands: "visible brands",
-    linkedPartners: "linked partners",
-    supportPartners: "support collaborators",
-    presentingPartner: "Presenting partner of the club",
-    featuredStatement: "The brand that should shine the most in this panel because it connects the club, the territory and the BMW experience.",
-    officialPresence: "Digital visibility",
-    officialPresenceDesc: "Featured presence across this panel, the homepage and the footer.",
-    memberValue: "Member value",
-    memberValueDesc: "Special conditions, parts, accessories and clear commercial context.",
-    trustLabel: "Brand trust",
-    trustDesc: "A stronger presentation for a sponsor that should feel central.",
-    visualIdentity: "Visual identity",
+    statBrands: "brands in total",
+    statSponsors: "sponsors",
+    statCollaborators: "collaborators",
   },
   pt: {
     eyebrow: "Patrocinadores e parceiros",
-    title: "Um painel com mais valor, mais visibilidade e melhor presença para as marcas",
-    intro: "Os patrocinadores devem perceber logo que fazem parte de um clube cuidado, premium e bem apresentado. Por isso passam agora a ter mais presença, melhor hierarquia visual, cor de marca como acento e identidade própria em cada cartão.",
+    title: "As marcas que apoiam o clube",
+    intro: "Empresas e colaboradores que acompanham o BMW Club Andorra. Algumas oferecem vantagens aos sócios.",
     ctaPrimary: "Quero ser patrocinador",
     featuredLabel: "Patrocinador principal",
     premiumLabel: "Parceiros em destaque",
-    premiumTitle: "Um espaço que valoriza melhor cada marca",
+    premiumTitle: "Patrocinadores do clube",
     networkLabel: "Rede de colaboradores",
-    networkIntro: "Um ecossistema visível e organizado que reforça confiança, território e qualidade percebida.",
+    networkTitle: "Outros colaboradores do clube",
     openSite: "Abrir site oficial",
     memberBenefits: "Vantagens para sócios",
-    benefitsSummary: "Descontos, condições especiais e presença destacada dentro do ecossistema do clube.",
-    activeBrands: "marcas visíveis",
-    linkedPartners: "parceiros com link",
-    supportPartners: "colaboradores de apoio",
-    presentingPartner: "Parceiro apresentador do clube",
-    featuredStatement: "A marca que mais deve brilhar neste painel porque liga clube, território e experiência BMW.",
-    officialPresence: "Visibilidade digital",
-    officialPresenceDesc: "Presença destacada dentro do painel, na home e no rodapé.",
-    memberValue: "Valor para sócios",
-    memberValueDesc: "Condições especiais, peças, acessórios e contexto comercial claro.",
-    trustLabel: "Confiança de marca",
-    trustDesc: "Uma apresentação mais sólida para um patrocinador que deve sentir-se central.",
-    visualIdentity: "Identidade visual",
+    statBrands: "marcas no total",
+    statSponsors: "patrocinadores",
+    statCollaborators: "colaboradores",
   },
   de: {
     eyebrow: "Sponsoren und Partner",
-    title: "Ein Bereich mit mehr Wert, mehr Sichtbarkeit und besserer Präsenz für Partnermarken",
-    intro: "Sponsoren sollen sofort erkennen, dass sie Teil eines gepflegten, hochwertigen Clubs sind. Deshalb erhalten sie jetzt mehr Präsenz, klarere Hierarchie, Markenfarben als Akzent und eine stärkere Identität auf jeder Karte.",
+    title: "Die Marken, die den Club unterstützen",
+    intro: "Unternehmen und Partner, die den BMW Club Andorra begleiten. Einige bieten Mitgliedern Vorteile.",
     ctaPrimary: "Sponsor werden",
     featuredLabel: "Hauptsponsor",
     premiumLabel: "Hervorgehobene Partner",
-    premiumTitle: "Ein Bereich, der jede Marke besser aufwertet",
+    premiumTitle: "Sponsoren des Clubs",
     networkLabel: "Partnernetzwerk",
-    networkIntro: "Ein sichtbares und geordnetes Ökosystem, das Vertrauen, regionale Verankerung und wahrgenommene Qualität stärkt.",
+    networkTitle: "Weitere Partner des Clubs",
     openSite: "Offizielle Website öffnen",
     memberBenefits: "Mitgliedervorteile",
-    benefitsSummary: "Rabatte, Sonderkonditionen und hochwertige Sichtbarkeit innerhalb des Club-Ökosystems.",
-    activeBrands: "sichtbare Marken",
-    linkedPartners: "Partner mit Link",
-    supportPartners: "Support-Partner",
-    presentingPartner: "Präsentierender Partner des Clubs",
-    featuredStatement: "Die Marke, die in diesem Bereich am stärksten strahlen sollte, weil sie Club, Region und BMW-Erlebnis verbindet.",
-    officialPresence: "Digitale Sichtbarkeit",
-    officialPresenceDesc: "Hervorgehobene Präsenz in diesem Bereich, auf der Startseite und im Footer.",
-    memberValue: "Mitgliedernutzen",
-    memberValueDesc: "Sonderkonditionen, Teile, Zubehör und klarer kommerzieller Kontext.",
-    trustLabel: "Markenvertrauen",
-    trustDesc: "Eine stärkere Präsentation für einen Sponsor, der zentral wirken soll.",
-    visualIdentity: "Visuelle Identität",
+    statBrands: "Marken insgesamt",
+    statSponsors: "Sponsoren",
+    statCollaborators: "Kooperationspartner",
   },
   ru: {
     eyebrow: "Спонсоры и партнёры",
-    title: "Панель с большей ценностью, заметностью и лучшим присутствием для партнёрских брендов",
-    intro: "Спонсоры должны сразу видеть, что они являются частью аккуратно оформленного премиального клуба. Поэтому теперь у них больше присутствия, более чёткая иерархия, фирменные цветовые акценты и своя идентичность на каждой карточке.",
+    title: "Бренды, которые поддерживают клуб",
+    intro: "Компании и партнёры, которые сотрудничают с BMW Club Andorra. Некоторые из них предлагают преимущества участникам клуба.",
     ctaPrimary: "Стать спонсором",
     featuredLabel: "Главный спонсор",
     premiumLabel: "Выделенные партнёры",
-    premiumTitle: "Пространство, которое лучше подаёт каждый бренд",
+    premiumTitle: "Спонсоры клуба",
     networkLabel: "Сеть партнёров",
-    networkIntro: "Видимая и упорядоченная экосистема, усиливающая доверие, локальную связь и ощущение качества.",
+    networkTitle: "Другие партнёры клуба",
     openSite: "Открыть официальный сайт",
     memberBenefits: "Преимущества для участников",
-    benefitsSummary: "Скидки, специальные условия и заметное присутствие внутри экосистемы клуба.",
-    activeBrands: "видимых брендов",
-    linkedPartners: "партнёров со ссылкой",
-    supportPartners: "поддерживающих партнёров",
-    presentingPartner: "Ключевой партнёр клуба",
-    featuredStatement: "Бренд, который должен сиять сильнее всех в этой панели, потому что связывает клуб, территорию и опыт BMW.",
-    officialPresence: "Цифровая заметность",
-    officialPresenceDesc: "Выделенное присутствие в этой панели, на главной странице и в футере.",
-    memberValue: "Ценность для участников",
-    memberValueDesc: "Специальные условия, запчасти, аксессуары и понятный коммерческий контекст.",
-    trustLabel: "Доверие к бренду",
-    trustDesc: "Более сильная подача для спонсора, который должен ощущаться центральным.",
-    visualIdentity: "Визуальная идентичность",
+    statBrands: "бренды",
+    statSponsors: "спонсоры",
+    statCollaborators: "партнёры",
   },
 };
 
@@ -266,7 +196,7 @@ const Patrocinadors = () => {
   const featuredSponsor = sponsorItems.find((item) => item.tier === "featured");
   const premiumSponsors = sponsorItems.filter((item) => item.tier === "premium");
   const supportSponsors = sponsorItems.filter((item) => item.tier === "support");
-  const linkedSponsors = sponsorItems.filter((item) => item.link);
+  const mainSponsors = sponsorItems.filter((item) => item.tier !== "support");
 
   return (
     <PageShell>
@@ -292,15 +222,15 @@ const Patrocinadors = () => {
               <div className="grid gap-4 sm:grid-cols-3 lg:grid-cols-1 xl:grid-cols-3">
                 <div className="rounded-[1.75rem] border border-white/10 bg-white/8 p-5 backdrop-blur-xl">
                   <div className="text-3xl font-bold">{sponsorItems.length}</div>
-                  <div className="mt-2 text-sm text-white/68">{t.activeBrands}</div>
+                  <div className="mt-2 text-sm text-white/68">{t.statBrands}</div>
                 </div>
                 <div className="rounded-[1.75rem] border border-white/10 bg-white/8 p-5 backdrop-blur-xl">
-                  <div className="text-3xl font-bold">{linkedSponsors.length}</div>
-                  <div className="mt-2 text-sm text-white/68">{t.linkedPartners}</div>
+                  <div className="text-3xl font-bold">{mainSponsors.length}</div>
+                  <div className="mt-2 text-sm text-white/68">{t.statSponsors}</div>
                 </div>
                 <div className="rounded-[1.75rem] border border-white/10 bg-white/8 p-5 backdrop-blur-xl">
                   <div className="text-3xl font-bold">{supportSponsors.length}</div>
-                  <div className="mt-2 text-sm text-white/68">{t.supportPartners}</div>
+                  <div className="mt-2 text-sm text-white/68">{t.statCollaborators}</div>
                 </div>
               </div>
             </div>
@@ -327,34 +257,13 @@ const Patrocinadors = () => {
                     <h2 className="text-3xl sm:text-5xl md:text-7xl font-bold text-balance leading-[0.92]">{featuredSponsor.name}</h2>
                     {featuredSponsor.accent && <span className="rounded-full border border-white/10 bg-white/8 px-4 py-2 text-xs font-semibold uppercase tracking-[0.2em] text-white/70">{featuredSponsor.accent}</span>}
                   </div>
-                  <p className="mt-5 max-w-3xl text-lg md:text-xl text-white/80">{t.featuredStatement}</p>
-                  <p className="mt-5 text-base md:text-lg text-white/68 max-w-3xl">{getLocalizedText(featuredSponsor.summary, language)}</p>
-
-                  <div className="mt-8 grid sm:grid-cols-2 xl:grid-cols-3 gap-4">
-                    {[
-                      { icon: Sparkles, title: t.officialPresence, desc: t.officialPresenceDesc },
-                      { icon: ShieldCheck, title: t.memberValue, desc: t.memberValueDesc },
-                      { icon: Star, title: t.trustLabel, desc: t.trustDesc },
-                    ].map((item) => {
-                      const Icon = item.icon;
-                      return (
-                        <div key={item.title} className="rounded-[1.5rem] border border-white/10 bg-white/6 p-5 backdrop-blur-xl">
-                          <div className="rounded-2xl bg-white/10 p-3 w-fit"><Icon className="h-5 w-5 text-primary" /></div>
-                          <div className="mt-4 text-lg font-semibold">{item.title}</div>
-                          <p className="mt-2 text-sm text-white/66">{item.desc}</p>
-                        </div>
-                      );
-                    })}
-                  </div>
+                  <p className="mt-5 max-w-3xl text-lg md:text-xl text-white/80">{getLocalizedText(featuredSponsor.summary, language)}</p>
                 </div>
 
                 <div className="relative overflow-hidden rounded-[2.2rem] border p-6 md:p-7" style={{ borderColor: featuredSponsor.brand.border, background: `linear-gradient(160deg, rgba(255,255,255,.08) 0%, rgba(255,255,255,.03) 100%)`, boxShadow: `0 38px 80px -52px ${featuredSponsor.brand.accent}80` }}>
                   <div className="absolute -right-8 top-4 text-[84px] font-bold leading-none opacity-[0.06] hidden md:block">01</div>
                   <div className="relative z-10 flex flex-wrap items-center justify-between gap-3 mb-5">
-                    <div>
-                      <div className="text-[11px] uppercase tracking-[0.24em] text-white/55">{t.visualIdentity}</div>
-                      <div className="mt-2 text-sm font-semibold text-white/82">{featuredSponsor.category}</div>
-                    </div>
+                    <div className="text-sm font-semibold text-white/82">{featuredSponsor.category}</div>
                     {featuredSponsor.link && (
                       <a href={featuredSponsor.link.href} target="_blank" rel="noreferrer" className="inline-flex items-center gap-2 rounded-full border border-white/12 bg-white/10 px-4 py-2 text-xs font-semibold uppercase tracking-[0.14em] text-white transition-base hover:bg-white/14">
                         {t.openSite}
@@ -366,11 +275,7 @@ const Patrocinadors = () => {
                   <SponsorLogoPlate sponsor={featuredSponsor} dark />
 
                   <div className="rounded-[1.75rem] bg-white text-slate-950 p-6 shadow-elegant mt-5">
-                    <div className="inline-flex items-center gap-2 rounded-full bg-primary/10 px-3 py-1 text-xs font-semibold uppercase tracking-[0.2em] text-primary">
-                      <BadgeCheck className="h-4 w-4" />
-                      {t.presentingPartner}
-                    </div>
-                    <div className="mt-4 text-2xl font-bold text-balance">{featuredSponsor.name}</div>
+                    <div className="text-2xl font-bold text-balance">{featuredSponsor.name}</div>
                     <div className="mt-2 text-sm text-slate-500 uppercase tracking-[0.2em]">{featuredSponsor.category}</div>
                     {featuredSponsor.benefit && (
                       <div className="mt-6 rounded-[1.5rem] p-5" style={{ background: featuredSponsor.brand.badge }}>
@@ -378,10 +283,6 @@ const Patrocinadors = () => {
                         <p className="mt-3 font-medium text-slate-800">{getLocalizedText(featuredSponsor.benefit, language)}</p>
                       </div>
                     )}
-                    <p className="mt-5 text-sm text-slate-600">{t.benefitsSummary}</p>
-                    <div className="mt-6 rounded-[1.4rem] p-4 text-sm font-medium" style={{ background: featuredSponsor.brand.badge, color: featuredSponsor.brand.text }}>
-                      {featuredSponsor.accent ?? t.featuredLabel}
-                    </div>
                   </div>
                 </div>
               </div>
@@ -401,8 +302,7 @@ const Patrocinadors = () => {
             {premiumSponsors.map((sponsor) => (
               <Card key={sponsor.id} className="border rounded-[1.75rem] md:rounded-[2rem] p-5 md:p-6 hover-tilt h-full flex flex-col shadow-sm" style={{ background: sponsor.brand.surface, borderColor: sponsor.brand.border }}>
                 <SponsorLogoPlate sponsor={sponsor} compact />
-                <div className="mt-5 text-xs uppercase tracking-[0.22em] font-semibold" style={{ color: sponsor.brand.accent }}>{t.visualIdentity}</div>
-                <p className="mt-4 text-muted-foreground flex-1">{getLocalizedText(sponsor.summary, language)}</p>
+                <p className="mt-5 text-muted-foreground flex-1">{getLocalizedText(sponsor.summary, language)}</p>
                 {sponsor.benefit && (
                   <div className="mt-5 rounded-[1.35rem] p-4 text-sm text-foreground/85" style={{ background: sponsor.brand.badge }}>
                     <div className="text-xs uppercase tracking-[0.2em] font-semibold mb-2" style={{ color: sponsor.brand.accent }}>{t.memberBenefits}</div>
@@ -427,7 +327,7 @@ const Patrocinadors = () => {
             <div className="grid lg:grid-cols-[0.9fr_1.1fr] gap-8 items-start">
               <div>
                 <p className="text-sm uppercase tracking-[0.24em] text-primary">{t.networkLabel}</p>
-                <h2 className="mt-2 text-3xl md:text-4xl font-bold text-balance">{t.networkIntro}</h2>
+                <h2 className="mt-2 text-3xl md:text-4xl font-bold text-balance">{t.networkTitle}</h2>
               </div>
               <div className="grid sm:grid-cols-2 gap-4">
                 {supportSponsors.map((sponsor) => (

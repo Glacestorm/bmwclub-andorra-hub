@@ -7,13 +7,13 @@ import { getLocalizedText } from "@/lib/localized";
 import { archiveItems } from "@/content/siteExperience";
 
 const translations: Record<LanguageCode, Record<string, string>> = {
-  ca: { eyebrow: "Arxiu del club", title: "Documents, revistes i memòria recuperada", subtitle: "Hemeroteca del club amb PDFs, vídeos i peces històriques que aporten context, trajectòria i profunditat.", pdf: "PDF", video: "Vídeo", image: "Imatge", open: "Obrir recurs" },
-  es: { eyebrow: "Archivo del club", title: "Documentos, revistas y memoria recuperada", subtitle: "Hemeroteca del club con PDFs, vídeos y piezas históricas que aportan contexto, trayectoria y profundidad.", pdf: "PDF", video: "Vídeo", image: "Imagen", open: "Abrir recurso" },
-  fr: { eyebrow: "Archive du club", title: "Documents, magazines et mémoire récupérée", subtitle: "Archive du club avec PDF, vidéos et pièces historiques apportant contexte, trajectoire et profondeur.", pdf: "PDF", video: "Vidéo", image: "Image", open: "Ouvrir la ressource" },
-  en: { eyebrow: "Club archive", title: "Documents, magazines and recovered memory", subtitle: "Club archive with PDFs, videos and historical pieces that add context, continuity and depth.", pdf: "PDF", video: "Video", image: "Image", open: "Open asset" },
-  pt: { eyebrow: "Arquivo do clube", title: "Documentos, revistas e memória recuperada", subtitle: "Hemeroteca do clube com PDFs, vídeos e peças históricas que dão contexto, percurso e profundidade.", pdf: "PDF", video: "Vídeo", image: "Imagem", open: "Abrir recurso" },
-  de: { eyebrow: "Club-Archiv", title: "Dokumente, Magazine und wiederhergestellte Erinnerung", subtitle: "Club-Archiv mit PDFs, Videos und historischen Stücken, die Kontext, Kontinuität und Tiefe vermitteln.", pdf: "PDF", video: "Video", image: "Bild", open: "Asset öffnen" },
-  ru: { eyebrow: "Архив клуба", title: "Документы, журналы и восстановленная память", subtitle: "Архив клуба с PDF, видео и историческими материалами, которые добавляют контекст, преемственность и глубину.", pdf: "PDF", video: "Видео", image: "Изображение", open: "Открыть материал" },
+  ca: { eyebrow: "Arxiu del club", title: "Documents, revistes i imatges", subtitle: "Classificacions, revistes BMW i cartells d'esdeveniments que conserva el club.", pdf: "PDF", video: "Vídeo", image: "Imatge", open: "Obrir recurs" },
+  es: { eyebrow: "Archivo del club", title: "Documentos, revistas e imágenes", subtitle: "Clasificaciones, revistas BMW y carteles de eventos que conserva el club.", pdf: "PDF", video: "Vídeo", image: "Imagen", open: "Abrir recurso" },
+  fr: { eyebrow: "Archive du club", title: "Documents, magazines et images", subtitle: "Classements, magazines BMW et affiches d'événements conservés par le club.", pdf: "PDF", video: "Vidéo", image: "Image", open: "Ouvrir la ressource" },
+  en: { eyebrow: "Club archive", title: "Documents, magazines and images", subtitle: "Results, BMW magazines and event posters kept by the club.", pdf: "PDF", video: "Video", image: "Image", open: "Open resource" },
+  pt: { eyebrow: "Arquivo do clube", title: "Documentos, revistas e imagens", subtitle: "Classificações, revistas BMW e cartazes de eventos que o clube conserva.", pdf: "PDF", video: "Vídeo", image: "Imagem", open: "Abrir recurso" },
+  de: { eyebrow: "Club-Archiv", title: "Dokumente, Magazine und Bilder", subtitle: "Ergebnislisten, BMW-Magazine und Veranstaltungsplakate, die der Club aufbewahrt.", pdf: "PDF", video: "Video", image: "Bild", open: "Ressource öffnen" },
+  ru: { eyebrow: "Архив клуба", title: "Документы, журналы и изображения", subtitle: "Результаты соревнований, журналы BMW и афиши мероприятий, которые хранит клуб.", pdf: "PDF", video: "Видео", image: "Изображение", open: "Открыть материал" },
 };
 
 const iconByType = {

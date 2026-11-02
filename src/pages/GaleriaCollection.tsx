@@ -1,5 +1,5 @@
 import { Link, Navigate, useLocation } from "react-router-dom";
-import { ArrowRight, Gauge, Images, Sparkles } from "lucide-react";
+import { ArrowRight, Images, Sparkles } from "lucide-react";
 import { PageShell } from "@/components/PageShell";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
@@ -26,99 +26,71 @@ const translations: Record<LanguageCode, Record<string, string>> = {
     gallery: "Galeria",
     albums: "Àlbums",
     photos: "fotos",
-    sections: "seccions visuals",
     back: "Tornar a galeria",
-    collections: "Col·leccions",
-    collectionsTitle: "Lectura més clara del material recuperat",
-    collectionsBody: "Cada any o bloc històric ara s'obre com una peça pròpia, amb àlbums, arxiu fotogràfic i millor jerarquia visual.",
-    openMedia: "Obrir arxiu visual",
-    performance: "Galeria preparada",
-    performanceBody: "La pàgina carrega primer la vista resum i només descarrega les fotos completes quan obres cada àlbum.",
-    progressive: "càrrega progressiva",
+    collections: "Col·lecció",
+    collectionsTitle: "Àlbums i fotos",
+    collectionsBody: "Obre un àlbum per veure'n totes les fotos i selecciona qualsevol imatge per ampliar-la.",
+    openMedia: "Veure fotos",
   },
   es: {
     gallery: "Galería",
     albums: "Álbumes",
     photos: "fotos",
-    sections: "secciones visuales",
     back: "Volver a galería",
-    collections: "Colecciones",
-    collectionsTitle: "Lectura más clara del material recuperado",
-    collectionsBody: "Cada año o bloque histórico se abre ahora como una pieza propia, con álbumes, archivo fotográfico y mejor jerarquía visual.",
-    openMedia: "Abrir archivo visual",
-    performance: "Galería preparada",
-    performanceBody: "La página carga primero la vista resumen y solo descarga las fotos completas cuando abres cada álbum.",
-    progressive: "carga progresiva",
+    collections: "Colección",
+    collectionsTitle: "Álbumes y fotos",
+    collectionsBody: "Abre un álbum para ver todas sus fotos y selecciona cualquier imagen para ampliarla.",
+    openMedia: "Ver fotos",
   },
   fr: {
     gallery: "Galerie",
     albums: "Albums",
     photos: "photos",
-    sections: "sections visuelles",
     back: "Retour à la galerie",
-    collections: "Collections",
-    collectionsTitle: "Lecture plus claire du matériel récupéré",
-    collectionsBody: "Chaque année ou bloc historique s'ouvre désormais comme une pièce propre, avec albums, archive photographique et meilleure hiérarchie visuelle.",
-    openMedia: "Ouvrir l'archive visuelle",
-    performance: "Galerie préparée",
-    performanceBody: "La page charge d'abord la vue résumée et ne télécharge les photos complètes que lorsque vous ouvrez chaque album.",
-    progressive: "chargement progressif",
+    collections: "Collection",
+    collectionsTitle: "Albums et photos",
+    collectionsBody: "Ouvrez un album pour voir toutes ses photos et sélectionnez une image pour l'agrandir.",
+    openMedia: "Voir les photos",
   },
   en: {
     gallery: "Gallery",
     albums: "Albums",
     photos: "photos",
-    sections: "visual sections",
     back: "Back to gallery",
-    collections: "Collections",
-    collectionsTitle: "Clearer reading of the recovered material",
-    collectionsBody: "Each year or historical block now opens as its own piece, with albums, photographic archive and better visual hierarchy.",
-    openMedia: "Open visual archive",
-    performance: "Gallery ready",
-    performanceBody: "The page loads the summary view first and only downloads full photos when you open each album.",
-    progressive: "progressive loading",
+    collections: "Collection",
+    collectionsTitle: "Albums and photos",
+    collectionsBody: "Open an album to see all its photos and select any image to enlarge it.",
+    openMedia: "View photos",
   },
   pt: {
     gallery: "Galeria",
     albums: "Álbuns",
     photos: "fotos",
-    sections: "secções visuais",
     back: "Voltar à galeria",
-    collections: "Coleções",
-    collectionsTitle: "Leitura mais clara do material recuperado",
-    collectionsBody: "Cada ano ou bloco histórico abre agora como uma peça própria, com álbuns, arquivo fotográfico e melhor hierarquia visual.",
-    openMedia: "Abrir arquivo visual",
-    performance: "Galeria preparada",
-    performanceBody: "A página carrega primeiro a vista resumida e só descarrega as fotos completas quando abre cada álbum.",
-    progressive: "carregamento progressivo",
+    collections: "Coleção",
+    collectionsTitle: "Álbuns e fotos",
+    collectionsBody: "Abra um álbum para ver todas as fotos e selecione qualquer imagem para a ampliar.",
+    openMedia: "Ver fotos",
   },
   de: {
     gallery: "Galerie",
     albums: "Alben",
     photos: "Fotos",
-    sections: "visuelle Bereiche",
     back: "Zurück zur Galerie",
-    collections: "Sammlungen",
-    collectionsTitle: "Klarere Lesbarkeit des wiederhergestellten Materials",
-    collectionsBody: "Jedes Jahr oder jeder historische Block öffnet sich jetzt als eigener Bereich mit Alben, Bildarchiv und besserer visueller Hierarchie.",
-    openMedia: "Visuelles Archiv öffnen",
-    performance: "Galerie bereit",
-    performanceBody: "Die Seite lädt zuerst die Übersicht und lädt vollständige Fotos erst dann, wenn ein Album geöffnet wird.",
-    progressive: "progressives Laden",
+    collections: "Sammlung",
+    collectionsTitle: "Alben und Fotos",
+    collectionsBody: "Öffnen Sie ein Album, um alle Fotos zu sehen, und wählen Sie ein Bild aus, um es zu vergrößern.",
+    openMedia: "Fotos ansehen",
   },
   ru: {
     gallery: "Галерея",
     albums: "Альбомы",
     photos: "фото",
-    sections: "визуальных разделов",
     back: "Назад в галерею",
-    collections: "Коллекции",
-    collectionsTitle: "Более ясное чтение восстановленного материала",
-    collectionsBody: "Каждый год или исторический блок теперь открывается как отдельный материал с альбомами, фотоархивом и лучшей визуальной иерархией.",
-    openMedia: "Открыть визуальный архив",
-    performance: "Галерея готова",
-    performanceBody: "Страница сначала загружает обзор, а полные фотографии скачиваются только при открытии альбома.",
-    progressive: "прогрессивная загрузка",
+    collections: "Коллекция",
+    collectionsTitle: "Альбомы и фото",
+    collectionsBody: "Откройте альбом, чтобы увидеть все фотографии, и выберите любое изображение, чтобы увеличить его.",
+    openMedia: "Смотреть фото",
   },
 };
 
@@ -156,7 +128,6 @@ const GaleriaCollection = () => {
                 {page.hero.subtitle ? <p className="mt-5 max-w-3xl text-lg text-white/76">{page.hero.subtitle}</p> : null}
                 <div className="mt-8 flex flex-wrap gap-3">
                   <NavigateButton href="/galeria" label={t.back} />
-                  <span className="inline-flex items-center rounded-full border border-white/12 bg-white/8 px-4 py-3 text-xs font-semibold uppercase tracking-[0.22em] text-white/75">{t.progressive}</span>
                 </div>
               </div>
 
@@ -164,23 +135,15 @@ const GaleriaCollection = () => {
                 <p className="text-sm uppercase tracking-[0.24em] text-primary">{t.collections}</p>
                 <h2 className="mt-3 text-3xl font-bold text-balance">{t.collectionsTitle}</h2>
                 <p className="mt-4 text-muted-foreground">{t.collectionsBody}</p>
-                <div className="mt-6 grid grid-cols-3 gap-3">
-                  <div className="rounded-[1.25rem] bg-secondary/80 p-4">
-                    <div className="text-2xl font-bold">{albumId ? sections.length : page.albums?.length ?? 0}</div>
-                    <div className="mt-1 text-xs uppercase tracking-[0.18em] text-muted-foreground">{t.albums}</div>
-                  </div>
+                <div className="mt-6 grid grid-cols-2 gap-3">
                   <div className="rounded-[1.25rem] bg-secondary/80 p-4">
                     <div className="text-2xl font-bold">{sections.length}</div>
-                    <div className="mt-1 text-xs uppercase tracking-[0.18em] text-muted-foreground">{t.sections}</div>
+                    <div className="mt-1 text-xs uppercase tracking-[0.18em] text-muted-foreground">{t.albums}</div>
                   </div>
                   <div className="rounded-[1.25rem] bg-secondary/80 p-4">
                     <div className="text-2xl font-bold">{photoCount}</div>
                     <div className="mt-1 text-xs uppercase tracking-[0.18em] text-muted-foreground">{t.photos}</div>
                   </div>
-                </div>
-                <div className="mt-6 rounded-[1.5rem] border border-border/70 bg-white/70 p-4">
-                  <div className="flex items-center gap-2 text-sm font-semibold text-primary"><Gauge className="h-4 w-4" /> {t.performance}</div>
-                  <p className="mt-2 text-sm text-muted-foreground">{t.performanceBody}</p>
                 </div>
               </Card>
             </div>

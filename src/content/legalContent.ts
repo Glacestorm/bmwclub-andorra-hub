@@ -45,7 +45,7 @@ export const legalContent: Record<LegalPageKey, LegalPageContent> = {
   cookies: {
     title: "Cookies",
     intro:
-      "Aquesta web pot utilitzar cookies tècniques mínimes necessàries per al funcionament i, si en el futur s’incorporen eines de mesura o contingut extern, s’haurà d’actualitzar aquest avís.",
+      "Aquesta web pot utilitzar les cookies tècniques mínimes necessàries per al seu funcionament.",
     updatedAt: "12 de juliol de 2026",
     sections: [
       {
@@ -57,8 +57,8 @@ export const legalContent: Record<LegalPageKey, LegalPageContent> = {
       {
         title: "Tipus d’ús actual",
         paragraphs: [
-          "En l’estat actual del lloc, l’ús previst és principalment tècnic: navegació, rendiment bàsic i visualització correcta del contingut.",
-          "Si més endavant s’afegeixen analítica, vídeos incrustats o mapes de tercers, aquest text s’haurà d’ampliar abans de publicar aquests serveis.",
+          "L’ús de cookies en aquest lloc és principalment tècnic: navegació, rendiment bàsic i visualització correcta del contingut.",
+          "Si en el futur s’incorporen serveis d’analítica, vídeos incrustats o mapes de tercers que utilitzin cookies, aquesta política s’actualitzarà abans d’activar-los.",
         ],
       },
       {

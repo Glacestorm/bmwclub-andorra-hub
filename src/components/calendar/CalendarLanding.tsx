@@ -10,13 +10,13 @@ import { LanguageCode } from "@/lib/i18n";
 import { fallbackCalendarYears, getCalendarYearsFromEvents, useMergedEvents } from "@/lib/clubCms";
 
 const translations: Record<LanguageCode, Record<string, string>> = {
-  ca: { eyebrow: "Calendari públic del club", title: "Sortides, esdeveniments i temporada viva", subtitle: "El calendari públic del club reuneix les temporades visibles, els anys recuperats i la meteo comparada d'origen i destí per a cada sortida.", open2026: "Obrir 2026", weather: "Meteo origen / destí", recovered: "esdeveniments recuperats", pending: "pendents a partir d'avui", viewCalendar: "Veure calendari", coverageTitle: "Cobertura actual", coverageBody: "Inclou", coverageBody2: "sortides i activitats públiques a partir del calendari original, els títols recuperats del recull del club i les dates inferides de les fotos quan el calendari antic retornava error.", coverageNote: "Les dates confirmades per la web original conserven enllaç a l'original. Les dates inferides queden marcades per evitar confusions.", seasons: "temporades visibles", spotlight: "Ruta destacada", spotlightBody: "L'experiència de calendari combina agenda, detall de ruta, meteo i connexió directa amb galeria i arxiu.", yearsLabel: "Anys recuperats" },
-  es: { eyebrow: "Calendario público del club", title: "Salidas, eventos y temporada viva", subtitle: "El calendario público del club reúne las temporadas visibles, los años recuperados y la meteo comparada de origen y destino para cada salida.", open2026: "Abrir 2026", weather: "Meteo origen / destino", recovered: "eventos recuperados", pending: "pendientes a partir de hoy", viewCalendar: "Ver calendario", coverageTitle: "Cobertura actual", coverageBody: "Incluye", coverageBody2: "salidas y actividades públicas a partir del calendario original, los títulos recuperados del archivo del club y las fechas inferidas de las fotos cuando el calendario antiguo devolvía error.", coverageNote: "Las fechas confirmadas por la web original conservan enlace a la fuente. Las fechas inferidas quedan marcadas para evitar confusiones.", seasons: "temporadas visibles", spotlight: "Ruta destacada", spotlightBody: "La experiencia de calendario combina agenda, detalle de ruta, meteo y conexión directa con galería y archivo.", yearsLabel: "Años recuperados" },
-  fr: { eyebrow: "Calendrier public du club", title: "Sorties, événements et saison vivante", subtitle: "Le calendrier public du club réunit les saisons visibles, les années récupérées et la météo comparée entre origine et destination pour chaque sortie.", open2026: "Ouvrir 2026", weather: "Météo origine / destination", recovered: "événements récupérés", pending: "à venir à partir d'aujourd'hui", viewCalendar: "Voir le calendrier", coverageTitle: "Couverture actuelle", coverageBody: "Inclut", coverageBody2: "sorties et activités publiques à partir du calendrier original, des titres récupérés des archives du club et des dates déduites des photos lorsque l'ancien calendrier renvoyait une erreur.", coverageNote: "Les dates confirmées par le site original conservent un lien vers la source. Les dates déduites restent signalées pour éviter toute confusion.", seasons: "saisons visibles", spotlight: "Parcours mis en avant", spotlightBody: "L'expérience calendrier combine agenda, détail de parcours, météo et lien direct avec galerie et archives.", yearsLabel: "Années reconstruites" },
-  en: { eyebrow: "Public club calendar", title: "Outings, events and a live season", subtitle: "The club's public calendar brings together visible seasons, recovered years and origin/destination weather comparisons for each outing.", open2026: "Open 2026", weather: "Origin / destination weather", recovered: "recovered events", pending: "upcoming from today", viewCalendar: "View calendar", coverageTitle: "Current coverage", coverageBody: "It includes", coverageBody2: "public outings and activities from the original calendar, titles recovered from the club archive and dates inferred from photos when the old calendar returned an error.", coverageNote: "Dates confirmed by the original website keep a link to the source. Inferred dates remain marked to avoid confusion.", seasons: "visible seasons", spotlight: "Featured route", spotlightBody: "The calendar experience combines agenda, route detail, weather and direct links to gallery and archive.", yearsLabel: "Recovered years" },
-  pt: { eyebrow: "Calendário público do clube", title: "Passeios, eventos e temporada viva", subtitle: "O calendário público do clube reúne as temporadas visíveis, os anos recuperados e a meteorologia comparada de origem e destino para cada passeio.", open2026: "Abrir 2026", weather: "Meteorologia origem / destino", recovered: "eventos recuperados", pending: "pendentes a partir de hoje", viewCalendar: "Ver calendário", coverageTitle: "Cobertura atual", coverageBody: "Inclui", coverageBody2: "passeios e atividades públicas a partir do calendário original, dos títulos recuperados do arquivo do clube e das datas inferidas das fotos quando o calendário antigo devolvia erro.", coverageNote: "As datas confirmadas pelo site original mantêm link para a fonte. As datas inferidas permanecem assinaladas para evitar evitar confusões.", seasons: "temporadas visíveis", spotlight: "Rota em destaque", spotlightBody: "A experiência de calendário combina agenda, detalhe de rota, meteorologia e ligação direta à galeria e arquivo.", yearsLabel: "Anos recuperados" },
-  de: { eyebrow: "Öffentlicher Club-Kalender", title: "Ausfahrten, Veranstaltungen und eine lebendige Saison", subtitle: "Der öffentliche Kalender des Clubs vereint sichtbare Saisons, rekonstruierte Jahre und den Wettervergleich von Start und Ziel für jede Ausfahrt.", open2026: "2026 öffnen", weather: "Wetter Start / Ziel", recovered: "rekonstruierte Termine", pending: "noch ausstehend ab heute", viewCalendar: "Kalender ansehen", coverageTitle: "Aktuelle Abdeckung", coverageBody: "Enthält", coverageBody2: "öffentliche Ausfahrten und Aktivitäten aus dem Originalkalender, archivierte Clubtitel und aus Fotos abgeleitete Daten, wenn der alte Kalender Fehler lieferte.", coverageNote: "Vom Original bestätigte Daten behalten einen Link zur Quelle. Abgeleitete Daten bleiben markiert, um Verwechslungen zu vermeiden.", seasons: "sichtbare Saisons", spotlight: "Hervorgehobene Route", spotlightBody: "Das Kalender-Erlebnis kombiniert Agenda, Routendetails, Wetter und direkte Verbindungen zu Galerie und Archiv.", yearsLabel: "Rekonstruierte Jahre" },
-  ru: { eyebrow: "Публичный календарь клуба", title: "Выезды, события и живой сезон", subtitle: "Публичный календарь клуба объединяет видимые сезоны, восстановленные годы и сравнение погоды точки старта и финиша для каждого выезда.", open2026: "Открыть 2026", weather: "Погода старта / финиша", recovered: "восстановленных событий", pending: "ещё впереди с сегодняшнего дня", viewCalendar: "Открыть календарь", coverageTitle: "Текущее покрытие", coverageBody: "Включает", coverageBody2: "публичные выезды и мероприятия из исходного календаря, названия из архива клуба и даты, восстановленные по фотографиям, когда старый календарь отдавал ошибку.", coverageNote: "Даты, подтверждённые оригинальным сайтом, сохраняют ссылку на источник. Восстановленные даты помечены, чтобы избежать путаницы.", seasons: "видимых сезонов", spotlight: "Главный маршрут", spotlightBody: "Календарь объединяет афишу, детали маршрута, погоду и прямые связи с галереей и архивом.", yearsLabel: "Восстановленные годы" },
+  ca: { eyebrow: "Calendari públic del club", title: "Sortides, esdeveniments i temporada viva", subtitle: "Consulta les sortides i trobades del club any per any, amb la meteo a l'origen i al destí de cada ruta.", open2026: "Obrir 2026", weather: "Meteo origen / destí", events: "esdeveniments", pending: "pendents a partir d'avui", viewCalendar: "Veure calendari", seasonsLabel: "Temporades", spotlight: "Destacat", spotlightBody: "Consulta la data, la ruta i la meteo de cada sortida.", gallery: "Galeria de fotos" },
+  es: { eyebrow: "Calendario público del club", title: "Salidas, eventos y temporada viva", subtitle: "Consulta las salidas y encuentros del club año por año, con la meteo en el origen y el destino de cada ruta.", open2026: "Abrir 2026", weather: "Meteo origen / destino", events: "eventos", pending: "pendientes a partir de hoy", viewCalendar: "Ver calendario", seasonsLabel: "Temporadas", spotlight: "Destacado", spotlightBody: "Consulta la fecha, la ruta y la meteo de cada salida.", gallery: "Galería de fotos" },
+  fr: { eyebrow: "Calendrier public du club", title: "Sorties, événements et saison vivante", subtitle: "Retrouvez les sorties et rencontres du club année par année, avec la météo au départ et à l'arrivée de chaque parcours.", open2026: "Ouvrir 2026", weather: "Météo origine / destination", events: "événements", pending: "à venir à partir d'aujourd'hui", viewCalendar: "Voir le calendrier", seasonsLabel: "Saisons", spotlight: "À la une", spotlightBody: "Consultez la date, le parcours et la météo de chaque sortie.", gallery: "Galerie photos" },
+  en: { eyebrow: "Public club calendar", title: "Outings, events and a live season", subtitle: "Browse the club's outings and meetups year by year, with the weather at the start and destination of each route.", open2026: "Open 2026", weather: "Origin / destination weather", events: "events", pending: "upcoming from today", viewCalendar: "View calendar", seasonsLabel: "Seasons", spotlight: "Featured", spotlightBody: "Check the date, route and weather for every outing.", gallery: "Photo gallery" },
+  pt: { eyebrow: "Calendário público do clube", title: "Passeios, eventos e temporada viva", subtitle: "Consulte os passeios e encontros do clube ano a ano, com a meteorologia na origem e no destino de cada rota.", open2026: "Abrir 2026", weather: "Meteorologia origem / destino", events: "eventos", pending: "pendentes a partir de hoje", viewCalendar: "Ver calendário", seasonsLabel: "Temporadas", spotlight: "Em destaque", spotlightBody: "Consulte a data, a rota e a meteorologia de cada passeio.", gallery: "Galeria de fotos" },
+  de: { eyebrow: "Öffentlicher Club-Kalender", title: "Ausfahrten, Veranstaltungen und eine lebendige Saison", subtitle: "Alle Ausfahrten und Treffen des Clubs Jahr für Jahr, mit dem Wetter an Start und Ziel jeder Route.", open2026: "2026 öffnen", weather: "Wetter Start / Ziel", events: "Termine", pending: "noch ausstehend ab heute", viewCalendar: "Kalender ansehen", seasonsLabel: "Saisons", spotlight: "Im Fokus", spotlightBody: "Datum, Route und Wetter jeder Ausfahrt auf einen Blick.", gallery: "Fotogalerie" },
+  ru: { eyebrow: "Публичный календарь клуба", title: "Выезды, события и живой сезон", subtitle: "Выезды и встречи клуба по годам — с погодой в точке старта и на финише каждого маршрута.", open2026: "Открыть 2026", weather: "Погода старта / финиша", events: "событий", pending: "ещё впереди с сегодняшнего дня", viewCalendar: "Открыть календарь", seasonsLabel: "Сезоны", spotlight: "В центре внимания", spotlightBody: "Дата, маршрут и погода для каждого выезда.", gallery: "Фотогалерея" },
 };
 
 export const CalendarLanding = () => {
@@ -24,7 +24,6 @@ export const CalendarLanding = () => {
   const t = translations[language];
   const { data: events } = useMergedEvents();
   const years = getCalendarYearsFromEvents(events).length ? getCalendarYearsFromEvents(events) : fallbackCalendarYears;
-  const recoveredYears = years.length;
   const nextYearEvents = getEventsByYearFromList(events, 2026);
 
   return (
@@ -37,24 +36,20 @@ export const CalendarLanding = () => {
               <div className="relative z-10 space-y-6">
                 <div className="flex flex-wrap items-center gap-3">
                   <span className="glass-panel rounded-full px-4 py-1 text-xs font-semibold tracking-[0.24em] text-slate-900 uppercase">{t.eyebrow}</span>
-                  <span className="rounded-full border border-white/15 bg-white/8 px-4 py-1 text-xs font-semibold uppercase tracking-[0.24em] text-white/80">{events.length} {t.recovered}</span>
+                  <span className="rounded-full border border-white/15 bg-white/8 px-4 py-1 text-xs font-semibold uppercase tracking-[0.24em] text-white/80">{events.length} {t.events}</span>
                 </div>
                 <div>
                   <h1 className="text-4xl md:text-6xl font-bold text-balance">{t.title}</h1>
                   <p className="mt-4 text-lg md:text-xl text-white/78 max-w-3xl">{t.subtitle}</p>
                 </div>
-                <div className="grid gap-3 sm:grid-cols-3">
+                <div className="grid gap-3 sm:grid-cols-2">
                   <div className="rounded-2xl border border-white/10 bg-white/8 p-4">
-                    <p className="text-xs uppercase tracking-[0.22em] text-white/55">{t.yearsLabel}</p>
-                    <p className="mt-2 text-3xl font-bold">{recoveredYears}</p>
+                    <p className="text-xs uppercase tracking-[0.22em] text-white/55">{t.seasonsLabel}</p>
+                    <p className="mt-2 text-3xl font-bold">{years.length}</p>
                   </div>
                   <div className="rounded-2xl border border-white/10 bg-white/8 p-4">
                     <p className="text-xs uppercase tracking-[0.22em] text-white/55">2026</p>
                     <p className="mt-2 text-3xl font-bold">{nextYearEvents.length}</p>
-                  </div>
-                  <div className="rounded-2xl border border-white/10 bg-white/8 p-4">
-                    <p className="text-xs uppercase tracking-[0.22em] text-white/55">{t.seasons}</p>
-                    <p className="mt-2 text-3xl font-bold">{years.length}</p>
                   </div>
                 </div>
                 <div className="flex flex-wrap items-center gap-3">
@@ -73,13 +68,13 @@ export const CalendarLanding = () => {
               <p className="mt-4 text-muted-foreground">{t.spotlightBody}</p>
               <div className="mt-6 space-y-3">
                 <div className="premium-card rounded-2xl border-0 p-4 shadow-sm">
-                  <div className="flex items-center gap-3 text-sm text-muted-foreground"><CalendarDays className="h-4 w-4 text-primary" /> {nextYearEvents.length} {t.recovered}</div>
+                  <div className="flex items-center gap-3 text-sm text-muted-foreground"><CalendarDays className="h-4 w-4 text-primary" /> {nextYearEvents.length} {t.events}</div>
                 </div>
                 <div className="premium-card rounded-2xl border-0 p-4 shadow-sm">
                   <div className="flex items-center gap-3 text-sm text-muted-foreground"><CloudSun className="h-4 w-4 text-primary" /> {t.weather}</div>
                 </div>
                 <div className="premium-card rounded-2xl border-0 p-4 shadow-sm">
-                  <div className="flex items-center gap-3 text-sm text-muted-foreground"><FolderArchive className="h-4 w-4 text-primary" /> {t.coverageTitle}</div>
+                  <div className="flex items-center gap-3 text-sm text-muted-foreground"><FolderArchive className="h-4 w-4 text-primary" /> {t.gallery}</div>
                 </div>
               </div>
               <Link to="/calendari/2026" className="mt-6 inline-flex items-center gap-2 text-sm font-semibold text-primary hover:text-primary/80 transition-base">{t.viewCalendar} <ArrowUpRight className="h-4 w-4" /></Link>
@@ -106,22 +101,13 @@ export const CalendarLanding = () => {
                     <span className="stat-pill">{eventsForYear.length}</span>
                   </div>
                   <div className="space-y-2 text-sm text-muted-foreground">
-                    <p>{eventsForYear.length} {t.recovered}</p>
-                    <p>{upcoming} {t.pending}</p>
+                    <p>{eventsForYear.length} {t.events}</p>
+                    {upcoming > 0 ? <p>{upcoming} {t.pending}</p> : null}
                   </div>
                   <Link to={`/calendari/${year}`}><Button variant="outline" className="w-full">{t.viewCalendar}</Button></Link>
                 </Card>
               );
             })}
-          </div>
-
-          <div className="max-w-5xl mx-auto mt-10">
-            <Card className="premium-card rounded-[2rem] border-0 p-6 md:p-8 shadow-elegant">
-              <h2 className="text-2xl font-bold">{t.coverageTitle}</h2>
-              <p className="mt-3 text-muted-foreground">{t.coverageBody} {events.length} {t.coverageBody2}</p>
-              <div className="my-5 h-px metal-line" />
-              <p className="text-sm text-muted-foreground">{t.coverageNote}</p>
-            </Card>
           </div>
         </div>
       </section>

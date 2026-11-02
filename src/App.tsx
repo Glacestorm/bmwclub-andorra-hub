@@ -19,9 +19,6 @@ const Meteo = lazyWithAutoReload(() => import("./pages/Meteo"));
 const Calendari = lazyWithAutoReload(() => import("./pages/Calendari"));
 const CalendariYear = lazyWithAutoReload(() => import("./pages/CalendariYear"));
 const Arxiu = lazyWithAutoReload(() => import("./pages/Arxiu"));
-const DriveExperience = lazyWithAutoReload(() => import("./pages/DriveExperience"));
-const EventMode = lazyWithAutoReload(() => import("./pages/EventMode"));
-const PostDriveReport = lazyWithAutoReload(() => import("./pages/PostDriveReport"));
 const GestioClub = lazyWithAutoReload(() => import("./pages/GestioClub"));
 const EventDetail = lazyWithAutoReload(() => import("./pages/EventDetail"));
 const LegalPage = lazyWithAutoReload(() => import("./pages/LegalPage"));
@@ -105,9 +102,9 @@ const App = () => {
               <Route path="/arxiu" element={withRouteFallback(<Arxiu />)} />
               <Route path="/assistent-ia" element={<Navigate to="/contacte" replace />} />
               <Route path="/itineraris" element={<Navigate to="/calendari" replace />} />
-              <Route path="/drive-experience" element={withRouteFallback(<DriveExperience />)} />
-              <Route path="/event-mode" element={withRouteFallback(<EventMode />)} />
-              <Route path="/post-drive-report" element={withRouteFallback(<PostDriveReport />)} />
+              <Route path="/drive-experience" element={<Navigate to="/calendari" replace />} />
+              <Route path="/event-mode" element={<Navigate to="/calendari" replace />} />
+              <Route path="/post-drive-report" element={<Navigate to="/calendari" replace />} />
               <Route path="/gestio-club" element={withRouteFallback(<GestioClub />)} />
               <Route path="/esdeveniments/:eventId" element={withRouteFallback(<EventDetail />)} />
               <Route path="/galeria" element={<Galeria />} />

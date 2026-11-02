@@ -12,112 +12,91 @@ import { mergeGallerySections, usePublishedGallerySections } from "@/lib/clubCms
 const translations: Record<LanguageCode, Record<string, string>> = {
   ca: {
     eyebrow: "Galeria del club",
-    title: "Una galeria amb més caràcter editorial i millor lectura visual",
-    subtitle: "No és només un arxiu d'imatges. És la memòria viva del club: sortides, moments històrics, vida social i passió BMW explicades amb més criteri.",
+    title: "Els moments del club, en imatges",
+    subtitle: "Sortides, trobades, moments històrics i vida social del BMW Club Andorra al llarg dels anys.",
     openingCta: "Obrir fotos històriques",
     secondaryCta: "Veure sortides recents",
-    categories: "Blocs de galeria",
-    categoriesTitle: "Dos grans relats visuals del club",
+    categories: "Col·leccions",
+    categoriesTitle: "Tria per on començar",
     categoryOpen: "Obrir col·lecció",
-    libraryEyebrow: "Experiència visual",
-    libraryTitle: "Història, comunitat i carretera dins un mateix espai",
-    libraryBody: "La galeria presenta arxiu històric, sortides modernes i col·leccions per anys amb una lectura clara i ordenada per al visitant.",
     years: "anys",
     sections: "seccions",
     photos: "fotos",
   },
   es: {
     eyebrow: "Galería del club",
-    title: "Una galería con más carácter editorial y mejor lectura visual",
-    subtitle: "No es solo un archivo de imágenes. Es la memoria viva del club: salidas, momentos históricos, vida social y pasión BMW explicadas con más criterio.",
+    title: "Los momentos del club, en imágenes",
+    subtitle: "Salidas, encuentros, momentos históricos y vida social del BMW Club Andorra a lo largo de los años.",
     openingCta: "Abrir fotos históricas",
     secondaryCta: "Ver salidas recientes",
-    categories: "Bloques de galería",
-    categoriesTitle: "Dos grandes relatos visuales del club",
+    categories: "Colecciones",
+    categoriesTitle: "Elige por dónde empezar",
     categoryOpen: "Abrir colección",
-    libraryEyebrow: "Experiencia visual",
-    libraryTitle: "Historia, comunidad y carretera dentro de un mismo espacio",
-    libraryBody: "La galería presenta archivo histórico, salidas modernas y colecciones por años con una lectura clara y ordenada para el visitante.",
     years: "años",
     sections: "secciones",
     photos: "fotos",
   },
   fr: {
     eyebrow: "Galerie du club",
-    title: "Une galerie avec plus de caractère éditorial et une lecture visuelle plus claire",
-    subtitle: "Ce n'est pas seulement une archive d'images. C'est la mémoire vivante du club : sorties, moments historiques, vie sociale et passion BMW racontés avec plus de soin.",
+    title: "Les moments du club en images",
+    subtitle: "Sorties, rencontres, moments historiques et vie sociale du BMW Club Andorra au fil des années.",
     openingCta: "Ouvrir les photos historiques",
     secondaryCta: "Voir les sorties récentes",
-    categories: "Blocs de galerie",
-    categoriesTitle: "Deux grands récits visuels du club",
+    categories: "Collections",
+    categoriesTitle: "Choisissez par où commencer",
     categoryOpen: "Ouvrir la collection",
-    libraryEyebrow: "Expérience visuelle",
-    libraryTitle: "Histoire, communauté et route dans un même espace",
-    libraryBody: "La galerie présente archive historique, sorties modernes et collections par années avec une lecture claire et ordonnée pour le visiteur.",
     years: "années",
     sections: "sections",
     photos: "photos",
   },
   en: {
     eyebrow: "Club gallery",
-    title: "A gallery with more editorial character and clearer visual reading",
-    subtitle: "This is not just an image archive. It is the living memory of the club: outings, historical moments, social life and BMW passion told with more intent.",
+    title: "The club's moments in pictures",
+    subtitle: "Outings, meetups, historic moments and social life of BMW Club Andorra over the years.",
     openingCta: "Open historical photos",
     secondaryCta: "View recent outings",
-    categories: "Gallery blocks",
-    categoriesTitle: "Two big visual narratives of the club",
+    categories: "Collections",
+    categoriesTitle: "Choose where to start",
     categoryOpen: "Open collection",
-    libraryEyebrow: "Visual experience",
-    libraryTitle: "History, community and road inside one space",
-    libraryBody: "The gallery presents historical archive, modern outings and year-based collections with a clear, structured reading for visitors.",
     years: "years",
     sections: "sections",
     photos: "photos",
   },
   pt: {
     eyebrow: "Galeria do clube",
-    title: "Uma galeria com mais carácter editorial e melhor leitura visual",
-    subtitle: "Não é apenas um arquivo de imagens. É a memória viva do clube: passeios, momentos históricos, vida social e paixão BMW explicados com mais critério.",
+    title: "Os momentos do clube em imagens",
+    subtitle: "Passeios, encontros, momentos históricos e vida social do BMW Club Andorra ao longo dos anos.",
     openingCta: "Abrir fotos históricas",
     secondaryCta: "Ver saídas recentes",
-    categories: "Blocos de galeria",
-    categoriesTitle: "Dois grandes relatos visuais do clube",
+    categories: "Coleções",
+    categoriesTitle: "Escolha por onde começar",
     categoryOpen: "Abrir coleção",
-    libraryEyebrow: "Experiência visual",
-    libraryTitle: "História, comunidade e estrada no mesmo espaço",
-    libraryBody: "A galeria apresenta arquivo histórico, saídas modernas e coleções por anos com leitura clara e organizada para o visitante.",
     years: "anos",
     sections: "secções",
     photos: "fotos",
   },
   de: {
     eyebrow: "Club-Galerie",
-    title: "Eine Galerie mit mehr editoriellem Charakter und klarerer visueller Führung",
-    subtitle: "Sie ist nicht nur ein Bildarchiv. Sie ist die lebendige Erinnerung des Clubs: Ausfahrten, historische Momente, Clubleben und BMW-Leidenschaft mit mehr Struktur erzählt.",
+    title: "Die Momente des Clubs in Bildern",
+    subtitle: "Ausfahrten, Treffen, historische Momente und Clubleben des BMW Club Andorra im Lauf der Jahre.",
     openingCta: "Historische Fotos öffnen",
     secondaryCta: "Aktuelle Ausfahrten ansehen",
-    categories: "Galeriebereiche",
-    categoriesTitle: "Zwei große visuelle Erzählungen des Clubs",
+    categories: "Sammlungen",
+    categoriesTitle: "Wählen Sie, wo Sie beginnen möchten",
     categoryOpen: "Sammlung öffnen",
-    libraryEyebrow: "Visuelle Erfahrung",
-    libraryTitle: "Geschichte, Community und Straße in einem Raum",
-    libraryBody: "Die Galerie zeigt historisches Archiv, moderne Ausfahrten und nach Jahren geordnete Sammlungen mit klarer, strukturierter Lesbarkeit für Besucher.",
     years: "Jahre",
     sections: "Bereiche",
     photos: "Fotos",
   },
   ru: {
     eyebrow: "Галерея клуба",
-    title: "Галерея с более редакционной подачей и лучшей визуальной структурой",
-    subtitle: "Это не просто архив изображений. Это живая память клуба: выезды, исторические моменты, социальная жизнь и страсть к BMW, показанные более продуманно.",
+    title: "Моменты клуба в фотографиях",
+    subtitle: "Выезды, встречи, исторические моменты и жизнь BMW Club Andorra на протяжении многих лет.",
     openingCta: "Открыть исторические фото",
     secondaryCta: "Смотреть недавние выезды",
-    categories: "Блоки галереи",
-    categoriesTitle: "Две большие визуальные линии клуба",
+    categories: "Коллекции",
+    categoriesTitle: "Выберите, с чего начать",
     categoryOpen: "Открыть коллекцию",
-    libraryEyebrow: "Визуальный опыт",
-    libraryTitle: "История, сообщество и дорога в одном пространстве",
-    libraryBody: "Галерея показывает исторический архив, современные выезды и коллекции по годам в ясной и упорядоченной подаче для посетителя.",
     years: "лет",
     sections: "разделов",
     photos: "фото",
@@ -127,6 +106,17 @@ const translations: Record<LanguageCode, Record<string, string>> = {
 const groupToPageKey: Record<string, string> = {
   "/galeria/historiques": "historiques",
   "/galeria/sortides/2024": "sortides_2024",
+};
+
+const galleryKeyByHref: Record<string, string> = {
+  "/galeria/historiques": "historiques",
+  "/galeria/historiques/2011-2012": "historiques_2011_2012",
+  "/galeria/historiques/2013-2015": "historiques_2013_2015",
+  "/galeria/historiques/2016-2021": "historiques_2016_2021",
+  "/galeria/historiques/2022": "historiques_2022",
+  "/galeria/sortides/2024": "sortides_2024",
+  "/galeria/sortides/2025": "sortides_2025",
+  "/galeria/sortides/2026": "sortides_2026",
 };
 
 const Galeria = () => {
@@ -139,8 +129,10 @@ const Galeria = () => {
   const groups = (page.groups ?? []).map((group, index) => {
     const pageKey = groupToPageKey[group.href];
     const dynamicSections = pageKey === "historiques" ? historicDynamic : pageKey === "sortides_2024" ? outingsDynamic : [];
-    const sections = pageKey ? mergeGallerySections(galleryMediaByPage[pageKey] ?? [], dynamicSections) : [];
-    const photoCount = sections.reduce((acc, section) => acc + section.images.length, 0);
+    // Count every year in the group, not just the page the card links to; a photo shown on two pages counts once.
+    const galleryKeys = [...new Set([group.href, ...(group.children ?? []).map((child) => child.href)].map((href) => galleryKeyByHref[href]).filter(Boolean))];
+    const sections = mergeGallerySections(galleryKeys.flatMap((key) => galleryMediaByPage[key] ?? []), dynamicSections);
+    const photoCount = new Set(sections.flatMap((section) => section.images.map((image) => image.src))).size;
     return {
       ...group,
       pageKey,
@@ -157,7 +149,7 @@ const Galeria = () => {
         <div className="container mx-auto px-4 max-w-6xl">
           <Card className="glass-dark border-0 rounded-[2.5rem] overflow-hidden relative p-8 md:p-10 text-white">
             <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(0,102,177,.35),transparent_30%)]" />
-            <div className="relative z-10 grid lg:grid-cols-[1.05fr_0.95fr] gap-8 items-end">
+            <div className="relative z-10 max-w-4xl">
               <div>
                 <div className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/10 px-4 py-2 text-xs font-semibold uppercase tracking-[0.24em] text-white/75">
                   <Sparkles className="h-4 w-4" />
@@ -170,12 +162,6 @@ const Galeria = () => {
                   <Link to="/galeria/sortides/2024"><Button variant="outline" size="lg" className="rounded-full border-white/15 bg-white/5 text-white hover:bg-white/10">{t.secondaryCta}</Button></Link>
                 </div>
               </div>
-
-              <Card className="glass-panel border-0 rounded-[2rem] p-6 md:p-7 text-slate-950">
-                <p className="text-sm uppercase tracking-[0.24em] text-primary">{t.libraryEyebrow}</p>
-                <h2 className="mt-3 text-3xl font-bold text-balance">{t.libraryTitle}</h2>
-                <p className="mt-4 text-muted-foreground">{t.libraryBody}</p>
-              </Card>
             </div>
           </Card>
         </div>

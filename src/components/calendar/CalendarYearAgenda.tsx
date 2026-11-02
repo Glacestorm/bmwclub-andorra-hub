@@ -6,18 +6,9 @@ import { Button } from "@/components/ui/button";
 import { ClubEvent, yearLabels } from "@/content/calendarData";
 import { useLanguage } from "@/components/LanguageProvider";
 import { LanguageCode } from "@/lib/i18n";
-import { formatEventDateRange, formatMonthGroup, getEventStatus, groupEventsByMonth } from "@/lib/calendar";
+import { formatEventDateRange, formatMonthGroup, getEventStatus, groupEventsByMonth, hasExactEventDate } from "@/lib/calendar";
 import { RouteWeatherPanel } from "@/components/calendar/RouteWeatherPanel";
-
-const evidenceLabelByLanguage: Record<LanguageCode, Record<ClubEvent["evidence"], string>> = {
-  ca: { "original-site": "Web original", "gallery-title": "Recull del club", "media-inferred": "Data inferida de fotos", mixed: "Fonts combinades" },
-  es: { "original-site": "Web original", "gallery-title": "Archivo del club", "media-inferred": "Fecha inferida por fotos", mixed: "Fuentes combinadas" },
-  fr: { "original-site": "Site original", "gallery-title": "Archive du club", "media-inferred": "Date déduite des photos", mixed: "Sources combinées" },
-  en: { "original-site": "Original website", "gallery-title": "Club archive", "media-inferred": "Date inferred from photos", mixed: "Combined sources" },
-  pt: { "original-site": "Site original", "gallery-title": "Arquivo do clube", "media-inferred": "Data inferida por fotos", mixed: "Fontes combinadas" },
-  de: { "original-site": "Originalseite", "gallery-title": "Club-Archiv", "media-inferred": "Aus Fotos abgeleitet", mixed: "Kombinierte Quellen" },
-  ru: { "original-site": "Оригинальный сайт", "gallery-title": "Архив клуба", "media-inferred": "Дата восстановлена по фото", mixed: "Смешанные источники" },
-};
+import { localizeEventNote } from "@/components/calendar/eventNotes";
 
 const categoryLabelByLanguage: Record<LanguageCode, Record<ClubEvent["category"], string>> = {
   ca: { sortida: "sortida", esmorzar: "esmorzar", "cars-coffee": "cars & coffee", rally: "rally", viatge: "viatge", sopar: "sopar", historica: "històrica" },
@@ -30,13 +21,13 @@ const categoryLabelByLanguage: Record<LanguageCode, Record<ClubEvent["category"]
 };
 
 const uiTranslations: Record<LanguageCode, Record<string, string>> = {
-  ca: { live: "En curs", upcoming: "Per fer", done: "Realitzada", historic: "Històrica", showWeather: "Veure meteo", hideWeather: "Amagar meteo", photos: "Fotos", original: "Original", detail: "Obrir fitxa", origin: "Origen", destination: "Destí", agenda: "Agenda pública", intro: "Calendari públic amb les sortides recuperades de la web original, la galeria històrica i les dades inferides de les fotos quan el calendari antic no era accessible.", exactDate: "Sense data exacta", events: "esdeveniments", routes: "Rutes del club", archiveLink: "Enllaç original" },
-  es: { live: "En curso", upcoming: "Pendiente", done: "Realizada", historic: "Histórica", showWeather: "Ver meteo", hideWeather: "Ocultar meteo", photos: "Fotos", original: "Original", detail: "Abrir ficha", origin: "Origen", destination: "Destino", agenda: "Agenda pública", intro: "Calendario público con las salidas recuperadas de la web original, la galería histórica y los datos inferidos de las fotos cuando el calendario antiguo no era accesible.", exactDate: "Sin fecha exacta", events: "eventos", routes: "Rutas del club", archiveLink: "Enlace original" },
-  fr: { live: "En cours", upcoming: "À venir", done: "Réalisée", historic: "Historique", showWeather: "Voir météo", hideWeather: "Masquer météo", photos: "Photos", original: "Original", detail: "Ouvrir la fiche", origin: "Origine", destination: "Destination", agenda: "Agenda public", intro: "Calendrier public avec les sorties récupérées du site original, la galerie historique et les données déduites des photos lorsque l'ancien calendrier n'était pas accessible.", exactDate: "Sans date exacte", events: "événements", routes: "Parcours du club", archiveLink: "Lien original" },
-  en: { live: "Live", upcoming: "Upcoming", done: "Completed", historic: "Historic", showWeather: "View weather", hideWeather: "Hide weather", photos: "Photos", original: "Original", detail: "Open detail", origin: "Origin", destination: "Destination", agenda: "Public agenda", intro: "Public calendar with outings recovered from the original site, the historical gallery and dates inferred from photos when the old calendar was not accessible.", exactDate: "No exact date", events: "events", routes: "Club routes", archiveLink: "Original link" },
-  pt: { live: "Em curso", upcoming: "Por fazer", done: "Realizado", historic: "Histórica", showWeather: "Ver meteorologia", hideWeather: "Ocultar meteorologia", photos: "Fotos", original: "Original", detail: "Abrir ficha", origin: "Origem", destination: "Destino", agenda: "Agenda pública", intro: "Calendário público com os passeios recuperados do site original, a galeria histórica e os dados inferidos das fotos quando o calendário antigo não estava acessível.", exactDate: "Sem data exata", events: "eventos", routes: "Rotas do clube", archiveLink: "Ligação original" },
-  de: { live: "Läuft", upcoming: "Bevorstehend", done: "Abgeschlossen", historic: "Historisch", showWeather: "Wetter ansehen", hideWeather: "Wetter ausblenden", photos: "Fotos", original: "Original", detail: "Detail öffnen", origin: "Start", destination: "Ziel", agenda: "Öffentliche Agenda", intro: "Öffentlicher Kalender mit Ausfahrten von der Originalseite, der historischen Galerie und aus Fotos abgeleiteten Daten, wenn der alte Kalender nicht erreichbar war.", exactDate: "Ohne genaues Datum", events: "Termine", routes: "Club-Routen", archiveLink: "Original-Link" },
-  ru: { live: "Сейчас", upcoming: "Предстоит", done: "Завершено", historic: "Историческое", showWeather: "Показать погоду", hideWeather: "Скрыть погоду", photos: "Фото", original: "Источник", detail: "Открыть карточку", origin: "Старт", destination: "Финиш", agenda: "Публичная афиша", intro: "Публичный календарь с выездами, восстановленными с оригинального сайта, исторической галереей и данными, собранными по фотографиям, когда старый календарь был недоступен.", exactDate: "Без точной даты", events: "событий", routes: "Маршруты клуба", archiveLink: "Оригинальная ссылка" },
+  ca: { live: "En curs", upcoming: "Per fer", done: "Realitzada", historic: "Històrica", showWeather: "Veure meteo", hideWeather: "Amagar meteo", photos: "Fotos", detail: "Obrir fitxa", origin: "Origen", destination: "Destí", agenda: "Agenda pública", intro: "Sortides i trobades del club ordenades per mes, amb l'origen, el destí i la meteo de cada ruta.", exactDate: "Sense data exacta", events: "esdeveniments", months: "Mesos amb activitat", archiveLink: "Enllaç extern" },
+  es: { live: "En curso", upcoming: "Pendiente", done: "Realizada", historic: "Histórica", showWeather: "Ver meteo", hideWeather: "Ocultar meteo", photos: "Fotos", detail: "Abrir ficha", origin: "Origen", destination: "Destino", agenda: "Agenda pública", intro: "Salidas y encuentros del club ordenados por mes, con el origen, el destino y la meteo de cada ruta.", exactDate: "Sin fecha exacta", events: "eventos", months: "Meses con actividad", archiveLink: "Enlace externo" },
+  fr: { live: "En cours", upcoming: "À venir", done: "Réalisée", historic: "Historique", showWeather: "Voir météo", hideWeather: "Masquer météo", photos: "Photos", detail: "Ouvrir la fiche", origin: "Origine", destination: "Destination", agenda: "Agenda public", intro: "Sorties et rencontres du club classées par mois, avec le départ, la destination et la météo de chaque parcours.", exactDate: "Sans date exacte", events: "événements", months: "Mois d'activité", archiveLink: "Lien externe" },
+  en: { live: "Live", upcoming: "Upcoming", done: "Completed", historic: "Historic", showWeather: "View weather", hideWeather: "Hide weather", photos: "Photos", detail: "Open detail", origin: "Origin", destination: "Destination", agenda: "Public agenda", intro: "Club outings and meetups by month, with the start, destination and weather for each route.", exactDate: "No exact date", events: "events", months: "Active months", archiveLink: "External link" },
+  pt: { live: "Em curso", upcoming: "Por fazer", done: "Realizado", historic: "Histórica", showWeather: "Ver meteorologia", hideWeather: "Ocultar meteorologia", photos: "Fotos", detail: "Abrir ficha", origin: "Origem", destination: "Destino", agenda: "Agenda pública", intro: "Passeios e encontros do clube organizados por mês, com a origem, o destino e a meteorologia de cada rota.", exactDate: "Sem data exata", events: "eventos", months: "Meses com atividade", archiveLink: "Ligação externa" },
+  de: { live: "Läuft", upcoming: "Bevorstehend", done: "Abgeschlossen", historic: "Historisch", showWeather: "Wetter ansehen", hideWeather: "Wetter ausblenden", photos: "Fotos", detail: "Detail öffnen", origin: "Start", destination: "Ziel", agenda: "Öffentliche Agenda", intro: "Ausfahrten und Treffen des Clubs nach Monaten, mit Start, Ziel und Wetter jeder Route.", exactDate: "Ohne genaues Datum", events: "Termine", months: "Monate mit Terminen", archiveLink: "Externer Link" },
+  ru: { live: "Сейчас", upcoming: "Предстоит", done: "Завершено", historic: "Историческое", showWeather: "Показать погоду", hideWeather: "Скрыть погоду", photos: "Фото", detail: "Открыть карточку", origin: "Старт", destination: "Финиш", agenda: "Публичная афиша", intro: "Выезды и встречи клуба по месяцам — со стартом, финишем и погодой для каждого маршрута.", exactDate: "Без точной даты", events: "событий", months: "Месяцы с событиями", archiveLink: "Внешняя ссылка" },
 };
 
 const EventCard = ({ event }: { event: ClubEvent }) => {
@@ -55,7 +46,6 @@ const EventCard = ({ event }: { event: ClubEvent }) => {
         <div className="space-y-4 max-w-3xl">
           <div className="flex flex-wrap items-center gap-2">
             <span className={`rounded-full px-3 py-1 text-xs font-semibold ${statusClass}`}>{statusLabel}</span>
-            <span className="stat-pill">{evidenceLabelByLanguage[language][event.evidence]}</span>
             <span className="stat-pill stat-pill-dark">{categoryLabelByLanguage[language][event.category]}</span>
           </div>
 
@@ -76,18 +66,18 @@ const EventCard = ({ event }: { event: ClubEvent }) => {
           </div>
 
           {event.summary ? <p className="text-sm text-muted-foreground leading-relaxed">{event.summary}</p> : null}
-          {event.notes?.length ? <ul className="space-y-1 text-sm text-muted-foreground list-disc pl-5">{event.notes.map((note) => <li key={note}>{note}</li>)}</ul> : null}
+          {event.notes?.length ? <ul className="space-y-1 text-sm text-muted-foreground list-disc pl-5">{event.notes.map((note) => <li key={note}>{localizeEventNote(note, language)}</li>)}</ul> : null}
         </div>
 
         <div className="flex flex-wrap gap-2 lg:max-w-[220px] lg:justify-end">
           <Link to={`/esdeveniments/${event.id}`}><Button variant="hero" size="sm">{ui.detail} <ArrowUpRight className="ml-2 h-4 w-4" /></Button></Link>
-          <Button variant="outline" size="sm" onClick={() => setShowWeather((value) => !value)}>{showWeather ? ui.hideWeather : ui.showWeather}</Button>
+          {hasExactEventDate(event) ? <Button variant="outline" size="sm" onClick={() => setShowWeather((value) => !value)}>{showWeather ? ui.hideWeather : ui.showWeather}</Button> : null}
           {event.galleryHref ? <Link to={event.galleryHref}><Button variant="outline" size="sm">{ui.photos}</Button></Link> : null}
           {event.legacyHref ? <a href={event.legacyHref} target="_blank" rel="noreferrer"><Button variant="outline" size="sm">{ui.archiveLink}</Button></a> : null}
         </div>
       </div>
 
-      {showWeather ? (
+      {showWeather && hasExactEventDate(event) ? (
         <div className="mt-5 rounded-[1.5rem] border border-border/70 bg-white/50 p-4 md:p-5">
           <RouteWeatherPanel event={event} />
         </div>
@@ -113,18 +103,14 @@ export const CalendarYearAgenda = ({ year, events }: { year: number; events: Clu
               <p className="text-xs uppercase tracking-[0.25em] text-white/65">{ui.agenda}</p>
               <h1 className="text-4xl md:text-6xl font-bold text-balance">{yearLabels[year] ?? `Calendari ${year}`}</h1>
               <p className="text-white/78 max-w-3xl">{ui.intro}</p>
-              <div className="grid gap-3 sm:grid-cols-3">
+              <div className="grid gap-3 sm:grid-cols-2">
                 <div className="rounded-2xl border border-white/10 bg-white/8 p-4">
                   <p className="text-xs uppercase tracking-[0.22em] text-white/55">{ui.events}</p>
                   <p className="mt-2 text-3xl font-bold">{events.length}</p>
                 </div>
                 <div className="rounded-2xl border border-white/10 bg-white/8 p-4">
-                  <p className="text-xs uppercase tracking-[0.22em] text-white/55">{ui.routes}</p>
+                  <p className="text-xs uppercase tracking-[0.22em] text-white/55">{ui.months}</p>
                   <p className="mt-2 text-3xl font-bold">{monthCount}</p>
-                </div>
-                <div className="rounded-2xl border border-white/10 bg-white/8 p-4">
-                  <p className="text-xs uppercase tracking-[0.22em] text-white/55">{year}</p>
-                  <p className="mt-2 text-3xl font-bold">{grouped.length}</p>
                 </div>
               </div>
             </div>

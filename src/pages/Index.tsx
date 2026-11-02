@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { ArrowRight, Archive, Calendar, Sparkles, Stars } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 import { PageShell } from "@/components/PageShell";
 import { Hero } from "@/components/Hero";
 import { Button } from "@/components/ui/button";
@@ -14,228 +14,137 @@ import { sponsorItems } from "@/content/sponsorData";
 
 const translations: Record<LanguageCode, Record<string, string>> = {
   ca: {
-    ethos: "Experiència BMW amb més pes, més context i millor disseny.",
-    pillars: "Nou enfocament",
-    pillarsTitle: "Web més potent, més moderna i amb narrativa pròpia",
-    pillarsSubtitle: "Calendari viu, meteo útil, arxiu real i accessos clars dins una experiència ordenada i orientada al club.",
-    pillar1: "Calendari viu",
-    pillar1d: "Sortides futures, historial i compte enrere connectats entre si.",
-    pillar3: "Arxiu recuperat",
-    pillar3d: "Documents, vídeos i revistes que abans estaven dispersos ara passen a ser una hemeroteca útil.",
-    pillar4: "Partners premium",
-    pillar4d: "Patrocinadors i col·laboradors amb presència més clara dins l'ecosistema digital del club.",
     archiveEyebrow: "Arxiu del club",
-    archiveTitle: "Memòria recuperada, sense aparença de CMS vell",
+    archiveTitle: "Documents, revistes i vídeos de la història del club",
     archiveCta: "Obrir arxiu",
-    officialEyebrow: "Partners premium",
-    officialTitle: "Marques i col·laboradors amb millor visibilitat dins la web",
-    officialCta: "Veure patrocinadors",
     sponsorsEyebrow: "Patrocinadors",
-    sponsorsTitle: "Marques amb visibilitat real, no una llista discreta al peu de pàgina",
+    sponsorsTitle: "Empreses i marques que col·laboren amb el club",
     sponsorsCta: "Veure patrocinadors",
     sponsorsOpen: "Obrir web",
-    featuredSponsorLabel: "Sponsor principal",
-    featuredSponsorText: "Pyrénées Andorra ha de sentir-se visible de debò: més presència, millor composició i context premium dins la home.",
-    journalEyebrow: "Lectura del club",
-    journalTitle: "Tres entrades clares per entendre el club, reviure'l i connectar-lo amb la marca",
+    featuredSponsorLabel: "Patrocinador principal",
+    journalEyebrow: "Explora",
+    journalTitle: "Coneix el club, la seva galeria i els seus patrocinadors",
     journalClub: "El Club",
+    journalClubText: "Qui som, què fem i com fer-te'n soci.",
     journalGallery: "Galeria",
+    journalGalleryText: "Fotos de les sortides i de la història del club, ordenades per anys.",
     journalBrand: "Patrocinadors",
+    journalBrandText: "Les empreses i marques que donen suport al club.",
     journalOpen: "Entrar",
-    visitEvent: "Obrir fitxa",
-    openOfficial: "Obrir",
   },
   es: {
-    ethos: "Experiencia BMW con más peso, más contexto y mejor diseño.",
-    pillars: "Nuevo enfoque",
-    pillarsTitle: "Una web más potente, más moderna y con narrativa propia",
-    pillarsSubtitle: "Calendario vivo, meteo útil, archivo real y accesos claros dentro de una experiencia ordenada y orientada al club.",
-    pillar1: "Calendario vivo",
-    pillar1d: "Salidas futuras, histórico y cuenta atrás conectados entre sí.",
-    pillar3: "Archivo recuperado",
-    pillar3d: "Documentos, vídeos y revistas que antes estaban dispersos pasan a ser una hemeroteca útil.",
-    pillar4: "Partners premium",
-    pillar4d: "Patrocinadores y colaboradores con una presencia más clara dentro del ecosistema digital del club.",
     archiveEyebrow: "Archivo del club",
-    archiveTitle: "Memoria recuperada, sin apariencia de CMS viejo",
+    archiveTitle: "Documentos, revistas y vídeos de la historia del club",
     archiveCta: "Abrir archivo",
-    officialEyebrow: "Partners premium",
-    officialTitle: "Marcas y colaboradores con mejor visibilidad dentro de la web",
-    officialCta: "Ver patrocinadores",
     sponsorsEyebrow: "Patrocinadores",
-    sponsorsTitle: "Marcas con visibilidad real, no una lista discreta en el pie de página",
+    sponsorsTitle: "Empresas y marcas que colaboran con el club",
     sponsorsCta: "Ver patrocinadores",
     sponsorsOpen: "Abrir web",
     featuredSponsorLabel: "Patrocinador principal",
-    featuredSponsorText: "Pyrénées Andorra debe sentirse realmente visible: más presencia, mejor composición y contexto premium dentro de la home.",
-    journalEyebrow: "Lectura del club",
-    journalTitle: "Tres entradas claras para entender el club, revivirlo y conectarlo con la marca",
+    journalEyebrow: "Explora",
+    journalTitle: "Conoce el club, su galería y sus patrocinadores",
     journalClub: "El Club",
+    journalClubText: "Quiénes somos, qué hacemos y cómo hacerte socio.",
     journalGallery: "Galería",
+    journalGalleryText: "Fotos de las salidas y de la historia del club, ordenadas por años.",
     journalBrand: "Patrocinadores",
+    journalBrandText: "Las empresas y marcas que apoyan al club.",
     journalOpen: "Entrar",
-    visitEvent: "Abrir ficha",
-    openOfficial: "Abrir",
   },
   fr: {
-    ethos: "Une expérience BMW avec plus de poids, de contexte et un meilleur design.",
-    pillars: "Nouvelle approche",
-    pillarsTitle: "Un site plus fort, plus moderne et avec son propre récit",
-    pillarsSubtitle: "Calendrier vivant, météo utile, véritable archive et accès clairs dans une expérience ordonnée et fidèle au club.",
-    pillar1: "Calendrier vivant",
-    pillar1d: "Sorties futures, historique et compte à rebours reliés entre eux.",
-    pillar3: "Archive récupérée",
-    pillar3d: "Documents, vidéos et magazines auparavant dispersés deviennent une archive utile.",
-    pillar4: "Partenaires premium",
-    pillar4d: "Sponsors et collaborateurs avec une présence plus claire dans l'écosystème digital du club.",
     archiveEyebrow: "Archive du club",
-    archiveTitle: "Mémoire récupérée, sans l'apparence d'un vieux CMS",
+    archiveTitle: "Documents, magazines et vidéos de l'histoire du club",
     archiveCta: "Ouvrir l'archive",
-    officialEyebrow: "Partenaires premium",
-    officialTitle: "Marques et collaborateurs avec une meilleure visibilité sur le site",
-    officialCta: "Voir les sponsors",
     sponsorsEyebrow: "Sponsors",
-    sponsorsTitle: "Des marques avec une vraie visibilité, pas une simple liste discrète en pied de page",
+    sponsorsTitle: "Les entreprises et marques partenaires du club",
     sponsorsCta: "Voir les sponsors",
     sponsorsOpen: "Ouvrir le site",
     featuredSponsorLabel: "Sponsor principal",
-    featuredSponsorText: "Pyrénées Andorra doit réellement se sentir visible : plus de présence, une meilleure composition et un contexte premium sur l'accueil.",
-    journalEyebrow: "Lecture du club",
-    journalTitle: "Trois entrées claires pour comprendre le club, le revivre et le relier à la marque",
+    journalEyebrow: "Explorer",
+    journalTitle: "Découvrez le club, sa galerie et ses sponsors",
     journalClub: "Le Club",
+    journalClubText: "Qui nous sommes, ce que nous faisons et comment devenir membre.",
     journalGallery: "Galerie",
+    journalGalleryText: "Photos des sorties et de l'histoire du club, classées par année.",
     journalBrand: "Sponsors",
+    journalBrandText: "Les entreprises et marques qui soutiennent le club.",
     journalOpen: "Entrer",
-    visitEvent: "Ouvrir la fiche",
-    openOfficial: "Ouvrir",
   },
   en: {
-    ethos: "A BMW experience with more weight, more context and better design.",
-    pillars: "New direction",
-    pillarsTitle: "A stronger, more modern website with its own narrative",
-    pillarsSubtitle: "Live calendar, useful weather, real archive and clear access points within a well-structured experience focused on the club.",
-    pillar1: "Live calendar",
-    pillar1d: "Future outings, history and countdown are all connected.",
-    pillar3: "Recovered archive",
-    pillar3d: "Documents, videos and magazines that were scattered now become a useful archive.",
-    pillar4: "Premium partners",
-    pillar4d: "Sponsors and collaborators with clearer presence across the club's digital ecosystem.",
     archiveEyebrow: "Club archive",
-    archiveTitle: "Recovered memory, without the look of an old CMS",
+    archiveTitle: "Documents, magazines and videos from the club's history",
     archiveCta: "Open archive",
-    officialEyebrow: "Premium partners",
-    officialTitle: "Brands and collaborators with stronger visibility across the site",
-    officialCta: "View sponsors",
     sponsorsEyebrow: "Sponsors",
-    sponsorsTitle: "Brands with real visibility, not a discreet list hidden in the footer",
+    sponsorsTitle: "Companies and brands that work with the club",
     sponsorsCta: "View sponsors",
     sponsorsOpen: "Open site",
     featuredSponsorLabel: "Main sponsor",
-    featuredSponsorText: "Pyrénées Andorra should feel genuinely visible: more presence, better composition and premium context across the homepage.",
-    journalEyebrow: "Club reading",
-    journalTitle: "Three clear entry points to understand the club, relive it and connect it with the brand",
+    journalEyebrow: "Explore",
+    journalTitle: "Get to know the club, its gallery and its sponsors",
     journalClub: "The Club",
+    journalClubText: "Who we are, what we do and how to become a member.",
     journalGallery: "Gallery",
+    journalGalleryText: "Photos of the club's outings and history, organised by year.",
     journalBrand: "Sponsors",
+    journalBrandText: "The companies and brands that support the club.",
     journalOpen: "Open",
-    visitEvent: "Open detail",
-    openOfficial: "Open",
   },
   pt: {
-    ethos: "Experiência BMW com mais peso, mais contexto e melhor design.",
-    pillars: "Nova direção",
-    pillarsTitle: "Um site mais forte, mais moderno e com narrativa própria",
-    pillarsSubtitle: "Calendário vivo, meteorologia útil, arquivo real e acessos claros dentro de uma experiência organizada e orientada ao clube.",
-    pillar1: "Calendário vivo",
-    pillar1d: "Passeios futuros, histórico e contagem decrescente ligados entre si.",
-    pillar3: "Arquivo recuperado",
-    pillar3d: "Documentos, vídeos e revistas que antes estavam dispersos passam a formar uma hemeroteca útil.",
-    pillar4: "Parceiros premium",
-    pillar4d: "Patrocinadores e colaboradores com presença mais clara no ecossistema digital do clube.",
     archiveEyebrow: "Arquivo do clube",
-    archiveTitle: "Memória recuperada, sem aspeto de CMS antigo",
+    archiveTitle: "Documentos, revistas e vídeos da história do clube",
     archiveCta: "Abrir arquivo",
-    officialEyebrow: "Parceiros premium",
-    officialTitle: "Marcas e colaboradores com melhor visibilidade no site",
-    officialCta: "Ver patrocinadores",
     sponsorsEyebrow: "Patrocinadores",
-    sponsorsTitle: "Marcas com visibilidade real, não uma lista discreta no rodapé",
+    sponsorsTitle: "Empresas e marcas que colaboram com o clube",
     sponsorsCta: "Ver patrocinadores",
     sponsorsOpen: "Abrir site",
     featuredSponsorLabel: "Patrocinador principal",
-    featuredSponsorText: "Pyrénées Andorra deve sentir-se realmente visível: mais presença, melhor composição e contexto premium na home.",
-    journalEyebrow: "Leitura do clube",
-    journalTitle: "Três entradas claras para entender o clube, revivê-lo e ligá-lo à marca",
+    journalEyebrow: "Explorar",
+    journalTitle: "Conheça o clube, a sua galeria e os seus patrocinadores",
     journalClub: "O Clube",
+    journalClubText: "Quem somos, o que fazemos e como se tornar sócio.",
     journalGallery: "Galeria",
+    journalGalleryText: "Fotos dos passeios e da história do clube, organizadas por ano.",
     journalBrand: "Patrocinadores",
+    journalBrandText: "As empresas e marcas que apoiam o clube.",
     journalOpen: "Entrar",
-    visitEvent: "Abrir ficha",
-    openOfficial: "Abrir",
   },
   de: {
-    ethos: "BMW-Erlebnis mit mehr Gewicht, mehr Kontext und besserem Design.",
-    pillars: "Neue Richtung",
-    pillarsTitle: "Eine stärkere, modernere Website mit eigener Erzählung",
-    pillarsSubtitle: "Live-Kalender, nützliches Wetter, echtes Archiv und klare Zugänge in einem geordneten Erlebnis mit Fokus auf den Club.",
-    pillar1: "Live-Kalender",
-    pillar1d: "Zukünftige Ausfahrten, Historie und Countdown sind miteinander verbunden.",
-    pillar3: "Wiederhergestelltes Archiv",
-    pillar3d: "Dokumente, Videos und Magazine werden aus verstreuten Dateien zu einem nützlichen Archiv.",
-    pillar4: "Premium-Partner",
-    pillar4d: "Sponsoren und Partner mit klarerer Präsenz im digitalen Club-Ökosystem.",
     archiveEyebrow: "Club-Archiv",
-    archiveTitle: "Wiederhergestellte Erinnerung ohne alten CMS-Look",
+    archiveTitle: "Dokumente, Magazine und Videos aus der Geschichte des Clubs",
     archiveCta: "Archiv öffnen",
-    officialEyebrow: "Premium-Partner",
-    officialTitle: "Marken und Partner mit stärkerer Sichtbarkeit auf der Website",
-    officialCta: "Sponsoren ansehen",
     sponsorsEyebrow: "Sponsoren",
-    sponsorsTitle: "Marken mit echter Sichtbarkeit, nicht nur eine unauffällige Liste im Footer",
+    sponsorsTitle: "Unternehmen und Marken, die mit dem Club zusammenarbeiten",
     sponsorsCta: "Sponsoren ansehen",
     sponsorsOpen: "Website öffnen",
     featuredSponsorLabel: "Hauptsponsor",
-    featuredSponsorText: "Pyrénées Andorra soll wirklich sichtbar sein: mehr Präsenz, bessere Komposition und Premium-Kontext auf der Startseite.",
-    journalEyebrow: "Club-Lektüre",
-    journalTitle: "Drei klare Einstiege, um den Club zu verstehen, neu zu erleben und mit der Marke zu verbinden",
+    journalEyebrow: "Entdecken",
+    journalTitle: "Lernen Sie den Club, seine Galerie und seine Sponsoren kennen",
     journalClub: "Der Club",
+    journalClubText: "Wer wir sind, was wir machen und wie Sie Mitglied werden.",
     journalGallery: "Galerie",
+    journalGalleryText: "Fotos von Ausfahrten und aus der Geschichte des Clubs, nach Jahren geordnet.",
     journalBrand: "Sponsoren",
+    journalBrandText: "Die Unternehmen und Marken, die den Club unterstützen.",
     journalOpen: "Öffnen",
-    visitEvent: "Detail öffnen",
-    openOfficial: "Öffnen",
   },
   ru: {
-    ethos: "Опыт BMW с большим весом, контекстом и лучшим дизайном.",
-    pillars: "Новый вектор",
-    pillarsTitle: "Более сильный, современный сайт со своей собственной историей",
-    pillarsSubtitle: "Живой календарь, полезная погода, настоящий архив и понятные точки входа в ясной и структурированной клубной подаче.",
-    pillar1: "Живой календарь",
-    pillar1d: "Будущие выезды, история и обратный отсчёт связаны между собой.",
-    pillar3: "Восстановленный архив",
-    pillar3d: "Документы, видео и журналы, которые раньше были разбросаны, становятся полезным архивом.",
-    pillar4: "Премиум-партнёры",
-    pillar4d: "Спонсоры и партнёры с более заметным присутствием в цифровой экосистеме клуба.",
     archiveEyebrow: "Архив клуба",
-    archiveTitle: "Восстановленная память без ощущения старого CMS",
+    archiveTitle: "Документы, журналы и видео из истории клуба",
     archiveCta: "Открыть архив",
-    officialEyebrow: "Премиум-партнёры",
-    officialTitle: "Бренды и партнёры с более сильной видимостью на сайте",
-    officialCta: "Открыть спонсоров",
     sponsorsEyebrow: "Спонсоры",
-    sponsorsTitle: "Бренды с реальной заметностью, а не скромный список в футере",
+    sponsorsTitle: "Компании и бренды, которые сотрудничают с клубом",
     sponsorsCta: "Открыть спонсоров",
     sponsorsOpen: "Открыть сайт",
     featuredSponsorLabel: "Главный спонсор",
-    featuredSponsorText: "Pyrénées Andorra должен быть действительно заметным: больше присутствия, лучше композиция и премиальный контекст на главной.",
-    journalEyebrow: "Навигация по клубу",
-    journalTitle: "Три ясные точки входа, чтобы понять клуб, пережить его заново и связать с брендом",
+    journalEyebrow: "Узнать больше",
+    journalTitle: "Познакомьтесь с клубом, его галереей и спонсорами",
     journalClub: "Клуб",
+    journalClubText: "Кто мы, чем занимаемся и как вступить в клуб.",
     journalGallery: "Галерея",
+    journalGalleryText: "Фотографии выездов и истории клуба по годам.",
     journalBrand: "Спонсоры",
+    journalBrandText: "Компании и бренды, которые поддерживают клуб.",
     journalOpen: "Открыть",
-    visitEvent: "Открыть карточку",
-    openOfficial: "Открыть",
   },
 };
 
@@ -251,45 +160,6 @@ const Index = () => {
     <PageShell>
       <Hero language={language} />
       <HomeWelcomeShowcase />
-
-      <section className="relative z-20 pt-6 pb-10 md:-mt-10 md:pt-0 md:pb-12 lg:-mt-12">
-        <div className="container mx-auto px-4">
-          <Card className="glass-panel rounded-[2rem] border-0 max-w-6xl mx-auto p-6 md:p-8 shadow-[0_28px_90px_-42px_rgba(15,23,42,.4)]">
-            <div className="grid md:grid-cols-[1.2fr_0.8fr] gap-8 items-center">
-              <div>
-                <div className="inline-flex items-center gap-2 rounded-full bg-primary/10 px-4 py-2 text-sm font-medium text-primary mb-4"><Sparkles className="h-4 w-4" /> {t.pillars}</div>
-                <h2 className="text-3xl md:text-5xl font-bold text-balance">{t.pillarsTitle}</h2>
-                <p className="mt-4 text-lg text-muted-foreground max-w-3xl">{t.pillarsSubtitle}</p>
-              </div>
-              <div className="rounded-[1.5rem] bg-accent text-white p-6 shadow-elegant">
-                <div className="inline-flex items-center gap-2 rounded-full bg-white/10 px-3 py-1 text-xs font-semibold uppercase tracking-[0.2em]"><Stars className="h-4 w-4" /> BMW Club Andorra</div>
-                <p className="mt-4 text-xl font-semibold text-balance">{t.ethos}</p>
-                <div className="mt-6 flex gap-3 flex-wrap">
-                  <Link to="/patrocinadors"><Button variant="outline" className="bg-white/5 text-white border-white/15 hover:bg-white/10">{t.sponsorsCta}</Button></Link>
-                </div>
-              </div>
-            </div>
-          </Card>
-        </div>
-      </section>
-
-      <section className="pb-12">
-        <div className="container mx-auto px-4 max-w-6xl grid md:grid-cols-2 gap-5">
-          {[
-            { title: t.pillar1, desc: t.pillar1d, icon: Calendar },
-            { title: t.pillar3, desc: t.pillar3d, icon: Archive },
-          ].map((item) => {
-            const Icon = item.icon;
-            return (
-              <Card key={item.title} className="premium-card border-0 rounded-[1.75rem] p-6 hover-tilt">
-                <div className="rounded-2xl bg-primary/10 p-3 w-fit"><Icon className="h-5 w-5 text-primary" /></div>
-                <h3 className="mt-5 text-2xl font-bold">{item.title}</h3>
-                <p className="mt-3 text-muted-foreground">{item.desc}</p>
-              </Card>
-            );
-          })}
-        </div>
-      </section>
 
       <section className="pb-16">
         <div className="container mx-auto px-4">
@@ -328,7 +198,6 @@ const Index = () => {
                     </div>
                     <div className="mt-4 text-2xl sm:text-3xl md:text-4xl font-bold text-balance">{featuredSponsor.name}</div>
                     <div className="mt-3 text-sm uppercase tracking-[0.2em] text-white/55">{featuredSponsor.category}</div>
-                    <p className="mt-5 max-w-2xl text-white/76">{t.featuredSponsorText}</p>
                     <div className="mt-6 rounded-[1.5rem] border border-white/10 bg-black/10 p-5">
                       <p className="text-sm text-white/72">{getLocalizedText(featuredSponsor.summary, language)}</p>
                     </div>
@@ -382,9 +251,9 @@ const Index = () => {
           </div>
           <div className="grid md:grid-cols-3 gap-6">
             {[
-              { title: t.journalClub, href: "/el-club", text: t.ethos },
-              { title: t.journalGallery, href: "/galeria", text: t.pillar3d },
-              { title: t.journalBrand, href: "/patrocinadors", text: t.pillar4d },
+              { title: t.journalClub, href: "/el-club", text: t.journalClubText },
+              { title: t.journalGallery, href: "/galeria", text: t.journalGalleryText },
+              { title: t.journalBrand, href: "/patrocinadors", text: t.journalBrandText },
             ].map((item) => (
               <Link key={item.href} to={item.href}>
                 <Card className="premium-card border-0 rounded-[2rem] p-6 hover-tilt h-full">
