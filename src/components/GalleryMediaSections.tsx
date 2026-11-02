@@ -38,6 +38,7 @@ const getSectionContext = (section: GalleryMediaSection, t: (typeof translations
 
 const LEGACY_MEDIA_ORIGIN = "https://bca.jcarranca.com";
 const LOCAL_FIRST_GALLERY_PREFIXES = [
+  "/legacy-mirror/images/phocagallery/sortides/Any_2026/VII_Ralli_Turistic_03_10/",
   "/legacy-mirror/images/phocagallery/sortides/Any_2026/Sortida_Franca_20_09/",
   "/legacy-mirror/images/phocagallery/sortides/Any_2026/4_Cars_Coffee_19_07/",
 ];

@@ -3714,6 +3714,148 @@ export const galleryMediaByPage: Record<string, GalleryMediaSection[]> = {
   ],
   "sortides_2026": [
     {
+      "id": "rally-turistic-2026",
+      "title": "VII Ral·li Turístic · 03-04/10/2026",
+      "sourceFolder": "phocagallery/sortides/Any_2026/VII_Ralli_Turistic_03_10",
+      "images": [
+        {
+          "src": "/legacy-mirror/images/phocagallery/sortides/Any_2026/VII_Ralli_Turistic_03_10/ralli-turistic-2026-10-03-01.jpg",
+          "alt": "VII Ral·li Turístic · 03-04/10/2026 · Foto 1",
+          "filename": "ralli-turistic-2026-10-03-01.jpg"
+        },
+        {
+          "src": "/legacy-mirror/images/phocagallery/sortides/Any_2026/VII_Ralli_Turistic_03_10/ralli-turistic-2026-10-03-02.jpg",
+          "alt": "VII Ral·li Turístic · 03-04/10/2026 · Foto 2",
+          "filename": "ralli-turistic-2026-10-03-02.jpg"
+        },
+        {
+          "src": "/legacy-mirror/images/phocagallery/sortides/Any_2026/VII_Ralli_Turistic_03_10/ralli-turistic-2026-10-03-03.jpg",
+          "alt": "VII Ral·li Turístic · 03-04/10/2026 · Foto 3",
+          "filename": "ralli-turistic-2026-10-03-03.jpg"
+        },
+        {
+          "src": "/legacy-mirror/images/phocagallery/sortides/Any_2026/VII_Ralli_Turistic_03_10/ralli-turistic-2026-10-03-04.jpg",
+          "alt": "VII Ral·li Turístic · 03-04/10/2026 · Foto 4",
+          "filename": "ralli-turistic-2026-10-03-04.jpg"
+        },
+        {
+          "src": "/legacy-mirror/images/phocagallery/sortides/Any_2026/VII_Ralli_Turistic_03_10/ralli-turistic-2026-10-03-05.jpg",
+          "alt": "VII Ral·li Turístic · 03-04/10/2026 · Foto 5",
+          "filename": "ralli-turistic-2026-10-03-05.jpg"
+        },
+        {
+          "src": "/legacy-mirror/images/phocagallery/sortides/Any_2026/VII_Ralli_Turistic_03_10/ralli-turistic-2026-10-03-06.jpg",
+          "alt": "VII Ral·li Turístic · 03-04/10/2026 · Foto 6",
+          "filename": "ralli-turistic-2026-10-03-06.jpg"
+        },
+        {
+          "src": "/legacy-mirror/images/phocagallery/sortides/Any_2026/VII_Ralli_Turistic_03_10/ralli-turistic-2026-10-03-07.jpg",
+          "alt": "VII Ral·li Turístic · 03-04/10/2026 · Foto 7",
+          "filename": "ralli-turistic-2026-10-03-07.jpg"
+        },
+        {
+          "src": "/legacy-mirror/images/phocagallery/sortides/Any_2026/VII_Ralli_Turistic_03_10/ralli-turistic-2026-10-03-08.jpg",
+          "alt": "VII Ral·li Turístic · 03-04/10/2026 · Foto 8",
+          "filename": "ralli-turistic-2026-10-03-08.jpg"
+        },
+        {
+          "src": "/legacy-mirror/images/phocagallery/sortides/Any_2026/VII_Ralli_Turistic_03_10/ralli-turistic-2026-10-03-09.jpg",
+          "alt": "VII Ral·li Turístic · 03-04/10/2026 · Foto 9",
+          "filename": "ralli-turistic-2026-10-03-09.jpg"
+        },
+        {
+          "src": "/legacy-mirror/images/phocagallery/sortides/Any_2026/VII_Ralli_Turistic_03_10/ralli-turistic-2026-10-03-10.jpg",
+          "alt": "VII Ral·li Turístic · 03-04/10/2026 · Foto 10",
+          "filename": "ralli-turistic-2026-10-03-10.jpg"
+        },
+        {
+          "src": "/legacy-mirror/images/phocagallery/sortides/Any_2026/VII_Ralli_Turistic_03_10/ralli-turistic-2026-10-03-11.jpg",
+          "alt": "VII Ral·li Turístic · 03-04/10/2026 · Foto 11",
+          "filename": "ralli-turistic-2026-10-03-11.jpg"
+        },
+        {
+          "src": "/legacy-mirror/images/phocagallery/sortides/Any_2026/VII_Ralli_Turistic_03_10/ralli-turistic-2026-10-03-12.jpg",
+          "alt": "VII Ral·li Turístic · 03-04/10/2026 · Foto 12",
+          "filename": "ralli-turistic-2026-10-03-12.jpg"
+        },
+        {
+          "src": "/legacy-mirror/images/phocagallery/sortides/Any_2026/VII_Ralli_Turistic_03_10/ralli-turistic-2026-10-03-13.jpg",
+          "alt": "VII Ral·li Turístic · 03-04/10/2026 · Foto 13",
+          "filename": "ralli-turistic-2026-10-03-13.jpg"
+        },
+        {
+          "src": "/legacy-mirror/images/phocagallery/sortides/Any_2026/VII_Ralli_Turistic_03_10/ralli-turistic-2026-10-03-14.jpg",
+          "alt": "VII Ral·li Turístic · 03-04/10/2026 · Foto 14",
+          "filename": "ralli-turistic-2026-10-03-14.jpg"
+        },
+        {
+          "src": "/legacy-mirror/images/phocagallery/sortides/Any_2026/VII_Ralli_Turistic_03_10/ralli-turistic-2026-10-03-15.jpg",
+          "alt": "VII Ral·li Turístic · 03-04/10/2026 · Foto 15",
+          "filename": "ralli-turistic-2026-10-03-15.jpg"
+        },
+        {
+          "src": "/legacy-mirror/images/phocagallery/sortides/Any_2026/VII_Ralli_Turistic_03_10/ralli-turistic-2026-10-03-16.jpg",
+          "alt": "VII Ral·li Turístic · 03-04/10/2026 · Foto 16",
+          "filename": "ralli-turistic-2026-10-03-16.jpg"
+        },
+        {
+          "src": "/legacy-mirror/images/phocagallery/sortides/Any_2026/VII_Ralli_Turistic_03_10/ralli-turistic-2026-10-03-17.jpg",
+          "alt": "VII Ral·li Turístic · 03-04/10/2026 · Foto 17",
+          "filename": "ralli-turistic-2026-10-03-17.jpg"
+        },
+        {
+          "src": "/legacy-mirror/images/phocagallery/sortides/Any_2026/VII_Ralli_Turistic_03_10/ralli-turistic-2026-10-03-18.jpg",
+          "alt": "VII Ral·li Turístic · 03-04/10/2026 · Foto 18",
+          "filename": "ralli-turistic-2026-10-03-18.jpg"
+        },
+        {
+          "src": "/legacy-mirror/images/phocagallery/sortides/Any_2026/VII_Ralli_Turistic_03_10/ralli-turistic-2026-10-03-19.jpg",
+          "alt": "VII Ral·li Turístic · 03-04/10/2026 · Foto 19",
+          "filename": "ralli-turistic-2026-10-03-19.jpg"
+        },
+        {
+          "src": "/legacy-mirror/images/phocagallery/sortides/Any_2026/VII_Ralli_Turistic_03_10/ralli-turistic-2026-10-03-20.jpg",
+          "alt": "VII Ral·li Turístic · 03-04/10/2026 · Foto 20",
+          "filename": "ralli-turistic-2026-10-03-20.jpg"
+        },
+        {
+          "src": "/legacy-mirror/images/phocagallery/sortides/Any_2026/VII_Ralli_Turistic_03_10/ralli-turistic-2026-10-03-21.jpg",
+          "alt": "VII Ral·li Turístic · 03-04/10/2026 · Foto 21",
+          "filename": "ralli-turistic-2026-10-03-21.jpg"
+        },
+        {
+          "src": "/legacy-mirror/images/phocagallery/sortides/Any_2026/VII_Ralli_Turistic_03_10/ralli-turistic-2026-10-03-22.jpg",
+          "alt": "VII Ral·li Turístic · 03-04/10/2026 · Foto 22",
+          "filename": "ralli-turistic-2026-10-03-22.jpg"
+        },
+        {
+          "src": "/legacy-mirror/images/phocagallery/sortides/Any_2026/VII_Ralli_Turistic_03_10/ralli-turistic-2026-10-03-23.jpg",
+          "alt": "VII Ral·li Turístic · 03-04/10/2026 · Foto 23",
+          "filename": "ralli-turistic-2026-10-03-23.jpg"
+        },
+        {
+          "src": "/legacy-mirror/images/phocagallery/sortides/Any_2026/VII_Ralli_Turistic_03_10/ralli-turistic-2026-10-03-24.jpg",
+          "alt": "VII Ral·li Turístic · 03-04/10/2026 · Foto 24",
+          "filename": "ralli-turistic-2026-10-03-24.jpg"
+        },
+        {
+          "src": "/legacy-mirror/images/phocagallery/sortides/Any_2026/VII_Ralli_Turistic_03_10/ralli-turistic-2026-10-03-25.jpg",
+          "alt": "VII Ral·li Turístic · 03-04/10/2026 · Foto 25",
+          "filename": "ralli-turistic-2026-10-03-25.jpg"
+        },
+        {
+          "src": "/legacy-mirror/images/phocagallery/sortides/Any_2026/VII_Ralli_Turistic_03_10/ralli-turistic-2026-10-03-26.jpg",
+          "alt": "VII Ral·li Turístic · 03-04/10/2026 · Foto 26",
+          "filename": "ralli-turistic-2026-10-03-26.jpg"
+        },
+        {
+          "src": "/legacy-mirror/images/phocagallery/sortides/Any_2026/VII_Ralli_Turistic_03_10/ralli-turistic-2026-10-03-27.jpg",
+          "alt": "VII Ral·li Turístic · 03-04/10/2026 · Foto 27",
+          "filename": "ralli-turistic-2026-10-03-27.jpg"
+        }
+      ]
+    },
+    {
       "id": "sortida-franca-2026",
       "title": "Sortida a França · 20/09/2026",
       "sourceFolder": "phocagallery/sortides/Any_2026/Sortida_Franca_20_09",
@@ -3829,11 +3971,6 @@ export const galleryMediaByPage: Record<string, GalleryMediaSection[]> = {
           "filename": "sortida-franca-2026-09-20-22.jpg"
         },
         {
-          "src": "/legacy-mirror/images/phocagallery/sortides/Any_2026/Sortida_Franca_20_09/sortida-franca-2026-09-20-23.jpg",
-          "alt": "Sortida a França · 20/09/2026 · Foto 23",
-          "filename": "sortida-franca-2026-09-20-23.jpg"
-        },
-        {
           "src": "/legacy-mirror/images/phocagallery/sortides/Any_2026/Sortida_Franca_20_09/sortida-franca-2026-09-20-24.jpg",
           "alt": "Sortida a França · 20/09/2026 · Foto 24",
           "filename": "sortida-franca-2026-09-20-24.jpg"
@@ -3862,11 +3999,6 @@ export const galleryMediaByPage: Record<string, GalleryMediaSection[]> = {
           "src": "/legacy-mirror/images/phocagallery/sortides/Any_2026/Sortida_Franca_20_09/sortida-franca-2026-09-20-29.jpg",
           "alt": "Sortida a França · 20/09/2026 · Foto 29",
           "filename": "sortida-franca-2026-09-20-29.jpg"
-        },
-        {
-          "src": "/legacy-mirror/images/phocagallery/sortides/Any_2026/Sortida_Franca_20_09/sortida-franca-2026-09-20-30.jpg",
-          "alt": "Sortida a França · 20/09/2026 · Foto 30",
-          "filename": "sortida-franca-2026-09-20-30.jpg"
         },
         {
           "src": "/legacy-mirror/images/phocagallery/sortides/Any_2026/Sortida_Franca_20_09/sortida-franca-2026-09-20-31.jpg",
@@ -3902,6 +4034,21 @@ export const galleryMediaByPage: Record<string, GalleryMediaSection[]> = {
           "src": "/legacy-mirror/images/phocagallery/sortides/Any_2026/Sortida_Franca_20_09/sortida-franca-2026-09-20-37.jpg",
           "alt": "Sortida a França · 20/09/2026 · Foto 37",
           "filename": "sortida-franca-2026-09-20-37.jpg"
+        },
+        {
+          "src": "/legacy-mirror/images/phocagallery/sortides/Any_2026/Sortida_Franca_20_09/sortida-franca-2026-09-20-38.jpg",
+          "alt": "Sortida a França · 20/09/2026 · Foto 38",
+          "filename": "sortida-franca-2026-09-20-38.jpg"
+        },
+        {
+          "src": "/legacy-mirror/images/phocagallery/sortides/Any_2026/Sortida_Franca_20_09/sortida-franca-2026-09-20-39.jpg",
+          "alt": "Sortida a França · 20/09/2026 · Foto 39",
+          "filename": "sortida-franca-2026-09-20-39.jpg"
+        },
+        {
+          "src": "/legacy-mirror/images/phocagallery/sortides/Any_2026/Sortida_Franca_20_09/sortida-franca-2026-09-20-40.jpg",
+          "alt": "Sortida a França · 20/09/2026 · Foto 40",
+          "filename": "sortida-franca-2026-09-20-40.jpg"
         }
       ]
     },

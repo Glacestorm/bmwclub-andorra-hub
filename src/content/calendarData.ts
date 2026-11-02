@@ -787,6 +787,7 @@ export const clubEvents: ClubEvent[] = [
     category: "rally",
     source: andorraLaVella,
     destination: andorraCircuit,
+    galleryHref: "/galeria/sortides/2026?album=rally-turistic-2026",
     notes: ["Font: calendari 2026 del club facilitat per Carles el 18/10/2026. Hora i destinació provisionals fins que es confirmin."],
     evidence: "mixed",
     featured: true,
