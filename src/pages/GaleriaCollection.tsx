@@ -32,6 +32,7 @@ const translations: Record<LanguageCode, Record<string, string>> = {
     collectionsTitle: "Àlbums i fotos",
     collectionsBody: "Obre un àlbum per veure'n totes les fotos i selecciona qualsevol imatge per ampliar-la.",
     openMedia: "Veure fotos",
+    noPhotos: "Sense fotos",
   },
   es: {
     gallery: "Galería",
@@ -42,6 +43,7 @@ const translations: Record<LanguageCode, Record<string, string>> = {
     collectionsTitle: "Álbumes y fotos",
     collectionsBody: "Abre un álbum para ver todas sus fotos y selecciona cualquier imagen para ampliarla.",
     openMedia: "Ver fotos",
+    noPhotos: "Sin fotos",
   },
   fr: {
     gallery: "Galerie",
@@ -52,6 +54,7 @@ const translations: Record<LanguageCode, Record<string, string>> = {
     collectionsTitle: "Albums et photos",
     collectionsBody: "Ouvrez un album pour voir toutes ses photos et sélectionnez une image pour l'agrandir.",
     openMedia: "Voir les photos",
+    noPhotos: "Pas de photos",
   },
   en: {
     gallery: "Gallery",
@@ -62,6 +65,7 @@ const translations: Record<LanguageCode, Record<string, string>> = {
     collectionsTitle: "Albums and photos",
     collectionsBody: "Open an album to see all its photos and select any image to enlarge it.",
     openMedia: "View photos",
+    noPhotos: "No photos",
   },
   pt: {
     gallery: "Galeria",
@@ -72,6 +76,7 @@ const translations: Record<LanguageCode, Record<string, string>> = {
     collectionsTitle: "Álbuns e fotos",
     collectionsBody: "Abra um álbum para ver todas as fotos e selecione qualquer imagem para a ampliar.",
     openMedia: "Ver fotos",
+    noPhotos: "Sem fotos",
   },
   de: {
     gallery: "Galerie",
@@ -82,6 +87,7 @@ const translations: Record<LanguageCode, Record<string, string>> = {
     collectionsTitle: "Alben und Fotos",
     collectionsBody: "Öffnen Sie ein Album, um alle Fotos zu sehen, und wählen Sie ein Bild aus, um es zu vergrößern.",
     openMedia: "Fotos ansehen",
+    noPhotos: "Keine Fotos",
   },
   ru: {
     gallery: "Галерея",
@@ -92,6 +98,7 @@ const translations: Record<LanguageCode, Record<string, string>> = {
     collectionsTitle: "Альбомы и фото",
     collectionsBody: "Откройте альбом, чтобы увидеть все фотографии, и выберите любое изображение, чтобы увеличить его.",
     openMedia: "Смотреть фото",
+    noPhotos: "Нет фото",
   },
 };
 
@@ -156,12 +163,17 @@ const GaleriaCollection = () => {
         <section className="pb-10">
           <div className="container mx-auto px-4 max-w-6xl">
             <div className="grid md:grid-cols-2 xl:grid-cols-3 gap-4">
-              {page.albums.map((album) => (
-                <Card key={`${album.year ?? "album"}-${album.title}`} className="premium-card border-0 rounded-[1.7rem] p-5 hover-tilt shadow-sm">
-                  {album.year ? <p className="text-xs uppercase tracking-[0.2em] text-primary font-semibold mb-3">{album.year}</p> : null}
-                  <h2 className="text-lg font-semibold text-balance">{album.title}</h2>
-                </Card>
-              ))}
+              {page.albums.map((album) => {
+                const key = `${album.year ?? "album"}-${album.title}`;
+                const card = (
+                  <Card key={album.href ? undefined : key} className="premium-card border-0 rounded-[1.7rem] p-5 hover-tilt shadow-sm h-full">
+                    {album.year ? <p className="text-xs uppercase tracking-[0.2em] text-primary font-semibold mb-3">{album.year}</p> : null}
+                    <h2 className="text-lg font-semibold text-balance">{album.title}</h2>
+                    {album.noPhotos ? <p className="mt-2 text-xs uppercase tracking-[0.18em] text-muted-foreground">{t.noPhotos}</p> : null}
+                  </Card>
+                );
+                return album.href ? <Link key={key} to={album.href} className="block h-full">{card}</Link> : card;
+              })}
             </div>
           </div>
         </section>

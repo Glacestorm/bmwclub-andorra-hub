@@ -45,6 +45,9 @@ export type PageSection = IntroSection | CardsSection | SponsorsSection;
 export type GalleryAlbum = {
   title: string;
   year?: number;
+  // Where the index card leads: the album (?album=id) or, for an outing without photos, its event page.
+  href?: string;
+  noPhotos?: boolean;
 };
 
 export type GalleryGroup = {
@@ -294,13 +297,15 @@ export const bmwContent: Record<string, PageContent> = {
     seoTitle: "Any 2026 | BMW Club Andorra",
     hero: { title: "Any 2026", subtitle: "Recull de les activitats i trobades del club durant el 2026." },
     albums: [
-      { title: "1r Cars & Coffee 01/03/2026" },
-      { title: "Sortida a Cerdanya 29/03/2026" },
-      { title: "2n Cars & Coffee 19/04/2026" },
-      { title: "4t Cars & Coffee 19/07/2026" },
-      { title: "Sortida a França · 20/09/2026" },
-      { title: "VII Ral·li Turístic · 03-04/10/2026" },
-      { title: "5è Cars & Coffee 18/10/2026" },
+      { title: "1r Cars & Coffee 01/03/2026", href: "/galeria/sortides/2026?album=cars-coffee-2026-03-01" },
+      { title: "Sortida a Cerdanya 29/03/2026", href: "/galeria/sortides/2026?album=sortida-cerdanya-2026" },
+      { title: "2n Cars & Coffee 19/04/2026", href: "/galeria/sortides/2026?album=cars-coffee-2026-04-19" },
+      { title: "Sortida de 2 dies a Espanya 09-10/05/2026", href: "/esdeveniments/sortida-2-dies-espanya-2026", noPhotos: true },
+      { title: "3r Cars & Coffee 14/06/2026", href: "/esdeveniments/cars-coffee-2026-06-14", noPhotos: true },
+      { title: "4t Cars & Coffee 19/07/2026", href: "/galeria/sortides/2026?album=cars-coffee-2026-07-19" },
+      { title: "Sortida a França · 20/09/2026", href: "/galeria/sortides/2026?album=sortida-franca-2026" },
+      { title: "VII Ral·li Turístic · 03-04/10/2026", href: "/galeria/sortides/2026?album=rally-turistic-2026" },
+      { title: "5è Cars & Coffee 18/10/2026", href: "/galeria/sortides/2026?album=cars-coffee-2026-10-18" },
     ],
   },
   meteo: {
