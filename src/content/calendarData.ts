@@ -725,6 +725,7 @@ export const clubEvents: ClubEvent[] = [
     category: "cars-coffee",
     source: andorraLaVella,
     destination: andorraLaVella,
+    galleryHref: "/galeria/sortides/2026?album=cars-coffee-2026-10-18",
     evidence: "original-site",
     featured: true,
   },
