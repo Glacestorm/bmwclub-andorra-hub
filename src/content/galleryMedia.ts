@@ -3742,6 +3742,36 @@ export const galleryMediaByPage: Record<string, GalleryMediaSection[]> = {
           "src": "/legacy-mirror/images/phocagallery/sortides/Any_2026/5_Cars_Coffee_18_10/cars-coffee-2026-10-18-05.jpg",
           "alt": "5è Cars & Coffee 18/10/2026 · Foto 5",
           "filename": "cars-coffee-2026-10-18-05.jpg"
+        },
+        {
+          "src": "/legacy-mirror/images/phocagallery/sortides/Any_2026/5_Cars_Coffee_18_10/cars-coffee-2026-10-18-06.jpg",
+          "alt": "5è Cars & Coffee 18/10/2026 · Foto 6",
+          "filename": "cars-coffee-2026-10-18-06.jpg"
+        },
+        {
+          "src": "/legacy-mirror/images/phocagallery/sortides/Any_2026/5_Cars_Coffee_18_10/cars-coffee-2026-10-18-07.jpg",
+          "alt": "5è Cars & Coffee 18/10/2026 · Foto 7",
+          "filename": "cars-coffee-2026-10-18-07.jpg"
+        },
+        {
+          "src": "/legacy-mirror/images/phocagallery/sortides/Any_2026/5_Cars_Coffee_18_10/cars-coffee-2026-10-18-08.jpg",
+          "alt": "5è Cars & Coffee 18/10/2026 · Foto 8",
+          "filename": "cars-coffee-2026-10-18-08.jpg"
+        },
+        {
+          "src": "/legacy-mirror/images/phocagallery/sortides/Any_2026/5_Cars_Coffee_18_10/cars-coffee-2026-10-18-09.jpg",
+          "alt": "5è Cars & Coffee 18/10/2026 · Foto 9",
+          "filename": "cars-coffee-2026-10-18-09.jpg"
+        },
+        {
+          "src": "/legacy-mirror/images/phocagallery/sortides/Any_2026/5_Cars_Coffee_18_10/cars-coffee-2026-10-18-10.jpg",
+          "alt": "5è Cars & Coffee 18/10/2026 · Foto 10",
+          "filename": "cars-coffee-2026-10-18-10.jpg"
+        },
+        {
+          "src": "/legacy-mirror/images/phocagallery/sortides/Any_2026/5_Cars_Coffee_18_10/cars-coffee-2026-10-18-11.jpg",
+          "alt": "5è Cars & Coffee 18/10/2026 · Foto 11",
+          "filename": "cars-coffee-2026-10-18-11.jpg"
         }
       ]
     },
@@ -3884,6 +3914,16 @@ export const galleryMediaByPage: Record<string, GalleryMediaSection[]> = {
           "src": "/legacy-mirror/images/phocagallery/sortides/Any_2026/VII_Ralli_Turistic_03_10/ralli-turistic-2026-10-03-27.jpg",
           "alt": "VII Ral·li Turístic · 03-04/10/2026 · Foto 27",
           "filename": "ralli-turistic-2026-10-03-27.jpg"
+        },
+        {
+          "src": "/legacy-mirror/images/phocagallery/sortides/Any_2026/VII_Ralli_Turistic_03_10/ralli-turistic-2026-10-03-28.jpg",
+          "alt": "VII Ral·li Turístic · 03-04/10/2026 · Foto 28",
+          "filename": "ralli-turistic-2026-10-03-28.jpg"
+        },
+        {
+          "src": "/legacy-mirror/images/phocagallery/sortides/Any_2026/VII_Ralli_Turistic_03_10/ralli-turistic-2026-10-03-29.jpg",
+          "alt": "VII Ral·li Turístic · 03-04/10/2026 · Foto 29",
+          "filename": "ralli-turistic-2026-10-03-29.jpg"
         }
       ]
     },
