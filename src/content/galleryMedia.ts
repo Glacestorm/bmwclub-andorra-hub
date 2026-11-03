@@ -4125,6 +4125,7 @@ export const galleryMediaByPage: Record<string, GalleryMediaSection[]> = {
       ]
     },
     {
+      "id": "cars-coffee-2026-07-19",
       "title": "4t Cars & Coffee 19/07/2026",
       "sourceFolder": "phocagallery/sortides/Any_2026/4_Cars_Coffee_19_07",
       "images": [
@@ -4216,7 +4217,8 @@ export const galleryMediaByPage: Record<string, GalleryMediaSection[]> = {
       ]
     },
     {
-      "title": "1r Cars & Coffee",
+      "id": "cars-coffee-2026-03-01",
+      "title": "1r Cars & Coffee 01/03/2026",
       "sourceFolder": "phocagallery/sortides/Any_2026/1_Cars_",
       "images": [
         {
@@ -4272,6 +4274,7 @@ export const galleryMediaByPage: Record<string, GalleryMediaSection[]> = {
       ]
     },
     {
+      "id": "sortida-cerdanya-2026",
       "title": "Sortida a Cerdanya 29/03/2026",
       "sourceFolder": "phocagallery/sortides/Any_2026/Sortida_Cerdanya_29_03",
       "images": [
@@ -4338,7 +4341,8 @@ export const galleryMediaByPage: Record<string, GalleryMediaSection[]> = {
       ]
     },
     {
-      "title": "2n Cars & Coffee",
+      "id": "cars-coffee-2026-04-19",
+      "title": "2n Cars & Coffee 19/04/2026",
       "sourceFolder": "phocagallery/sortides/Any_2026/2_Cars_",
       "images": [
         {
