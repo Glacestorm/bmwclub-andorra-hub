@@ -8,6 +8,7 @@ import { LanguageCode } from "@/lib/i18n";
 import { bmwContent } from "@/content/bmwContent";
 import { galleryMediaByPage } from "@/content/galleryMedia";
 import { mergeGallerySections, usePublishedGallerySections } from "@/lib/clubCms";
+import { translateText } from "@/lib/siteTranslations";
 
 const translations: Record<LanguageCode, Record<string, string>> = {
   ca: {
@@ -190,7 +191,7 @@ const Galeria = () => {
                       </div>
                     </div>
 
-                    <h3 className="mt-6 text-3xl font-bold text-balance">{group.title}</h3>
+                    <h3 className="mt-6 text-3xl font-bold text-balance">{translateText(language, group.title)}</h3>
 
                     <div className="mt-6 grid gap-3 flex-1">
                       {group.children?.map((child) => (
@@ -200,7 +201,7 @@ const Galeria = () => {
                           className={`rounded-[1.25rem] border p-4 transition-base ${group.pageKey === "historiques" ? "border-white/10 bg-white/6 hover:bg-white/10 text-white/85" : "border-slate-200 bg-white/70 hover:bg-white text-slate-700"}`}
                         >
                           <div className="flex items-center justify-between gap-4">
-                            <span className="font-medium">{child.title}</span>
+                            <span className="font-medium">{translateText(language, child.title)}</span>
                             <ArrowRight className="h-4 w-4 shrink-0" />
                           </div>
                         </Link>

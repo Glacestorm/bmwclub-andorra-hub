@@ -3715,32 +3715,32 @@ export const galleryMediaByPage: Record<string, GalleryMediaSection[]> = {
   "sortides_2026": [
     {
       "id": "cars-coffee-2026-10-18",
-      "title": "5º Cars & Coffee 18/10/2026",
+      "title": "5è Cars & Coffee 18/10/2026",
       "sourceFolder": "phocagallery/sortides/Any_2026/5_Cars_Coffee_18_10",
       "images": [
         {
           "src": "/legacy-mirror/images/phocagallery/sortides/Any_2026/5_Cars_Coffee_18_10/cars-coffee-2026-10-18-01.jpg",
-          "alt": "5º Cars & Coffee 18/10/2026 · Foto 1",
+          "alt": "5è Cars & Coffee 18/10/2026 · Foto 1",
           "filename": "cars-coffee-2026-10-18-01.jpg"
         },
         {
           "src": "/legacy-mirror/images/phocagallery/sortides/Any_2026/5_Cars_Coffee_18_10/cars-coffee-2026-10-18-02.jpg",
-          "alt": "5º Cars & Coffee 18/10/2026 · Foto 2",
+          "alt": "5è Cars & Coffee 18/10/2026 · Foto 2",
           "filename": "cars-coffee-2026-10-18-02.jpg"
         },
         {
           "src": "/legacy-mirror/images/phocagallery/sortides/Any_2026/5_Cars_Coffee_18_10/cars-coffee-2026-10-18-03.jpg",
-          "alt": "5º Cars & Coffee 18/10/2026 · Foto 3",
+          "alt": "5è Cars & Coffee 18/10/2026 · Foto 3",
           "filename": "cars-coffee-2026-10-18-03.jpg"
         },
         {
           "src": "/legacy-mirror/images/phocagallery/sortides/Any_2026/5_Cars_Coffee_18_10/cars-coffee-2026-10-18-04.jpg",
-          "alt": "5º Cars & Coffee 18/10/2026 · Foto 4",
+          "alt": "5è Cars & Coffee 18/10/2026 · Foto 4",
           "filename": "cars-coffee-2026-10-18-04.jpg"
         },
         {
           "src": "/legacy-mirror/images/phocagallery/sortides/Any_2026/5_Cars_Coffee_18_10/cars-coffee-2026-10-18-05.jpg",
-          "alt": "5º Cars & Coffee 18/10/2026 · Foto 5",
+          "alt": "5è Cars & Coffee 18/10/2026 · Foto 5",
           "filename": "cars-coffee-2026-10-18-05.jpg"
         }
       ]
@@ -4085,92 +4085,92 @@ export const galleryMediaByPage: Record<string, GalleryMediaSection[]> = {
       ]
     },
     {
-      "title": "4º Cars & Coffee 19/07/2026",
+      "title": "4t Cars & Coffee 19/07/2026",
       "sourceFolder": "phocagallery/sortides/Any_2026/4_Cars_Coffee_19_07",
       "images": [
         {
           "src": "/legacy-mirror/images/phocagallery/sortides/Any_2026/4_Cars_Coffee_19_07/cars-coffee-2026-07-19-01.jpg",
-          "alt": "4º Cars & Coffee 19/07/2026 1",
+          "alt": "4t Cars & Coffee 19/07/2026 1",
           "filename": "cars-coffee-2026-07-19-01.jpg"
         },
         {
           "src": "/legacy-mirror/images/phocagallery/sortides/Any_2026/4_Cars_Coffee_19_07/cars-coffee-2026-07-19-02.jpg",
-          "alt": "4º Cars & Coffee 19/07/2026 2",
+          "alt": "4t Cars & Coffee 19/07/2026 2",
           "filename": "cars-coffee-2026-07-19-02.jpg"
         },
         {
           "src": "/legacy-mirror/images/phocagallery/sortides/Any_2026/4_Cars_Coffee_19_07/cars-coffee-2026-07-19-03.jpg",
-          "alt": "4º Cars & Coffee 19/07/2026 3",
+          "alt": "4t Cars & Coffee 19/07/2026 3",
           "filename": "cars-coffee-2026-07-19-03.jpg"
         },
         {
           "src": "/legacy-mirror/images/phocagallery/sortides/Any_2026/4_Cars_Coffee_19_07/cars-coffee-2026-07-19-04.jpg",
-          "alt": "4º Cars & Coffee 19/07/2026 4",
+          "alt": "4t Cars & Coffee 19/07/2026 4",
           "filename": "cars-coffee-2026-07-19-04.jpg"
         },
         {
           "src": "/legacy-mirror/images/phocagallery/sortides/Any_2026/4_Cars_Coffee_19_07/cars-coffee-2026-07-19-05.jpg",
-          "alt": "4º Cars & Coffee 19/07/2026 5",
+          "alt": "4t Cars & Coffee 19/07/2026 5",
           "filename": "cars-coffee-2026-07-19-05.jpg"
         },
         {
           "src": "/legacy-mirror/images/phocagallery/sortides/Any_2026/4_Cars_Coffee_19_07/cars-coffee-2026-07-19-06.jpg",
-          "alt": "4º Cars & Coffee 19/07/2026 6",
+          "alt": "4t Cars & Coffee 19/07/2026 6",
           "filename": "cars-coffee-2026-07-19-06.jpg"
         },
         {
           "src": "/legacy-mirror/images/phocagallery/sortides/Any_2026/4_Cars_Coffee_19_07/cars-coffee-2026-07-19-07.jpg",
-          "alt": "4º Cars & Coffee 19/07/2026 7",
+          "alt": "4t Cars & Coffee 19/07/2026 7",
           "filename": "cars-coffee-2026-07-19-07.jpg"
         },
         {
           "src": "/legacy-mirror/images/phocagallery/sortides/Any_2026/4_Cars_Coffee_19_07/cars-coffee-2026-07-19-08.jpg",
-          "alt": "4º Cars & Coffee 19/07/2026 8",
+          "alt": "4t Cars & Coffee 19/07/2026 8",
           "filename": "cars-coffee-2026-07-19-08.jpg"
         },
         {
           "src": "/legacy-mirror/images/phocagallery/sortides/Any_2026/4_Cars_Coffee_19_07/cars-coffee-2026-07-19-09.jpg",
-          "alt": "4º Cars & Coffee 19/07/2026 9",
+          "alt": "4t Cars & Coffee 19/07/2026 9",
           "filename": "cars-coffee-2026-07-19-09.jpg"
         },
         {
           "src": "/legacy-mirror/images/phocagallery/sortides/Any_2026/4_Cars_Coffee_19_07/cars-coffee-2026-07-19-10.jpg",
-          "alt": "4º Cars & Coffee 19/07/2026 10",
+          "alt": "4t Cars & Coffee 19/07/2026 10",
           "filename": "cars-coffee-2026-07-19-10.jpg"
         },
         {
           "src": "/legacy-mirror/images/phocagallery/sortides/Any_2026/4_Cars_Coffee_19_07/cars-coffee-2026-07-19-11.jpg",
-          "alt": "4º Cars & Coffee 19/07/2026 11",
+          "alt": "4t Cars & Coffee 19/07/2026 11",
           "filename": "cars-coffee-2026-07-19-11.jpg"
         },
         {
           "src": "/legacy-mirror/images/phocagallery/sortides/Any_2026/4_Cars_Coffee_19_07/cars-coffee-2026-07-19-12.jpg",
-          "alt": "4º Cars & Coffee 19/07/2026 12",
+          "alt": "4t Cars & Coffee 19/07/2026 12",
           "filename": "cars-coffee-2026-07-19-12.jpg"
         },
         {
           "src": "/legacy-mirror/images/phocagallery/sortides/Any_2026/4_Cars_Coffee_19_07/cars-coffee-2026-07-19-13.jpg",
-          "alt": "4º Cars & Coffee 19/07/2026 13",
+          "alt": "4t Cars & Coffee 19/07/2026 13",
           "filename": "cars-coffee-2026-07-19-13.jpg"
         },
         {
           "src": "/legacy-mirror/images/phocagallery/sortides/Any_2026/4_Cars_Coffee_19_07/cars-coffee-2026-07-19-14.jpg",
-          "alt": "4º Cars & Coffee 19/07/2026 14",
+          "alt": "4t Cars & Coffee 19/07/2026 14",
           "filename": "cars-coffee-2026-07-19-14.jpg"
         },
         {
           "src": "/legacy-mirror/images/phocagallery/sortides/Any_2026/4_Cars_Coffee_19_07/cars-coffee-2026-07-19-15.jpg",
-          "alt": "4º Cars & Coffee 19/07/2026 15",
+          "alt": "4t Cars & Coffee 19/07/2026 15",
           "filename": "cars-coffee-2026-07-19-15.jpg"
         },
         {
           "src": "/legacy-mirror/images/phocagallery/sortides/Any_2026/4_Cars_Coffee_19_07/cars-coffee-2026-07-19-16.jpg",
-          "alt": "4º Cars & Coffee 19/07/2026 16",
+          "alt": "4t Cars & Coffee 19/07/2026 16",
           "filename": "cars-coffee-2026-07-19-16.jpg"
         },
         {
           "src": "/legacy-mirror/images/phocagallery/sortides/Any_2026/4_Cars_Coffee_19_07/cars-coffee-2026-07-19-17.jpg",
-          "alt": "4º Cars & Coffee 19/07/2026 17",
+          "alt": "4t Cars & Coffee 19/07/2026 17",
           "filename": "cars-coffee-2026-07-19-17.jpg"
         }
       ]

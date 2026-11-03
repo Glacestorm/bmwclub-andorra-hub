@@ -65,8 +65,49 @@ const hasKnownMonth = (event: ClubEvent) => hasExactDay(event) || /\d{1,2}\/\d{4
 // Weather for an event only makes sense when the actual day is known.
 export const hasExactEventDate = (event: ClubEvent) => Boolean(event.start) && hasExactDay(event);
 
+const yearOnlyLabelByLanguage: Record<LanguageCode, (year: string) => string> = {
+  ca: (year) => `Any ${year}`,
+  es: (year) => `Año ${year}`,
+  fr: (year) => `Année ${year}`,
+  en: (year) => `Year ${year}`,
+  pt: (year) => `Ano ${year}`,
+  de: (year) => `Jahr ${year}`,
+  ru: (year) => `${year} год`,
+};
+
+const noExactDateLabelByLanguage: Record<LanguageCode, string> = {
+  ca: "Sense data exacta",
+  es: "Sin fecha exacta",
+  fr: "Sans date exacte",
+  en: "No exact date",
+  pt: "Sem data exata",
+  de: "Ohne genaues Datum",
+  ru: "Без точной даты",
+};
+
+// displayDate is written in Catalan ("Any 2016", "11/2021"); translate the known formats and keep anything else as written.
+export const localizeDisplayDate = (displayDate: string, language: LanguageCode = defaultLanguage) => {
+  const value = displayDate.trim();
+
+  const yearOnly = value.match(/^any\s+(\d{4})$/i);
+  if (yearOnly) return yearOnlyLabelByLanguage[language](yearOnly[1]);
+
+  const monthYear = value.match(/^(\d{1,2})\/(\d{4})$/);
+  if (monthYear) {
+    const month = Number(monthYear[1]);
+    if (month >= 1 && month <= 12) {
+      const formatted = new Intl.DateTimeFormat(localeByLanguage[language], { month: "long", year: "numeric", timeZone: "UTC" }).format(
+        new Date(Date.UTC(Number(monthYear[2]), month - 1, 1)),
+      );
+      return formatted.charAt(0).toLocaleUpperCase(localeByLanguage[language]) + formatted.slice(1);
+    }
+  }
+
+  return displayDate;
+};
+
 export const formatEventDateRange = (event: ClubEvent, language: LanguageCode = defaultLanguage) => {
-  if (!event.start || !hasExactDay(event)) return event.displayDate;
+  if (!event.start || !hasExactDay(event)) return localizeDisplayDate(event.displayDate, language);
 
   const start = new Date(event.start);
   const end = event.end ? new Date(event.end) : null;
@@ -102,7 +143,7 @@ export const formatEventDateRange = (event: ClubEvent, language: LanguageCode = 
 };
 
 export const formatMonthGroup = (event: ClubEvent, language: LanguageCode = defaultLanguage) => {
-  if (!event.start) return "Sense data exacta";
+  if (!event.start) return noExactDateLabelByLanguage[language];
   if (!hasKnownMonth(event)) {
     return new Intl.DateTimeFormat(localeByLanguage[language], { year: "numeric", timeZone: ANDORRA_TZ }).format(new Date(event.start));
   }

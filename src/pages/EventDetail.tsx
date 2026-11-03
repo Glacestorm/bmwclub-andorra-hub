@@ -18,6 +18,7 @@ import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { RouteWeatherPanel } from "@/components/calendar/RouteWeatherPanel";
 import { localizeEventNote } from "@/components/calendar/eventNotes";
+import { getEventDestinationLabel, getLocationLabel } from "@/components/calendar/calendarI18n";
 import { useLanguage } from "@/components/LanguageProvider";
 import { LanguageCode } from "@/lib/i18n";
 import { getLocalizedText } from "@/lib/localized";
@@ -279,7 +280,8 @@ const EventDetail = () => {
   const relatedArchive = meta ? archiveItems.filter((item) => meta.archiveIds?.includes(item.id)) : [];
   const status = event ? getEventStatus(event) : "historic";
   const statusLabel = status === "live" ? t.live : status === "upcoming" ? t.upcoming : status === "done" ? t.done : t.historic;
-  const destination = event?.destination?.label ?? event?.destination?.name ?? event?.source.label ?? event?.source.name ?? "";
+  const destination = event ? getEventDestinationLabel(event, language) : "";
+  const origin = event ? getLocationLabel(event.source, language) : "";
   const heroImage = event?.heroImage || meta?.heroImage || previewImages[0]?.src;
   const countdown = useMemo(() => {
     if (!event) return null;
@@ -336,7 +338,7 @@ const EventDetail = () => {
                 <div className={`grid gap-3 ${countdown ? "sm:grid-cols-2" : ""}`}>
                   <div className="rounded-2xl border border-white/10 bg-white/8 p-4">
                     <p className="text-xs uppercase tracking-[0.22em] text-white/55">{t.route}</p>
-                    <p className="mt-2 font-semibold">{event.source.label ?? event.source.name} → {destination}</p>
+                    <p className="mt-2 font-semibold">{origin} → {destination}</p>
                   </div>
                   {countdown ? (
                     <div className="rounded-2xl border border-white/10 bg-white/8 p-4">
@@ -372,7 +374,7 @@ const EventDetail = () => {
                 <div className="grid sm:grid-cols-2 gap-4">
                   <div className="rounded-2xl bg-secondary/70 p-4">
                     <div className="flex items-center gap-2 text-sm text-muted-foreground"><MapPin className="h-4 w-4" /> {t.source}</div>
-                    <p className="mt-2 font-semibold">{event.source.label ?? event.source.name}</p>
+                    <p className="mt-2 font-semibold">{origin}</p>
                   </div>
                   <div className="rounded-2xl bg-secondary/70 p-4">
                     <div className="flex items-center gap-2 text-sm text-muted-foreground"><Flag className="h-4 w-4" /> {t.destination}</div>

@@ -4,7 +4,8 @@ import { PageShell } from "@/components/PageShell";
 import { Card } from "@/components/ui/card";
 import { CountdownToNextEvent } from "@/components/calendar/CountdownToNextEvent";
 import { RouteWeatherPanel } from "@/components/calendar/RouteWeatherPanel";
-import { formatEventDateRange, getNextEventFromList, hasExactEventDate } from "@/lib/calendar";
+import { getEventCategoryLabel, getLocationLabel } from "@/components/calendar/calendarI18n";
+import { formatEventDateRange, getNextEventFromList, hasExactEventDate, localizeDisplayDate } from "@/lib/calendar";
 import { useLanguage } from "@/components/LanguageProvider";
 import { LanguageCode } from "@/lib/i18n";
 import { fallbackCalendarYears, getCalendarYearsFromEvents, useMergedEvents } from "@/lib/clubCms";
@@ -72,8 +73,8 @@ const Meteo = () => {
               {selectedEvent ? (
                 <div className="mt-6 space-y-3">
                   <div className="flex items-center gap-3 text-sm text-muted-foreground"><CalendarDays className="h-4 w-4 text-primary" /> {formatEventDateRange(selectedEvent, language)}</div>
-                  <div className="flex items-center gap-3 text-sm text-muted-foreground"><MapPin className="h-4 w-4 text-primary" /> {selectedEvent.source.name}{selectedEvent.destination ? ` → ${selectedEvent.destination.name}` : ""}</div>
-                  <div className="flex items-center gap-3 text-sm text-muted-foreground"><Flag className="h-4 w-4 text-primary" /> {t.route}: {selectedEvent.category}</div>
+                  <div className="flex items-center gap-3 text-sm text-muted-foreground"><MapPin className="h-4 w-4 text-primary" /> {getLocationLabel(selectedEvent.source, language)}{selectedEvent.destination ? ` → ${getLocationLabel(selectedEvent.destination, language)}` : ""}</div>
+                  <div className="flex items-center gap-3 text-sm text-muted-foreground"><Flag className="h-4 w-4 text-primary" /> {t.route}: {getEventCategoryLabel(selectedEvent.category, language)}</div>
                 </div>
               ) : null}
             </Card>
@@ -92,7 +93,7 @@ const Meteo = () => {
                 <p className="text-muted-foreground">{t.chooseDesc}</p>
               </div>
               <select value={selectedId} onChange={(event) => setSelectedId(event.target.value)} className="mt-5 w-full rounded-2xl border border-input bg-background px-4 py-3 text-sm">
-                {availableEvents.map((event) => <option key={event.id} value={event.id}>{event.year} · {event.title} · {event.displayDate}</option>)}
+                {availableEvents.map((event) => <option key={event.id} value={event.id}>{event.year} · {event.title} · {localizeDisplayDate(event.displayDate, language)}</option>)}
               </select>
               {selectedEvent ? <div className="mt-4 text-sm text-muted-foreground"><strong>{selectedEvent.title}</strong> · {formatEventDateRange(selectedEvent, language)}</div> : null}
             </Card>

@@ -2,8 +2,8 @@ import { Link } from "react-router-dom";
 import { ArrowUpRight, CalendarDays, CloudSun, Flag, FolderArchive } from "lucide-react";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { yearLabels } from "@/content/calendarData";
 import { CountdownToNextEvent } from "@/components/calendar/CountdownToNextEvent";
+import { getCalendarYearTitle } from "@/components/calendar/calendarI18n";
 import { getEventsByYearFromList } from "@/lib/calendar";
 import { useLanguage } from "@/components/LanguageProvider";
 import { LanguageCode } from "@/lib/i18n";
@@ -64,7 +64,7 @@ export const CalendarLanding = () => {
                 <Flag className="h-5 w-5" />
                 <p className="text-xs uppercase tracking-[0.25em] font-semibold">{t.spotlight}</p>
               </div>
-              <h2 className="mt-4 text-3xl font-bold text-balance">2026 · {yearLabels[2026] ?? `Calendari 2026`}</h2>
+              <h2 className="mt-4 text-3xl font-bold text-balance">2026 · {getCalendarYearTitle(2026, language)}</h2>
               <p className="mt-4 text-muted-foreground">{t.spotlightBody}</p>
               <div className="mt-6 space-y-3">
                 <div className="premium-card rounded-2xl border-0 p-4 shadow-sm">
@@ -96,7 +96,7 @@ export const CalendarLanding = () => {
                   <div className="flex items-start justify-between gap-4">
                     <div>
                       <p className="text-xs uppercase tracking-[0.25em] text-primary">{year}</p>
-                      <h2 className="mt-2 text-2xl font-bold text-balance">{yearLabels[year] ?? `Calendari ${year}`}</h2>
+                      <h2 className="mt-2 text-2xl font-bold text-balance">{getCalendarYearTitle(year, language)}</h2>
                     </div>
                     <span className="stat-pill">{eventsForYear.length}</span>
                   </div>

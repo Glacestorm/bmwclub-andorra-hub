@@ -705,7 +705,7 @@ export const clubEvents: ClubEvent[] = [
   {
     id: "cars-coffee-2026-07-19",
     year: 2026,
-    title: "4º Cars & Coffee",
+    title: "4t Cars & Coffee",
     start: "2026-07-19T08:00:00+02:00",
     end: "2026-07-19T12:30:00+02:00",
     displayDate: "19/07/2026",
@@ -718,7 +718,7 @@ export const clubEvents: ClubEvent[] = [
   {
     id: "cars-coffee-2026-10-18",
     year: 2026,
-    title: "5º Cars & Coffee",
+    title: "5è Cars & Coffee",
     start: "2026-10-18T07:00:00+02:00",
     end: "2026-10-18T12:30:00+02:00",
     displayDate: "18/10/2026",

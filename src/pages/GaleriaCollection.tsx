@@ -9,6 +9,7 @@ import { galleryMediaByPage } from "@/content/galleryMedia";
 import { useLanguage } from "@/components/LanguageProvider";
 import { LanguageCode } from "@/lib/i18n";
 import { mergeGallerySections, usePublishedGallerySections } from "@/lib/clubCms";
+import { translateText } from "@/lib/siteTranslations";
 
 const pageByPath: Record<string, keyof typeof bmwContent> = {
   "/galeria/historiques": "historiques",
@@ -124,8 +125,8 @@ const GaleriaCollection = () => {
                   <Images className="h-4 w-4" />
                   {t.gallery}
                 </div>
-                <h1 className="mt-5 text-4xl md:text-6xl font-bold text-balance">{albumId && sections[0] ? sections[0].title : page.hero.title}</h1>
-                {page.hero.subtitle ? <p className="mt-5 max-w-3xl text-lg text-white/76">{page.hero.subtitle}</p> : null}
+                <h1 className="mt-5 text-4xl md:text-6xl font-bold text-balance">{translateText(language, albumId && sections[0] ? sections[0].title : page.hero.title)}</h1>
+                {page.hero.subtitle ? <p className="mt-5 max-w-3xl text-lg text-white/76">{translateText(language, page.hero.subtitle)}</p> : null}
                 <div className="mt-8 flex flex-wrap gap-3">
                   <NavigateButton href="/galeria" label={t.back} />
                 </div>
@@ -174,7 +175,7 @@ const GaleriaCollection = () => {
             <div className="grid md:grid-cols-2 gap-6">
               {page.groups.map((group) => (
                 <Card key={group.href} className="premium-card border-0 rounded-[2rem] p-6 shadow-sm">
-                  <h2 className="text-2xl font-bold text-balance">{group.title}</h2>
+                  <h2 className="text-2xl font-bold text-balance">{translateText(language, group.title)}</h2>
                   <div className="mt-5"><NavigateButton href={group.href} label={t.openMedia} /></div>
                 </Card>
               ))}

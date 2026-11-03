@@ -29,6 +29,7 @@ import {
 import { ClubEvent, ClubLocation } from "@/content/calendarData";
 import { getEventEnd, getEventStart, isForecastWindowOpen } from "@/lib/calendar";
 import { useLanguage } from "@/components/LanguageProvider";
+import { getLocationLabel, getWeatherConditionLabel, localizeLocationName } from "@/components/calendar/calendarI18n";
 import { LanguageCode, localeByLanguage } from "@/lib/i18n";
 import { cn } from "@/lib/utils";
 
@@ -39,7 +40,6 @@ type WeatherPayload = {
   kind: WeatherKind;
   location: ClubLocation;
   summary?: {
-    label: string;
     weatherCode?: number;
     tempMax?: number;
     tempMin?: number;
@@ -57,16 +57,14 @@ type WeatherPayload = {
 };
 
 const uiTranslations: Record<LanguageCode, Record<string, string>> = {
-  ca: { title: "Meteo origen / destí", subtitle: "El temps a l'origen i al destí de la sortida. El pronòstic detallat està disponible des de 16 dies abans.", origin: "Origen", destination: "Destí", loading: "Carregant meteo…", unavailable: "Sense dades disponibles encara.", current: "Ara", humidity: "Humitat", precipitation: "Precipitació", wind: "Vent", sunrise: "Sortida del sol", sunset: "Posta de sol", liveNote: "Pronòstic viu per al dia de la sortida.", archiveNote: "Dades d'arxiu per al dia de la sortida.", exactDateMissing: "Sense data horària prou precisa per calcular la meteo d'aquesta ruta.", tooFar: "El pronòstic detallat s'activarà quan la sortida entri dins de la finestra de 16 dies.", error: "No s'ha pogut carregar la meteo en viu ara mateix.", forecast: "Pronòstic", archive: "Arxiu", details: "Més informació", feelsLike: "Sensació", thermalRange: "Amplitud", location: "Ubicació", openDetails: "Toca per ampliar", probability: "Probabilitat", condition: "Condició", updatedView: "Vista ampliada", currentWind: "Vent actual" },
-  es: { title: "Meteo origen / destino", subtitle: "El tiempo en el origen y en el destino de la salida. El pronóstico detallado está disponible desde 16 días antes.", origin: "Origen", destination: "Destino", loading: "Cargando meteo…", unavailable: "Todavía no hay datos disponibles.", current: "Ahora", humidity: "Humedad", precipitation: "Precipitación", wind: "Viento", sunrise: "Salida del sol", sunset: "Puesta del sol", liveNote: "Pronóstico en vivo para el día de la salida.", archiveNote: "Datos de archivo para el día de la salida.", exactDateMissing: "No hay suficiente precisión horaria para calcular la meteo de esta ruta.", tooFar: "El pronóstico detallado se activará cuando la salida entre dentro de la ventana de 16 días.", error: "No se ha podido cargar la meteo en vivo ahora mismo.", forecast: "Pronóstico", archive: "Archivo", details: "Más información", feelsLike: "Sensación", thermalRange: "Amplitud", location: "Ubicación", openDetails: "Pulsa para ampliar", probability: "Probabilidad", condition: "Condición", updatedView: "Vista ampliada", currentWind: "Viento actual" },
-  fr: { title: "Météo origine / destination", subtitle: "La météo au départ et à l'arrivée de la sortie. La prévision détaillée est disponible 16 jours avant.", origin: "Origine", destination: "Destination", loading: "Chargement météo…", unavailable: "Aucune donnée disponible pour le moment.", current: "Maintenant", humidity: "Humidité", precipitation: "Précipitations", wind: "Vent", sunrise: "Lever du soleil", sunset: "Coucher du soleil", liveNote: "Prévision en direct pour le jour de la sortie.", archiveNote: "Données d'archive pour le jour de la sortie.", exactDateMissing: "La date horaire n'est pas assez précise pour calculer la météo de cet itinéraire.", tooFar: "La prévision détaillée s'activera lorsque la sortie entrera dans la fenêtre des 16 jours.", error: "Impossible de charger la météo en direct pour le moment.", forecast: "Prévision", archive: "Archive", details: "Plus d'informations", feelsLike: "Ressenti", thermalRange: "Amplitude", location: "Lieu", openDetails: "Touchez pour agrandir", probability: "Probabilité", condition: "Condition", updatedView: "Vue détaillée", currentWind: "Vent actuel" },
-  en: { title: "Origin / destination weather", subtitle: "Weather at the start and destination of the outing. The detailed forecast is available from 16 days before.", origin: "Origin", destination: "Destination", loading: "Loading weather…", unavailable: "No data available yet.", current: "Now", humidity: "Humidity", precipitation: "Precipitation", wind: "Wind", sunrise: "Sunrise", sunset: "Sunset", liveNote: "Live forecast for the outing day.", archiveNote: "Archive data for the outing day.", exactDateMissing: "There is not enough timing precision to calculate the weather for this route.", tooFar: "The detailed forecast will activate when the outing enters the 16-day window.", error: "The live weather could not be loaded right now.", forecast: "Forecast", archive: "Archive", details: "More info", feelsLike: "Feels like", thermalRange: "Range", location: "Location", openDetails: "Tap to expand", probability: "Probability", condition: "Condition", updatedView: "Expanded view", currentWind: "Current wind" },
-  pt: { title: "Meteorologia origem / destino", subtitle: "O tempo na origem e no destino do passeio. A previsão detalhada fica disponível 16 dias antes.", origin: "Origem", destination: "Destino", loading: "A carregar meteorologia…", unavailable: "Ainda não há dados disponíveis.", current: "Agora", humidity: "Humidade", precipitation: "Precipitação", wind: "Vento", sunrise: "Nascer do sol", sunset: "Pôr do sol", liveNote: "Previsão em tempo real para o dia do passeio.", archiveNote: "Dados de arquivo para o dia do passeio.", exactDateMissing: "Não existe precisão horária suficiente para calcular a meteorologia desta rota.", tooFar: "A previsão detalhada será ativada quando o passeio entrar na janela de 16 dias.", error: "Não foi possível carregar a meteorologia em tempo real neste momento.", forecast: "Previsão", archive: "Arquivo", details: "Mais informação", feelsLike: "Sensação", thermalRange: "Amplitude", location: "Localização", openDetails: "Toque para ampliar", probability: "Probabilidade", condition: "Condição", updatedView: "Vista ampliada", currentWind: "Vento atual" },
-  de: { title: "Wetter Start / Ziel", subtitle: "Das Wetter an Start und Ziel der Ausfahrt. Die detaillierte Vorhersage ist ab 16 Tagen vorher verfügbar.", origin: "Start", destination: "Ziel", loading: "Wetter wird geladen…", unavailable: "Noch keine Daten verfügbar.", current: "Jetzt", humidity: "Luftfeuchtigkeit", precipitation: "Niederschlag", wind: "Wind", sunrise: "Sonnenaufgang", sunset: "Sonnenuntergang", liveNote: "Live-Vorhersage für den Tag der Ausfahrt.", archiveNote: "Archivdaten für den Tag der Ausfahrt.", exactDateMissing: "Es gibt nicht genügend zeitliche Präzision, um das Wetter für diese Route zu berechnen.", tooFar: "Die Detailvorhersage wird aktiviert, sobald die Ausfahrt in das 16-Tage-Fenster fällt.", error: "Das Live-Wetter konnte gerade nicht geladen werden.", forecast: "Prognose", archive: "Archiv", details: "Mehr Informationen", feelsLike: "Gefühlt", thermalRange: "Spanne", location: "Ort", openDetails: "Zum Erweitern tippen", probability: "Wahrscheinlichkeit", condition: "Bedingung", updatedView: "Erweiterte Ansicht", currentWind: "Aktueller Wind" },
-  ru: { title: "Погода старта / финиша", subtitle: "Погода в точке старта и на финише выезда. Подробный прогноз доступен за 16 дней до выезда.", origin: "Старт", destination: "Финиш", loading: "Загрузка погоды…", unavailable: "Данные пока недоступны.", current: "Сейчас", humidity: "Влажность", precipitation: "Осадки", wind: "Ветер", sunrise: "Восход", sunset: "Закат", liveNote: "Актуальный прогноз на день выезда.", archiveNote: "Архивные данные за день выезда.", exactDateMissing: "Недостаточно точных данных по времени, чтобы рассчитать погоду для этого маршрута.", tooFar: "Подробный прогноз появится, когда выезд войдёт в 16-дневное окно прогноза.", error: "Не удалось загрузить погоду прямо сейчас.", forecast: "Прогноз", archive: "Архив", details: "Подробнее", feelsLike: "Ощущается", thermalRange: "Размах", location: "Локация", openDetails: "Нажмите для деталей", probability: "Вероятность", condition: "Состояние", updatedView: "Подробный вид", currentWind: "Текущий ветер" },
+  ca: { title: "Meteo origen / destí", subtitle: "El temps a l'origen i al destí de la sortida. El pronòstic detallat està disponible des de 16 dies abans.", origin: "Origen", destination: "Destí", loading: "Carregant meteo…", unavailable: "Sense dades disponibles encara.", current: "Ara", humidity: "Humitat", precipitation: "Precipitació", wind: "Vent", sunrise: "Sortida del sol", sunset: "Posta de sol", liveNote: "Pronòstic viu per al dia de la sortida.", archiveNote: "Dades d'arxiu per al dia de la sortida.", exactDateMissing: "Sense data horària prou precisa per calcular la meteo d'aquesta ruta.", tooFar: "El pronòstic detallat s'activarà quan la sortida entri dins de la finestra de 16 dies.", error: "No s'ha pogut carregar la meteo en viu ara mateix.", forecast: "Pronòstic", archive: "Arxiu", details: "Més informació", feelsLike: "Sensació", thermalRange: "Amplitud", location: "Ubicació", openDetails: "Toca per ampliar", probability: "Probabilitat", condition: "Condició", updatedView: "Vista ampliada", currentWind: "Vent actual", min: "mín", max: "màx" },
+  es: { title: "Meteo origen / destino", subtitle: "El tiempo en el origen y en el destino de la salida. El pronóstico detallado está disponible desde 16 días antes.", origin: "Origen", destination: "Destino", loading: "Cargando meteo…", unavailable: "Todavía no hay datos disponibles.", current: "Ahora", humidity: "Humedad", precipitation: "Precipitación", wind: "Viento", sunrise: "Salida del sol", sunset: "Puesta del sol", liveNote: "Pronóstico en vivo para el día de la salida.", archiveNote: "Datos de archivo para el día de la salida.", exactDateMissing: "No hay suficiente precisión horaria para calcular la meteo de esta ruta.", tooFar: "El pronóstico detallado se activará cuando la salida entre dentro de la ventana de 16 días.", error: "No se ha podido cargar la meteo en vivo ahora mismo.", forecast: "Pronóstico", archive: "Archivo", details: "Más información", feelsLike: "Sensación", thermalRange: "Amplitud", location: "Ubicación", openDetails: "Pulsa para ampliar", probability: "Probabilidad", condition: "Condición", updatedView: "Vista ampliada", currentWind: "Viento actual", min: "mín", max: "máx" },
+  fr: { title: "Météo origine / destination", subtitle: "La météo au départ et à l'arrivée de la sortie. La prévision détaillée est disponible 16 jours avant.", origin: "Origine", destination: "Destination", loading: "Chargement météo…", unavailable: "Aucune donnée disponible pour le moment.", current: "Maintenant", humidity: "Humidité", precipitation: "Précipitations", wind: "Vent", sunrise: "Lever du soleil", sunset: "Coucher du soleil", liveNote: "Prévision en direct pour le jour de la sortie.", archiveNote: "Données d'archive pour le jour de la sortie.", exactDateMissing: "La date horaire n'est pas assez précise pour calculer la météo de cet itinéraire.", tooFar: "La prévision détaillée s'activera lorsque la sortie entrera dans la fenêtre des 16 jours.", error: "Impossible de charger la météo en direct pour le moment.", forecast: "Prévision", archive: "Archive", details: "Plus d'informations", feelsLike: "Ressenti", thermalRange: "Amplitude", location: "Lieu", openDetails: "Touchez pour agrandir", probability: "Probabilité", condition: "Condition", updatedView: "Vue détaillée", currentWind: "Vent actuel", min: "min", max: "max" },
+  en: { title: "Origin / destination weather", subtitle: "Weather at the start and destination of the outing. The detailed forecast is available from 16 days before.", origin: "Origin", destination: "Destination", loading: "Loading weather…", unavailable: "No data available yet.", current: "Now", humidity: "Humidity", precipitation: "Precipitation", wind: "Wind", sunrise: "Sunrise", sunset: "Sunset", liveNote: "Live forecast for the outing day.", archiveNote: "Archive data for the outing day.", exactDateMissing: "There is not enough timing precision to calculate the weather for this route.", tooFar: "The detailed forecast will activate when the outing enters the 16-day window.", error: "The live weather could not be loaded right now.", forecast: "Forecast", archive: "Archive", details: "More info", feelsLike: "Feels like", thermalRange: "Range", location: "Location", openDetails: "Tap to expand", probability: "Probability", condition: "Condition", updatedView: "Expanded view", currentWind: "Current wind", min: "min", max: "max" },
+  pt: { title: "Meteorologia origem / destino", subtitle: "O tempo na origem e no destino do passeio. A previsão detalhada fica disponível 16 dias antes.", origin: "Origem", destination: "Destino", loading: "A carregar meteorologia…", unavailable: "Ainda não há dados disponíveis.", current: "Agora", humidity: "Humidade", precipitation: "Precipitação", wind: "Vento", sunrise: "Nascer do sol", sunset: "Pôr do sol", liveNote: "Previsão em tempo real para o dia do passeio.", archiveNote: "Dados de arquivo para o dia do passeio.", exactDateMissing: "Não existe precisão horária suficiente para calcular a meteorologia desta rota.", tooFar: "A previsão detalhada será ativada quando o passeio entrar na janela de 16 dias.", error: "Não foi possível carregar a meteorologia em tempo real neste momento.", forecast: "Previsão", archive: "Arquivo", details: "Mais informação", feelsLike: "Sensação", thermalRange: "Amplitude", location: "Localização", openDetails: "Toque para ampliar", probability: "Probabilidade", condition: "Condição", updatedView: "Vista ampliada", currentWind: "Vento atual", min: "mín", max: "máx" },
+  de: { title: "Wetter Start / Ziel", subtitle: "Das Wetter an Start und Ziel der Ausfahrt. Die detaillierte Vorhersage ist ab 16 Tagen vorher verfügbar.", origin: "Start", destination: "Ziel", loading: "Wetter wird geladen…", unavailable: "Noch keine Daten verfügbar.", current: "Jetzt", humidity: "Luftfeuchtigkeit", precipitation: "Niederschlag", wind: "Wind", sunrise: "Sonnenaufgang", sunset: "Sonnenuntergang", liveNote: "Live-Vorhersage für den Tag der Ausfahrt.", archiveNote: "Archivdaten für den Tag der Ausfahrt.", exactDateMissing: "Es gibt nicht genügend zeitliche Präzision, um das Wetter für diese Route zu berechnen.", tooFar: "Die Detailvorhersage wird aktiviert, sobald die Ausfahrt in das 16-Tage-Fenster fällt.", error: "Das Live-Wetter konnte gerade nicht geladen werden.", forecast: "Prognose", archive: "Archiv", details: "Mehr Informationen", feelsLike: "Gefühlt", thermalRange: "Spanne", location: "Ort", openDetails: "Zum Erweitern tippen", probability: "Wahrscheinlichkeit", condition: "Bedingung", updatedView: "Erweiterte Ansicht", currentWind: "Aktueller Wind", min: "min", max: "max" },
+  ru: { title: "Погода старта / финиша", subtitle: "Погода в точке старта и на финише выезда. Подробный прогноз доступен за 16 дней до выезда.", origin: "Старт", destination: "Финиш", loading: "Загрузка погоды…", unavailable: "Данные пока недоступны.", current: "Сейчас", humidity: "Влажность", precipitation: "Осадки", wind: "Ветер", sunrise: "Восход", sunset: "Закат", liveNote: "Актуальный прогноз на день выезда.", archiveNote: "Архивные данные за день выезда.", exactDateMissing: "Недостаточно точных данных по времени, чтобы рассчитать погоду для этого маршрута.", tooFar: "Подробный прогноз появится, когда выезд войдёт в 16-дневное окно прогноза.", error: "Не удалось загрузить погоду прямо сейчас.", forecast: "Прогноз", archive: "Архив", details: "Подробнее", feelsLike: "Ощущается", thermalRange: "Размах", location: "Локация", openDetails: "Нажмите для деталей", probability: "Вероятность", condition: "Состояние", updatedView: "Подробный вид", currentWind: "Текущий ветер", min: "мин", max: "макс" },
 };
-
-const weatherCodeMap: Record<number, string> = { 0: "Cel net", 1: "Majoritàriament serè", 2: "Intervals de núvols", 3: "Ennuvolat", 45: "Boira", 48: "Boira gebradora", 51: "Plugim lleuger", 53: "Plugim moderat", 55: "Plugim intens", 61: "Pluja feble", 63: "Pluja moderada", 65: "Pluja intensa", 71: "Neu feble", 73: "Neu moderada", 75: "Neu intensa", 80: "Ruixat feble", 81: "Ruixat moderat", 82: "Ruixat intens", 95: "Tempesta", 96: "Tempesta amb pedra", 99: "Tempesta forta amb pedra" };
 
 const toDateString = (date: Date) => date.toISOString().slice(0, 10);
 
@@ -91,9 +89,9 @@ const weatherCodeToTheme = (code?: number): WeatherTheme => {
   if (code === 1 || code === 2) return "partly";
   if (code === 3) return "cloudy";
   if (code === 45 || code === 48) return "fog";
-  if (code === 51 || code === 53 || code === 55) return "drizzle";
-  if (code === 61 || code === 63 || code === 65 || code === 80 || code === 81 || code === 82) return "rain";
-  if (code === 71 || code === 73 || code === 75) return "snow";
+  if (code === 51 || code === 53 || code === 55 || code === 56 || code === 57) return "drizzle";
+  if (code === 61 || code === 63 || code === 65 || code === 66 || code === 67 || code === 80 || code === 81 || code === 82) return "rain";
+  if (code === 71 || code === 73 || code === 75 || code === 77 || code === 85 || code === 86) return "snow";
   if (code === 95 || code === 96 || code === 99) return "storm";
   return "cloudy";
 };
@@ -177,7 +175,6 @@ const fetchWeather = async (event: ClubEvent, location: ClubLocation, ui: Record
     kind: isPast ? "archive" : "forecast",
     location,
     summary: {
-      label: weatherCodeMap[weatherCode] ?? "Sense classificació",
       weatherCode,
       tempMax: data.daily?.temperature_2m_max?.[idx],
       tempMin: data.daily?.temperature_2m_min?.[idx],
@@ -212,16 +209,19 @@ const WeatherLocationCard = ({ title, payload, language }: { title: string; payl
     return <Card className="rounded-[2rem] border-0 bg-white/72 p-6 shadow-sm"><p className="text-sm text-muted-foreground">{ui.loading}</p></Card>;
   }
 
+  const locationLabel = getLocationLabel(payload.location, language);
+
   if (!payload.summary) {
     return (
       <Card className="rounded-[2rem] border-0 bg-white/72 p-6 shadow-sm">
         <p className="text-xs uppercase tracking-[0.2em] text-primary">{title}</p>
-        <h3 className="mt-3 text-xl font-semibold">{payload.location.label ?? payload.location.name}</h3>
+        <h3 className="mt-3 text-xl font-semibold">{locationLabel}</h3>
         <p className="mt-3 text-sm text-muted-foreground">{payload.note ?? ui.unavailable}</p>
       </Card>
     );
   }
 
+  const conditionLabel = getWeatherConditionLabel(payload.summary.weatherCode, language);
   const theme = weatherCodeToTheme(payload.summary.weatherCode);
   const visual = weatherVisualByTheme[theme];
   const HeroIcon = visual.icon;
@@ -242,7 +242,7 @@ const WeatherLocationCard = ({ title, payload, language }: { title: string; payl
               <span className="rounded-full border border-white/16 bg-white/10 px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.22em] text-white/84">{title}</span>
               <span className={cn("rounded-full px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.22em] text-white/90 backdrop-blur", payload.kind === "forecast" ? "bg-emerald-400/20" : "bg-white/10")}>{payload.kind === "forecast" ? ui.forecast : ui.archive}</span>
             </div>
-            <h3 className="mt-4 text-2xl font-semibold text-white">{payload.location.label ?? payload.location.name}</h3>
+            <h3 className="mt-4 text-2xl font-semibold text-white">{locationLabel}</h3>
             <p className="mt-2 text-sm text-white/72">{payload.note}</p>
           </div>
           <div className={cn("rounded-2xl border border-white/16 bg-gradient-to-br px-3 py-3 text-white/90 shadow-lg backdrop-blur-sm", visual.pill)}>
@@ -252,8 +252,8 @@ const WeatherLocationCard = ({ title, payload, language }: { title: string; payl
 
         <div className="mt-8 space-y-5">
           <div>
-            <p className="text-3xl font-bold leading-none text-white md:text-4xl">{payload.summary.label}</p>
-            <p className="mt-2 text-sm text-white/78">{formatTemp(payload.summary.tempMin)} min · {formatTemp(payload.summary.tempMax)} max</p>
+            <p className="text-3xl font-bold leading-none text-white md:text-4xl">{conditionLabel}</p>
+            <p className="mt-2 text-sm text-white/78">{formatTemp(payload.summary.tempMin)} {ui.min} · {formatTemp(payload.summary.tempMax)} {ui.max}</p>
           </div>
 
           <div className="grid grid-cols-2 gap-3">
@@ -286,7 +286,7 @@ const WeatherLocationCard = ({ title, payload, language }: { title: string; payl
                 <span className="rounded-full border border-white/14 bg-white/10 px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.22em] text-white/82">{title}</span>
                 <span className={cn("rounded-full px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.22em] text-white/90", payload.kind === "forecast" ? "bg-emerald-400/20" : "bg-white/10")}>{payload.kind === "forecast" ? ui.forecast : ui.archive}</span>
               </div>
-              <DialogTitle className="mt-4 text-3xl font-bold text-white">{payload.location.label ?? payload.location.name}</DialogTitle>
+              <DialogTitle className="mt-4 text-3xl font-bold text-white">{locationLabel}</DialogTitle>
               <DialogDescription className="mt-2 max-w-2xl text-white/74">{ui.updatedView} · {payload.note}</DialogDescription>
             </DialogHeader>
 
@@ -295,8 +295,8 @@ const WeatherLocationCard = ({ title, payload, language }: { title: string; payl
                 <div className="flex items-center justify-between gap-4">
                   <div>
                     <p className="text-xs uppercase tracking-[0.22em] text-white/58">{ui.condition}</p>
-                    <p className="mt-2 text-3xl font-bold">{payload.summary.label}</p>
-                    <p className="mt-2 text-sm text-white/70">{formatTemp(payload.summary.tempMin)} min · {formatTemp(payload.summary.tempMax)} max</p>
+                    <p className="mt-2 text-3xl font-bold">{conditionLabel}</p>
+                    <p className="mt-2 text-sm text-white/70">{formatTemp(payload.summary.tempMin)} {ui.min} · {formatTemp(payload.summary.tempMax)} {ui.max}</p>
                   </div>
                   <div className={cn("rounded-3xl border border-white/16 bg-gradient-to-br p-4", visual.pill)}>
                     <HeroIcon className="h-10 w-10 text-white/92" />
@@ -324,7 +324,7 @@ const WeatherLocationCard = ({ title, payload, language }: { title: string; payl
             <div className="mt-4 grid gap-4 md:grid-cols-3">
               <div className="rounded-[1.4rem] border border-white/12 bg-white/6 p-4">
                 <div className="flex items-center gap-2 text-xs uppercase tracking-[0.22em] text-white/58"><MapPin className="h-3.5 w-3.5" />{ui.location}</div>
-                <p className="mt-3 text-sm font-medium text-white">{payload.location.name}</p>
+                <p className="mt-3 text-sm font-medium text-white">{localizeLocationName(payload.location.name, language)}</p>
                 <p className="mt-1 text-xs text-white/60">{formatCoordinate(payload.location.lat)}, {formatCoordinate(payload.location.lon)}</p>
               </div>
               <div className="rounded-[1.4rem] border border-white/12 bg-white/6 p-4">

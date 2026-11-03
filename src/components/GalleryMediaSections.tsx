@@ -9,6 +9,7 @@ import { useLanguage } from "@/components/LanguageProvider";
 import { LanguageCode } from "@/lib/i18n";
 import { ArrowLeft, Camera, ChevronDown, ChevronUp, Images, ExternalLink, Star } from "lucide-react";
 import { savePhotoFeedback, usePhotoFeedback } from "@/lib/clubCms";
+import { translateText } from "@/lib/siteTranslations";
 import { useToast } from "@/hooks/use-toast";
 
 interface GalleryMediaSectionsProps {
@@ -122,7 +123,7 @@ const GallerySectionCard = ({ section, isInitiallyOpen, language }: { section: G
               <Camera className="h-3.5 w-3.5" />
               {context.label}
             </div>
-            <h2 className="mt-4 text-2xl md:text-3xl font-bold text-balance">{section.title}</h2>
+            <h2 className="mt-4 text-2xl md:text-3xl font-bold text-balance">{translateText(language, section.title)}</h2>
             <p className="mt-4 text-sm text-muted-foreground">{context.summary}</p>
           </div>
 
@@ -200,7 +201,7 @@ const GallerySectionCard = ({ section, isInitiallyOpen, language }: { section: G
               </div>
               <div className="p-6 md:p-8 flex flex-col justify-center">
                 <p className="text-xs uppercase tracking-[0.22em] text-primary font-semibold">{t.openArchive}</p>
-                <h3 className="mt-3 text-2xl font-bold text-balance">{section.title}</h3>
+                <h3 className="mt-3 text-2xl font-bold text-balance">{translateText(language, section.title)}</h3>
                 <p className="mt-3 text-muted-foreground">{t.showing} {section.images.length} / {section.images.length} {t.photos}</p>
               </div>
             </div>

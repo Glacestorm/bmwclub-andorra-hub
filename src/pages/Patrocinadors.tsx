@@ -6,6 +6,7 @@ import { Button } from "@/components/ui/button";
 import { useLanguage } from "@/components/LanguageProvider";
 import { sponsorItems, type SponsorItem } from "@/content/sponsorData";
 import { getLocalizedText } from "@/lib/localized";
+import { translateText } from "@/lib/siteTranslations";
 import { LanguageCode } from "@/lib/i18n";
 
 const translations: Record<LanguageCode, Record<string, string>> = {
@@ -124,6 +125,7 @@ const translations: Record<LanguageCode, Record<string, string>> = {
 };
 
 const SponsorLogoPlate = ({ sponsor, dark = false, compact = false }: { sponsor: SponsorItem; dark?: boolean; compact?: boolean }) => {
+  const { language } = useLanguage();
   const logoFit = sponsor.brand.logoFit ?? "standard";
   const isPyrenees = sponsor.id === "pyrenees-andorra";
 
@@ -156,7 +158,7 @@ const SponsorLogoPlate = ({ sponsor, dark = false, compact = false }: { sponsor:
             {sponsor.accent ?? sponsor.name}
           </div>
           <div className="rounded-full px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.18em] max-w-full break-words" style={{ background: sponsor.brand.badge, color: sponsor.brand.text }}>
-          {sponsor.category}
+          {translateText(language, sponsor.category)}
           </div>
         </div>
 
@@ -263,7 +265,7 @@ const Patrocinadors = () => {
                 <div className="relative overflow-hidden rounded-[2.2rem] border p-6 md:p-7" style={{ borderColor: featuredSponsor.brand.border, background: `linear-gradient(160deg, rgba(255,255,255,.08) 0%, rgba(255,255,255,.03) 100%)`, boxShadow: `0 38px 80px -52px ${featuredSponsor.brand.accent}80` }}>
                   <div className="absolute -right-8 top-4 text-[84px] font-bold leading-none opacity-[0.06] hidden md:block">01</div>
                   <div className="relative z-10 flex flex-wrap items-center justify-between gap-3 mb-5">
-                    <div className="text-sm font-semibold text-white/82">{featuredSponsor.category}</div>
+                    <div className="text-sm font-semibold text-white/82">{translateText(language, featuredSponsor.category)}</div>
                     {featuredSponsor.link && (
                       <a href={featuredSponsor.link.href} target="_blank" rel="noreferrer" className="inline-flex items-center gap-2 rounded-full border border-white/12 bg-white/10 px-4 py-2 text-xs font-semibold uppercase tracking-[0.14em] text-white transition-base hover:bg-white/14">
                         {t.openSite}
@@ -276,7 +278,7 @@ const Patrocinadors = () => {
 
                   <div className="rounded-[1.75rem] bg-white text-slate-950 p-6 shadow-elegant mt-5">
                     <div className="text-2xl font-bold text-balance">{featuredSponsor.name}</div>
-                    <div className="mt-2 text-sm text-slate-500 uppercase tracking-[0.2em]">{featuredSponsor.category}</div>
+                    <div className="mt-2 text-sm text-slate-500 uppercase tracking-[0.2em]">{translateText(language, featuredSponsor.category)}</div>
                     {featuredSponsor.benefit && (
                       <div className="mt-6 rounded-[1.5rem] p-5" style={{ background: featuredSponsor.brand.badge }}>
                         <div className="text-xs uppercase tracking-[0.22em] text-primary font-semibold">{t.memberBenefits}</div>

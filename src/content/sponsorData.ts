@@ -66,7 +66,7 @@ export const sponsorItems: SponsorItem[] = [
     id: "coma-hotel",
     name: "Coma Hotel Restaurant Ordino",
     tier: "premium",
-    category: "Hospitality",
+    category: "Hostaleria",
     brand: {
       logoPath: "/sponsors/coma-hotel.svg",
       logoFit: "wide",
@@ -91,7 +91,7 @@ export const sponsorItems: SponsorItem[] = [
     id: "basar-valira",
     name: "Basar Valira",
     tier: "premium",
-    category: "Lifestyle / col·leccionisme",
+    category: "Col·leccionisme / miniatures",
     brand: {
       logoPath: "/sponsors/basar-valira-source.jpg",
       logoFit: "wide",
@@ -200,7 +200,7 @@ export const sponsorItems: SponsorItem[] = [
     id: "ada-sl",
     name: "ADA SL",
     tier: "support",
-    category: "Partner de suport",
+    category: "Col·laborador de suport",
     brand: {
       logoPath: "/sponsors/ada-sl.svg",
       logoFit: "standard",

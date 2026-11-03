@@ -9,6 +9,7 @@ import { HomeWelcomeShowcase } from "@/components/home/HomeWelcomeShowcase";
 import { useLanguage } from "@/components/LanguageProvider";
 import { LanguageCode } from "@/lib/i18n";
 import { getLocalizedText } from "@/lib/localized";
+import { translateText } from "@/lib/siteTranslations";
 import { archiveItems } from "@/content/siteExperience";
 import { sponsorItems } from "@/content/sponsorData";
 
@@ -197,7 +198,7 @@ const Index = () => {
                       <img src={featuredSponsor.brand.logoPath} alt={`${featuredSponsor.name} logo`} className="mx-auto h-20 w-auto max-w-full object-contain" loading="lazy" />
                     </div>
                     <div className="mt-4 text-2xl sm:text-3xl md:text-4xl font-bold text-balance">{featuredSponsor.name}</div>
-                    <div className="mt-3 text-sm uppercase tracking-[0.2em] text-white/55">{featuredSponsor.category}</div>
+                    <div className="mt-3 text-sm uppercase tracking-[0.2em] text-white/55">{translateText(language, featuredSponsor.category)}</div>
                     <div className="mt-6 rounded-[1.5rem] border border-white/10 bg-black/10 p-5">
                       <p className="text-sm text-white/72">{getLocalizedText(featuredSponsor.summary, language)}</p>
                     </div>
@@ -229,7 +230,7 @@ const Index = () => {
                             loading="lazy"
                           />
                         </div>
-                        <div className="mt-4 text-xs uppercase tracking-[0.2em] text-white/60 font-semibold">{sponsor.category}</div>
+                        <div className="mt-4 text-xs uppercase tracking-[0.2em] text-white/60 font-semibold">{translateText(language, sponsor.category)}</div>
                         <div className="mt-2 font-semibold text-balance">{sponsor.name}</div>
                         <div className="mt-2 text-sm text-white/68">{getLocalizedText(sponsor.summary, language)}</div>
                         <div className="mt-4 inline-flex items-center gap-2 text-sm text-white">{t.sponsorsOpen} <ArrowRight className="h-4 w-4" /></div>

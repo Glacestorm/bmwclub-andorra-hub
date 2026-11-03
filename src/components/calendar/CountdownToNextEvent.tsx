@@ -6,7 +6,8 @@ import { Button } from "@/components/ui/button";
 import { useLanguage } from "@/components/LanguageProvider";
 import { LanguageCode } from "@/lib/i18n";
 import { useCountdownConfig, useMergedEvents } from "@/lib/clubCms";
-import { formatEventDateRange, getCountdownParts, getLastCompletedEventFromList, getNextEventFromList } from "@/lib/calendar";
+import { formatEventDateRange, getCountdownParts, getLastCompletedEventFromList, getNextEventFromList, localizeDisplayDate } from "@/lib/calendar";
+import { getEventDestinationLabel, getLocationLabel } from "@/components/calendar/calendarI18n";
 
 const translations: Record<LanguageCode, Record<string, string>> = {
   ca: { title: "Temps fins a la propera sortida", noFutureTitle: "Properes sortides", noFutureBody: "Encara no hi ha noves sortides anunciades. Quan es publiquin les dates, les trobaràs aquí.", pausedTitle: "Properes sortides", pausedBody: "Consulta el calendari per conèixer les properes sortides del club.", secondaryTitle: "Altra cita destacada", buttonCalendar: "Obrir calendari", buttonWeather: "Veure meteo origen / destí", eventDetail: "Obrir fitxa", lastEventPrefix: "L'última sortida completada va ser", days: "Dies", hours: "Hores", minutes: "Min", seconds: "Seg", route: "Ruta", season: "Temporada viva" },
@@ -71,7 +72,7 @@ export const CountdownToNextEvent = () => {
 
   const target = primaryEvent.start ? new Date(primaryEvent.start) : null;
   const countdown = target ? getCountdownParts(target, now) : null;
-  const destination = primaryEvent.destination?.label ?? primaryEvent.destination?.name ?? primaryEvent.source.label ?? primaryEvent.source.name;
+  const destination = getEventDestinationLabel(primaryEvent, language);
   const secondaryTarget = secondaryEvent?.start ? new Date(secondaryEvent.start) : null;
   const secondaryCountdown = secondaryTarget ? getCountdownParts(secondaryTarget, now) : null;
 
@@ -96,13 +97,13 @@ export const CountdownToNextEvent = () => {
                 <div className="flex items-center gap-2 text-xs uppercase tracking-[0.22em] text-primary">
                   <MapPin className="h-4 w-4" /> {t.route}
                 </div>
-                <p className="mt-2 font-semibold text-foreground">{primaryEvent.source.label ?? primaryEvent.source.name} → {destination}</p>
+                <p className="mt-2 font-semibold text-foreground">{getLocationLabel(primaryEvent.source, language)} → {destination}</p>
               </div>
               <div className="rounded-2xl border border-border/70 bg-background/80 p-4">
                 <div className="flex items-center gap-2 text-xs uppercase tracking-[0.22em] text-primary">
                   <CalendarDays className="h-4 w-4" /> {primaryEvent.year}
                 </div>
-                {previousEvent ? <p className="mt-2 text-sm text-muted-foreground">{`${t.lastEventPrefix} ${previousEvent.title} (${previousEvent.displayDate}).`}</p> : null}
+                {previousEvent ? <p className="mt-2 text-sm text-muted-foreground">{`${t.lastEventPrefix} ${previousEvent.title} (${localizeDisplayDate(previousEvent.displayDate, language)}).`}</p> : null}
               </div>
             </div>
 
